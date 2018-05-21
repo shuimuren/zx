@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <!--variable
+            name="upDatePwdModel"
+            type="com.zixin.login.viewmodel.activity.UpDatePwdViewModel"/>-->
+    </data>
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:background="@drawable/bg"
+        android:layout_height="match_parent"
+        tools:context="com.zixin.login.activity.UpDatePwdActivity">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="@dimen/x370"
+            android:layout_height="@dimen/y106"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y730"
+            android:background="@drawable/png_shadow"
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="取消"
+                android:textColor="@color/regist_tv"
+                android:textSize="18sp"
+                 />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="@dimen/x640"
+            android:layout_height="@dimen/y720"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/y160"
+            android:background="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <!--用户类型选择-->
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y90">
+
+                    <TextView
+                        android:id="@+id/tv_update_person"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/x36"
+                        android:layout_marginTop="@dimen/y20"
+                        android:text="个人"
+                        android:textColor="@color/login_person_tv"
+                        android:textSize="20sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_update_date_company"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/x36"
+                        android:layout_marginTop="@dimen/y20"
+                        android:text="企业"
+                        android:textColor="@color/login_company_tv"
+                        android:textSize="16sp"
+                         />
+
+                </RelativeLayout>
+
+
+                <!--手机号-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y80"
+                    android:layout_marginTop="@dimen/y31"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x36"
+                        android:text="手机号"
+                        android:textColor="#98c3ec"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/phone_ed"
+
+                        android:inputType="phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/y80"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x10"
+                        android:layout_marginRight="@dimen/x36"
+                        android:background="@null"
+                        android:text="" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_marginLeft="@dimen/x36"
+                    android:layout_marginRight="@dimen/x36"
+                    android:background="#98c3ec">
+
+                </View>
+                <!--验证码-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y80"
+                    android:layout_marginTop="@dimen/y31"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x36"
+                        android:text="验证码"
+                        android:textColor="#98c3ec"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/code_ed"
+                        android:layout_width="@dimen/x250"
+                        android:layout_height="@dimen/y80"
+                        android:layout_gravity="center_vertical"
+
+                        android:layout_marginLeft="@dimen/x10"
+                        android:background="@null"
+                        android:text="" />
+
+                    <Button
+                        android:id="@+id/btn_update_code"
+                        android:layout_width="@dimen/x200"
+                        android:layout_height="@dimen/y60"
+                        android:layout_gravity="center"
+                        android:background="#4d92d3"
+                        android:gravity="center"
+                        android:text="获取验证码"
+                        android:textColor="#ffffff"
+                        android:textSize="10sp"
+                         />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_marginLeft="@dimen/x36"
+                    android:layout_marginRight="@dimen/x36"
+                    android:background="#98c3ec">
+
+                </View>
+                <!--密码-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y80"
+                    android:layout_marginTop="@dimen/y31"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:textSize="16sp"
+                        android:id="@+id/password_ed"
+                        android:layout_width="@dimen/x400"
+                        android:layout_height="@dimen/y80"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x36"
+                        android:layout_marginRight="@dimen/x16"
+                        android:background="@null"
+                        android:hint="请设置一个6~20位的密码"
+                        android:inputType="textPassword"
+                        android:text=""
+                        android:textColorHint="#98c3ec" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/x26"
+                        android:button="@null"
+                        android:drawableLeft="@drawable/icon_hide" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_marginLeft="@dimen/x36"
+                    android:layout_marginRight="@dimen/x36"
+                    android:background="#98c3ec">
+
+                </View>
+                <!--确认密码-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/y80"
+                    android:layout_marginTop="@dimen/y31"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/confirm_password"
+                        android:textSize="16sp"
+                        android:layout_width="@dimen/x400"
+                        android:layout_height="@dimen/y80"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x36"
+                        android:layout_marginRight="@dimen/x16"
+                        android:background="@null"
+                        android:hint="请确认密码"
+                        android:inputType="textPassword"
+                        android:text=""
+                        android:textColorHint="#98c3ec" />
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/x26"
+                        android:button="@null"
+                        android:drawableLeft="@drawable/icon_hide" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2px"
+                    android:layout_marginLeft="@dimen/x36"
+                    android:layout_marginRight="@dimen/x36"
+                    android:background="#98c3ec">
+
+                </View>
+                <!--登录按钮-->
+                <Button
+                    android:id="@+id/btn_go_update"
+                    android:layout_width="@dimen/x267"
+                    android:layout_height="@dimen/y80"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/y40"
+                    android:background="#4d92d3"
+                    android:text="确定"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </RelativeLayout>
+</layout>

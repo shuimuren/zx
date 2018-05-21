@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhixing.work.zhixin.view.card.Addressctivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/regional_selection"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_50"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/color_303030"
+                android:text="省  市  区" />
+
+            <TextView
+                android:id="@+id/provincial_urban_area"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+
+                android:hint="省份、城市、行政区"
+                android:textColor="@color/color_303030"
+                android:textColorHint="@color/hint"
+                android:textSize="@dimen/font_size_14sp" />
+
+            <ImageView
+
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/dp_10"
+                android:src="@drawable/icon_next" />
+        </LinearLayout>
+
+        <View style="@style/line"></View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10"
+            android:paddingTop="@dimen/dp_10">
+
+            <TextView
+
+                android:textColor="@color/color_303030"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:text="详细地址" />
+
+            <EditText
+                android:id="@+id/addressEd"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_marginBottom="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:background="@null"
+                android:hint=""
+                android:maxLength="128"
+                android:textSize="@dimen/font_size_14sp" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

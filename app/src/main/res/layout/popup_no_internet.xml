@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/network_disconnect_info"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="#FFDFE0"
+    android:orientation="horizontal"
+    android:clickable="true"
+    android:fitsSystemWindows="true"
+    android:padding="10dp"
+    >
+        <ImageView
+        android:layout_gravity="center"
+            android:id="@+id/iv_neterror"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/em_login_error_icon" />
+        <TextView
+            android:layout_gravity="center"
+            android:id="@+id/tv_connect_errormsg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="@string/net_no_connect"
+            android:textColor="#604A4C" />
+
+
+</LinearLayout>

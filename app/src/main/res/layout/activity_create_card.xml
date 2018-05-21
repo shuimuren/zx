@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhixing.work.zhixin.view.card.CreateCardActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y88"
+            android:background="@color/hardtoast"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/x24"
+                android:src="@drawable/gantanh" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/x10"
+                android:text="卡牌等同于您的个人简历,请务必填写真实信息" />
+        </LinearLayout>
+        <!--姓名-->
+        <RelativeLayout
+            android:id="@+id/rl_name"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y98"
+            android:background="@color/linerlayout">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x24"
+                android:text="姓名"
+                android:textColor="@color/linerlayout_tv"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/name_ed"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y80"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x24"
+                android:layout_toLeftOf="@+id/name_right"
+                android:background="@null"
+
+                android:gravity="center"
+
+                android:maxLength="5"
+
+                />
+
+            <ImageView
+                android:id="@+id/name_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_next" />
+        </RelativeLayout>
+        <!--性别-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y98"
+            android:layout_marginTop="@dimen/y2"
+            android:background="@color/linerlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x24"
+                android:text="性别"
+                android:textColor="@color/linerlayout_tv"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/card_sex_man"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+
+                android:layout_marginRight="@dimen/x36"
+                android:layout_toLeftOf="@+id/card_sex_woman"
+                android:button="@drawable/card_check"
+
+                />
+
+            <CheckBox
+
+                android:id="@+id/card_sex_woman"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+
+                android:layout_marginRight="@dimen/x24"
+                android:button="@drawable/card_check_m" />
+        </RelativeLayout>
+        <!--手机号-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y98"
+            android:layout_marginTop="@dimen/y2"
+            android:background="@color/linerlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x24"
+                android:text="手机号"
+                android:textColor="@color/linerlayout_tv"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/regist_phone_num"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y80"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x24"
+                android:background="@null"
+                android:gravity="center"
+
+                />
+        </RelativeLayout>
+        <!--邮箱-->
+        <RelativeLayout
+            android:id="@+id/rl_mail"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y98"
+            android:layout_marginTop="@dimen/y2"
+            android:background="@color/linerlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x24"
+                android:text="邮箱"
+                android:textColor="@color/linerlayout_tv"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/mailbox"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/y80"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x24"
+                android:layout_toLeftOf="@+id/mail_right"
+                android:background="@null"
+                android:gravity="center"
+
+                android:inputType="textEmailAddress"
+                android:maxLength="20" />
+
+            <ImageView
+                android:id="@+id/mail_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_next" />
+        </RelativeLayout>
+        <!--是否学生-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y98"
+            android:layout_marginTop="@dimen/y20"
+            android:background="@color/linerlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x24"
+                android:text="学生"
+                android:textColor="@color/linerlayout_tv"
+                android:textSize="20sp" />
+
+            <CheckBox
+                android:id="@+id/is_student_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x150"
+
+                android:button="@drawable/card_check_stu"
+                android:paddingLeft="@dimen/x24"
+                android:text="是"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/card_stu_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x24"
+                android:button="@drawable/card_check_stu"
+
+                android:paddingLeft="@dimen/x24"
+                android:text="否"
+                android:textColor="@color/gray"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/btn_born_card"
+            android:layout_width="@dimen/x640"
+            android:layout_height="@dimen/y100"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/y100"
+            android:background="@color/hardtoast"
+            android:enabled="false"
+            android:text="生成卡牌"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
+

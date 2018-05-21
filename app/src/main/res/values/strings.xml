@@ -1,0 +1,42 @@
+<resources>
+    <string name="app_name">职信</string>
+
+
+    <string name="message">正聊</string>
+    <string name="score">评分</string>
+    <string name="appicon">应用</string>
+    <string name="career">社区</string>
+    <string name="my_center">个人</string>
+    <string name="h5_url">https://h5pay.jd.com/degrade?</string>
+    <string name="net_connect_timeout">网络连接超时</string>
+    <string name="net_error">网络异常,请稍后重试</string>
+    <string name="net_fatal_error">请求失败，请检查您的网络</string>
+    <string name="net_no_connect">无网络连接，请检查您的网络</string>
+    <string name="sdk_version">2.1.0</string>
+
+    <string-array name="education">
+        <item>小学</item>
+        <item>初中</item>
+        <item>中专</item>
+        <item>高中</item>
+        <item>大专</item>
+        <item>本科</item>
+        <item>硕士</item>
+        <item>博士</item>
+        <item>MBA</item>
+    </string-array>
+    <string-array name="constellation">
+        <item>白羊座</item>
+        <item>金牛座</item>
+        <item>双子座</item>
+        <item>巨蟹座</item>
+        <item>狮子座</item>
+        <item>处女座</item>
+        <item>天秤座</item>
+        <item>天蝎座</item>
+        <item>射手座</item>
+        <item>摩羯座</item>
+        <item>水瓶座</item>
+        <item>双鱼座</item>
+    </string-array>
+</resources>

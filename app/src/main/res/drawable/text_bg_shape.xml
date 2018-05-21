@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 没有焦点时的背景图片 -->
+    <item android:drawable="@color/color_7d4a14" android:state_selected="false" />
+
+
+
+
+
+    <!--选中时的颜色  -->
+    <item android:drawable="@color/color_ac6a1d" android:state_selected="true" />
+    <!-- 非触摸模式下获得焦点并单击时的颜色 -->
+    <item android:drawable="@color/color_ac6a1d" android:state_focused="true" android:state_pressed="true" />
+</selector>

@@ -1,0 +1,46 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+
+    android:fitsSystemWindows="true">
+    <!--
+    <View
+        android:id="@+id/blurred_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <com.farm.langwen.ui.libraries.BlurringView
+        android:id="@+id/blurring_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:visibility="gone"/>
+    -->
+
+    <FrameLayout
+        android:id="@+id/fr_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_title_bar_container" />
+
+    <!--
+          <EditText 
+         android:layout_height="wrap_content"
+         android:layout_width="match_parent"
+         android:layout_alignParentBottom="true"
+         android:text="还不行吗"/>
+    -->
+
+    <include
+        android:id="@+id/rl_title_bar_container"
+        layout="@layout/bar_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true" />
+
+
+</RelativeLayout>

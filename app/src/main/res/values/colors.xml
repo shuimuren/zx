@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="tab_unselect">#c9c9c9</color>
+    <color name="bg_btn">#dadada</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="color_dddddd">#dddddd</color>
+    <color name="main_color">#408acf</color>
+    <color name="base_end_color_default">#FFFFFF</color>
+    <color name="base_end_color_pressed">#ff2570ba</color>
+    <color name="base_start_color_default">#FFFFFF</color>
+    <color name="base_start_color_pressed">#ff3590c4</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_303030">#303030</color>
+    <color name="color_71aae0">#71aae0</color>
+
+    <color name="toobar">#408acf</color>
+    <color name="color_cfc496">#cfc496</color>
+    <color name="hardtoast">#b1b6bb</color>
+    <color name="linerlayout">#ffffff</color>
+    <color name="linerlayout_tv">#303030</color>
+
+
+    <color name="color_ac6a1d">#ac6a1d</color>
+    <color name="color_7d4a14">#7d4a14</color>
+    <color name="color_b38131">#b38131</color>
+    <color name="color_123456">#b38131</color>
+
+    <color name="bg_deep">#000000</color>
+    <color name="bg_gray">#f1f1f1</color>
+    <color name="bg_guide">#12121c</color>
+    <color name="bg_main">#f0f0f0</color>
+    <color name="bg_menu">#f0f2ee</color>
+    <color name="bg_pressed">#dddddd</color>
+    <color name="bg_white">#fdfdfd</color>
+    <color name="bill_tableview_text_color">#ff8295bf</color>
+    <color name="black">#4d4d4d</color>
+    <color name="blue">#0088db</color>
+    <color name="color_error">#FF0000</color>
+    <color name="color_login">#4d4d4d</color>
+    <color name="color_right">#99cc00</color>
+    <color name="color_tip">#f58220</color>
+    <color name="color_title_bg">#d9434b</color>
+
+
+    <color name="exit_bg_active">#dc2321</color>
+    <color name="gray">#8d8d8d</color>
+    <color name="hint">#999999</color>
+    <color name="color_f5f5f5">#f5f5f5</color>
+    <color name="hyperlinks_second">#559fed</color>
+
+
+    <color name="white">#FFFFFF</color>
+
+    <color name="color_e5e5e5">#e5e5e5</color>
+    <color name="color_eef0f2">#eef0f2</color>
+    <color name="regist_radio_button_text_pressed">#333333</color>
+    <color name="home_ad">#333333</color>
+    <color name="nomal_text">#999999</color>
+    <color name="login_xian">#D2D2D2</color>
+    <color name="login_jingshi">#DC1E00</color>
+    <color name="login_btn_text">#FFFFFF</color>
+    <color name="regist_divider">#cccccc</color>
+    <color name="withDrawBankNum">#1d66ea</color>
+    <color name="withDrawBankText">#666666</color>
+    <color name="color_98c3ec">#98c3ec</color>
+    <color name="moremoney">#f96b72</color>
+    <color name="bcompany">#4d92d3</color>
+    <color name="acompany">#ffaa4d</color>
+    <color name="regist_tv">#40bacf</color>
+    <color name="login_person_tv">#3f3f3f</color>
+    <color name="login_company_tv">#408acf</color>
+    <color name="spinner_check">#42494f</color>
+    <color name="spinner_checked">#42494f</color>
+    <color name="tv_choice_id">#101010</color>
+    <color name="btn_write_per_data">#408ACF</color>
+
+
+    <drawable name="pay_bg_actionbar_normal">#d9434b</drawable>
+    <drawable name="pay_bg_actionbar_pressed">#ce2730</drawable>
+
+    <style name="CustomProgressDialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="Theme.Activity.Translucent" parent="android:Theme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="app_base_theme" parent="android:Theme.Light.NoTitleBar" />
+
+</resources>

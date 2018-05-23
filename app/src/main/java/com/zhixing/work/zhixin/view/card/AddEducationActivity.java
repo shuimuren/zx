@@ -73,8 +73,9 @@ public class AddEducationActivity extends BaseTitleActivity {
     Button sava;
     private List<String> list;
 
-    private String education_ct;
+
     private int education_type;
+    private String education_ct;
     private String graduate_college_ct;
     private String school_time_ct;
     private String graduation_time_ct;

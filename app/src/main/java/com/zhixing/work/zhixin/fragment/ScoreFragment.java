@@ -32,6 +32,8 @@ import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.view.card.CardCounterActivity;
 import com.zhixing.work.zhixin.view.card.CreateCardActivity;
+import com.zhixing.work.zhixin.view.card.PerfectCardCertificateActivity;
+import com.zhixing.work.zhixin.view.card.PerfectCardCertificateActivity_ViewBinding;
 import com.zhixing.work.zhixin.view.card.PerfectCardDataActivity;
 
 import org.greenrobot.eventbus.EventBus;

@@ -21,7 +21,7 @@ import com.zhixing.work.zhixin.bean.UpdateBean;
 import com.zhixing.work.zhixin.http.HttpHeadUtils;
 import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
-import com.zhixing.work.zhixin.http.RetrofitClient;
+
 import com.zhixing.work.zhixin.http.api.Constant;
 import com.zhixing.work.zhixin.http.api.LoginApi;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
@@ -45,7 +45,7 @@ import javax.crypto.spec.SecretKeySpec;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import me.goldze.mvvmhabit.utils.RxUtils;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;

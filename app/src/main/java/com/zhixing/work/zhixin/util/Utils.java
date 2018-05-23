@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.app.ZxApplication;
 import com.zhixing.work.zhixin.bean.AddressJson;
 
@@ -707,8 +709,14 @@ public class Utils {
     /**
      * 搜索省
      */
-    public static String searchProvincial(List<AddressJson> list, int id) {
+    public static String searchProvincial(int id) {
         String provincial = "";
+        List<AddressJson> list = new ArrayList<>();
+        Gson gson = new Gson();
+        if (!TextUtils.isEmpty(SettingUtils.getProvincialList())) {
+            list = gson.fromJson(SettingUtils.getProvincialList(), new TypeToken<List<AddressJson>>() {
+            }.getType());
+        }
         for (int i = 0; i < list.size(); i++) {
             AddressJson addressJson = list.get(i);
             if (addressJson.getId() == id) {
@@ -723,8 +731,16 @@ public class Utils {
     /**
      * 搜索市
      */
-    public static String searchCity(List<AddressJson.ChildBeanX> list, int id) {
+    public static String searchCity(int id) {
         String city = "";
+
+
+        List<AddressJson.ChildBeanX> list = new ArrayList<>();
+        Gson gson = new Gson();
+        if (!TextUtils.isEmpty(SettingUtils.getCityList())) {
+            list = gson.fromJson(SettingUtils.getCityList(), new TypeToken<List<AddressJson.ChildBeanX>>() {
+            }.getType());
+        }
         for (int i = 0; i < list.size(); i++) {
             AddressJson.ChildBeanX bean = list.get(i);
             if (bean.getId() == id) {
@@ -739,8 +755,15 @@ public class Utils {
     /**
      * 搜索区
      */
-    public static String searchArea(List<AddressJson.ChildBeanX.ChildBean> list, int id) {
+    public static String searchArea(int id) {
         String area = "";
+
+        List<AddressJson.ChildBeanX.ChildBean> list = new ArrayList<>();
+        Gson gson = new Gson();
+        if (!TextUtils.isEmpty(SettingUtils.getAreaList())) {
+            list = gson.fromJson(SettingUtils.getAreaList(), new TypeToken<List<AddressJson.ChildBeanX.ChildBean>>() {
+            }.getType());
+        }
         for (int i = 0; i < list.size(); i++) {
             AddressJson.ChildBeanX.ChildBean bean = list.get(i);
             if (bean.getId() == id) {

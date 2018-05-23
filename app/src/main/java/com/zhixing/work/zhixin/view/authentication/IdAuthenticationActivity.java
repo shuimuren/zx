@@ -1,11 +1,14 @@
-package com.zhixing.work.zhixin.view.myCenter;
+package com.zhixing.work.zhixin.view.authentication;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,6 +36,7 @@ import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.dialog.SelectImageDialog;
 import com.zhixing.work.zhixin.domain.AlbumItem;
+import com.zhixing.work.zhixin.event.UploadImageFinishEvent;
 import com.zhixing.work.zhixin.http.Constant;
 import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
@@ -44,18 +48,25 @@ import com.zhixing.work.zhixin.util.BitmapUtils;
 import com.zhixing.work.zhixin.util.LOG;
 import com.zhixing.work.zhixin.view.util.SelectImageActivity;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import top.zibin.luban.CompressionPredicate;
+import top.zibin.luban.Luban;
+import top.zibin.luban.OnCompressListener;
 
 public class IdAuthenticationActivity extends BaseTitleActivity {
-
-
+    //身份证验证
     @BindView(R.id.prompt_hold)
     LinearLayout promptHold;
     @BindView(R.id.rl_hold_id)
@@ -86,6 +97,8 @@ public class IdAuthenticationActivity extends BaseTitleActivity {
     private AlbumItem cardB;
     private AlbumItem cardC;
     private int isUploadCount;
+    private String upLoadImages;//上传图片组
+    private List<AlbumItem> upImages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,10 +134,65 @@ public class IdAuthenticationActivity extends BaseTitleActivity {
                 imagesList.add(cardC);
 
 
-                showLoadingDialog("上传中...");
-                new Thread(new uploadRunnable()).start();
+                if (null != imagesList && imagesList.size() > 1) {
+                    final List<String> list = new ArrayList<String>();
+                    for (int i = 0; i < imagesList.size(); i++) {
+                        AlbumItem albumItem = imagesList.get(i);
+                        if (null != albumItem) {
+                            list.add(albumItem.getFilePath());
+                        }
+                    }
+                    compressWithLs(list);
+                } else {
+                    AlertUtils.toast(context, "还未选择图片");
+                }
+
+
             }
         });
+    }
+
+
+    //压缩图片
+    //* 压缩图片 Listener 方式
+
+    private void compressWithLs(final List<String> photos) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Luban.with(context)
+                        .load(photos)
+                        .ignoreBy(100)
+                        .setTargetDir(getPath())
+                        .filter(new CompressionPredicate() {
+                            @Override
+                            public boolean apply(String path) {
+                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
+                            }
+                        })
+                        .setCompressListener(new OnCompressListener() {
+                            @Override
+                            public void onStart() {
+                                showLoadingDialog("上传中...");
+                            }
+
+                            @Override
+                            public void onSuccess(File file) {
+                                Log.i(TAG, file.getAbsolutePath());
+                                showResult(photos, file);
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                                LOG.d("错误", e.toString());
+                            }
+                        }).launch();
+
+            }
+        }).start();
+
     }
 
     private class uploadRunnable implements Runnable {
@@ -132,10 +200,10 @@ public class IdAuthenticationActivity extends BaseTitleActivity {
         @Override
         public void run() {
             isUploadCount = 0;
-            for (int i = 0; i < imagesList.size(); i++) {
-                AlbumItem albumItem = imagesList.get(i);
+            for (int i = 0; i < upImages.size(); i++) {
+                AlbumItem albumItem = upImages.get(i);
                 if (null != albumItem) {
-                    upload(albumItem);
+                    upload(albumItem,i);
                 }
             }
 
@@ -160,23 +228,29 @@ public class IdAuthenticationActivity extends BaseTitleActivity {
         });
     }
 
-    private void upload(final AlbumItem albumItem) {
+    private void upload(final AlbumItem albumItem, final int index) {
         String thumbnail = albumItem.getFilePath();
         String resultpath = thumbnail;
-        try {
-            resultpath = BitmapUtils.bitmapCompress(thumbnail);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         String UUID = AppUtils.getUUID();
+
         ALiYunOssFileLoader.asyncUpload(context, stsToken, ALiYunFileURLBuilder.BUCKET_SECTET, ALiYunFileURLBuilder.PERSONALIDCARD + UUID,
                 resultpath, new ALiYunOssFileLoader.OssFileUploadListener() {
                     @Override
                     public void onUploadSuccess(String objectKey) {
                         isUploadCount++;
-                        if (isUploadCount==3){
+
+                        if (index == 0) {
+                            upLoadImages = "";
+                            upLoadImages = objectKey;
+                        } else {
+                            upLoadImages = upLoadImages + "," + objectKey;
+                        }
+                        String path = Environment.getExternalStorageDirectory() + "/zhixin/image/";
+                        if (isUploadCount == 3) {
                             hideLoadingDialog();
-                            AlertUtils.toast(context,"上传成功");
+                            upImages.clear();
+                            deleteDir(path);
+                            EventBus.getDefault().post(new UploadImageFinishEvent(upLoadImages));
                         }
                         LOG.i(TAG, "动态图片上传成功：" + objectKey);
                     }
@@ -189,6 +263,13 @@ public class IdAuthenticationActivity extends BaseTitleActivity {
                     @Override
                     public void onUploadFailure(String objectKey, ServiceException ossException) {
                         hideLoadingDialog();
+                        upImages.clear();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                AlertUtils.toast(context, "动态图片上传失败");
+                            }
+                        });
                         LOG.i(TAG, "动态图片上传失败：" + objectKey);
                     }
                 });
@@ -259,6 +340,7 @@ public class IdAuthenticationActivity extends BaseTitleActivity {
                 break;
         }
     }
+
 
     private void takeAPicture() {
         photoPath = Constant.CACHE_DIR_IMAGE + "/" + AppUtils.getUUID();
@@ -346,5 +428,66 @@ public class IdAuthenticationActivity extends BaseTitleActivity {
                 }
             }
         }
+    }
+
+
+    private String getPath() {
+        String path = Environment.getExternalStorageDirectory() + "/zhixin/image/";
+        File file = new File(path);
+        if (file.mkdirs()) {
+            return path;
+        }
+        return path;
+    }
+
+
+    private void showResult(List<String> photos, File file) {
+
+        int[] thumbSize = computeSize(file.getAbsolutePath());
+        String thumbArg = String.format(Locale.CHINA, "压缩后参数：%d*%d, %dk", thumbSize[0], thumbSize[1], file.length() >> 10);
+        LOG.d("图", thumbArg);
+        AlbumItem albumItem = new AlbumItem();
+        albumItem.setFilePath(file.getAbsolutePath());
+        upImages.add(albumItem);
+        if (upImages.size() == photos.size()) {
+            new Thread(new uploadRunnable()).start();
+        }
+    }
+
+    private int[] computeSize(String srcImg) {
+        int[] size = new int[2];
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        options.inSampleSize = 1;
+
+        BitmapFactory.decodeFile(srcImg, options);
+        size[0] = options.outWidth;
+        size[1] = options.outHeight;
+        return size;
+    }
+
+    //删除文件夹和文件夹里面的文件
+    public static void deleteDir(final String pPath) {
+        File dir = new File(pPath);
+        deleteDirWihtFile(dir);
+    }
+
+    public static void deleteDirWihtFile(File dir) {
+        if (dir == null || !dir.exists() || !dir.isDirectory())
+            return;
+        for (File file : dir.listFiles()) {
+            if (file.isFile())
+                file.delete(); // 删除所有文件
+            else if (file.isDirectory())
+                deleteDirWihtFile(file); // 递规的方式删除文件夹
+        }
+        //dir.delete();// 删除目录本身
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onTradeAreaEvent(UploadImageFinishEvent event) {
+        AlertUtils.toast(context, "图片上传成功");
     }
 }

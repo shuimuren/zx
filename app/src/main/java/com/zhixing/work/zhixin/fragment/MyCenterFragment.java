@@ -11,7 +11,8 @@ import android.widget.LinearLayout;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseMainFragment;
-import com.zhixing.work.zhixin.view.myCenter.IdAuthenticationActivity;
+import com.zhixing.work.zhixin.view.authentication.AuthenticationHallActivity;
+import com.zhixing.work.zhixin.view.authentication.IdAuthenticationActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,8 +25,8 @@ import butterknife.Unbinder;
  */
 public class MyCenterFragment extends BaseMainFragment {
 
-    @BindView(R.id.ll_authentication_id)
-    LinearLayout llAuthenticationId;
+    @BindView(R.id.ll_authentication)
+    LinearLayout llAuthentication;
     private Unbinder unbinder;
     private Context context;
 
@@ -44,7 +45,6 @@ public class MyCenterFragment extends BaseMainFragment {
         unbinder = ButterKnife.bind(this, view);
         context = getActivity();
         return view;
-
     }
 
     @Override
@@ -59,9 +59,9 @@ public class MyCenterFragment extends BaseMainFragment {
         unbinder.unbind();
     }
 
-    @OnClick(R.id.ll_authentication_id)
+    @OnClick(R.id.ll_authentication)
     public void onViewClicked() {
-        startActivity(new Intent(context, IdAuthenticationActivity.class));
+        startActivity(new Intent(context, AuthenticationHallActivity.class));
     }
 
     }

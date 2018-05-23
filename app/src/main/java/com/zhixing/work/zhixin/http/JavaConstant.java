@@ -31,4 +31,9 @@ public class JavaConstant {
     public static final String WorkBackground = basehttp + "WorkBackground";
     //获取阿里云临时凭证
     public static final String getOSS = basehttp + "sts";
+    ///获取答题
+    public static final String TestPaper = basehttp + "Evaluate/TestPaper";
+
+    //提交答案
+    public static final String Evaluate = basehttp + "Evaluate";
 }

@@ -231,7 +231,7 @@ public class BitmapUtils {
                 String dirPath = Constant.CACHE_DIR_IMAGE;
                 String uuid= AppUtils.getUUID();
                 FileOutputStream fos = new FileOutputStream(new File(dirPath,uuid+"jpg"));
-                bm.compress(Bitmap.CompressFormat.JPEG, 40, fos);
+                bm.compress(Bitmap.CompressFormat.JPEG, 70, fos);
                 String newPath = dirPath+uuid+"jpg" ;
                 return newPath;
             } catch (Exception e) {

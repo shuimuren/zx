@@ -13,7 +13,7 @@
     <string name="net_fatal_error">请求失败，请检查您的网络</string>
     <string name="net_no_connect">无网络连接，请检查您的网络</string>
     <string name="sdk_version">2.1.0</string>
-
+    <string name="historical_score"><u>phone:0123456</u></string>
     <string-array name="education">
         <item>小学</item>
         <item>初中</item>

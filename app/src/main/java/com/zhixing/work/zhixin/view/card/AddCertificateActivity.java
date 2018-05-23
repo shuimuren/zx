@@ -119,10 +119,9 @@ public class AddCertificateActivity extends BaseTitleActivity {
                     return;
                 }
 
-                Certificate certificate = new Certificate(name,time,achievement);
+                Certificate certificate = new Certificate(name, time, achievement);
                 EventBus.getDefault().post(certificate);
                 finish();
-
                 break;
         }
     }

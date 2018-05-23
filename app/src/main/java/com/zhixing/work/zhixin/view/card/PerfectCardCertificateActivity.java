@@ -98,8 +98,8 @@ public class PerfectCardCertificateActivity extends BaseTitleActivity {
 
     //提交数据
     private void addCertificate(String json) {
-        OkUtils.getInstances().postJson(context, JavaConstant.CertificateBackground, json, new TypeToken<EntityObject<Object>>() {
-        }.getType(), new ResultCallBackListener<Object>() {
+        OkUtils.getInstances().postJson(context, JavaConstant.CertificateBackground, json, new TypeToken<EntityObject<Boolean>>() {
+        }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, final String msg) {
                 hideLoadingDialog();
@@ -118,16 +118,22 @@ public class PerfectCardCertificateActivity extends BaseTitleActivity {
             }
 
             @Override
-            public void onSuccess(final EntityObject<Object> response) {
+            public void onSuccess(final EntityObject<Boolean> response) {
                 hideLoadingDialog();
                 if (response.getCode() == 10000) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             try {
-                                AlertUtils.toast(context, "添加成功");
-                                finish();
-                                startActivity(new Intent(context, PerfectCardWorkActivity.class));
+                                if (response.getContent()) {
+
+                                    AlertUtils.toast(context, "添加成功");
+                                    finish();
+                                    startActivity(new Intent(context, PerfectCardWorkActivity.class));
+                                } else {
+                                    AlertUtils.toast(context, response.getMessage());
+                                }
+
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

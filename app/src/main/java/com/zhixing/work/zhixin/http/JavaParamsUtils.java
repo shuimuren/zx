@@ -124,8 +124,13 @@ public class JavaParamsUtils {
         params.put("opt", "baseinfo");
         return params;
     }
-    //    获取反面卡牌信息
+    //    获取阿里云临时
     public Map<String, String> getOSS() {
+        Map<String, String> params = new HashMap<>();
+        return params;
+    }
+    //    获取答题
+    public Map<String, String> TestPaper() {
         Map<String, String> params = new HashMap<>();
         return params;
     }

@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/ll_authentication_id"
+            android:id="@+id/ll_authentication"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:paddingLeft="@dimen/dp_10"
@@ -24,7 +24,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="身份认证" />
+                android:text="我的认证" />
 
             <ImageView
                 android:layout_width="wrap_content"

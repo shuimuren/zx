@@ -142,12 +142,9 @@ public class PerfectCardEducationActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(final EntityObject<Object> response) {
                 hideLoadingDialog();
-
-
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
                         try {
                             if (response.getCode() == 10000) {
                                 AlertUtils.toast(context, "添加成功");

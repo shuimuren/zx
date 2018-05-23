@@ -1,5 +1,6 @@
 package com.zhixing.work.zhixin.view.card;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -30,6 +31,7 @@ import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
+import com.zhixing.work.zhixin.view.score.ScoreActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import java.util.ArrayList;
@@ -41,8 +43,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class CardCounterActivity extends BaseTitleActivity {
-
-
     @BindView(R.id.basics)
     TextView basics;
     @BindView(R.id.senior)
@@ -158,9 +158,9 @@ public class CardCounterActivity extends BaseTitleActivity {
         ButterKnife.bind(this);
         basics.setSelected(true);
         initAdapter();
-        mHandler.sendEmptyMessage(MSG_LOAD_DATA);
+     /*   mHandler.sendEmptyMessage(MSG_LOAD_DATA);*/
+        getData();
         setTitle("职信卡牌");
-
     }
 
     private void initAdapter() {
@@ -169,10 +169,8 @@ public class CardCounterActivity extends BaseTitleActivity {
         commodityLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         listview.setLayoutManager(commodityLayoutManager);
         listview.addItemDecoration(new RecycleViewDivider(context, LinearLayoutManager.HORIZONTAL));
-
         listview.setAdapter(workAdapter);
     }
-
     @OnClick({R.id.basics, R.id.senior, R.id.basic_editor, R.id.senior_editor, R.id.basics_bt, R.id.seniority, R.id.skill, R.id.fate, R.id.career})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -195,6 +193,7 @@ public class CardCounterActivity extends BaseTitleActivity {
             case R.id.basics_bt:
                 break;
             case R.id.seniority:
+                startActivity(new Intent(context, ScoreActivity.class));
                 break;
             case R.id.skill:
                 break;
@@ -204,7 +203,6 @@ public class CardCounterActivity extends BaseTitleActivity {
                 break;
         }
     }
-
     //获取数据
     private void getData() {
         OkUtils.getInstances().httpTokenGet(context, JavaConstant.card, JavaParamsUtils.getInstances().getCardAll(), new TypeToken<EntityObject<CardBack>>() {
@@ -213,7 +211,6 @@ public class CardCounterActivity extends BaseTitleActivity {
             public void onFailure(int errorId, String msg) {
                 AlertUtils.toast(context, "服务器错误");
             }
-
             @Override
             public void onSuccess(EntityObject<CardBack> response) {
                 if (response.getCode() == 10000) {
@@ -232,109 +229,46 @@ public class CardCounterActivity extends BaseTitleActivity {
         phone.setText(SettingUtils.getPhoneNumber());
         nikename.setText(cardBack.getNickName());
         gendr.setText(cardBack.getSex());
-        dateBirth.setText(DateFormatUtil.parseDate(cardBack.getBirthday(), "yyyy-MM-dd"));
+        if (!TextUtils.isEmpty(cardBack.getBirthday())) {
+            dateBirth.setText(DateFormatUtil.parseDate(cardBack.getBirthday(), "yyyy-MM-dd"));
+        }
         constellation.setText(cardBack.getConstellation());
         height.setText(cardBack.getStature() + "cm");
         weight.setText(cardBack.getWeight() + "kg");
         motto.setText(cardBack.getMotto());
-        firstWorkingTime.setText(DateFormatUtil.parseDate(cardBack.getFirstWorkTime(), "yyyy-MM-dd"));
+        if (!TextUtils.isEmpty(cardBack.getFirstWorkTime())) {
+            firstWorkingTime.setText(DateFormatUtil.parseDate(cardBack.getFirstWorkTime(), "yyyy-MM-dd"));
+        }
+
         nation.setText(cardBack.getNation());
         if (cardBack.getNativePlaceProvince() != null) {
-            nativePlace.setText(Utils.searchProvincial(provincialList, cardBack.getNativePlaceProvince()));
+            nativePlace.setText(Utils.searchProvincial(cardBack.getNativePlaceProvince()));
         }
 
         political.setText(cardBack.getPoliticsFace());
         idNo.setText(cardBack.getIdCard());
-        if (cardBack.getHouseholdType() == 0) {
-            censusRegister.setText("农村户口");
-        } else {
-            censusRegister.setText("城市户口");
-        }
+        if (cardBack.getHouseholdType() == null) {
 
+        } else {
+            if (cardBack.getHouseholdType() == 0) {
+                censusRegister.setText("农村户口");
+            } else {
+                censusRegister.setText("城市户口");
+            }
+        }
         if (cardBack.getProvince() != null) {
-            addressct = Utils.searchProvincial(provincialList, cardBack.getProvince());
+            addressct = Utils.searchProvincial(cardBack.getProvince());
         }
         if (cardBack.getCity() != null) {
-            addressct = addressct + Utils.searchCity(cityList, cardBack.getCity());
+            addressct = addressct + Utils.searchCity(cardBack.getCity());
         }
         if (cardBack.getDistrict() != null) {
-            addressct = addressct + Utils.searchArea(areaList, cardBack.getDistrict());
+            addressct = addressct + Utils.searchArea(cardBack.getDistrict());
         }
         address.setText(addressct + cardBack.getAddress());
         education.setText(cardBack.getEducation());
 
     }
 
-    private void initJsonData() {//解析数据
-        /**
-         * 注意：assets 目录下的Json文件仅供参考，实际使用可自行替换文件
-         * 关键逻辑在于循环体
-         *
-         * */
-        String JsonData = Utils.getJson(this, "Area.json");//获取assets目录下的json文件数据
 
-        ArrayList<AddressJson> jsonBean = gson.fromJson(JsonData, new TypeToken<List<AddressJson>>() {
-        }.getType());
-
-        /**
-         * 添加省份数据
-         *
-         * 注意：如果是添加的JavaBean实体，则实体类需要实现 IPickerViewData 接口，
-         * PickerView会通过getPickerViewText方法获取字符串显示出来。
-         */
-        provincialList = jsonBean;
-
-        Iterator iter = provincialList.iterator();
-        //2、通过循环迭代
-        //hasNext():判断是否存在下一个元素
-        for (int i = 0; i < provincialList.size(); i++) {
-            List<AddressJson.ChildBeanX> dataList = provincialList.get(i).getChild();
-            if (dataList.size() == 0) {
-
-            } else {
-                cityList.addAll(dataList);
-            }
-        }
-        for (int i = 0; i < cityList.size(); i++) {
-            List<AddressJson.ChildBeanX.ChildBean> dataList = cityList.get(i).getChild();
-            if (dataList.size() == 0) {
-
-            } else {
-                areaList.addAll(dataList);
-            }
-
-        }
-        getData();
-    }
-
-
-    private Handler mHandler = new Handler() {
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case MSG_LOAD_DATA:
-                    if (thread == null) {//如果已创建就不再重新创建子线程了
-
-
-                        thread = new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                // 写子线程中的操作,解析省市区数据
-                                initJsonData();
-                            }
-                        });
-                        thread.start();
-                    }
-                    break;
-
-                case MSG_LOAD_SUCCESS:
-                    isLoaded = true;
-                    break;
-
-                case MSG_LOAD_FAILED:
-
-                    break;
-
-            }
-        }
-    };
 }

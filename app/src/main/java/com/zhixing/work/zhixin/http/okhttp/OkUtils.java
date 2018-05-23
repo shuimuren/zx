@@ -272,7 +272,7 @@ public class OkUtils<T> {
                         try {
                             entity = gson.fromJson(response, classType);
                         } catch (Exception e1) {
-                            callback.onFailure(32000, "提交数据失败");
+                            callback.onFailure(32000, "获取数据失败");
                             Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
                         }
                         if (entity != null) {
@@ -635,10 +635,10 @@ public class OkUtils<T> {
             OkHttpUtils.put().url(url).requestBody(requestBody).
                     addHeader("content-type", "application/x-www-form-urlencoded")
                     .addHeader("version", BuildConfig.VERSION_NAME).//打印版本
+                    addHeader(TOKEN, SettingUtils.getToken()).
                     addHeader(ACCESSID, accessId).
                     addHeader(TIMESTAMP, timer).
                     addHeader(NONCE, randoms).
-                    addHeader(TOKEN, SettingUtils.getToken()).
                     addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
                     .build().execute(new StringCallback() {
                 @Override
@@ -689,11 +689,17 @@ public class OkUtils<T> {
 
         //创建一个RequestBody(参数1：数据类型 参数2传递的json串)
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        Log.i(TAG + "请求参数：", url + "?" +json.toString());
         RequestBody requestBody = RequestBody.create(JSON, json);
         //创建一个请求对象
         Request request = new Request.Builder()
                 .url(url)
-                .post(requestBody).addHeader("token", SettingUtils.getToken())
+                .post(requestBody).addHeader("token", SettingUtils.getToken()).
+                        addHeader(ACCESSID, accessId).
+                        addHeader(TIMESTAMP, timer).
+
+                        addHeader(NONCE, randoms).
+                        addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
                 .build();
         //发送请求获取响应
         Call call = OkHttpUtils.getInstance().getOkHttpClient().newCall(request);
@@ -713,6 +719,63 @@ public class OkUtils<T> {
                     entity = gson.fromJson(data, classType);
                 } catch (Exception e1) {
 
+                    callback.onFailure(32000, "提交数据失败");
+                    Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
+                }
+                if (entity != null) {
+                    if (entity.getCode() > 0) {
+
+                        //成功状态
+                        callback.onSuccess(entity);
+                    } else {
+                        callback.onFailure(entity.getCode(), "服务器错误");
+                        //不成功状态
+                        //  sessionId 失效 导致重先登录 重新登录还是失败  那就跳到登录界面去
+
+
+                    }
+                } else {
+                    callback.onFailure(0, "错误");
+                }
+            }
+        });
+
+
+    }
+
+    public void patchJson(final Context context, final String url, final String json, final Type classType, final ResultCallBackListener<T> callback) {
+        //申明给服务端传递一个json串
+        //创建一个OkHttpClient对象
+
+        //创建一个RequestBody(参数1：数据类型 参数2传递的json串)
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        RequestBody requestBody = RequestBody.create(JSON, json);
+        //创建一个请求对象
+        Log.i(TAG + "请求参数：", url + "?" +json.toString());
+        Request request = new Request.Builder()
+                .url(url)
+                .patch(requestBody).addHeader("token", SettingUtils.getToken()).
+                        addHeader(ACCESSID, accessId).
+                        addHeader(TIMESTAMP, timer).
+                        addHeader(NONCE, randoms).
+                        addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                .build();
+        //发送请求获取响应
+        Call call = OkHttpUtils.getInstance().getOkHttpClient().newCall(request);
+        call.enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callback.onFailure(0, "错误");
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                EntityObject<T> entity = null;
+                try {
+                    String data = response.body().string();
+                    Log.i(TAG + "返回成功 = >", "" + data);
+                    entity = gson.fromJson(data, classType);
+                } catch (Exception e1) {
                     callback.onFailure(32000, "提交数据失败");
                     Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
                 }

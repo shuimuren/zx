@@ -10,7 +10,6 @@ import java.util.Date;
 public class SettingUtils {
 
 
-
     public static class SettingItems {
 
         // 保存在静态变量中
@@ -40,14 +39,15 @@ public class SettingUtils {
         public static final String USER_ID = "userID"; // 用户iD
         public static final String Avatar = "Avatar"; // 用户头像地址
         public static final String OPENID_EASEMOB = "openid_easemob"; // 用户环信id
-
         public static final String HISTORICAL_RECORDS = "historical_records"; // 历史记录
 
+        public static final String TESTPAPER = "testpaper"; // 试卷
+        public static final String PROVINCIALLIST = "provincialList"; // 省
+        public static final String CITYLIST = "cityList"; // 城市
+        public static final String AREALIST = "areaList"; // 区
 
-        /**
-         * 未读的添加好友请求数量
-         */
-        public static final String ADD_FRIENDS_REQUEST_NUMBER = "add_friends_request_number";
+
+
         /**
          * 点赞消息
          */
@@ -64,6 +64,103 @@ public class SettingUtils {
         public static final String UnReadTradeAreaData = "current_times_community_group"; // 同小区群发表的时间
         public static final String userBean = "userBean"; // 个人信息
     }
+
+
+
+
+
+
+
+
+
+
+    /**
+     * 保存provincialList
+     *
+     * @param areaList
+     */
+    public static void putAreaList(String areaList) {
+
+        String list = "";
+        if (!TextUtils.isEmpty(areaList)) {
+            list = areaList;
+        }
+        PreferenceUtils.putString(SettingItems.AREALIST, list);
+    }
+    /**
+     * areaList
+     *
+     * @return
+     */
+    public static String getAreaList() {
+
+        String areaList = PreferenceUtils.getString(SettingItems.AREALIST);
+        if (!TextUtils.isEmpty(areaList)) {
+            return areaList;
+        }
+        return "";
+    }
+
+
+
+    /**
+     * 保存provincialList
+     *
+     * @param cityList
+     */
+    public static void putCityList(String cityList) {
+
+        String list = "";
+        if (!TextUtils.isEmpty(cityList)) {
+            list = cityList;
+        }
+        PreferenceUtils.putString(SettingItems.CITYLIST, list);
+    }
+    /**
+     * 获取provincialList
+     *
+     * @return
+     */
+    public static String getCityList() {
+
+        String provincialList = PreferenceUtils.getString(SettingItems.CITYLIST);
+        if (!TextUtils.isEmpty(provincialList)) {
+            return provincialList;
+        }
+        return "";
+    }
+
+
+
+
+
+    /**
+     * 保存provincialList
+     *
+     * @param provincialList
+     */
+    public static void putProvincialList(String provincialList) {
+
+        String list = "";
+        if (!TextUtils.isEmpty(provincialList)) {
+            list = provincialList;
+        }
+        PreferenceUtils.putString(SettingItems.PROVINCIALLIST, list);
+    }
+    /**
+     * 获取provincialList
+     *
+     * @return
+     */
+    public static String getProvincialList() {
+
+        String provincialList = PreferenceUtils.getString(SettingItems.PROVINCIALLIST);
+        if (!TextUtils.isEmpty(provincialList)) {
+            return provincialList;
+        }
+        return "";
+    }
+
 
 
 
@@ -150,6 +247,36 @@ public class SettingUtils {
         }
         return "";
     }
+
+
+    /**
+     * 保存Pass_Id
+     *
+     * @param testPaper
+     */
+    public static void putTestPaper(String testPaper) {
+
+        String testpaper = "";
+        if (!TextUtils.isEmpty(testPaper)) {
+            testpaper = testPaper;
+        }
+        PreferenceUtils.putString(SettingItems.TESTPAPER, testpaper);
+    }
+
+    /**
+     * 获取testpaper
+     *
+     * @return
+     */
+    public static String getTestPaper() {
+
+        String testpaper = PreferenceUtils.getString(SettingItems.TESTPAPER);
+        if (!TextUtils.isEmpty(testpaper)) {
+            return testpaper;
+        }
+        return "";
+    }
+
     /**
      * 保存token
      *
@@ -172,14 +299,13 @@ public class SettingUtils {
     public static String getToken() {
 
         String token = PreferenceUtils.getString(Constant.TOKEN);
-        if (token!=null){
-            int lnt= token.length();
-            if (lnt==0) {
+        if (token != null) {
+            int lnt = token.length();
+            if (lnt == 0) {
                 return "";
             }
-        }else {
-            token="";
-
+        } else {
+            token = "";
         }
 
         return token;
@@ -772,51 +898,13 @@ public class SettingUtils {
                 .getBoolean(SettingItems.IS_TODAY_QIAN_DAO, false);
     }
 
-    /**
-     * 获取未读请求添加好友数量
-     *
-     * @return
-     */
-    public static int getFriendsRequestNumber() {
-        return PreferenceUtils.getInt(SettingItems.ADD_FRIENDS_REQUEST_NUMBER,
-                0);
-    }
+
+
+
 
     /**
-     * 未读请求添加好友数量加1
-     */
-    public static void addFriendsRequestNumber() {
-        int number = PreferenceUtils.getInt(
-                SettingItems.ADD_FRIENDS_REQUEST_NUMBER, 0);
-        number++;
-        PreferenceUtils.putInt(SettingItems.ADD_FRIENDS_REQUEST_NUMBER, number);
-    }
 
-    /**
-     * 未读请求添加好友数量清0
-     */
-    public static void clearFriendsRequestNumber() {
-        PreferenceUtils.putInt(SettingItems.ADD_FRIENDS_REQUEST_NUMBER, 0);
-    }
 
-    /**
-     * 保存未读消息数
-     *
-     * @param number
-     */
-    public static void putNoReadMessageNumber(int number) {
-        PreferenceUtils.putInt(SettingItems.NO_READ_MESSAGE_NUMBER, number);
-    }
-
-    /**
-     * 拿到未读消息数量
-     *
-     * @return
-     */
-    public static int getNoReadMessageNumber() {
-        return PreferenceUtils.getInt(SettingItems.ADD_FRIENDS_REQUEST_NUMBER,
-                0);
-    }
 
     /**
      * 点赞数量清0
@@ -861,7 +949,6 @@ public class SettingUtils {
         Date date = new Date();
         PreferenceUtils.putLong(SettingItems.CURRENT_TIMES_CITY_GTOUP, date.getTime());
     }
-
 
 
     /**

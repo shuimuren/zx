@@ -19,42 +19,41 @@ public class ALiYunFileURLBuilder {
     public static final String BUCKET_public = "zx-img-public";
 
 
-
-   // public static final String BASE = "test/"; //测试环境
+    // public static final String BASE = "test/"; //测试环境
     public static final String BASE = "prod/"; //正式环境
-    public static final String PERSONALIDCARD ="personalIdCard/";  // 身份证
-    public static final String PERSONALPORTRAIT ="personalPortrait/";  // 简历头像
-    public static final String PERSONALAVATAR ="personalAvatar/";  // 简历头像
-    public static final String DYNAMIC = BASE+"dynamic/";  //  动态图片
+    public static final String PERSONALIDCARD = "personalIdCard/";  // 身份证
+    public static final String PERSONALPORTRAIT = "personalPortrait/";  // 简历头像
 
 
+    public static final String PERSONALCERTIFICATE = "personalCertificate";//用户证书认证上传】
+    public static final String PERSONALEDUCATION = "personalEducation";   //用户学历认证上传】
+    public static final String PERSONALAVATAR = "personalAvatar/";  //用户个性头像
+    public static final String DYNAMIC = BASE + "dynamic/";  //  动态图片
     //三级目录
-    public static String getBase(){
-        String str=String.format(OSS_FILE_URL, BUCKET_SECTET);
+    public static String getBase() {
+        String str = String.format(OSS_FILE_URL, BUCKET_SECTET);
 //        LOG.i(TAG, " 阿里云base:"+ str+"   长度："+str.length());
         return str;
     }
+//**
+//     * 获取用户头像url
+//     * @param userId
+//     * @return
+//
+//    public static String getUserIconUrl(long userId) {
+//        String url=getBase() + USER_ICON  + userId;
+//        LOG.i(TAG, " 用户头像地址:"+ url);
+//        return url;
+//    }
 
-/*
-    *//**
-     * 获取用户头像url
-     * @param userId
-     * @return
-     *//*
-    public static String getUserIconUrl(long userId) {
-        String url=getBase() + USER_ICON  + userId;
-        LOG.i(TAG, " 用户头像地址:"+ url);
-        return url;
-    }
-
-    *//**
-     * 获取动态url
-     * @param key
-     * @return
-     *//*
-    public static String getDynamicUrl(String key) {
-        String url=getBase() + DYNAMIC + key;
-        LOG.i(TAG, " 动态图片地址:"+ url);
-        return url;
-    }*/
+//    /**/*//**
+//     * 获取动态url
+//     * @param key
+//     * @return
+//     *//**//*
+//    public static String getDynamicUrl(String key) {
+//        String url=getBase() + DYNAMIC + key;
+//        LOG.i(TAG, " 动态图片地址:"+ url);
+//        return url;
+//    }*/
 }

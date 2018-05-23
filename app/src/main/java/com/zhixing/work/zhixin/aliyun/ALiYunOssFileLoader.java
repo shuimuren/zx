@@ -20,7 +20,7 @@ import com.zhixing.work.zhixin.bean.StsToken;
 
 /**
  * 阿里云上传工具类
- * Created by wangsuli on 2017/4/27.
+ *
  */
 
 public class ALiYunOssFileLoader {
@@ -68,7 +68,6 @@ public class ALiYunOssFileLoader {
                 if (listener != null)
                     listener.onUploadSuccess(request.getObjectKey());
             }
-
             @Override
             public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
                 // 请求异常

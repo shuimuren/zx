@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhixing.work.zhixin.view.authentication.EducationCertificationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_education"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/y2"
+                android:background="@color/linerlayout"
+                android:paddingLeft="@dimen/dp_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x24"
+                    android:text="学历"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/education"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x10"
+                    android:layout_toLeftOf="@+id/iv_education"
+                    android:gravity="right"
+                    android:hint="请选择学历"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_education"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="@dimen/x24"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+            <!--毕业院校-->
+
+            <RelativeLayout
+                android:id="@+id/rl_graduate_college"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/y2"
+                android:background="@color/linerlayout"
+                android:paddingLeft="@dimen/dp_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x24"
+                    android:text="毕业院校"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/graduate_college"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x24"
+                    android:layout_toLeftOf="@+id/iv_graduate_college"
+                    android:background="@null"
+
+                    android:gravity="right"
+                    android:hint="请填写毕业学校"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp"></TextView>
+
+                <ImageView
+                    android:id="@+id/iv_graduate_college"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="@dimen/x24"
+                    android:src="@drawable/icon_next" />
+                />
+            </RelativeLayout>
+
+            <!--毕业时间-->
+            <RelativeLayout
+                android:id="@+id/rl_graduation_time"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/y2"
+                android:background="@color/linerlayout"
+                android:paddingLeft="@dimen/dp_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x24"
+                    android:text="毕业时间"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/graduation_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x10"
+                    android:layout_toLeftOf="@+id/iv_graduation_time"
+                    android:gravity="right"
+                    android:hint="请选择毕业日期"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_graduation_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="@dimen/x24"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+            <!--专业-->
+            <RelativeLayout
+                android:id="@+id/rl_major"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="@dimen/y2"
+                android:background="@color/linerlayout"
+                android:paddingLeft="@dimen/dp_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x24"
+                    android:text="专业"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/major"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x24"
+                    android:layout_toLeftOf="@+id/iv_major"
+                    android:background="@null"
+
+                    android:gravity="right"
+                    android:hint="请输入专业"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="@dimen/font_size_16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_major"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="@dimen/x24"
+                    android:src="@drawable/icon_next" />
+
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="@dimen/dp_5"
+                android:background="@color/color_f5f5f5"
+                android:gravity="center_vertical"
+                android:text="请上传学位证书.学历证书或者国家相对应的学位学历认证证书"
+                android:textColor="@color/hint" />
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/listview"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:background="@color/linerlayout">
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:background="@drawable/btn_blue_normal_shape"
+                android:text="提交"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+        </RelativeLayout>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

@@ -50,6 +50,11 @@ public class MainFragment extends SupportFragment {
     }
 
     @Override
+    public void fetchData() {
+
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         SupportFragment firstFragment = findChildFragment(MessageFragment.class);
@@ -68,7 +73,6 @@ public class MainFragment extends SupportFragment {
                     mFragments[THIRD]);
         } else {
             // 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
-
             // 这里我们需要拿到mFragments的引用,也可以通过getChildFragmentManager.findFragmentByTag自行进行判断查找(效率更高些),用下面的方法查找更方便些
             mFragments[FIRST] = firstFragment;
             mFragments[SECOND] = findChildFragment(ScoreFragment.class);
@@ -77,11 +81,8 @@ public class MainFragment extends SupportFragment {
             mFragments[THIRD] = findChildFragment(MyCenterFragment.class);
         }
     }
-
     private void initView(View view) {
         mBottomBar = (BottomBar) view.findViewById(R.id.bottomBar);
-
-
         mBottomBar
                 .addItem(new BottomBarTab(_mActivity, R.drawable.message_bg, getString(R.string.message)))
                 .addItem(new BottomBarTab(_mActivity, R.drawable.score_bg, getString(R.string.score)))
@@ -112,7 +113,6 @@ public class MainFragment extends SupportFragment {
             @Override
             public void onTabUnselected(int position) {
             }
-
             @Override
             public void onTabReselected(int position) {
                 // 在FirstPagerFragment,FirstHomeFragment中接收, 因为是嵌套的Fragment
@@ -121,7 +121,6 @@ public class MainFragment extends SupportFragment {
             }
         });
     }
-
     @Override
     public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
         super.onFragmentResult(requestCode, resultCode, data);

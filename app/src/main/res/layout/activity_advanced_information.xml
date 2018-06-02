@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhixing.work.zhixin.view.card.AdvancedInformationActivity">
+
+    <com.zhixing.work.zhixin.widget.ElasticScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_nation"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="民族"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/nation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_nation"
+                    android:background="@null"
+
+                    android:gravity="right"
+                    android:hint=""
+
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_nation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+            <!--籍贯-->
+            <RelativeLayout
+                android:id="@+id/rl_native_place"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="籍贯"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/native_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_native_place"
+                    android:background="@null"
+
+                    android:gravity="right"
+                    android:hint=""
+
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_native_place"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+            <!--政治面貌-->
+            <RelativeLayout
+
+                android:id="@+id/rl_political"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="政治面貌"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/political"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_political"
+                    android:gravity="right"
+                    android:hint=""
+
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_political"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+            <!--身份证号-->
+            <RelativeLayout
+                android:id="@+id/rl_id"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="身份证号"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_id"
+                    android:gravity="right"
+                    android:hint=""
+
+
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+            <!--户口类型-->
+            <RelativeLayout
+                android:id="@+id/rl_census_register"
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="户口类型"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/census_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_census_register"
+                    android:gravity="right"
+                    android:hint=""
+
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_census_register"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+
+            <!--现居住地址-->
+            <RelativeLayout
+                android:id="@+id/rl_adress"
+
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="现居住地址"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_adress"
+                    android:background="@null"
+                    android:ellipsize="end"
+                    android:gravity="right"
+
+                    android:hint=""
+                    android:maxLength="10"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_adress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+            </RelativeLayout>
+            <!--button-->
+            <View style="@style/line"></View>
+            <!--婚姻-->
+            <RelativeLayout
+                android:id="@+id/rl_marriage"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="婚姻"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/marriage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_marriage"
+                    android:gravity="right"
+                    android:hint=""
+
+                    android:maxLines="1"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_marriage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+            </RelativeLayout>
+            <View style="@style/line"></View>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="是否有留学经历"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/is_study_abroad_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="75dp"
+
+                    android:button="@drawable/card_check_stu"
+                    android:paddingLeft="10dp"
+                    android:text="是"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+
+                <CheckBox
+                    android:id="@+id/study_abroad_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:button="@drawable/card_check_stu"
+
+                    android:paddingLeft="10dp"
+                    android:text="否"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+            <View style="@style/line"></View>
+
+            <RelativeLayout
+                android:id="@+id/rl_education"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="最高学历"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/highest_education"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_highest_education"
+                    android:gravity="right"
+                    android:hint=""
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_highest_education"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+                <RelativeLayout
+                    android:id="@+id/rlwork"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginTop="13dp"
+                    android:background="@color/linerlayout">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:text="工作经历"
+                        android:textColor="@color/linerlayout_tv"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:id="@+id/iv_work"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginRight="10dp"
+                        android:src="@drawable/icon_next" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_10"
+                android:background="@color/color_f5f5f5"></View>
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/work_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_10"
+                android:background="@color/color_f5f5f5"></View>
+
+
+            <RelativeLayout
+                android:id="@+id/rleducation"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="教育经历"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_education"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/education_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+
+            '
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_10"
+                android:background="@color/color_f5f5f5"></View>
+
+
+            <RelativeLayout
+                android:id="@+id/rlcertificate"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="证书信息"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_certificate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+            </RelativeLayout>
+
+            <android.support.v7.widget.RecyclerView
+
+                android:id="@+id/certificate_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+    </com.zhixing.work.zhixin.widget.ElasticScrollView>
+</android.support.constraint.ConstraintLayout>

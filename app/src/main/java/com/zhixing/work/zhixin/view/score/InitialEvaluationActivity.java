@@ -149,14 +149,13 @@ public class InitialEvaluationActivity extends BaseTitleActivity {
                 answer.setQuizTime(50);
                 answer.setTestPaperId(testPaper.getTestPaperId());
                 answer.setAnswerList(answerList);
-                showLoading();
+                showLoadingDialog("");
                 submit(gson.toJson(answer));
                 break;
             case R.id.ll_next:
                 break;
         }
     }
-
     private void submit(String json) {
         OkUtils.getInstances().patchJson(context, JavaConstant.Evaluate, json, new TypeToken<EntityObject<Evaluating>>() {
         }.getType(), new ResultCallBackListener<Evaluating>() {

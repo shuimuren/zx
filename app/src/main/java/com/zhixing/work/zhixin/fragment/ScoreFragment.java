@@ -3,7 +3,11 @@ package com.zhixing.work.zhixin.fragment;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,35 +19,54 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.alibaba.sdk.android.oss.ServiceException;
 import com.google.gson.reflect.TypeToken;
 import com.willy.ratingbar.ScaleRatingBar;
 import com.zhixing.work.zhixin.R;
+import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
+import com.zhixing.work.zhixin.aliyun.ALiYunOssFileLoader;
 import com.zhixing.work.zhixin.base.BaseMainFragment;
 import com.zhixing.work.zhixin.bean.Card;
 import com.zhixing.work.zhixin.bean.EntityObject;
+import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.dialog.CardCompleteDialog;
+import com.zhixing.work.zhixin.dialog.SelectImageDialog;
+import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.CardCompleteEvent;
 import com.zhixing.work.zhixin.event.CardRefreshEvent;
+import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
+import com.zhixing.work.zhixin.http.Constant;
 import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
+import com.zhixing.work.zhixin.http.okhttp.AppUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.BitmapUtils;
+import com.zhixing.work.zhixin.util.GlideUtils;
+import com.zhixing.work.zhixin.util.LOG;
 import com.zhixing.work.zhixin.util.SettingUtils;
-import com.zhixing.work.zhixin.view.card.CardCounterActivity;
 import com.zhixing.work.zhixin.view.card.CreateCardActivity;
-import com.zhixing.work.zhixin.view.card.PerfectCardCertificateActivity;
-import com.zhixing.work.zhixin.view.card.PerfectCardCertificateActivity_ViewBinding;
 import com.zhixing.work.zhixin.view.card.PerfectCardDataActivity;
+import com.zhixing.work.zhixin.view.card.back.CardMainActivity;
+import com.zhixing.work.zhixin.view.resume.PersonalDataActivity;
+import com.zhixing.work.zhixin.view.util.SelectImageActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import okhttp3.FormBody;
+import okhttp3.RequestBody;
 
 
 /**
@@ -102,29 +125,46 @@ public class ScoreFragment extends BaseMainFragment {
     LinearLayout llNikeName;
     @BindView(R.id.ll_motto)
     LinearLayout llMotto;
+    @BindView(R.id.default_avatar)
+    ImageView defaultAvatar;
+    @BindView(R.id.avatar_text)
+    TextView avatarText;
 
     private Unbinder unbinder;
     private Context context;
     private Card card;
     private String study_abroad;
 
+    private StsToken stsToken;
+    public static final int REQUEST_CAMERA = 10; // 拍照
+
+    private File photoFile;
+    private Uri imageUri;
+    private List<AlbumItem> selectedImages;//标记选中的图片
+    private String upLoadImages = "";//上传图片组
+    private File cropFilePath;
+    private Uri outPutUri;
+    public static final String TAG = "ScoreFragment";
+
+    public static ScoreFragment instance;
+
     public static ScoreFragment newInstance() {
         Bundle args = new Bundle();
         ScoreFragment fragment = new ScoreFragment();
         fragment.setArguments(args);
         return fragment;
-
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_score, container, false);
-
+        instance = this;
         unbinder = ButterKnife.bind(this, view);
         context = getActivity();
         EventBus.getDefault().register(this);
         initData();
+
         return view;
     }
 
@@ -136,11 +176,13 @@ public class ScoreFragment extends BaseMainFragment {
                 rlCord.setVisibility(View.VISIBLE);
                 rlData.setVerticalGravity(View.GONE);
                 AlertUtils.toast(context, "服务器错误");
+                getOssToken();
             }
 
             @Override
             public void onSuccess(EntityObject<Card> response) {
                 if (response.getCode() == 10000) {
+                    getOssToken();
                     if (response.getContent() == null) {
                         rlCord.setVisibility(View.VISIBLE);
                         rlData.setVisibility(View.GONE);
@@ -168,12 +210,52 @@ public class ScoreFragment extends BaseMainFragment {
                             llMotto.setVisibility(View.VISIBLE);
                             motto.setText(card.getMotto());
                         }
+                        if (TextUtils.isEmpty(card.getAvatar())) {
+                            avatar.setVisibility(View.GONE);
+                            defaultAvatar.setVisibility(View.VISIBLE);
+                            avatarText.setVisibility(View.VISIBLE);
+                        } else {
+                            avatar.setVisibility(View.VISIBLE);
+                            defaultAvatar.setVisibility(View.GONE);
+                            avatarText.setVisibility(View.GONE);
+                        }
                     }
 
                 }
             }
         });
     }
+
+    @Override
+    public void fetchData() {
+    }
+
+    //获取阿里云的凭证
+    private void getOssToken() {
+        OkUtils.getInstances().httpTokenGet(context, JavaConstant.getOSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
+        }.getType(), new ResultCallBackListener<StsToken>() {
+            @Override
+            public void onFailure(int errorId, String msg) {
+                AlertUtils.toast(context, "服务器错误");
+            }
+
+            @Override
+            public void onSuccess(EntityObject<StsToken> response) {
+                if (response.getCode() == 10000) {
+                    stsToken = response.getContent();
+                    if (card != null) {
+                        if (!TextUtils.isEmpty(card.getAvatar())) {
+                            String url = ALiYunOssFileLoader.gtePublic(context, stsToken, ALiYunFileURLBuilder.BUCKET_PUBLIC, card.getAvatar());
+                            GlideUtils.getInstance().loadGlideRoundTransform(context, url, avatar);
+                        }
+                    }
+
+                }
+            }
+        });
+    }
+
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -181,7 +263,7 @@ public class ScoreFragment extends BaseMainFragment {
         EventBus.getDefault().unregister(this);
     }
 
-    @OnClick({R.id.create_card, R.id.perfect_card, R.id.more})
+    @OnClick({R.id.create_card, R.id.perfect_card, R.id.more, R.id.rl_avatar})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.create_card:
@@ -191,7 +273,33 @@ public class ScoreFragment extends BaseMainFragment {
                 startActivity(new Intent(context, PerfectCardDataActivity.class));
                 break;
             case R.id.more:
-                startActivity(new Intent(context, CardCounterActivity.class));
+                startActivity(new Intent(context, CardMainActivity.class));
+                break;
+            case R.id.rl_avatar:
+                SelectImageDialog imageDialog = new SelectImageDialog(context, new SelectImageDialog.OnItemClickListener() {
+                    @Override
+                    public void onClick(SelectImageDialog dialog, int index) {
+                        dialog.dismiss();
+
+                        switch (index) {
+                            case SelectImageDialog.TYPE_CAMERA:
+                                photoFile = new File(Constant.CACHE_DIR_IMAGE + "/" + System.currentTimeMillis() + ".jpg");
+                                Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                                intentCamera.putExtra(MediaStore.Images.ImageColumns.ORIENTATION, 0);
+                                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                                instance.startActivityForResult(intentCamera, REQUEST_CAMERA);
+                                break;
+                            case SelectImageDialog.TYPE_PHOTO:
+                                Intent intent = new Intent(context, SelectImageActivity.class);
+                                intent.putExtra(SelectImageActivity.LIMIT, 1);
+                                instance.startActivityForResult(intent, SelectImageActivity.REQUEST_AVATAR);
+                                break;
+                        }
+                    }
+                });
+                imageDialog.show();
+
+
                 break;
         }
     }
@@ -220,4 +328,136 @@ public class ScoreFragment extends BaseMainFragment {
         }
 
     }
+
+    public void onConfigurationChanged(Configuration newConfig) {
+        //其实这里什么都不要做
+        super.onConfigurationChanged(newConfig);
+    }
+
+    /**
+     * 初始化剪裁图片的输出Uri
+     */
+    private void intCropUri() {
+        if (outPutUri == null) {
+            cropFilePath = new File(Environment.getExternalStorageDirectory().getPath(), "cutImage.png");
+            try {
+                cropFilePath.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            outPutUri = Uri.fromFile(cropFilePath);
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode != RESULT_OK) {
+            return;
+        }
+        if (requestCode == SelectImageActivity.REQUEST_AVATAR) {
+            //从相册选照片
+            selectedImages = (ArrayList<AlbumItem>) data.getSerializableExtra("images");
+            AlbumItem albumItem = selectedImages.get(0);
+            imageUri = Uri.fromFile(new File(albumItem.getFilePath()));
+            intCropUri();
+            BitmapUtils.createPhotoCropFragment(instance, imageUri, outPutUri);
+        } else if (requestCode == REQUEST_CAMERA) {
+            //拍照照片
+            imageUri = Uri.fromFile(photoFile);
+            intCropUri();
+            BitmapUtils.createPhotoCropFragment(instance, imageUri, outPutUri);
+        } else if (requestCode == Constant.IMAGE_CROP) {
+            upload(cropFilePath.getAbsolutePath());
+
+        }
+
+    }
+
+
+    /*保存界面状态，如果activity意外被系统killed，返回时可以恢复状态值*/
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        //savedInstanceState.putString("msg_con", htmlsource);
+        if (photoFile != null) {
+            if (photoFile.getAbsolutePath() != null) {
+                savedInstanceState.putString("msg_camera_picname", photoFile.getAbsolutePath());
+            }
+        }
+
+
+        super.onSaveInstanceState(savedInstanceState); //实现父类方法 放在最后 防止拍照后无法返回当前activity
+    }
+
+
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+
+        photoFile = new File(savedInstanceState.getString("msg_camera_picname"));
+
+
+    }
+
+
+    //上传头像
+    private void upload(final String resultpath) {
+
+        String UUID = AppUtils.getUUID();
+        ALiYunOssFileLoader.asyncUpload(context, stsToken, ALiYunFileURLBuilder.BUCKET_PUBLIC, ALiYunFileURLBuilder.PERSONALAVATAR + UUID,
+                resultpath, new ALiYunOssFileLoader.OssFileUploadListener() {
+                    @Override
+                    public void onUploadSuccess(String objectKey) {
+                        LOG.i("tou", "动态图片上传成功：" + objectKey);
+                        RequestBody body = new FormBody.Builder()
+                                .add("Avatar", objectKey)
+                                .build();
+
+                        upAvatar(body, objectKey);
+                    }
+
+                    @Override
+                    public void onUploadProgress(String objectKey, long currentSize, long totalSize) {
+                    }
+
+                    @Override
+                    public void onUploadFailure(String objectKey, ServiceException ossException) {
+                        LOG.i(TAG, "动态图片上传失败：" + objectKey);
+                    }
+                });
+    }
+
+    private void upAvatar(RequestBody body, final String key) {
+        OkUtils.getInstances().httpatch(body, context, JavaConstant.Avatar, JavaParamsUtils.getInstances().resumeAvatar(), new TypeToken<EntityObject<Boolean>>() {
+        }.getType(), new ResultCallBackListener<Boolean>() {
+            @Override
+            public void onFailure(int errorId, String msg) {
+                hideLoadingDialog();
+                AlertUtils.toast(context, msg);
+            }
+            @Override
+            public void onSuccess(EntityObject<Boolean> response) {
+                hideLoadingDialog();
+                if (response.getCode() == 10000) {
+                    if (response.getContent() != null && response.getContent()) {
+                        if (response.getContent()) {
+                            EventBus.getDefault().post(new ResumeRefreshEvent(true));
+                            String url = ALiYunOssFileLoader.gtePublic(context, stsToken, ALiYunFileURLBuilder.BUCKET_PUBLIC, key);
+                            avatarText.setVisibility(View.GONE);
+                            defaultAvatar.setVisibility(View.GONE);
+                            GlideUtils.getInstance().loadGlideRoundTransform(context, url, avatar);
+
+                        }
+                    } else {
+                        AlertUtils.toast(context, "修改失败");
+                    }
+
+                } else {
+                    AlertUtils.toast(context, response.getMessage());
+                }
+
+
+            }
+        });
+
+    }
+
 }

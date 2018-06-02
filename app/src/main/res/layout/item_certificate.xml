@@ -13,6 +13,7 @@
         android:padding="@dimen/dp_10">
 
         <TextView
+            android:gravity="center_vertical"
             android:id="@+id/name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -21,6 +22,7 @@
             android:textColor="@color/color_303030" />
 
         <TextView
+            android:gravity="center_vertical"
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

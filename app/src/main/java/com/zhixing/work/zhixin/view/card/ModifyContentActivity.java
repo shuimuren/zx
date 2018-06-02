@@ -22,21 +22,44 @@ public class ModifyContentActivity extends BaseTitleActivity {
     EditText edit;
     private String title;
     private Context context;
+    private String content;
+    private String hint;
     private String type;
     public static final String TYPE = "type";//类型
+    public static final String HINT = "hint";//提示
     public static final String TYPE_TITLE = "title";//标题
+    public static final String TYPE_CONTENT = "content";//内容
+
     public static final String TYPE_WORK_CONTENT = "work_content";//工作内容
+    public static final String TYPE_EXPLAIN = "explain";//说明
+    public static final String TYPE_PROJECT_DESCRIBE = "project_describe";//项目描述
+    public static final String TYPE_PROJECT_ACHIEVEMENT = "project_achievement";//项目描述
+    public static final String TYPE_ADVANTAGE = "type_advantage";//我的优势
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_content);
         ButterKnife.bind(this);
-
+        context = this;
 
         title = getIntent().getStringExtra(TYPE_TITLE);
+        hint = getIntent().getStringExtra(HINT);
+        content = getIntent().getStringExtra(TYPE_CONTENT);
         type = getIntent().getStringExtra(TYPE);
+
+        if (TextUtils.isEmpty(content)) {
+            edit.setHint(hint);
+            edit.setHintTextColor(getResources().getColor(R.color.hint));
+        }else {
+
+                edit.setText(content);
+                edit.setSelection(content.length());
+
+        }
+
         setTitle(title);
+
         setRightText1("保存");
         initView();
     }

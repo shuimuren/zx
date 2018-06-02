@@ -74,6 +74,7 @@ public class CreateCardActivity extends BaseTitleActivity {
     private Map<String, String> dataMap = new HashMap<>();
     private String nameData;
     private String mailData;
+
     private Context context;
 
     @Override
@@ -84,6 +85,7 @@ public class CreateCardActivity extends BaseTitleActivity {
         setTitle("创建卡牌");
         context = this;
         initView();
+        dataMap.put(isstudent, "20");
     }
 
 
@@ -115,10 +117,17 @@ public class CreateCardActivity extends BaseTitleActivity {
                 CreateCard(dataMap.get(name), dataMap.get(mail), dataMap.get(gender), dataMap.get(isstudent));
                 break;
             case R.id.rl_name:
-                startActivity(new Intent(context, ModifyDataActivity.class).putExtra("title", "填写名字").putExtra("type", "name"));
+                startActivity(new Intent(context, ModifyDataActivity.class).
+                        putExtra("title", "填写名字").putExtra("type", "name")
+                        .putExtra(ModifyDataActivity.TYPE_CONTENT, nameEd.getText().toString())
+                );
                 break;
             case R.id.rl_mail:
-                startActivity(new Intent(context, ModifyDataActivity.class).putExtra("title", "填写邮箱").putExtra("type", "mail"));
+                startActivity(new Intent(context, ModifyDataActivity.class).
+                        putExtra("title", "填写邮箱").
+                        putExtra("type", "mail")
+                        .putExtra(ModifyDataActivity.TYPE_CONTENT, mailbox.getText().toString())
+                );
                 break;
         }
     }

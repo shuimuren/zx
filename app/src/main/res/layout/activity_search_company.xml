@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhixing.work.zhixin.view.resume.SearchCompanyActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/main_color">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="7dp"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:layout_marginTop="7dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_white_shape">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:src="@drawable/search_ed" />
+
+                <EditText
+                    android:id="@+id/edit"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="输入屏蔽的公司"
+                    android:textColorHint="@color/hint" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/dp_15"
+                android:paddingRight="@dimen/dp_15"
+                android:text="取消"
+                android:textColor="@color/white"
+                android:textSize="@dimen/dp_16" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_prompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+     >
+
+            <TextView
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:text="通过以下方式搜索公司"
+                android:textColor="@color/color_303030"
+                android:textSize="@dimen/font_size_18sp" />
+
+            <TextView
+                android:layout_marginLeft="@dimen/dp_15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:text="公司全称：如“北京华品博睿网络技术有限公司”\n\n公司简称：如“易启秀”\n\n企业邮箱后缀：如“kindfo.com”"
+                android:textColor="@color/color_303030" />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

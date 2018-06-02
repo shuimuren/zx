@@ -54,6 +54,7 @@
             android:theme="@style/ThemeSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -72,9 +73,11 @@
         <activity android:name=".view.card.ModifyContentActivity" />
         <activity android:name=".view.card.ModifyUserActivity" />
         <activity android:name=".view.card.Addressctivity" />
-        <activity
-            android:name=".view.card.CardCounterActivity"
+        <!--
+            <activity
+            android:name=".view.card.CardCounterFragment"
             android:launchMode="singleTask" />
+        -->
         <activity android:name=".view.authentication.IdAuthenticationActivity" />
         <activity android:name=".view.util.SelectImageActivity" />
         <activity android:name=".view.authentication.AuthenticationHallActivity" />
@@ -84,10 +87,28 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan|stateAlwaysHidden" />
         <activity
-            android:name=".view.score.ScoreActivity"
+            android:name=".view.card.back.fragment.EvaluatingFragment"
             android:launchMode="singleTask" />
         <activity android:name=".view.score.EvaluationHallActivity" />
-        <activity android:name=".view.score.InitialEvaluationActivity"></activity>
+        <activity android:name=".view.score.InitialEvaluationActivity" />
+        <activity android:name=".view.resume.MyResumeActivity" />
+        <activity android:name=".view.resume.PersonalDataActivity" />
+        <activity android:name=".view.resume.PrivacySettingsActivity" />
+        <activity android:name=".view.resume.ShieldingCompanyActivity" />
+        <activity android:name=".view.resume.ShieldedHelpActivity" />
+        <activity android:name=".view.resume.SearchCompanyActivity" />
+        <activity android:name=".view.resume.AddProjectActivity" />
+        <activity android:name=".view.card.EditorialBasisActivity" />
+        <activity android:name=".view.card.AdvancedInformationActivity" />
+        <activity android:name=".view.card.back.CardMainActivity" />
+        <activity android:name=".view.card.back.WorkListActivity" />
+        <activity android:name=".view.card.back.EducationListActivity" />
+        <activity android:name=".view.card.back.CertificateListActivity" />
+        <activity android:name=".view.resume.JobIntensionActivity" />
+        <activity android:name=".view.resume.WorkPlaceActivity" />
+        <activity android:name=".view.resume.IndustryActivity" />
+        <activity android:name=".view.resume.JobActivity" />
+        <activity android:name=".view.resume.JobListActivity"></activity>
     </application>
 
 </manifest>

@@ -19,7 +19,7 @@
                 android:id="@+id/rl_certificate_time"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="@dimen/y2"
+                android:layout_marginTop="1dp"
                 android:background="@color/linerlayout"
                 android:paddingLeft="@dimen/dp_10">
 
@@ -27,7 +27,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x24"
+                    android:layout_marginLeft="10dp"
                     android:text="获得证书时间"
                     android:textColor="@color/linerlayout_tv"
                     android:textSize="18sp" />
@@ -38,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/x10"
+                    android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@+id/iv_certificate_time"
                     android:gravity="right"
                     android:hint="请选择时间"
@@ -52,18 +52,18 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
-                    android:layout_marginRight="@dimen/x24"
+                    android:layout_marginRight="10dp"
                     android:src="@drawable/icon_next" />
 
             </RelativeLayout>
             <!--毕业时间-->
-
+            <View style="@style/line"></View>
 
             <RelativeLayout
                 android:id="@+id/rl_certificate_name"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="@dimen/y2"
+                android:layout_marginTop="1dp"
                 android:background="@color/linerlayout"
                 android:paddingLeft="@dimen/dp_10">
 
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x24"
+                    android:layout_marginLeft="10dp"
                     android:text="证书"
                     android:textColor="@color/linerlayout_tv"
                     android:textSize="18sp" />
@@ -81,7 +81,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/x10"
+                    android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@+id/iv_certificate_name"
                     android:gravity="right"
                     android:hint="请输入证书名"
@@ -95,16 +95,16 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
-                    android:layout_marginRight="@dimen/x24"
+                    android:layout_marginRight="10dp"
                     android:src="@drawable/icon_next" />
 
             </RelativeLayout>
-
+            <View style="@style/line"></View>
             <RelativeLayout
                 android:id="@+id/rl_achievement"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="@dimen/y2"
+                android:layout_marginTop="1dp"
                 android:background="@color/linerlayout"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x24"
+                    android:layout_marginLeft="10dp"
                     android:text="成绩"
                     android:textColor="@color/linerlayout_tv"
                     android:textSize="18sp" />
@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/x24"
+                    android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@+id/iv_achievement"
                     android:background="@null"
                     android:gravity="right"
@@ -140,7 +140,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
-                    android:layout_marginRight="@dimen/x24"
+                    android:layout_marginRight="10dp"
                     android:src="@drawable/icon_next" />
             </RelativeLayout>
 

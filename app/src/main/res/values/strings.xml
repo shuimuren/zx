@@ -6,7 +6,7 @@
     <string name="score">评分</string>
     <string name="appicon">应用</string>
     <string name="career">社区</string>
-    <string name="my_center">个人</string>
+    <string name="my_center">我的</string>
     <string name="h5_url">https://h5pay.jd.com/degrade?</string>
     <string name="net_connect_timeout">网络连接超时</string>
     <string name="net_error">网络异常,请稍后重试</string>
@@ -24,6 +24,11 @@
         <item>硕士</item>
         <item>博士</item>
         <item>MBA</item>
+    </string-array>
+    <string-array name="state">
+        <item>离职-随时到岗</item>
+        <item>暂不考虑</item>
+        <item>考虑机会</item>
     </string-array>
     <string-array name="constellation">
         <item>白羊座</item>

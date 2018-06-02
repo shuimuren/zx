@@ -41,4 +41,8 @@ public class AppiconFragment extends BaseMainFragment {
     }
 
 
+    @Override
+    public void fetchData() {
+
+    }
 }

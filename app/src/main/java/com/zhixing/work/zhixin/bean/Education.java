@@ -16,6 +16,7 @@ public class Education {
         StartDate = startDate;
         EndDate = endDate;
         Major = major;
+
     }
 
     public String getEducation() {
@@ -59,8 +60,18 @@ public class Education {
     }
 
     private String Education;
-    private String  School;
-    private String  StartDate;
-    private String  EndDate;
-    private String  Major;
+    private String School;
+    private String StartDate;
+    private String EndDate;
+    private String Major;
+
+    public String getExperience() {
+        return Experience;
+    }
+
+    public void setExperience(String experience) {
+        Experience = experience;
+    }
+
+    private String Experience;
 }

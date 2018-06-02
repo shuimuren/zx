@@ -15,15 +15,15 @@
         <RelativeLayout
             android:id="@+id/rl_company_name"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y98"
-            android:layout_marginTop="@dimen/y2"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
             android:background="@color/linerlayout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginLeft="10dp"
                 android:text="公司名称"
                 android:textColor="@color/linerlayout_tv"
                 android:textSize="18sp" />
@@ -33,13 +33,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x10"
+                android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/iv_company_name"
-                android:textColor="@color/color_303030"
+                android:gravity="right"
 
                 android:hint="请输入公司名称"
+                android:textColor="@color/color_303030"
                 android:textColorHint="@color/hint"
-                android:gravity="right"
                 android:textSize="16sp" />
 
             <ImageView
@@ -48,23 +48,23 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
-                android:layout_marginRight="@dimen/x24"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/icon_next" />
 
         </RelativeLayout>
-
+        <View style="@style/line"></View>
         <RelativeLayout
             android:id="@+id/rl_post"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y98"
-            android:layout_marginTop="@dimen/y2"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
             android:background="@color/linerlayout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginLeft="10dp"
                 android:text="工作岗位"
                 android:textColor="@color/linerlayout_tv"
                 android:textSize="18sp" />
@@ -74,12 +74,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x10"
+                android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/iv_post"
-                android:textColor="@color/color_303030"
-                android:hint="请输入工作岗位"
-                android:textColorHint="@color/hint"
                 android:gravity="right"
+                android:hint="请输入工作岗位"
+                android:textColor="@color/color_303030"
+                android:textColorHint="@color/hint"
                 android:textSize="16sp" />
 
             <ImageView
@@ -88,38 +88,38 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
-                android:layout_marginRight="@dimen/x24"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/icon_next" />
 
         </RelativeLayout>
-
+        <View style="@style/line"></View>
         <RelativeLayout
             android:id="@+id/rl_start_time"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y98"
-            android:layout_marginTop="@dimen/y2"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
             android:background="@color/linerlayout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginLeft="10dp"
                 android:text="开始时间"
                 android:textColor="@color/linerlayout_tv"
                 android:textSize="18sp" />
 
             <TextView
-                android:hint="请选择开始日期"
-                android:textColorHint="@color/hint"
-                android:gravity="right"
                 android:id="@+id/start_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x10"
+                android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/iv_start_time"
+                android:gravity="right"
+                android:hint="请选择开始日期"
                 android:textColor="@color/color_303030"
+                android:textColorHint="@color/hint"
                 android:textSize="16sp" />
 
             <ImageView
@@ -128,16 +128,16 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
-                android:layout_marginRight="@dimen/x24"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/icon_next" />
 
         </RelativeLayout>
-
+        <View style="@style/line"></View>
         <RelativeLayout
             android:id="@+id/rl_end_time"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y98"
-            android:layout_marginTop="@dimen/y2"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
             android:background="@color/linerlayout">
 
             <TextView
@@ -145,22 +145,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginLeft="10dp"
                 android:text="结束时间"
                 android:textColor="@color/linerlayout_tv"
                 android:textSize="18sp" />
 
             <TextView
-                android:hint="请选择结束日期"
-                android:textColorHint="@color/hint"
-                android:gravity="right"
                 android:id="@+id/end_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x10"
+                android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/iv_end_time"
+                android:gravity="right"
+                android:hint="请选择结束日期"
                 android:textColor="@color/color_303030"
+                android:textColorHint="@color/hint"
                 android:textSize="16sp" />
 
             <ImageView
@@ -169,41 +169,41 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
-                android:layout_marginRight="@dimen/x24"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/icon_next" />
 
         </RelativeLayout>
-
+        <View style="@style/line"></View>
         <RelativeLayout
             android:id="@+id/rl_work_content"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y98"
-            android:layout_marginTop="@dimen/y2"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
             android:background="@color/linerlayout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginLeft="10dp"
                 android:text="工作内容"
                 android:textColor="@color/linerlayout_tv"
                 android:textSize="18sp" />
 
             <TextView
-                android:hint="请输入工作内容"
-                android:textColorHint="@color/hint"
-                android:gravity="right"
                 android:id="@+id/work_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x10"
+                android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/iv_work_content"
+                android:gravity="right"
+                android:hint="请输入工作内容"
                 android:ellipsize="end"
                 android:maxEms="10"
                 android:singleLine="true"
                 android:textColor="@color/color_303030"
+                android:textColorHint="@color/hint"
 
                 android:textSize="16sp" />
 
@@ -214,23 +214,23 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
-                android:layout_marginRight="@dimen/x24"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/icon_next" />
 
         </RelativeLayout>
-
+        <View style="@style/line"></View>
         <RelativeLayout
             android:id="@+id/rl_department"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y98"
-            android:layout_marginTop="@dimen/y2"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
             android:background="@color/linerlayout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginLeft="10dp"
                 android:text="所属部门"
                 android:textColor="@color/linerlayout_tv"
                 android:textSize="18sp" />
@@ -240,12 +240,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x10"
+                android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/iv_department"
-                android:hint="选填"
-                android:textColorHint="@color/hint"
                 android:gravity="right"
+                android:hint="请输入所属部门"
                 android:textColor="@color/color_303030"
+                android:textColorHint="@color/hint"
                 android:textSize="16sp" />
 
             <ImageView
@@ -254,27 +254,30 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerInParent="true"
-                android:layout_marginRight="@dimen/x24"
+                android:layout_marginRight="10dp"
                 android:src="@drawable/icon_next" />
 
         </RelativeLayout>
-
+        <View style="@style/line"></View>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y150"
+            android:layout_height="75dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginTop="@dimen/dp_20"
-            android:background="@color/linerlayout">
+            android:layout_marginTop="10dp"
+            >
 
             <Button
-                android:id="@+id/sava"
-                android:layout_width="@dimen/x640"
-                android:layout_height="@dimen/y80"
+                android:id="@+id/delete"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:layout_centerInParent="true"
-                android:background="@drawable/btn_blue_normal_shape"
-                android:text="保存"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/btn_red_normal_shape"
+                android:text="删除"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:visibility="gone" />
         </RelativeLayout>
 
     </LinearLayout>

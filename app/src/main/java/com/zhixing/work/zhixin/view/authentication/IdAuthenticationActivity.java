@@ -488,6 +488,7 @@ public class IdAuthenticationActivity extends BaseTitleActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTradeAreaEvent(UploadImageFinishEvent event) {
-        AlertUtils.toast(context, "图片上传成功");
+        AlertUtils.toast(context, "图片上传成功,请耐心等待审核");
+        finish();
     }
 }

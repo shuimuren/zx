@@ -42,13 +42,13 @@ public class RegistActivity extends BaseTitleActivity {
     @BindView(R.id.regist_phone_num_ed)
     ClearEditText registPhoneNumEd;
     @BindView(R.id.btn_regist_get_code)
-    Button btnRegistGetCode;
+    TextView btnRegistGetCode;
     @BindView(R.id.password_ed)
     ClearEditText passwordEd;
     @BindView(R.id.iv_hide_pwd)
     RadioButton ivHidePwd;
     @BindView(R.id.btn_go_regist)
-    Button btnGoRegist;
+    TextView btnGoRegist;
     @BindView(R.id.regist_check)
     CheckBox registCheck;
     @BindView(R.id.code_ed)

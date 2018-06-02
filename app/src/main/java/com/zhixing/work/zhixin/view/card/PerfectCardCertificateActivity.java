@@ -165,7 +165,8 @@ public class PerfectCardCertificateActivity extends BaseTitleActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_certificate:
-                startActivity(new Intent(context, AddCertificateActivity.class));
+                startActivity(new Intent(context, AddCertificateActivity.class).putExtra("type", "card"));
+
                 break;
             case R.id.not_certificate:
                 if (notCertificate.isChecked()) {
@@ -176,13 +177,18 @@ public class PerfectCardCertificateActivity extends BaseTitleActivity {
                 break;
             case R.id.btn_work:
 
-                if (list.size() < 1) {
-                    AlertUtils.toast(context, "请添加证书");
-                    return;
+                if (notCertificate.isChecked()) {
+                    startActivity(new Intent(context, PerfectCardWorkActivity.class));
+                    finish();
+                } else {
+                    if (list.size() < 1) {
+                        AlertUtils.toast(context, "请添加证书");
+                        return;
+                    }
+                    addCertificate(gson.toJson(list));
                 }
 
 
-                addCertificate(gson.toJson(list));
                 break;
         }
     }

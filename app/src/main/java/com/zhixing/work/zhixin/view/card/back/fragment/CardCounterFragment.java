@@ -1,28 +1,31 @@
-package com.zhixing.work.zhixin.view.card;
+package com.zhixing.work.zhixin.view.card.back.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
-import com.zhixing.work.zhixin.adapter.AddWorkAdapter;
+import com.zhixing.work.zhixin.adapter.EducationAdapter;
 import com.zhixing.work.zhixin.adapter.WorkAdapter;
-import com.zhixing.work.zhixin.base.BaseTitleActivity;
-import com.zhixing.work.zhixin.bean.AddressBean;
+import com.zhixing.work.zhixin.base.SupportFragment;
 import com.zhixing.work.zhixin.bean.AddressJson;
-import com.zhixing.work.zhixin.bean.Card;
 import com.zhixing.work.zhixin.bean.CardBack;
 import com.zhixing.work.zhixin.bean.EntityObject;
+import com.zhixing.work.zhixin.event.CardBackEvent;
 import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
@@ -31,18 +34,24 @@ import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
-import com.zhixing.work.zhixin.view.score.ScoreActivity;
+import com.zhixing.work.zhixin.view.card.AdvancedInformationActivity;
+import com.zhixing.work.zhixin.view.card.EditorialBasisActivity;
+import com.zhixing.work.zhixin.view.card.PerfectCardDataActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 
-public class CardCounterActivity extends BaseTitleActivity {
+public class CardCounterFragment extends SupportFragment {
     @BindView(R.id.basics)
     TextView basics;
     @BindView(R.id.senior)
@@ -89,8 +98,10 @@ public class CardCounterActivity extends BaseTitleActivity {
     LinearLayout llFirstWorkingTime;
     @BindView(R.id.basic_editor)
     Button basicEditor;
+    @BindView(R.id.rl_basic_ed)
+    RelativeLayout rlBasicEd;
     @BindView(R.id.rl_basics)
-    LinearLayout rlBasics;
+    RelativeLayout rlBasics;
     @BindView(R.id.nation)
     TextView nation;
     @BindView(R.id.ll_nation)
@@ -123,8 +134,10 @@ public class CardCounterActivity extends BaseTitleActivity {
     RecyclerView listview;
     @BindView(R.id.senior_editor)
     Button seniorEditor;
+    @BindView(R.id.rl_senior_ed)
+    RelativeLayout rlSeniorEd;
     @BindView(R.id.rl_senior)
-    LinearLayout rlSenior;
+    RelativeLayout rlSenior;
     @BindView(R.id.basics_bt)
     TextView basicsBt;
     @BindView(R.id.seniority)
@@ -135,8 +148,17 @@ public class CardCounterActivity extends BaseTitleActivity {
     TextView fate;
     @BindView(R.id.career)
     TextView career;
+    @BindView(R.id.education_list)
+    RecyclerView educationList;
+    @BindView(R.id.ll_data)
+    LinearLayout llData;
+    @BindView(R.id.perfect_card)
+    Button perfectCard;
+    @BindView(R.id.ll_empty)
+    LinearLayout llEmpty;
     private CardBack cardBack;
     private List<CardBack.WorkBackgroundOutputsBean> list = new ArrayList<CardBack.WorkBackgroundOutputsBean>();
+    private List<CardBack.EducationBackgroundOutputsBean> edList = new ArrayList<CardBack.EducationBackgroundOutputsBean>();
     private ArrayList<AddressJson> provincialList = new ArrayList<AddressJson>();
     private ArrayList<AddressJson.ChildBeanX> cityList = new ArrayList<AddressJson.ChildBeanX>();
     private ArrayList<AddressJson.ChildBeanX.ChildBean> areaList = new ArrayList<AddressJson.ChildBeanX.ChildBean>();
@@ -150,18 +172,43 @@ public class CardCounterActivity extends BaseTitleActivity {
     private String addressct = "";
 
     private WorkAdapter workAdapter;
+    private EducationAdapter educationAdapter;
+    private Context context;
+    private boolean isViewCreated;
+
+    //Fragment对用户可见的标记
+    private boolean isUIVisible;
+    private Unbinder unbinder;
+
+    public static CardCounterFragment newInstance() {
+        Bundle args = new Bundle();
+        CardCounterFragment fragment = new CardCounterFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_card_counter, container, false);
+        ButterKnife.bind(this, view);
+        basics.setSelected(true);
+        context = getActivity();
+        isViewCreated = true;
+
+        unbinder = ButterKnife.bind(this, view);
+        EventBus.getDefault().register(this);
+     /*   mHandler.sendEmptyMessage(MSG_LOAD_DATA);*/
+        initAdapter();
+        return view;
+    }
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_card_counter);
-        ButterKnife.bind(this);
-        basics.setSelected(true);
-        initAdapter();
-     /*   mHandler.sendEmptyMessage(MSG_LOAD_DATA);*/
+    public void fetchData() {
         getData();
-        setTitle("职信卡牌");
     }
+
 
     private void initAdapter() {
         workAdapter = new WorkAdapter(list, context);
@@ -170,8 +217,17 @@ public class CardCounterActivity extends BaseTitleActivity {
         listview.setLayoutManager(commodityLayoutManager);
         listview.addItemDecoration(new RecycleViewDivider(context, LinearLayoutManager.HORIZONTAL));
         listview.setAdapter(workAdapter);
+
+
+        educationAdapter = new EducationAdapter(edList, context);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(context);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        educationList.setLayoutManager(layoutManager);
+        educationList.addItemDecoration(new RecycleViewDivider(context, LinearLayoutManager.HORIZONTAL));
+        educationList.setAdapter(educationAdapter);
     }
-    @OnClick({R.id.basics, R.id.senior, R.id.basic_editor, R.id.senior_editor, R.id.basics_bt, R.id.seniority, R.id.skill, R.id.fate, R.id.career})
+
+    @OnClick({R.id.basics, R.id.senior, R.id.basic_editor, R.id.perfect_card ,R.id.senior_editor, R.id.basics_bt, R.id.seniority, R.id.skill, R.id.fate, R.id.career})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.basics:
@@ -187,13 +243,15 @@ public class CardCounterActivity extends BaseTitleActivity {
                 basics.setSelected(false);
                 break;
             case R.id.basic_editor:
+                startActivity(new Intent(context, EditorialBasisActivity.class));
                 break;
             case R.id.senior_editor:
+                startActivity(new Intent(context, AdvancedInformationActivity.class));
                 break;
             case R.id.basics_bt:
                 break;
             case R.id.seniority:
-                startActivity(new Intent(context, ScoreActivity.class));
+
                 break;
             case R.id.skill:
                 break;
@@ -201,8 +259,13 @@ public class CardCounterActivity extends BaseTitleActivity {
                 break;
             case R.id.career:
                 break;
+
+            case R.id.perfect_card:
+                startActivity(new Intent(context, PerfectCardDataActivity.class));
+                break;
         }
     }
+
     //获取数据
     private void getData() {
         OkUtils.getInstances().httpTokenGet(context, JavaConstant.card, JavaParamsUtils.getInstances().getCardAll(), new TypeToken<EntityObject<CardBack>>() {
@@ -211,17 +274,43 @@ public class CardCounterActivity extends BaseTitleActivity {
             public void onFailure(int errorId, String msg) {
                 AlertUtils.toast(context, "服务器错误");
             }
+
             @Override
             public void onSuccess(EntityObject<CardBack> response) {
                 if (response.getCode() == 10000) {
                     cardBack = response.getContent();
                     list = cardBack.getWorkBackgroundOutputs();
+                    edList = cardBack.getEducationBackgroundOutputs();
+                    if (cardBack != null) {
+                        if (cardBack.getCertificateBackgroundOutputs() != null && !cardBack.getCertificateBackgroundOutputs().isEmpty()) {
+                            llData.setVisibility(View.VISIBLE);
+                            llEmpty.setVisibility(View.GONE);
+                        } else {
+
+                            llData.setVisibility(View.GONE);
+                            llEmpty.setVisibility(View.VISIBLE);
+                        }
+                    }
                     workAdapter.setList(list);
+                    educationAdapter.setList(edList);
                     initView();
                 }
             }
         });
     }
+
+
+    private void lazyLoad() {
+        //这里进行双重标记判断,是因为setUserVisibleHint会多次回调,并且会在onCreateView执行前回调,必须确保onCreateView加载完毕且页面可见,才加载数据
+        if (isViewCreated && isUIVisible) {
+            getData();
+            //数据加载完毕,恢复标记,防止重复加载
+            isViewCreated = false;
+            isUIVisible = false;
+        }
+    }
+
+
     //设置参数
     private void initView() {
         name.setText(cardBack.getRealName());
@@ -265,10 +354,62 @@ public class CardCounterActivity extends BaseTitleActivity {
         if (cardBack.getDistrict() != null) {
             addressct = addressct + Utils.searchArea(cardBack.getDistrict());
         }
-        address.setText(addressct + cardBack.getAddress());
+        if (TextUtils.isEmpty(cardBack.getAddress())) {
+            address.setText(addressct);
+        } else {
+            address.setText(addressct + cardBack.getAddress());
+        }
         education.setText(cardBack.getEducation());
 
     }
 
+    //刷新
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onCardBackEvent(CardBackEvent event) {
+        if (event.getRefresh()) {
+            getData();
+        }
+    }
 
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        Log.d("TAG", "CardCounterFragment" + " setUserVisibleHint() --> isVisibleToUser = " + isVisibleToUser);
+
+        if (isVisibleToUser) {
+            isUIVisible = true;
+            lazyLoad();
+        } else {
+            isUIVisible = false;
+        }
+        super.setUserVisibleHint(isVisibleToUser);
+    }
+
+    @Override
+    public void onSupportInvisible() {
+        if (cardBack == null) {
+            getData();
+        }
+    }
+
+    @Override
+    public void onSupportVisible() {
+        thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                if (cardBack == null) {
+
+                    getData();
+
+                }
+            }
+        });
+        thread.start();
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }

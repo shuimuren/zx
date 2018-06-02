@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.SupportActivity;
 import com.zhixing.work.zhixin.bean.AddressJson;
+import com.zhixing.work.zhixin.bean.HotCity;
 import com.zhixing.work.zhixin.fragment.MainFragment;
 import com.zhixing.work.zhixin.presenter.MainContract;
 import com.zhixing.work.zhixin.util.SettingUtils;
@@ -34,6 +35,7 @@ public class MainActivity extends SupportActivity {
     private static final int MSG_LOAD_DATA = 0x0001;
     private static final int MSG_LOAD_SUCCESS = 0x0002;
     private static final int MSG_LOAD_FAILED = 0x0003;
+    public static MainActivity instance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +45,7 @@ public class MainActivity extends SupportActivity {
         if (findFragment(MainFragment.class) == null) {
             loadRootFragment(R.id.fl_container, MainFragment.newInstance());
         }
-
+        instance = this;
         if (TextUtils.isEmpty(SettingUtils.getProvincialList())) {
             mHandler.sendEmptyMessage(MSG_LOAD_DATA);
         }
@@ -68,14 +70,11 @@ public class MainActivity extends SupportActivity {
         return super.onKeyUp(keyCode, event);
     }
 
-
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MSG_LOAD_DATA:
                     if (thread == null) {//如果已创建就不再重新创建子线程了
-
-
                         thread = new Thread(new Runnable() {
                             @Override
                             public void run() {
@@ -112,6 +111,14 @@ public class MainActivity extends SupportActivity {
         ArrayList<AddressJson> jsonBean = gson.fromJson(JsonData, new TypeToken<List<AddressJson>>() {
         }.getType());
 
+        String cityData = Utils.getJson(context, "hotcity.json");//热门城市
+        String Industrytype = Utils.getJson(context, "Industrytype.json");//行业
+        String jobList = Utils.getJson(context, "Jobtype.json");//行业
+
+
+        SettingUtils.putJobList(jobList);
+        SettingUtils.putHotCityList(cityData);
+        SettingUtils.putIndustry(Industrytype);
         /**
          * 添加省份数据
          *
@@ -119,7 +126,6 @@ public class MainActivity extends SupportActivity {
          * PickerView会通过getPickerViewText方法获取字符串显示出来。
          */
         provincialList = jsonBean;
-
         Iterator iter = provincialList.iterator();
         //2、通过循环迭代
         //hasNext():判断是否存在下一个元素

@@ -6,9 +6,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.company.zixin.card.activity.CompeteEducationalActivity">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -18,7 +20,7 @@
                 <LinearLayout
 
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y98"
+                    android:layout_height="50dp"
                     android:background="#dde0e4"
                     android:orientation="horizontal">
 
@@ -81,33 +83,38 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_below="@+id/twoa_iv"
-                                android:text="学历信息"
+                                android:text="教育经历"
                                 android:textColor="@color/main_color"
                                 android:textSize="@dimen/font_size_12sp" />
                         </RelativeLayout>
 
                     </RelativeLayout>
+
                     <ImageView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:src="@drawable/line_light" />
+
                     <RelativeLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1">
+
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:layout_centerVertical="true">
+
                             <ImageView
                                 android:id="@+id/three_iv"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_centerHorizontal="true"
                                 android:src="@drawable/png_3_light" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -188,10 +195,10 @@
 
 
                 <LinearLayout
-                    android:layout_marginTop="10dp"
                     android:id="@+id/ll_data"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
                     <android.support.v7.widget.RecyclerView
@@ -204,8 +211,8 @@
                     <RelativeLayout
                         android:id="@+id/add_certificate"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y100"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="50dp"
                         android:background="@color/linerlayout">
 
                         <LinearLayout
@@ -218,7 +225,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginRight="@dimen/x20"
+                                android:layout_marginRight="10dp"
                                 android:src="@drawable/icon_add" />
 
                             <TextView
@@ -237,12 +244,12 @@
             <Button
                 android:id="@+id/btn_work"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/y80"
+                android:layout_height="40dp"
                 android:layout_alignParentBottom="true"
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="30dp"
-                android:layout_marginLeft="@dimen/x20"
-                android:layout_marginRight="@dimen/x20"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 android:background="@drawable/btn_blue_normal_shape"
                 android:text="下一步"
                 android:textColor="#ffffff"

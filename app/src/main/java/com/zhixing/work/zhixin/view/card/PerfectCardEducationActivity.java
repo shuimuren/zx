@@ -91,7 +91,7 @@ public class PerfectCardEducationActivity extends BaseTitleActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_edcation:
-                startActivity(new Intent(context, AddEducationActivity.class));
+                startActivity(new Intent(context, AddEducationActivity.class).putExtra("type", "card"));
                 break;
             case R.id.btn_next:
                 if (list.size() < 1) {

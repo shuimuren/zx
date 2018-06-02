@@ -1,6 +1,7 @@
 package com.zhixing.work.zhixin.util;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +15,7 @@ import android.util.Base64;
 
 
 import com.zhixing.work.zhixin.app.ZxApplication;
+import com.zhixing.work.zhixin.fragment.ScoreFragment;
 import com.zhixing.work.zhixin.http.Constant;
 import com.zhixing.work.zhixin.http.okhttp.AppUtils;
 
@@ -192,6 +194,34 @@ public class BitmapUtils {
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         context.startActivityForResult(intent, Constant.IMAGE_CROP);
     }
+
+    /**
+     * 对图片进行裁剪功能 便于上传
+     *
+     * @param context
+     * @param imageUri
+     */
+    public static void createPhotoCropFragment(ScoreFragment fragment, Uri imageUri, Uri outPutUri) {
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        /*
+
+        */
+        intent.setDataAndType(imageUri, "image/*");
+        // 设置裁剪
+        intent.putExtra("crop", "true");
+        // aspectX aspectY 是宽高的比例
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        // outputX outputY 是裁剪图片宽高
+        intent.putExtra("outputX", 200);
+        intent.putExtra("outputY", 200);
+        intent.putExtra("scale",true);
+        intent.putExtra("return-data", false);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT,outPutUri);
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+        fragment.startActivityForResult(intent, Constant.IMAGE_CROP);
+    }
+
 
     public static int getBitmapSize(Bitmap bitmap) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {    //API 19

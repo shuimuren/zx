@@ -1,0 +1,405 @@
+[
+  {
+    "Id": 1,
+    "ParentId": 0,
+    "Name": "IT|通信|电子|互联网",
+    "Child": [
+      {
+        "Id": 2,
+        "ParentId": 1,
+        "Name": "互联网/电子商务",
+        "Child": []
+      },
+      {
+        "Id": 3,
+        "ParentId": 1,
+        "Name": "计算机软件",
+        "Child": []
+      },
+      {
+        "Id": 4,
+        "ParentId": 1,
+        "Name": "IT服务(系统/数据/维护)",
+        "Child": []
+      },
+      {
+        "Id": 5,
+        "ParentId": 1,
+        "Name": "电子技术/半导体/集成电路",
+        "Child": []
+      },
+      {
+        "Id": 6,
+        "ParentId": 1,
+        "Name": "计算机硬件",
+        "Child": []
+      },
+      {
+        "Id": 7,
+        "ParentId": 1,
+        "Name": "通信/电信/网络设备",
+        "Child": []
+      },
+      {
+        "Id": 8,
+        "ParentId": 1,
+        "Name": "通信/电信运营、增值服务",
+        "Child": []
+      },
+      {
+        "Id": 9,
+        "ParentId": 1,
+        "Name": "网络游戏",
+        "Child": []
+      }
+    ]
+  },
+  {
+    "Id": 10,
+    "ParentId": 0,
+    "Name": "金融业",
+    "Child": [
+      {
+        "Id": 11,
+        "ParentId": 10,
+        "Name": "基金/证券/期货/投资",
+        "Child": []
+      },
+      {
+        "Id": 12,
+        "ParentId": 10,
+        "Name": "保险",
+        "Child": []
+      },
+      {
+        "Id": 13,
+        "ParentId": 10,
+        "Name": "银行",
+        "Child": []
+      },
+      {
+        "Id": 14,
+        "ParentId": 10,
+        "Name": "信托/担保/拍卖/典当",
+        "Child": []
+      }
+    ]
+  },
+  {
+    "Id": 15,
+    "ParentId": 0,
+    "Name": "房地产|建筑业",
+    "Child": [
+      {
+        "Id": 16,
+        "ParentId": 15,
+        "Name": "房地产/建筑/建材/工程",
+        "Child": []
+      },
+      {
+        "Id": 17,
+        "ParentId": 15,
+        "Name": "家居/室内设计/装饰装潢",
+        "Child": []
+      },
+      {
+        "Id": 18,
+        "ParentId": 15,
+        "Name": "物业管理/商业中心",
+        "Child": []
+      }
+    ]
+  },
+  {
+    "Id": 19,
+    "ParentId": 0,
+    "Name": "商业服务",
+    "Child": [
+      {
+        "Id": 20,
+        "ParentId": 19,
+        "Name": "专业服务/咨询(财会/法律/人力资源等)",
+        "Child": []
+      },
+      {
+        "Id": 21,
+        "ParentId": 19,
+        "Name": "广告/会展/公关",
+        "Child": []
+      },
+      {
+        "Id": 22,
+        "ParentId": 19,
+        "Name": "中介服务",
+        "Child": []
+      },
+      {
+        "Id": 23,
+        "ParentId": 19,
+        "Name": "检验/检测/认证",
+        "Child": []
+      },
+      {
+        "Id": 24,
+        "ParentId": 19,
+        "Name": "外包服务",
+        "Child": []
+      }
+    ]
+  },
+  {
+    "Id": 25,
+    "ParentId": 0,
+    "Name": "贸易|批发|零售|租赁业",
+    "Child": [
+      {
+        "Id": 26,
+        "ParentId": 25,
+        "Name": "快速消费品（食品/饮料/烟酒/日化）",
+        "Child": []
+      },
+      {
+        "Id": 27,
+        "ParentId": 25,
+        "Name": "耐用消费品（服饰/纺织/皮革/家具/家电）",
+        "Child": []
+      },
+      {
+        "Id": 28,
+        "ParentId": 25,
+        "Name": "贸易/进出口",
+        "Child": []
+      },
+      {
+        "Id": 29,
+        "ParentId": 25,
+        "Name": "零售/批发",
+        "Child": []
+      },
+      {
+        "Id": 30,
+        "ParentId": 25,
+        "Name": "租赁服务",
+        "Child": []
+      }
+    ]
+  },
+  {
+    "Id": 31,
+    "ParentId": 0,
+    "Name": "文体教育|工艺美术",
+    "Child": [
+      {
+        "Id": 32,
+        "ParentId": 31,
+        "Name": "教育/培训/院校",
+        "Child": []
+      },
+      {
+        "Id": 33,
+        "ParentId": 31,
+        "Name": "礼品/玩具/工艺美术/收藏品/奢侈品",
+        "Child": []
+      }
+    ]
+  },
+  {
+    "Id": 34,
+    "ParentId": 0,
+    "Name": "生产|加工|制造",
+    "Child": [
+      {
+        "Id": 35,
+        "ParentId": 34,
+        "Name": "汽车/摩托车",
+        "Child": []
+      },
+      {
+        "Id": 36,
+        "ParentId": 34,
+        "Name": "大型设备/机电设备/重工业",
+        "Child": []
+      },
+      {
+        "Id": 37,
+        "ParentId": 34,
+        "Name": "加工制造（原料加工/模具）",
+        "Child": []
+      },
+      {
+        "Id": 38,
+        "ParentId": 34,
+        "Name": "仪器仪表及工业自动化",
+        "Child": []
+      },
+      {
+        "Id": 39,
+        "ParentId": 34,
+        "Name": "印刷/包装/造纸",
+        "Child": []
+      },
+      {
+        "Id": 40,
+        "ParentId": 34,
+        "Name": "办公用品及设备",
+        "Child": []
+      },
+      {
+        "Id": 41,
+        "ParentId": 34,
+        "Name": "医药/生物工程",
+        "Child": []
+      },
+      {
+        "Id": 42,
+        "ParentId": 34,
+        "Name": "医疗设备/器械",
+        "Child": []
+      },
+      {
+        "Id": 43,
+        "ParentId": 34,
+        "Name": "航空/航天研究与制造",
+        "Child": []
+      }
+    ]
+  },
+  {
+    "Id": 44,
+    "ParentId": 0,
+    "Name": "交通|运输|物流|仓储",
+    "Child": [
+      {
+        "Id": 45,
+        "ParentId": 44,
+        "Name": "交通/运输",
+        "Child": []
+      },
+      {
+        "Id": 46,
+        "ParentId": 44,
+        "Name": "物流/仓储",
+        "Child": []
+      }
+    ]
+  },
+  {
+    "Id": 47,
+    "ParentId": 0,
+    "Name": "服务业",
+    "Child": [
+      {
+        "Id": 48,
+        "ParentId": 47,
+        "Name": "医疗/护理/美容/保健/卫生服务",
+        "Child": []
+      },
+      {
+        "Id": 49,
+        "ParentId": 47,
+        "Name": "酒店/餐饮",
+        "Child": []
+      },
+      {
+        "Id": 50,
+        "ParentId": 47,
+        "Name": "旅游/度假",
+        "Child": []
+      }
+    ]
+  },
+  {
+    "Id": 51,
+    "ParentId": 0,
+    "Name": "文化|传媒|娱乐|体育",
+    "Child": [
+      {
+        "Id": 52,
+        "ParentId": 51,
+        "Name": "媒体/出版/影视/文化传播",
+        "Child": []
+      },
+      {
+        "Id": 53,
+        "ParentId": 51,
+        "Name": "娱乐/体育/休闲",
+        "Child": []
+      }
+    ]
+  },
+  {
+    "Id": 54,
+    "ParentId": 0,
+    "Name": "能源|矿产|环保",
+    "Child": [
+      {
+        "Id": 55,
+        "ParentId": 54,
+        "Name": "能源/矿产/采掘/冶炼",
+        "Child": []
+      },
+      {
+        "Id": 56,
+        "ParentId": 54,
+        "Name": "石油/石化/化工",
+        "Child": []
+      },
+      {
+        "Id": 57,
+        "ParentId": 54,
+        "Name": "电气/电力/水利",
+        "Child": []
+      },
+      {
+        "Id": 58,
+        "ParentId": 54,
+        "Name": "环保",
+        "Child": []
+      }
+    ]
+  },
+  {
+    "Id": 59,
+    "ParentId": 0,
+    "Name": "政府|非盈利机构",
+    "Child": [
+      {
+        "Id": 60,
+        "ParentId": 59,
+        "Name": "政府/公共事业/非盈利机构",
+        "Child": []
+      },
+      {
+        "Id": 61,
+        "ParentId": 59,
+        "Name": "学术/科研",
+        "Child": []
+      }
+    ]
+  },
+  {
+    "Id": 62,
+    "ParentId": 0,
+    "Name": "农|林|牧|渔|其他",
+    "Child": [
+      {
+        "Id": 63,
+        "ParentId": 62,
+        "Name": "农/林/牧/渔",
+        "Child": []
+      },
+      {
+        "Id": 64,
+        "ParentId": 62,
+        "Name": "跨领域经营",
+        "Child": []
+      },
+      {
+        "Id": 65,
+        "ParentId": 62,
+        "Name": "其他",
+        "Child": []
+      }
+    ]
+  }
+]

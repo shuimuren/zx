@@ -62,6 +62,12 @@ public class CardBack {
     private List<WorkBackgroundOutputsBean> WorkBackgroundOutputs;
     private List<EducationBackgroundOutputsBean> EducationBackgroundOutputs;
     private List<CertificateBackgroundOutputsBean> CertificateBackgroundOutputs;
+    /**
+     * Married : null
+     * StudyAbroad : null
+     */
+
+    private String StudyAbroad;
 
     public String getRealName() {
         return RealName;
@@ -263,6 +269,14 @@ public class CardBack {
         this.CertificateBackgroundOutputs = CertificateBackgroundOutputs;
     }
 
+    public String getStudyAbroad() {
+        return StudyAbroad;
+    }
+
+    public void setStudyAbroad(String StudyAbroad) {
+        this.StudyAbroad = StudyAbroad;
+    }
+
     public static class WorkBackgroundOutputsBean {
         /**
          * CompanyName : 深圳卡创有限公司
@@ -349,13 +363,10 @@ public class CardBack {
         /**
          * CertificateTitle : 吃鸡
          */
-
         private String CertificateTitle;
-
         public String getCertificateTitle() {
             return CertificateTitle;
         }
-
         public void setCertificateTitle(String CertificateTitle) {
             this.CertificateTitle = CertificateTitle;
         }

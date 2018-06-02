@@ -1,22 +1,27 @@
-package com.zhixing.work.zhixin.view.score;
+package com.zhixing.work.zhixin.view.card.back.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.willy.ratingbar.ScaleRatingBar;
 import com.zhixing.work.zhixin.R;
-import com.zhixing.work.zhixin.base.BaseTitleActivity;
-import com.zhixing.work.zhixin.view.card.CardCounterActivity;
+import com.zhixing.work.zhixin.base.SupportFragment;
+import com.zhixing.work.zhixin.view.card.back.fragment.CardCounterFragment;
+import com.zhixing.work.zhixin.view.score.EvaluationHallActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ScoreActivity extends BaseTitleActivity {
+public class EvaluatingFragment extends SupportFragment {
 
     @BindView(R.id.basics)
     TextView basics;
@@ -51,15 +56,27 @@ public class ScoreActivity extends BaseTitleActivity {
     @BindView(R.id.mentality_nm)
     TextView mentalityNm;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_score);
-        ButterKnife.bind(this);
-        setTitle("评分");
+    private Context context;
+
+
+    public static EvaluatingFragment newInstance() {
+        Bundle args = new Bundle();
+        EvaluatingFragment fragment = new EvaluatingFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_score, container, false);
+
+        ButterKnife.bind(this, view);
+        basics.setSelected(true);
+        context=getActivity();
 
 
+        return view;
+    }
     @OnClick({R.id.evaluating, R.id.historical_score, R.id.basics_bt, R.id.seniority, R.id.skill, R.id.fate, R.id.career})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -69,7 +86,7 @@ public class ScoreActivity extends BaseTitleActivity {
             case R.id.historical_score:
                 break;
             case R.id.basics_bt:
-                startActivity(new Intent(context, CardCounterActivity.class));
+
                 break;
             case R.id.seniority:
                 break;
@@ -80,5 +97,10 @@ public class ScoreActivity extends BaseTitleActivity {
             case R.id.career:
                 break;
         }
+    }
+
+    @Override
+    public void fetchData() {
+
     }
 }

@@ -16,6 +16,7 @@
     <color name="color_71aae0">#71aae0</color>
 
     <color name="toobar">#408acf</color>
+    <color name="red">#ff503e</color>
     <color name="color_cfc496">#cfc496</color>
     <color name="hardtoast">#b1b6bb</color>
     <color name="linerlayout">#ffffff</color>
@@ -47,6 +48,7 @@
     <color name="exit_bg_active">#dc2321</color>
     <color name="gray">#8d8d8d</color>
     <color name="hint">#999999</color>
+
     <color name="color_f5f5f5">#f5f5f5</color>
     <color name="hyperlinks_second">#559fed</color>
 

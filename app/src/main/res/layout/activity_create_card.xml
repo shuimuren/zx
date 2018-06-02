@@ -13,7 +13,8 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y88"
+            android:layout_height="45dp"
+
             android:background="@color/hardtoast"
             android:orientation="horizontal">
 
@@ -21,21 +22,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginLeft="10dp"
                 android:src="@drawable/gantanh" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="10dp"
                 android:text="卡牌等同于您的个人简历,请务必填写真实信息" />
         </LinearLayout>
         <!--姓名-->
         <RelativeLayout
             android:id="@+id/rl_name"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y98"
+            android:layout_height="50dp"
             android:background="@color/linerlayout">
 
             <TextView
@@ -43,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginLeft="10dp"
                 android:text="姓名"
                 android:textColor="@color/linerlayout_tv"
                 android:textSize="20sp" />
@@ -51,17 +52,16 @@
             <TextView
                 android:id="@+id/name_ed"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/y80"
+                android:layout_height="40dp"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x24"
-                android:layout_toLeftOf="@+id/name_right"
-                android:background="@null"
+                android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/name_right"
+            android:background="@null"
+            android:gravity="center"
 
-                android:gravity="center"
+            android:maxLength="5"
 
-                android:maxLength="5"
-
-                />
+            />
 
             <ImageView
                 android:id="@+id/name_right"
@@ -70,20 +70,20 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:src="@drawable/icon_next" />
+            android:src="@drawable/icon_next" />
         </RelativeLayout>
         <!--性别-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y98"
-            android:layout_marginTop="@dimen/y2"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
             android:background="@color/linerlayout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginLeft="10dp"
                 android:text="性别"
                 android:textColor="@color/linerlayout_tv"
                 android:textSize="20sp" />
@@ -93,7 +93,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
 
-                android:layout_marginRight="@dimen/x36"
+                android:layout_marginRight="15dp"
+
                 android:layout_toLeftOf="@+id/card_sex_woman"
                 android:button="@drawable/card_check"
 
@@ -106,21 +107,21 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
 
-                android:layout_marginRight="@dimen/x24"
+                android:layout_marginRight="10dp"
                 android:button="@drawable/card_check_m" />
         </RelativeLayout>
         <!--手机号-->
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y98"
-            android:layout_marginTop="@dimen/y2"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
             android:background="@color/linerlayout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginLeft="10dp"
                 android:text="手机号"
                 android:textColor="@color/linerlayout_tv"
                 android:textSize="20sp" />
@@ -128,10 +129,10 @@
             <TextView
                 android:id="@+id/regist_phone_num"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/y80"
+                android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x24"
+                android:layout_marginRight="10dp"
                 android:background="@null"
                 android:gravity="center"
 
@@ -141,15 +142,15 @@
         <RelativeLayout
             android:id="@+id/rl_mail"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y98"
-            android:layout_marginTop="@dimen/y2"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
             android:background="@color/linerlayout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginLeft="10dp"
                 android:text="邮箱"
                 android:textColor="@color/linerlayout_tv"
                 android:textSize="20sp" />
@@ -157,9 +158,9 @@
             <TextView
                 android:id="@+id/mailbox"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/y80"
+                android:layout_height="40dp"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x24"
+                android:layout_marginRight="10dp"
                 android:layout_toLeftOf="@+id/mail_right"
                 android:background="@null"
                 android:gravity="center"
@@ -178,16 +179,17 @@
         </RelativeLayout>
         <!--是否学生-->
         <RelativeLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y98"
-            android:layout_marginTop="@dimen/y20"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
             android:background="@color/linerlayout">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginLeft="10dp"
                 android:text="学生"
                 android:textColor="@color/linerlayout_tv"
                 android:textSize="20sp" />
@@ -198,10 +200,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x150"
+                android:layout_marginRight="75dp"
 
                 android:button="@drawable/card_check_stu"
-                android:paddingLeft="@dimen/x24"
+                android:paddingLeft="10dp"
                 android:text="是"
                 android:textColor="@color/gray"
                 android:textSize="18sp" />
@@ -212,10 +214,10 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x24"
+                android:layout_marginRight="10dp"
                 android:button="@drawable/card_check_stu"
 
-                android:paddingLeft="@dimen/x24"
+                android:paddingLeft="10dp"
                 android:text="否"
                 android:textColor="@color/gray"
                 android:textSize="18sp" />
@@ -224,10 +226,12 @@
 
         <Button
             android:id="@+id/btn_born_card"
-            android:layout_width="@dimen/x640"
-            android:layout_height="@dimen/y100"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/y100"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_40"
+            android:layout_marginTop="50dp"
             android:background="@color/hardtoast"
             android:enabled="false"
             android:text="生成卡牌"

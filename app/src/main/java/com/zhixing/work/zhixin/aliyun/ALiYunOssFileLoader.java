@@ -20,7 +20,6 @@ import com.zhixing.work.zhixin.bean.StsToken;
 
 /**
  * 阿里云上传工具类
- *
  */
 
 public class ALiYunOssFileLoader {
@@ -35,8 +34,6 @@ public class ALiYunOssFileLoader {
      * @param listener       回调监听
      */
     public static void asyncUpload(Context context, StsToken stsToken, String bucketName, final String objectKey, String uploadFilePath, final OssFileUploadListener listener) {
-
-
         OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider(stsToken.getAccessKeyId(), stsToken.getAccessKeySecret(), stsToken.getSecurityToken());
         ClientConfiguration conf = new ClientConfiguration();
         conf.setConnectionTimeout(15 * 1000); // 连接超时，默认15秒
@@ -44,7 +41,6 @@ public class ALiYunOssFileLoader {
         conf.setMaxConcurrentRequest(5); // 最大并发请求书，默认5个
         conf.setMaxErrorRetry(2); // 失败后最大重试次数，默认2次
         OSSClient mOSSClient = new OSSClient(context, ALiYunFileURLBuilder.END_POINT, credentialProvider, conf);
-
         // 构造上传请求
         PutObjectRequest put = new PutObjectRequest(bucketName, objectKey, uploadFilePath);
 
@@ -68,6 +64,7 @@ public class ALiYunOssFileLoader {
                 if (listener != null)
                     listener.onUploadSuccess(request.getObjectKey());
             }
+
             @Override
             public void onFailure(PutObjectRequest request, ClientException clientExcepion, ServiceException serviceException) {
                 // 请求异常
@@ -87,6 +84,7 @@ public class ALiYunOssFileLoader {
             }
         });
     }
+
     public interface OssFileUploadListener {
         void onUploadSuccess(String objectKey);
 
@@ -94,4 +92,45 @@ public class ALiYunOssFileLoader {
 
         void onUploadFailure(String objectKey, ServiceException ossException);
     }
+
+
+    public static String gtePublic(Context context, StsToken stsToken, String bucketName, final String objectKey) {
+
+        String url = "";
+        OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider(stsToken.getAccessKeyId(), stsToken.getAccessKeySecret(), stsToken.getSecurityToken());
+        ClientConfiguration conf = new ClientConfiguration();
+        conf.setConnectionTimeout(15 * 1000); // 连接超时，默认15秒
+        conf.setSocketTimeout(15 * 1000); // socket超时，默认15秒
+        conf.setMaxConcurrentRequest(5); // 最大并发请求书，默认5个
+        conf.setMaxErrorRetry(2); // 失败后最大重试次数，默认2次
+        OSSClient mOSSClient = new OSSClient(context, ALiYunFileURLBuilder.PUBLIC_END_POINT, credentialProvider, conf);
+        conf.setHttpDnsEnable(true);
+        url = mOSSClient.presignPublicObjectURL(bucketName, objectKey);
+
+        return url;
+    }
+
+
+    public static String gteSecret(Context context, StsToken stsToken, String bucketName, final String objectKey) {
+
+        String url = "";
+        OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider(stsToken.getAccessKeyId(), stsToken.getAccessKeySecret(), stsToken.getSecurityToken());
+        ClientConfiguration conf = new ClientConfiguration();
+        conf.setConnectionTimeout(15 * 1000); // 连接超时，默认15秒
+        conf.setSocketTimeout(15 * 1000); // socket超时，默认15秒
+        conf.setMaxConcurrentRequest(5); // 最大并发请求书，默认5个
+        conf.setMaxErrorRetry(2); // 失败后最大重试次数，默认2次
+        conf.setHttpDnsEnable(true);
+        OSSClient mOSSClient = new OSSClient(context, ALiYunFileURLBuilder.SECRET_END_POINT, credentialProvider, conf);
+        try {
+            url = mOSSClient.presignConstrainedObjectURL(bucketName, objectKey, 30 * 60);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return url;
+    }
+
 }

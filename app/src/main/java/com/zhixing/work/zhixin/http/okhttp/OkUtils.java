@@ -9,12 +9,16 @@ import com.google.gson.Gson;
 import com.zhixing.work.zhixin.BuildConfig;
 import com.zhixing.work.zhixin.app.ZxApplication;
 import com.zhixing.work.zhixin.bean.EntityObject;
+import com.zhixing.work.zhixin.bean.Evaluating;
+import com.zhixing.work.zhixin.bean.FailObject;
 import com.zhixing.work.zhixin.http.HttpHeadUtils;
 import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
+import com.zhixing.work.zhixin.util.Indicator;
 import com.zhixing.work.zhixin.util.NetUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
+import com.zhixing.work.zhixin.view.MainActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.FileCallBack;
@@ -166,11 +170,11 @@ public class OkUtils<T> {
                                 callback.onFailure(entity.getCode(), "服务器错误");
                                 //不成功状态
                                 //  sessionId 失效 导致重先登录 重新登录还是失败  那就跳到登录界面去
-                                if (entity.getCode() == 0 && entity.getMessage().equals("noSession")) {
+                                if (entity.getCode() == 10005 && entity.getMessage().equals("Token已过期")) {
                                     AlertUtils.toast(ZxApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
+
                                     logout();
                                 }
-
                             }
                         } else {
                             callback.onFailure(0, "错误");
@@ -213,11 +217,11 @@ public class OkUtils<T> {
                                 //不成功状态
 
                                 //  sessionId 失效 导致重先登录 重新登录还是失败  那就跳到登录界面去
-//                                if (entity.getReturnCode() == 4006) {
-//                                    //AlertUtils.toast(BjdpApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
-//                                    logout();
-//
-//                                }
+                                if (entity.getCode() == 10005 && entity.getMessage().equals("Token已过期")) {
+                                    AlertUtils.toast(ZxApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
+
+                                    logout();
+                                }
                                 callback.onFailure(entity.getCode(), entity.getMessage());
                             }
                         }
@@ -249,7 +253,6 @@ public class OkUtils<T> {
             String Session2 = SettingUtils.getFansucenterSessionId();
 
             if (isPost) {
-
                 OkHttpUtils.post().url(url).params(param)
                         .addHeader("version", BuildConfig.VERSION_NAME).//打印版本
                         addHeader(ACCESSID, accessId).
@@ -274,6 +277,17 @@ public class OkUtils<T> {
                         } catch (Exception e1) {
                             callback.onFailure(32000, "获取数据失败");
                             Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
+                            try {
+                                FailObject entity1 = gson.fromJson(response, FailObject.class);
+                                if (entity1.getCode() == 10005 && entity1.getMessage().equals("Token已过期")) {
+                                    AlertUtils.toast(ZxApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
+                                    logout();
+                                }
+                            } catch (Exception e) {
+
+                            }
+
+
                         }
                         if (entity != null) {
                             if (entity.getCode() > 0) {
@@ -284,7 +298,7 @@ public class OkUtils<T> {
                                 callback.onFailure(entity.getCode(), "服务器错误");
                                 //不成功状态
                                 //  sessionId 失效 导致重先登录 重新登录还是失败  那就跳到登录界面去
-                                if (entity.getCode() == 0 && entity.getMessage().equals("noSession")) {
+                                if (entity.getCode() == 10005 && entity.getMessage().equals("Token已过期")) {
                                     AlertUtils.toast(ZxApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
                                     logout();
                                 }
@@ -293,7 +307,6 @@ public class OkUtils<T> {
                         } else {
                             callback.onFailure(0, "错误");
                         }
-
                     }
                 });
             } else {
@@ -310,18 +323,25 @@ public class OkUtils<T> {
                         Log.i(TAG + "返回失败= >", "" + e.getMessage());
                         callback.onFailure(32000, e.getMessage());
                     }
-
                     @Override
                     public void onResponse(String response, int id) {
                         Log.i(TAG + "返回成功 = >", "" + response);
                         EntityObject<T> entity = null;
-
                         try {
                             entity = gson.fromJson(response, classType);
                             Log.i("EntityObject", "已解析");
                         } catch (Exception e1) {
                             callback.onFailure(32000, "提交数据失败");
                             Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
+                            try {
+                                FailObject entity1 = gson.fromJson(response, FailObject.class);
+                                if (entity1.getCode() == 10005 && entity1.getMessage().equals("Token已过期")) {
+                                    AlertUtils.toast(ZxApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
+                                    logout();
+                                }
+                            } catch (Exception e) {
+
+                            }
                         }
                         if (entity != null) {
                             if (entity.getCode() > 0) {
@@ -330,13 +350,11 @@ public class OkUtils<T> {
                             } else {
                                 callback.onFailure(entity.getCode(), "服务器错误");
                                 //不成功状态
+                                if (entity.getCode() == 10005 && entity.getMessage().equals("Token已过期")) {
+                                    AlertUtils.toast(ZxApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
 
-                                //  sessionId 失效 导致重先登录 重新登录还是失败  那就跳到登录界面去
-//                                if (entity.getReturnCode() == 4006) {
-//                                    //AlertUtils.toast(BjdpApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
-//                                    logout();
-//
-//                                }
+                                    logout();
+                                }
                                 callback.onFailure(entity.getCode(), entity.getMessage());
                             }
                         }
@@ -415,6 +433,10 @@ public class OkUtils<T> {
         patch(requestBody, context, url, param, classType, callback);
     }
 
+    public void httpDelete(final RequestBody requestBody, final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
+        delete(requestBody, context, url, param, classType, callback);
+    }
+
     public void httput(final RequestBody requestBody, final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
         put(requestBody, context, url, param, classType, callback);
     }
@@ -468,21 +490,6 @@ public class OkUtils<T> {
             }
         });
 
-
-    }
-
-    public void clearLoginState() {
-
-        SettingUtils.putSessionId(null);
-        SettingUtils.putFansAppApiSessionId(null);
-        SettingUtils.putFansAppApiSessionId(null);
-
-        SettingUtils.putUserId(null);
-        SettingUtils.putPass_Id(null);
-        SettingUtils.putAvatar(null);
-    }
-
-    private void logout() {
 
     }
 
@@ -570,6 +577,7 @@ public class OkUtils<T> {
             OkHttpUtils.patch().url(url).requestBody(requestBody).
                     addHeader("content-type", "application/x-www-form-urlencoded")
                     .addHeader("version", BuildConfig.VERSION_NAME).//打印版本
+                    addHeader(TOKEN, SettingUtils.getToken()).
                     addHeader(ACCESSID, accessId).
                     addHeader(TIMESTAMP, timer).
                     addHeader(NONCE, randoms).
@@ -600,8 +608,9 @@ public class OkUtils<T> {
                             callback.onFailure(entity.getCode(), "服务器错误");
                             //不成功状态
                             //  sessionId 失效 导致重先登录 重新登录还是失败  那就跳到登录界面去
-                            if (entity.getCode() == 0 && entity.getMessage().equals("noSession")) {
+                            if (entity.getCode() == 10005 && entity.getMessage().equals("Token已过期")) {
                                 AlertUtils.toast(ZxApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
+
                                 logout();
                             }
 
@@ -617,10 +626,72 @@ public class OkUtils<T> {
 
     }
 
+    private void delete(RequestBody requestBody, final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
+
+
+        if (NetUtils.isConnected(context)) {
+            if (param == null) {
+                param = new HashMap<String, String>();
+            }
+//            param.put(APP_VERSION, "" + AppUtils.getVersionCode(context));
+//            param.put(SESSION_ID, "" + SettingUtils.getSessionId());
+            if (param.size() == 0) {
+                Log.i(TAG + "请求参数：", url);
+            } else {
+                Log.i(TAG + "请求参数：", url + "?" + buildParam(param));
+            }
+            OkHttpUtils.delete().url(url).
+                    addHeader("content-type", "application/x-www-form-urlencoded")
+                    .addHeader("version", BuildConfig.VERSION_NAME).//打印版本
+                    addHeader(TOKEN, SettingUtils.getToken()).
+                    addHeader(ACCESSID, accessId).
+                    addHeader(TIMESTAMP, timer).
+                    addHeader(NONCE, randoms).
+                    addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                    .build().execute(new StringCallback() {
+                @Override
+                public void onError(Call call, Exception e, int id) {
+                    Log.i(TAG + "返回失败= >", "" + e.getMessage());
+                    callback.onFailure(32000, e.getMessage());
+                }
+
+                @Override
+                public void onResponse(String response, int id) {
+
+                    Log.i(TAG + "返回成功 = >", "" + response);
+                    EntityObject<T> entity = null;
+                    try {
+                        entity = gson.fromJson(response, classType);
+                    } catch (Exception e1) {
+                        callback.onFailure(32000, "提交数据失败");
+                        Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
+                    }
+                    if (entity != null) {
+                        if (entity.getCode() > 0) {
+                            //成功状态
+                            callback.onSuccess(entity);
+                        } else {
+                            callback.onFailure(entity.getCode(), "服务器错误");
+                            //不成功状态
+                            //  sessionId 失效 导致重先登录 重新登录还是失败  那就跳到登录界面去
+                            if (entity.getCode() == 10005 && entity.getMessage().equals("Token已过期")) {
+                                AlertUtils.toast(ZxApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
+
+                                logout();
+                            }
+
+                        }
+                    } else {
+                        callback.onFailure(0, "错误");
+                    }
+
+                }
+            });
+        }
+
+    }
 
     private void put(RequestBody requestBody, final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
-
-
         if (NetUtils.isConnected(context)) {
             if (param == null) {
                 param = new HashMap<String, String>();
@@ -666,8 +737,9 @@ public class OkUtils<T> {
                             callback.onFailure(entity.getCode(), "服务器错误");
                             //不成功状态
                             //  sessionId 失效 导致重先登录 重新登录还是失败  那就跳到登录界面去
-                            if (entity.getCode() == 0 && entity.getMessage().equals("noSession")) {
+                            if (entity.getCode() == 10005 && entity.getMessage().equals("Token已过期")) {
                                 AlertUtils.toast(ZxApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
+
                                 logout();
                             }
 
@@ -689,7 +761,7 @@ public class OkUtils<T> {
 
         //创建一个RequestBody(参数1：数据类型 参数2传递的json串)
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-        Log.i(TAG + "请求参数：", url + "?" +json.toString());
+        Log.i(TAG + "请求参数：", url + "?" + json.toString());
         RequestBody requestBody = RequestBody.create(JSON, json);
         //创建一个请求对象
         Request request = new Request.Builder()
@@ -697,7 +769,6 @@ public class OkUtils<T> {
                 .post(requestBody).addHeader("token", SettingUtils.getToken()).
                         addHeader(ACCESSID, accessId).
                         addHeader(TIMESTAMP, timer).
-
                         addHeader(NONCE, randoms).
                         addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
                 .build();
@@ -732,7 +803,72 @@ public class OkUtils<T> {
                         //不成功状态
                         //  sessionId 失效 导致重先登录 重新登录还是失败  那就跳到登录界面去
 
+                        if (entity.getCode() == 10005 && entity.getMessage().equals("Token已过期")) {
+                            AlertUtils.toast(ZxApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
 
+                            logout();
+                        }
+                    }
+                } else {
+                    callback.onFailure(0, "错误");
+                }
+            }
+        });
+
+
+    }
+
+    public void putJson(final Context context, final String url, final String json, final Type classType, final ResultCallBackListener<T> callback) {
+        //申明给服务端传递一个json串
+        //创建一个OkHttpClient对象
+        //创建一个RequestBody(参数1：数据类型 参数2传递的json串)
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        Log.i(TAG + "请求参数：", url + "?" + json.toString());
+        RequestBody requestBody = RequestBody.create(JSON, json);
+        //创建一个请求对象
+        Request request = new Request.Builder()
+                .url(url)
+                .put(requestBody).addHeader("token", SettingUtils.getToken()).
+                        addHeader(ACCESSID, accessId).
+                        addHeader(TIMESTAMP, timer).
+                        addHeader(NONCE, randoms).
+                        addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                .build();
+        //发送请求获取响应
+        Call call = OkHttpUtils.getInstance().getOkHttpClient().newCall(request);
+        call.enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callback.onFailure(0, "错误");
+            }
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+                EntityObject<T> entity = null;
+                try {
+                    String data = response.body().string();
+                    Log.i(TAG + "返回成功 = >", "" + data);
+                    entity = gson.fromJson(data, classType);
+                } catch (Exception e1) {
+
+                    callback.onFailure(32000, "提交数据失败");
+                    Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
+                }
+                if (entity != null) {
+                    if (entity.getCode() > 0) {
+
+                        //成功状态
+                        callback.onSuccess(entity);
+                    } else {
+                        callback.onFailure(entity.getCode(), "服务器错误");
+                        //不成功状态
+                        //  sessionId 失效 导致重先登录 重新登录还是失败  那就跳到登录界面去
+
+                        if (entity.getCode() == 10005 && entity.getMessage().equals("Token已过期")) {
+                            AlertUtils.toast(ZxApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
+
+                            logout();
+                        }
                     }
                 } else {
                     callback.onFailure(0, "错误");
@@ -751,7 +887,7 @@ public class OkUtils<T> {
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         RequestBody requestBody = RequestBody.create(JSON, json);
         //创建一个请求对象
-        Log.i(TAG + "请求参数：", url + "?" +json.toString());
+        Log.i(TAG + "请求参数：", url + "?" + json.toString());
         Request request = new Request.Builder()
                 .url(url)
                 .patch(requestBody).addHeader("token", SettingUtils.getToken()).
@@ -767,6 +903,7 @@ public class OkUtils<T> {
             public void onFailure(Call call, IOException e) {
                 callback.onFailure(0, "错误");
             }
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 
@@ -789,13 +926,91 @@ public class OkUtils<T> {
                         //不成功状态
                         //  sessionId 失效 导致重先登录 重新登录还是失败  那就跳到登录界面去
 
+                        if (entity.getCode() == 10005 && entity.getMessage().equals("Token已过期")) {
+                            AlertUtils.toast(ZxApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
 
+                            logout();
+                        }
                     }
                 } else {
                     callback.onFailure(0, "错误");
                 }
             }
         });
+
+
+    }
+
+    public void deleteJson(final Context context, final String url, final RequestBody body, final Type classType, final ResultCallBackListener<T> callback) {
+        //申明给服务端传递一个json串
+        //创建一个OkHttpClient对象
+        Request request = new Request.Builder().delete()
+                .url(url).addHeader("token", SettingUtils.getToken()).
+                        addHeader(ACCESSID, accessId).
+                        addHeader(TIMESTAMP, timer).
+                        addHeader(NONCE, randoms).
+                        addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                .build();
+        //发送请求获取响应
+        Call call = OkHttpUtils.getInstance().getOkHttpClient().newCall(request);
+        call.enqueue(new okhttp3.Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callback.onFailure(0, "错误");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                EntityObject<T> entity = null;
+                try {
+                    String data = response.body().string();
+                    Log.i(TAG + "返回成功 = >", "" + data);
+                    entity = gson.fromJson(data, classType);
+                } catch (Exception e1) {
+                    callback.onFailure(32000, "提交数据失败");
+                    Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
+                }
+                if (entity != null) {
+                    if (entity.getCode() > 0) {
+
+                        //成功状态
+                        callback.onSuccess(entity);
+                    } else {
+                        callback.onFailure(entity.getCode(), "服务器错误");
+                        //不成功状态
+                        if (entity.getCode() == 10005 && entity.getMessage().equals("Token已过期")) {
+                            AlertUtils.toast(ZxApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
+
+                            logout();
+                        }
+                        //  sessionId 失效 导致重先登录 重新登录还是失败  那就跳到登录界面去
+                    }
+                } else {
+                    callback.onFailure(0, "错误");
+                }
+            }
+        });
+
+
+    }
+
+    public void clearLoginState() {
+
+        SettingUtils.putSessionId(null);
+        SettingUtils.putFansAppApiSessionId(null);
+        SettingUtils.putFansAppApiSessionId(null);
+
+        SettingUtils.putUserId(null);
+        SettingUtils.putPass_Id(null);
+        SettingUtils.putAvatar(null);
+    }
+
+    private void logout() {
+
+        Indicator.goLogin(ZxApplication.getInstance());
+        //ZxApplication.getInstance().finishAllActivity();
+        MainActivity.instance.finish();
+        clearLoginState();
 
 
     }

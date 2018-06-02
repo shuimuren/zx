@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.ContentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    tools:context="com.zhixing.work.zhixin.view.card.back.CardMainActivity">
+
+    <LinearLayout
+        android:layout_marginBottom="@dimen/dp_25"
+        android:layout_marginLeft="@dimen/dp_15"
+        android:layout_marginTop="@dimen/dp_25"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_back_in"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="生涯" />
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.ContentFrameLayout>

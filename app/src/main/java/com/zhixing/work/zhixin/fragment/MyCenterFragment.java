@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseMainFragment;
 import com.zhixing.work.zhixin.view.authentication.AuthenticationHallActivity;
-import com.zhixing.work.zhixin.view.authentication.IdAuthenticationActivity;
+import com.zhixing.work.zhixin.view.resume.MyResumeActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +27,8 @@ public class MyCenterFragment extends BaseMainFragment {
 
     @BindView(R.id.ll_authentication)
     LinearLayout llAuthentication;
+    @BindView(R.id.ll_resume)
+    LinearLayout llResume;
     private Unbinder unbinder;
     private Context context;
 
@@ -49,8 +51,14 @@ public class MyCenterFragment extends BaseMainFragment {
 
     @Override
     public void onDestroy() {
-        unbinder.unbind();
         super.onDestroy();
+
+
+    }
+
+    @Override
+    public void fetchData() {
+
     }
 
     @Override
@@ -59,9 +67,17 @@ public class MyCenterFragment extends BaseMainFragment {
         unbinder.unbind();
     }
 
-    @OnClick(R.id.ll_authentication)
-    public void onViewClicked() {
-        startActivity(new Intent(context, AuthenticationHallActivity.class));
-    }
 
+    @OnClick({R.id.ll_authentication, R.id.ll_resume})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ll_authentication:
+                startActivity(new Intent(context, AuthenticationHallActivity.class));
+
+                break;
+            case R.id.ll_resume:
+                startActivity(new Intent(context, MyResumeActivity.class));
+                break;
+        }
     }
+}

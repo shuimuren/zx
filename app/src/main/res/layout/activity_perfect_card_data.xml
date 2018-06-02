@@ -16,7 +16,7 @@
         <LinearLayout
 
             android:layout_width="match_parent"
-            android:layout_height="@dimen/y98"
+            android:layout_height="50dp"
             android:background="#dde0e4"
             android:orientation="horizontal">
 
@@ -79,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/twoa_iv"
-                        android:text="学历信息"
+                        android:text="教育经历"
                         android:textSize="@dimen/font_size_12sp" />
                 </RelativeLayout>
 
@@ -185,7 +185,7 @@
                     <RelativeLayout
                         android:id="@id/rl_name"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
+                        android:layout_height="50dp"
                         android:layout_alignParentBottom="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentStart="true"
@@ -196,10 +196,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="昵称"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/name"
@@ -207,7 +207,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_name"
                             android:gravity="right"
                             android:hint="请输入昵称"
@@ -222,37 +222,39 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
                     </RelativeLayout>
+
+                    <View style="@style/line"></View>
                     <!--出生日期-->
                     <RelativeLayout
 
                         android:id="@+id/rl_date"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y2"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="出生日期"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/date"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_date"
                             android:gravity="right"
                             android:hint="请选择出生日期"
-                            android:maxLines="1"
+
                             android:text=""
                             android:textColor="@color/color_303030"
                             android:textColorHint="@color/hint"
@@ -264,28 +266,30 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
 
                     </RelativeLayout>
+
+                    <View style="@style/line"></View>
                     <!--星座-->
                     <RelativeLayout
                         android:id="@+id/rl_constellation"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y2"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="星座"
 
 
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
 
@@ -293,14 +297,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_constellation"
                             android:gravity="right"
                             android:hint="请选择星座"
 
                             android:textColor="@color/color_303030"
                             android:textColorHint="@color/hint"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <ImageView
                             android:id="@+id/iv_constellation"
@@ -308,40 +312,42 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
 
 
                     </RelativeLayout>
                     <!--学历-->
+                    <View style="@style/line"></View>
+
                     <RelativeLayout
                         android:id="@+id/rl_education"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y20"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="最高学历"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/highest_education"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_highest_education"
                             android:gravity="right"
                             android:hint="请选择学历"
                             android:textColor="@color/color_303030"
                             android:textColorHint="@color/hint"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <ImageView
                             android:id="@+id/iv_highest_education"
@@ -349,25 +355,27 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
 
                     </RelativeLayout>
 
+                    <View style="@style/line"></View>
+
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y20"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="是否有留学经历"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <CheckBox
                             android:id="@+id/is_study_abroad_yes"
@@ -375,13 +383,13 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x150"
+                            android:layout_marginRight="75dp"
 
                             android:button="@drawable/card_check_stu"
-                            android:paddingLeft="@dimen/x24"
+                            android:paddingLeft="10dp"
                             android:text="是"
                             android:textColor="@color/gray"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <CheckBox
                             android:id="@+id/study_abroad_no"
@@ -389,43 +397,44 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:button="@drawable/card_check_stu"
 
-                            android:paddingLeft="@dimen/x24"
+                            android:paddingLeft="10dp"
                             android:text="否"
                             android:textColor="@color/gray"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
                     </RelativeLayout>
 
+                    <View style="@style/line"></View>
                     <!--首次工作时间-->
                     <RelativeLayout
                         android:id="@+id/rl_worktime"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
+                        android:layout_height="50dp"
                         android:background="@color/linerlayout">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="首次工作时间"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/work_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_datejob"
                             android:gravity="right"
                             android:hint="请选择工作时间"
                             android:textColor="@color/color_303030"
                             android:textColorHint="@color/hint"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <ImageView
                             android:id="@+id/iv_datejob"
@@ -433,38 +442,42 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
 
                     </RelativeLayout>
+
+                    <View style="@style/line"></View>
                     <!--座右铭-->
                     <RelativeLayout
                         android:id="@+id/rl_motto"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y2"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="座右铭"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/motto_tx"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_Motto"
+                            android:ellipsize="end"
+
                             android:gravity="right"
                             android:hint="请选择输入座右铭"
-
-                            android:maxLines="1"
+                            android:maxEms="10"
+                            android:singleLine="true"
                             android:textColor="@color/color_303030"
                             android:textColorHint="@color/hint"
                             android:textSize="16sp" />
@@ -475,7 +488,7 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
 
 
@@ -486,15 +499,15 @@
                 <LinearLayout
                     android:id="@+id/all"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x60"
-                    android:layout_marginBottom="@dimen/x20"
-                    android:layout_marginTop="@dimen/x20"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginLeft="15dp"
                         android:layout_weight="1"
                         android:text="更多" />
 
@@ -507,34 +520,34 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:id="@+id/llMore"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
                     <!--身高-->
                     <RelativeLayout
                         android:id="@+id/rl_height"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y2"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="身高"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/height"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_height"
                             android:gravity="right"
                             android:hint="选填"
@@ -550,15 +563,17 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
                     </RelativeLayout>
+
+                    <View style="@style/line"></View>
                     <!--体重-->
                     <RelativeLayout
                         android:id="@+id/rl_weight"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y2"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout">
 
                         <TextView
@@ -566,22 +581,22 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="体重"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/weight"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_weight"
                             android:gravity="right"
                             android:hint="选填"
 
-                            android:maxLines="1"
+
                             android:textColor="@color/color_303030"
                             android:textColorHint="@color/hint"
                             android:textSize="16sp" />
@@ -592,28 +607,29 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
 
 
                     </RelativeLayout>
+
+                    <View style="@style/line"></View>
                     <!--婚姻-->
                     <RelativeLayout
                         android:id="@+id/rl_marriage"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y2"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="婚姻"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
-
+                            android:textSize="16sp" />
 
 
                         <TextView
@@ -621,7 +637,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_marriage"
                             android:gravity="right"
                             android:hint="选填"
@@ -637,26 +653,27 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
                     </RelativeLayout>
 
+                    <View style="@style/line"></View>
                     <!--身份证号-->
                     <RelativeLayout
                         android:id="@+id/rl_id"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y20"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="身份证号"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
 
                         <TextView
@@ -664,12 +681,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_id"
                             android:gravity="right"
                             android:hint="选填"
 
-                            android:maxLines="1"
+
                             android:textColor="@color/color_303030"
                             android:textColorHint="@color/hint"
                             android:textSize="16sp" />
@@ -680,33 +697,36 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
                     </RelativeLayout>
+
+                    <View style="@style/line"></View>
+
                     <!--户口类型-->
                     <RelativeLayout
                         android:id="@+id/rl_census_register"
 
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y2"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="户口类型"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/census_register"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_datejob3"
                             android:gravity="right"
                             android:hint="选填"
@@ -721,15 +741,17 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
 
                     </RelativeLayout>
+
+                    <View style="@style/line"></View>
                     <!--是否留学-->
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y2"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout"
                         android:visibility="gone">
 
@@ -737,16 +759,16 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="留学经历"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_datejob3aasd"
                             android:gravity="right"
                             android:hint="选填"
@@ -762,27 +784,29 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
 
                     </RelativeLayout>
+
+                    <View style="@style/line"></View>
                     <!--政治面貌-->
                     <RelativeLayout
 
                         android:id="@+id/rl_political"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y2"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="政治面貌"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/political"
@@ -790,7 +814,7 @@
                             android:layout_height="wrap_content"
 
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_political"
                             android:gravity="right"
                             android:hint="选填"
@@ -806,25 +830,27 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
                     </RelativeLayout>
+
+                    <View style="@style/line"></View>
                     <!--民族-->
                     <RelativeLayout
                         android:id="@+id/rl_nation"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y2"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="民族"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/nation"
@@ -832,7 +858,7 @@
                             android:layout_height="wrap_content"
 
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_nation"
                             android:background="@null"
 
@@ -849,25 +875,27 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
                     </RelativeLayout>
+
+                    <View style="@style/line"></View>
                     <!--籍贯-->
                     <RelativeLayout
                         android:id="@+id/rl_native_place"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y2"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="籍贯"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/native_place"
@@ -875,7 +903,7 @@
                             android:layout_height="wrap_content"
 
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_native_place"
                             android:background="@null"
 
@@ -892,40 +920,42 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
                     </RelativeLayout>
+
+                    <View style="@style/line"></View>
                     <!--现居住地址-->
                     <RelativeLayout
                         android:id="@+id/rl_adress"
 
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y98"
-                        android:layout_marginTop="@dimen/y2"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="1dp"
                         android:background="@color/linerlayout">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="@dimen/x24"
+                            android:layout_marginLeft="10dp"
                             android:text="现居住地址"
                             android:textColor="@color/linerlayout_tv"
-                            android:textSize="18sp" />
+                            android:textSize="16sp" />
 
                         <TextView
                             android:id="@+id/adress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:maxLength="10"
-                            android:ellipsize="end"
                             android:layout_centerVertical="true"
-                            android:layout_marginRight="@dimen/x10"
+                            android:layout_marginRight="10dp"
                             android:layout_toLeftOf="@+id/iv_adress"
                             android:background="@null"
-
+                            android:ellipsize="end"
                             android:gravity="right"
+
                             android:hint="选填"
+                            android:maxLength="10"
                             android:textColor="@color/color_303030"
                             android:textColorHint="@color/hint"
 
@@ -937,24 +967,26 @@
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
                             android:layout_centerInParent="true"
-                            android:layout_marginRight="@dimen/x24"
+                            android:layout_marginRight="10dp"
                             android:src="@drawable/icon_next" />
                     </RelativeLayout>
                     <!--button-->
-
+                    <View style="@style/line"></View>
                 </LinearLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y150"
+                    android:layout_height="75dp"
                     android:layout_alignParentBottom="true"
                     android:background="@color/linerlayout">
 
                     <Button
                         android:id="@+id/btn_go_compete_edu"
-                        android:layout_width="@dimen/x640"
-                        android:layout_height="@dimen/y80"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
                         android:layout_centerInParent="true"
+                        android:layout_marginLeft="40dp"
+                        android:layout_marginRight="40dp"
                         android:background="@color/hardtoast"
                         android:enabled="false"
                         android:text="下一步"

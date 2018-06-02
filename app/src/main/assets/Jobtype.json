@@ -1,0 +1,6685 @@
+[
+  {
+    "Id": 1,
+    "ParentId": 0,
+    "Name": "销售|客服|市场",
+    "Child": [
+      {
+        "Id": 2,
+        "ParentId": 1,
+        "Name": "销售业务",
+        "Child": [
+          {
+            "Id": 3,
+            "ParentId": 2,
+            "Name": "销售代表",
+            "Child": []
+          },
+          {
+            "Id": 4,
+            "ParentId": 2,
+            "Name": "客户代表",
+            "Child": []
+          },
+          {
+            "Id": 5,
+            "ParentId": 2,
+            "Name": "销售工程师",
+            "Child": []
+          },
+          {
+            "Id": 6,
+            "ParentId": 2,
+            "Name": "渠道/分销专员",
+            "Child": []
+          },
+          {
+            "Id": 7,
+            "ParentId": 2,
+            "Name": "区域销售专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 8,
+            "ParentId": 2,
+            "Name": "业务拓展专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 9,
+            "ParentId": 2,
+            "Name": "大客户销售代表",
+            "Child": []
+          },
+          {
+            "Id": 10,
+            "ParentId": 2,
+            "Name": "电话销售",
+            "Child": []
+          },
+          {
+            "Id": 11,
+            "ParentId": 2,
+            "Name": "网络/在线销售",
+            "Child": []
+          },
+          {
+            "Id": 12,
+            "ParentId": 2,
+            "Name": "团购业务员",
+            "Child": []
+          },
+          {
+            "Id": 13,
+            "ParentId": 2,
+            "Name": "销售业务跟单",
+            "Child": []
+          },
+          {
+            "Id": 14,
+            "ParentId": 2,
+            "Name": "医药代表",
+            "Child": []
+          },
+          {
+            "Id": 15,
+            "ParentId": 2,
+            "Name": "经销商",
+            "Child": []
+          },
+          {
+            "Id": 16,
+            "ParentId": 2,
+            "Name": "招商经理",
+            "Child": []
+          },
+          {
+            "Id": 17,
+            "ParentId": 2,
+            "Name": "招商主管",
+            "Child": []
+          },
+          {
+            "Id": 18,
+            "ParentId": 2,
+            "Name": "招商专员",
+            "Child": []
+          },
+          {
+            "Id": 19,
+            "ParentId": 2,
+            "Name": "会籍顾问",
+            "Child": []
+          },
+          {
+            "Id": 20,
+            "ParentId": 2,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 21,
+        "ParentId": 1,
+        "Name": "销售管理",
+        "Child": [
+          {
+            "Id": 22,
+            "ParentId": 21,
+            "Name": "销售总监",
+            "Child": []
+          },
+          {
+            "Id": 23,
+            "ParentId": 21,
+            "Name": "销售经理",
+            "Child": []
+          },
+          {
+            "Id": 24,
+            "ParentId": 21,
+            "Name": "销售主管",
+            "Child": []
+          },
+          {
+            "Id": 25,
+            "ParentId": 21,
+            "Name": "客户总监",
+            "Child": []
+          },
+          {
+            "Id": 26,
+            "ParentId": 21,
+            "Name": "客户经理",
+            "Child": []
+          },
+          {
+            "Id": 27,
+            "ParentId": 21,
+            "Name": "客户主管",
+            "Child": []
+          },
+          {
+            "Id": 28,
+            "ParentId": 21,
+            "Name": "渠道/分销总监",
+            "Child": []
+          },
+          {
+            "Id": 29,
+            "ParentId": 21,
+            "Name": "渠道/分销经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 30,
+            "ParentId": 21,
+            "Name": "区域销售总监",
+            "Child": []
+          },
+          {
+            "Id": 31,
+            "ParentId": 21,
+            "Name": "区域销售经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 32,
+            "ParentId": 21,
+            "Name": "业务拓展经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 33,
+            "ParentId": 21,
+            "Name": "大客户销售经理",
+            "Child": []
+          },
+          {
+            "Id": 34,
+            "ParentId": 21,
+            "Name": "团购经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 35,
+            "ParentId": 21,
+            "Name": "医药销售经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 36,
+            "ParentId": 21,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 37,
+        "ParentId": 1,
+        "Name": "销售行政/商务",
+        "Child": [
+          {
+            "Id": 38,
+            "ParentId": 37,
+            "Name": "销售行政经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 39,
+            "ParentId": 37,
+            "Name": "销售行政专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 40,
+            "ParentId": 37,
+            "Name": "销售运营经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 41,
+            "ParentId": 37,
+            "Name": "销售运营专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 42,
+            "ParentId": 37,
+            "Name": "商务经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 43,
+            "ParentId": 37,
+            "Name": "商务专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 44,
+            "ParentId": 37,
+            "Name": "销售培训师/讲师",
+            "Child": []
+          },
+          {
+            "Id": 45,
+            "ParentId": 37,
+            "Name": "销售数据分析",
+            "Child": []
+          },
+          {
+            "Id": 46,
+            "ParentId": 37,
+            "Name": "业务分析经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 47,
+            "ParentId": 37,
+            "Name": "业务分析专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 48,
+            "ParentId": 37,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 49,
+        "ParentId": 1,
+        "Name": "客服/售前/售后技术支持",
+        "Child": [
+          {
+            "Id": 50,
+            "ParentId": 49,
+            "Name": "客户服务总监",
+            "Child": []
+          },
+          {
+            "Id": 51,
+            "ParentId": 49,
+            "Name": "客户服务经理",
+            "Child": []
+          },
+          {
+            "Id": 52,
+            "ParentId": 49,
+            "Name": "客户服务主管",
+            "Child": []
+          },
+          {
+            "Id": 53,
+            "ParentId": 49,
+            "Name": "客户服务专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 54,
+            "ParentId": 49,
+            "Name": "客户关系/投诉协调人员",
+            "Child": []
+          },
+          {
+            "Id": 55,
+            "ParentId": 49,
+            "Name": "客户咨询热线/呼叫中心人员",
+            "Child": []
+          },
+          {
+            "Id": 56,
+            "ParentId": 49,
+            "Name": "网络/在线客服",
+            "Child": []
+          },
+          {
+            "Id": 57,
+            "ParentId": 49,
+            "Name": "售前/售后技术支持管理",
+            "Child": []
+          },
+          {
+            "Id": 58,
+            "ParentId": 49,
+            "Name": "售前/售后技术支持工程师",
+            "Child": []
+          },
+          {
+            "Id": 59,
+            "ParentId": 49,
+            "Name": "VIP专员",
+            "Child": []
+          },
+          {
+            "Id": 60,
+            "ParentId": 49,
+            "Name": "呼叫中心客服",
+            "Child": []
+          },
+          {
+            "Id": 61,
+            "ParentId": 49,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 62,
+        "ParentId": 1,
+        "Name": "市场",
+        "Child": [
+          {
+            "Id": 63,
+            "ParentId": 62,
+            "Name": "市场总监",
+            "Child": []
+          },
+          {
+            "Id": 64,
+            "ParentId": 62,
+            "Name": "市场经理",
+            "Child": []
+          },
+          {
+            "Id": 65,
+            "ParentId": 62,
+            "Name": "市场主管",
+            "Child": []
+          },
+          {
+            "Id": 66,
+            "ParentId": 62,
+            "Name": "市场专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 67,
+            "ParentId": 62,
+            "Name": "市场营销经理",
+            "Child": []
+          },
+          {
+            "Id": 68,
+            "ParentId": 62,
+            "Name": "市场营销主管",
+            "Child": []
+          },
+          {
+            "Id": 69,
+            "ParentId": 62,
+            "Name": "市场营销专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 70,
+            "ParentId": 62,
+            "Name": "业务拓展经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 71,
+            "ParentId": 62,
+            "Name": "业务拓展专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 72,
+            "ParentId": 62,
+            "Name": "产品经理",
+            "Child": []
+          },
+          {
+            "Id": 73,
+            "ParentId": 62,
+            "Name": "产品主管",
+            "Child": []
+          },
+          {
+            "Id": 74,
+            "ParentId": 62,
+            "Name": "产品专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 75,
+            "ParentId": 62,
+            "Name": "品牌经理",
+            "Child": []
+          },
+          {
+            "Id": 76,
+            "ParentId": 62,
+            "Name": "品牌主管",
+            "Child": []
+          },
+          {
+            "Id": 77,
+            "ParentId": 62,
+            "Name": "品牌专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 78,
+            "ParentId": 62,
+            "Name": "市场策划/企划经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 79,
+            "ParentId": 62,
+            "Name": "市场策划/企划专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 80,
+            "ParentId": 62,
+            "Name": "市场文案策划",
+            "Child": []
+          },
+          {
+            "Id": 81,
+            "ParentId": 62,
+            "Name": "活动策划",
+            "Child": []
+          },
+          {
+            "Id": 82,
+            "ParentId": 62,
+            "Name": "活动执行",
+            "Child": []
+          },
+          {
+            "Id": 83,
+            "ParentId": 62,
+            "Name": "促销主管/督导",
+            "Child": []
+          },
+          {
+            "Id": 84,
+            "ParentId": 62,
+            "Name": "促销员",
+            "Child": []
+          },
+          {
+            "Id": 85,
+            "ParentId": 62,
+            "Name": "网站推广",
+            "Child": []
+          },
+          {
+            "Id": 86,
+            "ParentId": 62,
+            "Name": "SEO/SEM",
+            "Child": []
+          },
+          {
+            "Id": 87,
+            "ParentId": 62,
+            "Name": "学术推广",
+            "Child": []
+          },
+          {
+            "Id": 88,
+            "ParentId": 62,
+            "Name": "选址拓展/新店开发",
+            "Child": []
+          },
+          {
+            "Id": 89,
+            "ParentId": 62,
+            "Name": "市场调研与分析",
+            "Child": []
+          },
+          {
+            "Id": 90,
+            "ParentId": 62,
+            "Name": "品牌策划",
+            "Child": []
+          },
+          {
+            "Id": 91,
+            "ParentId": 62,
+            "Name": "市场通路专员",
+            "Child": []
+          },
+          {
+            "Id": 92,
+            "ParentId": 62,
+            "Name": "促销经理",
+            "Child": []
+          },
+          {
+            "Id": 93,
+            "ParentId": 62,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 94,
+        "ParentId": 1,
+        "Name": "公关/媒介",
+        "Child": [
+          {
+            "Id": 95,
+            "ParentId": 94,
+            "Name": "公关总监",
+            "Child": []
+          },
+          {
+            "Id": 96,
+            "ParentId": 94,
+            "Name": "公关经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 97,
+            "ParentId": 94,
+            "Name": "公关专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 98,
+            "ParentId": 94,
+            "Name": "媒介经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 99,
+            "ParentId": 94,
+            "Name": "媒介专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 100,
+            "ParentId": 94,
+            "Name": "媒介策划/管理",
+            "Child": []
+          },
+          {
+            "Id": 101,
+            "ParentId": 94,
+            "Name": "政府事务管理",
+            "Child": []
+          },
+          {
+            "Id": 102,
+            "ParentId": 94,
+            "Name": "媒介销售",
+            "Child": []
+          },
+          {
+            "Id": 103,
+            "ParentId": 94,
+            "Name": "活动执行",
+            "Child": []
+          },
+          {
+            "Id": 104,
+            "ParentId": 94,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 105,
+        "ParentId": 1,
+        "Name": "广告/会展",
+        "Child": [
+          {
+            "Id": 106,
+            "ParentId": 105,
+            "Name": "广告创意/设计总监",
+            "Child": []
+          },
+          {
+            "Id": 107,
+            "ParentId": 105,
+            "Name": "广告创意/设计经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 108,
+            "ParentId": 105,
+            "Name": "广告创意/设计师",
+            "Child": []
+          },
+          {
+            "Id": 109,
+            "ParentId": 105,
+            "Name": "广告文案策划",
+            "Child": []
+          },
+          {
+            "Id": 110,
+            "ParentId": 105,
+            "Name": "广告美术指导",
+            "Child": []
+          },
+          {
+            "Id": 111,
+            "ParentId": 105,
+            "Name": "广告制作执行",
+            "Child": []
+          },
+          {
+            "Id": 112,
+            "ParentId": 105,
+            "Name": "广告客户总监",
+            "Child": []
+          },
+          {
+            "Id": 113,
+            "ParentId": 105,
+            "Name": "广告客户经理",
+            "Child": []
+          },
+          {
+            "Id": 114,
+            "ParentId": 105,
+            "Name": "广告客户主管",
+            "Child": []
+          },
+          {
+            "Id": 115,
+            "ParentId": 105,
+            "Name": "广告客户代表",
+            "Child": []
+          },
+          {
+            "Id": 116,
+            "ParentId": 105,
+            "Name": "广告/会展业务拓展",
+            "Child": []
+          },
+          {
+            "Id": 117,
+            "ParentId": 105,
+            "Name": "会展策划/设计",
+            "Child": []
+          },
+          {
+            "Id": 118,
+            "ParentId": 105,
+            "Name": "会务经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 119,
+            "ParentId": 105,
+            "Name": "会务专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 120,
+            "ParentId": 105,
+            "Name": "广告/会展项目管理",
+            "Child": []
+          },
+          {
+            "Id": 121,
+            "ParentId": 105,
+            "Name": "企业/业务发展经理",
+            "Child": []
+          },
+          {
+            "Id": 122,
+            "ParentId": 105,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 123,
+    "ParentId": 0,
+    "Name": "财务|人力资源|行政",
+    "Child": [
+      {
+        "Id": 124,
+        "ParentId": 123,
+        "Name": "财务/审计/税务",
+        "Child": [
+          {
+            "Id": 125,
+            "ParentId": 124,
+            "Name": "首席财务官CFO",
+            "Child": []
+          },
+          {
+            "Id": 126,
+            "ParentId": 124,
+            "Name": "财务总监",
+            "Child": []
+          },
+          {
+            "Id": 127,
+            "ParentId": 124,
+            "Name": "财务经理",
+            "Child": []
+          },
+          {
+            "Id": 128,
+            "ParentId": 124,
+            "Name": "财务主管/总帐主管",
+            "Child": []
+          },
+          {
+            "Id": 129,
+            "ParentId": 124,
+            "Name": "财务顾问",
+            "Child": []
+          },
+          {
+            "Id": 130,
+            "ParentId": 124,
+            "Name": "财务助理",
+            "Child": []
+          },
+          {
+            "Id": 131,
+            "ParentId": 124,
+            "Name": "财务分析经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 132,
+            "ParentId": 124,
+            "Name": "财务分析员",
+            "Child": []
+          },
+          {
+            "Id": 133,
+            "ParentId": 124,
+            "Name": "会计经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 134,
+            "ParentId": 124,
+            "Name": "会计/会计师",
+            "Child": []
+          },
+          {
+            "Id": 135,
+            "ParentId": 124,
+            "Name": "会计助理/文员",
+            "Child": []
+          },
+          {
+            "Id": 136,
+            "ParentId": 124,
+            "Name": "出纳员",
+            "Child": []
+          },
+          {
+            "Id": 137,
+            "ParentId": 124,
+            "Name": "审计经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 138,
+            "ParentId": 124,
+            "Name": "审计专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 139,
+            "ParentId": 124,
+            "Name": "税务经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 140,
+            "ParentId": 124,
+            "Name": "税务专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 141,
+            "ParentId": 124,
+            "Name": "成本经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 142,
+            "ParentId": 124,
+            "Name": "成本会计",
+            "Child": []
+          },
+          {
+            "Id": 143,
+            "ParentId": 124,
+            "Name": "资产/资金管理",
+            "Child": []
+          },
+          {
+            "Id": 144,
+            "ParentId": 124,
+            "Name": "资金专员",
+            "Child": []
+          },
+          {
+            "Id": 145,
+            "ParentId": 124,
+            "Name": "统计员",
+            "Child": []
+          },
+          {
+            "Id": 146,
+            "ParentId": 124,
+            "Name": "固定资产会计",
+            "Child": []
+          },
+          {
+            "Id": 147,
+            "ParentId": 124,
+            "Name": "成本管理员",
+            "Child": []
+          },
+          {
+            "Id": 148,
+            "ParentId": 124,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 149,
+        "ParentId": 123,
+        "Name": "人力资源",
+        "Child": [
+          {
+            "Id": 150,
+            "ParentId": 149,
+            "Name": "人力资源总监",
+            "Child": []
+          },
+          {
+            "Id": 151,
+            "ParentId": 149,
+            "Name": "人力资源经理",
+            "Child": []
+          },
+          {
+            "Id": 152,
+            "ParentId": 149,
+            "Name": "人力资源主管",
+            "Child": []
+          },
+          {
+            "Id": 153,
+            "ParentId": 149,
+            "Name": "人力资源专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 154,
+            "ParentId": 149,
+            "Name": "培训经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 155,
+            "ParentId": 149,
+            "Name": "培训专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 156,
+            "ParentId": 149,
+            "Name": "招聘经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 157,
+            "ParentId": 149,
+            "Name": "招聘专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 158,
+            "ParentId": 149,
+            "Name": "薪酬福利经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 159,
+            "ParentId": 149,
+            "Name": "薪酬福利专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 160,
+            "ParentId": 149,
+            "Name": "绩效考核经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 161,
+            "ParentId": 149,
+            "Name": "绩效考核专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 162,
+            "ParentId": 149,
+            "Name": "员工关系/企业文化/工会",
+            "Child": []
+          },
+          {
+            "Id": 163,
+            "ParentId": 149,
+            "Name": "企业培训师/讲师",
+            "Child": []
+          },
+          {
+            "Id": 164,
+            "ParentId": 149,
+            "Name": "人事信息系统(HRIS)管理",
+            "Child": []
+          },
+          {
+            "Id": 165,
+            "ParentId": 149,
+            "Name": "猎头顾问/助理",
+            "Child": []
+          },
+          {
+            "Id": 166,
+            "ParentId": 149,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 167,
+        "ParentId": 123,
+        "Name": "行政/后勤/文秘",
+        "Child": [
+          {
+            "Id": 168,
+            "ParentId": 167,
+            "Name": "行政总监",
+            "Child": []
+          },
+          {
+            "Id": 169,
+            "ParentId": 167,
+            "Name": "行政经理/主管/办公室主任",
+            "Child": []
+          },
+          {
+            "Id": 170,
+            "ParentId": 167,
+            "Name": "行政专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 171,
+            "ParentId": 167,
+            "Name": "助理/秘书/文员",
+            "Child": []
+          },
+          {
+            "Id": 172,
+            "ParentId": 167,
+            "Name": "前台/总机/接待",
+            "Child": []
+          },
+          {
+            "Id": 173,
+            "ParentId": 167,
+            "Name": "文档/资料管理",
+            "Child": []
+          },
+          {
+            "Id": 174,
+            "ParentId": 167,
+            "Name": "电脑操作/打字/录入员",
+            "Child": []
+          },
+          {
+            "Id": 175,
+            "ParentId": 167,
+            "Name": "后勤人员",
+            "Child": []
+          },
+          {
+            "Id": 176,
+            "ParentId": 167,
+            "Name": "党工团干事",
+            "Child": []
+          },
+          {
+            "Id": 177,
+            "ParentId": 167,
+            "Name": "图书管理员",
+            "Child": []
+          },
+          {
+            "Id": 178,
+            "ParentId": 167,
+            "Name": "内勤人员",
+            "Child": []
+          },
+          {
+            "Id": 179,
+            "ParentId": 167,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 180,
+    "ParentId": 0,
+    "Name": "项目|质量|高级管理",
+    "Child": [
+      {
+        "Id": 181,
+        "ParentId": 180,
+        "Name": "项目管理/项目协调",
+        "Child": [
+          {
+            "Id": 182,
+            "ParentId": 181,
+            "Name": "项目总监",
+            "Child": []
+          },
+          {
+            "Id": 183,
+            "ParentId": 181,
+            "Name": "项目经理/项目主管",
+            "Child": []
+          },
+          {
+            "Id": 184,
+            "ParentId": 181,
+            "Name": "项目专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 185,
+            "ParentId": 181,
+            "Name": "广告/会展项目管理",
+            "Child": []
+          },
+          {
+            "Id": 186,
+            "ParentId": 181,
+            "Name": "IT项目总监",
+            "Child": []
+          },
+          {
+            "Id": 187,
+            "ParentId": 181,
+            "Name": "IT项目经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 188,
+            "ParentId": 181,
+            "Name": "IT项目执行/协调人员",
+            "Child": []
+          },
+          {
+            "Id": 189,
+            "ParentId": 181,
+            "Name": "通信项目管理",
+            "Child": []
+          },
+          {
+            "Id": 190,
+            "ParentId": 181,
+            "Name": "房地产项目配套工程师",
+            "Child": []
+          },
+          {
+            "Id": 191,
+            "ParentId": 181,
+            "Name": "房地产项目管理",
+            "Child": []
+          },
+          {
+            "Id": 192,
+            "ParentId": 181,
+            "Name": "证券/投资项目管理",
+            "Child": []
+          },
+          {
+            "Id": 193,
+            "ParentId": 181,
+            "Name": "保险项目经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 194,
+            "ParentId": 181,
+            "Name": "生产项目经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 195,
+            "ParentId": 181,
+            "Name": "生产项目工程师",
+            "Child": []
+          },
+          {
+            "Id": 196,
+            "ParentId": 181,
+            "Name": "汽车工程项目管理",
+            "Child": []
+          },
+          {
+            "Id": 197,
+            "ParentId": 181,
+            "Name": "电子/电器项目管理",
+            "Child": []
+          },
+          {
+            "Id": 198,
+            "ParentId": 181,
+            "Name": "服装/纺织/皮革项目管理",
+            "Child": []
+          },
+          {
+            "Id": 199,
+            "ParentId": 181,
+            "Name": "医药项目管理",
+            "Child": []
+          },
+          {
+            "Id": 200,
+            "ParentId": 181,
+            "Name": "化工项目管理",
+            "Child": []
+          },
+          {
+            "Id": 201,
+            "ParentId": 181,
+            "Name": "物流/仓储项目管理",
+            "Child": []
+          },
+          {
+            "Id": 202,
+            "ParentId": 181,
+            "Name": "咨询项目管理",
+            "Child": []
+          },
+          {
+            "Id": 203,
+            "ParentId": 181,
+            "Name": "能源/矿产项目管理",
+            "Child": []
+          },
+          {
+            "Id": 204,
+            "ParentId": 181,
+            "Name": "项目计划合约专员",
+            "Child": []
+          },
+          {
+            "Id": 205,
+            "ParentId": 181,
+            "Name": "项目招投标",
+            "Child": []
+          },
+          {
+            "Id": 206,
+            "ParentId": 181,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 207,
+        "ParentId": 180,
+        "Name": "质量管理/安全防护",
+        "Child": [
+          {
+            "Id": 208,
+            "ParentId": 207,
+            "Name": "质量管理/测试经理",
+            "Child": []
+          },
+          {
+            "Id": 209,
+            "ParentId": 207,
+            "Name": "质量管理/测试主管",
+            "Child": []
+          },
+          {
+            "Id": 210,
+            "ParentId": 207,
+            "Name": "质量管理/测试工程师",
+            "Child": []
+          },
+          {
+            "Id": 211,
+            "ParentId": 207,
+            "Name": "质量检验员/测试员",
+            "Child": []
+          },
+          {
+            "Id": 212,
+            "ParentId": 207,
+            "Name": "化验/检验",
+            "Child": []
+          },
+          {
+            "Id": 213,
+            "ParentId": 207,
+            "Name": "认证/体系工程师/审核员",
+            "Child": []
+          },
+          {
+            "Id": 214,
+            "ParentId": 207,
+            "Name": "环境/健康/安全经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 215,
+            "ParentId": 207,
+            "Name": "环境/健康/安全工程师",
+            "Child": []
+          },
+          {
+            "Id": 216,
+            "ParentId": 207,
+            "Name": "供应商/采购质量管理",
+            "Child": []
+          },
+          {
+            "Id": 217,
+            "ParentId": 207,
+            "Name": "安全管理",
+            "Child": []
+          },
+          {
+            "Id": 218,
+            "ParentId": 207,
+            "Name": "安全消防",
+            "Child": []
+          },
+          {
+            "Id": 219,
+            "ParentId": 207,
+            "Name": "可靠度工程师",
+            "Child": []
+          },
+          {
+            "Id": 220,
+            "ParentId": 207,
+            "Name": "故障分析工程师",
+            "Child": []
+          },
+          {
+            "Id": 221,
+            "ParentId": 207,
+            "Name": "采购材料/设备管理",
+            "Child": []
+          },
+          {
+            "Id": 222,
+            "ParentId": 207,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 223,
+        "ParentId": 180,
+        "Name": "高级管理",
+        "Child": [
+          {
+            "Id": 224,
+            "ParentId": 223,
+            "Name": "首席执行官CEO/总裁/总经理",
+            "Child": []
+          },
+          {
+            "Id": 225,
+            "ParentId": 223,
+            "Name": "首席运营官COO",
+            "Child": []
+          },
+          {
+            "Id": 226,
+            "ParentId": 223,
+            "Name": "首席财务官CFO",
+            "Child": []
+          },
+          {
+            "Id": 227,
+            "ParentId": 223,
+            "Name": "CTO/CIO",
+            "Child": []
+          },
+          {
+            "Id": 228,
+            "ParentId": 223,
+            "Name": "副总裁/副总经理",
+            "Child": []
+          },
+          {
+            "Id": 229,
+            "ParentId": 223,
+            "Name": "分公司/代表处负责人",
+            "Child": []
+          },
+          {
+            "Id": 230,
+            "ParentId": 223,
+            "Name": "部门/事业部管理",
+            "Child": []
+          },
+          {
+            "Id": 231,
+            "ParentId": 223,
+            "Name": "总裁助理/总经理助理",
+            "Child": []
+          },
+          {
+            "Id": 232,
+            "ParentId": 223,
+            "Name": "总编/副总编",
+            "Child": []
+          },
+          {
+            "Id": 233,
+            "ParentId": 223,
+            "Name": "行长/副行长",
+            "Child": []
+          },
+          {
+            "Id": 234,
+            "ParentId": 223,
+            "Name": "工厂厂长/副厂长",
+            "Child": []
+          },
+          {
+            "Id": 235,
+            "ParentId": 223,
+            "Name": "校长/副校长",
+            "Child": []
+          },
+          {
+            "Id": 236,
+            "ParentId": 223,
+            "Name": "合伙人",
+            "Child": []
+          },
+          {
+            "Id": 237,
+            "ParentId": 223,
+            "Name": "办事处首席代表",
+            "Child": []
+          },
+          {
+            "Id": 238,
+            "ParentId": 223,
+            "Name": "投资者关系",
+            "Child": []
+          },
+          {
+            "Id": 239,
+            "ParentId": 223,
+            "Name": "企业秘书/董事会秘书",
+            "Child": []
+          },
+          {
+            "Id": 240,
+            "ParentId": 223,
+            "Name": "策略发展总监",
+            "Child": []
+          },
+          {
+            "Id": 241,
+            "ParentId": 223,
+            "Name": "运营总监",
+            "Child": []
+          },
+          {
+            "Id": 242,
+            "ParentId": 223,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 243,
+    "ParentId": 0,
+    "Name": "IT|互联网|通信",
+    "Child": [
+      {
+        "Id": 244,
+        "ParentId": 243,
+        "Name": "软件/互联网开发/系统集成",
+        "Child": [
+          {
+            "Id": 245,
+            "ParentId": 244,
+            "Name": "高级软件工程师",
+            "Child": []
+          },
+          {
+            "Id": 246,
+            "ParentId": 244,
+            "Name": "软件工程师",
+            "Child": []
+          },
+          {
+            "Id": 247,
+            "ParentId": 244,
+            "Name": "软件研发工程师",
+            "Child": []
+          },
+          {
+            "Id": 248,
+            "ParentId": 244,
+            "Name": "需求工程师",
+            "Child": []
+          },
+          {
+            "Id": 249,
+            "ParentId": 244,
+            "Name": "系统架构设计师",
+            "Child": []
+          },
+          {
+            "Id": 250,
+            "ParentId": 244,
+            "Name": "系统分析员",
+            "Child": []
+          },
+          {
+            "Id": 251,
+            "ParentId": 244,
+            "Name": "数据库开发工程师",
+            "Child": []
+          },
+          {
+            "Id": 252,
+            "ParentId": 244,
+            "Name": "ERP技术/开发应用",
+            "Child": []
+          },
+          {
+            "Id": 253,
+            "ParentId": 244,
+            "Name": "互联网软件工程师",
+            "Child": []
+          },
+          {
+            "Id": 254,
+            "ParentId": 244,
+            "Name": "手机软件开发工程师",
+            "Child": []
+          },
+          {
+            "Id": 255,
+            "ParentId": 244,
+            "Name": "嵌入式软件开发",
+            "Child": []
+          },
+          {
+            "Id": 256,
+            "ParentId": 244,
+            "Name": "移动互联网开发",
+            "Child": []
+          },
+          {
+            "Id": 257,
+            "ParentId": 244,
+            "Name": "WEB前端开发",
+            "Child": []
+          },
+          {
+            "Id": 258,
+            "ParentId": 244,
+            "Name": "语音/视频/图形开发",
+            "Child": []
+          },
+          {
+            "Id": 259,
+            "ParentId": 244,
+            "Name": "用户界面（UI）设计",
+            "Child": []
+          },
+          {
+            "Id": 260,
+            "ParentId": 244,
+            "Name": "用户体验（UE/UX）设计",
+            "Child": []
+          },
+          {
+            "Id": 261,
+            "ParentId": 244,
+            "Name": "网页设计/制作/美工",
+            "Child": []
+          },
+          {
+            "Id": 262,
+            "ParentId": 244,
+            "Name": "游戏设计/开发",
+            "Child": []
+          },
+          {
+            "Id": 263,
+            "ParentId": 244,
+            "Name": "游戏策划",
+            "Child": []
+          },
+          {
+            "Id": 264,
+            "ParentId": 244,
+            "Name": "游戏界面设计",
+            "Child": []
+          },
+          {
+            "Id": 265,
+            "ParentId": 244,
+            "Name": "系统集成工程师",
+            "Child": []
+          },
+          {
+            "Id": 266,
+            "ParentId": 244,
+            "Name": "算法工程师",
+            "Child": []
+          },
+          {
+            "Id": 267,
+            "ParentId": 244,
+            "Name": "仿真应用工程师",
+            "Child": []
+          },
+          {
+            "Id": 268,
+            "ParentId": 244,
+            "Name": "计算机辅助设计师",
+            "Child": []
+          },
+          {
+            "Id": 269,
+            "ParentId": 244,
+            "Name": "网站架构设计师",
+            "Child": []
+          },
+          {
+            "Id": 270,
+            "ParentId": 244,
+            "Name": "IOS开发工程师",
+            "Child": []
+          },
+          {
+            "Id": 271,
+            "ParentId": 244,
+            "Name": "Android开发工程师",
+            "Child": []
+          },
+          {
+            "Id": 272,
+            "ParentId": 244,
+            "Name": "Java开发工程师",
+            "Child": []
+          },
+          {
+            "Id": 273,
+            "ParentId": 244,
+            "Name": "PHP开发工程师",
+            "Child": []
+          },
+          {
+            "Id": 274,
+            "ParentId": 244,
+            "Name": "C语言开发工程师",
+            "Child": []
+          },
+          {
+            "Id": 275,
+            "ParentId": 244,
+            "Name": "脚本开发工程师",
+            "Child": []
+          },
+          {
+            "Id": 276,
+            "ParentId": 244,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 277,
+        "ParentId": 243,
+        "Name": "硬件开发",
+        "Child": [
+          {
+            "Id": 278,
+            "ParentId": 277,
+            "Name": "高级硬件工程师",
+            "Child": []
+          },
+          {
+            "Id": 279,
+            "ParentId": 277,
+            "Name": "硬件工程师",
+            "Child": []
+          },
+          {
+            "Id": 280,
+            "ParentId": 277,
+            "Name": "嵌入式硬件开发",
+            "Child": []
+          },
+          {
+            "Id": 281,
+            "ParentId": 277,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 282,
+        "ParentId": 243,
+        "Name": "互联网产品/运营管理",
+        "Child": [
+          {
+            "Id": 283,
+            "ParentId": 282,
+            "Name": "互联网产品经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 284,
+            "ParentId": 282,
+            "Name": "互联网产品专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 285,
+            "ParentId": 282,
+            "Name": "电子商务经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 286,
+            "ParentId": 282,
+            "Name": "电子商务专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 287,
+            "ParentId": 282,
+            "Name": "网络运营管理",
+            "Child": []
+          },
+          {
+            "Id": 288,
+            "ParentId": 282,
+            "Name": "网络运营专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 289,
+            "ParentId": 282,
+            "Name": "网站编辑",
+            "Child": []
+          },
+          {
+            "Id": 290,
+            "ParentId": 282,
+            "Name": "SEO/SEM",
+            "Child": []
+          },
+          {
+            "Id": 291,
+            "ParentId": 282,
+            "Name": "产品总监",
+            "Child": []
+          },
+          {
+            "Id": 292,
+            "ParentId": 282,
+            "Name": "运营总监",
+            "Child": []
+          },
+          {
+            "Id": 293,
+            "ParentId": 282,
+            "Name": "网站运营总监/经理",
+            "Child": []
+          },
+          {
+            "Id": 294,
+            "ParentId": 282,
+            "Name": "电子商务总监",
+            "Child": []
+          },
+          {
+            "Id": 295,
+            "ParentId": 282,
+            "Name": "新媒体运营",
+            "Child": []
+          },
+          {
+            "Id": 296,
+            "ParentId": 282,
+            "Name": "网店店长",
+            "Child": []
+          },
+          {
+            "Id": 297,
+            "ParentId": 282,
+            "Name": "网店推广",
+            "Child": []
+          },
+          {
+            "Id": 298,
+            "ParentId": 282,
+            "Name": "网店客服",
+            "Child": []
+          },
+          {
+            "Id": 299,
+            "ParentId": 282,
+            "Name": "网店运营",
+            "Child": []
+          },
+          {
+            "Id": 300,
+            "ParentId": 282,
+            "Name": "网店管理员",
+            "Child": []
+          },
+          {
+            "Id": 301,
+            "ParentId": 282,
+            "Name": "运营主管/专员",
+            "Child": []
+          },
+          {
+            "Id": 302,
+            "ParentId": 282,
+            "Name": "微信推广",
+            "Child": []
+          },
+          {
+            "Id": 303,
+            "ParentId": 282,
+            "Name": "淘宝/微信运营专员/主管",
+            "Child": []
+          },
+          {
+            "Id": 304,
+            "ParentId": 282,
+            "Name": "产品运营",
+            "Child": []
+          },
+          {
+            "Id": 305,
+            "ParentId": 282,
+            "Name": "数据运营",
+            "Child": []
+          },
+          {
+            "Id": 306,
+            "ParentId": 282,
+            "Name": "市场运营",
+            "Child": []
+          },
+          {
+            "Id": 307,
+            "ParentId": 282,
+            "Name": "内容运营",
+            "Child": []
+          },
+          {
+            "Id": 308,
+            "ParentId": 282,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 309,
+        "ParentId": 243,
+        "Name": "IT质量管理/测试/配置管理",
+        "Child": [
+          {
+            "Id": 310,
+            "ParentId": 309,
+            "Name": "IT质量管理经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 311,
+            "ParentId": 309,
+            "Name": "IT质量管理工程师",
+            "Child": []
+          },
+          {
+            "Id": 312,
+            "ParentId": 309,
+            "Name": "系统测试",
+            "Child": []
+          },
+          {
+            "Id": 313,
+            "ParentId": 309,
+            "Name": "软件测试",
+            "Child": []
+          },
+          {
+            "Id": 314,
+            "ParentId": 309,
+            "Name": "硬件测试",
+            "Child": []
+          },
+          {
+            "Id": 315,
+            "ParentId": 309,
+            "Name": "配置管理工程师",
+            "Child": []
+          },
+          {
+            "Id": 316,
+            "ParentId": 309,
+            "Name": "信息技术标准化工程师",
+            "Child": []
+          },
+          {
+            "Id": 317,
+            "ParentId": 309,
+            "Name": "标准化工程师",
+            "Child": []
+          },
+          {
+            "Id": 318,
+            "ParentId": 309,
+            "Name": "游戏测试",
+            "Child": []
+          },
+          {
+            "Id": 319,
+            "ParentId": 309,
+            "Name": "手机维修",
+            "Child": []
+          },
+          {
+            "Id": 320,
+            "ParentId": 309,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 321,
+        "ParentId": 243,
+        "Name": "IT运维/技术支持",
+        "Child": [
+          {
+            "Id": 322,
+            "ParentId": 321,
+            "Name": "信息技术经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 323,
+            "ParentId": 321,
+            "Name": "信息技术专员",
+            "Child": []
+          },
+          {
+            "Id": 324,
+            "ParentId": 321,
+            "Name": "IT技术支持/维护经理",
+            "Child": []
+          },
+          {
+            "Id": 325,
+            "ParentId": 321,
+            "Name": "IT技术支持/维护工程师",
+            "Child": []
+          },
+          {
+            "Id": 326,
+            "ParentId": 321,
+            "Name": "系统工程师",
+            "Child": []
+          },
+          {
+            "Id": 327,
+            "ParentId": 321,
+            "Name": "系统管理员",
+            "Child": []
+          },
+          {
+            "Id": 328,
+            "ParentId": 321,
+            "Name": "网络工程师",
+            "Child": []
+          },
+          {
+            "Id": 329,
+            "ParentId": 321,
+            "Name": "网络管理员",
+            "Child": []
+          },
+          {
+            "Id": 330,
+            "ParentId": 321,
+            "Name": "网络与信息安全工程师",
+            "Child": []
+          },
+          {
+            "Id": 331,
+            "ParentId": 321,
+            "Name": "数据库管理员",
+            "Child": []
+          },
+          {
+            "Id": 332,
+            "ParentId": 321,
+            "Name": "计算机硬件维护工程师",
+            "Child": []
+          },
+          {
+            "Id": 333,
+            "ParentId": 321,
+            "Name": "ERP实施顾问",
+            "Child": []
+          },
+          {
+            "Id": 334,
+            "ParentId": 321,
+            "Name": "IT技术文员/助理",
+            "Child": []
+          },
+          {
+            "Id": 335,
+            "ParentId": 321,
+            "Name": "IT文档工程师",
+            "Child": []
+          },
+          {
+            "Id": 336,
+            "ParentId": 321,
+            "Name": "Helpdesk",
+            "Child": []
+          },
+          {
+            "Id": 337,
+            "ParentId": 321,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 338,
+        "ParentId": 243,
+        "Name": "IT管理/项目协调",
+        "Child": [
+          {
+            "Id": 339,
+            "ParentId": 338,
+            "Name": "CTO/CIO",
+            "Child": []
+          },
+          {
+            "Id": 340,
+            "ParentId": 338,
+            "Name": "IT技术/研发总监",
+            "Child": []
+          },
+          {
+            "Id": 341,
+            "ParentId": 338,
+            "Name": "IT技术/研发经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 342,
+            "ParentId": 338,
+            "Name": "IT项目总监",
+            "Child": []
+          },
+          {
+            "Id": 343,
+            "ParentId": 338,
+            "Name": "IT项目经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 344,
+            "ParentId": 338,
+            "Name": "IT项目执行/协调人员",
+            "Child": []
+          },
+          {
+            "Id": 345,
+            "ParentId": 338,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 346,
+        "ParentId": 243,
+        "Name": "电信/通信技术开发及应用",
+        "Child": [
+          {
+            "Id": 347,
+            "ParentId": 346,
+            "Name": "通信技术工程师",
+            "Child": []
+          },
+          {
+            "Id": 348,
+            "ParentId": 346,
+            "Name": "通信研发工程师",
+            "Child": []
+          },
+          {
+            "Id": 349,
+            "ParentId": 346,
+            "Name": "数据通信工程师",
+            "Child": []
+          },
+          {
+            "Id": 350,
+            "ParentId": 346,
+            "Name": "移动通信工程师",
+            "Child": []
+          },
+          {
+            "Id": 351,
+            "ParentId": 346,
+            "Name": "电信网络工程师",
+            "Child": []
+          },
+          {
+            "Id": 352,
+            "ParentId": 346,
+            "Name": "电信交换工程师",
+            "Child": []
+          },
+          {
+            "Id": 353,
+            "ParentId": 346,
+            "Name": "有线传输工程师",
+            "Child": []
+          },
+          {
+            "Id": 354,
+            "ParentId": 346,
+            "Name": "无线/射频通信工程师",
+            "Child": []
+          },
+          {
+            "Id": 355,
+            "ParentId": 346,
+            "Name": "通信电源工程师",
+            "Child": []
+          },
+          {
+            "Id": 356,
+            "ParentId": 346,
+            "Name": "通信标准化工程师",
+            "Child": []
+          },
+          {
+            "Id": 357,
+            "ParentId": 346,
+            "Name": "通信项目管理",
+            "Child": []
+          },
+          {
+            "Id": 358,
+            "ParentId": 346,
+            "Name": "增值产品开发工程师",
+            "Child": []
+          },
+          {
+            "Id": 359,
+            "ParentId": 346,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 360,
+    "ParentId": 0,
+    "Name": "房产|建筑|物业管理",
+    "Child": [
+      {
+        "Id": 361,
+        "ParentId": 360,
+        "Name": "房地产开发/经纪/中介",
+        "Child": [
+          {
+            "Id": 362,
+            "ParentId": 361,
+            "Name": "房地产项目策划经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 363,
+            "ParentId": 361,
+            "Name": "房地产项目策划专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 364,
+            "ParentId": 361,
+            "Name": "房地产项目招投标",
+            "Child": []
+          },
+          {
+            "Id": 365,
+            "ParentId": 361,
+            "Name": "房地产项目开发报建",
+            "Child": []
+          },
+          {
+            "Id": 366,
+            "ParentId": 361,
+            "Name": "房地产项目配套工程师",
+            "Child": []
+          },
+          {
+            "Id": 367,
+            "ParentId": 361,
+            "Name": "房地产销售经理",
+            "Child": []
+          },
+          {
+            "Id": 368,
+            "ParentId": 361,
+            "Name": "房地产销售主管",
+            "Child": []
+          },
+          {
+            "Id": 369,
+            "ParentId": 361,
+            "Name": "房地产销售/置业顾问",
+            "Child": []
+          },
+          {
+            "Id": 370,
+            "ParentId": 361,
+            "Name": "房地产评估",
+            "Child": []
+          },
+          {
+            "Id": 371,
+            "ParentId": 361,
+            "Name": "房地产中介/交易",
+            "Child": []
+          },
+          {
+            "Id": 372,
+            "ParentId": 361,
+            "Name": "房地产项目管理",
+            "Child": []
+          },
+          {
+            "Id": 373,
+            "ParentId": 361,
+            "Name": "房地产资产管理",
+            "Child": []
+          },
+          {
+            "Id": 374,
+            "ParentId": 361,
+            "Name": "监察人员",
+            "Child": []
+          },
+          {
+            "Id": 375,
+            "ParentId": 361,
+            "Name": "地产店长/经理",
+            "Child": []
+          },
+          {
+            "Id": 376,
+            "ParentId": 361,
+            "Name": "房地产内勤",
+            "Child": []
+          },
+          {
+            "Id": 377,
+            "ParentId": 361,
+            "Name": "房地产客服",
+            "Child": []
+          },
+          {
+            "Id": 378,
+            "ParentId": 361,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 379,
+        "ParentId": 360,
+        "Name": "土木/建筑/装修/市政工程",
+        "Child": [
+          {
+            "Id": 380,
+            "ParentId": 379,
+            "Name": "高级建筑工程师/总工",
+            "Child": []
+          },
+          {
+            "Id": 381,
+            "ParentId": 379,
+            "Name": "建筑工程师",
+            "Child": []
+          },
+          {
+            "Id": 382,
+            "ParentId": 379,
+            "Name": "建筑设计师",
+            "Child": []
+          },
+          {
+            "Id": 383,
+            "ParentId": 379,
+            "Name": "土木/土建/结构工程师",
+            "Child": []
+          },
+          {
+            "Id": 384,
+            "ParentId": 379,
+            "Name": "岩土工程",
+            "Child": []
+          },
+          {
+            "Id": 385,
+            "ParentId": 379,
+            "Name": "建筑制图",
+            "Child": []
+          },
+          {
+            "Id": 386,
+            "ParentId": 379,
+            "Name": "建筑工程测绘/测量",
+            "Child": []
+          },
+          {
+            "Id": 387,
+            "ParentId": 379,
+            "Name": "道路/桥梁/隧道工程技术",
+            "Child": []
+          },
+          {
+            "Id": 388,
+            "ParentId": 379,
+            "Name": "水利/港口工程技术",
+            "Child": []
+          },
+          {
+            "Id": 389,
+            "ParentId": 379,
+            "Name": "架线和管道工程技术",
+            "Child": []
+          },
+          {
+            "Id": 390,
+            "ParentId": 379,
+            "Name": "给排水/暖通/空调工程",
+            "Child": []
+          },
+          {
+            "Id": 391,
+            "ParentId": 379,
+            "Name": "智能大厦/布线/弱电/安防",
+            "Child": []
+          },
+          {
+            "Id": 392,
+            "ParentId": 379,
+            "Name": "室内装潢设计",
+            "Child": []
+          },
+          {
+            "Id": 393,
+            "ParentId": 379,
+            "Name": "幕墙工程师",
+            "Child": []
+          },
+          {
+            "Id": 394,
+            "ParentId": 379,
+            "Name": "园林/景观设计",
+            "Child": []
+          },
+          {
+            "Id": 395,
+            "ParentId": 379,
+            "Name": "城市规划与设计",
+            "Child": []
+          },
+          {
+            "Id": 396,
+            "ParentId": 379,
+            "Name": "市政工程师",
+            "Child": []
+          },
+          {
+            "Id": 397,
+            "ParentId": 379,
+            "Name": "工程监理/质量管理",
+            "Child": []
+          },
+          {
+            "Id": 398,
+            "ParentId": 379,
+            "Name": "工程造价/预结算",
+            "Child": []
+          },
+          {
+            "Id": 399,
+            "ParentId": 379,
+            "Name": "工程资料管理",
+            "Child": []
+          },
+          {
+            "Id": 400,
+            "ParentId": 379,
+            "Name": "建筑施工现场管理",
+            "Child": []
+          },
+          {
+            "Id": 401,
+            "ParentId": 379,
+            "Name": "施工队长",
+            "Child": []
+          },
+          {
+            "Id": 402,
+            "ParentId": 379,
+            "Name": "施工员",
+            "Child": []
+          },
+          {
+            "Id": 403,
+            "ParentId": 379,
+            "Name": "建筑工程安全管理",
+            "Child": []
+          },
+          {
+            "Id": 404,
+            "ParentId": 379,
+            "Name": "软装设计师",
+            "Child": []
+          },
+          {
+            "Id": 405,
+            "ParentId": 379,
+            "Name": "工程总监",
+            "Child": []
+          },
+          {
+            "Id": 406,
+            "ParentId": 379,
+            "Name": "土建勘察",
+            "Child": []
+          },
+          {
+            "Id": 407,
+            "ParentId": 379,
+            "Name": "硬装设计师",
+            "Child": []
+          },
+          {
+            "Id": 408,
+            "ParentId": 379,
+            "Name": "橱柜设计师",
+            "Child": []
+          },
+          {
+            "Id": 409,
+            "ParentId": 379,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 410,
+        "ParentId": 360,
+        "Name": "物业管理",
+        "Child": [
+          {
+            "Id": 411,
+            "ParentId": 410,
+            "Name": "物业经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 412,
+            "ParentId": 410,
+            "Name": "物业管理专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 413,
+            "ParentId": 410,
+            "Name": "物业租赁/销售",
+            "Child": []
+          },
+          {
+            "Id": 414,
+            "ParentId": 410,
+            "Name": "物业维修",
+            "Child": []
+          },
+          {
+            "Id": 415,
+            "ParentId": 410,
+            "Name": "物业顾问",
+            "Child": []
+          },
+          {
+            "Id": 416,
+            "ParentId": 410,
+            "Name": "物业招商管理",
+            "Child": []
+          },
+          {
+            "Id": 417,
+            "ParentId": 410,
+            "Name": "监控维护",
+            "Child": []
+          },
+          {
+            "Id": 418,
+            "ParentId": 410,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 419,
+    "ParentId": 0,
+    "Name": "金融",
+    "Child": [
+      {
+        "Id": 420,
+        "ParentId": 419,
+        "Name": "银行",
+        "Child": [
+          {
+            "Id": 421,
+            "ParentId": 420,
+            "Name": "行长/副行长",
+            "Child": []
+          },
+          {
+            "Id": 422,
+            "ParentId": 420,
+            "Name": "银行经理/主任",
+            "Child": []
+          },
+          {
+            "Id": 423,
+            "ParentId": 420,
+            "Name": "银行大堂经理",
+            "Child": []
+          },
+          {
+            "Id": 424,
+            "ParentId": 420,
+            "Name": "银行客户总监",
+            "Child": []
+          },
+          {
+            "Id": 425,
+            "ParentId": 420,
+            "Name": "银行客户经理",
+            "Child": []
+          },
+          {
+            "Id": 426,
+            "ParentId": 420,
+            "Name": "银行客户主管",
+            "Child": []
+          },
+          {
+            "Id": 427,
+            "ParentId": 420,
+            "Name": "银行客户代表",
+            "Child": []
+          },
+          {
+            "Id": 428,
+            "ParentId": 420,
+            "Name": "银行客户服务",
+            "Child": []
+          },
+          {
+            "Id": 429,
+            "ParentId": 420,
+            "Name": "综合业务经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 430,
+            "ParentId": 420,
+            "Name": "综合业务专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 431,
+            "ParentId": 420,
+            "Name": "银行会计/柜员",
+            "Child": []
+          },
+          {
+            "Id": 432,
+            "ParentId": 420,
+            "Name": "公司业务",
+            "Child": []
+          },
+          {
+            "Id": 433,
+            "ParentId": 420,
+            "Name": "个人业务",
+            "Child": []
+          },
+          {
+            "Id": 434,
+            "ParentId": 420,
+            "Name": "银行卡/电子银行业务推广",
+            "Child": []
+          },
+          {
+            "Id": 435,
+            "ParentId": 420,
+            "Name": "信贷管理/资信评估/分析",
+            "Child": []
+          },
+          {
+            "Id": 436,
+            "ParentId": 420,
+            "Name": "信审核查",
+            "Child": []
+          },
+          {
+            "Id": 437,
+            "ParentId": 420,
+            "Name": "外汇交易",
+            "Child": []
+          },
+          {
+            "Id": 438,
+            "ParentId": 420,
+            "Name": "进出口/信用证结算",
+            "Child": []
+          },
+          {
+            "Id": 439,
+            "ParentId": 420,
+            "Name": "清算人员",
+            "Child": []
+          },
+          {
+            "Id": 440,
+            "ParentId": 420,
+            "Name": "风险控制",
+            "Child": []
+          },
+          {
+            "Id": 441,
+            "ParentId": 420,
+            "Name": "个人业务部门经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 442,
+            "ParentId": 420,
+            "Name": "公司业务部门经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 443,
+            "ParentId": 420,
+            "Name": "高级客户经理/客户经理",
+            "Child": []
+          },
+          {
+            "Id": 444,
+            "ParentId": 420,
+            "Name": "信用卡销售",
+            "Child": []
+          },
+          {
+            "Id": 445,
+            "ParentId": 420,
+            "Name": "银行柜员",
+            "Child": []
+          },
+          {
+            "Id": 446,
+            "ParentId": 420,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 447,
+        "ParentId": 419,
+        "Name": "证券/期货/投资管理/服务",
+        "Child": [
+          {
+            "Id": 448,
+            "ParentId": 447,
+            "Name": "证券总监/部门经理",
+            "Child": []
+          },
+          {
+            "Id": 449,
+            "ParentId": 447,
+            "Name": "证券/期货/外汇经纪人",
+            "Child": []
+          },
+          {
+            "Id": 450,
+            "ParentId": 447,
+            "Name": "证券/投资客户总监",
+            "Child": []
+          },
+          {
+            "Id": 451,
+            "ParentId": 447,
+            "Name": "证券/投资客户经理",
+            "Child": []
+          },
+          {
+            "Id": 452,
+            "ParentId": 447,
+            "Name": "证券/投资客户主管",
+            "Child": []
+          },
+          {
+            "Id": 453,
+            "ParentId": 447,
+            "Name": "证券/投资客户代表",
+            "Child": []
+          },
+          {
+            "Id": 454,
+            "ParentId": 447,
+            "Name": "证券分析/金融研究",
+            "Child": []
+          },
+          {
+            "Id": 455,
+            "ParentId": 447,
+            "Name": "投资/理财服务",
+            "Child": []
+          },
+          {
+            "Id": 456,
+            "ParentId": 447,
+            "Name": "投资银行业务",
+            "Child": []
+          },
+          {
+            "Id": 457,
+            "ParentId": 447,
+            "Name": "融资总监",
+            "Child": []
+          },
+          {
+            "Id": 458,
+            "ParentId": 447,
+            "Name": "融资经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 459,
+            "ParentId": 447,
+            "Name": "融资专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 460,
+            "ParentId": 447,
+            "Name": "股票/期货操盘手",
+            "Child": []
+          },
+          {
+            "Id": 461,
+            "ParentId": 447,
+            "Name": "资产评估",
+            "Child": []
+          },
+          {
+            "Id": 462,
+            "ParentId": 447,
+            "Name": "风险管理/控制/稽查",
+            "Child": []
+          },
+          {
+            "Id": 463,
+            "ParentId": 447,
+            "Name": "储备经理人",
+            "Child": []
+          },
+          {
+            "Id": 464,
+            "ParentId": 447,
+            "Name": "证券/投资项目管理",
+            "Child": []
+          },
+          {
+            "Id": 465,
+            "ParentId": 447,
+            "Name": "金融/经济研究员",
+            "Child": []
+          },
+          {
+            "Id": 466,
+            "ParentId": 447,
+            "Name": "金融产品经理",
+            "Child": []
+          },
+          {
+            "Id": 467,
+            "ParentId": 447,
+            "Name": "金融产品销售",
+            "Child": []
+          },
+          {
+            "Id": 468,
+            "ParentId": 447,
+            "Name": "基金项目经理",
+            "Child": []
+          },
+          {
+            "Id": 469,
+            "ParentId": 447,
+            "Name": "金融服务经理",
+            "Child": []
+          },
+          {
+            "Id": 470,
+            "ParentId": 447,
+            "Name": "投资经理",
+            "Child": []
+          },
+          {
+            "Id": 471,
+            "ParentId": 447,
+            "Name": "投资银行财务分析",
+            "Child": []
+          },
+          {
+            "Id": 472,
+            "ParentId": 447,
+            "Name": "金融租赁",
+            "Child": []
+          },
+          {
+            "Id": 473,
+            "ParentId": 447,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 474,
+        "ParentId": 419,
+        "Name": "保险",
+        "Child": [
+          {
+            "Id": 475,
+            "ParentId": 474,
+            "Name": "保险业务管理",
+            "Child": []
+          },
+          {
+            "Id": 476,
+            "ParentId": 474,
+            "Name": "保险代理/经纪人/客户经理",
+            "Child": []
+          },
+          {
+            "Id": 477,
+            "ParentId": 474,
+            "Name": "保险顾问/财务规划师",
+            "Child": []
+          },
+          {
+            "Id": 478,
+            "ParentId": 474,
+            "Name": "保险产品开发/项目策划",
+            "Child": []
+          },
+          {
+            "Id": 479,
+            "ParentId": 474,
+            "Name": "保险培训师",
+            "Child": []
+          },
+          {
+            "Id": 480,
+            "ParentId": 474,
+            "Name": "保险契约管理",
+            "Child": []
+          },
+          {
+            "Id": 481,
+            "ParentId": 474,
+            "Name": "核保理赔",
+            "Child": []
+          },
+          {
+            "Id": 482,
+            "ParentId": 474,
+            "Name": "汽车定损/车险理赔",
+            "Child": []
+          },
+          {
+            "Id": 483,
+            "ParentId": 474,
+            "Name": "保险精算师",
+            "Child": []
+          },
+          {
+            "Id": 484,
+            "ParentId": 474,
+            "Name": "客户服务/续期管理",
+            "Child": []
+          },
+          {
+            "Id": 485,
+            "ParentId": 474,
+            "Name": "保险内勤",
+            "Child": []
+          },
+          {
+            "Id": 486,
+            "ParentId": 474,
+            "Name": "保险项目经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 487,
+            "ParentId": 474,
+            "Name": "储备经理人",
+            "Child": []
+          },
+          {
+            "Id": 488,
+            "ParentId": 474,
+            "Name": "理财顾问/财务规划师",
+            "Child": []
+          },
+          {
+            "Id": 489,
+            "ParentId": 474,
+            "Name": "保险电销",
+            "Child": []
+          },
+          {
+            "Id": 490,
+            "ParentId": 474,
+            "Name": "保险核安",
+            "Child": []
+          },
+          {
+            "Id": 491,
+            "ParentId": 474,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 492,
+        "ParentId": 419,
+        "Name": "信托/担保/拍卖/典当",
+        "Child": [
+          {
+            "Id": 493,
+            "ParentId": 492,
+            "Name": "信托服务",
+            "Child": []
+          },
+          {
+            "Id": 494,
+            "ParentId": 492,
+            "Name": "担保业务",
+            "Child": []
+          },
+          {
+            "Id": 495,
+            "ParentId": 492,
+            "Name": "拍卖师",
+            "Child": []
+          },
+          {
+            "Id": 496,
+            "ParentId": 492,
+            "Name": "典当业务",
+            "Child": []
+          },
+          {
+            "Id": 497,
+            "ParentId": 492,
+            "Name": "珠宝/收藏品鉴定",
+            "Child": []
+          },
+          {
+            "Id": 498,
+            "ParentId": 492,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 499,
+    "ParentId": 0,
+    "Name": "采购|贸易|交通|物流",
+    "Child": [
+      {
+        "Id": 500,
+        "ParentId": 499,
+        "Name": "采购/贸易",
+        "Child": [
+          {
+            "Id": 501,
+            "ParentId": 500,
+            "Name": "采购总监",
+            "Child": []
+          },
+          {
+            "Id": 502,
+            "ParentId": 500,
+            "Name": "采购经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 503,
+            "ParentId": 500,
+            "Name": "采购专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 504,
+            "ParentId": 500,
+            "Name": "供应商开发",
+            "Child": []
+          },
+          {
+            "Id": 505,
+            "ParentId": 500,
+            "Name": "供应链管理",
+            "Child": []
+          },
+          {
+            "Id": 506,
+            "ParentId": 500,
+            "Name": "买手",
+            "Child": []
+          },
+          {
+            "Id": 507,
+            "ParentId": 500,
+            "Name": "外贸/贸易经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 508,
+            "ParentId": 500,
+            "Name": "外贸/贸易专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 509,
+            "ParentId": 500,
+            "Name": "贸易跟单",
+            "Child": []
+          },
+          {
+            "Id": 510,
+            "ParentId": 500,
+            "Name": "报关员",
+            "Child": []
+          },
+          {
+            "Id": 511,
+            "ParentId": 500,
+            "Name": "业务跟单经理",
+            "Child": []
+          },
+          {
+            "Id": 512,
+            "ParentId": 500,
+            "Name": "高级业务跟单",
+            "Child": []
+          },
+          {
+            "Id": 513,
+            "ParentId": 500,
+            "Name": "助理业务跟单",
+            "Child": []
+          },
+          {
+            "Id": 514,
+            "ParentId": 500,
+            "Name": "国际贸易主管/专员",
+            "Child": []
+          },
+          {
+            "Id": 515,
+            "ParentId": 500,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 516,
+        "ParentId": 499,
+        "Name": "交通运输服务",
+        "Child": [
+          {
+            "Id": 517,
+            "ParentId": 516,
+            "Name": "机动车司机/驾驶",
+            "Child": []
+          },
+          {
+            "Id": 518,
+            "ParentId": 516,
+            "Name": "列车驾驶/操作",
+            "Child": []
+          },
+          {
+            "Id": 519,
+            "ParentId": 516,
+            "Name": "船舶驾驶/操作",
+            "Child": []
+          },
+          {
+            "Id": 520,
+            "ParentId": 516,
+            "Name": "飞机驾驶/操作",
+            "Child": []
+          },
+          {
+            "Id": 521,
+            "ParentId": 516,
+            "Name": "公交/地铁乘务",
+            "Child": []
+          },
+          {
+            "Id": 522,
+            "ParentId": 516,
+            "Name": "列车乘务",
+            "Child": []
+          },
+          {
+            "Id": 523,
+            "ParentId": 516,
+            "Name": "船舶乘务",
+            "Child": []
+          },
+          {
+            "Id": 524,
+            "ParentId": 516,
+            "Name": "船员/水手",
+            "Child": []
+          },
+          {
+            "Id": 525,
+            "ParentId": 516,
+            "Name": "航空乘务",
+            "Child": []
+          },
+          {
+            "Id": 526,
+            "ParentId": 516,
+            "Name": "地勤人员",
+            "Child": []
+          },
+          {
+            "Id": 527,
+            "ParentId": 516,
+            "Name": "安检员",
+            "Child": []
+          },
+          {
+            "Id": 528,
+            "ParentId": 516,
+            "Name": "驾驶教练",
+            "Child": []
+          },
+          {
+            "Id": 529,
+            "ParentId": 516,
+            "Name": "交通管理员",
+            "Child": []
+          },
+          {
+            "Id": 530,
+            "ParentId": 516,
+            "Name": "船长",
+            "Child": []
+          },
+          {
+            "Id": 531,
+            "ParentId": 516,
+            "Name": "代驾",
+            "Child": []
+          },
+          {
+            "Id": 532,
+            "ParentId": 516,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 533,
+        "ParentId": 499,
+        "Name": "物流/仓储",
+        "Child": [
+          {
+            "Id": 534,
+            "ParentId": 533,
+            "Name": "物流总监",
+            "Child": []
+          },
+          {
+            "Id": 535,
+            "ParentId": 533,
+            "Name": "物流经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 536,
+            "ParentId": 533,
+            "Name": "物流专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 537,
+            "ParentId": 533,
+            "Name": "货运代理",
+            "Child": []
+          },
+          {
+            "Id": 538,
+            "ParentId": 533,
+            "Name": "运输经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 539,
+            "ParentId": 533,
+            "Name": "快递员/速递员",
+            "Child": []
+          },
+          {
+            "Id": 540,
+            "ParentId": 533,
+            "Name": "水运/空运/陆运操作",
+            "Child": []
+          },
+          {
+            "Id": 541,
+            "ParentId": 533,
+            "Name": "集装箱业务",
+            "Child": []
+          },
+          {
+            "Id": 542,
+            "ParentId": 533,
+            "Name": "报关员",
+            "Child": []
+          },
+          {
+            "Id": 543,
+            "ParentId": 533,
+            "Name": "单证员",
+            "Child": []
+          },
+          {
+            "Id": 544,
+            "ParentId": 533,
+            "Name": "仓库经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 545,
+            "ParentId": 533,
+            "Name": "仓库/物料管理员",
+            "Child": []
+          },
+          {
+            "Id": 546,
+            "ParentId": 533,
+            "Name": "理货/分拣/打包",
+            "Child": []
+          },
+          {
+            "Id": 547,
+            "ParentId": 533,
+            "Name": "物流/仓储调度",
+            "Child": []
+          },
+          {
+            "Id": 548,
+            "ParentId": 533,
+            "Name": "物流/仓储项目管理",
+            "Child": []
+          },
+          {
+            "Id": 549,
+            "ParentId": 533,
+            "Name": "搬运工",
+            "Child": []
+          },
+          {
+            "Id": 550,
+            "ParentId": 533,
+            "Name": "集装箱维护",
+            "Child": []
+          },
+          {
+            "Id": 551,
+            "ParentId": 533,
+            "Name": "集装箱操作",
+            "Child": []
+          },
+          {
+            "Id": 552,
+            "ParentId": 533,
+            "Name": "物流销售",
+            "Child": []
+          },
+          {
+            "Id": 553,
+            "ParentId": 533,
+            "Name": "供应链总监",
+            "Child": []
+          },
+          {
+            "Id": 554,
+            "ParentId": 533,
+            "Name": "供应链经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 555,
+            "ParentId": 533,
+            "Name": "物料经理",
+            "Child": []
+          },
+          {
+            "Id": 556,
+            "ParentId": 533,
+            "Name": "物料主管/专员",
+            "Child": []
+          },
+          {
+            "Id": 557,
+            "ParentId": 533,
+            "Name": "项目经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 558,
+            "ParentId": 533,
+            "Name": "海关事务管理",
+            "Child": []
+          },
+          {
+            "Id": 559,
+            "ParentId": 533,
+            "Name": "船务/空运陆运操作",
+            "Child": []
+          },
+          {
+            "Id": 560,
+            "ParentId": 533,
+            "Name": "订单处理员",
+            "Child": []
+          },
+          {
+            "Id": 561,
+            "ParentId": 533,
+            "Name": "水运/陆运/空运销售",
+            "Child": []
+          },
+          {
+            "Id": 562,
+            "ParentId": 533,
+            "Name": "外卖快递",
+            "Child": []
+          },
+          {
+            "Id": 563,
+            "ParentId": 533,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 564,
+    "ParentId": 0,
+    "Name": "生产|制造",
+    "Child": [
+      {
+        "Id": 565,
+        "ParentId": 564,
+        "Name": "生产管理/运营",
+        "Child": [
+          {
+            "Id": 566,
+            "ParentId": 565,
+            "Name": "工厂厂长/副厂长",
+            "Child": []
+          },
+          {
+            "Id": 567,
+            "ParentId": 565,
+            "Name": "生产总监",
+            "Child": []
+          },
+          {
+            "Id": 568,
+            "ParentId": 565,
+            "Name": "生产经理/车间主任",
+            "Child": []
+          },
+          {
+            "Id": 569,
+            "ParentId": 565,
+            "Name": "生产主管/督导/组长",
+            "Child": []
+          },
+          {
+            "Id": 570,
+            "ParentId": 565,
+            "Name": "生产运营管理",
+            "Child": []
+          },
+          {
+            "Id": 571,
+            "ParentId": 565,
+            "Name": "生产项目经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 572,
+            "ParentId": 565,
+            "Name": "生产项目工程师",
+            "Child": []
+          },
+          {
+            "Id": 573,
+            "ParentId": 565,
+            "Name": "产品管理",
+            "Child": []
+          },
+          {
+            "Id": 574,
+            "ParentId": 565,
+            "Name": "生产计划",
+            "Child": []
+          },
+          {
+            "Id": 575,
+            "ParentId": 565,
+            "Name": "制造工程师",
+            "Child": []
+          },
+          {
+            "Id": 576,
+            "ParentId": 565,
+            "Name": "工艺/制程工程师",
+            "Child": []
+          },
+          {
+            "Id": 577,
+            "ParentId": 565,
+            "Name": "工业工程师",
+            "Child": []
+          },
+          {
+            "Id": 578,
+            "ParentId": 565,
+            "Name": "生产设备管理",
+            "Child": []
+          },
+          {
+            "Id": 579,
+            "ParentId": 565,
+            "Name": "生产物料管理（PMC）",
+            "Child": []
+          },
+          {
+            "Id": 580,
+            "ParentId": 565,
+            "Name": "包装工程师",
+            "Child": []
+          },
+          {
+            "Id": 581,
+            "ParentId": 565,
+            "Name": "技术文档工程师",
+            "Child": []
+          },
+          {
+            "Id": 582,
+            "ParentId": 565,
+            "Name": "总工程师/副总工程师",
+            "Child": []
+          },
+          {
+            "Id": 583,
+            "ParentId": 565,
+            "Name": "生产文员",
+            "Child": []
+          },
+          {
+            "Id": 584,
+            "ParentId": 565,
+            "Name": "营运主管",
+            "Child": []
+          },
+          {
+            "Id": 585,
+            "ParentId": 565,
+            "Name": "营运经理",
+            "Child": []
+          },
+          {
+            "Id": 586,
+            "ParentId": 565,
+            "Name": "设备主管",
+            "Child": []
+          },
+          {
+            "Id": 587,
+            "ParentId": 565,
+            "Name": "化验师",
+            "Child": []
+          },
+          {
+            "Id": 588,
+            "ParentId": 565,
+            "Name": "生产跟单",
+            "Child": []
+          },
+          {
+            "Id": 589,
+            "ParentId": 565,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 590,
+        "ParentId": 564,
+        "Name": "电子/电器/半导体/仪器仪表",
+        "Child": [
+          {
+            "Id": 591,
+            "ParentId": 590,
+            "Name": "电子技术研发工程师",
+            "Child": []
+          },
+          {
+            "Id": 592,
+            "ParentId": 590,
+            "Name": "电子/电器工程师",
+            "Child": []
+          },
+          {
+            "Id": 593,
+            "ParentId": 590,
+            "Name": "电器研发工程师",
+            "Child": []
+          },
+          {
+            "Id": 594,
+            "ParentId": 590,
+            "Name": "电子/电器工艺/制程工程师",
+            "Child": []
+          },
+          {
+            "Id": 595,
+            "ParentId": 590,
+            "Name": "电路工程师/技术员",
+            "Child": []
+          },
+          {
+            "Id": 596,
+            "ParentId": 590,
+            "Name": "模拟电路设计/应用工程师",
+            "Child": []
+          },
+          {
+            "Id": 597,
+            "ParentId": 590,
+            "Name": "版图设计工程师",
+            "Child": []
+          },
+          {
+            "Id": 598,
+            "ParentId": 590,
+            "Name": "集成电路IC设计/应用工程师",
+            "Child": []
+          },
+          {
+            "Id": 599,
+            "ParentId": 590,
+            "Name": "IC验证工程师",
+            "Child": []
+          },
+          {
+            "Id": 600,
+            "ParentId": 590,
+            "Name": "电子元器件工程师",
+            "Child": []
+          },
+          {
+            "Id": 601,
+            "ParentId": 590,
+            "Name": "射频工程师",
+            "Child": []
+          },
+          {
+            "Id": 602,
+            "ParentId": 590,
+            "Name": "无线电工程师",
+            "Child": []
+          },
+          {
+            "Id": 603,
+            "ParentId": 590,
+            "Name": "激光/光电子技术",
+            "Child": []
+          },
+          {
+            "Id": 604,
+            "ParentId": 590,
+            "Name": "光源/照明工程师",
+            "Child": []
+          },
+          {
+            "Id": 605,
+            "ParentId": 590,
+            "Name": "变压器与磁电工程师",
+            "Child": []
+          },
+          {
+            "Id": 606,
+            "ParentId": 590,
+            "Name": "电池/电源开发",
+            "Child": []
+          },
+          {
+            "Id": 607,
+            "ParentId": 590,
+            "Name": "家用电器/数码产品研发",
+            "Child": []
+          },
+          {
+            "Id": 608,
+            "ParentId": 590,
+            "Name": "空调工程/设计",
+            "Child": []
+          },
+          {
+            "Id": 609,
+            "ParentId": 590,
+            "Name": "音频/视频工程师/技术员",
+            "Child": []
+          },
+          {
+            "Id": 610,
+            "ParentId": 590,
+            "Name": "安防系统工程师",
+            "Child": []
+          },
+          {
+            "Id": 611,
+            "ParentId": 590,
+            "Name": "电子/电器设备工程师",
+            "Child": []
+          },
+          {
+            "Id": 612,
+            "ParentId": 590,
+            "Name": "电子/电器维修/保养",
+            "Child": []
+          },
+          {
+            "Id": 613,
+            "ParentId": 590,
+            "Name": "电子/电器项目管理",
+            "Child": []
+          },
+          {
+            "Id": 614,
+            "ParentId": 590,
+            "Name": "电气工程师",
+            "Child": []
+          },
+          {
+            "Id": 615,
+            "ParentId": 590,
+            "Name": "电气设计",
+            "Child": []
+          },
+          {
+            "Id": 616,
+            "ParentId": 590,
+            "Name": "电气线路设计",
+            "Child": []
+          },
+          {
+            "Id": 617,
+            "ParentId": 590,
+            "Name": "线路结构设计",
+            "Child": []
+          },
+          {
+            "Id": 618,
+            "ParentId": 590,
+            "Name": "半导体技术",
+            "Child": []
+          },
+          {
+            "Id": 619,
+            "ParentId": 590,
+            "Name": "仪器/仪表/计量工程师",
+            "Child": []
+          },
+          {
+            "Id": 620,
+            "ParentId": 590,
+            "Name": "自动化工程师",
+            "Child": []
+          },
+          {
+            "Id": 621,
+            "ParentId": 590,
+            "Name": "现场应用工程师（FAE）",
+            "Child": []
+          },
+          {
+            "Id": 622,
+            "ParentId": 590,
+            "Name": "测试/可靠性工程师",
+            "Child": []
+          },
+          {
+            "Id": 623,
+            "ParentId": 590,
+            "Name": "电子工程师/技术员",
+            "Child": []
+          },
+          {
+            "Id": 624,
+            "ParentId": 590,
+            "Name": "电声/音响工程师/技术员",
+            "Child": []
+          },
+          {
+            "Id": 625,
+            "ParentId": 590,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 626,
+        "ParentId": 564,
+        "Name": "汽车制造",
+        "Child": [
+          {
+            "Id": 627,
+            "ParentId": 626,
+            "Name": "汽车动力系统工程师",
+            "Child": []
+          },
+          {
+            "Id": 628,
+            "ParentId": 626,
+            "Name": "汽车底盘/总装工程师",
+            "Child": []
+          },
+          {
+            "Id": 629,
+            "ParentId": 626,
+            "Name": "车身设计工程师",
+            "Child": []
+          },
+          {
+            "Id": 630,
+            "ParentId": 626,
+            "Name": "汽车电子工程师",
+            "Child": []
+          },
+          {
+            "Id": 631,
+            "ParentId": 626,
+            "Name": "汽车机械工程师",
+            "Child": []
+          },
+          {
+            "Id": 632,
+            "ParentId": 626,
+            "Name": "汽车零部件设计师",
+            "Child": []
+          },
+          {
+            "Id": 633,
+            "ParentId": 626,
+            "Name": "汽车装配工艺工程师",
+            "Child": []
+          },
+          {
+            "Id": 634,
+            "ParentId": 626,
+            "Name": "安全性能工程师",
+            "Child": []
+          },
+          {
+            "Id": 635,
+            "ParentId": 626,
+            "Name": "汽车工程项目管理",
+            "Child": []
+          },
+          {
+            "Id": 636,
+            "ParentId": 626,
+            "Name": "汽车机构工程师",
+            "Child": []
+          },
+          {
+            "Id": 637,
+            "ParentId": 626,
+            "Name": "汽车电工",
+            "Child": []
+          },
+          {
+            "Id": 638,
+            "ParentId": 626,
+            "Name": "售后服务/客户服务",
+            "Child": []
+          },
+          {
+            "Id": 639,
+            "ParentId": 626,
+            "Name": "加油站工作员",
+            "Child": []
+          },
+          {
+            "Id": 640,
+            "ParentId": 626,
+            "Name": "发动机/总装工程师",
+            "Child": []
+          },
+          {
+            "Id": 641,
+            "ParentId": 626,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 642,
+        "ParentId": 564,
+        "Name": "汽车销售与服务",
+        "Child": [
+          {
+            "Id": 643,
+            "ParentId": 642,
+            "Name": "汽车销售",
+            "Child": []
+          },
+          {
+            "Id": 644,
+            "ParentId": 642,
+            "Name": "汽车零配件销售",
+            "Child": []
+          },
+          {
+            "Id": 645,
+            "ParentId": 642,
+            "Name": "汽车售后服务/客户服务",
+            "Child": []
+          },
+          {
+            "Id": 646,
+            "ParentId": 642,
+            "Name": "汽车维修/保养",
+            "Child": []
+          },
+          {
+            "Id": 647,
+            "ParentId": 642,
+            "Name": "汽车质量管理/检验检测",
+            "Child": []
+          },
+          {
+            "Id": 648,
+            "ParentId": 642,
+            "Name": "汽车定损/车险理赔",
+            "Child": []
+          },
+          {
+            "Id": 649,
+            "ParentId": 642,
+            "Name": "汽车装饰美容",
+            "Child": []
+          },
+          {
+            "Id": 650,
+            "ParentId": 642,
+            "Name": "二手车评估师",
+            "Child": []
+          },
+          {
+            "Id": 651,
+            "ParentId": 642,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 652,
+        "ParentId": 564,
+        "Name": "机械设计/制造/维修",
+        "Child": [
+          {
+            "Id": 653,
+            "ParentId": 652,
+            "Name": "工程机械经理",
+            "Child": []
+          },
+          {
+            "Id": 654,
+            "ParentId": 652,
+            "Name": "工程机械主管",
+            "Child": []
+          },
+          {
+            "Id": 655,
+            "ParentId": 652,
+            "Name": "机械设备经理",
+            "Child": []
+          },
+          {
+            "Id": 656,
+            "ParentId": 652,
+            "Name": "机械设备工程师",
+            "Child": []
+          },
+          {
+            "Id": 657,
+            "ParentId": 652,
+            "Name": "机械工程师",
+            "Child": []
+          },
+          {
+            "Id": 658,
+            "ParentId": 652,
+            "Name": "机械设计师",
+            "Child": []
+          },
+          {
+            "Id": 659,
+            "ParentId": 652,
+            "Name": "机械制图员",
+            "Child": []
+          },
+          {
+            "Id": 660,
+            "ParentId": 652,
+            "Name": "机械研发工程师",
+            "Child": []
+          },
+          {
+            "Id": 661,
+            "ParentId": 652,
+            "Name": "机械结构工程师",
+            "Child": []
+          },
+          {
+            "Id": 662,
+            "ParentId": 652,
+            "Name": "机械工艺/制程工程师",
+            "Child": []
+          },
+          {
+            "Id": 663,
+            "ParentId": 652,
+            "Name": "气动工程师",
+            "Child": []
+          },
+          {
+            "Id": 664,
+            "ParentId": 652,
+            "Name": "CNC/数控工程师",
+            "Child": []
+          },
+          {
+            "Id": 665,
+            "ParentId": 652,
+            "Name": "模具工程师",
+            "Child": []
+          },
+          {
+            "Id": 666,
+            "ParentId": 652,
+            "Name": "夹具工程师",
+            "Child": []
+          },
+          {
+            "Id": 667,
+            "ParentId": 652,
+            "Name": "注塑工程师",
+            "Child": []
+          },
+          {
+            "Id": 668,
+            "ParentId": 652,
+            "Name": "铸造/锻造工程师/技师",
+            "Child": []
+          },
+          {
+            "Id": 669,
+            "ParentId": 652,
+            "Name": "机电工程师",
+            "Child": []
+          },
+          {
+            "Id": 670,
+            "ParentId": 652,
+            "Name": "材料工程师",
+            "Child": []
+          },
+          {
+            "Id": 671,
+            "ParentId": 652,
+            "Name": "机械维修/保养",
+            "Child": []
+          },
+          {
+            "Id": 672,
+            "ParentId": 652,
+            "Name": "飞机设计与制造",
+            "Child": []
+          },
+          {
+            "Id": 673,
+            "ParentId": 652,
+            "Name": "飞机维修/保养",
+            "Child": []
+          },
+          {
+            "Id": 674,
+            "ParentId": 652,
+            "Name": "列车设计与制造",
+            "Child": []
+          },
+          {
+            "Id": 675,
+            "ParentId": 652,
+            "Name": "列车维修/保养",
+            "Child": []
+          },
+          {
+            "Id": 676,
+            "ParentId": 652,
+            "Name": "船舶设计与制造",
+            "Child": []
+          },
+          {
+            "Id": 677,
+            "ParentId": 652,
+            "Name": "船舶维修/保养",
+            "Child": []
+          },
+          {
+            "Id": 678,
+            "ParentId": 652,
+            "Name": "技术研发工程师",
+            "Child": []
+          },
+          {
+            "Id": 679,
+            "ParentId": 652,
+            "Name": "技术研发经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 680,
+            "ParentId": 652,
+            "Name": "产品策划工程师",
+            "Child": []
+          },
+          {
+            "Id": 681,
+            "ParentId": 652,
+            "Name": "项目管理",
+            "Child": []
+          },
+          {
+            "Id": 682,
+            "ParentId": 652,
+            "Name": "实验室负责人/工程师",
+            "Child": []
+          },
+          {
+            "Id": 683,
+            "ParentId": 652,
+            "Name": "工业工程师",
+            "Child": []
+          },
+          {
+            "Id": 684,
+            "ParentId": 652,
+            "Name": "维修经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 685,
+            "ParentId": 652,
+            "Name": "装配工程师/客户经理",
+            "Child": []
+          },
+          {
+            "Id": 686,
+            "ParentId": 652,
+            "Name": "焊接工程师/技师",
+            "Child": []
+          },
+          {
+            "Id": 687,
+            "ParentId": 652,
+            "Name": "冲压工程师/技师",
+            "Child": []
+          },
+          {
+            "Id": 688,
+            "ParentId": 652,
+            "Name": "锅炉工程师/技师",
+            "Child": []
+          },
+          {
+            "Id": 689,
+            "ParentId": 652,
+            "Name": "光伏系统工程师",
+            "Child": []
+          },
+          {
+            "Id": 690,
+            "ParentId": 652,
+            "Name": "汽车/摩托车工程师",
+            "Child": []
+          },
+          {
+            "Id": 691,
+            "ParentId": 652,
+            "Name": "轨道交通工程师/技术员",
+            "Child": []
+          },
+          {
+            "Id": 692,
+            "ParentId": 652,
+            "Name": "数控操作",
+            "Child": []
+          },
+          {
+            "Id": 693,
+            "ParentId": 652,
+            "Name": "数控编程",
+            "Child": []
+          },
+          {
+            "Id": 694,
+            "ParentId": 652,
+            "Name": "无损检测工程师",
+            "Child": []
+          },
+          {
+            "Id": 695,
+            "ParentId": 652,
+            "Name": "浮法操作工(玻璃技术)",
+            "Child": []
+          },
+          {
+            "Id": 696,
+            "ParentId": 652,
+            "Name": "地铁轨道设计",
+            "Child": []
+          },
+          {
+            "Id": 697,
+            "ParentId": 652,
+            "Name": "机修工",
+            "Child": []
+          },
+          {
+            "Id": 698,
+            "ParentId": 652,
+            "Name": "工装工程师",
+            "Child": []
+          },
+          {
+            "Id": 699,
+            "ParentId": 652,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 700,
+        "ParentId": 564,
+        "Name": "服装/纺织/皮革设计/生产",
+        "Child": [
+          {
+            "Id": 701,
+            "ParentId": 700,
+            "Name": "服装/纺织品设计",
+            "Child": []
+          },
+          {
+            "Id": 702,
+            "ParentId": 700,
+            "Name": "服装打样/制版",
+            "Child": []
+          },
+          {
+            "Id": 703,
+            "ParentId": 700,
+            "Name": "服装/纺织/皮革工艺师",
+            "Child": []
+          },
+          {
+            "Id": 704,
+            "ParentId": 700,
+            "Name": "电脑放码员",
+            "Child": []
+          },
+          {
+            "Id": 705,
+            "ParentId": 700,
+            "Name": "裁床",
+            "Child": []
+          },
+          {
+            "Id": 706,
+            "ParentId": 700,
+            "Name": "样衣工",
+            "Child": []
+          },
+          {
+            "Id": 707,
+            "ParentId": 700,
+            "Name": "面料辅料开发/采购",
+            "Child": []
+          },
+          {
+            "Id": 708,
+            "ParentId": 700,
+            "Name": "服装/纺织/皮革跟单",
+            "Child": []
+          },
+          {
+            "Id": 709,
+            "ParentId": 700,
+            "Name": "服装/纺织品/皮革销售",
+            "Child": []
+          },
+          {
+            "Id": 710,
+            "ParentId": 700,
+            "Name": "服装/纺织品/皮革质量管理",
+            "Child": []
+          },
+          {
+            "Id": 711,
+            "ParentId": 700,
+            "Name": "服装/纺织/皮革项目管理",
+            "Child": []
+          },
+          {
+            "Id": 712,
+            "ParentId": 700,
+            "Name": "服装/纺织设计总监",
+            "Child": []
+          },
+          {
+            "Id": 713,
+            "ParentId": 700,
+            "Name": "纸样师/车板师",
+            "Child": []
+          },
+          {
+            "Id": 714,
+            "ParentId": 700,
+            "Name": "剪裁工",
+            "Child": []
+          },
+          {
+            "Id": 715,
+            "ParentId": 700,
+            "Name": "缝纫工",
+            "Child": []
+          },
+          {
+            "Id": 716,
+            "ParentId": 700,
+            "Name": "纺织工/针织工",
+            "Child": []
+          },
+          {
+            "Id": 717,
+            "ParentId": 700,
+            "Name": "配色工",
+            "Child": []
+          },
+          {
+            "Id": 718,
+            "ParentId": 700,
+            "Name": "印染工",
+            "Child": []
+          },
+          {
+            "Id": 719,
+            "ParentId": 700,
+            "Name": "漂染工",
+            "Child": []
+          },
+          {
+            "Id": 720,
+            "ParentId": 700,
+            "Name": "挡车工",
+            "Child": []
+          },
+          {
+            "Id": 721,
+            "ParentId": 700,
+            "Name": "浆纱工",
+            "Child": []
+          },
+          {
+            "Id": 722,
+            "ParentId": 700,
+            "Name": "整经工",
+            "Child": []
+          },
+          {
+            "Id": 723,
+            "ParentId": 700,
+            "Name": "鞋子设计",
+            "Child": []
+          },
+          {
+            "Id": 724,
+            "ParentId": 700,
+            "Name": "细纱工",
+            "Child": []
+          },
+          {
+            "Id": 725,
+            "ParentId": 700,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 726,
+        "ParentId": 564,
+        "Name": "技工/操作工",
+        "Child": [
+          {
+            "Id": 727,
+            "ParentId": 726,
+            "Name": "车床/磨床/铣床/冲床工",
+            "Child": []
+          },
+          {
+            "Id": 728,
+            "ParentId": 726,
+            "Name": "模具工",
+            "Child": []
+          },
+          {
+            "Id": 729,
+            "ParentId": 726,
+            "Name": "钳工/机修工/钣金工",
+            "Child": []
+          },
+          {
+            "Id": 730,
+            "ParentId": 726,
+            "Name": "电焊工/铆焊工",
+            "Child": []
+          },
+          {
+            "Id": 731,
+            "ParentId": 726,
+            "Name": "电工",
+            "Child": []
+          },
+          {
+            "Id": 732,
+            "ParentId": 726,
+            "Name": "水工/木工/油漆工",
+            "Child": []
+          },
+          {
+            "Id": 733,
+            "ParentId": 726,
+            "Name": "铲车/叉车工",
+            "Child": []
+          },
+          {
+            "Id": 734,
+            "ParentId": 726,
+            "Name": "空调工/电梯工/锅炉工",
+            "Child": []
+          },
+          {
+            "Id": 735,
+            "ParentId": 726,
+            "Name": "汽车维修/保养",
+            "Child": []
+          },
+          {
+            "Id": 736,
+            "ParentId": 726,
+            "Name": "普工/操作工",
+            "Child": []
+          },
+          {
+            "Id": 737,
+            "ParentId": 726,
+            "Name": "技工",
+            "Child": []
+          },
+          {
+            "Id": 738,
+            "ParentId": 726,
+            "Name": "组装工",
+            "Child": []
+          },
+          {
+            "Id": 739,
+            "ParentId": 726,
+            "Name": "包装工",
+            "Child": []
+          },
+          {
+            "Id": 740,
+            "ParentId": 726,
+            "Name": "电力线路工",
+            "Child": []
+          },
+          {
+            "Id": 741,
+            "ParentId": 726,
+            "Name": "拖压工",
+            "Child": []
+          },
+          {
+            "Id": 742,
+            "ParentId": 726,
+            "Name": "仪表工",
+            "Child": []
+          },
+          {
+            "Id": 743,
+            "ParentId": 726,
+            "Name": "电镀工",
+            "Child": []
+          },
+          {
+            "Id": 744,
+            "ParentId": 726,
+            "Name": "喷塑工",
+            "Child": []
+          },
+          {
+            "Id": 745,
+            "ParentId": 726,
+            "Name": "电梯工",
+            "Child": []
+          },
+          {
+            "Id": 746,
+            "ParentId": 726,
+            "Name": "吊车司机/卡车司机",
+            "Child": []
+          },
+          {
+            "Id": 747,
+            "ParentId": 726,
+            "Name": "洗车工",
+            "Child": []
+          },
+          {
+            "Id": 748,
+            "ParentId": 726,
+            "Name": "洗碗工",
+            "Child": []
+          },
+          {
+            "Id": 749,
+            "ParentId": 726,
+            "Name": "瓦工",
+            "Child": []
+          },
+          {
+            "Id": 750,
+            "ParentId": 726,
+            "Name": "万能工",
+            "Child": []
+          },
+          {
+            "Id": 751,
+            "ParentId": 726,
+            "Name": "钢筋工",
+            "Child": []
+          },
+          {
+            "Id": 752,
+            "ParentId": 726,
+            "Name": "学徒工",
+            "Child": []
+          },
+          {
+            "Id": 753,
+            "ParentId": 726,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 754,
+        "ParentId": 564,
+        "Name": "生物/制药/医疗器械",
+        "Child": [
+          {
+            "Id": 755,
+            "ParentId": 754,
+            "Name": "医药代表",
+            "Child": []
+          },
+          {
+            "Id": 756,
+            "ParentId": 754,
+            "Name": "医药销售经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 757,
+            "ParentId": 754,
+            "Name": "药品市场推广经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 758,
+            "ParentId": 754,
+            "Name": "药品市场推广专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 759,
+            "ParentId": 754,
+            "Name": "医疗器械销售",
+            "Child": []
+          },
+          {
+            "Id": 760,
+            "ParentId": 754,
+            "Name": "医疗器械推广",
+            "Child": []
+          },
+          {
+            "Id": 761,
+            "ParentId": 754,
+            "Name": "医药学术推广",
+            "Child": []
+          },
+          {
+            "Id": 762,
+            "ParentId": 754,
+            "Name": "医药招商",
+            "Child": []
+          },
+          {
+            "Id": 763,
+            "ParentId": 754,
+            "Name": "医药项目管理",
+            "Child": []
+          },
+          {
+            "Id": 764,
+            "ParentId": 754,
+            "Name": "医药项目招投标管理",
+            "Child": []
+          },
+          {
+            "Id": 765,
+            "ParentId": 754,
+            "Name": "生物工程/生物制药",
+            "Child": []
+          },
+          {
+            "Id": 766,
+            "ParentId": 754,
+            "Name": "药品研发",
+            "Child": []
+          },
+          {
+            "Id": 767,
+            "ParentId": 754,
+            "Name": "医疗器械研发",
+            "Child": []
+          },
+          {
+            "Id": 768,
+            "ParentId": 754,
+            "Name": "临床研究员",
+            "Child": []
+          },
+          {
+            "Id": 769,
+            "ParentId": 754,
+            "Name": "临床协调员",
+            "Child": []
+          },
+          {
+            "Id": 770,
+            "ParentId": 754,
+            "Name": "临床数据分析员",
+            "Child": []
+          },
+          {
+            "Id": 771,
+            "ParentId": 754,
+            "Name": "医药化学分析",
+            "Child": []
+          },
+          {
+            "Id": 772,
+            "ParentId": 754,
+            "Name": "医药技术研发管理人员",
+            "Child": []
+          },
+          {
+            "Id": 773,
+            "ParentId": 754,
+            "Name": "药品注册",
+            "Child": []
+          },
+          {
+            "Id": 774,
+            "ParentId": 754,
+            "Name": "医疗器械注册",
+            "Child": []
+          },
+          {
+            "Id": 775,
+            "ParentId": 754,
+            "Name": "药品生产/质量管理",
+            "Child": []
+          },
+          {
+            "Id": 776,
+            "ParentId": 754,
+            "Name": "医疗器械生产/质量管理",
+            "Child": []
+          },
+          {
+            "Id": 777,
+            "ParentId": 754,
+            "Name": "医疗器械维修/保养",
+            "Child": []
+          },
+          {
+            "Id": 778,
+            "ParentId": 754,
+            "Name": "临床推广经理",
+            "Child": []
+          },
+          {
+            "Id": 779,
+            "ParentId": 754,
+            "Name": "医药技术研发人员",
+            "Child": []
+          },
+          {
+            "Id": 780,
+            "ParentId": 754,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 781,
+        "ParentId": 564,
+        "Name": "化工",
+        "Child": [
+          {
+            "Id": 782,
+            "ParentId": 781,
+            "Name": "化工工程师",
+            "Child": []
+          },
+          {
+            "Id": 783,
+            "ParentId": 781,
+            "Name": "化工研发工程师",
+            "Child": []
+          },
+          {
+            "Id": 784,
+            "ParentId": 781,
+            "Name": "化学分析",
+            "Child": []
+          },
+          {
+            "Id": 785,
+            "ParentId": 781,
+            "Name": "化学技术应用",
+            "Child": []
+          },
+          {
+            "Id": 786,
+            "ParentId": 781,
+            "Name": "化学操作",
+            "Child": []
+          },
+          {
+            "Id": 787,
+            "ParentId": 781,
+            "Name": "化学制剂研发",
+            "Child": []
+          },
+          {
+            "Id": 788,
+            "ParentId": 781,
+            "Name": "油漆/化工涂料研发",
+            "Child": []
+          },
+          {
+            "Id": 789,
+            "ParentId": 781,
+            "Name": "塑料工程师",
+            "Child": []
+          },
+          {
+            "Id": 790,
+            "ParentId": 781,
+            "Name": "化学实验室技术员/研究员",
+            "Child": []
+          },
+          {
+            "Id": 791,
+            "ParentId": 781,
+            "Name": "化工项目管理",
+            "Child": []
+          },
+          {
+            "Id": 792,
+            "ParentId": 781,
+            "Name": "橡胶工程师",
+            "Child": []
+          },
+          {
+            "Id": 793,
+            "ParentId": 781,
+            "Name": "配色技术员",
+            "Child": []
+          },
+          {
+            "Id": 794,
+            "ParentId": 781,
+            "Name": "化妆品研发",
+            "Child": []
+          },
+          {
+            "Id": 795,
+            "ParentId": 781,
+            "Name": "造纸研发",
+            "Child": []
+          },
+          {
+            "Id": 796,
+            "ParentId": 781,
+            "Name": "化学/化工技术总监",
+            "Child": []
+          },
+          {
+            "Id": 797,
+            "ParentId": 781,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 798,
+    "ParentId": 0,
+    "Name": "传媒|印刷|艺术|设计",
+    "Child": [
+      {
+        "Id": 799,
+        "ParentId": 798,
+        "Name": "影视/媒体/出版/印刷",
+        "Child": [
+          {
+            "Id": 800,
+            "ParentId": 799,
+            "Name": "导演/编导",
+            "Child": []
+          },
+          {
+            "Id": 801,
+            "ParentId": 799,
+            "Name": "总编/副总编",
+            "Child": []
+          },
+          {
+            "Id": 802,
+            "ParentId": 799,
+            "Name": "艺术指导/舞美设计",
+            "Child": []
+          },
+          {
+            "Id": 803,
+            "ParentId": 799,
+            "Name": "摄影师/摄像师",
+            "Child": []
+          },
+          {
+            "Id": 804,
+            "ParentId": 799,
+            "Name": "化妆师/造型师/服装/道具",
+            "Child": []
+          },
+          {
+            "Id": 805,
+            "ParentId": 799,
+            "Name": "主持人/司仪",
+            "Child": []
+          },
+          {
+            "Id": 806,
+            "ParentId": 799,
+            "Name": "演员/模特",
+            "Child": []
+          },
+          {
+            "Id": 807,
+            "ParentId": 799,
+            "Name": "配音员",
+            "Child": []
+          },
+          {
+            "Id": 808,
+            "ParentId": 799,
+            "Name": "音效师",
+            "Child": []
+          },
+          {
+            "Id": 809,
+            "ParentId": 799,
+            "Name": "后期制作",
+            "Child": []
+          },
+          {
+            "Id": 810,
+            "ParentId": 799,
+            "Name": "经纪人/星探",
+            "Child": []
+          },
+          {
+            "Id": 811,
+            "ParentId": 799,
+            "Name": "放映管理",
+            "Child": []
+          },
+          {
+            "Id": 812,
+            "ParentId": 799,
+            "Name": "作家/编剧/撰稿人",
+            "Child": []
+          },
+          {
+            "Id": 813,
+            "ParentId": 799,
+            "Name": "文字编辑/组稿",
+            "Child": []
+          },
+          {
+            "Id": 814,
+            "ParentId": 799,
+            "Name": "美术编辑/美术设计",
+            "Child": []
+          },
+          {
+            "Id": 815,
+            "ParentId": 799,
+            "Name": "记者/采编",
+            "Child": []
+          },
+          {
+            "Id": 816,
+            "ParentId": 799,
+            "Name": "电话采编",
+            "Child": []
+          },
+          {
+            "Id": 817,
+            "ParentId": 799,
+            "Name": "文案策划",
+            "Child": []
+          },
+          {
+            "Id": 818,
+            "ParentId": 799,
+            "Name": "校对/录入",
+            "Child": []
+          },
+          {
+            "Id": 819,
+            "ParentId": 799,
+            "Name": "发行管理",
+            "Child": []
+          },
+          {
+            "Id": 820,
+            "ParentId": 799,
+            "Name": "排版设计",
+            "Child": []
+          },
+          {
+            "Id": 821,
+            "ParentId": 799,
+            "Name": "印刷排版/制版",
+            "Child": []
+          },
+          {
+            "Id": 822,
+            "ParentId": 799,
+            "Name": "印刷操作",
+            "Child": []
+          },
+          {
+            "Id": 823,
+            "ParentId": 799,
+            "Name": "编辑出版",
+            "Child": []
+          },
+          {
+            "Id": 824,
+            "ParentId": 799,
+            "Name": "主笔设计师",
+            "Child": []
+          },
+          {
+            "Id": 825,
+            "ParentId": 799,
+            "Name": "放映员",
+            "Child": []
+          },
+          {
+            "Id": 826,
+            "ParentId": 799,
+            "Name": "灯光师",
+            "Child": []
+          },
+          {
+            "Id": 827,
+            "ParentId": 799,
+            "Name": "艺术/设计总监",
+            "Child": []
+          },
+          {
+            "Id": 828,
+            "ParentId": 799,
+            "Name": "影视策划/制作人员",
+            "Child": []
+          },
+          {
+            "Id": 829,
+            "ParentId": 799,
+            "Name": "调色员",
+            "Child": []
+          },
+          {
+            "Id": 830,
+            "ParentId": 799,
+            "Name": "烫金工",
+            "Child": []
+          },
+          {
+            "Id": 831,
+            "ParentId": 799,
+            "Name": "晒版员",
+            "Child": []
+          },
+          {
+            "Id": 832,
+            "ParentId": 799,
+            "Name": "装订工",
+            "Child": []
+          },
+          {
+            "Id": 833,
+            "ParentId": 799,
+            "Name": "数码直印/菲林输出",
+            "Child": []
+          },
+          {
+            "Id": 834,
+            "ParentId": 799,
+            "Name": "调墨技师",
+            "Child": []
+          },
+          {
+            "Id": 835,
+            "ParentId": 799,
+            "Name": "电分操作员",
+            "Child": []
+          },
+          {
+            "Id": 836,
+            "ParentId": 799,
+            "Name": "打稿机操作员",
+            "Child": []
+          },
+          {
+            "Id": 837,
+            "ParentId": 799,
+            "Name": "切纸机操作工",
+            "Child": []
+          },
+          {
+            "Id": 838,
+            "ParentId": 799,
+            "Name": "裱胶工",
+            "Child": []
+          },
+          {
+            "Id": 839,
+            "ParentId": 799,
+            "Name": "复卷工",
+            "Child": []
+          },
+          {
+            "Id": 840,
+            "ParentId": 799,
+            "Name": "压痕工",
+            "Child": []
+          },
+          {
+            "Id": 841,
+            "ParentId": 799,
+            "Name": "印刷机械机长",
+            "Child": []
+          },
+          {
+            "Id": 842,
+            "ParentId": 799,
+            "Name": "转播工程师",
+            "Child": []
+          },
+          {
+            "Id": 843,
+            "ParentId": 799,
+            "Name": "视频主播",
+            "Child": []
+          },
+          {
+            "Id": 844,
+            "ParentId": 799,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 845,
+        "ParentId": 798,
+        "Name": "艺术/设计",
+        "Child": [
+          {
+            "Id": 846,
+            "ParentId": 845,
+            "Name": "设计管理人员",
+            "Child": []
+          },
+          {
+            "Id": 847,
+            "ParentId": 845,
+            "Name": "艺术/设计总监",
+            "Child": []
+          },
+          {
+            "Id": 848,
+            "ParentId": 845,
+            "Name": "绘画",
+            "Child": []
+          },
+          {
+            "Id": 849,
+            "ParentId": 845,
+            "Name": "原画师",
+            "Child": []
+          },
+          {
+            "Id": 850,
+            "ParentId": 845,
+            "Name": "CAD设计/制图",
+            "Child": []
+          },
+          {
+            "Id": 851,
+            "ParentId": 845,
+            "Name": "平面设计",
+            "Child": []
+          },
+          {
+            "Id": 852,
+            "ParentId": 845,
+            "Name": "Flash设计/开发",
+            "Child": []
+          },
+          {
+            "Id": 853,
+            "ParentId": 845,
+            "Name": "特效设计",
+            "Child": []
+          },
+          {
+            "Id": 854,
+            "ParentId": 845,
+            "Name": "视觉设计",
+            "Child": []
+          },
+          {
+            "Id": 855,
+            "ParentId": 845,
+            "Name": "用户体验（UE/UX）设计",
+            "Child": []
+          },
+          {
+            "Id": 856,
+            "ParentId": 845,
+            "Name": "美术编辑/美术设计",
+            "Child": []
+          },
+          {
+            "Id": 857,
+            "ParentId": 845,
+            "Name": "多媒体/动画设计",
+            "Child": []
+          },
+          {
+            "Id": 858,
+            "ParentId": 845,
+            "Name": "包装设计",
+            "Child": []
+          },
+          {
+            "Id": 859,
+            "ParentId": 845,
+            "Name": "家具设计",
+            "Child": []
+          },
+          {
+            "Id": 860,
+            "ParentId": 845,
+            "Name": "家居用品设计",
+            "Child": []
+          },
+          {
+            "Id": 861,
+            "ParentId": 845,
+            "Name": "工艺品/珠宝设计",
+            "Child": []
+          },
+          {
+            "Id": 862,
+            "ParentId": 845,
+            "Name": "玩具设计",
+            "Child": []
+          },
+          {
+            "Id": 863,
+            "ParentId": 845,
+            "Name": "店面/展览/展示/陈列设计",
+            "Child": []
+          },
+          {
+            "Id": 864,
+            "ParentId": 845,
+            "Name": "工业设计",
+            "Child": []
+          },
+          {
+            "Id": 865,
+            "ParentId": 845,
+            "Name": "游戏界面设计",
+            "Child": []
+          },
+          {
+            "Id": 866,
+            "ParentId": 845,
+            "Name": "园林景观设计师",
+            "Child": []
+          },
+          {
+            "Id": 867,
+            "ParentId": 845,
+            "Name": "平面设计总监",
+            "Child": []
+          },
+          {
+            "Id": 868,
+            "ParentId": 845,
+            "Name": "平面设计经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 869,
+            "ParentId": 845,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 870,
+    "ParentId": 0,
+    "Name": "咨询|法律|教育|翻译",
+    "Child": [
+      {
+        "Id": 871,
+        "ParentId": 870,
+        "Name": "咨询/顾问/调研/数据分析",
+        "Child": [
+          {
+            "Id": 872,
+            "ParentId": 871,
+            "Name": "咨询总监",
+            "Child": []
+          },
+          {
+            "Id": 873,
+            "ParentId": 871,
+            "Name": "咨询经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 874,
+            "ParentId": 871,
+            "Name": "咨询顾问/咨询员",
+            "Child": []
+          },
+          {
+            "Id": 875,
+            "ParentId": 871,
+            "Name": "专业顾问",
+            "Child": []
+          },
+          {
+            "Id": 876,
+            "ParentId": 871,
+            "Name": "调研员",
+            "Child": []
+          },
+          {
+            "Id": 877,
+            "ParentId": 871,
+            "Name": "数据分析师",
+            "Child": []
+          },
+          {
+            "Id": 878,
+            "ParentId": 871,
+            "Name": "情报信息分析",
+            "Child": []
+          },
+          {
+            "Id": 879,
+            "ParentId": 871,
+            "Name": "猎头顾问/助理",
+            "Child": []
+          },
+          {
+            "Id": 880,
+            "ParentId": 871,
+            "Name": "咨询项目管理",
+            "Child": []
+          },
+          {
+            "Id": 881,
+            "ParentId": 871,
+            "Name": "咨询师",
+            "Child": []
+          },
+          {
+            "Id": 882,
+            "ParentId": 871,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 883,
+        "ParentId": 870,
+        "Name": "教育/培训",
+        "Child": [
+          {
+            "Id": 884,
+            "ParentId": 883,
+            "Name": "幼教",
+            "Child": []
+          },
+          {
+            "Id": 885,
+            "ParentId": 883,
+            "Name": "小学教师",
+            "Child": []
+          },
+          {
+            "Id": 886,
+            "ParentId": 883,
+            "Name": "初中教师",
+            "Child": []
+          },
+          {
+            "Id": 887,
+            "ParentId": 883,
+            "Name": "高中教师",
+            "Child": []
+          },
+          {
+            "Id": 888,
+            "ParentId": 883,
+            "Name": "大学教师",
+            "Child": []
+          },
+          {
+            "Id": 889,
+            "ParentId": 883,
+            "Name": "职业技术教师",
+            "Child": []
+          },
+          {
+            "Id": 890,
+            "ParentId": 883,
+            "Name": "家教",
+            "Child": []
+          },
+          {
+            "Id": 891,
+            "ParentId": 883,
+            "Name": "兼职教师",
+            "Child": []
+          },
+          {
+            "Id": 892,
+            "ParentId": 883,
+            "Name": "理科教师",
+            "Child": []
+          },
+          {
+            "Id": 893,
+            "ParentId": 883,
+            "Name": "文科教师",
+            "Child": []
+          },
+          {
+            "Id": 894,
+            "ParentId": 883,
+            "Name": "外语教师",
+            "Child": []
+          },
+          {
+            "Id": 895,
+            "ParentId": 883,
+            "Name": "音乐教师",
+            "Child": []
+          },
+          {
+            "Id": 896,
+            "ParentId": 883,
+            "Name": "美术教师",
+            "Child": []
+          },
+          {
+            "Id": 897,
+            "ParentId": 883,
+            "Name": "体育老师/教练",
+            "Child": []
+          },
+          {
+            "Id": 898,
+            "ParentId": 883,
+            "Name": "校长/副校长",
+            "Child": []
+          },
+          {
+            "Id": 899,
+            "ParentId": 883,
+            "Name": "教学/教务管理人员",
+            "Child": []
+          },
+          {
+            "Id": 900,
+            "ParentId": 883,
+            "Name": "培训督导",
+            "Child": []
+          },
+          {
+            "Id": 901,
+            "ParentId": 883,
+            "Name": "培训师/讲师",
+            "Child": []
+          },
+          {
+            "Id": 902,
+            "ParentId": 883,
+            "Name": "培训助理/助教",
+            "Child": []
+          },
+          {
+            "Id": 903,
+            "ParentId": 883,
+            "Name": "教育产品开发",
+            "Child": []
+          },
+          {
+            "Id": 904,
+            "ParentId": 883,
+            "Name": "培训策划",
+            "Child": []
+          },
+          {
+            "Id": 905,
+            "ParentId": 883,
+            "Name": "培训/招生/课程顾问",
+            "Child": []
+          },
+          {
+            "Id": 906,
+            "ParentId": 883,
+            "Name": "大学教授",
+            "Child": []
+          },
+          {
+            "Id": 907,
+            "ParentId": 883,
+            "Name": "舞蹈老师",
+            "Child": []
+          },
+          {
+            "Id": 908,
+            "ParentId": 883,
+            "Name": "外籍教师",
+            "Child": []
+          },
+          {
+            "Id": 909,
+            "ParentId": 883,
+            "Name": "特教(特殊教育)",
+            "Child": []
+          },
+          {
+            "Id": 910,
+            "ParentId": 883,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 911,
+        "ParentId": 870,
+        "Name": "律师/法务/合规",
+        "Child": [
+          {
+            "Id": 912,
+            "ParentId": 911,
+            "Name": "法务经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 913,
+            "ParentId": 911,
+            "Name": "法务专员/助理",
+            "Child": []
+          },
+          {
+            "Id": 914,
+            "ParentId": 911,
+            "Name": "律师",
+            "Child": []
+          },
+          {
+            "Id": 915,
+            "ParentId": 911,
+            "Name": "律师助理",
+            "Child": []
+          },
+          {
+            "Id": 916,
+            "ParentId": 911,
+            "Name": "企业律师/合规经理/主管",
+            "Child": []
+          },
+          {
+            "Id": 917,
+            "ParentId": 911,
+            "Name": "企业律师/合规顾问",
+            "Child": []
+          },
+          {
+            "Id": 918,
+            "ParentId": 911,
+            "Name": "知识产权/专利顾问/代理人",
+            "Child": []
+          },
+          {
+            "Id": 919,
+            "ParentId": 911,
+            "Name": "合同管理",
+            "Child": []
+          },
+          {
+            "Id": 920,
+            "ParentId": 911,
+            "Name": "合规经理",
+            "Child": []
+          },
+          {
+            "Id": 921,
+            "ParentId": 911,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 922,
+        "ParentId": 870,
+        "Name": "翻译（口译与笔译）",
+        "Child": [
+          {
+            "Id": 923,
+            "ParentId": 922,
+            "Name": "英语翻译",
+            "Child": []
+          },
+          {
+            "Id": 924,
+            "ParentId": 922,
+            "Name": "法语翻译",
+            "Child": []
+          },
+          {
+            "Id": 925,
+            "ParentId": 922,
+            "Name": "日语翻译",
+            "Child": []
+          },
+          {
+            "Id": 926,
+            "ParentId": 922,
+            "Name": "德语翻译",
+            "Child": []
+          },
+          {
+            "Id": 927,
+            "ParentId": 922,
+            "Name": "俄语翻译",
+            "Child": []
+          },
+          {
+            "Id": 928,
+            "ParentId": 922,
+            "Name": "西班牙语翻译",
+            "Child": []
+          },
+          {
+            "Id": 929,
+            "ParentId": 922,
+            "Name": "意大利语翻译",
+            "Child": []
+          },
+          {
+            "Id": 930,
+            "ParentId": 922,
+            "Name": "葡萄牙语翻译",
+            "Child": []
+          },
+          {
+            "Id": 931,
+            "ParentId": 922,
+            "Name": "阿拉伯语翻译",
+            "Child": []
+          },
+          {
+            "Id": 932,
+            "ParentId": 922,
+            "Name": "韩语/朝鲜语翻译",
+            "Child": []
+          },
+          {
+            "Id": 933,
+            "ParentId": 922,
+            "Name": "其他语种翻译",
+            "Child": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 934,
+    "ParentId": 0,
+    "Name": "服务业",
+    "Child": [
+      {
+        "Id": 935,
+        "ParentId": 934,
+        "Name": "商超/酒店/娱乐管理/服务",
+        "Child": [
+          {
+            "Id": 936,
+            "ParentId": 935,
+            "Name": "店长/卖场管理",
+            "Child": []
+          },
+          {
+            "Id": 937,
+            "ParentId": 935,
+            "Name": "楼面管理",
+            "Child": []
+          },
+          {
+            "Id": 938,
+            "ParentId": 935,
+            "Name": "品牌/连锁招商管理",
+            "Child": []
+          },
+          {
+            "Id": 939,
+            "ParentId": 935,
+            "Name": "大堂经理/领班",
+            "Child": []
+          },
+          {
+            "Id": 940,
+            "ParentId": 935,
+            "Name": "酒店管理",
+            "Child": []
+          },
+          {
+            "Id": 941,
+            "ParentId": 935,
+            "Name": "客房管理",
+            "Child": []
+          },
+          {
+            "Id": 942,
+            "ParentId": 935,
+            "Name": "收银主管",
+            "Child": []
+          },
+          {
+            "Id": 943,
+            "ParentId": 935,
+            "Name": "收银员",
+            "Child": []
+          },
+          {
+            "Id": 944,
+            "ParentId": 935,
+            "Name": "店员/营业员/导购员",
+            "Child": []
+          },
+          {
+            "Id": 945,
+            "ParentId": 935,
+            "Name": "理货员",
+            "Child": []
+          },
+          {
+            "Id": 946,
+            "ParentId": 935,
+            "Name": "促销主管/督导",
+            "Child": []
+          },
+          {
+            "Id": 947,
+            "ParentId": 935,
+            "Name": "促销员",
+            "Child": []
+          },
+          {
+            "Id": 948,
+            "ParentId": 935,
+            "Name": "品类管理",
+            "Child": []
+          },
+          {
+            "Id": 949,
+            "ParentId": 935,
+            "Name": "前厅接待/礼仪/迎宾",
+            "Child": []
+          },
+          {
+            "Id": 950,
+            "ParentId": 935,
+            "Name": "预订员",
+            "Child": []
+          },
+          {
+            "Id": 951,
+            "ParentId": 935,
+            "Name": "行李员",
+            "Child": []
+          },
+          {
+            "Id": 952,
+            "ParentId": 935,
+            "Name": "服务员",
+            "Child": []
+          },
+          {
+            "Id": 953,
+            "ParentId": 935,
+            "Name": "防损员/内保",
+            "Child": []
+          },
+          {
+            "Id": 954,
+            "ParentId": 935,
+            "Name": "奢侈品销售",
+            "Child": []
+          },
+          {
+            "Id": 955,
+            "ParentId": 935,
+            "Name": "主持人/司仪",
+            "Child": []
+          },
+          {
+            "Id": 956,
+            "ParentId": 935,
+            "Name": "客房服务员",
+            "Child": []
+          },
+          {
+            "Id": 957,
+            "ParentId": 935,
+            "Name": "生鲜食品加工/处理",
+            "Child": []
+          },
+          {
+            "Id": 958,
+            "ParentId": 935,
+            "Name": "酒店试睡员",
+            "Child": []
+          },
+          {
+            "Id": 959,
+            "ParentId": 935,
+            "Name": "门卫",
+            "Child": []
+          },
+          {
+            "Id": 960,
+            "ParentId": 935,
+            "Name": "质量管理",
+            "Child": []
+          },
+          {
+            "Id": 961,
+            "ParentId": 935,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 962,
+        "ParentId": 934,
+        "Name": "旅游/度假/出入境服务",
+        "Child": [
+          {
+            "Id": 963,
+            "ParentId": 962,
+            "Name": "旅游产品销售",
+            "Child": []
+          },
+          {
+            "Id": 964,
+            "ParentId": 962,
+            "Name": "旅游顾问",
+            "Child": []
+          },
+          {
+            "Id": 965,
+            "ParentId": 962,
+            "Name": "导游/票务",
+            "Child": []
+          },
+          {
+            "Id": 966,
+            "ParentId": 962,
+            "Name": "旅游计划调度",
+            "Child": []
+          },
+          {
+            "Id": 967,
+            "ParentId": 962,
+            "Name": "旅游产品/线路策划",
+            "Child": []
+          },
+          {
+            "Id": 968,
+            "ParentId": 962,
+            "Name": "签证业务办理",
+            "Child": []
+          },
+          {
+            "Id": 969,
+            "ParentId": 962,
+            "Name": "潜水员",
+            "Child": []
+          },
+          {
+            "Id": 970,
+            "ParentId": 962,
+            "Name": "海外游计调",
+            "Child": []
+          },
+          {
+            "Id": 971,
+            "ParentId": 962,
+            "Name": "水族馆表演演员",
+            "Child": []
+          },
+          {
+            "Id": 972,
+            "ParentId": 962,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 973,
+        "ParentId": 934,
+        "Name": "烹饪/料理/食品研发",
+        "Child": [
+          {
+            "Id": 974,
+            "ParentId": 973,
+            "Name": "厨师/面点师",
+            "Child": []
+          },
+          {
+            "Id": 975,
+            "ParentId": 973,
+            "Name": "食品加工/处理",
+            "Child": []
+          },
+          {
+            "Id": 976,
+            "ParentId": 973,
+            "Name": "调酒师/茶艺师/咖啡师",
+            "Child": []
+          },
+          {
+            "Id": 977,
+            "ParentId": 973,
+            "Name": "营养师",
+            "Child": []
+          },
+          {
+            "Id": 978,
+            "ParentId": 973,
+            "Name": "厨工",
+            "Child": []
+          },
+          {
+            "Id": 979,
+            "ParentId": 973,
+            "Name": "食品/饮料研发",
+            "Child": []
+          },
+          {
+            "Id": 980,
+            "ParentId": 973,
+            "Name": "食品/饮料检验",
+            "Child": []
+          },
+          {
+            "Id": 981,
+            "ParentId": 973,
+            "Name": "餐厅领班",
+            "Child": []
+          },
+          {
+            "Id": 982,
+            "ParentId": 973,
+            "Name": "餐厅服务员",
+            "Child": []
+          },
+          {
+            "Id": 983,
+            "ParentId": 973,
+            "Name": "行政主厨",
+            "Child": []
+          },
+          {
+            "Id": 984,
+            "ParentId": 973,
+            "Name": "中餐厨师",
+            "Child": []
+          },
+          {
+            "Id": 985,
+            "ParentId": 973,
+            "Name": "西餐厨师",
+            "Child": []
+          },
+          {
+            "Id": 986,
+            "ParentId": 973,
+            "Name": "日式厨师",
+            "Child": []
+          },
+          {
+            "Id": 987,
+            "ParentId": 973,
+            "Name": "西点师",
+            "Child": []
+          },
+          {
+            "Id": 988,
+            "ParentId": 973,
+            "Name": "厨师助理/学徒",
+            "Child": []
+          },
+          {
+            "Id": 989,
+            "ParentId": 973,
+            "Name": "送餐员",
+            "Child": []
+          },
+          {
+            "Id": 990,
+            "ParentId": 973,
+            "Name": "传菜员",
+            "Child": []
+          },
+          {
+            "Id": 991,
+            "ParentId": 973,
+            "Name": "烧烤师",
+            "Child": []
+          },
+          {
+            "Id": 992,
+            "ParentId": 973,
+            "Name": "品酒师",
+            "Child": []
+          },
+          {
+            "Id": 993,
+            "ParentId": 973,
+            "Name": "杂工",
+            "Child": []
+          },
+          {
+            "Id": 994,
+            "ParentId": 973,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 995,
+        "ParentId": 934,
+        "Name": "保健/美容/美发/健身",
+        "Child": [
+          {
+            "Id": 996,
+            "ParentId": 995,
+            "Name": "美发/发型师",
+            "Child": []
+          },
+          {
+            "Id": 997,
+            "ParentId": 995,
+            "Name": "化妆师",
+            "Child": []
+          },
+          {
+            "Id": 998,
+            "ParentId": 995,
+            "Name": "美容师/美甲师",
+            "Child": []
+          },
+          {
+            "Id": 999,
+            "ParentId": 995,
+            "Name": "美容顾问(BA)",
+            "Child": []
+          },
+          {
+            "Id": 1000,
+            "ParentId": 995,
+            "Name": "健身/美体/舞蹈教练",
+            "Child": []
+          },
+          {
+            "Id": 1001,
+            "ParentId": 995,
+            "Name": "按摩/足疗",
+            "Child": []
+          },
+          {
+            "Id": 1002,
+            "ParentId": 995,
+            "Name": "救生员",
+            "Child": []
+          },
+          {
+            "Id": 1003,
+            "ParentId": 995,
+            "Name": "美发培训师",
+            "Child": []
+          },
+          {
+            "Id": 1004,
+            "ParentId": 995,
+            "Name": "游泳教练",
+            "Child": []
+          },
+          {
+            "Id": 1005,
+            "ParentId": 995,
+            "Name": "高尔夫教练",
+            "Child": []
+          },
+          {
+            "Id": 1006,
+            "ParentId": 995,
+            "Name": "瑜伽教练",
+            "Child": []
+          },
+          {
+            "Id": 1007,
+            "ParentId": 995,
+            "Name": "户外/游戏教练",
+            "Child": []
+          },
+          {
+            "Id": 1008,
+            "ParentId": 995,
+            "Name": "美体师",
+            "Child": []
+          },
+          {
+            "Id": 1009,
+            "ParentId": 995,
+            "Name": "美容整形师",
+            "Child": []
+          },
+          {
+            "Id": 1010,
+            "ParentId": 995,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 1011,
+        "ParentId": 934,
+        "Name": "医院/医疗/护理",
+        "Child": [
+          {
+            "Id": 1012,
+            "ParentId": 1011,
+            "Name": "医疗管理人员",
+            "Child": []
+          },
+          {
+            "Id": 1013,
+            "ParentId": 1011,
+            "Name": "综合门诊/全科医生",
+            "Child": []
+          },
+          {
+            "Id": 1014,
+            "ParentId": 1011,
+            "Name": "内科医生",
+            "Child": []
+          },
+          {
+            "Id": 1015,
+            "ParentId": 1011,
+            "Name": "外科医生",
+            "Child": []
+          },
+          {
+            "Id": 1016,
+            "ParentId": 1011,
+            "Name": "儿科医生",
+            "Child": []
+          },
+          {
+            "Id": 1017,
+            "ParentId": 1011,
+            "Name": "牙科医生",
+            "Child": []
+          },
+          {
+            "Id": 1018,
+            "ParentId": 1011,
+            "Name": "美容整形科医生",
+            "Child": []
+          },
+          {
+            "Id": 1019,
+            "ParentId": 1011,
+            "Name": "中医科医生",
+            "Child": []
+          },
+          {
+            "Id": 1020,
+            "ParentId": 1011,
+            "Name": "麻醉医生",
+            "Child": []
+          },
+          {
+            "Id": 1021,
+            "ParentId": 1011,
+            "Name": "心理医生",
+            "Child": []
+          },
+          {
+            "Id": 1022,
+            "ParentId": 1011,
+            "Name": "眼科医生/验光师",
+            "Child": []
+          },
+          {
+            "Id": 1023,
+            "ParentId": 1011,
+            "Name": "医学影像/放射科医师",
+            "Child": []
+          },
+          {
+            "Id": 1024,
+            "ParentId": 1011,
+            "Name": "化验/检验科医师",
+            "Child": []
+          },
+          {
+            "Id": 1025,
+            "ParentId": 1011,
+            "Name": "药房管理/药剂师",
+            "Child": []
+          },
+          {
+            "Id": 1026,
+            "ParentId": 1011,
+            "Name": "理疗师",
+            "Child": []
+          },
+          {
+            "Id": 1027,
+            "ParentId": 1011,
+            "Name": "兽医",
+            "Child": []
+          },
+          {
+            "Id": 1028,
+            "ParentId": 1011,
+            "Name": "护士/护理人员",
+            "Child": []
+          },
+          {
+            "Id": 1029,
+            "ParentId": 1011,
+            "Name": "营养师",
+            "Child": []
+          },
+          {
+            "Id": 1030,
+            "ParentId": 1011,
+            "Name": "针灸/推拿",
+            "Child": []
+          },
+          {
+            "Id": 1031,
+            "ParentId": 1011,
+            "Name": "验光师",
+            "Child": []
+          },
+          {
+            "Id": 1032,
+            "ParentId": 1011,
+            "Name": "公共卫生/疾病监控",
+            "Child": []
+          },
+          {
+            "Id": 1033,
+            "ParentId": 1011,
+            "Name": "护理主任/护士长",
+            "Child": []
+          },
+          {
+            "Id": 1034,
+            "ParentId": 1011,
+            "Name": "院长",
+            "Child": []
+          },
+          {
+            "Id": 1035,
+            "ParentId": 1011,
+            "Name": "专科医生",
+            "Child": []
+          },
+          {
+            "Id": 1036,
+            "ParentId": 1011,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 1037,
+        "ParentId": 934,
+        "Name": "社区/居民/家政服务",
+        "Child": [
+          {
+            "Id": 1038,
+            "ParentId": 1037,
+            "Name": "保安经理",
+            "Child": []
+          },
+          {
+            "Id": 1039,
+            "ParentId": 1037,
+            "Name": "保安",
+            "Child": []
+          },
+          {
+            "Id": 1040,
+            "ParentId": 1037,
+            "Name": "家政人员",
+            "Child": []
+          },
+          {
+            "Id": 1041,
+            "ParentId": 1037,
+            "Name": "婚礼/庆典策划服务",
+            "Child": []
+          },
+          {
+            "Id": 1042,
+            "ParentId": 1037,
+            "Name": "宠物护理和美容",
+            "Child": []
+          },
+          {
+            "Id": 1043,
+            "ParentId": 1037,
+            "Name": "保姆/母婴护理",
+            "Child": []
+          },
+          {
+            "Id": 1044,
+            "ParentId": 1037,
+            "Name": "搬运工",
+            "Child": []
+          },
+          {
+            "Id": 1045,
+            "ParentId": 1037,
+            "Name": "保洁",
+            "Child": []
+          },
+          {
+            "Id": 1046,
+            "ParentId": 1037,
+            "Name": "钟点工",
+            "Child": []
+          },
+          {
+            "Id": 1047,
+            "ParentId": 1037,
+            "Name": "月嫂",
+            "Child": []
+          },
+          {
+            "Id": 1048,
+            "ParentId": 1037,
+            "Name": "家电维修",
+            "Child": []
+          },
+          {
+            "Id": 1049,
+            "ParentId": 1037,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 1050,
+    "ParentId": 0,
+    "Name": "能源|环保|农业|科研",
+    "Child": [
+      {
+        "Id": 1051,
+        "ParentId": 1050,
+        "Name": "能源/矿产/地质勘查",
+        "Child": [
+          {
+            "Id": 1052,
+            "ParentId": 1051,
+            "Name": "石油/天然气技术人员",
+            "Child": []
+          },
+          {
+            "Id": 1053,
+            "ParentId": 1051,
+            "Name": "空调/热能工程师",
+            "Child": []
+          },
+          {
+            "Id": 1054,
+            "ParentId": 1051,
+            "Name": "核力/火力工程师",
+            "Child": []
+          },
+          {
+            "Id": 1055,
+            "ParentId": 1051,
+            "Name": "水利/水电工程师",
+            "Child": []
+          },
+          {
+            "Id": 1056,
+            "ParentId": 1051,
+            "Name": "电力工程师/技术员",
+            "Child": []
+          },
+          {
+            "Id": 1057,
+            "ParentId": 1051,
+            "Name": "地质勘查/选矿/采矿",
+            "Child": []
+          },
+          {
+            "Id": 1058,
+            "ParentId": 1051,
+            "Name": "能源/矿产项目管理",
+            "Child": []
+          },
+          {
+            "Id": 1059,
+            "ParentId": 1051,
+            "Name": "电力系统研发工程师",
+            "Child": []
+          },
+          {
+            "Id": 1060,
+            "ParentId": 1051,
+            "Name": "电力电子研发工程师",
+            "Child": []
+          },
+          {
+            "Id": 1061,
+            "ParentId": 1051,
+            "Name": "控制保护研发工程师",
+            "Child": []
+          },
+          {
+            "Id": 1062,
+            "ParentId": 1051,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 1063,
+        "ParentId": 1050,
+        "Name": "环境科学/环保",
+        "Child": [
+          {
+            "Id": 1064,
+            "ParentId": 1063,
+            "Name": "环保技术工程师",
+            "Child": []
+          },
+          {
+            "Id": 1065,
+            "ParentId": 1063,
+            "Name": "环境评价工程师",
+            "Child": []
+          },
+          {
+            "Id": 1066,
+            "ParentId": 1063,
+            "Name": "环境监测工程师",
+            "Child": []
+          },
+          {
+            "Id": 1067,
+            "ParentId": 1063,
+            "Name": "水处理工程师",
+            "Child": []
+          },
+          {
+            "Id": 1068,
+            "ParentId": 1063,
+            "Name": "固废处理工程师",
+            "Child": []
+          },
+          {
+            "Id": 1069,
+            "ParentId": 1063,
+            "Name": "废气处理工程师",
+            "Child": []
+          },
+          {
+            "Id": 1070,
+            "ParentId": 1063,
+            "Name": "生态治理/规划",
+            "Child": []
+          },
+          {
+            "Id": 1071,
+            "ParentId": 1063,
+            "Name": "环境管理/园林景区保护",
+            "Child": []
+          },
+          {
+            "Id": 1072,
+            "ParentId": 1063,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 1073,
+        "ParentId": 1050,
+        "Name": "农/林/牧/渔业",
+        "Child": [
+          {
+            "Id": 1074,
+            "ParentId": 1073,
+            "Name": "插花设计师",
+            "Child": []
+          },
+          {
+            "Id": 1075,
+            "ParentId": 1073,
+            "Name": "农艺师",
+            "Child": []
+          },
+          {
+            "Id": 1076,
+            "ParentId": 1073,
+            "Name": "林业技术人员",
+            "Child": []
+          },
+          {
+            "Id": 1077,
+            "ParentId": 1073,
+            "Name": "园艺师",
+            "Child": []
+          },
+          {
+            "Id": 1078,
+            "ParentId": 1073,
+            "Name": "畜牧师",
+            "Child": []
+          },
+          {
+            "Id": 1079,
+            "ParentId": 1073,
+            "Name": "动物育种/养殖",
+            "Child": []
+          },
+          {
+            "Id": 1080,
+            "ParentId": 1073,
+            "Name": "动物营养/饲料研发",
+            "Child": []
+          },
+          {
+            "Id": 1081,
+            "ParentId": 1073,
+            "Name": "饲料销售",
+            "Child": []
+          },
+          {
+            "Id": 1082,
+            "ParentId": 1073,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 1083,
+        "ParentId": 1050,
+        "Name": "公务员/事业单位/科研机构",
+        "Child": [
+          {
+            "Id": 1084,
+            "ParentId": 1083,
+            "Name": "公务员/事业单位人员",
+            "Child": []
+          },
+          {
+            "Id": 1085,
+            "ParentId": 1083,
+            "Name": "科研管理人员",
+            "Child": []
+          },
+          {
+            "Id": 1086,
+            "ParentId": 1083,
+            "Name": "科研人员",
+            "Child": []
+          },
+          {
+            "Id": 1087,
+            "ParentId": 1083,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": 1088,
+    "ParentId": 0,
+    "Name": "兼职|实习|社工|其他",
+    "Child": [
+      {
+        "Id": 1089,
+        "ParentId": 1088,
+        "Name": "实习生/培训生/储备干部",
+        "Child": [
+          {
+            "Id": 1090,
+            "ParentId": 1089,
+            "Name": "实习生",
+            "Child": []
+          },
+          {
+            "Id": 1091,
+            "ParentId": 1089,
+            "Name": "培训生",
+            "Child": []
+          },
+          {
+            "Id": 1092,
+            "ParentId": 1089,
+            "Name": "储备干部",
+            "Child": []
+          },
+          {
+            "Id": 1093,
+            "ParentId": 1089,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 1094,
+        "ParentId": 1088,
+        "Name": "志愿者/社会工作者",
+        "Child": [
+          {
+            "Id": 1095,
+            "ParentId": 1094,
+            "Name": "志愿者/义工",
+            "Child": []
+          },
+          {
+            "Id": 1096,
+            "ParentId": 1094,
+            "Name": "社会工作者/社工",
+            "Child": []
+          },
+          {
+            "Id": 1097,
+            "ParentId": 1094,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      },
+      {
+        "Id": 1098,
+        "ParentId": 1088,
+        "Name": "兼职/临时",
+        "Child": [
+          {
+            "Id": 1099,
+            "ParentId": 1098,
+            "Name": "兼职",
+            "Child": []
+          },
+          {
+            "Id": 1100,
+            "ParentId": 1098,
+            "Name": "临时",
+            "Child": []
+          },
+          {
+            "Id": 1101,
+            "ParentId": 1098,
+            "Name": "国外求职",
+            "Child": []
+          },
+          {
+            "Id": 1102,
+            "ParentId": 1098,
+            "Name": "其他",
+            "Child": []
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.view.animation.Animation;
 
+import com.zhixing.work.zhixin.dialog.LoadingDialog;
+
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.SupportFragmentDelegate;
@@ -22,9 +24,13 @@ import me.yokeyword.fragmentation.anim.FragmentAnimator;
  * {@link Fragment} APIs.
  * Created by YoKey on 17/6/22.
  */
-public class SupportFragment extends Fragment implements ISupportFragment {
+public abstract class SupportFragment extends Fragment implements ISupportFragment {
     final SupportFragmentDelegate mDelegate = new SupportFragmentDelegate(this);
     protected FragmentActivity _mActivity;
+    protected boolean isViewInitiated;
+    protected boolean isVisibleToUser;
+    protected boolean isDataInitiated;
+    protected LoadingDialog loadingDialog;
 
     @Override
     public SupportFragmentDelegate getSupportDelegate() {
@@ -47,6 +53,45 @@ public class SupportFragment extends Fragment implements ISupportFragment {
         _mActivity = mDelegate.getActivity();
     }
 
+
+
+
+    public void hideLoadingDialog() {
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.dismiss();
+        }
+    }
+
+    /**
+     * 默认 message加载中 返回键可取消
+     */
+    public void showLoading() {
+        if (loadingDialog != null && loadingDialog.isShowing()) {
+            loadingDialog.setLoadingMessage("加载中");
+            loadingDialog.setCancelable(true);
+            return;
+        }
+        loadingDialog = new LoadingDialog(getActivity());
+        loadingDialog.setLoadingMessage("加载中");
+        loadingDialog.setCancelable(true);
+        loadingDialog.show();
+    }
+    public abstract void fetchData();
+
+    public boolean prepareFetchData() {
+        return prepareFetchData(false);
+    }
+
+    public boolean prepareFetchData(boolean forceUpdate) {
+        if (isVisibleToUser && isViewInitiated && (!isDataInitiated || forceUpdate)) {
+            fetchData();
+            isDataInitiated = true;
+            return true;
+        }
+        return false;
+    }
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +107,9 @@ public class SupportFragment extends Fragment implements ISupportFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mDelegate.onActivityCreated(savedInstanceState);
+        isViewInitiated = true;
+        prepareFetchData();
+
     }
 
     @Override
@@ -104,6 +152,8 @@ public class SupportFragment extends Fragment implements ISupportFragment {
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         mDelegate.setUserVisibleHint(isVisibleToUser);
+        this.isVisibleToUser = isVisibleToUser;
+        prepareFetchData();
     }
 
     /**

@@ -115,6 +115,7 @@ public class JavaParamsUtils {
         params.put("frontOrBack", "front");
         return params;
     }
+
     //    获取反面卡牌信息
     public Map<String, String> getCardAll() {
         Map<String, String> params = new HashMap<>();
@@ -124,15 +125,83 @@ public class JavaParamsUtils {
         params.put("opt", "baseinfo");
         return params;
     }
+
     //    获取阿里云临时
     public Map<String, String> getOSS() {
         Map<String, String> params = new HashMap<>();
         return params;
     }
+
     //    获取答题
     public Map<String, String> TestPaper() {
         Map<String, String> params = new HashMap<>();
         return params;
     }
 
+    //  修改简历个人信息
+    public Map<String, String> ResumePersonalInfo(String RealName, String FirstWorkTime, String Birthday) {
+        Map<String, String> params = new HashMap<>();
+
+        params.put("RealName", RealName);
+        params.put("FirstWorkTime", FirstWorkTime);
+        params.put("Birthday", Birthday);
+
+        return params;
+    }
+
+    //  修改简历头像
+    public Map<String, String> resumeAvatar() {
+        Map<String, String> params = new HashMap<>();
+        return params;
+    }
+
+    //  获取简历信息
+    public Map<String, String> getResume() {
+        Map<String, String> params = new HashMap<>();
+        return params;
+    }
+
+    //  删除工作
+    public Map<String, String> deleteWork(String id) {
+        Map<String, String> params = new HashMap<>();
+
+        params.put("Id", id);
+        return params;
+    }
+
+    //  删除工作
+    public Map<String, String> deleteEducation() {
+        Map<String, String> params = new HashMap<>();
+
+
+        return params;
+    }
+
+    //  修改工作
+    public Map<String, String> upWork() {
+        Map<String, String> params = new HashMap<>();
+
+        return params;
+    }
+
+    //  修改证书
+    public Map<String, String> upCertificate() {
+        Map<String, String> params = new HashMap<>();
+
+        return params;
+    }
+
+    //  项目经历
+    public Map<String, String> project() {
+        Map<String, String> params = new HashMap<>();
+
+        return params;
+    }
+
+    //  求职意向
+    public Map<String, String> Expect(String resumeId) {
+        Map<String, String> params = new HashMap<>();
+        params.put("resumeId", resumeId);
+        return params;
+    }
 }

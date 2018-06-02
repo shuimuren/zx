@@ -59,4 +59,6 @@ SupportFragmentDelegate getSupportDelegate();
     void putNewBundle(Bundle newBundle);
 
     boolean onBackPressedSupport();
+
+
 }

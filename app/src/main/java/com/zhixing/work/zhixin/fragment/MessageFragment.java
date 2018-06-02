@@ -16,7 +16,7 @@ import butterknife.ButterKnife;
 
 
 /**
- * Created by YoKeyword on 16/6/30.
+ *
  */
 public class MessageFragment extends BaseMainFragment {
 
@@ -43,4 +43,8 @@ public class MessageFragment extends BaseMainFragment {
     }
 
 
+    @Override
+    public void fetchData() {
+
+    }
 }

@@ -92,7 +92,7 @@ public class PerfectCardWorkActivity extends BaseTitleActivity {
         switch (view.getId()) {
             case R.id.add_work:
                 startActivity(new Intent(context, AddWorkActivity
-                        .class));
+                        .class).putExtra("type", "card"));
                 break;
             case R.id.submit:
                 if (list.size() < 1) {

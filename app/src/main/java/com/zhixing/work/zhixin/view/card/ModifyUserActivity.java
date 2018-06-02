@@ -27,10 +27,12 @@ public class ModifyUserActivity extends BaseTitleActivity {
 
     private String title;
     private Context context;
+    private String  content;
     private String type;
     public static final String TYPE = "type";//类型
     public static final String TYPE_TITLE = "title";//标题
     public static final String TYPE_COMPANY = "company";//单位
+    public static final String TYPE_CONTENT = "content";//内容
     public static final String TYPE_HEIGHT = "height";//身高
     public static final String TYPE_WEIGHT = "weight";//单位
 
@@ -44,6 +46,11 @@ public class ModifyUserActivity extends BaseTitleActivity {
 
         title = getIntent().getStringExtra(TYPE_TITLE);
         type = getIntent().getStringExtra(TYPE);
+        content=getIntent().getStringExtra(TYPE_CONTENT);
+        if (!TextUtils.isEmpty(content)){
+            edit.setText(content);
+            edit.setSelection(content.length());
+        }
         company_ct = getIntent().getStringExtra(TYPE_COMPANY);
         setRightText1("保存");
         initView();

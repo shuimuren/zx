@@ -68,13 +68,13 @@ public class UpDatePwdActivity extends BaseTitleActivity {
     @BindView(R.id.code_ed)
     EditText codeEd;
     @BindView(R.id.btn_update_code)
-    Button btnUpdateCode;
+    TextView btnUpdateCode;
     @BindView(R.id.password_ed)
     EditText passwordEd;
     @BindView(R.id.confirm_password)
     EditText confirmPassword;
     @BindView(R.id.btn_go_update)
-    Button btnGoUpdate;
+    TextView btnGoUpdate;
     @BindView(R.id.phone_ed)
     EditText phoneEd;
     private String type = "10";

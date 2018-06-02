@@ -411,7 +411,9 @@ public class CertificateCertificationActivity extends BaseTitleActivity {
             case R.id.rl_certificate_name:
                 startActivity(new Intent(context, ModifyDataActivity.class).
                         putExtra(ModifyDataActivity.TYPE_TITLE, "证书名字").
-                        putExtra(ModifyDataActivity.TYPE, ModifyDataActivity.TYPE_CERTIFICATE_NAME));
+                        putExtra(ModifyDataActivity.TYPE, ModifyDataActivity.TYPE_CERTIFICATE_NAME)
+                        .putExtra(ModifyDataActivity.TYPE_CONTENT,certificateName.getText().toString())
+                );
                 break;
             case R.id.rl_achievement:
                 break;
@@ -498,6 +500,7 @@ public class CertificateCertificationActivity extends BaseTitleActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTradeAreaEvent(UploadImageFinishEvent event) {
-        AlertUtils.toast(context, "图片上传成功");
+        AlertUtils.toast(context, "图片上传成功,请耐心等待审核");
+        finish();
     }
 }

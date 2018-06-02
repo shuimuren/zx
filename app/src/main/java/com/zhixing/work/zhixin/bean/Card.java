@@ -24,7 +24,7 @@ public class Card {
      */
 
     private int UserIdentity;
-    private Object Avatar;
+    private String Avatar;
     private String RealName;
     private String NickName;
     private int Sex;
@@ -41,11 +41,11 @@ public class Card {
         this.UserIdentity = UserIdentity;
     }
 
-    public Object getAvatar() {
+    public String getAvatar() {
         return Avatar;
     }
 
-    public void setAvatar(Object Avatar) {
+    public void setAvatar(String Avatar) {
         this.Avatar = Avatar;
     }
 

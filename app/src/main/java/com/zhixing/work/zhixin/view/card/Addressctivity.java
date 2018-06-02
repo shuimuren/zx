@@ -94,13 +94,11 @@ public class Addressctivity extends BaseTitleActivity {
 
     private void ShowPickerView() {// 弹出选择器
 
-        final OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+               final OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
             @Override
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 //返回的分别是三个级别的选中位置
                 String tx;
-
-
                 if (options1Items.get(options1).getChild().size() == 0) {
                     tx = options1Items.get(options1).getName();
                     Province = options1Items.get(options1).getId() + "";

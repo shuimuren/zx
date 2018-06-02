@@ -44,8 +44,10 @@ public class SettingUtils {
         public static final String TESTPAPER = "testpaper"; // 试卷
         public static final String PROVINCIALLIST = "provincialList"; // 省
         public static final String CITYLIST = "cityList"; // 城市
+        public static final String JOBLIST = "JobList"; // 职业
+        public static final String HOTLIST = "hotlist"; // 热门城市
+        public static final String INDUSTRY = "industry"; // 行业
         public static final String AREALIST = "areaList"; // 区
-
 
 
         /**
@@ -66,14 +68,6 @@ public class SettingUtils {
     }
 
 
-
-
-
-
-
-
-
-
     /**
      * 保存provincialList
      *
@@ -87,6 +81,7 @@ public class SettingUtils {
         }
         PreferenceUtils.putString(SettingItems.AREALIST, list);
     }
+
     /**
      * areaList
      *
@@ -102,7 +97,6 @@ public class SettingUtils {
     }
 
 
-
     /**
      * 保存provincialList
      *
@@ -116,6 +110,7 @@ public class SettingUtils {
         }
         PreferenceUtils.putString(SettingItems.CITYLIST, list);
     }
+
     /**
      * 获取provincialList
      *
@@ -131,7 +126,92 @@ public class SettingUtils {
     }
 
 
+    /**
+     * 保存JobList
+     *
+     * @param job
+     */
+    public static void putJobList(String job) {
 
+        String list = "";
+        if (!TextUtils.isEmpty(job)) {
+            list = job;
+        }
+        PreferenceUtils.putString(SettingItems.JOBLIST, list);
+    }
+
+
+
+    /**
+     * 获取JobList
+     *
+     * @return
+     */
+    public static String getJobList() {
+
+        String jobList = PreferenceUtils.getString(SettingItems.JOBLIST);
+        if (!TextUtils.isEmpty(jobList)) {
+            return jobList;
+        }
+        return "";
+    }
+
+    /**
+     * 保存cityList
+     *
+     * @param cityList
+     */
+    public static void putHotCityList(String cityList) {
+
+        String list = "";
+        if (!TextUtils.isEmpty(cityList)) {
+            list = cityList;
+        }
+        PreferenceUtils.putString(SettingItems.HOTLIST, list);
+    }
+
+    /**
+     * 获取cityList
+     *
+     * @return
+     */
+    public static String getHotCityList() {
+
+        String provincialList = PreferenceUtils.getString(SettingItems.HOTLIST);
+        if (!TextUtils.isEmpty(provincialList)) {
+            return provincialList;
+        }
+        return "";
+    }
+
+
+    /**
+     * 保存Industry
+     *
+     * @param Industry
+     */
+    public static void putIndustry(String Industry) {
+
+        String list = "";
+        if (!TextUtils.isEmpty(Industry)) {
+            list = Industry;
+        }
+        PreferenceUtils.putString(SettingItems.INDUSTRY, list);
+    }
+
+    /**
+     * 获取Industry
+     *
+     * @return
+     */
+    public static String getIndustry() {
+
+        String provincialList = PreferenceUtils.getString(SettingItems.INDUSTRY);
+        if (!TextUtils.isEmpty(provincialList)) {
+            return provincialList;
+        }
+        return "";
+    }
 
 
     /**
@@ -147,6 +227,7 @@ public class SettingUtils {
         }
         PreferenceUtils.putString(SettingItems.PROVINCIALLIST, list);
     }
+
     /**
      * 获取provincialList
      *
@@ -160,8 +241,6 @@ public class SettingUtils {
         }
         return "";
     }
-
-
 
 
     /**
@@ -899,14 +978,8 @@ public class SettingUtils {
     }
 
 
-
-
-
     /**
-
-
-
-    /**
+     * /**
      * 点赞数量清0
      */
     public static void clearNewPraise() {

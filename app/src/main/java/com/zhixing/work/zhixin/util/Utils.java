@@ -21,6 +21,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.app.ZxApplication;
 import com.zhixing.work.zhixin.bean.AddressJson;
+import com.zhixing.work.zhixin.bean.HotCity;
+import com.zhixing.work.zhixin.bean.IndustryType;
+import com.zhixing.work.zhixin.bean.JobType;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -752,6 +755,92 @@ public class Utils {
         return city;
     }
 
+
+    /**
+     * 搜索市
+     */
+    public static String searchHotCity(int id) {
+        String city = "";
+
+//
+        List<HotCity> list = new ArrayList<HotCity>();
+        Gson gson = new Gson();
+        if (!TextUtils.isEmpty(SettingUtils.getHotCityList())) {
+            list = gson.fromJson(SettingUtils.getHotCityList(), new TypeToken<List<HotCity>>() {
+            }.getType());
+        }
+
+       /* Gson gson = new Gson();
+        String JsonData = Utils.getJson(context, "hotcity.json");//获取assets目录下的json文件数据
+        List<HotCity> cityList = gson.fromJson(JsonData, new TypeToken<List<HotCity>>() {
+        }.getType());*/
+        for (int i = 0; i < list.size(); i++) {
+            HotCity bean = list.get(i);
+            if (bean.getId() == id) {
+                city = bean.getName();
+                break;
+            }
+
+        }
+        return city;
+    }
+
+
+    /**
+     * 搜索行业
+     */
+    public static String searchIndustry(int id) {
+        String city = "";
+
+//
+        List<IndustryType> list = new ArrayList<IndustryType>();
+        Gson gson = new Gson();
+        if (!TextUtils.isEmpty(SettingUtils.getIndustry())) {
+            list = gson.fromJson(SettingUtils.getIndustry(), new TypeToken<List<IndustryType>>() {
+            }.getType());
+        }
+        list = getIndustryTypeList(list);
+
+
+        for (int i = 0; i < list.size(); i++) {
+            IndustryType bean = list.get(i);
+            if (bean.getId() == id) {
+                city = bean.getName();
+                break;
+            }
+
+        }
+        return city;
+    }
+
+
+    /**
+     * 搜索行业
+     */
+    public static String searchjob(int id) {
+        String job = "";
+
+//
+        List<JobType> list = new ArrayList<JobType>();
+
+        Gson gson = new Gson();
+        if (!TextUtils.isEmpty(SettingUtils.getJobList())) {
+            list = gson.fromJson(SettingUtils.getJobList(), new TypeToken<List<JobType>>() {
+            }.getType());
+        }
+
+
+        list = getJobList(list);
+        for (int i = 0; i < list.size(); i++) {
+            JobType bean = list.get(i);
+            if (bean.getId() == id) {
+                job = bean.getName();
+                break;
+            }
+        }
+        return job;
+    }
+
     /**
      * 搜索区
      */
@@ -925,5 +1014,176 @@ public class Utils {
                 Toast.makeText(activity, toastContent, Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+
+    public static String getEducation(int id) {
+
+        String education = "";
+        switch (id) {
+            case 10:
+                education = "小学";
+                break;
+            case 20:
+                education = "初中";
+                break;
+            case 30:
+                education = "中专";
+                break;
+            case 40:
+                education = "高中";
+                break;
+            case 50:
+                education = "大专";
+                break;
+            case 60:
+                education = " 本科";
+                break;
+            case 70:
+                education = "硕士";
+                break;
+            case 80:
+                education = "博士";
+                break;
+            case 90:
+                education = "MBA";
+                break;
+        }
+        return education;
+    }
+
+    public static String getConstellation(String constellation) {
+
+        String education = "";
+        switch (constellation) {
+            case "白羊座":
+                education = "0";
+                break;
+            case "金牛座":
+                education = "1";
+                break;
+            case "双子座":
+                education = "2";
+                break;
+            case "巨蟹座":
+                education = "3";
+                break;
+            case "狮子座":
+                education = "4";
+                break;
+            case "处女座":
+                education = " 5";
+                break;
+            case "天秤座":
+                education = "6";
+                break;
+            case "天蝎座":
+                education = "7";
+                break;
+            case "射手座":
+                education = "8";
+                break;
+            case "摩羯座":
+                education = "9";
+                break;
+            case "水瓶座":
+                education = "10";
+                break;
+            case "双鱼座":
+                education = "11";
+                break;
+        }
+        return education;
+    }
+
+    public static String getPolitical(String constellation) {
+        String political = "";
+        switch (constellation) {
+            case "普通公民":
+                political = "0";
+                break;
+            case "中共党员":
+                political = "1";
+                break;
+            case "共青团员":
+                political = "2";
+                break;
+            case "民主党派人士":
+                political = "3";
+                break;
+            case "无党派民主人士":
+                political = "4";
+                break;
+
+        }
+        return political;
+    }
+
+    public static String getEducationId(String constellation) {
+
+        String education = "";
+        switch (constellation) {
+            case "小学":
+                education = "10";
+                break;
+            case "初中":
+                education = "20";
+                break;
+            case "中专":
+                education = "30";
+                break;
+            case "高中":
+                education = "40";
+                break;
+            case "大专":
+                education = "50";
+                break;
+            case "本科":
+                education = "60";
+                break;
+            case "硕士":
+                education = "70";
+                break;
+            case "博士":
+                education = "80";
+                break;
+            case "MBA":
+                education = "90";
+                break;
+
+        }
+        return education;
+    }
+
+
+    private static List<IndustryType> getIndustryTypeList(List<IndustryType> dataList) {
+        List<IndustryType> list = new ArrayList<IndustryType>();
+        for (int i = 0; i < dataList.size(); i++) {
+            IndustryType industryType = dataList.get(i);
+            list.add(industryType);
+            for (int j = 0; j < industryType.getChild().size(); j++) {
+                IndustryType bean = industryType.getChild().get(j);
+                list.add(bean);
+            }
+        }
+        return list;
+    }
+
+
+    private static List<JobType> getJobList(List<JobType> dataList) {
+        List<JobType> list = new ArrayList<JobType>();
+        for (int i = 0; i < dataList.size(); i++) {
+            JobType jobType = dataList.get(i);
+            list.add(jobType);
+            for (int j = 0; j < jobType.getChild().size(); j++) {
+                JobType bean = jobType.getChild().get(j);
+                list.add(bean);
+                for (int k = 0; k < bean.getChild().size(); k++) {
+                    JobType bean1 = bean.getChild().get(k);
+                    list.add(bean1);
+                }
+            }
+        }
+        return list;
     }
 }

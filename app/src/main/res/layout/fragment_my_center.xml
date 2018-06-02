@@ -33,5 +33,29 @@
         </LinearLayout>
 
         <View style="@style/line"></View>
+
+        <LinearLayout
+            android:id="@+id/ll_resume"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="简历设置" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_next" />
+        </LinearLayout>
+
+        <View style="@style/line"></View>
+
+
     </LinearLayout>
 </android.support.v7.widget.ContentFrameLayout>

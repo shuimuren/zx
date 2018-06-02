@@ -16,10 +16,10 @@
         tools:context="com.zixin.login.activity.RegistActivity">
 
         <android.support.v7.widget.CardView
-            android:layout_width="@dimen/x470"
-            android:layout_height="@dimen/y100"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/cd_regist"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/y860"
             android:background="@drawable/png_shadow"
             app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true">
@@ -35,10 +35,14 @@
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
-            android:layout_width="@dimen/x640"
-            android:layout_height="@dimen/y720"
+            android:id="@+id/cd_regist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/y160"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+
+            android:layout_marginTop="80dp"
             android:background="@color/white"
             app:cardCornerRadius="10dp"
             app:cardUseCompatPadding="true">
@@ -51,15 +55,15 @@
                 <RelativeLayout
 
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y110">
+                    android:layout_height="50dp">
 
                     <TextView
                         android:id="@+id/tv_regist_personl_account"
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x36"
-                        android:layout_marginTop="@dimen/y20"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginTop="10dp"
                         android:text="个人账号注册"
                         android:textColor="@color/login_person_tv"
                         android:textSize="20sp" />
@@ -69,8 +73,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/x36"
-                        android:layout_marginTop="@dimen/y20"
+                        android:layout_marginRight="15dp"
+                        android:layout_marginTop="10dp"
                         android:text="企业"
                         android:textColor="@color/login_company_tv"
                         android:textSize="16sp" />
@@ -82,15 +86,15 @@
                 <!--手机号-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y80"
-                    android:layout_marginTop="@dimen/y31"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x36"
+                        android:layout_marginLeft="15dp"
                         android:text="手机号"
                         android:textColor="#98c3ec"
                         android:textSize="16sp" />
@@ -98,10 +102,10 @@
                     <com.zhixing.work.zhixin.widget.ClearEditText
                         android:id="@+id/regist_phone_num_ed"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/y80"
+                        android:layout_height="40dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x10"
-                        android:layout_marginRight="@dimen/x36"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="15dp"
                         android:background="@null"
                         android:inputType="phone" />
                 </LinearLayout>
@@ -109,112 +113,124 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2px"
-                    android:layout_marginLeft="@dimen/x36"
-                    android:layout_marginRight="@dimen/x36"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:background="#98c3ec">
 
                 </View>
                 <!--验证码-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y80"
-                    android:layout_marginTop="@dimen/y31"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x36"
+                        android:layout_marginLeft="15dp"
                         android:text="验证码"
                         android:textColor="#98c3ec"
                         android:textSize="16sp" />
 
                     <com.zhixing.work.zhixin.widget.ClearEditText
                         android:id="@+id/code_ed"
-                        android:layout_width="@dimen/x250"
-                        android:layout_height="@dimen/y80"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x10"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
                         android:background="@null" />
 
-                    <Button
-                        android:layout_marginLeft="15dp"
+                    <TextView
                         android:id="@+id/btn_regist_get_code"
-                        android:layout_width="@dimen/x180"
-                        android:layout_height="@dimen/y60"
-                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="@dimen/dp_10"
                         android:background="#4d92d3"
                         android:gravity="center"
+                        android:paddingBottom="5dp"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:paddingTop="5dp"
                         android:text="获取验证码"
                         android:textColor="#ffffff"
-                        android:textSize="10sp" />
+                        android:textSize="12sp" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2px"
-                    android:layout_marginLeft="@dimen/x36"
-                    android:layout_marginRight="@dimen/x36"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:background="#98c3ec">
 
                 </View>
                 <!--密码-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/y80"
-                    android:layout_marginTop="@dimen/y31"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <com.zhixing.work.zhixin.widget.ClearEditText
                         android:id="@+id/password_ed"
-                        android:layout_width="@dimen/x400"
-                        android:layout_height="@dimen/y80"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x36"
-                        android:layout_marginRight="@dimen/x16"
-                        android:textSize="14sp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="8dp"
                         android:background="@null"
                         android:digits="1234567890abcdefghijklmnopqrstuvwxyz"
                         android:hint="请设置一个6~20位的密码"
                         android:inputType="textPassword"
-                        android:textColorHint="#98c3ec" />
+                        android:textColorHint="#98c3ec"
+                        android:textSize="14sp" />
 
                     <RadioButton
                         android:id="@+id/iv_hide_pwd"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/x26"
+                        android:layout_marginRight="15dp"
                         android:button="@null"
-                        android:drawableLeft="@drawable/icon_hide" />
+                        android:drawableLeft="@drawable/icon_hide"
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2px"
-                    android:layout_marginLeft="@dimen/x36"
-                    android:layout_marginRight="@dimen/x36"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp"
                     android:background="#98c3ec">
 
                 </View>
                 <!--确定按钮-->
-                <Button
+                <TextView
                     android:id="@+id/btn_go_regist"
-                    android:layout_width="@dimen/x267"
-                    android:layout_height="@dimen/y70"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/y40"
-                    android:background="#4d92d3"
-                    android:text="确定"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/btn_blue_normal_shape"
+                    android:paddingBottom="3dp"
+                    android:paddingLeft="35dp"
+                    android:paddingRight="35dp"
+                    android:paddingTop="3dp"
+                    android:text="登录"
                     android:textColor="#ffffff"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
+                />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="@dimen/y30"
+                    android:layout_marginTop="15dp"
                     android:orientation="horizontal">
 
                     <CheckBox
@@ -226,7 +242,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x3"
+                        android:layout_marginLeft="5dp"
                         android:text="我已阅读并同意" />
 
                     <TextView

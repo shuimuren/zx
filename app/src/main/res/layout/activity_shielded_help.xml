@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhixing.work.zhixin.view.resume.ShieldedHelpActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_15"
+            android:text="屏蔽公司是什么"
+            android:textColor="@color/color_303030"
+            android:textSize="@dimen/font_size_16sp" />
+
+        <TextView
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginRight="@dimen/dp_10"
+            android:text="1. 屏蔽公司后，此公司下的BOSS将不会在各个入口看见
+您(包括已建立联系的BOSS);\n\n
+2. 您不会再各个职位推荐的入口看见此公司下BOSS发布
+的职位；\n\n
+3. 您在各处查看此公司下BOSS的职位将不会通知BOSS;\n\n
+4. 您在各处对此公司下BOSS感兴趣，将不会通知BOSS;\n\n
+5. 您无法与此公司下的BOSS建立新的沟通，如需沟通，
+需先解除屏蔽。" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

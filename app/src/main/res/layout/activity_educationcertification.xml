@@ -19,7 +19,7 @@
                 android:id="@+id/rl_education"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="@dimen/y2"
+                android:layout_marginTop="1dp"
                 android:background="@color/linerlayout"
                 android:paddingLeft="@dimen/dp_5">
 
@@ -27,7 +27,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x24"
+                    android:layout_marginLeft="10dp"
                     android:text="学历"
                     android:textColor="@color/linerlayout_tv"
                     android:textSize="18sp" />
@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/x10"
+                    android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@+id/iv_education"
                     android:gravity="right"
                     android:hint="请选择学历"
@@ -51,17 +51,18 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
-                    android:layout_marginRight="@dimen/x24"
+                    android:layout_marginRight="10dp"
                     android:src="@drawable/icon_next" />
 
             </RelativeLayout>
+            <View style="@style/line"></View>
             <!--毕业院校-->
 
             <RelativeLayout
                 android:id="@+id/rl_graduate_college"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="@dimen/y2"
+                android:layout_marginTop="1dp"
                 android:background="@color/linerlayout"
                 android:paddingLeft="@dimen/dp_5">
 
@@ -69,7 +70,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x24"
+                    android:layout_marginLeft="10dp"
                     android:text="毕业院校"
                     android:textColor="@color/linerlayout_tv"
                     android:textSize="18sp" />
@@ -79,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/x24"
+                    android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@+id/iv_graduate_college"
                     android:background="@null"
 
@@ -95,17 +96,17 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
-                    android:layout_marginRight="@dimen/x24"
+                    android:layout_marginRight="10dp"
                     android:src="@drawable/icon_next" />
                 />
             </RelativeLayout>
-
+            <View style="@style/line"></View>
             <!--毕业时间-->
             <RelativeLayout
                 android:id="@+id/rl_graduation_time"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="@dimen/y2"
+                android:layout_marginTop="1dp"
                 android:background="@color/linerlayout"
                 android:paddingLeft="@dimen/dp_5">
 
@@ -113,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x24"
+                    android:layout_marginLeft="10dp"
                     android:text="毕业时间"
                     android:textColor="@color/linerlayout_tv"
                     android:textSize="18sp" />
@@ -123,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/x10"
+                    android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@+id/iv_graduation_time"
                     android:gravity="right"
                     android:hint="请选择毕业日期"
@@ -137,16 +138,17 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
-                    android:layout_marginRight="@dimen/x24"
+                    android:layout_marginRight="10dp"
                     android:src="@drawable/icon_next" />
 
             </RelativeLayout>
+            <View style="@style/line"></View>
             <!--专业-->
             <RelativeLayout
                 android:id="@+id/rl_major"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="@dimen/y2"
+                android:layout_marginTop="1dp"
                 android:background="@color/linerlayout"
                 android:paddingLeft="@dimen/dp_5">
 
@@ -154,7 +156,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/x24"
+                    android:layout_marginLeft="10dp"
                     android:text="专业"
                     android:textColor="@color/linerlayout_tv"
                     android:textSize="18sp" />
@@ -164,7 +166,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/x24"
+                    android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@+id/iv_major"
                     android:background="@null"
 
@@ -180,7 +182,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
-                    android:layout_marginRight="@dimen/x24"
+                    android:layout_marginRight="10dp"
                     android:src="@drawable/icon_next" />
 
 

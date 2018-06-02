@@ -199,9 +199,9 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
     private String education = "education";
     private String constellation = "constellation";
     private String isstudy_abroad;
-    private List<String> list;
     private List<String> constellationList;
-    private String[] menuList;
+    private String[] menuList  ;
+    private List<String> list;
     private int constellationType;
 
     private String Stature = "";
@@ -274,7 +274,10 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
                 pvTime.show();
                 break;
             case R.id.rl_name:
-                startActivity(new Intent(context, ModifyDataActivity.class).putExtra("title", "填写昵称").putExtra("type", "nakename"));
+                startActivity(new Intent(context, ModifyDataActivity.class).putExtra("title", "填写昵称").
+                        putExtra("type", "nakename")
+                        .putExtra(ModifyDataActivity.TYPE_CONTENT,name.getText().toString())
+                );
                 break;
             case R.id.rl_constellation:
                 //星座选择
@@ -290,7 +293,7 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
                         isComplete();
                     }
                 })
-                        .setTitleText("学历")
+                        .setTitleText("星座")
                         .setSubCalSize(20)//确定和取消文字大小
                         .setSubmitColor(Color.BLUE)//确定按钮文字颜色
                         .setCancelColor(Color.BLUE)//取消按钮文字颜色
@@ -369,13 +372,19 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
             case R.id.rl_weight:
                 startActivity(new Intent(context, ModifyUserActivity.class).
                         putExtra(ModifyUserActivity.TYPE_TITLE, "体重").
-                        putExtra(ModifyUserActivity.TYPE, ModifyUserActivity.TYPE_WEIGHT).putExtra(ModifyUserActivity.TYPE_COMPANY, "kg"));
+                        putExtra(ModifyUserActivity.TYPE, ModifyUserActivity.TYPE_WEIGHT).
+                        putExtra(ModifyUserActivity.TYPE_COMPANY, "kg").
+                        putExtra(ModifyUserActivity.TYPE_CONTENT,weight.getText().toString()));
+
+
                 break;
 
             case R.id.rl_height:
                 startActivity(new Intent(context, ModifyUserActivity.class).
                         putExtra(ModifyUserActivity.TYPE_TITLE, "身高").
-                        putExtra(ModifyUserActivity.TYPE, ModifyUserActivity.TYPE_HEIGHT).putExtra(ModifyUserActivity.TYPE_COMPANY, "cm"));
+                        putExtra(ModifyUserActivity.TYPE, ModifyUserActivity.TYPE_HEIGHT).
+                        putExtra(ModifyUserActivity.TYPE_COMPANY, "cm").
+                        putExtra(ModifyUserActivity.TYPE_CONTENT,height.getText().toString()));
                 break;
             case R.id.rl_marriage:
                 MarriageDialog dialog = new MarriageDialog(context, new MarriageDialog.OnItemClickListener() {
@@ -453,7 +462,10 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
                 politicalStatusDialog.show();
                 break;
             case R.id.rl_nation:
-                startActivity(new Intent(context, ModifyDataActivity.class).putExtra("title", "民族").putExtra("type", ModifyDataActivity.TYPE_NATION));
+                startActivity(new Intent(context, ModifyDataActivity.class)
+                        .putExtra("title", "民族").putExtra("type", ModifyDataActivity.TYPE_NATION)
+                        .putExtra(ModifyDataActivity.TYPE_CONTENT,nation.getText().toString())
+                );
                 break;
             case R.id.rl_native_place:
 
@@ -470,7 +482,9 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
             case R.id.rl_id:
                 startActivity(new Intent(context, ModifyDataActivity.class).
                         putExtra(ModifyDataActivity.TYPE_TITLE, "身份证号码").
-                        putExtra(ModifyDataActivity.TYPE, ModifyDataActivity.TYPE_ID));
+                        putExtra(ModifyDataActivity.TYPE, ModifyDataActivity.TYPE_ID)
+                        .putExtra(ModifyDataActivity.TYPE_CONTENT,id.getText().toString())
+                );
                 break;
             case R.id.is_study_abroad_yes:
                 studyAbroadNo.setChecked(false);
@@ -485,7 +499,10 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
                 isComplete();
                 break;
             case R.id.rl_motto:
-                startActivity(new Intent(context, ModifyDataActivity.class).putExtra("title", "填写座右铭").putExtra("type", "motto"));
+                startActivity(new Intent(context, ModifyDataActivity.class).
+                        putExtra("title", "填写座右铭").putExtra("type", "motto")
+                        .putExtra(ModifyDataActivity.TYPE_CONTENT,mottoTx.getText().toString())
+                );
                 break;
             case R.id.btn_go_compete_edu:
                 RequestBody body = new FormBody.Builder()
@@ -539,12 +556,12 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
                 break;
             case ModifyUserActivity.TYPE_WEIGHT: //send the video
 
-                weight.setText(event.getContent() + "kg");
+                weight.setText(event.getContent());
                 Weight = event.getContent();
 
                 break;
             case ModifyUserActivity.TYPE_HEIGHT: //send the video
-                height.setText(event.getContent() + "cm");
+                height.setText(event.getContent());
                 Stature = event.getContent();
                 break;
 
@@ -585,8 +602,6 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
             public void onOptionsSelect(int options1, int options2, int options3, View v) {
                 //返回的分别是三个级别的选中位置
                 String tx;
-
-
                 //int id3 = options1Items.get(options1).getChild().get(options2).getChild().get(options3).getId();
                 if (options1Items.get(options1).getChild().size() == 0) {
                     tx = options1Items.get(options1).getName();
@@ -609,9 +624,7 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
         pvOptions.setPicker(options1Items, options2Items);//三级选择器
         pvOptions.show();
     }
-
     private void submit(RequestBody body) {
-
         OkUtils.getInstances().httput(body, context, JavaConstant.personalinfo, JavaParamsUtils.getInstances().personalinfo(), new TypeToken<EntityObject<Object>>() {
         }.getType(), new ResultCallBackListener<Object>() {
             @Override

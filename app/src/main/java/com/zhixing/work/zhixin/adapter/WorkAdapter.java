@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
@@ -58,12 +59,13 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder> {
 
         private TextView name;
         private TextView time;
+        private LinearLayout ll_work;
     }
 
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View convertView = mInflater.inflate(R.layout.item_work_list,
+        View convertView = mInflater.inflate(R.layout.item_work,
                 parent, false);
         ViewHolder viewHolder = null;
         viewHolder = new ViewHolder(convertView);
@@ -71,6 +73,7 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder> {
 
         viewHolder.name = (TextView) convertView.findViewById(R.id.name);
         viewHolder.time = (TextView) convertView.findViewById(R.id.time);
+        viewHolder.ll_work = (LinearLayout) convertView.findViewById(R.id.ll_work);
 
         return viewHolder;
 
@@ -84,7 +87,6 @@ public class WorkAdapter extends RecyclerView.Adapter<WorkAdapter.ViewHolder> {
         String times = DateFormatUtil.parseDate(work.getStartDate(), "yyyy-mm") + " 一 "
                 + DateFormatUtil.parseDate(work.getEndDate(), "yyyy-mm");
         holder.time.setText(times);
-
 
     }
 

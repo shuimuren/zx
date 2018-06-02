@@ -48,19 +48,17 @@
                 android:background="@drawable/img_card"
                 android:visibility="gone">
 
-
                 <ImageView
-                    android:layout_width="@dimen/x300"
-                    android:layout_height="@dimen/y294"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/y180"
+                    android:layout_marginTop="90dp"
                     android:src="@drawable/img_person" />
                 <!--文字提醒-->
                 <LinearLayout
-                    android:layout_width="@dimen/x322"
-                    android:layout_height="@dimen/y112"
-                    android:layout_marginLeft="@dimen/x120"
-                    android:layout_marginTop="@dimen/y514"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="250dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -75,7 +73,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginTop="@dimen/y10"
+                        android:layout_marginTop="5dp"
                         android:text="立刻生成您的专属卡牌"
                         android:textColor="#7d5023"
                         android:textSize="14sp" />
@@ -83,11 +81,11 @@
                 <!--创建卡牌按钮-->
                 <Button
                     android:id="@+id/create_card"
-                    android:layout_width="@dimen/x320"
-                    android:layout_height="@dimen/y88"
+                    android:layout_width="160dp"
+                    android:layout_height="45dp"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="@dimen/x120"
-                    android:layout_marginTop="@dimen/y676"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="380dp"
                     android:background="@drawable/btn"
                     android:text="创建卡牌"
                     android:textColor="#f5e9b4" />
@@ -97,14 +95,14 @@
 
 
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/rl_data"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="30dp"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:visibility="gone">
+                android:layout_weight="1">
 
 
                 <RelativeLayout
@@ -119,11 +117,17 @@
                     <RelativeLayout
                         android:id="@+id/rl_avatar"
                         android:layout_width="match_parent"
-                        android:layout_height="230dp"
+                        android:layout_height="200dp"
                         android:background="@color/bg_main">
 
                         <ImageView
                             android:id="@+id/avatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY" />
+
+                        <ImageView
+                            android:id="@+id/default_avatar"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
@@ -131,15 +135,14 @@
                             android:src="@drawable/img_man" />
 
                         <TextView
+                            android:id="@+id/avatar_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/avatar"
                             android:layout_centerHorizontal="true"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="5dp"
                             android:text="点此上传照片" />
                     </RelativeLayout>
-
-
                     <LinearLayout
                         android:id="@+id/rl_name"
                         android:layout_width="match_parent"
@@ -189,7 +192,7 @@
                                 android:id="@+id/ll_nike_name"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
+                                android:layout_marginTop="5dp"
                                 android:orientation="horizontal">
 
                                 <TextView
@@ -235,7 +238,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="10dp"
+                                android:layout_marginTop="5dp"
                                 android:orientation="horizontal">
 
                                 <TextView
@@ -284,12 +287,13 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/dp_30">
+                            android:layout_marginBottom="@dimen/dp_30"
+                            android:visibility="gone">
 
                             <Button
                                 android:id="@+id/perfect_card"
-                                android:layout_width="@dimen/x320"
-                                android:layout_height="@dimen/y80"
+                                android:layout_width="160dp"
+                                android:layout_height="45dp"
                                 android:layout_centerHorizontal="true"
                                 android:background="@drawable/btn"
                                 android:text="完善卡牌"

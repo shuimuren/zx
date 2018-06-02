@@ -23,6 +23,7 @@ public class ModifyDataActivity extends BaseTitleActivity {
     private String title;
     private Context context;
     private String type;
+    private String content;
 
     public static final String TYPE = "type";//类型
     public static final String TYPE_TITLE = "title";//标题
@@ -37,16 +38,26 @@ public class ModifyDataActivity extends BaseTitleActivity {
     public static final String TYPE_DEPARTMENT = "department";//所属部门
     public static final String TYPE_ID = "id";//身份证号
     public static final String TYPE_MAJOR = "major";
+    public static final String TYPE_PROJECT_NAME = "project_name";
+    public static final String TYPE_PROJECT_URL = "project_url";
+    public static final String TYPE_PROJECT_ROLE = "project_role";
     public static final String TYPE_NATION = "nation";//民族
+
+    public static final String TYPE_CONTENT = "content";//内容
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_data);
         ButterKnife.bind(this);
-
         title = getIntent().getStringExtra("title");
         type = getIntent().getStringExtra("type");
+        context=this;
+        content=getIntent().getStringExtra(TYPE_CONTENT);
+        if (!TextUtils.isEmpty(content)) {
+            edit.setText(content);
+            edit.setSelection(content.length());
+        }
         setRightText1("保存");
         initView();
     }
@@ -71,14 +82,14 @@ public class ModifyDataActivity extends BaseTitleActivity {
                         finish();
                     } else {
 
-                        if (type.equals(TYPE_ID)){
-                            if (! Utils.isIdCardNo18(content)){
+                        if (type.equals(TYPE_ID)) {
+                            if (!Utils.isIdCardNo18(content)) {
                                 AlertUtils.toast(context, "请填写正确身份证号");
                                 return;
                             }
                             EventBus.getDefault().post(new ModifyEvent(type, content));
                             finish();
-                        }else {
+                        } else {
                             EventBus.getDefault().post(new ModifyEvent(type, content));
                             finish();
                         }

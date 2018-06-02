@@ -75,4 +75,11 @@ dependencies {
     implementation 'com.nineoldandroids:library:2.4.0'
 
     implementation 'com.daimajia.numberprogressbar:library:1.4@aar'
+
+    implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
+/*    *//*TagFlowLayout*/
+
+    implementation 'com.hyman:flowlayout-lib:1.1.2'
+
+
 }

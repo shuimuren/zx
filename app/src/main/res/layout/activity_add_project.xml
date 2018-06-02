@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhixing.work.zhixin.view.card.AddWorkActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#eef0f2">
+
+            <TextView
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_15"
+                android:gravity="center_vertical"
+                android:text="简介有重点的项目列表,BOSS会更快看到您的优势"
+                android:textColor="#999999" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_project_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/linerlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="项目名称"
+                android:textColor="@color/linerlayout_tv"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/project_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/iv_project_name"
+                android:gravity="right"
+
+                android:hint="请输入项目名称"
+                android:textColor="@color/color_303030"
+                android:textColorHint="@color/hint"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_project_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_next" />
+
+        </RelativeLayout>
+
+        <View style="@style/line"></View>
+
+        <RelativeLayout
+            android:id="@+id/rl_project_url"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/linerlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="项目URL"
+                android:textColor="@color/linerlayout_tv"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/project_url"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/iv_project_url"
+                android:gravity="right"
+                android:hint="选填"
+                android:textColor="@color/color_303030"
+                android:textColorHint="@color/hint"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_project_url"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_next" />
+
+        </RelativeLayout>
+
+        <View style="@style/line"></View>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_project_describe"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/linerlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="项目描述"
+                android:textColor="@color/linerlayout_tv"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/project_describe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/iv_project_describe"
+                android:gravity="right"
+                android:hint="请输入项目描述"
+                android:maxEms="10"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/color_303030"
+                android:textColorHint="@color/hint"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_project_describe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_next" />
+
+        </RelativeLayout>
+
+        <View style="@style/line"></View>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_project_achievement"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/linerlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="项目业绩"
+                android:textColor="@color/linerlayout_tv"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/project_achievement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/iv_project_achievement"
+                android:gravity="right"
+                android:hint="选填"
+                android:maxEms="10"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/color_303030"
+                android:textColorHint="@color/hint"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_project_achievement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_next" />
+
+        </RelativeLayout>
+        <View style="@style/line"></View>
+        <RelativeLayout
+            android:id="@+id/rl_project_role"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/linerlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="项目角色"
+                android:textColor="@color/linerlayout_tv"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/project_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/iv_project_role"
+                android:ellipsize="end"
+                android:gravity="right"
+                android:hint=""
+                android:maxEms="10"
+                android:singleLine="true"
+                android:textColor="@color/color_303030"
+                android:textColorHint="@color/hint"
+
+                android:textSize="16sp" />
+
+
+            <ImageView
+                android:id="@+id/iv_project_role"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_next" />
+
+        </RelativeLayout>
+
+        <View style="@style/line"></View>
+
+        <RelativeLayout
+            android:id="@+id/rl_start_time"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/linerlayout">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="开始时间"
+                android:textColor="@color/linerlayout_tv"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/iv_start_time"
+                android:gravity="right"
+                android:hint="请选择开始日期"
+                android:textColor="@color/color_303030"
+                android:textColorHint="@color/hint"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_next" />
+
+        </RelativeLayout>
+
+        <View style="@style/line"></View>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_end_time"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="1dp"
+            android:background="@color/linerlayout">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="结束时间"
+                android:textColor="@color/linerlayout_tv"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/iv_end_time"
+                android:gravity="right"
+                android:hint="请选择结束日期"
+                android:textColor="@color/color_303030"
+                android:textColorHint="@color/hint"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_end_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_next" />
+
+        </RelativeLayout>
+
+        <View style="@style/line"></View>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/btn_red_normal_shape"
+                android:text="删除"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                android:visibility="gone" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

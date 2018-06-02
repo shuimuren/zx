@@ -40,4 +40,8 @@ public class CommunityFragment extends BaseMainFragment {
     }
 
 
+    @Override
+    public void fetchData() {
+
+    }
 }

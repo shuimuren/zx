@@ -2,12 +2,14 @@ package com.zhixing.work.zhixin.util;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.app.ZxApplication;
 import com.zhixing.work.zhixin.bean.AddressJson;
 import com.zhixing.work.zhixin.bean.HotCity;
@@ -32,6 +35,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -1053,7 +1057,6 @@ public class Utils {
     }
 
     public static String getConstellation(String constellation) {
-
         String education = "";
         switch (constellation) {
             case "白羊座":
@@ -1094,6 +1097,52 @@ public class Utils {
                 break;
         }
         return education;
+    }
+
+
+    public static Integer getConstellationImage(int number) {
+        int constellation = R.drawable.sheshou;
+        switch (number) {
+            case 0:
+                constellation = R.drawable.baiy;
+                break;
+            case 1:
+                constellation = R.drawable.jingn;
+                break;
+            case 2:
+                constellation = R.drawable.shuangz;
+                break;
+            case 3:
+                constellation = R.drawable.juxie;
+                break;
+            case 4:
+                constellation = R.drawable.shizi;
+
+                break;
+            case 5:
+                constellation = R.drawable.chunv;
+                break;
+            case 6:
+                constellation = R.drawable.tianp;
+                break;
+            case 7:
+                constellation = R.drawable.tianxie;
+                break;
+            case 8:
+                constellation = R.drawable.sheshou;
+                break;
+            case 9:
+                constellation = R.drawable.moxie;
+
+                break;
+            case 10:
+                constellation = R.drawable.shuip;
+                break;
+            case 11:
+                constellation = R.drawable.shuangyu;
+                break;
+        }
+        return constellation;
     }
 
     public static String getPolitical(String constellation) {
@@ -1185,5 +1234,32 @@ public class Utils {
             }
         }
         return list;
+    }
+
+
+    // 加密
+    public static String getBase64(String str) {
+        String result = "";
+        if (str != null) {
+            try {
+                result = new String(Base64.encode(str.getBytes("utf-8"), Base64.NO_WRAP), "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    // 解密
+    public static String getFromBase64(String str) {
+        String result = "";
+        if (str != null) {
+            try {
+                result = new String(Base64.decode(str, Base64.NO_WRAP), "utf-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 }

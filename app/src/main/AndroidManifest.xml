@@ -108,7 +108,11 @@
         <activity android:name=".view.resume.WorkPlaceActivity" />
         <activity android:name=".view.resume.IndustryActivity" />
         <activity android:name=".view.resume.JobActivity" />
-        <activity android:name=".view.resume.JobListActivity"></activity>
+        <activity android:name=".view.resume.JobListActivity" />
+        <activity android:name=".view.setting.SettingActivity" />
+        <activity android:name=".view.companyCard.CreateCompanyCardActivity" />
+        <activity android:name=".view.companyCard.CompanyCertificationActivity" />
+        <activity android:name=".view.companyCard.PersonalQualificationActivity"></activity>
     </application>
 
 </manifest>

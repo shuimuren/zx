@@ -3,6 +3,7 @@ package com.zhixing.work.zhixin.util;
 import android.text.TextUtils;
 
 
+import com.zhixing.work.zhixin.bean.Token;
 import com.zhixing.work.zhixin.http.api.Constant;
 
 import java.util.Date;
@@ -64,7 +65,19 @@ public class SettingUtils {
         public static final String CURRENT_TIMES_COMMUNITY_GROUP = "current_times_community_group"; // 同小区群发表的时间
         //商圈未读消息数据
         public static final String UnReadTradeAreaData = "current_times_community_group"; // 同小区群发表的时间
-        public static final String userBean = "userBean"; // 个人信息
+        public static final String TOKENBEAN = "tokenBean"; // token信息
+    }
+
+
+    /**
+     * 保存Token数据
+     */
+    public static void putTokenBean(Token token) {
+        PreferenceUtils.putObject(SettingItems.TOKENBEAN, token);
+    }
+
+    public static Token getTokenBean() {
+        return (Token) PreferenceUtils.getObject(SettingItems.TOKENBEAN, null);
     }
 
 
@@ -139,7 +152,6 @@ public class SettingUtils {
         }
         PreferenceUtils.putString(SettingItems.JOBLIST, list);
     }
-
 
 
     /**

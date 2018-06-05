@@ -158,7 +158,7 @@ public class OkUtils<T> {
                         try {
                             entity = gson.fromJson(response, classType);
                         } catch (Exception e1) {
-                            callback.onFailure(32000, "提交数据失败");
+                            callback.onFailure(32000, "服务器错误");
                             Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
                         }
                         if (entity != null) {
@@ -205,7 +205,7 @@ public class OkUtils<T> {
                             entity = gson.fromJson(response, classType);
                             Log.i("EntityObject", "已解析");
                         } catch (Exception e1) {
-                            callback.onFailure(32000, "提交数据失败");
+                            callback.onFailure(32000, "服务器错误");
                             Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
                         }
                         if (entity != null) {
@@ -275,7 +275,7 @@ public class OkUtils<T> {
                         try {
                             entity = gson.fromJson(response, classType);
                         } catch (Exception e1) {
-                            callback.onFailure(32000, "获取数据失败");
+                            callback.onFailure(32000, "服务器错误");
                             Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
                             try {
                                 FailObject entity1 = gson.fromJson(response, FailObject.class);
@@ -331,7 +331,7 @@ public class OkUtils<T> {
                             entity = gson.fromJson(response, classType);
                             Log.i("EntityObject", "已解析");
                         } catch (Exception e1) {
-                            callback.onFailure(32000, "提交数据失败");
+                            callback.onFailure(32000, "服务器错误");
                             Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
                             try {
                                 FailObject entity1 = gson.fromJson(response, FailObject.class);
@@ -402,7 +402,7 @@ public class OkUtils<T> {
 
                         entity = gson.fromJson(response, classType);
                     } catch (Exception e1) {
-                        callback.onFailure(32000, "提交数据失败");
+                        callback.onFailure(32000, "服务器错误");
                         Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
 
                     }
@@ -433,8 +433,8 @@ public class OkUtils<T> {
         patch(requestBody, context, url, param, classType, callback);
     }
 
-    public void httpDelete(final RequestBody requestBody, final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
-        delete(requestBody, context, url, param, classType, callback);
+    public void httpDelete( final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
+        delete( context, url, param, classType, callback);
     }
 
     public void httput(final RequestBody requestBody, final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
@@ -452,7 +452,6 @@ public class OkUtils<T> {
     public void httpTokenGet(final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
         httpTokenBase(false, context, url, param, classType, callback);
     }
-
     public void httpPostString(final Context context, final String url, Map<String, String> param, String json, final Type classType, final ResultCallBackListener<T> callback) {
         httpPostBase(context, url, param, json, classType, callback);
     }
@@ -597,7 +596,7 @@ public class OkUtils<T> {
                     try {
                         entity = gson.fromJson(response, classType);
                     } catch (Exception e1) {
-                        callback.onFailure(32000, "提交数据失败");
+                        callback.onFailure(32000, "服务器错误");
                         Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
                     }
                     if (entity != null) {
@@ -626,7 +625,7 @@ public class OkUtils<T> {
 
     }
 
-    private void delete(RequestBody requestBody, final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
+    private void delete( final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
 
 
         if (NetUtils.isConnected(context)) {
@@ -663,7 +662,7 @@ public class OkUtils<T> {
                     try {
                         entity = gson.fromJson(response, classType);
                     } catch (Exception e1) {
-                        callback.onFailure(32000, "提交数据失败");
+                        callback.onFailure(32000, "服务器错误");
                         Log.i(TAG + "服务器返回失败 = >", "GSON解析异常---" + e1.getMessage());
                     }
                     if (entity != null) {

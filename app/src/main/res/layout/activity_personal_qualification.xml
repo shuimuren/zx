@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhixing.work.zhixin.view.companyCard.PersonalQualificationActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <!--姓名-->
+        <RelativeLayout
+            android:id="@+id/rl_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/linerlayout">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="姓名"
+                android:textColor="@color/linerlayout_tv"
+                android:textSize="16sp" />
+
+            <TextView
+
+                android:id="@+id/name_ed"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/name_right"
+                android:background="@null"
+                android:gravity="center"
+                android:textColor="@color/color_303030"
+
+
+                />
+
+            <ImageView
+                android:id="@+id/name_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_next" />
+        </RelativeLayout>
+
+        <!--姓名-->
+        <RelativeLayout
+            android:id="@+id/rl_id"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/linerlayout">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:text="身份证"
+                android:textColor="@color/linerlayout_tv"
+                android:textSize="16sp" />
+
+            <TextView
+
+                android:id="@+id/id_ed"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/id_right"
+                android:background="@null"
+                android:gravity="center"
+                android:textColor="@color/color_303030" />
+
+            <ImageView
+                android:id="@+id/id_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/icon_next" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/dp_10"
+            android:gravity="center_vertical"
+            android:text="手持身份证照片"
+            android:textColor="@color/color_303030"
+            android:textSize="@dimen/font_size_18sp" />
+
+        <ImageView
+            android:id="@+id/id_photo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_150"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_20"
+            android:src="@drawable/img_card_hand" />
+
+        <TextView
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="注：
+1. 请上传清晰、真实的手持身份证照片，并且用手指遮挡身份证后
+五位；\n\n
+2. 仅限GIF，PNG或JPG格式，大小限制在3M以内；
+\n\n
+3. 仅用于审核，不会向第三方透露，请放心上传！
+" />
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

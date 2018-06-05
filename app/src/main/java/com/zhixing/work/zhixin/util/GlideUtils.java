@@ -94,10 +94,8 @@ public class GlideUtils extends AppGlideModule {
                 .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                 .into(imageView);
     }
-
     /**
      * 便于更换头像 头像资源实时更新
-     *
      * @param context
      * @param
      * @param imageView 圆形头像
@@ -109,6 +107,4 @@ public class GlideUtils extends AppGlideModule {
                 .into(imageView);
 
     }
-
-    1完成了职信卡牌界面的改动,2基础信息的编辑,3高级信息的编辑,
 }

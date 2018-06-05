@@ -35,6 +35,8 @@ public class ModifyContentActivity extends BaseTitleActivity {
     public static final String TYPE_PROJECT_DESCRIBE = "project_describe";//项目描述
     public static final String TYPE_PROJECT_ACHIEVEMENT = "project_achievement";//项目描述
     public static final String TYPE_ADVANTAGE = "type_advantage";//我的优势
+    public static final String CORPORATE_NAME = "corporate_name";//公司名字
+    public static final String CORPORATE_ADDRESS = "corporate_address";//公司名字
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

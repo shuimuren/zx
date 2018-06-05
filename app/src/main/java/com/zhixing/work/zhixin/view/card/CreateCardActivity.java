@@ -140,8 +140,6 @@ public class CreateCardActivity extends BaseTitleActivity {
 
     //判断是否填写完毕
     private void isComplete() {
-
-        int c = dataMap.values().size();
         if (dataMap.values().size() == 5) {
             btnBornCard.setEnabled(true);
             btnBornCard.setBackgroundResource(R.color.color_71aae0);

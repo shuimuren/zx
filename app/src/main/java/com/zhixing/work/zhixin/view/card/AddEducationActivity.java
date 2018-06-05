@@ -199,12 +199,10 @@ public class AddEducationActivity extends BaseTitleActivity {
             rlExplain.setVisibility(View.VISIBLE);
         }
     }
-
     @OnClick({R.id.rl_education, R.id.rl_graduate_college, R.id.rl_school_time, R.id.rl_graduation_time, R.id.rl_major, R.id.delete, R.id.rl_explain})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_education:
-
                 list = Arrays.asList(getResources().getStringArray(R.array.education));
                 final OptionsPickerView pvOptions = new OptionsPickerBuilder(context, new OnOptionsSelectListener() {
                     @Override
@@ -257,7 +255,6 @@ public class AddEducationActivity extends BaseTitleActivity {
                 school_time.show();
                 break;
             case R.id.rl_graduation_time:
-
                 final TimePickerView graduation_time = new TimePickerBuilder(context, new OnTimeSelectListener() {
                     public void onTimeSelect(Date date2, View v) {//选中事件回调
                         String time = DateFormatUtil.getTime(date2);
@@ -284,7 +281,6 @@ public class AddEducationActivity extends BaseTitleActivity {
                 graduation_time.show();
                 break;
             case R.id.rl_major:
-
                 startActivity(new Intent(context, ModifyDataActivity.class).
                         putExtra(ModifyDataActivity.TYPE_TITLE, "专业").
                         putExtra(ModifyDataActivity.TYPE, ModifyDataActivity.TYPE_MAJOR)
@@ -341,9 +337,7 @@ public class AddEducationActivity extends BaseTitleActivity {
 
                     }
                 });
-
             }
-
             @Override
             public void onSuccess(final EntityObject<Boolean> response) {
                 hideLoadingDialog();
@@ -393,7 +387,6 @@ public class AddEducationActivity extends BaseTitleActivity {
                     }
                 });
             }
-
             @Override
             public void onSuccess(final EntityObject<Boolean> response) {
                 hideLoadingDialog();
@@ -420,18 +413,15 @@ public class AddEducationActivity extends BaseTitleActivity {
             }
         });
     }
-
-
     //删除经历
     private void deleteData(RequestBody body) {
-        OkUtils.getInstances().httpDelete(body, context, JavaConstant.EducationBackground + "?Id=" + bean.getId(), JavaParamsUtils.getInstances().deleteEducation(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpDelete(context, JavaConstant.EducationBackground + "?Id=" + bean.getId(), JavaParamsUtils.getInstances().deleteEducation(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
                 hideLoadingDialog();
                 AlertUtils.toast(context, msg);
             }
-
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();

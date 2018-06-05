@@ -43,7 +43,7 @@
                     android:layout_toLeftOf="@+id/name_right"
                     android:background="@null"
                     android:gravity="center"
-                    android:maxLength="5" />
+                    />
 
                 <ImageView
                     android:id="@+id/name_right"
@@ -453,10 +453,10 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@+id/iv_Motto"
-                    android:ellipsize="end"
                     android:gravity="right"
 
                     android:hint=""
+                    android:ellipsize="end"
                     android:maxEms="10"
                     android:singleLine="true"
                     android:textColor="@color/color_303030"

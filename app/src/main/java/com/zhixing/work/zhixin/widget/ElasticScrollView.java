@@ -20,26 +20,19 @@ public class ElasticScrollView extends ScrollView {
 
     //松开手指后, 界面回到正常位置需要的动画时间
     private static final int ANIM_TIME = 300;
-
     //ScrollView的子View， 也是ScrollView的唯一一个子View
     private View contentView;
-
     //手指按下时的Y值, 用于在移动时计算移动距离
     //如果按下时不能上拉和下拉， 会在手指移动时更新为当前手指的Y值
     private float startY;
-
     //用于记录正常的布局位置
     private Rect originalRect = new Rect();
-
     //手指按下时记录是否可以继续下拉
     private boolean canPullDown = false;
-
     //手指按下时记录是否可以继续上拉
     private boolean canPullUp = false;
-
     //在手指滑动的过程中记录是否移动了布局
     private boolean isMoved = false;
-
     public ElasticScrollView(Context context) {
         super(context);
     }

@@ -204,4 +204,24 @@ public class JavaParamsUtils {
         params.put("resumeId", resumeId);
         return params;
     }
+
+
+
+    //  公司基本信息
+    public Map<String, String> Company(String FullName,String Province,
+                                       String City,String District,
+                                       String Address,String ManagerName,
+                                       String ManagerSex,String ManagerEmail
+                                      ) {
+        Map<String, String> params = new HashMap<>();
+        params.put("FullName", FullName);
+        params.put("Province", Province);
+        params.put("City", City);
+        params.put("District", District);
+        params.put("Address", Address);
+        params.put("ManagerName", ManagerName);
+        params.put("ManagerSex", ManagerSex);
+        params.put("ManagerEmail", ManagerEmail);
+        return params;
+    }
 }

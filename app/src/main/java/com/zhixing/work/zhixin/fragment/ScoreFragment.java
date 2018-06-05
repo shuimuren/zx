@@ -46,10 +46,11 @@ import com.zhixing.work.zhixin.util.BitmapUtils;
 import com.zhixing.work.zhixin.util.GlideUtils;
 import com.zhixing.work.zhixin.util.LOG;
 import com.zhixing.work.zhixin.util.SettingUtils;
+import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.view.card.CreateCardActivity;
 import com.zhixing.work.zhixin.view.card.PerfectCardDataActivity;
 import com.zhixing.work.zhixin.view.card.back.CardMainActivity;
-import com.zhixing.work.zhixin.view.resume.PersonalDataActivity;
+import com.zhixing.work.zhixin.view.companyCard.CreateCompanyCardActivity;
 import com.zhixing.work.zhixin.view.util.SelectImageActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -129,6 +130,8 @@ public class ScoreFragment extends BaseMainFragment {
     ImageView defaultAvatar;
     @BindView(R.id.avatar_text)
     TextView avatarText;
+    @BindView(R.id.constellation)
+    ImageView constellation;
 
     private Unbinder unbinder;
     private Context context;
@@ -164,7 +167,6 @@ public class ScoreFragment extends BaseMainFragment {
         context = getActivity();
         EventBus.getDefault().register(this);
         initData();
-
         return view;
     }
 
@@ -196,16 +198,16 @@ public class ScoreFragment extends BaseMainFragment {
                         img_card.setImageResource(R.drawable.icon_1_light);
                         if (TextUtils.isEmpty(card.getNickName())) {
                             llNikeName.setVisibility(View.GONE);
-
                         } else {
                             llNikeName.setVisibility(View.VISIBLE);
                             nikename.setText(card.getNickName());
                         }
 
+                        if (card.getConstellation() != null) {
+                            constellation.setImageResource(Utils.getConstellationImage(card.getConstellation()));
+                        }
                         if (TextUtils.isEmpty(card.getMotto())) {
-
                             llMotto.setVisibility(View.GONE);
-
                         } else {
                             llMotto.setVisibility(View.VISIBLE);
                             motto.setText(card.getMotto());
@@ -229,7 +231,6 @@ public class ScoreFragment extends BaseMainFragment {
     @Override
     public void fetchData() {
     }
-
     //获取阿里云的凭证
     private void getOssToken() {
         OkUtils.getInstances().httpTokenGet(context, JavaConstant.getOSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
@@ -273,7 +274,8 @@ public class ScoreFragment extends BaseMainFragment {
                 startActivity(new Intent(context, PerfectCardDataActivity.class));
                 break;
             case R.id.more:
-                startActivity(new Intent(context, CardMainActivity.class));
+               // startActivity(new Intent(context, CardMainActivity.class));
+                startActivity(new Intent(context, CreateCompanyCardActivity.class));
                 break;
             case R.id.rl_avatar:
                 SelectImageDialog imageDialog = new SelectImageDialog(context, new SelectImageDialog.OnItemClickListener() {
@@ -298,8 +300,6 @@ public class ScoreFragment extends BaseMainFragment {
                     }
                 });
                 imageDialog.show();
-
-
                 break;
         }
     }
@@ -385,10 +385,8 @@ public class ScoreFragment extends BaseMainFragment {
             }
         }
 
-
         super.onSaveInstanceState(savedInstanceState); //实现父类方法 放在最后 防止拍照后无法返回当前activity
     }
-
 
     public void onRestoreInstanceState(Bundle savedInstanceState) {
 
@@ -433,6 +431,7 @@ public class ScoreFragment extends BaseMainFragment {
                 hideLoadingDialog();
                 AlertUtils.toast(context, msg);
             }
+
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();

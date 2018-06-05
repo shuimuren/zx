@@ -16,6 +16,8 @@ public class JavaConstant {
     public static final String goRegist = basehttp + "User";
     //登录
     public static final String goLogin = basehttp + "token";
+    //注销
+    public static final String outLogin = basehttp + "token";
     //更新密码
     public static final String UpdatePWD = basehttp + "User";
     //添加基础卡牌
@@ -57,6 +59,8 @@ public class JavaConstant {
     public static final String ExpectIndustry = basehttp + "Resume/ExpectIndustry";
     //修改职业
     public static final String ExpectJob = basehttp + "Resume/ExpectJob";
+    //添加公司基本资料
+    public static final String Company = basehttp + "Company";
 
 
 }

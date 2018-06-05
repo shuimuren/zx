@@ -110,7 +110,6 @@ public class Addressctivity extends BaseTitleActivity {
                     City = options1Items.get(options1).getChild().get(options2).getId() + "";
                     District = options1Items.get(options1).getChild().get(options2).getChild().get(options3).getId() + "";
                 }
-
                 detailedAddress = tx;
                 provincialUrbanArea.setText(tx);
             }
@@ -165,7 +164,6 @@ public class Addressctivity extends BaseTitleActivity {
 
         ArrayList<AddressJson> jsonBean = gson.fromJson(JsonData, new TypeToken<List<AddressJson>>() {
         }.getType());
-
         /**
          * 添加省份数据
          *

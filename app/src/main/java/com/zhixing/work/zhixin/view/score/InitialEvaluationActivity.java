@@ -175,7 +175,6 @@ public class InitialEvaluationActivity extends BaseTitleActivity {
                 });
 
             }
-
             @Override
             public void onSuccess(final EntityObject<Evaluating> response) {
                 hideLoadingDialog();

@@ -188,9 +188,9 @@ public class BitmapUtils {
         // outputX outputY 是裁剪图片宽高
         intent.putExtra("outputX", 200);
         intent.putExtra("outputY", 200);
-        intent.putExtra("scale",true);
+        intent.putExtra("scale", true);
         intent.putExtra("return-data", false);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,outPutUri);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, outPutUri);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         context.startActivityForResult(intent, Constant.IMAGE_CROP);
     }
@@ -213,11 +213,11 @@ public class BitmapUtils {
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
         // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", 200);
-        intent.putExtra("outputY", 200);
-        intent.putExtra("scale",true);
+        intent.putExtra("outputX", 600);
+        intent.putExtra("outputY", 600);
+        intent.putExtra("scale", true);
         intent.putExtra("return-data", false);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT,outPutUri);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, outPutUri);
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         fragment.startActivityForResult(intent, Constant.IMAGE_CROP);
     }
@@ -252,6 +252,7 @@ public class BitmapUtils {
         LOG.i("图片压缩后的大小为：", "" + smallSize + "KB");
         return smallImage;
     }
+
     private static String compress(String path) {
         if (path != null) {
             try {
@@ -259,10 +260,10 @@ public class BitmapUtils {
                 Bitmap bm = PictureUtil.getSmallBitmap(path);
                 String sdCardPath = Environment.getExternalStorageDirectory().getAbsolutePath();
                 String dirPath = Constant.CACHE_DIR_IMAGE;
-                String uuid= AppUtils.getUUID();
-                FileOutputStream fos = new FileOutputStream(new File(dirPath,uuid+"jpg"));
+                String uuid = AppUtils.getUUID();
+                FileOutputStream fos = new FileOutputStream(new File(dirPath, uuid + "jpg"));
                 bm.compress(Bitmap.CompressFormat.JPEG, 70, fos);
-                String newPath = dirPath+uuid+"jpg" ;
+                String newPath = dirPath + uuid + "jpg";
                 return newPath;
             } catch (Exception e) {
                 e.printStackTrace();

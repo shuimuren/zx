@@ -305,7 +305,7 @@ public class AddCertificateActivity extends BaseTitleActivity {
 
     //删除经历
     private void deleteData(RequestBody body) {
-        OkUtils.getInstances().httpDelete(body, context, JavaConstant.CertificateBackground + "?Id=" + bean.getId(), JavaParamsUtils.getInstances().deleteWork(bean.getId() + ""), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpDelete( context, JavaConstant.CertificateBackground + "?Id=" + bean.getId(), JavaParamsUtils.getInstances().deleteWork(bean.getId() + ""), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {

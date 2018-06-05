@@ -408,14 +408,13 @@ public class AddProjectActivity extends BaseTitleActivity {
 
     //删除经历
     private void deleteData(RequestBody body) {
-        OkUtils.getInstances().httpDelete(body, context, JavaConstant.ProjectBackground + "?Id=" + bean.getId(), JavaParamsUtils.getInstances().project(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpDelete( context, JavaConstant.ProjectBackground + "?Id=" + bean.getId(), JavaParamsUtils.getInstances().project(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
                 hideLoadingDialog();
                 AlertUtils.toast(context, msg);
             }
-
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
@@ -432,7 +431,6 @@ public class AddProjectActivity extends BaseTitleActivity {
                 }
             }
         });
-
 
     }
 }

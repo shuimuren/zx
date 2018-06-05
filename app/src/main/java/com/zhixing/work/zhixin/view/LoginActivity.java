@@ -6,22 +6,26 @@ import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.view.GestureDetector;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
+import com.zhixing.work.zhixin.bean.Token;
 import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
+import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.widget.ClearEditText;
 
 import butterknife.BindView;
@@ -57,6 +61,7 @@ public class LoginActivity extends BaseTitleActivity {
     private String phone;
     private String password;
     private Boolean isShowPassword = true;
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +122,6 @@ public class LoginActivity extends BaseTitleActivity {
                 }
                 break;
             case R.id.btn_login:
-
                 phone = phoneEd.getText().toString();
                 password = passwordEd.getText().toString();
                 if (TextUtils.isEmpty(phone)) {
@@ -141,23 +145,29 @@ public class LoginActivity extends BaseTitleActivity {
                                 public void onSuccess(EntityObject<String> response) {
                                     hideLoadingDialog();
                                     if (response.getCode() == 10000) {
-                                        SettingUtils.putToken(response.getContent());
-                                        SettingUtils.putPhoneNumber(phone);
+                                        if (!TextUtils.isEmpty(response.getContent())) {
+                                            SettingUtils.putToken(response.getContent());
 
-                                        startActivity(new Intent(context, MainActivity.class));
-                                        finish();
+                                            String token = Utils.getFromBase64(response.getContent().substring(response.getContent().indexOf(".") + 1, response.getContent().lastIndexOf(".")));
+                                            if (!TextUtils.isEmpty(token)) {
+                                                Token token1 = gson.fromJson(token, Token.class);
+                                                SettingUtils.putTokenBean(token1);
+                                            }
+                                            Token token2 = SettingUtils.getTokenBean();
+                                            SettingUtils.putPhoneNumber(phone);
+                                            startActivity(new Intent(context, MainActivity.class));
+                                            finish();
+                                        }
 
                                     } else {
                                         AlertUtils.toast(context, response.getMessage());
                                     }
-
                                 }
                             });
                     break;
 
                 }
         }
-
     }
 
 

@@ -5,7 +5,7 @@
     xmlns:zhy="http://sch-emas.android.com/apk/resauto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zhixing.work.zhixin.view.resume.WorkPlaceActivity">
+    tools:context=".view.myCenter.resume.WorkPlaceActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

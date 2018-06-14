@@ -51,6 +51,7 @@ public class StateDialog extends ButtomDialog {
             @Override
             public void onClick(View v) {
                 clickListener.onClick(StateDialog.this, TYPE_QUIT);
+
             }
 
         });

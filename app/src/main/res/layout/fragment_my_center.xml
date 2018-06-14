@@ -20,6 +20,7 @@
             android:paddingRight="@dimen/dp_10">
 
             <TextView
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -54,6 +55,27 @@
                 android:src="@drawable/icon_next" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/ll_organize"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:paddingLeft="@dimen/dp_10"
+            android:paddingRight="@dimen/dp_10">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="组织架构" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_next" />
+        </LinearLayout>
+
+
         <View style="@style/line"></View>
 
         <LinearLayout
@@ -77,6 +99,7 @@
         </LinearLayout>
 
         <View style="@style/line"></View>
+
 
     </LinearLayout>
 </android.support.v7.widget.ContentFrameLayout>

@@ -95,7 +95,7 @@ public class PublicEducationAdapter extends RecyclerView.Adapter<PublicEducation
             } else {
                 Glide.with(mContext).load(item.getFilePath()).into(holder.image);
             }
-            holder.check.setImageResource(R.drawable.icon_close);
+            holder.check.setImageResource(R.drawable.close);
         }
         if (mOnItemClickListener != null) {
             holder.rl_image.setOnClickListener(new View.OnClickListener() {

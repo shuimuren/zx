@@ -1056,6 +1056,84 @@ public class Utils {
         return education;
     }
 
+    public static String getNatureOfUnit(String id) {
+        String natureofunit = "";
+        switch (id) {
+            case "0":
+                natureofunit = "其他";
+                break;
+            case "1":
+                natureofunit = "国企";
+                break;
+            case "2":
+                natureofunit = "私营";
+                break;
+            case "3":
+                natureofunit = "中外合资";
+                break;
+            case "4":
+                natureofunit = "外商独资";
+
+        }
+        return natureofunit;
+    }
+
+
+    public static String getFinancingStage(String id) {
+
+        String financing = "";
+        switch (id) {
+            case "0":
+                financing = "未融资";
+                break;
+            case "1":
+                financing = "天使轮";
+                break;
+            case "2":
+                financing = "A轮";
+                break;
+            case "3":
+                financing = "B轮";
+                break;
+            case "4":
+                financing = "C轮";
+            case "5":
+                financing = "C轮以上";
+            case "6":
+                financing = "已上市";
+            case "7":
+                financing = "不需要融资";
+
+        }
+        return financing;
+    }
+
+    public static String getStaffSize(String id) {
+
+        String staffsize = "";
+        switch (id) {
+            case "10":
+                staffsize = "0-20";
+                break;
+            case "20":
+                staffsize = "20-100";
+                break;
+            case "30":
+                staffsize = "100-500";
+                break;
+
+            case "40":
+                staffsize = "500-1000";
+            case "50":
+                staffsize = "1000-10000";
+            case "60":
+                staffsize = "10000以上";
+
+
+        }
+        return staffsize;
+    }
+
     public static String getConstellation(String constellation) {
         String education = "";
         switch (constellation) {
@@ -1261,5 +1339,18 @@ public class Utils {
             }
         }
         return result;
+    }
+
+    public static void deleteDirWihtFile(File dir) {
+        if (dir == null || !dir.exists() || !dir.isDirectory())
+            return;
+        for (File file : dir.listFiles()) {
+            if (file.isFile())
+                if (file.getAbsolutePath().contains("cutImage")) {
+                    file.delete(); // 删除所有文件
+                } else if (file.isDirectory())
+                    deleteDirWihtFile(file); //
+        }
+
     }
 }

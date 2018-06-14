@@ -3,6 +3,7 @@ package com.zhixing.work.zhixin.util;
 import android.text.TextUtils;
 
 
+import com.google.gson.Gson;
 import com.zhixing.work.zhixin.bean.Token;
 import com.zhixing.work.zhixin.http.api.Constant;
 
@@ -10,6 +11,7 @@ import java.util.Date;
 
 public class SettingUtils {
 
+    private static Gson gson = new Gson();
 
     public static class SettingItems {
 
@@ -66,20 +68,50 @@ public class SettingUtils {
         //商圈未读消息数据
         public static final String UnReadTradeAreaData = "current_times_community_group"; // 同小区群发表的时间
         public static final String TOKENBEAN = "tokenBean"; // token信息
+
     }
 
 
-    /**
-     * 保存Token数据
-     */
+   /* *//**
+     * 保存Token对象
+     *//*
     public static void putTokenBean(Token token) {
         PreferenceUtils.putObject(SettingItems.TOKENBEAN, token);
     }
 
     public static Token getTokenBean() {
         return (Token) PreferenceUtils.getObject(SettingItems.TOKENBEAN, null);
+    }*/
+
+
+    /**
+     * 保存TokenBean
+     *
+     * @param token
+     */
+    public static void putTokenBean(String token) {
+
+        String tokenString = "";
+        if (!TextUtils.isEmpty(token)) {
+            tokenString = token;
+        }
+        PreferenceUtils.putString(SettingItems.TOKENBEAN, tokenString);
     }
 
+    /**
+     * 获取TokenBean
+     *
+     * @return
+     */
+    public static Token getTokenBean() {
+        Token token = new Token();
+        String tokenString = PreferenceUtils.getString(SettingItems.TOKENBEAN);
+        if (!TextUtils.isEmpty(tokenString)) {
+            token = gson.fromJson(tokenString, Token.class);
+            return token;
+        }
+        return token;
+    }
 
     /**
      * 保存provincialList
@@ -398,7 +430,6 @@ public class SettingUtils {
         } else {
             token = "";
         }
-
         return token;
     }
 

@@ -150,10 +150,10 @@ public class LoginActivity extends BaseTitleActivity {
 
                                             String token = Utils.getFromBase64(response.getContent().substring(response.getContent().indexOf(".") + 1, response.getContent().lastIndexOf(".")));
                                             if (!TextUtils.isEmpty(token)) {
-                                                Token token1 = gson.fromJson(token, Token.class);
-                                                SettingUtils.putTokenBean(token1);
+
+                                                SettingUtils.putTokenBean(token);
                                             }
-                                            Token token2 = SettingUtils.getTokenBean();
+
                                             SettingUtils.putPhoneNumber(phone);
                                             startActivity(new Intent(context, MainActivity.class));
                                             finish();

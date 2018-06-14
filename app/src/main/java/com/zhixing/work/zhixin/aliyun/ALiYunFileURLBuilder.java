@@ -25,10 +25,18 @@ public class ALiYunFileURLBuilder {
     public static final String BASE = "prod/"; //正式环境
     public static final String PERSONALIDCARD = "personalIdCard/";  // 身份证
     public static final String PERSONALPORTRAIT = "personalPortrait/";  // 简历头像
-
-
-    public static final String PERSONALCERTIFICATE = "personalCertificate/";//用户证书认证上传】
+    public static final String businessLicense = "company/businessLicense/";//企业营业执照图】
+    public static final String managerIdCard = "company/managerIdCard/";//企业管理员身份证图】
     public static final String PERSONALEDUCATION = "personalEducation/";   //用户学历认证上传】
+    public static final String PERSONALCERTIFICATE = "personalCertificate/";//用户证书认证上传】
+
+
+
+    public static final String COMPANYLOGO = "company/logo/";  //企业logo
+    public static final String COMPANYBACKGROUND = "company/background/";  //企业背景
+    public static final String COMPANYPRODUCT = "company/product/";  //企业产品图
+    public static final String COMPANYHISTORY = "company/history/";  //企业大事件
+    public static final String companyseniormanager = "company/seniorManager/";  //企业高管图
     public static final String PERSONALAVATAR = "personalAvatar/";  //用户个性头像
     public static final String DYNAMIC = BASE + "dynamic/";  //  动态图片
 

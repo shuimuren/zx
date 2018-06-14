@@ -11,9 +11,12 @@ import android.widget.LinearLayout;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseMainFragment;
+import com.zhixing.work.zhixin.bean.Token;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.view.authentication.AuthenticationHallActivity;
-import com.zhixing.work.zhixin.view.resume.MyResumeActivity;
+import com.zhixing.work.zhixin.view.companyCard.CompanyCertificationActivity;
+import com.zhixing.work.zhixin.view.myCenter.organizational.OrganizationalStructureActivity;
+import com.zhixing.work.zhixin.view.myCenter.resume.MyResumeActivity;
 import com.zhixing.work.zhixin.view.setting.SettingActivity;
 
 import butterknife.BindView;
@@ -26,15 +29,17 @@ import butterknife.Unbinder;
 
  */
 public class MyCenterFragment extends BaseMainFragment {
-
     @BindView(R.id.ll_authentication)
     LinearLayout llAuthentication;
     @BindView(R.id.ll_resume)
     LinearLayout llResume;
     @BindView(R.id.ll_setthing)
     LinearLayout llSetthing;
+    @BindView(R.id.ll_organize)
+    LinearLayout llOrganize;
     private Unbinder unbinder;
     private Context context;
+    private Token token;
 
     public static MyCenterFragment newInstance() {
         Bundle args = new Bundle();
@@ -49,19 +54,30 @@ public class MyCenterFragment extends BaseMainFragment {
         ButterKnife.bind(this, view);
         unbinder = ButterKnife.bind(this, view);
         context = getActivity();
+        token = SettingUtils.getTokenBean();
+        initView();
         return view;
+    }
+
+    private void initView() {
+
+        if (token.getRole() == 10) {
+            llOrganize.setVisibility(View.GONE);
+
+        } else {
+            llResume.setVisibility(View.GONE);
+        }
+
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
 
-
     }
 
     @Override
     public void fetchData() {
-
     }
 
     @Override
@@ -70,20 +86,29 @@ public class MyCenterFragment extends BaseMainFragment {
         unbinder.unbind();
     }
 
-
-    @OnClick({R.id.ll_authentication, R.id.ll_resume,R.id.ll_setthing})
+    @OnClick({R.id.ll_authentication, R.id.ll_resume, R.id.ll_setthing, R.id.ll_organize})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_authentication:
-                startActivity(new Intent(context, AuthenticationHallActivity.class));
+                if (token.getRole() == 10) {
+                    startActivity(new Intent(context, AuthenticationHallActivity.class));
+                } else {
 
+                    startActivity(new Intent(context, CompanyCertificationActivity.class));
+                }
                 break;
             case R.id.ll_resume:
                 startActivity(new Intent(context, MyResumeActivity.class));
+
+                break;
+            case R.id.ll_organize:
+                startActivity(new Intent(context, OrganizationalStructureActivity.class));
                 break;
             case R.id.ll_setthing:
                 startActivity(new Intent(context, SettingActivity.class));
                 break;
         }
     }
+
+
 }

@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhixing.work.zhixin.view.companyCard.back.CompanyPerfectCardActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_main"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/rl_company_logo"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="公司LOGO"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/company_logo"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_company_logo"
+
+
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_company_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"/>
+
+            <RelativeLayout
+                android:id="@+id/rl_company_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="公司全称"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/company_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_company_name"
+                    android:gravity="right"
+                    android:hint=""
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:visibility="invisible"
+                    android:id="@+id/iv_company_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+            <RelativeLayout
+                android:id="@+id/rl_company_abbreviation"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="公司简称"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/company_abbreviation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_company_abbreviation"
+                    android:gravity="right"
+                    android:hint="请输入公司简称"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_company_abbreviation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+            <RelativeLayout
+                android:id="@+id/rl_company_region"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="所在地区"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/company_region"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_company_region"
+                    android:gravity="right"
+                    android:hint="请选择地区名称"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_company_region"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+            <RelativeLayout
+                android:id="@+id/rl_company_address"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="详细地址"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/company_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_company_address"
+                    android:gravity="right"
+                    android:hint="请选择公司地址"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_company_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"></View>>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_company_nature"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="公司性质"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/company_nature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_company_nature"
+                    android:gravity="right"
+                    android:hint="选填"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_company_nature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_company_industry"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="公司行业"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:ellipsize="end"
+
+                    android:maxEms="10"
+                    android:singleLine="true"
+                    android:id="@+id/company_industry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_company_industry"
+                    android:gravity="right"
+                    android:hint="选填"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_company_industry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_company_financing"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="融资阶段"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/company_financing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="14dp"
+                    android:layout_toLeftOf="@+id/iv_company_financing"
+                    android:layout_marginRight="10dp"
+                    android:gravity="right"
+                    android:hint="选填"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+                <ImageView
+                    android:id="@+id/iv_company_financing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_company_scale"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="人员规模"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/company_scale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_company_scale"
+                    android:gravity="right"
+                    android:hint="选填"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_company_scale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+
+
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_company_website"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="公司官网"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/company_website"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_company_website"
+                    android:gravity="right"
+                    android:hint="选填"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_company_website"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+
+            <Button
+                android:layout_marginTop="@dimen/dp_20"
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginRight="@dimen/dp_30"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:background="@drawable/btn_blue_normal_shape"
+                android:text="提交"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>

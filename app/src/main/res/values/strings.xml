@@ -44,4 +44,32 @@
         <item>水瓶座</item>
         <item>双鱼座</item>
     </string-array>
+    <string-array name="nature">
+        <item>国企</item>
+        <item>民营</item>
+        <item>中外合资</item>
+        <item>外商独资</item>
+        <item>其它</item>
+    </string-array>
+
+    <string-array name="scale">
+        <item> 0-20</item>
+        <item>20-100</item>
+        <item>100-500</item>
+        <item>500-1000</item>
+        <item>1000-10000</item>
+        <item>10000以上</item>
+    </string-array>
+
+
+    <string-array name="financing">
+        <item>未融资</item>
+        <item>天使轮</item>
+        <item>A轮</item>
+        <item>B轮</item>
+        <item>C轮</item>
+        <item>C轮以上</item>
+        <item>已上市</item>
+        <item>不需要融资</item>
+    </string-array>
 </resources>

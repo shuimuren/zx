@@ -338,6 +338,7 @@ public class AddEducationActivity extends BaseTitleActivity {
                     }
                 });
             }
+
             @Override
             public void onSuccess(final EntityObject<Boolean> response) {
                 hideLoadingDialog();
@@ -362,15 +363,13 @@ public class AddEducationActivity extends BaseTitleActivity {
 
                     }
                 });
-
-
             }
         });
 
     }
     //更新数据
     private void upEducation(RequestBody body) {
-        OkUtils.getInstances().httput(body, context, JavaConstant.EducationBackground, JavaParamsUtils.getInstances().upWork(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpPut(body, context, JavaConstant.EducationBackground, JavaParamsUtils.getInstances().upWork(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, final String msg) {

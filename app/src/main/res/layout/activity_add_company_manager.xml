@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhixing.work.zhixin.view.companyCard.AddCompanyManagerActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_main"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_manager_photo"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="高管图片"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:id="@+id/photo"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_photo"
+
+
+                    />
+
+                <ImageView
+                    android:id="@+id/iv_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
+            <RelativeLayout
+                android:id="@+id/rl_manager_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="高管姓名"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/manager_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_manager_name"
+                    android:gravity="right"
+                    android:hint="请输入高管姓名"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_manager_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+            <RelativeLayout
+                android:id="@+id/rl_manager_position"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="高管职位"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/manager_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_manager_position"
+                    android:gravity="right"
+                    android:hint="请输入高管职位"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_manager_position"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+            </RelativeLayout>
+            <View style="@style/line"></View>
+            <RelativeLayout
+                android:id="@+id/rl_manager_introduce"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="高管介绍"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/manager_introduce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/iv_manager_introduce"
+                    android:ellipsize="end"
+                    android:gravity="right"
+                    android:hint="请输入高管介绍"
+                    android:maxEms="10"
+                    android:singleLine="true"
+                    android:textColor="@color/color_303030"
+                    android:textColorHint="@color/hint"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/iv_manager_introduce"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next" />
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/sava"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_30"
+            android:layout_marginRight="@dimen/dp_30"
+            android:layout_marginTop="@dimen/dp_20"
+            android:background="@drawable/btn_blue_normal_shape"
+            android:text="保存"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

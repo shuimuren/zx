@@ -1,30 +1,30 @@
 package com.zhixing.work.zhixin.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2018/6/4.
  */
 
-public class Token {
+public class Token  implements Serializable{
 
     /**
-     * exp : 1528946263
+     * exp : 1529213903
      * Id : 4
      * PhoneNum : 18565728308
      * Role : 10
+     * StaffId : 0
      * CompanyId : 0
-     * CompanyRole : 0
+     * StaffRole : 0
      */
+
     private int exp;
     private int Id;
     private String PhoneNum;
     private int Role;
-    private int CompanyId;
-    private int CompanyRole;
-    /**
-     * StaffId : 0
-     */
-
     private int StaffId;
+    private int CompanyId;
+    private int StaffRole;
 
     public int getExp() {
         return exp;
@@ -58,6 +58,14 @@ public class Token {
         this.Role = Role;
     }
 
+    public int getStaffId() {
+        return StaffId;
+    }
+
+    public void setStaffId(int StaffId) {
+        this.StaffId = StaffId;
+    }
+
     public int getCompanyId() {
         return CompanyId;
     }
@@ -66,19 +74,11 @@ public class Token {
         this.CompanyId = CompanyId;
     }
 
-    public int getCompanyRole() {
-        return CompanyRole;
+    public int getStaffRole() {
+        return StaffRole;
     }
 
-    public void setCompanyRole(int CompanyRole) {
-        this.CompanyRole = CompanyRole;
-    }
-
-    public int getStaffId() {
-        return StaffId;
-    }
-
-    public void setStaffId(int StaffId) {
-        this.StaffId = StaffId;
+    public void setStaffRole(int StaffRole) {
+        this.StaffRole = StaffRole;
     }
 }

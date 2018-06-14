@@ -36,7 +36,12 @@ public class ModifyContentActivity extends BaseTitleActivity {
     public static final String TYPE_PROJECT_ACHIEVEMENT = "project_achievement";//项目描述
     public static final String TYPE_ADVANTAGE = "type_advantage";//我的优势
     public static final String CORPORATE_NAME = "corporate_name";//公司名字
-    public static final String CORPORATE_ADDRESS = "corporate_address";//公司名字
+    public static final String PRODUCT_DESCRIPTION = "product_description";//公司名字
+    public static final String MANAGER_INTRODUCE = "manager_introduce";//高管介绍
+    public static final String EVENT_SYNOPSIS = "event_synopsis";//事件简介
+
+    public static final String CORPORATE_INTRODUCE = "corporate_introduce";//公司介绍
+    public static final String CORPORATE_ADDRESS = "corporate_address";//公司地址
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +58,12 @@ public class ModifyContentActivity extends BaseTitleActivity {
         if (TextUtils.isEmpty(content)) {
             edit.setHint(hint);
             edit.setHintTextColor(getResources().getColor(R.color.hint));
-        }else {
+        } else {
 
-                edit.setText(content);
-                edit.setSelection(content.length());
+            edit.setText(content);
+            edit.setSelection(content.length());
 
         }
-
         setTitle(title);
 
         setRightText1("保存");

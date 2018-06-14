@@ -85,7 +85,6 @@ public class InitialEvaluationActivity extends BaseTitleActivity {
 
             }
         });
-
     }
 
     private void getData() {

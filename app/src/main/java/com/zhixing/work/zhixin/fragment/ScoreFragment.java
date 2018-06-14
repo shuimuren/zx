@@ -27,8 +27,10 @@ import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
 import com.zhixing.work.zhixin.aliyun.ALiYunOssFileLoader;
 import com.zhixing.work.zhixin.base.BaseMainFragment;
 import com.zhixing.work.zhixin.bean.Card;
+import com.zhixing.work.zhixin.bean.CompanyCard;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.StsToken;
+import com.zhixing.work.zhixin.bean.Token;
 import com.zhixing.work.zhixin.dialog.CardCompleteDialog;
 import com.zhixing.work.zhixin.dialog.SelectImageDialog;
 import com.zhixing.work.zhixin.domain.AlbumItem;
@@ -51,6 +53,7 @@ import com.zhixing.work.zhixin.view.card.CreateCardActivity;
 import com.zhixing.work.zhixin.view.card.PerfectCardDataActivity;
 import com.zhixing.work.zhixin.view.card.back.CardMainActivity;
 import com.zhixing.work.zhixin.view.companyCard.CreateCompanyCardActivity;
+import com.zhixing.work.zhixin.view.companyCard.back.CompanyCardActivity;
 import com.zhixing.work.zhixin.view.util.SelectImageActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -132,10 +135,43 @@ public class ScoreFragment extends BaseMainFragment {
     TextView avatarText;
     @BindView(R.id.constellation)
     ImageView constellation;
+    @BindView(R.id.ll_user)
+    LinearLayout llUser;
+    @BindView(R.id.create_enterprise_card)
+    Button createEnterpriseCard;
+    @BindView(R.id.rl_enterprise_nocard)
+    RelativeLayout rlEnterpriseNocard;
+    @BindView(R.id.enterprise_avatar)
+    ImageView enterpriseAvatar;
+    @BindView(R.id.enterprise_default_avatar)
+    ImageView enterpriseDefaultAvatar;
+    @BindView(R.id.enterprise_avatar_text)
+    TextView enterpriseAvatarText;
+    @BindView(R.id.rl_enterprise_avatar)
+    RelativeLayout rlEnterpriseAvatar;
+    @BindView(R.id.company_address)
+    TextView companyAddress;
+    @BindView(R.id.ll_company_address)
+    LinearLayout llCompanyAddress;
+    @BindView(R.id.enterprise_data)
+    LinearLayout enterpriseData;
+    @BindView(R.id.enterprise_cord)
+    RelativeLayout enterpriseCord;
+    @BindView(R.id.enterprise_stars)
+    ScaleRatingBar enterpriseStars;
+    @BindView(R.id.enterprise_iv)
+    ImageView enterpriseIv;
+    @BindView(R.id.rl_enterprise_data)
+    RelativeLayout rlEnterpriseData;
+    @BindView(R.id.ll_enterprise)
+    LinearLayout llEnterprise;
+    @BindView(R.id.company_name)
+    TextView companyName;
 
     private Unbinder unbinder;
     private Context context;
     private Card card;
+    private CompanyCard companyCard;
     private String study_abroad;
 
     private StsToken stsToken;
@@ -150,6 +186,8 @@ public class ScoreFragment extends BaseMainFragment {
     public static final String TAG = "ScoreFragment";
 
     public static ScoreFragment instance;
+    public Token token;
+    private String addressct = "";
 
     public static ScoreFragment newInstance() {
         Bundle args = new Bundle();
@@ -166,8 +204,61 @@ public class ScoreFragment extends BaseMainFragment {
         unbinder = ButterKnife.bind(this, view);
         context = getActivity();
         EventBus.getDefault().register(this);
-        initData();
+        token = SettingUtils.getTokenBean();
+        if (token.getRole() == 10) {
+            initData();
+            llUser.setVisibility(View.VISIBLE);
+            llEnterprise.setVisibility(View.GONE);
+        } else {
+            getCompanyData();
+            llEnterprise.setVisibility(View.VISIBLE);
+            llUser.setVisibility(View.GONE);
+        }
         return view;
+    }
+
+    private void getCompanyData() {
+        OkUtils.getInstances().httpTokenGet(context, JavaConstant.CompanyCard, JavaParamsUtils.getInstances().getCompanyCard(), new TypeToken<EntityObject<CompanyCard>>() {
+        }.getType(), new ResultCallBackListener<CompanyCard>() {
+            @Override
+            public void onFailure(int errorId, String msg) {
+                rlEnterpriseNocard.setVisibility(View.VISIBLE);
+                rlEnterpriseData.setVisibility(View.GONE);
+                AlertUtils.toast(context, "服务器错误");
+                getOssToken();
+            }
+
+            @Override
+            public void onSuccess(EntityObject<CompanyCard> response) {
+                if (response.getCode() == 10000) {
+                    getOssToken();
+                    if (response.getContent() == null) {
+                        rlEnterpriseNocard.setVisibility(View.VISIBLE);
+                        rlEnterpriseData.setVisibility(View.GONE);
+                    } else {
+                        rlEnterpriseNocard.setVisibility(View.GONE);
+                        rlEnterpriseData.setVisibility(View.VISIBLE);
+                        companyCard = response.getContent();
+                        if (companyCard.getProvince() != null) {
+                            addressct = Utils.searchProvincial(companyCard.getProvince());
+                        }
+                        if (companyCard.getCity() != null) {
+                            addressct = addressct + Utils.searchCity(companyCard.getCity());
+                        }
+                        if (companyCard.getDistrict() != null) {
+                            addressct = addressct + Utils.searchArea(companyCard.getDistrict());
+                        }
+                        if (TextUtils.isEmpty(companyCard.getAddress())) {
+                            companyAddress.setText(addressct);
+                        } else {
+                            companyAddress.setText(addressct + companyCard.getAddress());
+                        }
+                        companyName.setText(companyCard.getFullName());
+                    }
+
+                }
+            }
+        });
     }
 
     private void initData() {
@@ -202,7 +293,6 @@ public class ScoreFragment extends BaseMainFragment {
                             llNikeName.setVisibility(View.VISIBLE);
                             nikename.setText(card.getNickName());
                         }
-
                         if (card.getConstellation() != null) {
                             constellation.setImageResource(Utils.getConstellationImage(card.getConstellation()));
                         }
@@ -231,6 +321,7 @@ public class ScoreFragment extends BaseMainFragment {
     @Override
     public void fetchData() {
     }
+
     //获取阿里云的凭证
     private void getOssToken() {
         OkUtils.getInstances().httpTokenGet(context, JavaConstant.getOSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
@@ -256,26 +347,34 @@ public class ScoreFragment extends BaseMainFragment {
         });
     }
 
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
         EventBus.getDefault().unregister(this);
     }
 
-    @OnClick({R.id.create_card, R.id.perfect_card, R.id.more, R.id.rl_avatar})
+    @OnClick({R.id.create_card, R.id.perfect_card, R.id.more, R.id.rl_avatar, R.id.create_enterprise_card})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.create_card:
                 startActivity(new Intent(context, CreateCardActivity.class));
                 break;
+            case R.id.create_enterprise_card:
+                startActivity(new Intent(context, CreateCompanyCardActivity.class));
+                break;
             case R.id.perfect_card:
                 startActivity(new Intent(context, PerfectCardDataActivity.class));
                 break;
             case R.id.more:
-               // startActivity(new Intent(context, CardMainActivity.class));
-                startActivity(new Intent(context, CreateCompanyCardActivity.class));
+                if (token.getRole() == 10) {
+                    startActivity(new Intent(context, CardMainActivity.class));
+                } else {
+                    startActivity(new Intent(context, CompanyCardActivity.class));
+                }
+                ////
                 break;
             case R.id.rl_avatar:
                 SelectImageDialog imageDialog = new SelectImageDialog(context, new SelectImageDialog.OnItemClickListener() {
@@ -308,7 +407,11 @@ public class ScoreFragment extends BaseMainFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCardCompleteEvent(CardCompleteEvent event) {
         if (event.isComplete()) {
-            initData();
+            if (token.getRole() == 10) {
+                initData();
+            } else {
+                getCompanyData();
+            }
             CardCompleteDialog dialog = new CardCompleteDialog(context, new CardCompleteDialog.OnItemClickListener() {
                 @Override
                 public void OnItemClick(Dialog dialog) {
@@ -320,13 +423,16 @@ public class ScoreFragment extends BaseMainFragment {
 
     }
 
-    //显示成就弹框
+    //刷新数据
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCardRefreshEvent(CardRefreshEvent event) {
         if (event.getRefresh()) {
-            initData();
+            if (token.getRole() == 10) {
+                initData();
+            } else {
+                getCompanyData();
+            }
         }
-
     }
 
     public void onConfigurationChanged(Configuration newConfig) {
@@ -334,6 +440,17 @@ public class ScoreFragment extends BaseMainFragment {
         super.onConfigurationChanged(newConfig);
     }
 
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (cropFilePath != null) {
+            if (!TextUtils.isEmpty(cropFilePath.getAbsolutePath())) {
+                Utils. deleteDirWihtFile(new File(Environment.getExternalStorageDirectory().getPath()));
+            }
+        }
+    }
     /**
      * 初始化剪裁图片的输出Uri
      */
@@ -391,14 +508,11 @@ public class ScoreFragment extends BaseMainFragment {
     public void onRestoreInstanceState(Bundle savedInstanceState) {
 
         photoFile = new File(savedInstanceState.getString("msg_camera_picname"));
-
-
     }
 
 
     //上传头像
     private void upload(final String resultpath) {
-
         String UUID = AppUtils.getUUID();
         ALiYunOssFileLoader.asyncUpload(context, stsToken, ALiYunFileURLBuilder.BUCKET_PUBLIC, ALiYunFileURLBuilder.PERSONALAVATAR + UUID,
                 resultpath, new ALiYunOssFileLoader.OssFileUploadListener() {
@@ -443,7 +557,6 @@ public class ScoreFragment extends BaseMainFragment {
                             avatarText.setVisibility(View.GONE);
                             defaultAvatar.setVisibility(View.GONE);
                             GlideUtils.getInstance().loadGlideRoundTransform(context, url, avatar);
-
                         }
                     } else {
                         AlertUtils.toast(context, "修改失败");

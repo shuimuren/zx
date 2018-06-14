@@ -7,6 +7,7 @@
     tools:context="com.zhixing.work.zhixin.view.companyCard.PersonalQualificationActivity">
 
     <LinearLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -16,9 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/linerlayout">
-
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -51,8 +50,10 @@
                 android:layout_marginRight="10dp"
                 android:src="@drawable/icon_next" />
         </RelativeLayout>
+        <View
+            style="@style/line"
+            ></View>
 
-        <!--姓名-->
         <RelativeLayout
             android:id="@+id/rl_id"
             android:layout_width="match_parent"
@@ -91,22 +92,28 @@
                 android:src="@drawable/icon_next" />
         </RelativeLayout>
 
+        <View
+            style="@style/line"
+           ></View>
         <TextView
+           android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginLeft="@dimen/dp_10"
+        android:paddingLeft="@dimen/dp_10"
             android:gravity="center_vertical"
             android:text="手持身份证照片"
             android:textColor="@color/color_303030"
             android:textSize="@dimen/font_size_18sp" />
 
         <ImageView
+
             android:id="@+id/id_photo"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_150"
             android:layout_marginLeft="@dimen/dp_40"
             android:layout_marginRight="@dimen/dp_40"
             android:layout_marginTop="@dimen/dp_20"
+            android:scaleType="fitXY"
             android:src="@drawable/img_card_hand" />
 
         <TextView
@@ -117,7 +124,7 @@
             android:text="注：
 1. 请上传清晰、真实的手持身份证照片，并且用手指遮挡身份证后
 五位；\n\n
-2. 仅限GIF，PNG或JPG格式，大小限制在3M以内；
+2. 仅限PNG或JPG格式，大小限制在3M以内；
 \n\n
 3. 仅用于审核，不会向第三方透露，请放心上传！
 " />

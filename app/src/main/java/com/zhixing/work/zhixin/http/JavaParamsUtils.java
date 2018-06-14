@@ -205,14 +205,20 @@ public class JavaParamsUtils {
         return params;
     }
 
+    //  提交
+    public Map<String, String> setCompany() {
+        Map<String, String> params = new HashMap<>();
+
+        return params;
+    }
 
 
     //  公司基本信息
-    public Map<String, String> Company(String FullName,String Province,
-                                       String City,String District,
-                                       String Address,String ManagerName,
-                                       String ManagerSex,String ManagerEmail
-                                      ) {
+    public Map<String, String> Company(String FullName, String Province,
+                                       String City, String District,
+                                       String Address, String ManagerName,
+                                       String ManagerSex, String ManagerEmail
+    ) {
         Map<String, String> params = new HashMap<>();
         params.put("FullName", FullName);
         params.put("Province", Province);
@@ -224,4 +230,180 @@ public class JavaParamsUtils {
         params.put("ManagerEmail", ManagerEmail);
         return params;
     }
+/*
+    Name	string	是	产品名称
+    Logo	string	否	图片名称
+    Url	string	否	产品URL
+    Intro*/
+
+    //  添加产品
+    public Map<String, String> CompanyProduct(String Name, String Logo,
+                                              String Url, String Intro
+    ) {
+        Map<String, String> params = new HashMap<>();
+        params.put("Name", Name);
+        params.put("Logo", Logo);
+        params.put("Url", Url);
+        params.put("Intro", Intro);
+
+        return params;
+    }
+
+
+    //  修改产品
+    public Map<String, String> editCompanyProduct(String id, String Name, String Logo,
+                                                  String Url, String Intro
+    ) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+        params.put("Name", Name);
+        params.put("Logo", Logo);
+        params.put("Url", Url);
+        params.put("Intro", Intro);
+
+        return params;
+    }
+
+    /*
+       CompanyId	string	是	公司ID
+    Name	string	是	姓名
+    JotTitle	string	是	职位
+    Intro	string	是	简介
+    Avatar	string	是	图片名称*/
+    //  添加高管
+    public Map<String, String> CompanySeniorManager(String CompanyId, String Name, String Avatar,
+                                                    String JotTitle, String Intro
+    ) {
+        Map<String, String> params = new HashMap<>();
+        params.put("CompanyId", CompanyId);
+        params.put("Name", Name);
+        params.put("Avatar", Avatar);
+        params.put("JotTitle", JotTitle);
+        params.put("Intro", Intro);
+
+        return params;
+    }
+
+    //  添加高管
+    public Map<String, String> editSeniorManager(String id, String Name, String Avatar,
+                                                 String JotTitle, String Intro
+    ) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+        params.put("Name", Name);
+        params.put("Avatar", Avatar);
+        params.put("JotTitle", JotTitle);
+        params.put("Intro", Intro);
+
+        return params;
+    }
+
+
+    //  获取高管
+    public Map<String, String> getCompanySeniorManager(
+    ) {
+        Map<String, String> params = new HashMap<>();
+
+        return params;
+    }
+
+    //  获取大事件
+    public Map<String, String> getCompanyHistory(
+    ) {
+        Map<String, String> params = new HashMap<>();
+
+        return params;
+    }
+
+    /*    Name	string	是	事件名称
+        Date	string	是	日期
+        Intro	string	是	简介
+        Image*/
+    //  获取大事件
+    public Map<String, String> AddCompanyHistory(String Name, String Date, String Intro, String Image) {
+        Map<String, String> params = new HashMap<>();
+        params.put("Name", Name);
+        params.put("Date", Date);
+        params.put("Intro", Intro);
+        params.put("Image", Image);
+
+
+        return params;
+    }
+
+    //  获取大事件
+    public Map<String, String> editCompanyHistory(String id, String Name, String Date, String Intro, String Image) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+        params.put("Name", Name);
+        params.put("Date", Date);
+        params.put("Intro", Intro);
+        params.put("Image", Image);
+
+
+        return params;
+    }
+
+    //    获取卡牌信息
+    public Map<String, String> getCompanyCard() {
+        Map<String, String> params = new HashMap<>();
+
+        return params;
+    }
+
+    //    获取公司产品
+    public Map<String, String> getCompanyProduct() {
+        Map<String, String> params = new HashMap<>();
+
+        return params;
+    }
+
+
+    //  删除工作
+    public Map<String, String> deleteProduct() {
+        Map<String, String> params = new HashMap<>();
+
+
+        return params;
+    }
+    //  添加产品
+    public Map<String, String> addDepartment(String ParentId, String Name
+    ) {
+        Map<String, String> params = new HashMap<>();
+        params.put("Name", Name);
+        params.put("ParentId", ParentId);
+
+
+        return params;
+    }
+    //  获取子部门
+    public Map<String, String> getDepartment(String departmentId
+    ) {
+        Map<String, String> params = new HashMap<>();
+        params.put("departmentId", departmentId);
+        return params;
+    }
+
+    //  获取公司组织架构
+    public Map<String, String> getCompany(
+    ) {
+        Map<String, String> params = new HashMap<>();
+
+        return params;
+    }
+    //  修改子部门
+    public Map<String, String> modifyDepartment(
+    ) {
+        Map<String, String> params = new HashMap<>();
+        return params;
+    }
+    //  获取子部门
+    public Map<String, String> getSetff(String departmentId
+    ) {
+        Map<String, String> params = new HashMap<>();
+        params.put("departmentId", departmentId);
+        return params;
+    }
+
+
 }

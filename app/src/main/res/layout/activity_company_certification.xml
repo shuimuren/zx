@@ -8,6 +8,7 @@
 
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -22,14 +23,18 @@
             android:text="公司资质认证"
             android:textColor="@color/color_303030"
             android:textSize="@dimen/font_size_18sp" />
-        <LinearLayout
-            android:id="@+id/ll_education"
+        <View
+            style="@style/line"
+            ></View>
+        <LinearLayout android:background="@color/white"
+
+            android:id="@+id/ll_company"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/education_iv"
+                android:id="@+id/company_iv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -45,7 +50,7 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/education"
+                android:id="@+id/company"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -77,8 +82,12 @@
             android:text="管理者个人资质认证"
             android:textColor="@color/color_303030"
             android:textSize="@dimen/font_size_18sp" />
+        <View
+            style="@style/line"
+            ></View>
 
         <LinearLayout
+            android:background="@color/white"
             android:id="@+id/ll_identity"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"

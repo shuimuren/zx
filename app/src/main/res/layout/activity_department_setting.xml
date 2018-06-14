@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.zhixing.work.zhixin.view.myCenter.organizational.DepartmentSettingActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_main"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_department_name"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="部门名称"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/department_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/department_name_right"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:textColor="@color/color_303030" />
+
+                <ImageView
+                    android:id="@+id/department_name_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next"
+                    android:textColor="@color/color_303030" />
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+            <RelativeLayout
+                android:id="@+id/rl_superior_department"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="上级部门"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+                <TextView
+                    android:id="@+id/superior_department"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/superior_department_right"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:textColor="@color/color_303030" />
+
+                <ImageView
+                    android:visibility="invisible"
+                    android:id="@+id/superior_department_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next"
+                    android:textColor="@color/color_303030" />
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+            <RelativeLayout
+                android:id="@+id/rl_department_director"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/linerlayout">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="部门主管"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/department_director"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toLeftOf="@+id/department_director_right"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:textColor="@color/color_303030" />
+
+                <ImageView
+                    android:id="@+id/department_director_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/icon_next"
+                    android:textColor="@color/color_303030" />
+            </RelativeLayout>
+
+            <View style="@style/line"></View>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp_50">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp_10"
+                    android:text="隐藏部门"
+                    android:textColor="@color/hint" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_hide"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="horizontal"
+                android:padding="@dimen/dp_10">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="隐藏部门"
+                    android:textColor="@color/color_303030" />
+
+                <CheckBox
+                    android:id="@+id/is_hide"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/selector_ck_bg"
+                    android:button="@null"
+                    />
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_setting"
+                android:layout_width="match_parent"
+                android:layout_height="51dp"
+                android:background="@color/linerlayout">
+
+                <View style="@style/line"></View>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:text="制定部门/人可见"
+                    android:textColor="@color/linerlayout_tv"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:text="设置"
+                    android:textColor="@color/color_303030" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/ll_delete"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/linerlayout">
+
+            <Button
+                android:id="@+id/delete"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/btn_blue_normal_shape"
+                android:text="删除部门"
+                android:textColor="#ffffff"
+                android:textSize="20sp"
+                 />
+        </RelativeLayout>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

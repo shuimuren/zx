@@ -188,7 +188,7 @@ public class CreateCardActivity extends BaseTitleActivity {
                 dataMap.put(event.getType(), event.getContent());
                 isComplete();
                 break;
-            case ModifyDataActivity.TYPE_NMAE: //send the video
+            case ModifyDataActivity.TYPE_NAME: //send the video
                 nameEd.setText(event.getContent());
                 dataMap.put(event.getType(), event.getContent());
                 isComplete();

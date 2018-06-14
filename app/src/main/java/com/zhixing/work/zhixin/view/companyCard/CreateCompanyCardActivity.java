@@ -3,6 +3,7 @@ package com.zhixing.work.zhixin.view.companyCard;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -26,6 +27,7 @@ import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.view.card.ModifyContentActivity;
 import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
@@ -83,7 +85,6 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
     @BindView(R.id.btn_born_card)
     Button btnBornCard;
     private String name = "name";
-
     private String mail = "mail";
     private String address_tx = "address";
     private String region_tx = "region";
@@ -106,13 +107,10 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
         ButterKnife.bind(this);
         initJsonData();
         setTitle("创建卡牌");
-
     }
-
     @OnClick({R.id.rl_corporate_name, R.id.card_sex_man, R.id.card_sex_woman, R.id.rl_region, R.id.rl_address, R.id.rl_name, R.id.rl_mail, R.id.btn_born_card})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-
             case R.id.card_sex_man:
                 cardSexWoman.setChecked(false);
                 dataMap.put(gender, "0");
@@ -129,7 +127,6 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
                         putExtra(ModifyContentActivity.TYPE, ModifyContentActivity.CORPORATE_NAME).
                         putExtra(ModifyContentActivity.HINT, "与营业照一致...").
                         putExtra(ModifyContentActivity.TYPE_CONTENT, corporateName.getText().toString()));
-
                 break;
             case R.id.rl_region:
                 final OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
@@ -150,7 +147,6 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
                         }
                         dataMap.put(region_tx, tx);
                         isComplete();
-
                         region.setText(tx);
                     }
                 })
@@ -159,7 +155,6 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
                         .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
                         .setContentTextSize(20)
                         .build();
-
                 pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
                 pvOptions.show();
                 break;
@@ -189,30 +184,27 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
                 break;
         }
     }
-
-
     private void CreateCard(String FullName, String Province, String City, String District, String Address, String ManagerName, String ManagerSex, String ManagerEmail) {
-
         OkUtils.getInstances().httpTokenPost(context, JavaConstant.Company, JavaParamsUtils.getInstances().
-                Company(FullName, Province, City, District, Address, ManagerName, ManagerSex, ManagerEmail), new TypeToken<EntityObject<Object>>() {
-        }.getType(), new ResultCallBackListener<Object>() {
+                Company(FullName, Province, City, District, Address, ManagerName, ManagerSex, ManagerEmail), new TypeToken<EntityObject<String>>() {
+        }.getType(), new ResultCallBackListener<String>() {
             @Override
             public void onFailure(int errorId, String msg) {
                 hideLoadingDialog();
                 AlertUtils.toast(context, msg);
-
             }
-
             @Override
-            public void onSuccess(EntityObject<Object> response) {
+            public void onSuccess(EntityObject<String> response) {
                 hideLoadingDialog();
                 if (response.getCode() == 10000) {
-                    AlertUtils.toast(context, "添加成功");
-                    EventBus.getDefault().post(new CardCompleteEvent(true));
-                    finish();
+                    if (!TextUtils.isEmpty(response.getContent())){
+                        AlertUtils.toast(context, "添加成功");
+                        SettingUtils.putToken(response.getContent());
+                        EventBus.getDefault().post(new CardCompleteEvent(true));
+                        finish();
+                    }
                 } else {
                     AlertUtils.toast(context, response.getMessage());
-
                 }
 
 
@@ -242,7 +234,7 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
                 dataMap.put(event.getType(), event.getContent());
                 isComplete();
                 break;
-            case ModifyDataActivity.TYPE_NMAE:
+            case ModifyDataActivity.TYPE_NAME:
                 nameEd.setText(event.getContent());
                 dataMap.put(event.getType(), event.getContent());
                 isComplete();
@@ -321,7 +313,5 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
              */
             options3Items.add(Province_AreaList);
         }
-
-
     }
 }

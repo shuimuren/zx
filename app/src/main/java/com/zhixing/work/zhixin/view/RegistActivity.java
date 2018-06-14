@@ -220,9 +220,10 @@ public class RegistActivity extends BaseTitleActivity {
             }
         });
     }
+
     private void Regist(String phone, String password, String code) {
-        OkUtils.getInstances().httpPost(context, JavaConstant.goRegist, JavaParamsUtils.getInstances().Registered(phone, password, type, code), new TypeToken<EntityObject<Object>>() {
-        }.getType(), new ResultCallBackListener<Object>() {
+        OkUtils.getInstances().httpPost(context, JavaConstant.goRegist, JavaParamsUtils.getInstances().Registered(phone, password, type, code), new TypeToken<EntityObject<String>>() {
+        }.getType(), new ResultCallBackListener<String>() {
             @Override
             public void onFailure(int errorId, String msg) {
                 hideLoadingDialog();
@@ -230,11 +231,16 @@ public class RegistActivity extends BaseTitleActivity {
             }
 
             @Override
-            public void onSuccess(EntityObject<Object> response) {
+            public void onSuccess(EntityObject<String> response) {
                 hideLoadingDialog();
-                AlertUtils.toast(context, "注册成功");
-                startActivity(new Intent(context, LoginActivity.class));
-                finish();
+                if (!TextUtils.isEmpty(response.getContent())) {
+                    AlertUtils.toast(context, "注册成功");
+                    startActivity(new Intent(context, LoginActivity.class));
+                    finish();
+                } else {
+                    AlertUtils.toast(context, response.getMessage());
+                }
+
 
             }
         });

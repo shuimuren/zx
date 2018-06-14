@@ -380,7 +380,7 @@ public class EditorialBasisActivity extends BaseTitleActivity {
 
     private void submit(RequestBody body) {
 
-        OkUtils.getInstances().httput(body, context, JavaConstant.personalinfo, JavaParamsUtils.getInstances().personalinfo(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpPut(body, context, JavaConstant.personalinfo, JavaParamsUtils.getInstances().personalinfo(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {

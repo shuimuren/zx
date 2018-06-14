@@ -63,4 +63,32 @@ public class JavaConstant {
     public static final String Company = basehttp + "Company";
 
 
+    //添加产品
+    public static final String CompanyProduct = basehttp + "CompanyProduct";
+    //添加高管
+    public static final String CompanySeniorManager = basehttp + "CompanySeniorManager";
+    //公司大事件
+    public static final String CompanyHistory = basehttp + "CompanyHistory";
+    //获取公司卡牌正面信息
+    public static final String CompanyCard = basehttp + "Company/Card";
+    //公司简介
+    public static final String CompanyIntro = basehttp + "Company/Intro";
+
+
+    //公司部门
+    public static final String Department = basehttp + "Department";
+
+    //获取公司的所有员工
+    public static final String DepartmentMember = basehttp + "Department/DepartmentMember";
+
+    //邀请进部门
+    public static final String Invite = basehttp + "Department/Invite";
+
+    //获取部门员工列表
+    public static final String Staff = basehttp + "Department/Staff";
+
+
+
+
+
 }

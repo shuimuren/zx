@@ -174,7 +174,6 @@ public class AddWorkActivity extends BaseTitleActivity {
                         addWork(gson.toJson(list));
                     }
                 }
-
             }
         });
         if (bean != null) {
@@ -275,7 +274,6 @@ public class AddWorkActivity extends BaseTitleActivity {
                 );
                 break;
             case R.id.delete:
-
                 deleteDialog = new DeleteDialog(context, "是否删除该工作经验", "", new DeleteDialog.OnItemClickListener() {
                     @Override
                     public void OnItemClick(int index, Dialog dialog) {
@@ -365,7 +363,7 @@ public class AddWorkActivity extends BaseTitleActivity {
 
     //更新数据
     private void upWork(RequestBody body) {
-        OkUtils.getInstances().httput(body, context, JavaConstant.WorkBackground, JavaParamsUtils.getInstances().upWork(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpPut(body, context, JavaConstant.WorkBackground, JavaParamsUtils.getInstances().upWork(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, final String msg) {
@@ -412,7 +410,6 @@ public class AddWorkActivity extends BaseTitleActivity {
 
     //删除经历
     private void deleteData(RequestBody body) {
-
         OkUtils.getInstances().httpDelete( context, JavaConstant.WorkBackground + "?Id=" + bean.getId(), JavaParamsUtils.getInstances().deleteWork(bean.getId() + ""), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override

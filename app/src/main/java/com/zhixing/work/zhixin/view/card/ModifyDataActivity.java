@@ -28,12 +28,20 @@ public class ModifyDataActivity extends BaseTitleActivity {
     public static final String TYPE = "type";//类型
     public static final String TYPE_TITLE = "title";//标题
     public static final String TYPE_MAILBOX = "mail";//邮箱
-    public static final String TYPE_NMAE = "name";//名字
+    public static final String TYPE_NAME = "name";//名字
     public static final String TYPE_NICKNAME = "nakename";//昵称
     public static final String TYPE_MOTTO = "motto";//座右铭
     public static final String TYPE_SCHOOL = "school";
     public static final String TYPE_CERTIFICATE_NAME = "certificate_name";//证书名称
     public static final String TYPE_COMPANY_NAME = "company_name";//公司名字
+    public static final String TYPE_PRODUCT_NAME = "product_name";//产品名字
+    public static final String TYPE_MANAGER_NAME = "manager_name";//高管名字
+    public static final String TYPE_MANAGER_POSITION = "manager_position";//高管职位
+    public static final String TYPE_PRODUCT_WEBSITE = "product_website";//产品官网
+    public static final String CORPORATE_ABBREVIATION = "CORPORATE_ABBREVIATION";//公司简称
+    public static final String EVENT_NAME = "event_name";//事件名称
+    public static final String COMPANY_WEBSITE = "company_website";//公司官网
+    public static final String DEPARTMENT_NAME = "department_name";//部门名字
     public static final String TYPE_POST = "post";//工作岗位
     public static final String TYPE_DEPARTMENT = "department";//所属部门
     public static final String TYPE_ID = "id";//身份证号
@@ -42,7 +50,6 @@ public class ModifyDataActivity extends BaseTitleActivity {
     public static final String TYPE_PROJECT_URL = "project_url";
     public static final String TYPE_PROJECT_ROLE = "project_role";
     public static final String TYPE_NATION = "nation";//民族
-
     public static final String TYPE_CONTENT = "content";//内容
 
     @Override
@@ -52,8 +59,8 @@ public class ModifyDataActivity extends BaseTitleActivity {
         ButterKnife.bind(this);
         title = getIntent().getStringExtra("title");
         type = getIntent().getStringExtra("type");
-        context=this;
-        content=getIntent().getStringExtra(TYPE_CONTENT);
+        context = this;
+        content = getIntent().getStringExtra(TYPE_CONTENT);
         if (!TextUtils.isEmpty(content)) {
             edit.setText(content);
             edit.setSelection(content.length());

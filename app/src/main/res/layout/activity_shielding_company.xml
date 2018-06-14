@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zhixing.work.zhixin.view.resume.ShieldingCompanyActivity">
+    tools:context=".view.myCenter.resume.ShieldingCompanyActivity">
 
 
     <LinearLayout

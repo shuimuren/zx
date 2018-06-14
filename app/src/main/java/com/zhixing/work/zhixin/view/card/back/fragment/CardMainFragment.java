@@ -98,7 +98,13 @@ public class CardMainFragment extends SupportFragment {
                 career.setBackgroundResource(R.drawable.btn_nor);
                 showHideFragment(mFragments[FIRST], mFragments[prePosition]);
                 prePosition = FIRST;
+
+
                 basics_bt.setText("基础");
+                seniority.setText("资");
+                skill.setText("技");
+                fate.setText("缘");
+                career.setText("生");
             }
         });
         seniority.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +117,12 @@ public class CardMainFragment extends SupportFragment {
                 career.setBackgroundResource(R.drawable.btn_nor);
                 showHideFragment(mFragments[SECOND], mFragments[prePosition]);
                 prePosition = SECOND;
+
+                basics_bt.setText("基");
                 seniority.setText("资质");
+                skill.setText("技");
+                fate.setText("缘");
+                career.setText("生");
 
             }
         });
@@ -126,7 +137,11 @@ public class CardMainFragment extends SupportFragment {
                 showHideFragment(mFragments[OTHER], mFragments[prePosition]);
                 prePosition = OTHER;
 
+                basics_bt.setText("基");
+                seniority.setText("资");
                 skill.setText("技能");
+                fate.setText("缘");
+                career.setText("生");
 
             }
         });
@@ -140,7 +155,14 @@ public class CardMainFragment extends SupportFragment {
                 career.setBackgroundResource(R.drawable.btn_nor);
                 showHideFragment(mFragments[FIND], mFragments[prePosition]);
                 prePosition = FIND;
-                skill.setText("缘分");
+
+
+
+                basics_bt.setText("基");
+                seniority.setText("资");
+                skill.setText("技");
+                fate.setText("缘分");
+                career.setText("生");
 
             }
         });
@@ -154,7 +176,12 @@ public class CardMainFragment extends SupportFragment {
                 career.setBackgroundResource(R.drawable.btn_pre);
                 showHideFragment(mFragments[THIRD], mFragments[prePosition]);
                 prePosition = THIRD;
-                career.setText("生涯");
+
+                basics_bt.setText("基");
+                seniority.setText("资");
+                skill.setText("技");
+                fate.setText("缘");
+                career.setText("生");
 
             }
         });

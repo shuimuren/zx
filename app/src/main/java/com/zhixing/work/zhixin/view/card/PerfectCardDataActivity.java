@@ -625,7 +625,7 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
         pvOptions.show();
     }
     private void submit(RequestBody body) {
-        OkUtils.getInstances().httput(body, context, JavaConstant.personalinfo, JavaParamsUtils.getInstances().personalinfo(), new TypeToken<EntityObject<Object>>() {
+        OkUtils.getInstances().httpPut(body, context, JavaConstant.personalinfo, JavaParamsUtils.getInstances().personalinfo(), new TypeToken<EntityObject<Object>>() {
         }.getType(), new ResultCallBackListener<Object>() {
             @Override
             public void onFailure(int errorId, String msg) {

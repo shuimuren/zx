@@ -86,8 +86,6 @@ public class IdAuthenticationActivity extends BaseTitleActivity {
     @BindView(R.id.back_iv)
     ImageView backIv;
     private StsToken stsToken;
-    private File photoFile;
-    private String photoPath;
 
     public static final int REQUEST_CAMERA = 106;
     private int type;
@@ -99,6 +97,8 @@ public class IdAuthenticationActivity extends BaseTitleActivity {
     private int isUploadCount;
     private String upLoadImages;//上传图片组
     private List<AlbumItem> upImages = new ArrayList<>();
+    private File photoFile;
+    private String photoPath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

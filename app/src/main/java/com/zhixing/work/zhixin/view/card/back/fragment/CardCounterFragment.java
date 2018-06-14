@@ -335,6 +335,7 @@ public class CardCounterFragment extends SupportFragment {
         }
 
         political.setText(cardBack.getPoliticsFace());
+
         idNo.setText(cardBack.getIdCard());
         if (cardBack.getHouseholdType() == null) {
 

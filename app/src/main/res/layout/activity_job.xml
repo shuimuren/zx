@@ -5,15 +5,13 @@
     xmlns:zhy="http://sch-emas.android.com/apk/resauto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zhixing.work.zhixin.view.resume.WorkPlaceActivity">
+    tools:context=".view.myCenter.resume.WorkPlaceActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <LinearLayout
-
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50">
             <TextView
@@ -25,7 +23,6 @@
                 android:text="已选职业"
                 android:textColor="@color/color_303030"
                 android:textSize="@dimen/font_size_18sp" />
-
             <TextView
                 android:id="@+id/number"
                 android:layout_width="wrap_content"
@@ -36,22 +33,16 @@
                 android:textColor="@color/color_303030"
                 android:textSize="@dimen/font_size_16sp" />
         </LinearLayout>
-
-
-
-
         <com.zhy.view.flowlayout.TagFlowLayout
             android:id="@+id/id_flowlayout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:padding="20dp"
-            zhy:max_select="-1"
-            >
+            zhy:max_select="-1">
         </com.zhy.view.flowlayout.TagFlowLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/job_list"
                 android:layout_width="match_parent"

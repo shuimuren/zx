@@ -141,6 +141,7 @@ public class OkUtils<T> {
                         .addHeader("version", BuildConfig.VERSION_NAME).//打印版本
                         addHeader(ACCESSID, accessId).
                         addHeader(TIMESTAMP, timer).
+                        addHeader(TOKEN, SettingUtils.getToken()).
                         addHeader(NONCE, randoms).
                         addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
                         .build().execute(new StringCallback() {
@@ -188,6 +189,7 @@ public class OkUtils<T> {
                         addHeader(ACCESSID, accessId).
                         addHeader(TIMESTAMP, timer).
                         addHeader(NONCE, randoms).
+                        addHeader(TOKEN, SettingUtils.getToken()).
                         addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
                         .build().execute(new StringCallback() {
                     @Override
@@ -437,7 +439,7 @@ public class OkUtils<T> {
         delete( context, url, param, classType, callback);
     }
 
-    public void httput(final RequestBody requestBody, final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
+    public void httpPut(final RequestBody requestBody, final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
         put(requestBody, context, url, param, classType, callback);
     }
 

@@ -107,4 +107,16 @@ public class GlideUtils extends AppGlideModule {
                 .into(imageView);
 
     }
+    /**
+
+     * @param imageView 圆形头像本地
+     */
+    public void loadIconInto(Context context, String url, ImageView imageView) {
+        Glide.with(context).load(url).
+                apply(RequestOptions.bitmapTransform(new CircleCrop())
+                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE)))
+                .apply( new RequestOptions().skipMemoryCache( true ))
+                .into(imageView);
+
+    }
 }

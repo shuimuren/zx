@@ -204,7 +204,6 @@ public class BitmapUtils {
     public static void createPhotoCropFragment(ScoreFragment fragment, Uri imageUri, Uri outPutUri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         /*
-
         */
         intent.setDataAndType(imageUri, "image/*");
         // 设置裁剪

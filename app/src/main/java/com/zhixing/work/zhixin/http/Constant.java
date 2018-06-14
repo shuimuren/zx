@@ -15,6 +15,8 @@ public class Constant {
     public static final String BASE = absolutePath + File.separator + "zhixin/";
     // 图片缓存
     public static final String CACHE_DIR_IMAGE = BASE + "image/";
+    //截图目录
+    public static final String CACHE_DIR_SCREENSHOT = BASE + "screenshot/";
     // 缩略图缓存
     public static final String THUMBNAIL_DIR_IMAGE = BASE + "thumbnail/";
     // 地图截图缓存
@@ -30,9 +32,6 @@ public class Constant {
     public static final int IMAGE_QUALITY = 80;
     //图片裁剪
     public static final int IMAGE_CROP = 1001;
-
-
-
     static {
         File f1 = new File(CACHE_DIR_IMAGE);
         File f2 = new File(THUMBNAIL_DIR_IMAGE);
@@ -40,6 +39,7 @@ public class Constant {
         File f4 = new File(VOICE_DIR);
         File f5 = new File(DB_DIR);
         File f6 = new File(UPDATE_FILE_DIR);
+        File f7 = new File(CACHE_DIR_SCREENSHOT);
         if (!f1.exists()) {
             f1.mkdirs();
         }
@@ -57,6 +57,9 @@ public class Constant {
         }
         if (!f6.exists()) {
             f6.mkdirs();
+        }
+        if (!f6.exists()) {
+            f7.mkdirs();
         }
     }
 

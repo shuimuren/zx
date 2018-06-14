@@ -206,7 +206,7 @@ public class AddCertificateActivity extends BaseTitleActivity {
 
     //更新数据
     private void upCertificate(RequestBody body) {
-        OkUtils.getInstances().httput(body, context, JavaConstant.CertificateBackground, JavaParamsUtils.getInstances().upCertificate(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpPut(body, context, JavaConstant.CertificateBackground, JavaParamsUtils.getInstances().upCertificate(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, final String msg) {

@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class SelectImageActivity extends BaseTitleActivity implements AdapterView.OnItemClickListener, View.OnClickListener{
+public class SelectImageActivity extends BaseTitleActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
     public static final String LIMIT = "limit";//可选几张图片
     public static final int REQUEST_AVATAR = 110;  // 头像请求
     public static final int REQUEST_DYNAMIC = 111;//发布动态
@@ -52,6 +52,7 @@ public class SelectImageActivity extends BaseTitleActivity implements AdapterVie
         initView();
         scanImages();
     }
+
     private void initView() {
         gridView = (GridView) findViewById(R.id.gridView);
         gridView.setOnItemClickListener(this);
@@ -87,7 +88,11 @@ public class SelectImageActivity extends BaseTitleActivity implements AdapterVie
                 item.setFilePath(file.getAbsolutePath());
 
                 item.setTime(cursor.getLong(cursor.getColumnIndex(MediaStore.MediaColumns.DATE_ADDED)));
-                albumList.add(item);
+                if (item.getFilePath().equals("/storage/emulated/0/cutImage.png")) {
+                } else {
+
+                    albumList.add(item);
+                }
 
             }
             cursor.close();
@@ -113,7 +118,6 @@ public class SelectImageActivity extends BaseTitleActivity implements AdapterVie
         }
         cursor.close();
     }
-
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
         AlbumItem item = adapter.getItem(position);

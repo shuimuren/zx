@@ -64,6 +64,8 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.FormBody;
+import okhttp3.RequestBody;
 import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
@@ -99,12 +101,12 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
     private String LegalPersonName;
     private String BusinessLicensePic;
     private List<String> natureList;
-    private String natureType="";
+    private String natureType = "";
 
 
     private List<AlbumItem> publishImages;
     private PublicEducationAdapter adapter;
-    private static final int MAX_UPLOAD_IMAGE = 3;//最多上传3张
+    private static final int MAX_UPLOAD_IMAGE = 1;//最多上传3张
     public static final int REQUEST_CAMERA = 106;
     private String token = "";
     private File photoFile;
@@ -114,15 +116,12 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
     private List<AlbumItem> selectedImages;
     private List<AlbumItem> upImages = new ArrayList<AlbumItem>();
     private StsToken stsToken;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enterprise_certification);
         ButterKnife.bind(this);
-
         setTitle("公司认证");
-
         publishImages = new ArrayList<>();
         publishImages.add(null);
         getOssToken();
@@ -198,7 +197,6 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
     }
 
 
-
     private void takeAPicture() {
         photoPath = Constant.CACHE_DIR_IMAGE + "/" + AppUtils.getUUID();
         photoFile = new File(photoPath);
@@ -244,9 +242,9 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
                         //返回的分别是三个级别的选中位置
                         String s = natureList.get(options1);
                         if (s.equals("其他")) {
-                            natureType = 0 + "";
+                            NatureOfUnit = 0 + "";
                         } else {
-                            natureType = options1 + 1 + "";
+                            NatureOfUnit = options1 + 1 + "";
                         }
                         corporateNature.setText(s);
                     }
@@ -288,6 +286,10 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
                         if (null != albumItem) {
                             list.add(albumItem.getFilePath());
                         }
+                    }
+                    if (list.isEmpty()) {
+                        AlertUtils.toast(context, "还未选择图片");
+                        return;
                     }
                     compressWithLs(list);
                 } else {
@@ -378,29 +380,28 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
     private void upload(final AlbumItem albumItem, final int index) {
         String thumbnail = albumItem.getFilePath();
         String resultpath = thumbnail;
-
         String UUID = AppUtils.getUUID();
         final int size = publishImages.size();
-        ALiYunOssFileLoader.asyncUpload(context, stsToken, ALiYunFileURLBuilder.BUCKET_SECTET, ALiYunFileURLBuilder.PERSONALEDUCATION + UUID,
+        ALiYunOssFileLoader.asyncUpload(context, stsToken, ALiYunFileURLBuilder.BUCKET_SECTET, ALiYunFileURLBuilder.BUSINESSLICENSE + UUID,
                 resultpath, new ALiYunOssFileLoader.OssFileUploadListener() {
                     @Override
                     public void onUploadSuccess(String objectKey) {
                         isUploadCount++;
-
-
                         if (index == 0) {
                             upLoadImages = "";
                             upLoadImages = objectKey;
                         } else {
                             upLoadImages = upLoadImages + "," + objectKey;
                         }
-                        String path = Environment.getExternalStorageDirectory() + "/zhixin/image/";
                         if (isUploadCount == size - (publishImages.get(size - 1) == null ? 1 : 0)) {
-                            hideLoadingDialog();
                             LOG.i(TAG, "动态图片上传成功：" + upLoadImages);
-                            upImages.clear();
-                            deleteDir(path);
-                            EventBus.getDefault().post(new UploadImageFinishEvent(upLoadImages.toString()));
+                            RequestBody body = new FormBody.Builder()
+                                    .add("FullName", FullName)
+                                    .add("NatureOfUnit", NatureOfUnit)
+                                    .add("LegalPersonName", LegalPersonName)
+                                    .add("BusinessLicensePic", objectKey)
+                                    .build();
+                            putCertification(body);
                         }
                         LOG.i(TAG, "动态图片上传成功：" + objectKey);
                     }
@@ -455,7 +456,6 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
         }
         adapter.notifyDataSetChanged();
     }
-
 
 
     @Override
@@ -522,4 +522,23 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
         AlertUtils.toast(context, "图片上传成功,请耐心等待审核");
         finish();
     }
+    private void putCertification(RequestBody body) {
+        OkUtils.getInstances().httpatch(body, context, JavaConstant.BusinessLicense, JavaParamsUtils.getInstances().BusinessLicense(), new TypeToken<EntityObject<Boolean>>() {
+        }.getType(), new ResultCallBackListener<Boolean>() {
+            @Override
+            public void onFailure(int errorId, String msg) {
+                AlertUtils.toast(context, msg);
+            }
+            @Override
+            public void onSuccess(EntityObject<Boolean> response) {
+                upImages.clear();
+                String path = Environment.getExternalStorageDirectory() + "/zhixin/image/";
+                deleteDir(path);
+                EventBus.getDefault().post(new UploadImageFinishEvent(upLoadImages.toString()));
+
+            }
+        });
+    }
+
+
 }

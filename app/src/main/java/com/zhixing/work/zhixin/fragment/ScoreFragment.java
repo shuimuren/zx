@@ -227,7 +227,6 @@ public class ScoreFragment extends BaseMainFragment {
                 AlertUtils.toast(context, "服务器错误");
                 getOssToken();
             }
-
             @Override
             public void onSuccess(EntityObject<CompanyCard> response) {
                 if (response.getCode() == 10000) {
@@ -236,6 +235,7 @@ public class ScoreFragment extends BaseMainFragment {
                         rlEnterpriseNocard.setVisibility(View.VISIBLE);
                         rlEnterpriseData.setVisibility(View.GONE);
                     } else {
+                        img_card.setImageResource(R.drawable.icon_1_light);
                         rlEnterpriseNocard.setVisibility(View.GONE);
                         rlEnterpriseData.setVisibility(View.VISIBLE);
                         companyCard = response.getContent();

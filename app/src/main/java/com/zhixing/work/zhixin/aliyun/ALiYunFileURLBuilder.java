@@ -25,8 +25,8 @@ public class ALiYunFileURLBuilder {
     public static final String BASE = "prod/"; //正式环境
     public static final String PERSONALIDCARD = "personalIdCard/";  // 身份证
     public static final String PERSONALPORTRAIT = "personalPortrait/";  // 简历头像
-    public static final String businessLicense = "company/businessLicense/";//企业营业执照图】
-    public static final String managerIdCard = "company/managerIdCard/";//企业管理员身份证图】
+    public static final String BUSINESSLICENSE = "company/businessLicense/";//企业营业执照图】
+    public static final String MANAGERIDCARD = "company/managerIdCard/";//企业管理员身份证图】
     public static final String PERSONALEDUCATION = "personalEducation/";   //用户学历认证上传】
     public static final String PERSONALCERTIFICATE = "personalCertificate/";//用户证书认证上传】
 

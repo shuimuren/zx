@@ -73,11 +73,8 @@ public class JavaConstant {
     public static final String CompanyCard = basehttp + "Company/Card";
     //公司简介
     public static final String CompanyIntro = basehttp + "Company/Intro";
-
-
     //公司部门
     public static final String Department = basehttp + "Department";
-
     //获取公司的所有员工
     public static final String DepartmentMember = basehttp + "Department/DepartmentMember";
 
@@ -86,6 +83,11 @@ public class JavaConstant {
 
     //获取部门员工列表
     public static final String Staff = basehttp + "Department/Staff";
+
+    //提交公司营业执照
+    public static final String BusinessLicense = basehttp + "CompanyCertification/BusinessLicense";
+    //提交公司法人认证
+    public static final String IdCard = basehttp + "CompanyCertification/IdCard";
 
 
 }

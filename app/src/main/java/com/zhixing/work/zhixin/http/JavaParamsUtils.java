@@ -404,6 +404,20 @@ public class JavaParamsUtils {
         params.put("departmentId", departmentId);
         return params;
     }
+    //  公司营业执照
+    public Map<String, String> BusinessLicense(
+    ) {
+        Map<String, String> params = new HashMap<>();
+
+        return params;
+    }
+    //  公司法人认证
+    public Map<String, String> IdCard(
+    ) {
+        Map<String, String> params = new HashMap<>();
+
+        return params;
+    }
 
 
 }

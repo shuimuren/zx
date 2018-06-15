@@ -20,6 +20,7 @@
             android:paddingRight="@dimen/dp_10">
 
             <TextView
+                android:id="@+id/authentication"
 
                 android:layout_width="0dp"
                 android:layout_height="match_parent"

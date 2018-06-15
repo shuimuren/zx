@@ -53,6 +53,8 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.FormBody;
+import okhttp3.RequestBody;
 import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
@@ -85,6 +87,9 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
     private StsToken stsToken;
     private List<AlbumItem> selectedImages;
     private AlbumItem albumItem;
+    private String ManagerName;
+    private String ManagerIdCard;
+    private String ManagerIdCardPic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +100,6 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
         setRightText1("保存");
         initView();
         getOssToken();
-
     }
 
     private void initView() {
@@ -110,13 +114,19 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
                             AlertUtils.toast(context, "请上传手持身份证");
                             return;
                         }
+                        if (ManagerName == null) {
+                            AlertUtils.toast(context, "请输入姓名");
+                            return;
+                        }
+                        if (ManagerIdCard == null) {
+                            AlertUtils.toast(context, "请输入身份证号码");
+                            return;
+                        }
 
 
-                            final List<String> list = new ArrayList<String>();
-                           list.add(albumItem.getFilePath());
-                            compressWithLs(list);
-
-
+                        final List<String> list = new ArrayList<String>();
+                        list.add(albumItem.getFilePath());
+                        compressWithLs(list);
 
                     }
                 });
@@ -169,11 +179,11 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
         switch (event.getType()) {
             case ModifyDataActivity.TYPE_ID: //send the video
                 idEd.setText(event.getContent());
-                IdCard = event.getContent();
+                ManagerIdCard = event.getContent();
                 break;
             case ModifyDataActivity.TYPE_NAME: //send the video
                 nameEd.setText(event.getContent());
-                Name = event.getContent();
+                ManagerName = event.getContent();
                 break;
 
 
@@ -259,13 +269,15 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
                         } else {
                             upLoadImages = upLoadImages + "," + objectKey;
                         }
-                        String path = Environment.getExternalStorageDirectory() +"/zhixin/image/";
-                        if (isUploadCount == 1) {
-                            hideLoadingDialog();
-                            upImages.clear();
-                            deleteDir(path);
-                            EventBus.getDefault().post(new UploadImageFinishEvent(upLoadImages));
-                        }
+                        String path = Environment.getExternalStorageDirectory() + "/zhixin/image/";
+                        RequestBody body = new FormBody.Builder()
+                                .add("ManagerName", ManagerName)
+                                .add("ManagerIdCard", ManagerIdCard)
+                                .add("ManagerIdCardPic", objectKey)
+
+                                .build();
+
+                        putCertification(body)
                         LOG.i(TAG, "动态图片上传成功：" + objectKey);
                     }
 
@@ -397,4 +409,25 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
         //dir.delete();// 删除目录本身
     }
 
+    private void putCertification(RequestBody body) {
+        OkUtils.getInstances().httpatch(body, context, JavaConstant.IdCard, JavaParamsUtils.getInstances().IdCard(), new TypeToken<EntityObject<Boolean>>() {
+        }.getType(), new ResultCallBackListener<Boolean>() {
+            @Override
+            public void onFailure(int errorId, String msg) {
+                hideLoadingDialog();
+                AlertUtils.toast(context, msg);
+            }
+
+            @Override
+            public void onSuccess(EntityObject<Boolean> response) {
+                hideLoadingDialog();
+                upImages.clear();
+
+                String path = Environment.getExternalStorageDirectory() + "/zhixin/image/";
+                deleteDir(path);
+                EventBus.getDefault().post(new UploadImageFinishEvent(upLoadImages.toString()));
+
+            }
+        });
+    }
 }

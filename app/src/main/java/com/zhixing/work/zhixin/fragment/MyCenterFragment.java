@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseMainFragment;
@@ -37,6 +38,8 @@ public class MyCenterFragment extends BaseMainFragment {
     LinearLayout llSetthing;
     @BindView(R.id.ll_organize)
     LinearLayout llOrganize;
+    @BindView(R.id.authentication)
+    TextView authentication;
     private Unbinder unbinder;
     private Context context;
     private Token token;
@@ -65,6 +68,8 @@ public class MyCenterFragment extends BaseMainFragment {
             llOrganize.setVisibility(View.GONE);
 
         } else {
+
+            authentication.setText("公司认证");
             llResume.setVisibility(View.GONE);
         }
 
@@ -78,12 +83,16 @@ public class MyCenterFragment extends BaseMainFragment {
 
     @Override
     public void fetchData() {
+
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
+
     }
 
     @OnClick({R.id.ll_authentication, R.id.ll_resume, R.id.ll_setthing, R.id.ll_organize})

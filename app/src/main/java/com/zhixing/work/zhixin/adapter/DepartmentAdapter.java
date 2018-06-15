@@ -14,6 +14,7 @@ import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.bean.Department;
 import com.zhixing.work.zhixin.bean.Resume;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
+import com.zhixing.work.zhixin.util.Utils;
 
 import java.util.List;
 
@@ -85,7 +86,12 @@ public class DepartmentAdapter extends RecyclerView.Adapter<DepartmentAdapter.Vi
 
         Department department = list.get(position);
         holder.name.setText(department.getDepartmentName());
-     
+        int number = Utils.searchStaff(department.getDepartmentId());
+        if (number != 0) {
+            holder.number.setText(number + "");
+        }
+
+
         if (mOnItemClickListener != null) {
             holder.ll_department.setOnClickListener(new View.OnClickListener() {
                 @Override

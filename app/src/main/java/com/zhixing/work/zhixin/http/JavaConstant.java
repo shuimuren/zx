@@ -88,7 +88,4 @@ public class JavaConstant {
     public static final String Staff = basehttp + "Department/Staff";
 
 
-
-
-
 }

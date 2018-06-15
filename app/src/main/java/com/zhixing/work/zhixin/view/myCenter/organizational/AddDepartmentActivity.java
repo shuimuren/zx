@@ -112,7 +112,6 @@ public class AddDepartmentActivity extends BaseTitleActivity {
                 hideLoadingDialog();
                 AlertUtils.toast(context, msg);
             }
-
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();

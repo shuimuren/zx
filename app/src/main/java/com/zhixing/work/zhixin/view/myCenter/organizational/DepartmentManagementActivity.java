@@ -90,7 +90,7 @@ public class DepartmentManagementActivity extends BaseTitleActivity {
                 bundle.putSerializable("bean", list.get(position));
                 intent.putExtras(bundle);
                 startActivity(intent);
-
+                Math.floor(60.5);
             }
 
             @Override

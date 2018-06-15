@@ -24,9 +24,13 @@ import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.app.ZxApplication;
 import com.zhixing.work.zhixin.bean.AddressJson;
+import com.zhixing.work.zhixin.bean.Education;
 import com.zhixing.work.zhixin.bean.HotCity;
 import com.zhixing.work.zhixin.bean.IndustryType;
 import com.zhixing.work.zhixin.bean.JobType;
+import com.zhixing.work.zhixin.bean.Staff;
+import com.zhixing.work.zhixin.bean.StaffList;
+import com.zhixing.work.zhixin.bean.Staffs;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -41,6 +45,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -869,6 +874,37 @@ public class Utils {
     }
 
     /**
+     * 搜索员工
+     */
+    public static int searchStaff(int id) {
+        StaffList bean = new StaffList();
+        HashSet set = new HashSet<Integer>();
+        List<StaffList> list = new ArrayList<>();
+        list = SettingUtils.getStaffList();
+        List<StaffList> datalist = new ArrayList<>();
+        list = SettingUtils.getStaffList();
+        try {
+            bean = getStaff(list, id);
+            if (!bean.getStaffIds().isEmpty()) {
+                set.addAll(bean.getStaffIds());
+            }
+
+            if (!bean.getChildOrgs().isEmpty()) {
+                try {
+                    set.addAll(getPersonnel(bean.getChildOrgs()));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        return set.size();
+    }
+
+    /**
      * 判断点击事件是否是连续点击
      *
      * @return
@@ -1353,4 +1389,118 @@ public class Utils {
         }
 
     }
+
+
+    public static List<StaffList> getChildOrgs(List<StaffList> childList, int parentId) throws Exception {
+        List<StaffList> listParentOrgs = new ArrayList<StaffList>();
+        List<StaffList> listNotParentOrgs = new ArrayList<StaffList>();
+        // 遍历childList，找出所有的根节点和非根节点
+        if (childList != null && childList.size() > 0) {
+            for (StaffList record : childList) {
+                // 对比找出父节点
+                if (record.getParentId() == parentId) {
+                    listParentOrgs.add(record);
+                } else {
+                    listNotParentOrgs.add(record);
+                }
+            }
+        }
+        // 查询子节点
+        if (listParentOrgs.size() > 0) {
+            for (StaffList record : listParentOrgs) {
+                // 递归查询子节点
+                record.setChildOrgs(getChildOrgs(listNotParentOrgs, record.getDepartmentId()));
+            }
+        }
+        return listParentOrgs;
+    }
+
+    public static List<Integer> getPersonnel(List<StaffList> staffList) throws Exception {
+        List<Integer> list = new ArrayList<Integer>();
+        List<StaffList> data = new ArrayList<StaffList>();
+
+        for (StaffList org : staffList) {
+            if (!org.getStaffIds().isEmpty()) {
+                list.addAll(org.getStaffIds());
+            }
+            if (!org.getChildOrgs().isEmpty()) {
+                data.addAll(org.getChildOrgs());
+            }
+
+        }
+        if (!data.isEmpty()) {
+            getPersonnel(data);
+        }
+        return list;
+    }
+
+
+    public static StaffList getStaff(List<StaffList> staffList, int id) throws Exception {
+        StaffList staffListBean = new StaffList();
+        ;
+
+        List<StaffList> data = new ArrayList<StaffList>();
+        data.clear();
+        Boolean isdata = false;
+        for (StaffList org : staffList) {
+            if (org.getDepartmentId() == id) {
+                staffListBean = org;
+                isdata = true;
+                break;
+            }
+            if (!org.getChildOrgs().isEmpty()) {
+                data.addAll(org.getChildOrgs());
+            }
+        }
+        if (staffListBean.getParentId() == null) {
+            if (!data.isEmpty()) {
+              return   getStaff(data, id);
+            }
+        }
+        return staffListBean;
+
+    }
+
+    public static List<StaffList> getTreeOrgs(List<StaffList> allOrgs) throws Exception {
+        List<StaffList> listParentRecord = new ArrayList<StaffList>();
+        List<StaffList> listNotParentRecord = new ArrayList<StaffList>();
+        // 第一步：遍历allOrgs找出所有的根节点和非根节点
+        if (allOrgs != null && allOrgs.size() > 0) {
+            for (StaffList org : allOrgs) {
+                if (0 == org.getParentId()) {
+                    listParentRecord.add(org);
+                } else {
+                    listNotParentRecord.add(org);
+                }
+            }
+        }
+        // 第二步： 递归获取所有子节点
+        if (listParentRecord.size() > 0) {
+            for (StaffList record : listParentRecord) {
+                // 添加所有子级
+                record.setChildOrgs(getChildOrgs(listNotParentRecord, record.getDepartmentId()));
+            }
+        }
+        return listParentRecord;
+    }
+
+
+    public static List<StaffList> getLeftTrees(List<Staffs> orgs) throws Exception {
+        //获取所有的记录
+        if (null != orgs && orgs.size() > 0) {
+            List<StaffList> allOrgs = new ArrayList<StaffList>();
+            for (Staffs org : orgs) {
+                StaffList bo = new StaffList();
+                bo.setDepartmentId(org.getDepartmentId());
+                bo.setParentId(org.getParentId());
+                bo.setStaffIds(org.getStaffIds());
+                bo.setParentId(org.getParentId());
+                allOrgs.add(bo);
+            }
+            return getTreeOrgs(allOrgs);
+        }
+        return null;
+    }
+
+
 }

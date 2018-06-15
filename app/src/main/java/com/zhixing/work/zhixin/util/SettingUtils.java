@@ -4,10 +4,17 @@ import android.text.TextUtils;
 
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.zhixing.work.zhixin.bean.AddressJson;
+import com.zhixing.work.zhixin.bean.Staff;
+import com.zhixing.work.zhixin.bean.StaffList;
+import com.zhixing.work.zhixin.bean.Staffs;
 import com.zhixing.work.zhixin.bean.Token;
 import com.zhixing.work.zhixin.http.api.Constant;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class SettingUtils {
 
@@ -51,8 +58,7 @@ public class SettingUtils {
         public static final String HOTLIST = "hotlist"; // 热门城市
         public static final String INDUSTRY = "industry"; // 行业
         public static final String AREALIST = "areaList"; // 区
-
-
+        public static final String STAFFSLIST = "StaffsList"; //公司所有员工
         /**
          * 点赞消息
          */
@@ -70,7 +76,6 @@ public class SettingUtils {
         public static final String TOKENBEAN = "tokenBean"; // token信息
 
     }
-
 
    /* *//**
      * 保存Token对象
@@ -141,6 +146,36 @@ public class SettingUtils {
         return "";
     }
 
+
+    /**
+     * 保存所有员工
+     *
+     * @param staffsList
+     */
+    public static void putStaffList(String staffsList) {
+
+        String list = "";
+        if (!TextUtils.isEmpty(staffsList)) {
+            list = staffsList;
+        }
+        PreferenceUtils.putString(SettingItems.STAFFSLIST, list);
+    }
+
+    /**
+     * 获取所有员工
+     *
+     * @return
+     */
+    public static List<StaffList> getStaffList() {
+      List<StaffList> staffsList = new ArrayList<StaffList>();
+        String list = PreferenceUtils.getString(SettingItems.STAFFSLIST);
+        if (!TextUtils.isEmpty(list)) {
+            staffsList = gson.fromJson(list, new TypeToken<List<StaffList>>() {
+            }.getType());
+            return staffsList;
+        }
+        return staffsList;
+    }
 
     /**
      * 保存provincialList

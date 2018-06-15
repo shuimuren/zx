@@ -14,6 +14,7 @@ import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.bean.Staff;
 import com.zhixing.work.zhixin.bean.Staff;
 import com.zhixing.work.zhixin.util.GlideUtils;
+import com.zhixing.work.zhixin.util.Utils;
 
 import java.util.List;
 
@@ -57,11 +58,13 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
         public ViewHolder(View view) {
             super(view);
         }
+
         private TextView name;
         private ImageView avater;
         private TextView number;
         private RelativeLayout ll_staff;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View convertView = mInflater.inflate(R.layout.item_staff,
@@ -83,7 +86,7 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
         Staff staff = list.get(position);
         holder.name.setText(staff.getStaffNickName());
 
-        GlideUtils.getInstance().loadRoundUserIconInto(context,staff.getStaffAvatar(),holder.avater);
+        GlideUtils.getInstance().loadRoundUserIconInto(context, staff.getStaffAvatar(), holder.avater);
 
 
         if (mOnItemClickListener != null) {

@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.adapter.StaffAdapter;
@@ -17,12 +18,16 @@ import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.Department;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Staff;
+import com.zhixing.work.zhixin.bean.StaffList;
+import com.zhixing.work.zhixin.bean.Staffs;
 import com.zhixing.work.zhixin.dialog.ShareDialog;
 import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.SettingUtils;
+import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import java.util.ArrayList;
@@ -48,9 +53,11 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
     RecyclerView staffListview;
     private List<Department> list = new ArrayList<>();
     private List<Staff> staffList = new ArrayList<>();
+    private List<Staffs> numberList = new ArrayList<>();
     private Department department;
 
     private StaffAdapter adapter;
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +67,9 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
         setTitle("组织架构");
         setRightText1("管理");
         getData();
-
+        getAllnumber();
         initView();
     }
-
     private void initView() {
         adapter = new StaffAdapter(staffList, context);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
@@ -82,7 +88,6 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
 
             }
         });
-
         setRightClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +102,6 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
             }
         });
     }
-
     private void getData() {
         OkUtils.getInstances().httpTokenGet(context, JavaConstant.Department, JavaParamsUtils.getInstances().getCompany(), new TypeToken<EntityObject<List<Department>>>() {
         }.getType(), new ResultCallBackListener<List<Department>>() {
@@ -105,7 +109,6 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
             public void onFailure(int errorId, String msg) {
                 AlertUtils.toast(context, "服务器错误");
             }
-
             @Override
             public void onSuccess(EntityObject<List<Department>> response) {
                 if (response.getCode() == 10000) {
@@ -119,8 +122,29 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
             }
         });
     }
-
-
+    private void getAllnumber() {
+        OkUtils.getInstances().httpTokenGet(context, JavaConstant.DepartmentMember, JavaParamsUtils.getInstances().getCompany(), new TypeToken<EntityObject<List<Staffs>>>() {
+        }.getType(), new ResultCallBackListener<List<Staffs>>() {
+            @Override
+            public void onFailure(int errorId, String msg) {
+                AlertUtils.toast(context, "服务器错误");
+            }
+            @Override
+            public void onSuccess(EntityObject<List<Staffs>> response) {
+                if (response.getCode() == 10000) {
+                    if (!response.getContent().isEmpty()) {
+                        numberList = response.getContent();
+                        try {
+                            List<StaffList> data = Utils.getLeftTrees(numberList);
+                            SettingUtils.putStaffList(gson.toJson(data));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+    }
     private void getStaff() {
         OkUtils.getInstances().httpTokenGet(context, JavaConstant.Staff, JavaParamsUtils.getInstances().getSetff(department.getDepartmentId() + ""), new TypeToken<EntityObject<List<Staff>>>() {
         }.getType(), new ResultCallBackListener<List<Staff>>() {
@@ -128,17 +152,18 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
             public void onFailure(int errorId, String msg) {
                 AlertUtils.toast(context, "服务器错误");
             }
+
             @Override
             public void onSuccess(EntityObject<List<Staff>> response) {
                 if (response.getCode() == 10000) {
                     if (!response.getContent().isEmpty()) {
                         staffList = response.getContent();
-
                     }
                 }
             }
         });
     }
+
     @OnClick(R.id.rl_add_workmate)
     public void onViewClicked() {
         ShareDialog imageDialog = new ShareDialog(context, new ShareDialog.OnItemClickListener() {

@@ -277,7 +277,7 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
 
                                 .build();
 
-                        putCertification(body)
+                        putCertification(body);
                         LOG.i(TAG, "动态图片上传成功：" + objectKey);
                     }
 

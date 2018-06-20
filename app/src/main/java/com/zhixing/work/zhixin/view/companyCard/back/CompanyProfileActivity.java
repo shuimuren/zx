@@ -130,7 +130,6 @@ public class CompanyProfileActivity extends BaseTitleActivity {
                         putExtra(ModifyContentActivity.TYPE_CONTENT, corporateIntroduce.getText().toString()));
                 break;
             case R.id.submit:
-
                 if (TextUtils.isEmpty(companyintro)) {
                     AlertUtils.toast(context, "公司介绍不能为空");
                     return;
@@ -147,12 +146,9 @@ public class CompanyProfileActivity extends BaseTitleActivity {
                 } else {
                     AlertUtils.toast(context, "还未选择图片");
                 }
-
                 break;
         }
     }
-
-
     //获取阿里云的凭证
     private void getOssToken() {
         OkUtils.getInstances().httpTokenGet(context, JavaConstant.getOSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
@@ -161,7 +157,6 @@ public class CompanyProfileActivity extends BaseTitleActivity {
             public void onFailure(int errorId, String msg) {
                 AlertUtils.toast(context, "服务器错误");
             }
-
             @Override
             public void onSuccess(EntityObject<StsToken> response) {
                 if (response.getCode() == 10000) {
@@ -494,7 +489,7 @@ public class CompanyProfileActivity extends BaseTitleActivity {
                     public void run() {
                         if (response.getCode() == 10000) {
                             if (response.getContent()) {
-                                AlertUtils.toast(context, "添加成功");
+                                AlertUtils.toast(context, "修改成功");
                                 EventBus.getDefault().post(new IntroRefreshEvent(true));
                                 finish();
                             } else {

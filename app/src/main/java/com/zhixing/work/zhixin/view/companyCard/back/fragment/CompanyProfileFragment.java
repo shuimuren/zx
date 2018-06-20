@@ -42,7 +42,6 @@ import butterknife.Unbinder;
  * 公司简介
  */
 public class CompanyProfileFragment extends SupportFragment {
-
     @BindView(R.id.perfect_profile)
     Button perfectProfile;
     @BindView(R.id.ll_empty)

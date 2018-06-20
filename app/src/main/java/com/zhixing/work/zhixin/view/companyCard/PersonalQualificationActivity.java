@@ -101,7 +101,6 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
         initView();
         getOssToken();
     }
-
     private void initView() {
         setRightClickListener(new View.OnClickListener() {
             @Override
@@ -173,7 +172,6 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
                 break;
         }
     }
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onModifyEvent(ModifyEvent event) {
         switch (event.getType()) {
@@ -185,17 +183,12 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
                 nameEd.setText(event.getContent());
                 ManagerName = event.getContent();
                 break;
-
-
         }
     }
-
-
     //压缩图片
     //* 压缩图片 Listener 方式
 
     private void compressWithLs(final List<String> photos) {
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -230,9 +223,7 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
 
             }
         }).start();
-
     }
-
 
     //获取阿里云的凭证
     private void getOssToken() {
@@ -257,33 +248,29 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
         String resultpath = thumbnail;
         String UUID = AppUtils.getUUID();
 
-        ALiYunOssFileLoader.asyncUpload(context, stsToken, ALiYunFileURLBuilder.BUCKET_SECTET, ALiYunFileURLBuilder.PERSONALIDCARD + UUID,
+        ALiYunOssFileLoader.asyncUpload(context, stsToken, ALiYunFileURLBuilder.BUCKET_SECTET, ALiYunFileURLBuilder.MANAGERIDCARD + UUID,
                 resultpath, new ALiYunOssFileLoader.OssFileUploadListener() {
                     @Override
                     public void onUploadSuccess(String objectKey) {
                         isUploadCount++;
-
                         if (index == 0) {
                             upLoadImages = "";
                             upLoadImages = objectKey;
                         } else {
                             upLoadImages = upLoadImages + "," + objectKey;
                         }
-                        String path = Environment.getExternalStorageDirectory() + "/zhixin/image/";
+
                         RequestBody body = new FormBody.Builder()
                                 .add("ManagerName", ManagerName)
                                 .add("ManagerIdCard", ManagerIdCard)
                                 .add("ManagerIdCardPic", objectKey)
-
                                 .build();
-
                         putCertification(body);
                         LOG.i(TAG, "动态图片上传成功：" + objectKey);
                     }
 
                     @Override
                     public void onUploadProgress(String objectKey, long currentSize, long totalSize) {
-
                     }
 
                     @Override
@@ -406,9 +393,10 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
             else if (file.isDirectory())
                 deleteDirWihtFile(file); // 递规的方式删除文件夹
         }
-        //dir.delete();// 删除目录本身
+
     }
 
+    //上传认证
     private void putCertification(RequestBody body) {
         OkUtils.getInstances().httpatch(body, context, JavaConstant.IdCard, JavaParamsUtils.getInstances().IdCard(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
@@ -422,12 +410,17 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
                 upImages.clear();
-
                 String path = Environment.getExternalStorageDirectory() + "/zhixin/image/";
                 deleteDir(path);
                 EventBus.getDefault().post(new UploadImageFinishEvent(upLoadImages.toString()));
 
             }
         });
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onTradeAreaEvent(UploadImageFinishEvent event) {
+        AlertUtils.toast(context, "资料上传成功,请耐心等待审核");
+        finish();
     }
 }

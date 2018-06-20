@@ -41,7 +41,6 @@ import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
 public class JobIntensionActivity extends BaseTitleActivity {
-
     @BindView(R.id.occupation)
     TextView occupation;
     @BindView(R.id.lloccupation)
@@ -69,7 +68,6 @@ public class JobIntensionActivity extends BaseTitleActivity {
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private String StartSalary = "0";
     private String EndSalary = "0";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

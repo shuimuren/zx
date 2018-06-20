@@ -24,10 +24,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
-
-
 /**
-
  */
 public class MyCenterFragment extends BaseMainFragment {
     @BindView(R.id.ll_authentication)
@@ -43,14 +40,12 @@ public class MyCenterFragment extends BaseMainFragment {
     private Unbinder unbinder;
     private Context context;
     private Token token;
-
     public static MyCenterFragment newInstance() {
         Bundle args = new Bundle();
         MyCenterFragment fragment = new MyCenterFragment();
         fragment.setArguments(args);
         return fragment;
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_center, container, false);
@@ -63,7 +58,6 @@ public class MyCenterFragment extends BaseMainFragment {
     }
 
     private void initView() {
-
         if (token.getRole() == 10) {
             llOrganize.setVisibility(View.GONE);
 
@@ -74,25 +68,20 @@ public class MyCenterFragment extends BaseMainFragment {
         }
 
     }
-
     @Override
     public void onDestroy() {
         super.onDestroy();
 
     }
-
     @Override
     public void fetchData() {
-
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (unbinder != null) {
             unbinder.unbind();
         }
-
     }
 
     @OnClick({R.id.ll_authentication, R.id.ll_resume, R.id.ll_setthing, R.id.ll_organize})

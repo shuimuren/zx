@@ -80,7 +80,6 @@ public class CompanyMainFragment extends SupportFragment {
             mFragments[EVENT] = findChildFragment(BigEventFragment.class);
         }
     }
-
     private void initView(View view) {
 
         profile = (TextView) view.findViewById(R.id.profile);
@@ -181,12 +180,10 @@ public class CompanyMainFragment extends SupportFragment {
         });
 
     }
-
     @Override
     public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
         super.onFragmentResult(requestCode, resultCode, data);
         if (requestCode == REQ_MSG && resultCode == RESULT_OK) {
-
         }
     }
 

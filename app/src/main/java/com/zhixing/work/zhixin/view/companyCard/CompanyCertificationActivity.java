@@ -35,7 +35,6 @@ public class CompanyCertificationActivity extends BaseTitleActivity {
         setContentView(R.layout.activity_company_certification);
         ButterKnife.bind(this);
         setTitle("公司认证");
-
     }
 
     @OnClick({R.id.ll_company, R.id.ll_identity})

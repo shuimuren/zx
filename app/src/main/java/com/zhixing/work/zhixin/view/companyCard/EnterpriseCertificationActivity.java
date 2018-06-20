@@ -145,7 +145,6 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
             }
         });
     }
-
     private void initView() {
         adapter = new PublicEducationAdapter(this, publishImages);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(context, 3);
@@ -176,7 +175,6 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
                         }
                     });
                     dialog.show();
-
                 } else {
                     if (publishImages.get(publishImages.size() - 1) == null) {
                         publishImages.remove(item);
@@ -188,15 +186,12 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
                     adapter.notifyDataSetChanged();
                 }
             }
-
             @Override
             public void onItemLongClick(View view, int position) {
 
             }
         });
     }
-
-
     private void takeAPicture() {
         photoPath = Constant.CACHE_DIR_IMAGE + "/" + AppUtils.getUUID();
         photoFile = new File(photoPath);
@@ -205,8 +200,6 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
         intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
         startActivityForResult(intentCamera, REQUEST_CAMERA);
     }
-
-
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onModifyEvent(ModifyEvent event) {
         switch (event.getType()) {
@@ -221,7 +214,6 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
                 break;
         }
     }
-
     @OnClick({R.id.rl_corporate_name, R.id.rl_corporate_nature, R.id.rl_name, R.id.submit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -231,7 +223,6 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
                         putExtra(ModifyContentActivity.TYPE, ModifyContentActivity.CORPORATE_NAME).
                         putExtra(ModifyContentActivity.HINT, "与营业照一致...").
                         putExtra(ModifyContentActivity.TYPE_CONTENT, corporateName.getText().toString()));
-
                 break;
             case R.id.rl_corporate_nature:
                 //公司性质
@@ -249,7 +240,7 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
                         corporateNature.setText(s);
                     }
                 })
-                        .setTitleText("公司性质")
+                        .setTitleText("公司资质")
                         .setSubCalSize(20)//确定和取消文字大小
                         .setSubmitColor(Color.BLUE)//确定按钮文字颜色
                         .setCancelColor(Color.BLUE)//取消按钮文字颜色
@@ -273,13 +264,11 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
                     AlertUtils.toast(context, "法人姓名不能为空");
                     return;
                 }
-
-                if (TextUtils.isEmpty(natureType)) {
+                if (TextUtils.isEmpty(NatureOfUnit)) {
                     AlertUtils.toast(context, "公司性质不能为空");
                     return;
                 }
-
-                if (null != publishImages && publishImages.size() > 1) {
+                if (null != publishImages && publishImages.size() >0) {
                     final List<String> list = new ArrayList<String>();
                     for (int i = 0; i < publishImages.size(); i++) {
                         AlbumItem albumItem = publishImages.get(i);
@@ -295,8 +284,6 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
                 } else {
                     AlertUtils.toast(context, "还未选择图片");
                 }
-
-
                 break;
         }
     }
@@ -519,7 +506,7 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTradeAreaEvent(UploadImageFinishEvent event) {
-        AlertUtils.toast(context, "图片上传成功,请耐心等待审核");
+        AlertUtils.toast(context, "资料上传成功,请耐心等待审核");
         finish();
     }
     private void putCertification(RequestBody body) {

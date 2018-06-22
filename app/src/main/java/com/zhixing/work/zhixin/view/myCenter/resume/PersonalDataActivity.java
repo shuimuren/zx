@@ -260,7 +260,7 @@ public class PersonalDataActivity extends BaseTitleActivity {
                 break;
         }
     }
-
+//修改数据
     private void modifyData(final RequestBody body, final int type) {
         OkUtils.getInstances().httpatch(body, context, JavaConstant.ResumePersonalInfo, JavaParamsUtils.getInstances().ResumePersonalInfo(name, workingTime, date_birth), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
@@ -431,6 +431,7 @@ public class PersonalDataActivity extends BaseTitleActivity {
                 });
     }
 
+    //修改头像
     private void upAvatar(RequestBody body, final String key) {
         OkUtils.getInstances().httpatch(body, context, JavaConstant.Resume, JavaParamsUtils.getInstances().resumeAvatar(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {

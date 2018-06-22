@@ -6,8 +6,8 @@ package com.zhixing.work.zhixin.http;
  */
 public class JavaConstant {
     //测试地址
-    public static final String basehttp = "http://192.168.1.10/";
-    //public static final String basehttp = "http://9681.vicp.net:51093/";
+    //public static final String basehttp = "http://192.168.1.10/";
+    public static final String basehttp = "http://9681.vicp.net:51093/";
     //是否注册
     public static final String IsRegist = basehttp + "User";
     //获取短信验证码
@@ -36,13 +36,10 @@ public class JavaConstant {
     public static final String getOSS = basehttp + "sts";
     ///获取答题
     public static final String TestPaper = basehttp + "Evaluate/TestPaper";
-
     //提交答案
     public static final String Evaluate = basehttp + "Evaluate";
-
     ///修改简历个人资料
     public static final String ResumePersonalInfo = basehttp + "Resume/PersonalInfo";
-
     //修改头像
     public static final String Avatar = basehttp + "Personal/Avatar";
 
@@ -50,7 +47,6 @@ public class JavaConstant {
     public static final String Resume = basehttp + "Resume";
     //项目经历
     public static final String ProjectBackground = basehttp + "ProjectBackground";
-
     //添加工作城市
     public static final String ExpectArea = basehttp + "Resume/ExpectArea";
     //获取求职意向
@@ -61,8 +57,6 @@ public class JavaConstant {
     public static final String ExpectJob = basehttp + "Resume/ExpectJob";
     //添加公司基本资料
     public static final String Company = basehttp + "Company";
-
-
     //添加产品
     public static final String CompanyProduct = basehttp + "CompanyProduct";
     //添加高管
@@ -77,13 +71,10 @@ public class JavaConstant {
     public static final String Department = basehttp + "Department";
     //获取公司的所有员工
     public static final String DepartmentMember = basehttp + "Department/DepartmentMember";
-
     //邀请进部门
     public static final String Invite = basehttp + "Department/Invite";
-
     //获取部门员工列表
     public static final String Staff = basehttp + "Department/Staff";
-
     //提交公司营业执照
     public static final String BusinessLicense = basehttp + "CompanyCertification/BusinessLicense";
     //提交公司法人认证

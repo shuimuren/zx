@@ -87,12 +87,12 @@ public class InitialEvaluationActivity extends BaseTitleActivity {
         });
     }
 
+    //如果请求失败或者数据为空,则从本地缓存取值
     private void getData() {
         OkUtils.getInstances().httpTokenGet(context, JavaConstant.TestPaper, JavaParamsUtils.getInstances().TestPaper(), new TypeToken<EntityObject<TestPaper>>() {
         }.getType(), new ResultCallBackListener<TestPaper>() {
             @Override
             public void onFailure(int errorId, String msg) {
-
                 if (!TextUtils.isEmpty(SettingUtils.getTestPaper())) {
                     testPaper = gson.fromJson(SettingUtils.getTestPaper(), TestPaper.class);
                     list = testPaper.getQuestions();

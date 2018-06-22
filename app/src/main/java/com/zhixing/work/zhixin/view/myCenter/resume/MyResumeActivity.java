@@ -286,6 +286,7 @@ public class MyResumeActivity extends BaseTitleActivity {
 
     }
 
+//    获取简历
     private void getResume() {
         OkUtils.getInstances().httpTokenGet(context, JavaConstant.Resume, JavaParamsUtils.getInstances().getResume(), new TypeToken<EntityObject<Resume>>() {
         }.getType(), new ResultCallBackListener<Resume>() {
@@ -424,6 +425,8 @@ public class MyResumeActivity extends BaseTitleActivity {
         }
 
     }
+
+    //更新数据
     private void upUserData(final String type, final String value) {
         final RequestBody body = new FormBody.Builder()
                 .add("Id", resume.getId() + "")

@@ -151,7 +151,7 @@ public class CreateCardActivity extends BaseTitleActivity {
 
     }
 
-
+//创建卡牌
     private void CreateCard(String RealName, String Email, String sex, String UserIdentity) {
 
         OkUtils.getInstances().httpTokenPost(context, JavaConstant.PersonalInfo, JavaParamsUtils.getInstances().PersonalInfo(RealName, Email, sex, UserIdentity), new TypeToken<EntityObject<Object>>() {

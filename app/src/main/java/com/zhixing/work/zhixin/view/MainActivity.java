@@ -50,7 +50,6 @@ public class MainActivity extends SupportActivity {
             mHandler.sendEmptyMessage(MSG_LOAD_DATA);
         }
     }
-
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         switch (keyCode) {
@@ -69,7 +68,6 @@ public class MainActivity extends SupportActivity {
         }
         return super.onKeyUp(keyCode, event);
     }
-
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {

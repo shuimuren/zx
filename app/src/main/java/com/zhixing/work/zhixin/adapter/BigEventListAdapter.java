@@ -86,6 +86,7 @@ public class BigEventListAdapter extends RecyclerView.Adapter<BigEventListAdapte
         holder.name.setText(history.getName());
 
         holder.time.setText( DateFormatUtil.parseDate(history.getDate(), "yyyy-mm"));
+
         if (mOnItemClickListener != null) {
             holder.ll_event.setOnClickListener(new View.OnClickListener() {
                 @Override

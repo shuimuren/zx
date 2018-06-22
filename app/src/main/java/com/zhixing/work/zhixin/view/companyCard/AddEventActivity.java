@@ -125,9 +125,7 @@ public class AddEventActivity extends BaseTitleActivity {
     private String Image = "";
     private String type;
     private History history;
-
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
@@ -142,11 +140,8 @@ public class AddEventActivity extends BaseTitleActivity {
             history = (History) bundle.get("bean");
             setView();
         }
-
         getOssToken();
     }
-
-
     private void setView() {
         if (!TextUtils.isEmpty(history.getName())) {
             eventName.setText(history.getName());
@@ -154,10 +149,10 @@ public class AddEventActivity extends BaseTitleActivity {
         }
         if (!TextUtils.isEmpty(history.getIntro())) {
             eventSynopsis.setText(history.getIntro());
-            Intro = history.getDate();
+            Intro = history.getIntro();
         }
         if (!TextUtils.isEmpty(history.getDate())) {
-            eventTime.setText(history.getDate());
+            eventTime.setText( DateFormatUtil.parseDate(history.getDate(), "yyyy-mm"));
             Date = history.getDate();
         }
     }

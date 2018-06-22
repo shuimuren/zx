@@ -534,6 +534,7 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
                 break;
         }
     }
+    //输入信息返回接受
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onModifyEvent(ModifyEvent event) {

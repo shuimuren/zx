@@ -169,6 +169,7 @@ public class RegistActivity extends BaseTitleActivity {
         }
     }
 
+    //验证码等待
     class Repeat extends TimerTask {
         @Override
         public void run() {
@@ -200,6 +201,7 @@ public class RegistActivity extends BaseTitleActivity {
         time = 60;
     }
 
+    //判断账号是否注册
     private void isRegist(String phone) {
         OkUtils.getInstances().httpGet(context, JavaConstant.IsRegist, JavaParamsUtils.getInstances().isRegist(phone, type), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
@@ -220,7 +222,7 @@ public class RegistActivity extends BaseTitleActivity {
             }
         });
     }
-
+//注册账号
     private void Regist(String phone, String password, String code) {
         OkUtils.getInstances().httpPost(context, JavaConstant.goRegist, JavaParamsUtils.getInstances().Registered(phone, password, type, code), new TypeToken<EntityObject<String>>() {
         }.getType(), new ResultCallBackListener<String>() {

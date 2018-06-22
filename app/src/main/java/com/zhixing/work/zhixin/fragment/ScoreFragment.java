@@ -227,6 +227,7 @@ public class ScoreFragment extends BaseMainFragment {
                 AlertUtils.toast(context, "服务器错误");
                 getOssToken();
             }
+
             @Override
             public void onSuccess(EntityObject<CompanyCard> response) {
                 if (response.getCode() == 10000) {
@@ -239,6 +240,10 @@ public class ScoreFragment extends BaseMainFragment {
                         rlEnterpriseNocard.setVisibility(View.GONE);
                         rlEnterpriseData.setVisibility(View.VISIBLE);
                         companyCard = response.getContent();
+                        if (!TextUtils.isEmpty(companyCard.getLogo())) {
+                            enterpriseDefaultAvatar.setVisibility(View.GONE);
+                            GlideUtils.getInstance().loadGlideRoundTransform(context, ALiYunFileURLBuilder.getUserIconUrl(companyCard.getLogo()), enterpriseAvatar);
+                        }
                         if (companyCard.getProvince() != null) {
                             addressct = Utils.searchProvincial(companyCard.getProvince());
                         }
@@ -260,7 +265,6 @@ public class ScoreFragment extends BaseMainFragment {
             }
         });
     }
-
     private void initData() {
         OkUtils.getInstances().httpTokenGet(context, JavaConstant.card, JavaParamsUtils.getInstances().getCard(), new TypeToken<EntityObject<Card>>() {
         }.getType(), new ResultCallBackListener<Card>() {
@@ -271,7 +275,6 @@ public class ScoreFragment extends BaseMainFragment {
                 AlertUtils.toast(context, "服务器错误");
                 getOssToken();
             }
-
             @Override
             public void onSuccess(EntityObject<Card> response) {
                 if (response.getCode() == 10000) {
@@ -321,7 +324,6 @@ public class ScoreFragment extends BaseMainFragment {
     @Override
     public void fetchData() {
     }
-
     //获取阿里云的凭证
     private void getOssToken() {
         OkUtils.getInstances().httpTokenGet(context, JavaConstant.getOSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
@@ -346,7 +348,6 @@ public class ScoreFragment extends BaseMainFragment {
             }
         });
     }
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -355,7 +356,6 @@ public class ScoreFragment extends BaseMainFragment {
         }
         EventBus.getDefault().unregister(this);
     }
-
     @OnClick({R.id.create_card, R.id.perfect_card, R.id.more, R.id.rl_avatar, R.id.create_enterprise_card})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -402,7 +402,6 @@ public class ScoreFragment extends BaseMainFragment {
                 break;
         }
     }
-
     //显示成就弹框
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCardCompleteEvent(CardCompleteEvent event) {
@@ -441,16 +440,16 @@ public class ScoreFragment extends BaseMainFragment {
     }
 
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
         if (cropFilePath != null) {
             if (!TextUtils.isEmpty(cropFilePath.getAbsolutePath())) {
-                Utils. deleteDirWihtFile(new File(Environment.getExternalStorageDirectory().getPath()));
+                Utils.deleteDirWihtFile(new File(Environment.getExternalStorageDirectory().getPath()));
             }
         }
     }
+
     /**
      * 初始化剪裁图片的输出Uri
      */

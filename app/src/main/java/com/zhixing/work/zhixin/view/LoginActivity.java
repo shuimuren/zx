@@ -87,6 +87,7 @@ public class LoginActivity extends BaseTitleActivity {
     @OnClick({R.id.tv_login_person, R.id.tv_login_company, R.id.btn_login, R.id.register, R.id.forget_password, R.id.show_password})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            //切换账户类型
             case R.id.tv_login_person:
                 type = "10";
                 tvLoginPerson.setTextSize(20);
@@ -96,6 +97,7 @@ public class LoginActivity extends BaseTitleActivity {
                 break;
             case R.id.tv_login_company:
                 type = "20";
+
                 tvLoginPerson.setTextSize(16);
                 tvLoginPerson.setTextColor(context.getResources().getColor(R.color.login_company_tv));
                 tvLoginCompany.setTextSize(20);

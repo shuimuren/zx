@@ -351,7 +351,6 @@ public class AddProductsActivity extends BaseTitleActivity {
 
                         // upAvatar(body, objectKey);
                     }
-
                     @Override
                     public void onUploadProgress(String objectKey, long currentSize, long totalSize) {
 
@@ -375,9 +374,7 @@ public class AddProductsActivity extends BaseTitleActivity {
             public void onFailure(int errorId, String msg) {
                 hideLoadingDialog();
                 AlertUtils.toast(context, msg);
-
             }
-
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
@@ -391,8 +388,6 @@ public class AddProductsActivity extends BaseTitleActivity {
                     AlertUtils.toast(context, response.getMessage());
 
                 }
-
-
             }
         });
     }

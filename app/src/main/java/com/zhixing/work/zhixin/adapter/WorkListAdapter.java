@@ -69,19 +69,13 @@ public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHo
                 parent, false);
         ViewHolder viewHolder = null;
         viewHolder = new ViewHolder(convertView);
-
-
         viewHolder.name = (TextView) convertView.findViewById(R.id.name);
         viewHolder.time = (TextView) convertView.findViewById(R.id.time);
         viewHolder.ll_work = (LinearLayout) convertView.findViewById(R.id.ll_work);
-
         return viewHolder;
-
     }
-
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-
         Resume.WrokBackgroundOutputsBean work = list.get(position);
         holder.name.setText(work.getCompanyName());
         String times = DateFormatUtil.parseDate(work.getStartDate(), "yyyy-mm") + " 一 "
@@ -105,8 +99,6 @@ public class WorkListAdapter extends RecyclerView.Adapter<WorkListAdapter.ViewHo
             });
         }
     }
-
-
     @Override
     public long getItemId(int position) {
         return position;

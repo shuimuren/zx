@@ -6,8 +6,8 @@ package com.zhixing.work.zhixin.http;
  */
 public class JavaConstant {
     //测试地址
-    //public static final String basehttp = "http://192.168.1.10/";
-    public static final String basehttp = "http://9681.vicp.net:51093/";
+    public static final String basehttp = "http://192.168.1.10/";
+   // public static final String basehttp = "http://9681.vicp.net:51093/";
     //是否注册
     public static final String IsRegist = basehttp + "User";
     //获取短信验证码

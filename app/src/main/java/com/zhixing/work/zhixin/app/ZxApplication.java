@@ -5,6 +5,7 @@ import android.content.Context;
 
 
 import com.zhixing.work.zhixin.base.BaseApplication;
+import com.zhixing.work.zhixin.util.AlertUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,13 +26,17 @@ public class ZxApplication extends BaseApplication {
     public List<Activity> aliveActivities = new ArrayList<>();
 //    private OSSClient mOSSClient;
 
+    public static Context getAppContext(){
+        return applicationContext;
+    }
     @Override
     public void onCreate() {
 
         super.onCreate();
-
+        applicationContext = getAppContext();
         instance = this;
         //init demo helper
+        AlertUtils.init(applicationContext,-1);
 
     }
     public static ZxApplication getInstance() {

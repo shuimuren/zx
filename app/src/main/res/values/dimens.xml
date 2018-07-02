@@ -105,4 +105,6 @@
     <dimen name="recall_dimen_256">256dp</dimen>
     <dimen name="recall_size_12">12sp</dimen>
     <dimen name="recall_size_8">8sp</dimen>
+
+    <dimen name="corner_radius">10dp</dimen>
 </resources>

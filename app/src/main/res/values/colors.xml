@@ -77,6 +77,7 @@
     <color name="spinner_checked">#42494f</color>
     <color name="tv_choice_id">#101010</color>
     <color name="btn_write_per_data">#408ACF</color>
+    <color name="color_register">#408acf</color>
 
 
     <drawable name="pay_bg_actionbar_normal">#d9434b</drawable>

@@ -233,7 +233,6 @@ public class JobIntensionActivity extends BaseTitleActivity {
     }
 
     private String getJobString(List<Expect.ResumeExpectJobOutputsBean> list) {
-
         String industry = "";
         for (int i = 0; i < list.size(); i++) {
 
@@ -298,7 +297,6 @@ public class JobIntensionActivity extends BaseTitleActivity {
                             highestBeanList.add(highestBean);
                             highestList.add(j + "");
                         }
-
                     }
                     salary.setHighest(highestBeanList);
                     list.add(salary);

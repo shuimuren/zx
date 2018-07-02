@@ -19,11 +19,14 @@ import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Token;
+import com.zhixing.work.zhixin.constant.RoleConstant;
 import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.RegularUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.widget.ClearEditText;
@@ -68,10 +71,10 @@ public class LoginActivity extends BaseTitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        setTitle("登录");
+        setTitle("登陆");
         setLeftNotVisible();
         context = this;
-        type = "10";
+        type = RoleConstant.PERSONAL_ROLE;
         initView();
     }
 
@@ -89,14 +92,14 @@ public class LoginActivity extends BaseTitleActivity {
         switch (view.getId()) {
             //切换账户类型
             case R.id.tv_login_person:
-                type = "10";
+                type = RoleConstant.PERSONAL_ROLE;
                 tvLoginPerson.setTextSize(20);
                 tvLoginPerson.setTextColor(context.getResources().getColor(R.color.login_person_tv));
                 tvLoginCompany.setTextSize(16);
                 tvLoginCompany.setTextColor(context.getResources().getColor(R.color.login_company_tv));
                 break;
             case R.id.tv_login_company:
-                type = "20";
+                type = RoleConstant.ENTERPRISE_ROLE;
 
                 tvLoginPerson.setTextSize(16);
                 tvLoginPerson.setTextColor(context.getResources().getColor(R.color.login_company_tv));
@@ -129,6 +132,8 @@ public class LoginActivity extends BaseTitleActivity {
                 if (TextUtils.isEmpty(phone)) {
                     AlertUtils.toast(context, "手机号不能为空");
                     return;
+                }else if(RegularUtils.isMobileNo(phone)){
+                    AlertUtils.toast(context,"请输入正确的手机号");
                 } else if (TextUtils.isEmpty(password)) {
                     AlertUtils.toast(context, "密码不能为空");
                     return;

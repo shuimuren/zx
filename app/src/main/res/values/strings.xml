@@ -72,4 +72,10 @@
         <item>已上市</item>
         <item>不需要融资</item>
     </string-array>
+    <string name="phone_number">手机号</string>
+    <string name="pass_word">密&#12288;码</string>
+    <string name="register">注册</string>
+    <string name="login">登陆</string>
+    <string name="personage_login">个人登录</string>
+    <string name="enterprise">企业</string>
 </resources>

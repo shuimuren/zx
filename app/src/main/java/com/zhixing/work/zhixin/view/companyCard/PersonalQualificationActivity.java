@@ -24,6 +24,7 @@ import com.zhixing.work.zhixin.aliyun.ALiYunOssFileLoader;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.StsToken;
+import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.dialog.SelectImageDialog;
 import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.ModifyEvent;
@@ -36,8 +37,6 @@ import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.BitmapUtils;
-import com.zhixing.work.zhixin.util.LOG;
-import com.zhixing.work.zhixin.view.authentication.IdAuthenticationActivity;
 import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
 import com.zhixing.work.zhixin.view.util.SelectImageActivity;
 
@@ -217,7 +216,7 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
                             @Override
                             public void onError(Throwable e) {
 
-                                LOG.d("错误", e.toString());
+                                Logger.d("错误", e.toString());
                             }
                         }).launch();
 
@@ -266,7 +265,7 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
                                 .add("ManagerIdCardPic", objectKey)
                                 .build();
                         putCertification(body);
-                        LOG.i(TAG, "动态图片上传成功：" + objectKey);
+                        Logger.i(TAG, "动态图片上传成功：" + objectKey);
                     }
 
                     @Override
@@ -283,7 +282,7 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
                                 AlertUtils.toast(context, "动态图片上传失败");
                             }
                         });
-                        LOG.i(TAG, "动态图片上传失败：" + objectKey);
+                        Logger.i(TAG, "动态图片上传失败：" + objectKey);
                     }
                 });
     }
@@ -327,7 +326,7 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
         } else if (requestCode == REQUEST_CAMERA) {
             //使用相机拍照
             final int rotateDegree = BitmapUtils.readPictureDegree(photoFile.getAbsolutePath());
-            LOG.i(TAG, "拍照后旋转的角度：" + rotateDegree);
+            Logger.i(TAG, "拍照后旋转的角度：" + rotateDegree);
             AlbumItem image = new AlbumItem();
             image.setFilePath(photoFile.getAbsolutePath());
             image.setThumbnail(photoFile.getAbsolutePath());
@@ -364,7 +363,7 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
     private void showResult(List<String> photos, File file) {
         int[] thumbSize = computeSize(file.getAbsolutePath());
         String thumbArg = String.format(Locale.CHINA, "压缩后参数：%d*%d, %dk", thumbSize[0], thumbSize[1], file.length() >> 10);
-        LOG.d("图", thumbArg);
+        Logger.d("图", thumbArg);
         AlbumItem albumItem = new AlbumItem();
         albumItem.setFilePath(file.getAbsolutePath());
         upImages.add(albumItem);

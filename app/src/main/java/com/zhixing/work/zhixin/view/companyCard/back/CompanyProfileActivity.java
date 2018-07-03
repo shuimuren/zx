@@ -30,12 +30,11 @@ import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Intro;
 import com.zhixing.work.zhixin.bean.StsToken;
+import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.dialog.SelectImageDialog;
 import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.IntroRefreshEvent;
 import com.zhixing.work.zhixin.event.ModifyEvent;
-import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
-import com.zhixing.work.zhixin.event.UploadImageFinishEvent;
 import com.zhixing.work.zhixin.http.Constant;
 import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
@@ -44,10 +43,7 @@ import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.BitmapUtils;
-import com.zhixing.work.zhixin.util.LOG;
 import com.zhixing.work.zhixin.view.card.ModifyContentActivity;
-import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
-import com.zhixing.work.zhixin.view.companyCard.EnterpriseCertificationActivity;
 import com.zhixing.work.zhixin.view.util.SelectImageActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
@@ -204,7 +200,7 @@ public class CompanyProfileActivity extends BaseTitleActivity {
                         publishImages.remove(item);
                         publishImages.add(null);
                     }
-                    LOG.i(TAG, "images.SIZE:" + publishImages.size());
+                    Logger.i(TAG, "images.SIZE:" + publishImages.size());
                     adapter.notifyDataSetChanged();
                 }
             }
@@ -272,7 +268,7 @@ public class CompanyProfileActivity extends BaseTitleActivity {
                             @Override
                             public void onError(Throwable e) {
 
-                                LOG.d("错误", e.toString());
+                                Logger.d("错误", e.toString());
                             }
                         }).launch();
 
@@ -285,7 +281,7 @@ public class CompanyProfileActivity extends BaseTitleActivity {
 
         int[] thumbSize = computeSize(file.getAbsolutePath());
         String thumbArg = String.format(Locale.CHINA, "压缩后参数：%d*%d, %dk", thumbSize[0], thumbSize[1], file.length() >> 10);
-        LOG.d("图", thumbArg);
+        Logger.d("图", thumbArg);
         AlbumItem albumItem = new AlbumItem();
         albumItem.setFilePath(file.getAbsolutePath());
         upImages.add(albumItem);
@@ -337,7 +333,7 @@ public class CompanyProfileActivity extends BaseTitleActivity {
                         String path = Environment.getExternalStorageDirectory() + "/zhixin/image/";
                         if (isUploadCount == size - (publishImages.get(size - 1) == null ? 1 : 0)) {
                             hideLoadingDialog();
-                            LOG.i(TAG, "动态图片上传成功：" + upLoadImages);
+                            Logger.i(TAG, "动态图片上传成功：" + upLoadImages);
                             upImages.clear();
                             deleteDir(path);
                             Intro intro = new Intro();
@@ -346,7 +342,7 @@ public class CompanyProfileActivity extends BaseTitleActivity {
                             addProfie(gson.toJson(intro));
 
                         }
-                        LOG.i(TAG, "动态图片上传成功：" + objectKey);
+                        Logger.i(TAG, "动态图片上传成功：" + objectKey);
                     }
 
                     @Override
@@ -364,7 +360,7 @@ public class CompanyProfileActivity extends BaseTitleActivity {
                                 AlertUtils.toast(context, "动态图片上传失败");
                             }
                         });
-                        LOG.i(TAG, "动态图片上传失败：" + objectKey);
+                        Logger.i(TAG, "动态图片上传失败：" + objectKey);
                     }
                 });
     }
@@ -383,7 +379,7 @@ public class CompanyProfileActivity extends BaseTitleActivity {
         } else if (requestCode == REQUEST_CAMERA) {
             //使用相机拍照
             final int rotateDegree = BitmapUtils.readPictureDegree(photoFile.getAbsolutePath());
-            LOG.i(TAG, "拍照后旋转的角度：" + rotateDegree);
+            Logger.i(TAG, "拍照后旋转的角度：" + rotateDegree);
             AlbumItem image = new AlbumItem();
             image.setFilePath(photoFile.getAbsolutePath());
             image.setThumbnail(photoFile.getAbsolutePath());

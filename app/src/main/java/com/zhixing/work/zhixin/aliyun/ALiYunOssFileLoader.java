@@ -1,11 +1,9 @@
 package com.zhixing.work.zhixin.aliyun;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.alibaba.sdk.android.oss.ClientConfiguration;
 import com.alibaba.sdk.android.oss.ClientException;
-import com.alibaba.sdk.android.oss.OSS;
 import com.alibaba.sdk.android.oss.OSSClient;
 import com.alibaba.sdk.android.oss.ServiceException;
 import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback;
@@ -15,8 +13,9 @@ import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
 import com.alibaba.sdk.android.oss.internal.OSSAsyncTask;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
-
 import com.zhixing.work.zhixin.bean.StsToken;
+import com.zhixing.work.zhixin.common.Logger;
+
 
 /**
  * 阿里云上传工具类
@@ -48,7 +47,7 @@ public class ALiYunOssFileLoader {
         put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
             @Override
             public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
-                Log.d(TAG + "PutObject", "currentSize: " + currentSize + " totalSize: " + totalSize);
+                Logger.d(TAG + "PutObject", "currentSize: " + currentSize + " totalSize: " + totalSize);
                 if (listener != null)
                     listener.onUploadProgress(objectKey, currentSize, totalSize);
             }
@@ -57,10 +56,10 @@ public class ALiYunOssFileLoader {
         OSSAsyncTask task = mOSSClient.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
             @Override
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
-                Log.d(TAG + "PutObject", "UploadSuccess");
+                Logger.d(TAG + "PutObject", "UploadSuccess");
 
-                Log.d(TAG + "ETag", result.getETag());
-                Log.d(TAG + "RequestId", result.getRequestId());
+                Logger.d(TAG + "ETag", result.getETag());
+                Logger.d(TAG + "RequestId", result.getRequestId());
                 if (listener != null)
                     listener.onUploadSuccess(request.getObjectKey());
             }
@@ -74,10 +73,10 @@ public class ALiYunOssFileLoader {
                 }
                 if (serviceException != null) {
                     // 服务异常
-                    Log.e(TAG + "ErrorCode", serviceException.getErrorCode());
-                    Log.e(TAG + "RequestId", serviceException.getRequestId());
-                    Log.e(TAG + "HostId", serviceException.getHostId());
-                    Log.e(TAG + "RawMessage", serviceException.getRawMessage());
+                    Logger.e(TAG + "ErrorCode", serviceException.getErrorCode());
+                    Logger.e(TAG + "RequestId", serviceException.getRequestId());
+                    Logger.e(TAG + "HostId", serviceException.getHostId());
+                    Logger.e(TAG + "RawMessage", serviceException.getRawMessage());
                 }
                 if (listener != null)
                     listener.onUploadFailure(request.getObjectKey(), serviceException);

@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 
 
 /**
- *
+ *缘分
  */
 public class KarmaFragment extends SupportFragment {
 

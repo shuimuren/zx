@@ -28,7 +28,7 @@ public  class HttpHeadUtils {
     }
 
     //获取随机数
-    public static String getRadom(){
+    public static String getRandom(){
 
         float random=new Random().nextFloat();
         String randoms = String.valueOf(random);

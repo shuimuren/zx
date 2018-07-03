@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 
 
 /**
- *
+ *技能
  */
 public class SkillFragment extends SupportFragment {
 

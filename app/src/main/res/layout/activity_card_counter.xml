@@ -382,7 +382,7 @@
                     android:id="@+id/rl_senior"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <com.zhixing.work.zhixin.widget.ElasticScrollView
                         android:layout_width="match_parent"

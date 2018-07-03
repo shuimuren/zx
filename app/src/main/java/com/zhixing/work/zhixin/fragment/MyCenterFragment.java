@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseMainFragment;
 import com.zhixing.work.zhixin.bean.Token;
+import com.zhixing.work.zhixin.constant.RoleConstant;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.view.authentication.AuthenticationHallActivity;
 import com.zhixing.work.zhixin.view.companyCard.CompanyCertificationActivity;
@@ -24,7 +25,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+
 /**
+ * 我的
  */
 public class MyCenterFragment extends BaseMainFragment {
     @BindView(R.id.ll_authentication)
@@ -88,10 +91,9 @@ public class MyCenterFragment extends BaseMainFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_authentication:
-                if (token.getRole() == 10) {
+                if (token.getRole() == Integer.parseInt(RoleConstant.PERSONAL_ROLE)) {
                     startActivity(new Intent(context, AuthenticationHallActivity.class));
                 } else {
-
                     startActivity(new Intent(context, CompanyCertificationActivity.class));
                 }
                 break;

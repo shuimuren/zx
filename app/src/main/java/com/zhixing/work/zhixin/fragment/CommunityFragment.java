@@ -14,7 +14,7 @@ import butterknife.ButterKnife;
 
 
 /**
- *
+ *社区
  */
 public class CommunityFragment extends BaseMainFragment {
 

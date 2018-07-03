@@ -12,27 +12,27 @@ import com.zhixing.work.zhixin.app.ZxApplication;
 
 public class ResourceUtils {
     private static Resources getResources() {
-        return ZxApplication.getAppContext().getResources();
+        return ZxApplication.getInstance().getResources();
     }
 
     public static String getString(int stringId) {
-        return ZxApplication.getAppContext().getResources().getString(stringId);
+        return ZxApplication.getInstance().getResources().getString(stringId);
     }
 
     public static float getDimenFloat(int dimenId) {
-        return ZxApplication.getAppContext().getResources().getDimension(dimenId);
+        return ZxApplication.getInstance().getResources().getDimension(dimenId);
     }
 
     public static int getDimenInt(int dimenId) {
-        return (int) ZxApplication.getAppContext().getResources().getDimension(dimenId);
+        return (int) ZxApplication.getInstance().getResources().getDimension(dimenId);
     }
 
     public static Drawable getDrawable(int resId) {
-        return ZxApplication.getAppContext().getResources().getDrawable(resId);
+        return ZxApplication.getInstance().getResources().getDrawable(resId);
     }
 
     public static int getColor(int resId) {
-        return ZxApplication.getAppContext().getResources().getColor(resId);
+        return ZxApplication.getInstance().getResources().getColor(resId);
     }
 
     public static ColorStateList getColorStateList(int resId) {

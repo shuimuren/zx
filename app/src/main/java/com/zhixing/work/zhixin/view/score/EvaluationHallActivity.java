@@ -12,6 +12,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 测评大厅
+ */
 public class EvaluationHallActivity extends BaseTitleActivity {
 
     @BindView(R.id.start)

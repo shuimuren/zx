@@ -132,8 +132,9 @@ public class LoginActivity extends BaseTitleActivity {
                 if (TextUtils.isEmpty(phone)) {
                     AlertUtils.toast(context, "手机号不能为空");
                     return;
-                }else if(RegularUtils.isMobileNo(phone)){
+                }else if(!RegularUtils.isMobileNo(phone)){
                     AlertUtils.toast(context,"请输入正确的手机号");
+                    return;
                 } else if (TextUtils.isEmpty(password)) {
                     AlertUtils.toast(context, "密码不能为空");
                     return;

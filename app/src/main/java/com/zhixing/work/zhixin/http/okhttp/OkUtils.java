@@ -81,7 +81,7 @@ public class OkUtils<T> {
         }
 
         timer = DateFormatUtil.getTimeZ();
-        randoms = HttpHeadUtils.getRadom();
+        randoms = HttpHeadUtils.getRandom();
         return instances;
     }
 

@@ -26,6 +26,7 @@ import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Resume;
 import com.zhixing.work.zhixin.bean.StsToken;
+import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.dialog.SelectImageDialog;
 import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.ModifyEvent;
@@ -409,7 +410,7 @@ public class PersonalDataActivity extends BaseTitleActivity {
                 resultpath, new ALiYunOssFileLoader.OssFileUploadListener() {
                     @Override
                     public void onUploadSuccess(String objectKey) {
-                        LOG.i(TAG, "动态图片上传成功：" + objectKey);
+                        Logger.i(TAG, "动态图片上传成功：" + objectKey);
                         RequestBody body = new FormBody.Builder()
                                 .add("Id", resume.getId() + "")
                                 .add("Avatar", objectKey)
@@ -426,7 +427,7 @@ public class PersonalDataActivity extends BaseTitleActivity {
                     @Override
                     public void onUploadFailure(String objectKey, ServiceException ossException) {
 
-                        LOG.i(TAG, "动态图片上传失败：" + objectKey);
+                        Logger.i(TAG, "动态图片上传失败：" + objectKey);
                     }
                 });
     }

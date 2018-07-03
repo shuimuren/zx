@@ -30,6 +30,7 @@ import com.zhixing.work.zhixin.bean.Company;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.IndustryType;
 import com.zhixing.work.zhixin.bean.StsToken;
+import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.dialog.SelectImageDialog;
 import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.BasicRefreshEvent;
@@ -44,7 +45,6 @@ import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.BitmapUtils;
 import com.zhixing.work.zhixin.util.GlideUtils;
-import com.zhixing.work.zhixin.util.LOG;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.view.card.ModifyContentActivity;
 import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
@@ -663,7 +663,7 @@ public class CompanyPerfectCardActivity extends BaseTitleActivity {
                 resultpath, new ALiYunOssFileLoader.OssFileUploadListener() {
                     @Override
                     public void onUploadSuccess(String objectKey) {
-                        LOG.i(TAG, "动态图片上传成功：" + objectKey);
+                        Logger.i(TAG, "动态图片上传成功：" + objectKey);
                         Logo = objectKey;
                         RequestBody body = new FormBody.Builder()
                                 .add("Logo", Logo)
@@ -690,7 +690,7 @@ public class CompanyPerfectCardActivity extends BaseTitleActivity {
                     @Override
                     public void onUploadFailure(String objectKey, ServiceException ossException) {
 
-                        LOG.i(TAG, "动态图片上传失败：" + objectKey);
+                        Logger.i(TAG, "动态图片上传失败：" + objectKey);
                     }
                 });
     }

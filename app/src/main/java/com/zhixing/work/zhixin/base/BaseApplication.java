@@ -2,6 +2,8 @@ package com.zhixing.work.zhixin.base;
 
 import android.app.Activity;
 
+import com.zhixing.work.zhixin.util.AlertUtils;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +42,7 @@ public class BaseApplication extends android.support.multidex.MultiDexApplicatio
         initHomeDir();
 
 //        FrameConfig.initConfig(this);
-
+        AlertUtils.init(this,-1);
     }
 
     private void initHomeDir() {

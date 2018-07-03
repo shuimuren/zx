@@ -386,6 +386,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="90dp"
+                        android:scaleType="fitXY"
                         android:src="@drawable/img_person" />
                     <!--文字提醒-->
                     <LinearLayout

@@ -21,6 +21,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 资质
+ */
 public class EvaluatingFragment extends SupportFragment {
 
     @BindView(R.id.basics)
@@ -65,6 +68,7 @@ public class EvaluatingFragment extends SupportFragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -72,17 +76,20 @@ public class EvaluatingFragment extends SupportFragment {
 
         ButterKnife.bind(this, view);
         basics.setSelected(true);
-        context=getActivity();
+        context = getActivity();
 
 
         return view;
     }
+
     @OnClick({R.id.evaluating, R.id.historical_score, R.id.basics_bt, R.id.seniority, R.id.skill, R.id.fate, R.id.career})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            //参加测评
             case R.id.evaluating:
                 startActivity(new Intent(context, EvaluationHallActivity.class));
                 break;
+            //历史评分
             case R.id.historical_score:
                 break;
             case R.id.basics_bt:

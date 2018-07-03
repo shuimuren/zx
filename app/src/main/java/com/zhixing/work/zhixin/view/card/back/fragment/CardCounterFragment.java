@@ -51,6 +51,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
+/**
+ * 基础
+ */
 public class CardCounterFragment extends SupportFragment {
     @BindView(R.id.basics)
     TextView basics;

@@ -4,7 +4,7 @@
 
     <string name="message">正聊</string>
     <string name="score">评分</string>
-    <string name="appicon">应用</string>
+    <string name="application">应用</string>
     <string name="career">社区</string>
     <string name="my_center">我的</string>
     <string name="h5_url">https://h5pay.jd.com/degrade?</string>
@@ -78,4 +78,7 @@
     <string name="login">登陆</string>
     <string name="personage_login">个人登录</string>
     <string name="enterprise">企业</string>
+    <string name="profession_card">职业卡牌</string>
+    <string name="about_zhi_xin">关于职信</string>
+    <string name="setting">设置</string>
 </resources>

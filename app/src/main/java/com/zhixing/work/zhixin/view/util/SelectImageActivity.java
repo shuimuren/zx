@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.adapter.SelectImageAdapter;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
+import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.util.LOG;
 
@@ -113,7 +114,7 @@ public class SelectImageActivity extends BaseTitleActivity implements AdapterVie
                 String id = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Thumbnails.IMAGE_ID));
                 String data = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Thumbnails.DATA));
                 thumbnailMap.put(id, data);
-                LOG.i(TAG, "getThumbnail--缩略图总览: " + " id:" + id + "  thumbnai:" + data);
+                Logger.i(TAG, "getThumbnail--缩略图总览: " + " id:" + id + "  thumbnai:" + data);
             }
         }
         cursor.close();

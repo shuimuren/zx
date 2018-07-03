@@ -31,6 +31,8 @@ import com.zhixing.work.zhixin.bean.CompanyCard;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.bean.Token;
+import com.zhixing.work.zhixin.common.Logger;
+import com.zhixing.work.zhixin.constant.RoleConstant;
 import com.zhixing.work.zhixin.dialog.CardCompleteDialog;
 import com.zhixing.work.zhixin.dialog.SelectImageDialog;
 import com.zhixing.work.zhixin.domain.AlbumItem;
@@ -205,7 +207,7 @@ public class ScoreFragment extends BaseMainFragment {
         context = getActivity();
         EventBus.getDefault().register(this);
         token = SettingUtils.getTokenBean();
-        if (token.getRole() == 10) {
+        if (token.getRole() == Integer.parseInt(RoleConstant.PERSONAL_ROLE)) {
             initData();
             llUser.setVisibility(View.VISIBLE);
             llEnterprise.setVisibility(View.GONE);
@@ -369,12 +371,12 @@ public class ScoreFragment extends BaseMainFragment {
                 startActivity(new Intent(context, PerfectCardDataActivity.class));
                 break;
             case R.id.more:
-                if (token.getRole() == 10) {
+                if (token.getRole() == Integer.parseInt(RoleConstant.PERSONAL_ROLE)) {
                     startActivity(new Intent(context, CardMainActivity.class));
                 } else {
                     startActivity(new Intent(context, CompanyCardActivity.class));
                 }
-                ////
+
                 break;
             case R.id.rl_avatar:
                 SelectImageDialog imageDialog = new SelectImageDialog(context, new SelectImageDialog.OnItemClickListener() {
@@ -406,7 +408,7 @@ public class ScoreFragment extends BaseMainFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCardCompleteEvent(CardCompleteEvent event) {
         if (event.isComplete()) {
-            if (token.getRole() == 10) {
+            if (token.getRole() == Integer.parseInt(RoleConstant.PERSONAL_ROLE)) {
                 initData();
             } else {
                 getCompanyData();
@@ -426,7 +428,7 @@ public class ScoreFragment extends BaseMainFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCardRefreshEvent(CardRefreshEvent event) {
         if (event.getRefresh()) {
-            if (token.getRole() == 10) {
+            if (token.getRole() == Integer.parseInt(RoleConstant.PERSONAL_ROLE)) {
                 initData();
             } else {
                 getCompanyData();
@@ -517,7 +519,7 @@ public class ScoreFragment extends BaseMainFragment {
                 resultpath, new ALiYunOssFileLoader.OssFileUploadListener() {
                     @Override
                     public void onUploadSuccess(String objectKey) {
-                        LOG.i("tou", "动态图片上传成功：" + objectKey);
+                        Logger.i("tou", "动态图片上传成功：" + objectKey);
                         RequestBody body = new FormBody.Builder()
                                 .add("Avatar", objectKey)
                                 .build();
@@ -531,7 +533,7 @@ public class ScoreFragment extends BaseMainFragment {
 
                     @Override
                     public void onUploadFailure(String objectKey, ServiceException ossException) {
-                        LOG.i(TAG, "动态图片上传失败：" + objectKey);
+                        Logger.i(TAG, "动态图片上传失败：" + objectKey);
                     }
                 });
     }

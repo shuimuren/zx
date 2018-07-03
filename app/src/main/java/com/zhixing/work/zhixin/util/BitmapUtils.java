@@ -15,6 +15,7 @@ import android.util.Base64;
 
 
 import com.zhixing.work.zhixin.app.ZxApplication;
+import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.fragment.ScoreFragment;
 import com.zhixing.work.zhixin.http.Constant;
 import com.zhixing.work.zhixin.http.okhttp.AppUtils;
@@ -87,10 +88,10 @@ public class BitmapUtils {
         Bitmap bm = getSmallBitmap(filePath);
         Bitmap bit = getSmallBitmap(filePath);
         int size = getBitmapSize(bm);
-        LOG.i(TAG, "方法图片压缩前大小" + size + "KB");
+        Logger.i(TAG, "方法图片压缩前大小" + size + "KB");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        LOG.i(TAG, "图片压缩前大小" + baos.toByteArray().length + "KB");
+        Logger.i(TAG, "图片压缩前大小" + baos.toByteArray().length + "KB");
         int degree = readPictureDegree(filePath);
         if (degree != 0) {//旋转照片角度
             bm = rotateBitmap(bm, degree);
@@ -104,12 +105,12 @@ public class BitmapUtils {
             bm.compress(Bitmap.CompressFormat.JPEG, mQuality, out);
             mQuality = mQuality - 5;
         } while (outputFile.length() / 1024 < 100 && mQuality > 20);
-        LOG.i(TAG, "图片压缩后大小： " + (outputFile.length() / 1024) + "KB");
+        Logger.i(TAG, "图片压缩后大小： " + (outputFile.length() / 1024) + "KB");
         ByteArrayOutputStream bao = new ByteArrayOutputStream();
         bit.compress(Bitmap.CompressFormat.JPEG, quality, baos);
         byte[] bytes = baos.toByteArray();
         bm = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-        LOG.i("wechat", "压缩后图片的大小" + (bm.getByteCount() / 1024 / 1024)
+        Logger.i("wechat", "压缩后图片的大小" + (bm.getByteCount() / 1024 / 1024)
                 + "M宽度为" + bm.getWidth() + "高度为" + bm.getHeight()
                 + "bytes.length=  " + (bytes.length / 1024) + "KB"
                 + "quality=" + quality);
@@ -237,7 +238,7 @@ public class BitmapUtils {
     public static String bitmapCompress(String filePath) {
         // 获取指定文件的指定单位的大小  param1：文件路径  param2：获取大小的类型  1为B、2为KB、3为MB、4为GB
         double bigSize = FileSizeUtil.getFileOrFilesSize(filePath, 3);
-        LOG.i("图片压缩前的大小为：", " " + bigSize + "MB");
+        Logger.i("图片压缩前的大小为：", " " + bigSize + "MB");
 
         // 当图片大于1M时，才进行压缩
         String smallImage;
@@ -248,7 +249,7 @@ public class BitmapUtils {
         }
 
         double smallSize = FileSizeUtil.getFileOrFilesSize(smallImage, 2);
-        LOG.i("图片压缩后的大小为：", "" + smallSize + "KB");
+        Logger.i("图片压缩后的大小为：", "" + smallSize + "KB");
         return smallImage;
     }
 

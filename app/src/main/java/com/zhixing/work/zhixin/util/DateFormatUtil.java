@@ -3,6 +3,8 @@ package com.zhixing.work.zhixin.util;
 
 import android.text.TextUtils;
 
+import com.zhixing.work.zhixin.common.Logger;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -134,7 +136,7 @@ public class DateFormatUtil {
             date = sdf1.parse(sdf1.format(calendar1.getTime()));
             return date;
         } catch (ParseException e) {
-            LOG.e(TAG, e.getMessage());
+            Logger.e(TAG, e.getMessage());
             // ignore
         }
         return date;
@@ -151,7 +153,7 @@ public class DateFormatUtil {
             String times = format.format(time);
             date = format.parse(times);
         } catch (ParseException e) {
-            LOG.e(TAG, e.getMessage());
+            Logger.e(TAG, e.getMessage());
         }
         return date;
     }
@@ -207,7 +209,7 @@ public class DateFormatUtil {
             String time = fmt.format(date);
             return time;
         } catch (ParseException e) {
-            LOG.e(TAG, e.getMessage());
+            Logger.e(TAG, e.getMessage());
             // ignore
         }
         return null;

@@ -9,11 +9,15 @@ import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
+import com.zhixing.work.zhixin.util.AlertUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 我的认证
+ */
 public class AuthenticationHallActivity extends BaseTitleActivity {
 
     @BindView(R.id.identity_iv)
@@ -58,19 +62,25 @@ public class AuthenticationHallActivity extends BaseTitleActivity {
     @OnClick({R.id.ll_identity, R.id.ll_education, R.id.ll_work, R.id.ll_certificate, R.id.ll_skill})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            //身份认证
             case R.id.ll_identity:
                 startActivity(new Intent(context, IdAuthenticationActivity.class));
                 break;
+            //学历认证
             case R.id.ll_education:
                 startActivity(new Intent(context, EducationCertificationActivity.class));
                 break;
+            //工作认证
             case R.id.ll_work:
+                AlertUtils.show("工作认证");
                 break;
+            //证书认证
             case R.id.ll_certificate:
-
-               startActivity(new Intent(context, CertificateCertificationActivity.class));
+                startActivity(new Intent(context, CertificateCertificationActivity.class));
                 break;
+            //技能认证
             case R.id.ll_skill:
+                AlertUtils.show("技能认证");
                 break;
         }
     }

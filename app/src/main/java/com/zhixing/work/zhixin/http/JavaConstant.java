@@ -2,7 +2,7 @@ package com.zhixing.work.zhixin.http;
 
 
 /**
- *
+ * 请求静态类
  */
 public class JavaConstant {
     //测试地址

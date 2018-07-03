@@ -1,7 +1,7 @@
 package com.zhixing.work.zhixin.aliyun;
 
 
-import com.zhixing.work.zhixin.util.LOG;
+import com.zhixing.work.zhixin.common.Logger;
 
 /**
  * 阿里云地址创建类
@@ -48,7 +48,7 @@ public class ALiYunFileURLBuilder {
     }
     public static String getUserIconUrl(String key) {
         String url = getBase() + key;
-        LOG.i(TAG, " 用户头像地址:" + url);
+        Logger.i(TAG, " 用户头像地址:" + url);
         return url;
     }
 //    /**/*//**

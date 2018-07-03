@@ -12,9 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.SupportActivity;
 import com.zhixing.work.zhixin.bean.AddressJson;
-import com.zhixing.work.zhixin.bean.HotCity;
 import com.zhixing.work.zhixin.fragment.MainFragment;
-import com.zhixing.work.zhixin.presenter.MainContract;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
 
@@ -24,7 +22,6 @@ import java.util.List;
 
 
 public class MainActivity extends SupportActivity {
-    MainContract.MainPresenter mPresenter;
     private long firstTime = 0;
     private ArrayList<AddressJson> provincialList = new ArrayList<AddressJson>();
     private ArrayList<AddressJson.ChildBeanX> cityList = new ArrayList<AddressJson.ChildBeanX>();

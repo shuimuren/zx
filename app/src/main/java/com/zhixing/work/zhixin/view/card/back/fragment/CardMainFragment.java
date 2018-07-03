@@ -12,7 +12,7 @@ import com.zhixing.work.zhixin.base.SupportFragment;
 
 
 /**
- *
+ *基础
  */
 public class CardMainFragment extends SupportFragment {
     private static final int REQ_MSG = 10;
@@ -181,7 +181,7 @@ public class CardMainFragment extends SupportFragment {
                 seniority.setText("资");
                 skill.setText("技");
                 fate.setText("缘");
-                career.setText("生");
+                career.setText("生涯");
 
             }
         });

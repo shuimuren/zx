@@ -2,6 +2,7 @@ package com.zhixing.work.zhixin.view.setting;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -10,21 +11,23 @@ import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.app.ZxApplication;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
-import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
 import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.RegularUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.view.LoginActivity;
-
-import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 设置页面
+ */
 public class SettingActivity extends BaseTitleActivity {
 
     @BindView(R.id.rlUserAgreement)
@@ -53,9 +56,8 @@ public class SettingActivity extends BaseTitleActivity {
     }
 
     @OnClick(R.id.btnLogOut)
-    public void onViewClicked() {
+    public void onLogOutViewClicked() {
         LogOut();
-
     }
 
 
@@ -73,7 +75,6 @@ public class SettingActivity extends BaseTitleActivity {
 
     //退出登录
     private void LogOut() {
-
         OkUtils.getInstances().httpDelete(context, JavaConstant.outLogin, JavaParamsUtils.getInstances().project(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
@@ -91,7 +92,7 @@ public class SettingActivity extends BaseTitleActivity {
                         startActivity(new Intent(context, LoginActivity.class));
                         clearLoginState();
                     } else {
-
+                      //  AlertUtils.show();
                     }
                 } else {
                     AlertUtils.toast(context, response.getMessage());
@@ -100,6 +101,32 @@ public class SettingActivity extends BaseTitleActivity {
         });
 
 
+    }
+
+    @OnClick({R.id.rlUserAgreement, R.id.rlPrivacyStrategy, R.id.account_security, R.id.rlAbout, R.id.check_version, R.id.data_clean})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            //用户协议
+            case R.id.rlUserAgreement:
+                break;
+            //隐私策略
+            case R.id.rlPrivacyStrategy:
+                break;
+            //修改密码
+            case R.id.account_security:
+                break;
+            //关于职信
+            case R.id.rlAbout:
+                AlertUtils.show(ResourceUtils.getString(R.string.about_zhi_xin));
+                break;
+            //检查更新
+            case R.id.check_version:
+                AlertUtils.show("检查更新");
+                break;
+            //清除缓存
+            case R.id.data_clean:
+                break;
+        }
     }
 
 }

@@ -1,6 +1,5 @@
 package com.zhixing.work.zhixin.view.companyCard;
 
-import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -23,9 +22,9 @@ import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Product;
 import com.zhixing.work.zhixin.bean.StsToken;
+import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.dialog.SelectImageDialog;
 import com.zhixing.work.zhixin.domain.AlbumItem;
-import com.zhixing.work.zhixin.event.CardCompleteEvent;
 import com.zhixing.work.zhixin.event.ModifyEvent;
 import com.zhixing.work.zhixin.event.ProductRefreshEvent;
 import com.zhixing.work.zhixin.http.Constant;
@@ -342,7 +341,7 @@ public class AddProductsActivity extends BaseTitleActivity {
                 resultpath, new ALiYunOssFileLoader.OssFileUploadListener() {
                     @Override
                     public void onUploadSuccess(String objectKey) {
-                        LOG.i(TAG, "动态图片上传成功：" + objectKey);
+                        Logger.i(TAG, "动态图片上传成功：" + objectKey);
                         if (type.equals("edit")) {
                             editProduct(product.getId() + "", Name, objectKey, Url, Intro);
                         } else {
@@ -360,7 +359,7 @@ public class AddProductsActivity extends BaseTitleActivity {
                     public void onUploadFailure(String objectKey, ServiceException ossException) {
 
                         hideLoadingDialog();
-                        LOG.i(TAG, "动态图片上传失败：" + objectKey);
+                        Logger.i(TAG, "动态图片上传失败：" + objectKey);
                     }
                 });
     }

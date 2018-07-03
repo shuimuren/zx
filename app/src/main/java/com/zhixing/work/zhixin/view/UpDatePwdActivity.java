@@ -148,7 +148,7 @@ public class UpDatePwdActivity extends BaseTitleActivity {
             case R.id.btn_go_update:
 
                 timers = DateFormatUtil.getTimeZ();
-                randoms = HttpHeadUtils.getRadom();
+                randoms = HttpHeadUtils.getRandom();
                 phone = phoneEd.getText().toString();
                 code = codeEd.getText().toString();
                 password = passwordEd.getText().toString();

@@ -25,6 +25,7 @@ import com.zhixing.work.zhixin.bean.Manager;
 import com.zhixing.work.zhixin.bean.Product;
 import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.bean.Token;
+import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.dialog.SelectImageDialog;
 import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.ManagerRefreshEvent;
@@ -359,7 +360,7 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
                 resultpath, new ALiYunOssFileLoader.OssFileUploadListener() {
                     @Override
                     public void onUploadSuccess(String objectKey) {
-                        LOG.i(TAG, "动态图片上传成功：" + objectKey);
+                        Logger.i(TAG, "动态图片上传成功：" + objectKey);
                         Avatar = objectKey;
                         if (type.equals("edit")) {
                             editManager(manager.getId() + "", Name, Avatar, JotTitle, Intro);
@@ -377,7 +378,7 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
                     @Override
                     public void onUploadFailure(String objectKey, ServiceException ossException) {
                         hideLoadingDialog();
-                        LOG.i(TAG, "动态图片上传失败：" + objectKey);
+                        Logger.i(TAG, "动态图片上传失败：" + objectKey);
                     }
                 });
     }

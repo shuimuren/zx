@@ -20,7 +20,6 @@ import com.zhixing.work.zhixin.adapter.SelectImageAdapter;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.domain.AlbumItem;
-import com.zhixing.work.zhixin.util.LOG;
 
 import java.io.File;
 import java.util.ArrayList;

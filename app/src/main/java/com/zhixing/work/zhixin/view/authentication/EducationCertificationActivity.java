@@ -13,7 +13,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -41,12 +40,13 @@ import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.ModifyEvent;
 import com.zhixing.work.zhixin.event.UploadImageFinishEvent;
 import com.zhixing.work.zhixin.http.Constant;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
-import com.zhixing.work.zhixin.http.okhttp.AppUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.AppUtils;
 import com.zhixing.work.zhixin.util.BitmapUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
 import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
@@ -140,7 +140,7 @@ public class EducationCertificationActivity extends BaseTitleActivity {
 
     //获取阿里云的凭证
     private void getOssToken() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.getOSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.GET_OSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
         }.getType(), new ResultCallBackListener<StsToken>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -149,7 +149,7 @@ public class EducationCertificationActivity extends BaseTitleActivity {
 
             @Override
             public void onSuccess(EntityObject<StsToken> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     stsToken = response.getContent();
                 }
             }

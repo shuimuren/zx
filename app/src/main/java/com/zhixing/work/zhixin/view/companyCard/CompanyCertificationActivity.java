@@ -9,11 +9,15 @@ import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 公司认证
+ */
 public class CompanyCertificationActivity extends BaseTitleActivity {
 
     @BindView(R.id.company_iv)
@@ -34,15 +38,17 @@ public class CompanyCertificationActivity extends BaseTitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_certification);
         ButterKnife.bind(this);
-        setTitle("公司认证");
+        setTitle(ResourceUtils.getString(R.string.certified_company));
     }
 
     @OnClick({R.id.ll_company, R.id.ll_identity})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            //公司认证
             case R.id.ll_company:
                 startActivity(new Intent(context, EnterpriseCertificationActivity.class));
                 break;
+            //身份认证
             case R.id.ll_identity:
                 startActivity(new Intent(context, PersonalQualificationActivity.class));
                 break;

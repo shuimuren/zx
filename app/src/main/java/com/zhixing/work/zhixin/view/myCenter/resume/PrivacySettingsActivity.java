@@ -12,10 +12,11 @@ import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Resume;
 import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -70,7 +71,7 @@ public class PrivacySettingsActivity extends BaseTitleActivity {
         final RequestBody body = new FormBody.Builder()
                 .add("Id", resume.getId() + "")
                 .add(type, value).build();
-        OkUtils.getInstances().httpatch(body, context, JavaConstant.Resume, JavaParamsUtils.getInstances().resumeAvatar(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpatch(body, context, RequestConstant.RESUME, JavaParamsUtils.getInstances().resumeAvatar(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -81,7 +82,7 @@ public class PrivacySettingsActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent() != null && response.getContent()) {
                         if (response.getContent()) {
                             EventBus.getDefault().post(new ResumeRefreshEvent(true));

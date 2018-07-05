@@ -1,6 +1,5 @@
 package com.zhixing.work.zhixin.view.companyCard.back.fragment;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,16 +18,13 @@ import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
 import com.zhixing.work.zhixin.base.SupportFragment;
 import com.zhixing.work.zhixin.bean.Company;
-import com.zhixing.work.zhixin.bean.CompanyCard;
 import com.zhixing.work.zhixin.bean.EntityObject;
-import com.zhixing.work.zhixin.dialog.CardCompleteDialog;
 import com.zhixing.work.zhixin.event.BasicRefreshEvent;
-import com.zhixing.work.zhixin.event.BigEventRefreshEvent;
-import com.zhixing.work.zhixin.event.CardCompleteEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.GlideUtils;
 import com.zhixing.work.zhixin.util.Utils;
@@ -213,7 +209,7 @@ public class CompanyBasicFragment extends SupportFragment {
 
     private void getData() {
 
-        OkUtils.getInstances().httpTokenGet(getActivity(), JavaConstant.Company, JavaParamsUtils.getInstances().getCompanyCard(), new TypeToken<EntityObject<Company>>() {
+        OkUtils.getInstances().httpTokenGet(getActivity(), RequestConstant.COMPANY, JavaParamsUtils.getInstances().getCompanyCard(), new TypeToken<EntityObject<Company>>() {
         }.getType(), new ResultCallBackListener<Company>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -222,7 +218,7 @@ public class CompanyBasicFragment extends SupportFragment {
 
             @Override
             public void onSuccess(EntityObject<Company> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent() == null) {
                         llEmpty.setVisibility(View.VISIBLE);
                         llData.setVisibility(View.GONE);

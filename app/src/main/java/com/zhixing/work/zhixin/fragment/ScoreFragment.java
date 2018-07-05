@@ -40,15 +40,15 @@ import com.zhixing.work.zhixin.event.CardCompleteEvent;
 import com.zhixing.work.zhixin.event.CardRefreshEvent;
 import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
 import com.zhixing.work.zhixin.http.Constant;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
-import com.zhixing.work.zhixin.http.okhttp.AppUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.AppUtils;
 import com.zhixing.work.zhixin.util.BitmapUtils;
 import com.zhixing.work.zhixin.util.GlideUtils;
-import com.zhixing.work.zhixin.util.LOG;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.view.card.CreateCardActivity;
@@ -191,6 +191,7 @@ public class ScoreFragment extends BaseMainFragment {
     public Token token;
     private String addressct = "";
 
+
     public static ScoreFragment newInstance() {
         Bundle args = new Bundle();
         ScoreFragment fragment = new ScoreFragment();
@@ -220,7 +221,7 @@ public class ScoreFragment extends BaseMainFragment {
     }
 
     private void getCompanyData() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.CompanyCard, JavaParamsUtils.getInstances().getCompanyCard(), new TypeToken<EntityObject<CompanyCard>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.COMPANY_CARD, JavaParamsUtils.getInstances().getCompanyCard(), new TypeToken<EntityObject<CompanyCard>>() {
         }.getType(), new ResultCallBackListener<CompanyCard>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -232,7 +233,7 @@ public class ScoreFragment extends BaseMainFragment {
 
             @Override
             public void onSuccess(EntityObject<CompanyCard> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     getOssToken();
                     if (response.getContent() == null) {
                         rlEnterpriseNocard.setVisibility(View.VISIBLE);
@@ -268,7 +269,7 @@ public class ScoreFragment extends BaseMainFragment {
         });
     }
     private void initData() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.card, JavaParamsUtils.getInstances().getCard(), new TypeToken<EntityObject<Card>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.GET_CARD_INFO, JavaParamsUtils.getInstances().getCard(), new TypeToken<EntityObject<Card>>() {
         }.getType(), new ResultCallBackListener<Card>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -279,7 +280,7 @@ public class ScoreFragment extends BaseMainFragment {
             }
             @Override
             public void onSuccess(EntityObject<Card> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     getOssToken();
                     if (response.getContent() == null) {
                         rlCord.setVisibility(View.VISIBLE);
@@ -328,7 +329,7 @@ public class ScoreFragment extends BaseMainFragment {
     }
     //获取阿里云的凭证
     private void getOssToken() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.getOSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.GET_OSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
         }.getType(), new ResultCallBackListener<StsToken>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -337,7 +338,7 @@ public class ScoreFragment extends BaseMainFragment {
 
             @Override
             public void onSuccess(EntityObject<StsToken> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     stsToken = response.getContent();
                     if (card != null) {
                         if (!TextUtils.isEmpty(card.getAvatar())) {
@@ -376,7 +377,6 @@ public class ScoreFragment extends BaseMainFragment {
                 } else {
                     startActivity(new Intent(context, CompanyCardActivity.class));
                 }
-
                 break;
             case R.id.rl_avatar:
                 SelectImageDialog imageDialog = new SelectImageDialog(context, new SelectImageDialog.OnItemClickListener() {
@@ -539,7 +539,7 @@ public class ScoreFragment extends BaseMainFragment {
     }
 
     private void upAvatar(RequestBody body, final String key) {
-        OkUtils.getInstances().httpatch(body, context, JavaConstant.Avatar, JavaParamsUtils.getInstances().resumeAvatar(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpatch(body, context, RequestConstant.AVATAR, JavaParamsUtils.getInstances().resumeAvatar(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -550,7 +550,7 @@ public class ScoreFragment extends BaseMainFragment {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent() != null && response.getContent()) {
                         if (response.getContent()) {
                             EventBus.getDefault().post(new ResumeRefreshEvent(true));

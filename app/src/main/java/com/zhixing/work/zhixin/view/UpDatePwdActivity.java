@@ -4,60 +4,34 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
-
-import com.zhixing.work.zhixin.BuildConfig;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
-import com.zhixing.work.zhixin.bean.PutPersonlDataEntity;
 import com.zhixing.work.zhixin.bean.UpdateBean;
+import com.zhixing.work.zhixin.constant.RoleConstant;
 import com.zhixing.work.zhixin.http.HttpHeadUtils;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
-
-import com.zhixing.work.zhixin.http.api.Constant;
-import com.zhixing.work.zhixin.http.api.LoginApi;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
 import com.zhixing.work.zhixin.util.Utils;
 
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.FormBody;
-import okhttp3.Headers;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Response;
-import rx.Observer;
-import rx.Subscription;
-
-import static com.zhixing.work.zhixin.http.okhttp.OkUtils.buildParam;
 
 public class UpDatePwdActivity extends BaseTitleActivity {
 
@@ -77,7 +51,7 @@ public class UpDatePwdActivity extends BaseTitleActivity {
     TextView btnGoUpdate;
     @BindView(R.id.phone_ed)
     EditText phoneEd;
-    private String type = "10";
+    private String type = RoleConstant.PERSONAL_ROLE;
     private String phone;
     private String password;
     private String confirmpassword;
@@ -97,7 +71,6 @@ public class UpDatePwdActivity extends BaseTitleActivity {
         setContentView(R.layout.activity_up_date_pwd);
         ButterKnife.bind(this);
         context = this;
-
         setTitle("忘记密码");
     }
 
@@ -108,14 +81,14 @@ public class UpDatePwdActivity extends BaseTitleActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_update_person:
-                type = "10";
+                type = RoleConstant.PERSONAL_ROLE;
                 tvUpdatePerson.setTextSize(20);
                 tvUpdatePerson.setTextColor(context.getResources().getColor(R.color.login_person_tv));
                 tvUpdateDateCompany.setTextSize(16);
                 tvUpdateDateCompany.setTextColor(context.getResources().getColor(R.color.login_company_tv));
                 break;
             case R.id.tv_update_date_company:
-                type = "20";
+                type = RoleConstant.ENTERPRISE_ROLE;
                 tvUpdatePerson.setTextSize(16);
                 tvUpdatePerson.setTextColor(context.getResources().getColor(R.color.login_company_tv));
                 tvUpdateDateCompany.setTextSize(20);
@@ -129,7 +102,7 @@ public class UpDatePwdActivity extends BaseTitleActivity {
                     timer.schedule(repeat, 0, 1000);
                     btnUpdateCode.setClickable(false);
                     btnUpdateCode.setBackgroundColor(getResources().getColor(R.color.withDrawBankText));
-                    OkUtils.getInstances().httpGet(context, JavaConstant.getRegistCode, JavaParamsUtils.getInstances().Short_Message(phone, type, "20"), new TypeToken<EntityObject<Object>>() {
+                    OkUtils.getInstances().httpGet(context, RequestConstant.GET_REGISTER_CODE, JavaParamsUtils.getInstances().Short_Message(phone, type, "20"), new TypeToken<EntityObject<Object>>() {
                     }.getType(), new ResultCallBackListener<Object>() {
                         @Override
                         public void onFailure(int errorId, String msg) {
@@ -178,62 +151,12 @@ public class UpDatePwdActivity extends BaseTitleActivity {
                 bean.NewPassword = password;
                 bean.Role = type;
                 bean.SmsCode = code;
-//                OkHttpClient okHttpClient = new OkHttpClient();
-//                final RequestBody body = new FormBody.Builder()
-//                        .add("PhoneNum", phone)
-//                        .add("NewPassword", password)
-//                        .add("Role", type)
-//                        .add("SmsCode", code)
-//                        .build();
-//                Request request = new Request.Builder()
-//                        .url(JavaConstant.UpdatePWD).addHeader("content-type", "application/x-www-form-urlencoded")
-//                        .addHeader("version", BuildConfig.VERSION_NAME).//打印版本
-//                        addHeader("accessId", accessId).
-//                                addHeader("timestamp", timers).
-//                                addHeader("nonce", randoms).
-//                                addHeader("signature", getSignature(getASCII(accessId, timers, randoms, accessSecret)))
-//                        .patch(body)
-//                        .build();
-//                Call call = okHttpClient.newCall(request);
-//                call.enqueue(new Callback() {
-//                    @Override
-//                    public void onFailure(Call call, IOException e) {
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                AlertUtils.toast(context, "网络错误");
-//                            }
-//                        });
-//                    }
-//                    @Override
-//                    public void onResponse(Call call, final Response response) throws IOException {
-//                        final EntityObject test;
-//                        try {
-//                            Headers requestHeaders1 = response.headers();
-//                            String data =response.body().string();
-//
-//
-//                        } catch (Exception e) {
-//                            e.printStackTrace();
-//                        }
-//
-//
-//
-//
-//
-//
-//
-//                    }
-//                });
-
-
                 RequestBody body = new FormBody.Builder()
                         .add("PhoneNum", phone)
                         .add("NewPassword", password)
                         .add("Role", type)
                         .add("SmsCode", code)
                         .build();
-
                 modifyPassword(body, phone, password, code);
                 break;
         }
@@ -273,7 +196,7 @@ public class UpDatePwdActivity extends BaseTitleActivity {
     private void modifyPassword(RequestBody body, String phone, String password, String code) {
 
 
-        OkUtils.getInstances().httpatch(body, context, JavaConstant.UpdatePWD, JavaParamsUtils.getInstances().upPassword(phone, password, type, code), new TypeToken<EntityObject<Object>>() {
+        OkUtils.getInstances().httpatch(body, context, RequestConstant.UPDATE_PASSWORD, JavaParamsUtils.getInstances().upPassword(phone, password, type, code), new TypeToken<EntityObject<Object>>() {
         }.getType(), new ResultCallBackListener<Object>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -284,7 +207,7 @@ public class UpDatePwdActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Object> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     AlertUtils.toast(context, "修改成功");
                     startActivity(new Intent(context, LoginActivity.class));
                     finish();
@@ -295,7 +218,6 @@ public class UpDatePwdActivity extends BaseTitleActivity {
 
             }
         });
-//
 
     }
 

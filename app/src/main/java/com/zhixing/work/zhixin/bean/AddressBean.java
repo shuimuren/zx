@@ -1,9 +1,5 @@
 package com.zhixing.work.zhixin.bean;
 
-import com.contrarywind.interfaces.IPickerViewData;
-
-import java.util.List;
-
 /**
  * Created by Administrator on 2018/5/18.
  */

@@ -21,9 +21,10 @@ import com.zhixing.work.zhixin.bean.JobData;
 import com.zhixing.work.zhixin.bean.JobType;
 import com.zhixing.work.zhixin.event.JobListEvent;
 import com.zhixing.work.zhixin.event.JobRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
@@ -209,7 +210,7 @@ public class JobActivity extends BaseTitleActivity {
         jobAdapter.setList(jobDataList, 3 - dataList.size());
     }
     private void addData(String json) {
-        OkUtils.getInstances().putJson(context, JavaConstant.ExpectJob + "?resumeId=" + resumeId, json, new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().putJson(context, RequestConstant.RESUME_EXPECT_JOB + "?resumeId=" + resumeId, json, new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, final String msg) {
@@ -233,7 +234,7 @@ public class JobActivity extends BaseTitleActivity {
                     @Override
                     public void run() {
                         try {
-                            if (response.getCode() == 10000) {
+                            if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                                 if (response.getContent()) {
                                     AlertUtils.toast(context, "添加成功");
                                     EventBus.getDefault().post(new JobRefreshEvent(true));

@@ -19,10 +19,11 @@ import com.zhixing.work.zhixin.bean.Expect;
 import com.zhixing.work.zhixin.bean.Salary;
 import com.zhixing.work.zhixin.event.JobRefreshEvent;
 import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.Utils;
 
@@ -93,7 +94,7 @@ public class JobIntensionActivity extends BaseTitleActivity {
     }
 
     private void getData() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.Expect, JavaParamsUtils.getInstances().Expect(resumeId), new TypeToken<EntityObject<Expect>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.EXPECT, JavaParamsUtils.getInstances().Expect(resumeId), new TypeToken<EntityObject<Expect>>() {
         }.getType(), new ResultCallBackListener<Expect>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -102,7 +103,7 @@ public class JobIntensionActivity extends BaseTitleActivity {
 
             @Override
             public void onSuccess(EntityObject<Expect> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     expect = response.getContent();
                     cityList = expect.getResumeExpectAreaOutputs();
                     IndustryList = expect.getResumeExpectIndustryOutputs();
@@ -326,7 +327,7 @@ public class JobIntensionActivity extends BaseTitleActivity {
 
     private void upUserData(RequestBody body) {
 
-        OkUtils.getInstances().httpatch(body, context, JavaConstant.Resume, JavaParamsUtils.getInstances().resumeAvatar(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpatch(body, context, RequestConstant.RESUME, JavaParamsUtils.getInstances().resumeAvatar(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -337,7 +338,7 @@ public class JobIntensionActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent() != null && response.getContent()) {
                         if (response.getContent()) {
                             if (StartSalary.equals("0")) {

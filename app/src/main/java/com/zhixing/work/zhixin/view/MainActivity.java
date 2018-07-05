@@ -74,7 +74,6 @@ public class MainActivity extends SupportActivity {
                             @Override
                             public void run() {
                                 // 写子线程中的操作,解析省市区数据
-
                                 initJsonData();
                             }
                         });

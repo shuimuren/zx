@@ -5,30 +5,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 
 import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.adapter.ManagerListAdapter;
-import com.zhixing.work.zhixin.adapter.ProductListAdapter;
-import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
-import com.zhixing.work.zhixin.aliyun.ALiYunOssFileLoader;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Manager;
-import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.dialog.DeleteDialog;
 import com.zhixing.work.zhixin.event.ManagerRefreshEvent;
-import com.zhixing.work.zhixin.event.ProductRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
-import com.zhixing.work.zhixin.util.GlideUtils;
-import com.zhixing.work.zhixin.view.card.AddWorkActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import org.greenrobot.eventbus.EventBus;
@@ -65,7 +58,7 @@ public class CompanyManagerActivity extends BaseTitleActivity {
 
 
     private void getData() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.CompanySeniorManager, JavaParamsUtils.getInstances().getCompanySeniorManager(), new TypeToken<EntityObject<List<Manager>>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.COMPANY_SENIOR_MANAGER, JavaParamsUtils.getInstances().getCompanySeniorManager(), new TypeToken<EntityObject<List<Manager>>>() {
         }.getType(), new ResultCallBackListener<List<Manager>>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -74,7 +67,7 @@ public class CompanyManagerActivity extends BaseTitleActivity {
 
             @Override
             public void onSuccess(EntityObject<List<Manager>> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     list = response.getContent();
                     if (!list.isEmpty()) {
                         managerListAdapter.setList(list);
@@ -139,7 +132,7 @@ public class CompanyManagerActivity extends BaseTitleActivity {
     }
     //删除经历
     private void deleteData(int id) {
-        OkUtils.getInstances().httpDelete(context, JavaConstant.CompanySeniorManager + "?Id=" + id, JavaParamsUtils.getInstances().deleteProduct(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpDelete(context, RequestConstant.COMPANY_SENIOR_MANAGER + "?Id=" + id, JavaParamsUtils.getInstances().deleteProduct(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -149,7 +142,7 @@ public class CompanyManagerActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent()) {
                         AlertUtils.toast(context, "删除成功");
                         EventBus.getDefault().post(new ManagerRefreshEvent(true));

@@ -6,9 +6,7 @@ import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.view.GestureDetector;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,15 +16,14 @@ import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
-import com.zhixing.work.zhixin.bean.Token;
 import com.zhixing.work.zhixin.constant.RoleConstant;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.RegularUtils;
-import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.widget.ClearEditText;
@@ -140,7 +137,7 @@ public class LoginActivity extends BaseTitleActivity {
                     return;
                 } else {
                     showLoadingDialog("登陆中");
-                    OkUtils.getInstances().httpPost(context, JavaConstant.goLogin,
+                    OkUtils.getInstances().httpPost(context, RequestConstant.GO_LOGIN,
                             JavaParamsUtils.getInstances().Login(phone, password, type), new TypeToken<EntityObject<String>>() {
                             }.getType(), new ResultCallBackListener<String>() {
                                 @Override
@@ -152,13 +149,12 @@ public class LoginActivity extends BaseTitleActivity {
                                 @Override
                                 public void onSuccess(EntityObject<String> response) {
                                     hideLoadingDialog();
-                                    if (response.getCode() == 10000) {
+                                    if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                                         if (!TextUtils.isEmpty(response.getContent())) {
                                             SettingUtils.putToken(response.getContent());
-
+                                            SettingUtils.setHttpRequestHead(response.getContent());
                                             String token = Utils.getFromBase64(response.getContent().substring(response.getContent().indexOf(".") + 1, response.getContent().lastIndexOf(".")));
                                             if (!TextUtils.isEmpty(token)) {
-
                                                 SettingUtils.putTokenBean(token);
                                             }
 

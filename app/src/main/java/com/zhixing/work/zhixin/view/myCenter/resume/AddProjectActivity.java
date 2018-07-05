@@ -22,10 +22,11 @@ import com.zhixing.work.zhixin.bean.Project;
 import com.zhixing.work.zhixin.bean.Resume;
 import com.zhixing.work.zhixin.event.ModifyEvent;
 import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
 import com.zhixing.work.zhixin.view.card.ModifyContentActivity;
@@ -311,7 +312,7 @@ public class AddProjectActivity extends BaseTitleActivity {
 
     //提交数据
     private void addProject(String json) {
-        OkUtils.getInstances().postJson(context, JavaConstant.ProjectBackground, json, new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().postJson(context, RequestConstant.PROJECT_BACKGROUND, json, new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, final String msg) {
@@ -335,7 +336,7 @@ public class AddProjectActivity extends BaseTitleActivity {
                     @Override
                     public void run() {
                         try {
-                            if (response.getCode() == 10000) {
+                            if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                                 if (response.getContent()) {
                                     AlertUtils.toast(context, "添加成功");
                                     EventBus.getDefault().post(new ResumeRefreshEvent(true));
@@ -359,7 +360,7 @@ public class AddProjectActivity extends BaseTitleActivity {
 
     //更新数据
     private void upProject(RequestBody body) {
-        OkUtils.getInstances().httpPut(body, context, JavaConstant.ProjectBackground, JavaParamsUtils.getInstances().project(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpPut(body, context, RequestConstant.PROJECT_BACKGROUND, JavaParamsUtils.getInstances().project(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, final String msg) {
@@ -384,7 +385,7 @@ public class AddProjectActivity extends BaseTitleActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (response.getCode() == 10000) {
+                        if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                             if (response.getContent()) {
                                 AlertUtils.toast(context, "修改成功");
                                 EventBus.getDefault().post(new ResumeRefreshEvent(true));
@@ -407,7 +408,7 @@ public class AddProjectActivity extends BaseTitleActivity {
 
     //删除经历
     private void deleteData(RequestBody body) {
-        OkUtils.getInstances().httpDelete( context, JavaConstant.ProjectBackground + "?Id=" + bean.getId(), JavaParamsUtils.getInstances().project(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpDelete( context, RequestConstant.PROJECT_BACKGROUND + "?Id=" + bean.getId(), JavaParamsUtils.getInstances().project(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -417,7 +418,7 @@ public class AddProjectActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent()) {
                         AlertUtils.toast(context, "删除成功");
                         EventBus.getDefault().post(new ResumeRefreshEvent(true));

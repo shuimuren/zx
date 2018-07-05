@@ -14,18 +14,15 @@ import android.widget.RelativeLayout;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
-import com.zhixing.work.zhixin.adapter.AddEducationAdapter;
 import com.zhixing.work.zhixin.adapter.AddWorkAdapter;
-import com.zhixing.work.zhixin.app.ZxApplication;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
-import com.zhixing.work.zhixin.bean.Education;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Work;
-import com.zhixing.work.zhixin.event.CardCompleteEvent;
 import com.zhixing.work.zhixin.event.CardRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
@@ -114,7 +111,7 @@ public class PerfectCardWorkActivity extends BaseTitleActivity {
 
     //提交数据
     private void addWork(String json) {
-        OkUtils.getInstances().postJson(context, JavaConstant.WorkBackground, json, new TypeToken<EntityObject<Object>>() {
+        OkUtils.getInstances().postJson(context, RequestConstant.WorkBackground, json, new TypeToken<EntityObject<Object>>() {
         }.getType(), new ResultCallBackListener<Object>() {
             @Override
             public void onFailure(int errorId, final String msg) {
@@ -140,7 +137,7 @@ public class PerfectCardWorkActivity extends BaseTitleActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (response.getCode() == 10000) {
+                        if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
 
                             AlertUtils.toast(context, "添加成功");
                             EventBus.getDefault().post(new CardRefreshEvent(true));

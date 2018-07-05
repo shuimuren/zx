@@ -32,16 +32,16 @@ import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.ModifyEvent;
 import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
 import com.zhixing.work.zhixin.http.Constant;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
-import com.zhixing.work.zhixin.http.okhttp.AppUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.AppUtils;
 import com.zhixing.work.zhixin.util.BitmapUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
 import com.zhixing.work.zhixin.util.GlideUtils;
-import com.zhixing.work.zhixin.util.LOG;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
 import com.zhixing.work.zhixin.view.util.SelectImageActivity;
@@ -263,7 +263,7 @@ public class PersonalDataActivity extends BaseTitleActivity {
     }
 //修改数据
     private void modifyData(final RequestBody body, final int type) {
-        OkUtils.getInstances().httpatch(body, context, JavaConstant.ResumePersonalInfo, JavaParamsUtils.getInstances().ResumePersonalInfo(name, workingTime, date_birth), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpatch(body, context, RequestConstant.RESUME_PERSONAL_INFO, JavaParamsUtils.getInstances().ResumePersonalInfo(name, workingTime, date_birth), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -273,7 +273,7 @@ public class PersonalDataActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent() != null && response.getContent()) {
                         if (response.getContent()) {
                             EventBus.getDefault().post(new ResumeRefreshEvent(true));
@@ -385,7 +385,7 @@ public class PersonalDataActivity extends BaseTitleActivity {
 
     //获取阿里云的凭证
     private void getOssToken() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.getOSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.GET_OSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
         }.getType(), new ResultCallBackListener<StsToken>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -394,7 +394,7 @@ public class PersonalDataActivity extends BaseTitleActivity {
 
             @Override
             public void onSuccess(EntityObject<StsToken> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     stsToken = response.getContent();
                     initView();
                 }
@@ -403,11 +403,16 @@ public class PersonalDataActivity extends BaseTitleActivity {
     }
 
     //上传头像
-    private void upload(final String resultpath) {
+
+    /**
+     *
+     * @param imagePath 图片本地路径
+     */
+    private void upload(final String imagePath) {
 
         String UUID = AppUtils.getUUID();
         ALiYunOssFileLoader.asyncUpload(context, stsToken, ALiYunFileURLBuilder.BUCKET_SECTET, ALiYunFileURLBuilder.PERSONALPORTRAIT + UUID,
-                resultpath, new ALiYunOssFileLoader.OssFileUploadListener() {
+                imagePath, new ALiYunOssFileLoader.OssFileUploadListener() {
                     @Override
                     public void onUploadSuccess(String objectKey) {
                         Logger.i(TAG, "动态图片上传成功：" + objectKey);
@@ -434,7 +439,7 @@ public class PersonalDataActivity extends BaseTitleActivity {
 
     //修改头像
     private void upAvatar(RequestBody body, final String key) {
-        OkUtils.getInstances().httpatch(body, context, JavaConstant.Resume, JavaParamsUtils.getInstances().resumeAvatar(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpatch(body, context, RequestConstant.RESUME, JavaParamsUtils.getInstances().resumeAvatar(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -445,7 +450,7 @@ public class PersonalDataActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent() != null && response.getContent()) {
                         if (response.getContent()) {
                             EventBus.getDefault().post(new ResumeRefreshEvent(true));

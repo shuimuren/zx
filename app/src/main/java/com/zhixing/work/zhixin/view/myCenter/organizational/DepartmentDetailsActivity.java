@@ -18,10 +18,11 @@ import com.zhixing.work.zhixin.bean.Department;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Staff;
 import com.zhixing.work.zhixin.event.DepartmentRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
@@ -156,7 +157,7 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
     }
 
     private void getData() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.Department, JavaParamsUtils.getInstances().getDepartment(department.getDepartmentId() + ""), new TypeToken<EntityObject<List<Department>>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.DEPARTMENT, JavaParamsUtils.getInstances().getDepartment(department.getDepartmentId() + ""), new TypeToken<EntityObject<List<Department>>>() {
         }.getType(), new ResultCallBackListener<List<Department>>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -165,7 +166,7 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
 
             @Override
             public void onSuccess(EntityObject<List<Department>> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (!response.getContent().isEmpty()) {
                         list = response.getContent();
                         adapter.setList(list);
@@ -179,7 +180,7 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
     }
 
     private void getStaff() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.Staff, JavaParamsUtils.getInstances().getCompany(), new TypeToken<EntityObject<List<Staff>>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.STAFF, JavaParamsUtils.getInstances().getCompany(), new TypeToken<EntityObject<List<Staff>>>() {
         }.getType(), new ResultCallBackListener<List<Staff>>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -188,7 +189,7 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
 
             @Override
             public void onSuccess(EntityObject<List<Staff>> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (!response.getContent().isEmpty()) {
                         staffList = response.getContent();
 

@@ -12,18 +12,17 @@ import android.widget.TextView;
 import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.adapter.CertificateListAdapter;
-import com.zhixing.work.zhixin.adapter.EducationListAdapter;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Resume;
 import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.view.card.AddCertificateActivity;
-import com.zhixing.work.zhixin.view.card.AddEducationActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -90,7 +89,7 @@ public class CertificateListActivity extends BaseTitleActivity {
 
     //获取数据
     private void getData() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.CertificateBackground, JavaParamsUtils.getInstances().getCardAll(), new TypeToken<EntityObject<List<Resume.CertificateOutputsBean>>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.ADD_CERTIFICATE, JavaParamsUtils.getInstances().getCardAll(), new TypeToken<EntityObject<List<Resume.CertificateOutputsBean>>>() {
         }.getType(), new ResultCallBackListener<List<Resume.CertificateOutputsBean>>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -99,7 +98,7 @@ public class CertificateListActivity extends BaseTitleActivity {
 
             @Override
             public void onSuccess(EntityObject<List<Resume.CertificateOutputsBean>> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     list = response.getContent();
                     certificateListAdapter.setList(list);
                 }

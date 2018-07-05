@@ -16,12 +16,11 @@ import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.History;
 import com.zhixing.work.zhixin.dialog.DeleteDialog;
 import com.zhixing.work.zhixin.event.BigEventRefreshEvent;
-import com.zhixing.work.zhixin.event.ManagerRefreshEvent;
-import com.zhixing.work.zhixin.event.ProductRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
@@ -59,7 +58,7 @@ public class BigEventActivity extends BaseTitleActivity {
         startActivity(new Intent(context, AddEventActivity.class).putExtra("type", "add"));
     }
     private void getData() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.CompanyHistory, JavaParamsUtils.getInstances().getCompanyHistory(), new TypeToken<EntityObject<List<History>>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.COMPANY_HISTORY, JavaParamsUtils.getInstances().getCompanyHistory(), new TypeToken<EntityObject<List<History>>>() {
         }.getType(), new ResultCallBackListener<List<History>>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -68,7 +67,7 @@ public class BigEventActivity extends BaseTitleActivity {
 
             @Override
             public void onSuccess(EntityObject<List<History>> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     list = response.getContent();
                     if (!list.isEmpty()) {
                         bigEventListAdapter.setList(list);
@@ -126,7 +125,7 @@ public class BigEventActivity extends BaseTitleActivity {
 
     //删除经历
     private void deleteData(int id) {
-        OkUtils.getInstances().httpDelete(context, JavaConstant.CompanyHistory + "?Id=" + id, JavaParamsUtils.getInstances().deleteProduct(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpDelete(context, RequestConstant.COMPANY_HISTORY + "?Id=" + id, JavaParamsUtils.getInstances().deleteProduct(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -136,7 +135,7 @@ public class BigEventActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent()) {
                         AlertUtils.toast(context, "删除成功");
                         EventBus.getDefault().post(new BigEventRefreshEvent(true));

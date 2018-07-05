@@ -18,12 +18,12 @@ import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
 import com.zhixing.work.zhixin.base.SupportFragment;
 import com.zhixing.work.zhixin.bean.CompanyIntro;
 import com.zhixing.work.zhixin.bean.EntityObject;
-import com.zhixing.work.zhixin.event.CardRefreshEvent;
 import com.zhixing.work.zhixin.event.IntroRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.GlideUtils;
 import com.zhixing.work.zhixin.view.companyCard.back.CompanyProfileActivity;
@@ -121,7 +121,7 @@ public class CompanyProfileFragment extends SupportFragment {
     }
 
     private void getData() {
-        OkUtils.getInstances().httpTokenGet(getActivity(), JavaConstant.CompanyIntro, JavaParamsUtils.getInstances().getCompanyCard(), new TypeToken<EntityObject<CompanyIntro>>() {
+        OkUtils.getInstances().httpTokenGet(getActivity(), RequestConstant.COMPANY_INTRO, JavaParamsUtils.getInstances().getCompanyCard(), new TypeToken<EntityObject<CompanyIntro>>() {
         }.getType(), new ResultCallBackListener<CompanyIntro>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -130,7 +130,7 @@ public class CompanyProfileFragment extends SupportFragment {
 
             @Override
             public void onSuccess(EntityObject<CompanyIntro> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent() == null) {
                         llEmpty.setVisibility(View.VISIBLE);
                         llData.setVisibility(View.GONE);

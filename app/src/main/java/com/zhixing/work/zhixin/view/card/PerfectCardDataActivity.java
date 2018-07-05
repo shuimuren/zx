@@ -3,11 +3,9 @@ package com.zhixing.work.zhixin.view.card;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -35,10 +33,11 @@ import com.zhixing.work.zhixin.dialog.MarriageDialog;
 import com.zhixing.work.zhixin.dialog.PoliticalStatusDialog;
 import com.zhixing.work.zhixin.dialog.ResidenceDialog;
 import com.zhixing.work.zhixin.event.ModifyEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
 import com.zhixing.work.zhixin.util.Utils;
@@ -46,7 +45,6 @@ import com.zhixing.work.zhixin.util.Utils;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -626,7 +624,7 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
         pvOptions.show();
     }
     private void submit(RequestBody body) {
-        OkUtils.getInstances().httpPut(body, context, JavaConstant.personalinfo, JavaParamsUtils.getInstances().personalinfo(), new TypeToken<EntityObject<Object>>() {
+        OkUtils.getInstances().httpPut(body, context, RequestConstant.EDIT_PERSONAL_INFO, JavaParamsUtils.getInstances().personalinfo(), new TypeToken<EntityObject<Object>>() {
         }.getType(), new ResultCallBackListener<Object>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -637,7 +635,7 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Object> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     startActivity(new Intent(context, PerfectCardEducationActivity.class));
                     finish();
                 } else {

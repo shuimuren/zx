@@ -14,10 +14,11 @@ import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Resume;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 
 import java.util.List;
@@ -133,7 +134,7 @@ public class ResumeWorkAdapter extends RecyclerView.Adapter<ResumeWorkAdapter.Vi
     }
 
     private void setPublic(RequestBody body, String id, final CheckBox cb) {
-        OkUtils.getInstances().httpatch(body, context, JavaConstant.WorkBackground + "?Id=" + id, JavaParamsUtils.getInstances().resumeAvatar(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpatch(body, context, RequestConstant.WorkBackground + "?Id=" + id, JavaParamsUtils.getInstances().resumeAvatar(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -144,7 +145,7 @@ public class ResumeWorkAdapter extends RecyclerView.Adapter<ResumeWorkAdapter.Vi
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
 
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent() != null && response.getContent()) {
                         if (response.getContent()) {
 

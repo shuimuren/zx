@@ -26,10 +26,11 @@ import com.zhixing.work.zhixin.bean.AddressJson;
 import com.zhixing.work.zhixin.bean.CardBack;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.event.CardBackEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
 import com.zhixing.work.zhixin.util.SettingUtils;
@@ -271,7 +272,7 @@ public class CardCounterFragment extends SupportFragment {
 
     //获取数据
     private void getData() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.card, JavaParamsUtils.getInstances().getCardAll(), new TypeToken<EntityObject<CardBack>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.GET_CARD_INFO, JavaParamsUtils.getInstances().getCardAll(), new TypeToken<EntityObject<CardBack>>() {
         }.getType(), new ResultCallBackListener<CardBack>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -280,7 +281,7 @@ public class CardCounterFragment extends SupportFragment {
 
             @Override
             public void onSuccess(EntityObject<CardBack> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     cardBack = response.getContent();
                     list = cardBack.getWorkBackgroundOutputs();
                     edList = cardBack.getEducationBackgroundOutputs();

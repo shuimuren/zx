@@ -22,7 +22,6 @@ import com.zhixing.work.zhixin.aliyun.ALiYunOssFileLoader;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Manager;
-import com.zhixing.work.zhixin.bean.Product;
 import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.bean.Token;
 import com.zhixing.work.zhixin.common.Logger;
@@ -30,17 +29,16 @@ import com.zhixing.work.zhixin.dialog.SelectImageDialog;
 import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.ManagerRefreshEvent;
 import com.zhixing.work.zhixin.event.ModifyEvent;
-import com.zhixing.work.zhixin.event.ProductRefreshEvent;
 import com.zhixing.work.zhixin.http.Constant;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
-import com.zhixing.work.zhixin.http.okhttp.AppUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.AppUtils;
 import com.zhixing.work.zhixin.util.BitmapUtils;
 import com.zhixing.work.zhixin.util.GlideUtils;
-import com.zhixing.work.zhixin.util.LOG;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.view.card.ModifyContentActivity;
@@ -336,7 +334,7 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
 
     //获取阿里云的凭证
     private void getOssToken() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.getOSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.GET_OSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
         }.getType(), new ResultCallBackListener<StsToken>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -345,7 +343,7 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
 
             @Override
             public void onSuccess(EntityObject<StsToken> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     stsToken = response.getContent();
 
                 }
@@ -386,7 +384,7 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
 
     private void addManager(String CompanyId, String Name, String Avatar,
                             String JotTitle, String Intro) {
-        OkUtils.getInstances().httpPost(context, JavaConstant.CompanySeniorManager, JavaParamsUtils.getInstances().CompanySeniorManager
+        OkUtils.getInstances().httpPost(context, RequestConstant.COMPANY_SENIOR_MANAGER, JavaParamsUtils.getInstances().CompanySeniorManager
                 (CompanyId, Name, Avatar,
                         JotTitle, Intro), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
@@ -400,7 +398,7 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent()) {
                         AlertUtils.toast(context, "添加成功");
                         EventBus.getDefault().post(new ManagerRefreshEvent(true));
@@ -424,7 +422,7 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
                 .add("Avatar", Avatar)
                 .add("JotTitle", JotTitle)
                 .add("Intro", Intro).build();
-        OkUtils.getInstances().httpPut(body, context, JavaConstant.CompanySeniorManager, JavaParamsUtils.getInstances().CompanySeniorManager
+        OkUtils.getInstances().httpPut(body, context, RequestConstant.COMPANY_SENIOR_MANAGER, JavaParamsUtils.getInstances().CompanySeniorManager
                 (id, Name, Avatar,
                         JotTitle, Intro), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
@@ -438,7 +436,7 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent()) {
                         AlertUtils.toast(context, "修改成功");
                         EventBus.getDefault().post(new ManagerRefreshEvent(true));

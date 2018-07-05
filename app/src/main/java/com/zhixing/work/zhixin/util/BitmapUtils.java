@@ -1,7 +1,6 @@
 package com.zhixing.work.zhixin.util;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,7 +17,6 @@ import com.zhixing.work.zhixin.app.ZxApplication;
 import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.fragment.ScoreFragment;
 import com.zhixing.work.zhixin.http.Constant;
-import com.zhixing.work.zhixin.http.okhttp.AppUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

@@ -1,7 +1,5 @@
 package com.zhy.http.okhttp;
 
-import android.util.Log;
-
 import com.zhy.http.okhttp.builder.GetBuilder;
 import com.zhy.http.okhttp.builder.HeadBuilder;
 import com.zhy.http.okhttp.builder.OtherRequestBuilder;
@@ -18,12 +16,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
-import okhttp3.Headers;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.Response;
-
-import static com.zhy.http.okhttp.log.LoggerInterceptor.TAG;
 
 /**
  *

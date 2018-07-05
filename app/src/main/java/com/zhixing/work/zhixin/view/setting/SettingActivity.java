@@ -11,12 +11,12 @@ import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.app.ZxApplication;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
-import com.zhixing.work.zhixin.util.RegularUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.view.LoginActivity;
@@ -75,7 +75,7 @@ public class SettingActivity extends BaseTitleActivity {
 
     //退出登录
     private void LogOut() {
-        OkUtils.getInstances().httpDelete(context, JavaConstant.outLogin, JavaParamsUtils.getInstances().project(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpDelete(context, RequestConstant.LOG_OUT, JavaParamsUtils.getInstances().project(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -86,7 +86,7 @@ public class SettingActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent()) {
                         ZxApplication.getInstance().finishAllActivity();
                         startActivity(new Intent(context, LoginActivity.class));

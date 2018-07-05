@@ -33,10 +33,11 @@ import com.zhixing.work.zhixin.dialog.PoliticalStatusDialog;
 import com.zhixing.work.zhixin.dialog.ResidenceDialog;
 import com.zhixing.work.zhixin.event.CardBackEvent;
 import com.zhixing.work.zhixin.event.ModifyEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.view.card.back.CertificateListActivity;
@@ -183,7 +184,7 @@ public class AdvancedInformationActivity extends BaseTitleActivity {
 
     //获取数据
     private void getData() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.card, JavaParamsUtils.getInstances().getCardAll(), new TypeToken<EntityObject<CardBack>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.GET_CARD_INFO, JavaParamsUtils.getInstances().getCardAll(), new TypeToken<EntityObject<CardBack>>() {
         }.getType(), new ResultCallBackListener<CardBack>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -630,7 +631,7 @@ public class AdvancedInformationActivity extends BaseTitleActivity {
 
     private void submit(RequestBody body) {
 
-        OkUtils.getInstances().httpPut(body, context, JavaConstant.personalinfo, JavaParamsUtils.getInstances().personalinfo(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpPut(body, context, RequestConstant.EDIT_PERSONAL_INFO, JavaParamsUtils.getInstances().personalinfo(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -641,7 +642,7 @@ public class AdvancedInformationActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent()) {
                         AlertUtils.toast(context, "修改成功");
                         EventBus.getDefault().post(new CardBackEvent(true));

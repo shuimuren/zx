@@ -3,10 +3,7 @@ package com.zhixing.work.zhixin.app;
 import android.app.Activity;
 import android.content.Context;
 
-
 import com.zhixing.work.zhixin.base.BaseApplication;
-import com.zhixing.work.zhixin.common.Logger;
-import com.zhixing.work.zhixin.util.AlertUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +30,7 @@ public class ZxApplication extends BaseApplication {
         super.onCreate();
         instance = this;
         //init demo helper
+        applicationContext = this;
      //
 
     }

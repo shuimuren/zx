@@ -17,10 +17,11 @@ import com.zhixing.work.zhixin.base.TestPaper;
 import com.zhixing.work.zhixin.bean.Answer;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Evaluating;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
@@ -90,7 +91,7 @@ public class InitialEvaluationActivity extends BaseTitleActivity {
 
     //如果请求失败或者数据为空,则从本地缓存取值
     private void getData() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.TestPaper, JavaParamsUtils.getInstances().TestPaper(), new TypeToken<EntityObject<TestPaper>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.TEST_PAPER, JavaParamsUtils.getInstances().TestPaper(), new TypeToken<EntityObject<TestPaper>>() {
         }.getType(), new ResultCallBackListener<TestPaper>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -105,7 +106,7 @@ public class InitialEvaluationActivity extends BaseTitleActivity {
 
             @Override
             public void onSuccess(EntityObject<TestPaper> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     testPaper = response.getContent();
                     list = response.getContent().getQuestions();
                     SettingUtils.putTestPaper(gson.toJson(testPaper));
@@ -157,7 +158,7 @@ public class InitialEvaluationActivity extends BaseTitleActivity {
         }
     }
     private void submit(String json) {
-        OkUtils.getInstances().patchJson(context, JavaConstant.Evaluate, json, new TypeToken<EntityObject<Evaluating>>() {
+        OkUtils.getInstances().patchJson(context, RequestConstant.EVALUATE, json, new TypeToken<EntityObject<Evaluating>>() {
         }.getType(), new ResultCallBackListener<Evaluating>() {
             @Override
             public void onFailure(int errorId, final String msg) {
@@ -182,7 +183,7 @@ public class InitialEvaluationActivity extends BaseTitleActivity {
                     @Override
                     public void run() {
                         try {
-                            if (response.getCode() == 10000) {
+                            if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                                 if (response.getContent() != null) {
                                     AlertUtils.toast(context, "提交成功");
                                     SettingUtils.putTestPaper("");

@@ -13,19 +13,17 @@ import android.widget.Button;
 import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.adapter.ProductAdapter;
-import com.zhixing.work.zhixin.adapter.ProductListAdapter;
 import com.zhixing.work.zhixin.base.SupportFragment;
-import com.zhixing.work.zhixin.bean.Company;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Product;
 import com.zhixing.work.zhixin.event.ProductRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.view.companyCard.CompanyProductsActivity;
-import com.zhixing.work.zhixin.widget.DashlineItemDivider;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import org.greenrobot.eventbus.EventBus;
@@ -126,7 +124,7 @@ public class ProductIntroductionFragment extends SupportFragment {
     }
 
     private void getData() {
-        OkUtils.getInstances().httpTokenGet(getActivity(), JavaConstant.CompanyProduct, JavaParamsUtils.getInstances().getCompanyProduct(), new TypeToken<EntityObject<List<Product>>>() {
+        OkUtils.getInstances().httpTokenGet(getActivity(), RequestConstant.COMPANY_PRODUCT, JavaParamsUtils.getInstances().getCompanyProduct(), new TypeToken<EntityObject<List<Product>>>() {
         }.getType(), new ResultCallBackListener<List<Product>>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -135,7 +133,7 @@ public class ProductIntroductionFragment extends SupportFragment {
 
             @Override
             public void onSuccess(EntityObject<List<Product>> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent() == null) {
 
                     } else {

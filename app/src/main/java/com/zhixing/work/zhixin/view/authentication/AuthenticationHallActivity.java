@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,7 +57,7 @@ public class AuthenticationHallActivity extends BaseTitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication_hall);
         ButterKnife.bind(this);
-        setTitle("我的认证");
+        setTitle(ResourceUtils.getString(R.string.user_attestation));
     }
 
     @OnClick({R.id.ll_identity, R.id.ll_education, R.id.ll_work, R.id.ll_certificate, R.id.ll_skill})

@@ -2,15 +2,12 @@ package com.zhixing.work.zhixin.util;
 
 import android.text.TextUtils;
 
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.zhixing.work.zhixin.bean.AddressJson;
-import com.zhixing.work.zhixin.bean.Staff;
 import com.zhixing.work.zhixin.bean.StaffList;
-import com.zhixing.work.zhixin.bean.Staffs;
 import com.zhixing.work.zhixin.bean.Token;
-import com.zhixing.work.zhixin.http.api.Constant;
+import com.zhixing.work.zhixin.http.HttpHeadUtils;
+import com.zhixing.work.zhixin.network.OkHttpUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -74,6 +71,8 @@ public class SettingUtils {
         //商圈未读消息数据
         public static final String UnReadTradeAreaData = "current_times_community_group"; // 同小区群发表的时间
         public static final String TOKENBEAN = "tokenBean"; // token信息
+
+        public static final String TOKEN = "token";
 
     }
 
@@ -167,7 +166,7 @@ public class SettingUtils {
      * @return
      */
     public static List<StaffList> getStaffList() {
-      List<StaffList> staffsList = new ArrayList<StaffList>();
+        List<StaffList> staffsList = new ArrayList<StaffList>();
         String list = PreferenceUtils.getString(SettingItems.STAFFSLIST);
         if (!TextUtils.isEmpty(list)) {
             staffsList = gson.fromJson(list, new TypeToken<List<StaffList>>() {
@@ -446,7 +445,14 @@ public class SettingUtils {
         if (!TextUtils.isEmpty(pass_Id)) {
             token = pass_Id;
         }
-        PreferenceUtils.putString(Constant.TOKEN, token);
+        PreferenceUtils.putString(SettingItems.TOKEN, token);
+    }
+
+    public static void setHttpRequestHead(String token) {
+        OkHttpUtil okHttpUtil = OkHttpUtil.getInstance();
+        if (!TextUtils.isEmpty(token)) {
+            okHttpUtil.setCommentHeader(HttpHeadUtils.KEY_TOKEN, token);
+        }
     }
 
     /**
@@ -456,7 +462,7 @@ public class SettingUtils {
      */
     public static String getToken() {
 
-        String token = PreferenceUtils.getString(Constant.TOKEN);
+        String token = PreferenceUtils.getString(SettingItems.TOKEN);
         if (token != null) {
             int lnt = token.length();
             if (lnt == 0) {

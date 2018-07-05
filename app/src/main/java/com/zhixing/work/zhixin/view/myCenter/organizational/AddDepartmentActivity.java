@@ -15,13 +15,12 @@ import com.zhixing.work.zhixin.bean.Department;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.event.DepartmentRefreshEvent;
 import com.zhixing.work.zhixin.event.ModifyEvent;
-import com.zhixing.work.zhixin.event.ProductRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
-import com.zhixing.work.zhixin.view.card.ModifyContentActivity;
 import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -104,7 +103,7 @@ public class AddDepartmentActivity extends BaseTitleActivity {
 
     private void addDepartment(String ParentId, String Name
     ) {
-        OkUtils.getInstances().httpPost(context, JavaConstant.Department, JavaParamsUtils.getInstances().addDepartment(ParentId, Name
+        OkUtils.getInstances().httpPost(context, RequestConstant.DEPARTMENT, JavaParamsUtils.getInstances().addDepartment(ParentId, Name
         ), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
@@ -115,7 +114,7 @@ public class AddDepartmentActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent()) {
                         AlertUtils.toast(context, "添加成功");
                         EventBus.getDefault().post(new DepartmentRefreshEvent(true));

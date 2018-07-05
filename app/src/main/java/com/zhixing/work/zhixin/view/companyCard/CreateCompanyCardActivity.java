@@ -22,10 +22,11 @@ import com.zhixing.work.zhixin.bean.AddressJson;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.event.CardCompleteEvent;
 import com.zhixing.work.zhixin.event.ModifyEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
@@ -185,7 +186,7 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
         }
     }
     private void CreateCard(String FullName, String Province, String City, String District, String Address, String ManagerName, String ManagerSex, String ManagerEmail) {
-        OkUtils.getInstances().httpTokenPost(context, JavaConstant.Company, JavaParamsUtils.getInstances().
+        OkUtils.getInstances().httpTokenPost(context, RequestConstant.COMPANY, JavaParamsUtils.getInstances().
                 Company(FullName, Province, City, District, Address, ManagerName, ManagerSex, ManagerEmail), new TypeToken<EntityObject<String>>() {
         }.getType(), new ResultCallBackListener<String>() {
             @Override
@@ -196,7 +197,7 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<String> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (!TextUtils.isEmpty(response.getContent())){
                         AlertUtils.toast(context, "添加成功");
                         SettingUtils.putToken(response.getContent());

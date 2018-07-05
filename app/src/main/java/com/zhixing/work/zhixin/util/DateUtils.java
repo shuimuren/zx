@@ -178,12 +178,11 @@ public class DateUtils {
     }
 
     public static Date stringToDateMinute(String str) {
-        //str =  " 2008-07-10 19:20:00 " 格式
         SimpleDateFormat format;
         if (str.length() == 10) {
             format = new SimpleDateFormat("yyyy-MM-dd");
         } else {
-            format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+            format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         }
 
         if (str == null || str.length() == 0) {

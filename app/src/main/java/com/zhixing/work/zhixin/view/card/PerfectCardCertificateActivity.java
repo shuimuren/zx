@@ -18,9 +18,10 @@ import com.zhixing.work.zhixin.adapter.AddCertificateAdapter;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.Certificate;
 import com.zhixing.work.zhixin.bean.EntityObject;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
@@ -98,7 +99,7 @@ public class PerfectCardCertificateActivity extends BaseTitleActivity {
 
     //提交数据
     private void addCertificate(String json) {
-        OkUtils.getInstances().postJson(context, JavaConstant.CertificateBackground, json, new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().postJson(context, RequestConstant.ADD_CERTIFICATE, json, new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, final String msg) {
@@ -120,7 +121,7 @@ public class PerfectCardCertificateActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(final EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

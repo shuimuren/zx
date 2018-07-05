@@ -123,8 +123,6 @@
             </LinearLayout>
 
             <LinearLayout
-
-
                 android:id="@+id/rl_back_id"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
@@ -142,7 +140,6 @@
                     android:visibility="gone" />
 
                 <LinearLayout
-
                     android:id="@+id/back_prompt"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

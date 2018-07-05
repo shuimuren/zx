@@ -25,3 +25,22 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    supportLibraryVersion = "27.1.1"
+    retrofitVersion = '2.4.0'
+    eventbusVersion = '3.0.0'
+    glideVersion = '4.7.1'
+    aspectjrtVersion = '1.8.10'
+    okHttpVersion = '3.10.0'
+    loggerVersion = '2.2.0'
+    butterknifeVersion = '8.8.1'
+    smartRefreshVersion = '1.1.0-alpha-7'
+    debugLeakCanaryVersion = 'leakcanary-android:1.5.4'
+    releaseLeakCanaryVersion = 'leakcanary-android-no-op:1.5.4'
+    bannerVersion = '1.4.10'
+    recylerViewHelperVersion = '2.9.40'
+
+
+}
+

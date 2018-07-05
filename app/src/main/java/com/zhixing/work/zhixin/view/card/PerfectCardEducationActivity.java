@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,31 +16,22 @@ import com.zhixing.work.zhixin.adapter.AddEducationAdapter;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.Education;
 import com.zhixing.work.zhixin.bean.EntityObject;
-import com.zhixing.work.zhixin.http.JavaConstant;
-import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
-import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
-import com.zhy.http.okhttp.OkHttpUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.Headers;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class PerfectCardEducationActivity extends BaseTitleActivity {
 
@@ -120,7 +110,7 @@ public class PerfectCardEducationActivity extends BaseTitleActivity {
 
     //提交数据
     private void addEducation(String json) {
-        OkUtils.getInstances().postJson(context, JavaConstant.EducationBackground, json, new TypeToken<EntityObject<Object>>() {
+        OkUtils.getInstances().postJson(context, RequestConstant.ADD_EDUCATION_EXPERIENCE, json, new TypeToken<EntityObject<Object>>() {
         }.getType(), new ResultCallBackListener<Object>() {
             @Override
             public void onFailure(int errorId, final String msg) {
@@ -146,7 +136,7 @@ public class PerfectCardEducationActivity extends BaseTitleActivity {
                     @Override
                     public void run() {
                         try {
-                            if (response.getCode() == 10000) {
+                            if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                                 AlertUtils.toast(context, "添加成功");
                                 startActivity(new Intent(context, PerfectCardCertificateActivity.class));
                                 finish();

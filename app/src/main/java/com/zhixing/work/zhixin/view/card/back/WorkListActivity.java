@@ -16,10 +16,11 @@ import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Resume;
 import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.view.card.AddWorkActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
@@ -88,7 +89,7 @@ public class WorkListActivity extends BaseTitleActivity {
 
     //获取数据
     private void getData() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.WorkBackground, JavaParamsUtils.getInstances().getCardAll(), new TypeToken<EntityObject<List<Resume.WrokBackgroundOutputsBean>>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.WorkBackground, JavaParamsUtils.getInstances().getCardAll(), new TypeToken<EntityObject<List<Resume.WrokBackgroundOutputsBean>>>() {
         }.getType(), new ResultCallBackListener<List<Resume.WrokBackgroundOutputsBean>>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -97,7 +98,7 @@ public class WorkListActivity extends BaseTitleActivity {
 
             @Override
             public void onSuccess(EntityObject<List<Resume.WrokBackgroundOutputsBean>> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     list = response.getContent();
                     workListAdapter.setList(list);
                 }

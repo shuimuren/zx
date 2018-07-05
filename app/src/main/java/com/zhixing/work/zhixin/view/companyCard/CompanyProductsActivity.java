@@ -16,10 +16,11 @@ import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Product;
 import com.zhixing.work.zhixin.dialog.DeleteDialog;
 import com.zhixing.work.zhixin.event.ProductRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
@@ -56,7 +57,7 @@ public class CompanyProductsActivity extends BaseTitleActivity {
     }
 
     private void getData() {
-        OkUtils.getInstances().httpTokenGet(context, JavaConstant.CompanyProduct, JavaParamsUtils.getInstances().getCompanySeniorManager(), new TypeToken<EntityObject<List<Product>>>() {
+        OkUtils.getInstances().httpTokenGet(context, RequestConstant.COMPANY_PRODUCT, JavaParamsUtils.getInstances().getCompanySeniorManager(), new TypeToken<EntityObject<List<Product>>>() {
         }.getType(), new ResultCallBackListener<List<Product>>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -65,7 +66,7 @@ public class CompanyProductsActivity extends BaseTitleActivity {
 
             @Override
             public void onSuccess(EntityObject<List<Product>> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     list = response.getContent();
                     if (!list.isEmpty()) {
                         productListAdapter.setList(list);
@@ -122,7 +123,7 @@ public class CompanyProductsActivity extends BaseTitleActivity {
     }
     //删除经历
     private void deleteData(int id) {
-        OkUtils.getInstances().httpDelete(context, JavaConstant.CompanyProduct + "?Id=" + id, JavaParamsUtils.getInstances().deleteProduct(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpDelete(context, RequestConstant.COMPANY_PRODUCT + "?Id=" + id, JavaParamsUtils.getInstances().deleteProduct(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -132,7 +133,7 @@ public class CompanyProductsActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent()) {
                         AlertUtils.toast(context, "删除成功");
                         EventBus.getDefault().post(new ProductRefreshEvent(true));

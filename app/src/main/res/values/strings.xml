@@ -81,4 +81,8 @@
     <string name="profession_card">职业卡牌</string>
     <string name="about_zhi_xin">关于职信</string>
     <string name="setting">设置</string>
+    <string name="certified_company">公司认证</string>
+    <string name="user_attestation">我的认证</string>
+    <string name="identity_authentication">身份认证</string>
+    <string name="upload">上传</string>
 </resources>

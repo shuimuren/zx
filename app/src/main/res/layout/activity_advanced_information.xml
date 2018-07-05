@@ -42,10 +42,8 @@
                     android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@+id/iv_nation"
                     android:background="@null"
-
                     android:gravity="right"
                     android:hint=""
-
                     android:textColor="@color/color_303030"
                     android:textColorHint="@color/hint"
                     android:textSize="16sp" />

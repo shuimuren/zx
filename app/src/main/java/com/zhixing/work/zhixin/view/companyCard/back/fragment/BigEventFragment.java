@@ -15,18 +15,15 @@ import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.adapter.BigEventListAdapter;
 import com.zhixing.work.zhixin.base.SupportFragment;
-import com.zhixing.work.zhixin.bean.Company;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.History;
-import com.zhixing.work.zhixin.bean.HotCity;
-import com.zhixing.work.zhixin.event.BasicRefreshEvent;
 import com.zhixing.work.zhixin.event.BigEventRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
-import com.zhixing.work.zhixin.view.companyCard.AddEventActivity;
 import com.zhixing.work.zhixin.view.companyCard.BigEventActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
@@ -140,7 +137,7 @@ public class BigEventFragment extends SupportFragment {
 
     private void getData() {
 
-        OkUtils.getInstances().httpTokenGet(getActivity(), JavaConstant.CompanyHistory, JavaParamsUtils.getInstances().getCompanyCard(), new TypeToken<EntityObject<List<History>>>() {
+        OkUtils.getInstances().httpTokenGet(getActivity(), RequestConstant.COMPANY_HISTORY, JavaParamsUtils.getInstances().getCompanyCard(), new TypeToken<EntityObject<List<History>>>() {
         }.getType(), new ResultCallBackListener<List<History>>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -149,7 +146,7 @@ public class BigEventFragment extends SupportFragment {
 
             @Override
             public void onSuccess(EntityObject<List<History>> response) {
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent() == null) {
 
                     } else {

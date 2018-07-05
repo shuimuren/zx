@@ -3,7 +3,7 @@ package com.zhixing.work.zhixin.domain;
 import java.io.Serializable;
 
 /**
- * Created by wangsuli on 2017/4/27.
+ *
  */
 
 public class AlbumItem implements Serializable {

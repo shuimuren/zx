@@ -26,10 +26,11 @@ import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Resume;
 import com.zhixing.work.zhixin.event.ModifyEvent;
 import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
 import com.zhixing.work.zhixin.util.Utils;
@@ -321,7 +322,7 @@ public class AddEducationActivity extends BaseTitleActivity {
 
     //提交数据
     private void addEducation(String json) {
-        OkUtils.getInstances().postJson(context, JavaConstant.EducationBackground, json, new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().postJson(context, RequestConstant.ADD_EDUCATION_EXPERIENCE, json, new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, final String msg) {
@@ -346,7 +347,7 @@ public class AddEducationActivity extends BaseTitleActivity {
                     @Override
                     public void run() {
                         try {
-                            if (response.getCode() == 10000) {
+                            if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                                 if (response.getContent()) {
                                     AlertUtils.toast(context, "添加成功");
                                     EventBus.getDefault().post(new ResumeRefreshEvent(true));
@@ -369,7 +370,7 @@ public class AddEducationActivity extends BaseTitleActivity {
     }
     //更新数据
     private void upEducation(RequestBody body) {
-        OkUtils.getInstances().httpPut(body, context, JavaConstant.EducationBackground, JavaParamsUtils.getInstances().upWork(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpPut(body, context, RequestConstant.ADD_EDUCATION_EXPERIENCE, JavaParamsUtils.getInstances().upWork(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, final String msg) {
@@ -393,7 +394,7 @@ public class AddEducationActivity extends BaseTitleActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (response.getCode() == 10000) {
+                        if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                             if (response.getContent()) {
                                 AlertUtils.toast(context, "修改成功");
                                 EventBus.getDefault().post(new ResumeRefreshEvent(true));
@@ -414,7 +415,7 @@ public class AddEducationActivity extends BaseTitleActivity {
     }
     //删除经历
     private void deleteData(RequestBody body) {
-        OkUtils.getInstances().httpDelete(context, JavaConstant.EducationBackground + "?Id=" + bean.getId(), JavaParamsUtils.getInstances().deleteEducation(), new TypeToken<EntityObject<Boolean>>() {
+        OkUtils.getInstances().httpDelete(context, RequestConstant.ADD_EDUCATION_EXPERIENCE + "?Id=" + bean.getId(), JavaParamsUtils.getInstances().deleteEducation(), new TypeToken<EntityObject<Boolean>>() {
         }.getType(), new ResultCallBackListener<Boolean>() {
             @Override
             public void onFailure(int errorId, String msg) {
@@ -424,7 +425,7 @@ public class AddEducationActivity extends BaseTitleActivity {
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
-                if (response.getCode() == 10000) {
+                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (response.getContent()) {
                         AlertUtils.toast(context, "删除成功");
                         EventBus.getDefault().post(new ResumeRefreshEvent(true));

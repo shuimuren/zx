@@ -41,7 +41,6 @@ public class LoginActivity extends BaseTitleActivity {
     TextView tvLoginPerson;
     @BindView(R.id.tv_login_company)
     TextView tvLoginCompany;
-
     @BindView(R.id.btn_login)
     TextView btnLogin;
     @BindView(R.id.phone_ed)

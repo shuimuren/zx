@@ -9,10 +9,8 @@ import com.google.gson.Gson;
 import com.zhixing.work.zhixin.BuildConfig;
 import com.zhixing.work.zhixin.app.ZxApplication;
 import com.zhixing.work.zhixin.bean.EntityObject;
-import com.zhixing.work.zhixin.bean.Evaluating;
 import com.zhixing.work.zhixin.bean.FailObject;
 import com.zhixing.work.zhixin.http.HttpHeadUtils;
-import com.zhixing.work.zhixin.http.JavaConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
 import com.zhixing.work.zhixin.util.Indicator;
@@ -20,7 +18,6 @@ import com.zhixing.work.zhixin.util.NetUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.view.MainActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.Callback;
 import com.zhy.http.okhttp.callback.FileCallBack;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -41,9 +38,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 
 import okhttp3.Call;
-import okhttp3.FormBody;
 import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
@@ -60,15 +55,10 @@ public class OkUtils<T> {
     private static String timer;
     private static String randoms;
     private static OkUtils instances;
-    public static String accessId = "7568512625";
-    public static String accessSecret = "a02f3025-9c9b-4737-897d-7e94242797a0";
+
     private String ASCII;
 
-    public static final String ACCESSID = "accessId";
-    public static final String TIMESTAMP = "timestamp";
-    public static final String NONCE = "nonce";
-    public static final String TOKEN = "token";
-    public static final String SIGNATURE = "signature";
+
 
     private Gson gson = new Gson();
     public static final MediaType JSONType = MediaType.parse("application/json; charset=utf-8");
@@ -139,11 +129,11 @@ public class OkUtils<T> {
 
                 OkHttpUtils.post().url(url).params(param)
                         .addHeader("version", BuildConfig.VERSION_NAME).//打印版本
-                        addHeader(ACCESSID, accessId).
-                        addHeader(TIMESTAMP, timer).
-                        addHeader(TOKEN, SettingUtils.getToken()).
-                        addHeader(NONCE, randoms).
-                        addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                        addHeader(HttpHeadUtils.KEY_ACCESSID, HttpHeadUtils.ACCESS_ID).
+                        addHeader(HttpHeadUtils.KEY_TIMESTAMP, timer).
+                        addHeader(HttpHeadUtils.KEY_TOKEN, SettingUtils.getToken()).
+                        addHeader(HttpHeadUtils.KEY_NONCE, randoms).
+                        addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms,HttpHeadUtils.ACCESS_SECRET)))
                         .build().execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
@@ -186,11 +176,11 @@ public class OkUtils<T> {
             } else {
                 OkHttpUtils.get().url(url).params(param)
                         .addHeader("version", BuildConfig.VERSION_NAME).//打印版本
-                        addHeader(ACCESSID, accessId).
-                        addHeader(TIMESTAMP, timer).
-                        addHeader(NONCE, randoms).
-                        addHeader(TOKEN, SettingUtils.getToken()).
-                        addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                        addHeader(HttpHeadUtils.KEY_ACCESSID, HttpHeadUtils.ACCESS_ID).
+                        addHeader(HttpHeadUtils.KEY_TIMESTAMP, timer).
+                        addHeader(HttpHeadUtils.KEY_NONCE, randoms).
+                        addHeader(HttpHeadUtils.KEY_TOKEN, SettingUtils.getToken()).
+                        addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms, HttpHeadUtils.ACCESS_SECRET)))
                         .build().execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
@@ -257,11 +247,11 @@ public class OkUtils<T> {
             if (isPost) {
                 OkHttpUtils.post().url(url).params(param)
                         .addHeader("version", BuildConfig.VERSION_NAME).//打印版本
-                        addHeader(ACCESSID, accessId).
-                        addHeader(TIMESTAMP, timer).
-                        addHeader(NONCE, randoms).
-                        addHeader(TOKEN, SettingUtils.getToken()).
-                        addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                        addHeader(HttpHeadUtils.KEY_ACCESSID, HttpHeadUtils.ACCESS_ID).
+                        addHeader(HttpHeadUtils.KEY_TIMESTAMP, timer).
+                        addHeader(HttpHeadUtils.KEY_NONCE, randoms).
+                        addHeader(HttpHeadUtils.KEY_TOKEN, SettingUtils.getToken()).
+                        addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms, HttpHeadUtils.ACCESS_SECRET)))
                         .build().execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
@@ -314,11 +304,11 @@ public class OkUtils<T> {
             } else {
                 OkHttpUtils.get().url(url).params(param)
                         .addHeader("version", BuildConfig.VERSION_NAME).//打印版本
-                        addHeader(ACCESSID, accessId).
-                        addHeader(TIMESTAMP, timer).
-                        addHeader(NONCE, randoms).
-                        addHeader(TOKEN, SettingUtils.getToken()).
-                        addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                        addHeader(HttpHeadUtils.KEY_ACCESSID, HttpHeadUtils.ACCESS_ID).
+                        addHeader(HttpHeadUtils.KEY_TIMESTAMP, timer).
+                        addHeader(HttpHeadUtils.KEY_NONCE, randoms).
+                        addHeader(HttpHeadUtils.KEY_TOKEN, SettingUtils.getToken()).
+                        addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms, HttpHeadUtils.ACCESS_SECRET)))
                         .build().execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
@@ -379,11 +369,11 @@ public class OkUtils<T> {
             //       String urls = url + "?" + buildParam(param);
 
             OkHttpUtils.postJson().url(url).addHeader("version", BuildConfig.VERSION_NAME).//打印版本
-                    addHeader(ACCESSID, accessId).
-                    addHeader(TIMESTAMP, timer).
-                    addHeader(NONCE, randoms).
-                    addHeader(TOKEN, SettingUtils.getToken()).
-                    addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret))).
+                    addHeader(HttpHeadUtils.KEY_ACCESSID, HttpHeadUtils.ACCESS_ID).
+                    addHeader(HttpHeadUtils.KEY_TIMESTAMP, timer).
+                    addHeader(HttpHeadUtils.KEY_NONCE, randoms).
+                    addHeader(HttpHeadUtils.KEY_TOKEN, SettingUtils.getToken()).
+                    addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms, HttpHeadUtils.ACCESS_SECRET))).
                     content(json).mediaType(JSONType).build().execute(new StringCallback() {
 
                 @Override
@@ -535,7 +525,7 @@ public class OkUtils<T> {
         String hash = "";
         try {
             Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
-            SecretKeySpec secret_key = new SecretKeySpec(accessSecret.getBytes(), "HmacSHA256");
+            SecretKeySpec secret_key = new SecretKeySpec(HttpHeadUtils.ACCESS_SECRET.getBytes(), "HmacSHA256");
             sha256_HMAC.init(secret_key);
             byte[] bytes = sha256_HMAC.doFinal(ASCII.getBytes());
             hash = byteArrayToHexString(bytes);
@@ -578,11 +568,11 @@ public class OkUtils<T> {
             OkHttpUtils.patch().url(url).requestBody(requestBody).
                     addHeader("content-type", "application/x-www-form-urlencoded")
                     .addHeader("version", BuildConfig.VERSION_NAME).//打印版本
-                    addHeader(TOKEN, SettingUtils.getToken()).
-                    addHeader(ACCESSID, accessId).
-                    addHeader(TIMESTAMP, timer).
-                    addHeader(NONCE, randoms).
-                    addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                    addHeader(HttpHeadUtils.KEY_TOKEN, SettingUtils.getToken()).
+                    addHeader(HttpHeadUtils.KEY_ACCESSID, HttpHeadUtils.ACCESS_ID).
+                    addHeader(HttpHeadUtils.KEY_TIMESTAMP, timer).
+                    addHeader(HttpHeadUtils.KEY_NONCE, randoms).
+                    addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms, HttpHeadUtils.ACCESS_SECRET)))
                     .build().execute(new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
@@ -644,11 +634,11 @@ public class OkUtils<T> {
             OkHttpUtils.delete().url(url).
                     addHeader("content-type", "application/x-www-form-urlencoded")
                     .addHeader("version", BuildConfig.VERSION_NAME).//打印版本
-                    addHeader(TOKEN, SettingUtils.getToken()).
-                    addHeader(ACCESSID, accessId).
-                    addHeader(TIMESTAMP, timer).
-                    addHeader(NONCE, randoms).
-                    addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                    addHeader(HttpHeadUtils.KEY_TOKEN, SettingUtils.getToken()).
+                    addHeader(HttpHeadUtils.KEY_ACCESSID, HttpHeadUtils.ACCESS_ID).
+                    addHeader(HttpHeadUtils.KEY_TIMESTAMP, timer).
+                    addHeader(HttpHeadUtils.KEY_NONCE, randoms).
+                    addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms, HttpHeadUtils.ACCESS_SECRET)))
                     .build().execute(new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
@@ -707,11 +697,11 @@ public class OkUtils<T> {
             OkHttpUtils.put().url(url).requestBody(requestBody).
                     addHeader("content-type", "application/x-www-form-urlencoded")
                     .addHeader("version", BuildConfig.VERSION_NAME).//打印版本
-                    addHeader(TOKEN, SettingUtils.getToken()).
-                    addHeader(ACCESSID, accessId).
-                    addHeader(TIMESTAMP, timer).
-                    addHeader(NONCE, randoms).
-                    addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                    addHeader(HttpHeadUtils.KEY_TOKEN, SettingUtils.getToken()).
+                    addHeader(HttpHeadUtils.KEY_ACCESSID, HttpHeadUtils.ACCESS_ID).
+                    addHeader(HttpHeadUtils.KEY_TIMESTAMP, timer).
+                    addHeader(HttpHeadUtils.KEY_NONCE, randoms).
+                    addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms, HttpHeadUtils.ACCESS_SECRET)))
                     .build().execute(new StringCallback() {
                 @Override
                 public void onError(Call call, Exception e, int id) {
@@ -768,10 +758,10 @@ public class OkUtils<T> {
         Request request = new Request.Builder()
                 .url(url)
                 .post(requestBody).addHeader("token", SettingUtils.getToken()).
-                        addHeader(ACCESSID, accessId).
-                        addHeader(TIMESTAMP, timer).
-                        addHeader(NONCE, randoms).
-                        addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                        addHeader(HttpHeadUtils.KEY_ACCESSID, HttpHeadUtils.ACCESS_ID).
+                        addHeader(HttpHeadUtils.KEY_TIMESTAMP, timer).
+                        addHeader(HttpHeadUtils.KEY_NONCE, randoms).
+                        addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms, HttpHeadUtils.ACCESS_SECRET)))
                 .build();
         //发送请求获取响应
         Call call = OkHttpUtils.getInstance().getOkHttpClient().newCall(request);
@@ -830,10 +820,10 @@ public class OkUtils<T> {
         Request request = new Request.Builder()
                 .url(url)
                 .put(requestBody).addHeader("token", SettingUtils.getToken()).
-                        addHeader(ACCESSID, accessId).
-                        addHeader(TIMESTAMP, timer).
-                        addHeader(NONCE, randoms).
-                        addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                        addHeader(HttpHeadUtils.KEY_ACCESSID,HttpHeadUtils.ACCESS_ID).
+                        addHeader(HttpHeadUtils.KEY_TIMESTAMP, timer).
+                        addHeader(HttpHeadUtils.KEY_NONCE, randoms).
+                        addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms, HttpHeadUtils.ACCESS_SECRET)))
                 .build();
         //发送请求获取响应
         Call call = OkHttpUtils.getInstance().getOkHttpClient().newCall(request);
@@ -892,10 +882,10 @@ public class OkUtils<T> {
         Request request = new Request.Builder()
                 .url(url)
                 .patch(requestBody).addHeader("token", SettingUtils.getToken()).
-                        addHeader(ACCESSID, accessId).
-                        addHeader(TIMESTAMP, timer).
-                        addHeader(NONCE, randoms).
-                        addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                        addHeader(HttpHeadUtils.KEY_ACCESSID, HttpHeadUtils.ACCESS_ID).
+                        addHeader(HttpHeadUtils.KEY_TIMESTAMP, timer).
+                        addHeader(HttpHeadUtils.KEY_NONCE, randoms).
+                        addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms, HttpHeadUtils.ACCESS_SECRET)))
                 .build();
         //发送请求获取响应
         Call call = OkHttpUtils.getInstance().getOkHttpClient().newCall(request);
@@ -947,10 +937,10 @@ public class OkUtils<T> {
         //创建一个OkHttpClient对象
         Request request = new Request.Builder().delete()
                 .url(url).addHeader("token", SettingUtils.getToken()).
-                        addHeader(ACCESSID, accessId).
-                        addHeader(TIMESTAMP, timer).
-                        addHeader(NONCE, randoms).
-                        addHeader(SIGNATURE, getSignature(getASCII(accessId, timer, randoms, accessSecret)))
+                        addHeader(HttpHeadUtils.KEY_ACCESSID, HttpHeadUtils.ACCESS_ID).
+                        addHeader(HttpHeadUtils.KEY_TIMESTAMP, timer).
+                        addHeader(HttpHeadUtils.KEY_NONCE, randoms).
+                        addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms, HttpHeadUtils.ACCESS_SECRET)))
                 .build();
         //发送请求获取响应
         Call call = OkHttpUtils.getInstance().getOkHttpClient().newCall(request);

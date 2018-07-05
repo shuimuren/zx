@@ -9,27 +9,19 @@ import android.view.animation.AlphaAnimation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.zhixing.work.zhixin.R;
-import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.util.SettingUtils;
-import com.zhy.http.okhttp.utils.L;
-
-import java.util.Map;
 /**
  * 开屏页
  */
 public class SplashActivity extends Activity {
 
     private static final int sleepTime = 2000;
-
-    private Gson gson;
     public static SplashActivity instance;
 
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
-
         setContentView(R.layout.em_activity_splash);
         RelativeLayout rootLayout = (RelativeLayout) findViewById(R.id.splash_root);
         TextView versionText = (TextView) findViewById(R.id.tv_version);
@@ -37,55 +29,26 @@ public class SplashActivity extends Activity {
         animation.setDuration(1500);
         rootLayout.startAnimation(animation);
 
+        //因为初始化耗时,延迟加载
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (TextUtils.isEmpty(SettingUtils.getToken())) {
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(intent);
 
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//
-//
-//            }
-//        }, 1000);
+                } else {
+                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+                finish();
 
-    }
-
-    @Override
-    protected void onStart() {
-
-        super.onStart();
-        if (TextUtils.isEmpty(SettingUtils.getToken())) {
-            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-            startActivity(intent);
-
-        } else {
-            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
-        finish();
-
-
-    }
-
-    private void goMain() {
-        long start = System.currentTimeMillis();
-
-        long costTime = System.currentTimeMillis() - start;
-        //wait
-        if (sleepTime - costTime > 0) {
-            try {
-                Thread.sleep(sleepTime - costTime);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
-        }
-        startActivity(new Intent(SplashActivity.this, MainActivity.class));
-        instance = null;
-        finish();
+        }, sleepTime);
+
     }
 
-    /**
-     * get sdk version
-     */
+
 
 
 }

@@ -119,8 +119,6 @@ public class JavaParamsUtils {
     //    获取反面卡牌信息
     public Map<String, String> getCardAll() {
         Map<String, String> params = new HashMap<>();
-
-
         params.put("frontOrBack", "back");
         params.put("opt", "baseinfo");
         return params;
@@ -366,6 +364,7 @@ public class JavaParamsUtils {
 
         return params;
     }
+
     //  添加产品
     public Map<String, String> addDepartment(String ParentId, String Name
     ) {
@@ -376,6 +375,7 @@ public class JavaParamsUtils {
 
         return params;
     }
+
     //  获取子部门
     public Map<String, String> getDepartment(String departmentId
     ) {
@@ -391,12 +391,14 @@ public class JavaParamsUtils {
 
         return params;
     }
+
     //  修改子部门
     public Map<String, String> modifyDepartment(
     ) {
         Map<String, String> params = new HashMap<>();
         return params;
     }
+
     //  获取子部门
     public Map<String, String> getSetff(String departmentId
     ) {
@@ -404,6 +406,7 @@ public class JavaParamsUtils {
         params.put("departmentId", departmentId);
         return params;
     }
+
     //  公司营业执照
     public Map<String, String> BusinessLicense(
     ) {
@@ -411,6 +414,7 @@ public class JavaParamsUtils {
 
         return params;
     }
+
     //  公司法人认证
     public Map<String, String> IdCard(
     ) {

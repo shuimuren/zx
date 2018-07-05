@@ -35,13 +35,12 @@
 
         <TextView
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             android:text="@string/app_name"
             android:textColor="#fff"
             android:textSize="20sp"
             android:typeface="normal"
-            android:visibility="gone"></TextView>
+            android:visibility="gone"/>
 
         <TextView
 
@@ -53,7 +52,7 @@
             android:textColor="#fff"
             android:textSize="20sp"
             android:visibility="gone"
-            tools:ignore="HardcodedText"></TextView>
+            tools:ignore="HardcodedText"/>
     </LinearLayout>
 
 </RelativeLayout>

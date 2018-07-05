@@ -3,6 +3,7 @@ package com.zhixing.work.zhixin.app;
 import android.app.Activity;
 import android.content.Context;
 
+import com.squareup.leakcanary.LeakCanary;
 import com.zhixing.work.zhixin.base.BaseApplication;
 
 import java.util.ArrayList;
@@ -32,7 +33,10 @@ public class ZxApplication extends BaseApplication {
         //init demo helper
         applicationContext = this;
      //
-
+        if(LeakCanary.isInAnalyzerProcess(this)){
+            return;
+        }
+        LeakCanary.install(this);
     }
     public static ZxApplication getInstance() {
         return instance;

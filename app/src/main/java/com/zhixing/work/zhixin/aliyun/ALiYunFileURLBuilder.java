@@ -43,8 +43,8 @@ public class ALiYunFileURLBuilder {
     public static final String KEY_BUCKET_NAME = "bucketName"; //主目录key值 BUCKET_SECTET/BUCKET_PUBLIC
     public static final String KEY_SUB_ITEM_CATALOGUE = "subItem"; //子目录key
     public static final String KEY_FILE_PATH = "filePath"; //图片路径
-    public static final String KEY_LOAD_BASE_URL = "loadUrl"; //
-    public static final String KEY_IMAGE_MARK = "object"; //图片标记
+    public static final String KEY_LOAD_BASE_URL = "baseUrl"; //
+    public static final String KEY_IMAGE_MARK = "imageMark"; //图片标记
 
 
     public static String getBase() {

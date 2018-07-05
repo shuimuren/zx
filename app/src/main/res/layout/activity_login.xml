@@ -9,7 +9,6 @@
 
 
     <android.support.v7.widget.CardView
-
         android:id="@+id/cardView"
         android:layout_width="@dimen/x230"
         android:layout_height="@dimen/x40"
@@ -48,7 +47,6 @@
             android:orientation="vertical">
             <!--用户类型选择-->
             <RelativeLayout
-
                 android:layout_width="match_parent"
                 android:layout_height="55dp">
 

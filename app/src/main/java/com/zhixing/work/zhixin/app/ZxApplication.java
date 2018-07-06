@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.squareup.leakcanary.LeakCanary;
 import com.zhixing.work.zhixin.base.BaseApplication;
+import com.zhixing.work.zhixin.common.ScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class ZxApplication extends BaseApplication {
             return;
         }
         LeakCanary.install(this);
+        ScreenUtil.setDensity(this);
     }
     public static ZxApplication getInstance() {
         return instance;

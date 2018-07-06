@@ -76,10 +76,9 @@ import okhttp3.RequestBody;
 
 
 /**
- *
+ *评分页面
  */
 public class ScoreFragment extends BaseMainFragment {
-
 
     @BindView(R.id.title)
     TextView title;
@@ -121,8 +120,8 @@ public class ScoreFragment extends BaseMainFragment {
     RelativeLayout rlData;
     @BindView(R.id.phone)
     TextView phone;
-    @BindView(R.id.nikename)
-    TextView nikename;
+    @BindView(R.id.nikeName)
+    TextView nikeName;
     @BindView(R.id.motto)
     TextView motto;
     @BindView(R.id.more)
@@ -189,7 +188,7 @@ public class ScoreFragment extends BaseMainFragment {
 
     public static ScoreFragment instance;
     public Token token;
-    private String addressct = "";
+    private String addressCity = "";
 
 
     public static ScoreFragment newInstance() {
@@ -248,18 +247,18 @@ public class ScoreFragment extends BaseMainFragment {
                             GlideUtils.getInstance().loadGlideRoundTransform(context, ALiYunFileURLBuilder.getUserIconUrl(companyCard.getLogo()), enterpriseAvatar);
                         }
                         if (companyCard.getProvince() != null) {
-                            addressct = Utils.searchProvincial(companyCard.getProvince());
+                            addressCity = Utils.searchProvincial(companyCard.getProvince());
                         }
                         if (companyCard.getCity() != null) {
-                            addressct = addressct + Utils.searchCity(companyCard.getCity());
+                            addressCity = addressCity + Utils.searchCity(companyCard.getCity());
                         }
                         if (companyCard.getDistrict() != null) {
-                            addressct = addressct + Utils.searchArea(companyCard.getDistrict());
+                            addressCity = addressCity + Utils.searchArea(companyCard.getDistrict());
                         }
                         if (TextUtils.isEmpty(companyCard.getAddress())) {
-                            companyAddress.setText(addressct);
+                            companyAddress.setText(addressCity);
                         } else {
-                            companyAddress.setText(addressct + companyCard.getAddress());
+                            companyAddress.setText(addressCity + companyCard.getAddress());
                         }
                         companyName.setText(companyCard.getFullName());
                     }
@@ -297,7 +296,7 @@ public class ScoreFragment extends BaseMainFragment {
                             llNikeName.setVisibility(View.GONE);
                         } else {
                             llNikeName.setVisibility(View.VISIBLE);
-                            nikename.setText(card.getNickName());
+                            nikeName.setText(card.getNickName());
                         }
                         if (card.getConstellation() != null) {
                             constellation.setImageResource(Utils.getConstellationImage(card.getConstellation()));

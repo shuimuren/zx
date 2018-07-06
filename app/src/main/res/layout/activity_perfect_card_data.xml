@@ -45,7 +45,7 @@
                         android:layout_below="@+id/onea_iv"
                         android:text="个人资料"
                         android:textColor="@color/main_color"
-                        android:textSize="@dimen/font_size_12sp" />
+                        android:textSize="@dimen/font_small" />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -80,7 +80,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/twoa_iv"
                         android:text="教育经历"
-                        android:textSize="@dimen/font_size_12sp" />
+                        android:textSize="@dimen/font_small" />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -115,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/three_iv"
                         android:text="证书信息"
-                        android:textSize="@dimen/font_size_12sp" />
+                        android:textSize="@dimen/font_small" />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -151,7 +151,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/four_iv"
                         android:text="工作信息"
-                        android:textSize="@dimen/font_size_12sp" />
+                        android:textSize="@dimen/font_small" />
                 </RelativeLayout>
 
             </RelativeLayout>

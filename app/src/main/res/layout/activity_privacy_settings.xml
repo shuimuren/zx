@@ -26,7 +26,7 @@
                 android:gravity="center_vertical"
                 android:text="屏蔽公司"
                 android:textColor="@color/color_303030"
-                android:textSize="@dimen/font_size_16sp" />
+                android:textSize="@dimen/font_list_right" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -54,7 +54,7 @@
                 android:gravity="center_vertical"
                 android:text="企业公开对我的评价"
                 android:textColor="@color/color_303030"
-                android:textSize="@dimen/font_size_16sp" />
+                android:textSize="@dimen/font_list_right" />
 
             <CheckBox
                 android:id="@+id/public_evaluation"
@@ -88,7 +88,7 @@
                 android:gravity="center_vertical"
                 android:text="隐藏简历"
                 android:textColor="@color/color_303030"
-                android:textSize="@dimen/font_size_16sp" />
+                android:textSize="@dimen/font_list_right" />
 
             <CheckBox
                 android:id="@+id/hidden_resume"

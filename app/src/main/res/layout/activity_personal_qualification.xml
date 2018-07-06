@@ -103,13 +103,13 @@
             android:gravity="center_vertical"
             android:text="手持身份证照片"
             android:textColor="@color/color_303030"
-            android:textSize="@dimen/font_size_18sp" />
+            android:textSize="@dimen/font_head" />
 
         <ImageView
 
             android:id="@+id/id_photo"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_150"
+            android:layout_height="@dimen/id_photo_height"
             android:layout_marginLeft="@dimen/dp_40"
             android:layout_marginRight="@dimen/dp_40"
             android:layout_marginTop="@dimen/dp_20"

@@ -169,12 +169,11 @@
                     android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@+id/iv_major"
                     android:background="@null"
-
                     android:gravity="right"
                     android:hint="请输入专业"
                     android:textColor="@color/color_303030"
                     android:textColorHint="@color/hint"
-                    android:textSize="@dimen/font_size_16sp" />
+                    android:textSize="@dimen/font_list_right" />
 
                 <ImageView
                     android:id="@+id/iv_major"

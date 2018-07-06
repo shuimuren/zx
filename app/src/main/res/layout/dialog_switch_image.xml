@@ -8,7 +8,7 @@
     <TextView
         android:id="@+id/camera"
         android:textColor="@color/color_333333"
-        android:textSize="@dimen/font_size_18sp"
+        android:textSize="@dimen/font_head"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/white"
@@ -21,7 +21,7 @@
     <TextView
         android:id="@+id/photo"
         android:textColor="@color/color_333333"
-        android:textSize="@dimen/font_size_18sp"
+        android:textSize="@dimen/font_head"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/white"
@@ -45,7 +45,7 @@
             android:background="@color/white"
             android:gravity="center"
             android:textColor="@color/color_333333"
-            android:textSize="@dimen/font_size_18sp"
+            android:textSize="@dimen/font_head"
             android:text="取消" />
     </LinearLayout>
 

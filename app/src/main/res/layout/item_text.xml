@@ -16,4 +16,4 @@
     android:paddingTop="@dimen/dp_8"
     android:text="深圳"
     android:textColor="@color/main_color"
-    android:textSize="@dimen/font_size_12sp" />
+    android:textSize="@dimen/font_small" />

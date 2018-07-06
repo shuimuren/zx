@@ -11,7 +11,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
@@ -24,6 +23,7 @@ import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.RegularUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.widget.ClearEditText;
@@ -60,14 +60,14 @@ public class LoginActivity extends BaseTitleActivity {
     private String phone;
     private String password;
     private Boolean isShowPassword = true;
-    private Gson gson = new Gson();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        setTitle("登陆");
+        setTitle(ResourceUtils.getString(R.string.login));
         setLeftNotVisible();
         context = this;
         type = RoleConstant.PERSONAL_ROLE;
@@ -79,36 +79,37 @@ public class LoginActivity extends BaseTitleActivity {
         if (!TextUtils.isEmpty(SettingUtils.getPhoneNumber())) {
             phoneEd.setText(SettingUtils.getPhoneNumber());
             phoneEd.setSelection(SettingUtils.getPhoneNumber().length());
-
         }
     }
 
     @OnClick({R.id.tv_login_person, R.id.tv_login_company, R.id.btn_login, R.id.register, R.id.forget_password, R.id.show_password})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            //切换账户类型
+            //切换账户类型切换为个人用户
             case R.id.tv_login_person:
                 type = RoleConstant.PERSONAL_ROLE;
                 tvLoginPerson.setTextSize(20);
-                tvLoginPerson.setTextColor(context.getResources().getColor(R.color.login_person_tv));
+                tvLoginPerson.setTextColor(ResourceUtils.getColor(R.color.login_person_tv));
                 tvLoginCompany.setTextSize(16);
-                tvLoginCompany.setTextColor(context.getResources().getColor(R.color.login_company_tv));
+                tvLoginCompany.setTextColor(ResourceUtils.getColor(R.color.login_company_tv));
                 break;
+            //切换账户类型切换为企业
             case R.id.tv_login_company:
                 type = RoleConstant.ENTERPRISE_ROLE;
-
                 tvLoginPerson.setTextSize(16);
-                tvLoginPerson.setTextColor(context.getResources().getColor(R.color.login_company_tv));
+                tvLoginPerson.setTextColor(ResourceUtils.getColor(R.color.login_company_tv));
                 tvLoginCompany.setTextSize(20);
-                tvLoginCompany.setTextColor(context.getResources().getColor(R.color.login_person_tv));
+                tvLoginCompany.setTextColor(ResourceUtils.getColor(R.color.login_person_tv));
                 break;
+            //注册
             case R.id.register:
                 startActivity(new Intent(context, RegistActivity.class));
                 break;
+            //忘记密码
             case R.id.forget_password:
                 startActivity(new Intent(context, UpDatePwdActivity.class));
                 break;
-
+            //显示密码
             case R.id.show_password:
                 if (isShowPassword) {// 显示密码
                     showPassword.setImageDrawable(getResources().getDrawable(R.drawable.icon_show));
@@ -122,20 +123,21 @@ public class LoginActivity extends BaseTitleActivity {
                     isShowPassword = !isShowPassword;
                 }
                 break;
+            //登录
             case R.id.btn_login:
                 phone = phoneEd.getText().toString();
                 password = passwordEd.getText().toString();
                 if (TextUtils.isEmpty(phone)) {
-                    AlertUtils.toast(context, "手机号不能为空");
+                    AlertUtils.show(ResourceUtils.getString(R.string.alert_phone_number_is_null));
                     return;
                 }else if(!RegularUtils.isMobileNo(phone)){
-                    AlertUtils.toast(context,"请输入正确的手机号");
+                    AlertUtils.show(ResourceUtils.getString(R.string.alert_phone_number_unusable));
                     return;
                 } else if (TextUtils.isEmpty(password)) {
-                    AlertUtils.toast(context, "密码不能为空");
+                   AlertUtils.show(ResourceUtils.getString(R.string.alert_pass_word_unusable));
                     return;
                 } else {
-                    showLoadingDialog("登陆中");
+                    showLoadingDialog(ResourceUtils.getString(R.string.landing));
                     OkUtils.getInstances().httpPost(context, RequestConstant.GO_LOGIN,
                             JavaParamsUtils.getInstances().Login(phone, password, type), new TypeToken<EntityObject<String>>() {
                             }.getType(), new ResultCallBackListener<String>() {
@@ -144,7 +146,6 @@ public class LoginActivity extends BaseTitleActivity {
                                     hideLoadingDialog();
                                     AlertUtils.toast(context, msg);
                                 }
-
                                 @Override
                                 public void onSuccess(EntityObject<String> response) {
                                     hideLoadingDialog();
@@ -161,7 +162,6 @@ public class LoginActivity extends BaseTitleActivity {
                                             startActivity(new Intent(context, MainActivity.class));
                                             finish();
                                         }
-
                                     } else {
                                         AlertUtils.toast(context, response.getMessage());
                                     }

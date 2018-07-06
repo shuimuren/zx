@@ -63,7 +63,7 @@ public class MainFragment extends SupportFragment {
             mFragments[COMMUNITY_FRAGMENT_CODE] = CommunityFragment.newInstance();
             mFragments[MY_CENTER_FRAGMENT_CODE] = MyCenterFragment.newInstance();
 
-            loadMultipleRootFragment(R.id.fl_tab_container,MAIN_FRAGMENT_CODE,
+            loadMultipleRootFragment(R.id.fl_tab_container, MAIN_FRAGMENT_CODE,
                     mFragments[MAIN_FRAGMENT_CODE],
                     mFragments[SCORE_FRAGMENT_CODE],
                     mFragments[APPLICATION_FRAGMENT_CODE],
@@ -81,9 +81,8 @@ public class MainFragment extends SupportFragment {
     }
 
     private void initView(View view) {
-        mBottomBar = (BottomBar) view.findViewById(R.id.bottomBar);
-        mBottomBar
-                .addItem(new BottomBarTab(_mActivity, R.drawable.message_bg, getString(R.string.message)))
+        mBottomBar = view.findViewById(R.id.bottomBar);
+        mBottomBar.addItem(new BottomBarTab(_mActivity, R.drawable.message_bg, getString(R.string.message)))
                 .addItem(new BottomBarTab(_mActivity, R.drawable.score_bg, getString(R.string.score)))
                 .addItem(new BottomBarTab(_mActivity, R.drawable.appicon_bg, getString(R.string.application)))
                 .addItem(new BottomBarTab(_mActivity, R.drawable.career_bg, getString(R.string.career)))
@@ -111,6 +110,7 @@ public class MainFragment extends SupportFragment {
 
             @Override
             public void onTabUnselected(int position) {
+
             }
 
             @Override

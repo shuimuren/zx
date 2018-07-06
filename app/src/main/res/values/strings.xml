@@ -1,7 +1,5 @@
 <resources>
     <string name="app_name">职信</string>
-
-
     <string name="message">正聊</string>
     <string name="score">评分</string>
     <string name="application">应用</string>
@@ -85,4 +83,29 @@
     <string name="user_attestation">我的认证</string>
     <string name="identity_authentication">身份认证</string>
     <string name="upload">上传</string>
+    <string name="alert_phone_number_is_null">手机号不能为空</string>
+    <string name="alert_verification_code_is_null">验证码不能为空</string>
+    <string name="alert_phone_number_unusable">请输入正确的手机号</string>
+    <string name="alert_pass_word_unusable">密码不能为空</string>
+    <string name="alert_pass_word_not_match">重复密码不一致</string>
+    <string name="forget_password">忘记密码?</string>
+    <string name="landing">登陆中...</string>
+    <string name="cancel">取消</string>
+    <string name="personal_register">个人账号注册</string>
+    <string name="personal">个人</string>
+    <string name="verification_code">验证码</string>
+    <string name="password_hint">请设置一个6~20位的密码</string>
+    <string name="had_read_and_agree">我已阅读并同意</string>
+    <string name="agreement">《用户协议》</string>
+    <string name="get_success_and_waiting">短信处理成功,请耐心等待</string>
+    <string name="verification_code_is_null">验证码不能为空</string>
+    <string name="agree_agreement">请同意用户协议</string>
+    <string name="get_verification_code">获取验证码</string>
+    <string name="send_again">秒后重新发送</string>
+    <string name="register_success">注册成功</string>
+    <string name="account_unusable">账号已存在</string>
+    <string name="hint_input_password">请确认密码</string>
+    <string name="hint_input_phone_number">请输入手机号</string>
+    <string name="forget_password_title">忘记密码</string>
+    <string name="fix_success">修改成功</string>
 </resources>

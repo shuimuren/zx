@@ -14,14 +14,13 @@ import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.UpdateBean;
 import com.zhixing.work.zhixin.constant.RoleConstant;
-import com.zhixing.work.zhixin.http.HttpHeadUtils;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
-import com.zhixing.work.zhixin.util.DateFormatUtil;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.Utils;
 
 import java.util.Timer;
@@ -61,21 +60,14 @@ public class UpDatePwdActivity extends BaseTitleActivity {
     private Timer timer;// 短信重发倒计时
     private Repeat repeat;
 
-    private String ASCII;
-    public static String accessId = "7568512625";
-    public static String accessSecret = "a02f3025-9c9b-4737-897d-7e94242797a0";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_up_date_pwd);
         ButterKnife.bind(this);
         context = this;
-        setTitle("忘记密码");
+        setTitle(ResourceUtils.getString(R.string.forget_password_title));
     }
-
-    private static String timers;
-    private static String randoms;
 
     @OnClick({R.id.tv_update_person, R.id.tv_update_date_company, R.id.btn_update_code, R.id.btn_go_update})
     public void onViewClicked(View view) {
@@ -111,17 +103,15 @@ public class UpDatePwdActivity extends BaseTitleActivity {
 
                         @Override
                         public void onSuccess(EntityObject<Object> response) {
-                            AlertUtils.toast(context, "短信处理成功,请耐心等待");
+                            AlertUtils.toast(context, ResourceUtils.getString(R.string.get_success_and_waiting));
                         }
                     });
                 } else {
-                    AlertUtils.toast(context, "请输入正确的手机号码");
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_phone_number_unusable));
                 }
                 break;
             case R.id.btn_go_update:
 
-                timers = DateFormatUtil.getTimeZ();
-                randoms = HttpHeadUtils.getRandom();
                 phone = phoneEd.getText().toString();
                 code = codeEd.getText().toString();
                 password = passwordEd.getText().toString();
@@ -131,19 +121,19 @@ public class UpDatePwdActivity extends BaseTitleActivity {
 
 
                 if (!Utils.isMobileNO1(phone)) {
-                    AlertUtils.toast(context, "请输入正确的手机号码");
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_phone_number_unusable));
                     return;
                 }
                 if (!TextUtils.isDigitsOnly(password)) {
-                    AlertUtils.toast(context, "密码不能为空");
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_phone_number_is_null));
                     return;
                 }
                 if (!TextUtils.isDigitsOnly(code)) {
-                    AlertUtils.toast(context, "验证码不能为空");
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_verification_code_is_null));
                     return;
                 }
                 if (!password.equals(confirmpassword)) {
-                    AlertUtils.toast(context, "重复密码不一致");
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_pass_word_not_match));
                 }
                 UpdateBean bean = new UpdateBean();
                 bean.PhoneNum = phone;
@@ -179,7 +169,7 @@ public class UpDatePwdActivity extends BaseTitleActivity {
     }
 
     private void setCanGetPin() {
-        btnUpdateCode.setText("获取验证码");
+        btnUpdateCode.setText(ResourceUtils.getString(R.string.get_verification_code));
         btnUpdateCode.setClickable(true);
         btnUpdateCode.setBackgroundColor(getResources().getColor(R.color.bcompany));
         btnUpdateCode.setTextColor(getResources().getColor(R.color.white));
@@ -208,7 +198,7 @@ public class UpDatePwdActivity extends BaseTitleActivity {
             public void onSuccess(EntityObject<Object> response) {
                 hideLoadingDialog();
                 if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
-                    AlertUtils.toast(context, "修改成功");
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.fix_success));
                     startActivity(new Intent(context, LoginActivity.class));
                     finish();
                 } else {

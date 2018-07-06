@@ -48,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:text=""
                         android:textColor="@color/white"
-                        android:textSize="@dimen/font_size_18sp" />
+                        android:textSize="@dimen/font_head" />
 
                     <com.willy.ratingbar.ScaleRatingBar xmlns:app="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/stars"
@@ -85,7 +85,7 @@
                     android:gravity="center_vertical"
                     android:text="个人资料"
                     android:textColor="@color/color_303030"
-                    android:textSize="@dimen/font_size_16sp" />
+                    android:textSize="@dimen/font_list_right" />
 
                 <TextView
                     android:id="@+id/user_info"
@@ -120,7 +120,7 @@
                     android:gravity="center_vertical"
                     android:text="求职意向"
                     android:textColor="@color/color_303030"
-                    android:textSize="@dimen/font_size_16sp" />
+                    android:textSize="@dimen/font_list_right" />
 
                 <TextView
                     android:id="@+id/job_intention"
@@ -156,7 +156,7 @@
                     android:gravity="center_vertical"
                     android:text="求职状态"
                     android:textColor="@color/color_303030"
-                    android:textSize="@dimen/font_size_16sp" />
+                    android:textSize="@dimen/font_list_right" />
 
                 <TextView
 
@@ -193,7 +193,7 @@
                     android:gravity="center_vertical"
                     android:text="我的优势"
                     android:textColor="@color/color_303030"
-                    android:textSize="@dimen/font_size_16sp" />
+                    android:textSize="@dimen/font_list_right" />
 
                 <TextView
                     android:singleLine="true"
@@ -416,7 +416,7 @@
                 android:paddingTop="@dimen/dp_10"
                 android:text="预览求职卡牌"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size_16sp" />
+                android:textSize="@dimen/font_list_right" />
         </LinearLayout>
     </com.zhixing.work.zhixin.widget.ElasticScrollView>
 </android.support.constraint.ConstraintLayout>

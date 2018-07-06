@@ -13,7 +13,7 @@
         android:layout_marginTop="@dimen/dp_20"
         android:gravity="center"
         android:text="新建部门"
-        android:textSize="@dimen/font_size_16sp" />
+        android:textSize="@dimen/font_list_right" />
 
     <EditText
 android:paddingLeft="@dimen/dp_10"

@@ -56,7 +56,7 @@
                 android:gravity="center"
                 android:text="添加屏蔽公司"
                 android:textColor="@color/white"
-                android:textSize="@dimen/font_size_16sp" />
+                android:textSize="@dimen/font_list_right" />
         </LinearLayout>
 
     </LinearLayout>

@@ -68,8 +68,8 @@ public class CardCounterFragment extends SupportFragment {
     TextView mail;
     @BindView(R.id.phone)
     TextView phone;
-    @BindView(R.id.nikename)
-    TextView nikename;
+    @BindView(R.id.nikeName)
+    TextView nikeName;
     @BindView(R.id.ll_niken_ame)
     LinearLayout llNikenAme;
     @BindView(R.id.gendr)
@@ -320,7 +320,7 @@ public class CardCounterFragment extends SupportFragment {
         name.setText(cardBack.getRealName());
         mail.setText(cardBack.getEmail());
         phone.setText(SettingUtils.getPhoneNumber());
-        nikename.setText(cardBack.getNickName());
+        nikeName.setText(cardBack.getNickName());
         gendr.setText(cardBack.getSex());
         if (!TextUtils.isEmpty(cardBack.getBirthday())) {
             dateBirth.setText(DateFormatUtil.parseDate(cardBack.getBirthday(), "yyyy-MM-dd"));

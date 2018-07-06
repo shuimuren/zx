@@ -13,7 +13,7 @@
         android:gravity="center"
         android:text="离职-随时到岗"
         android:textColor="@color/color_333333"
-        android:textSize="@dimen/font_size_18sp" />
+        android:textSize="@dimen/font_head" />
 
     <View style="@style/line" />
 
@@ -25,7 +25,7 @@
         android:gravity="center"
         android:text="在职-暂不考虑"
         android:textColor="@color/color_333333"
-        android:textSize="@dimen/font_size_18sp" />
+        android:textSize="@dimen/font_head" />
 
     <View style="@style/line" />
 
@@ -37,7 +37,7 @@
         android:gravity="center"
         android:text="在职-考虑机会"
         android:textColor="@color/color_333333"
-        android:textSize="@dimen/font_size_18sp" />
+        android:textSize="@dimen/font_head" />
 
     <View style="@style/line" />
 
@@ -58,7 +58,7 @@
             android:gravity="center"
             android:text="取消"
             android:textColor="@color/color_333333"
-            android:textSize="@dimen/font_size_18sp" />
+            android:textSize="@dimen/font_head" />
     </LinearLayout>
 
 </LinearLayout>

@@ -16,12 +16,14 @@ import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
+import com.zhixing.work.zhixin.common.ScreenUtil;
 import com.zhixing.work.zhixin.constant.RoleConstant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.widget.ClearEditText;
 
@@ -53,7 +55,7 @@ public class RegistActivity extends BaseTitleActivity {
     CheckBox registCheck;
     @BindView(R.id.code_ed)
     ClearEditText codeEd;
-    private String type = "10";
+    private String type = RoleConstant.PERSONAL_ROLE;
     private String phone;
     private String password;
     private String code;
@@ -65,15 +67,15 @@ public class RegistActivity extends BaseTitleActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ScreenUtil.setOrientation(this, ScreenUtil.ORIENTATION_HEIGHT);
         setContentView(R.layout.activity_regist);
         ButterKnife.bind(this);
         context = this;
-        setTitle("注册");
-        initview();
-
+        setTitle(ResourceUtils.getString(R.string.register));
+        initView();
     }
 
-    private void initview() {
+    private void initView() {
         registPhoneNumEd.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -88,7 +90,6 @@ public class RegistActivity extends BaseTitleActivity {
             public void afterTextChanged(Editable s) {
                 String content = registPhoneNumEd.getText().toString();
                 if (!TextUtils.isEmpty(content)) {
-
                     if (Utils.isMobileNO1(content)) {
                         isRegist(content);
                     } else {
@@ -133,11 +134,11 @@ public class RegistActivity extends BaseTitleActivity {
 
                         @Override
                         public void onSuccess(EntityObject<Object> response) {
-                            AlertUtils.toast(context, "短信处理成功,请耐心等待");
+                            AlertUtils.toast(context, ResourceUtils.getString(R.string.get_success_and_waiting));
                         }
                     });
                 } else {
-                    AlertUtils.toast(context, "请输入正确的手机号码");
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_phone_number_unusable));
                 }
                 break;
             case R.id.btn_go_regist:
@@ -145,19 +146,19 @@ public class RegistActivity extends BaseTitleActivity {
                 code = codeEd.getText().toString();
                 password = passwordEd.getText().toString();
                 if (!Utils.isMobileNO1(phone)) {
-                    AlertUtils.toast(context, "请输入正确的手机号码");
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_phone_number_unusable));
                     return;
                 }
                 if (!TextUtils.isDigitsOnly(password)) {
-                    AlertUtils.toast(context, "密码不能为空");
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_pass_word_unusable));
                     return;
                 }
                 if (!TextUtils.isDigitsOnly(code)) {
-                    AlertUtils.toast(context, "验证码不能为空");
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.verification_code_is_null));
                     return;
                 }
                 if (!registCheck.isChecked()) {
-                    AlertUtils.toast(context, "请同意用户协议");
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.agree_agreement));
                     return;
                 }
                 showLoading();
@@ -177,7 +178,7 @@ public class RegistActivity extends BaseTitleActivity {
                 @Override
                 public void run() {
                     time--;
-                    btnRegistGetCode.setText(time + "秒后重新发送");
+                    btnRegistGetCode.setText(time + ResourceUtils.getString(R.string.send_again));
                     if (time == 0) {
                         setCanGetPin();
                     }
@@ -187,7 +188,7 @@ public class RegistActivity extends BaseTitleActivity {
     }
 
     private void setCanGetPin() {
-        btnRegistGetCode.setText("获取验证码");
+        btnRegistGetCode.setText(ResourceUtils.getString(R.string.get_verification_code));
         btnRegistGetCode.setClickable(true);
         btnRegistGetCode.setBackgroundColor(getResources().getColor(R.color.bcompany));
         btnRegistGetCode.setTextColor(getResources().getColor(R.color.white));
@@ -215,14 +216,15 @@ public class RegistActivity extends BaseTitleActivity {
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();
                 if (response.getContent()) {
-                    AlertUtils.toast(context, "账号已存在");
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.account_unusable));
                 }
 
 
             }
         });
     }
-//注册账号
+
+    //注册账号
     private void Regist(String phone, String password, String code) {
         OkUtils.getInstances().httpPost(context, RequestConstant.GO_REGISTER, JavaParamsUtils.getInstances().Registered(phone, password, type, code), new TypeToken<EntityObject<String>>() {
         }.getType(), new ResultCallBackListener<String>() {
@@ -236,13 +238,12 @@ public class RegistActivity extends BaseTitleActivity {
             public void onSuccess(EntityObject<String> response) {
                 hideLoadingDialog();
                 if (!TextUtils.isEmpty(response.getContent())) {
-                    AlertUtils.toast(context, "注册成功");
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.register_success));
                     startActivity(new Intent(context, LoginActivity.class));
                     finish();
                 } else {
                     AlertUtils.toast(context, response.getMessage());
                 }
-
 
             }
         });

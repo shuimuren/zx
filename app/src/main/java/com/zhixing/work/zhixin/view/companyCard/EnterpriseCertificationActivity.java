@@ -70,6 +70,9 @@ import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
+/**
+ * 公司认证
+ */
 public class EnterpriseCertificationActivity extends BaseTitleActivity {
 
     @BindView(R.id.corporate_name)

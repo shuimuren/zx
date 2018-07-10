@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -26,34 +25,40 @@ import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.google.gson.reflect.TypeToken;
+import com.xmd.file.provider.FileProvider7;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.adapter.PublicEducationAdapter;
 import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
 import com.zhixing.work.zhixin.aliyun.ALiYunOssFileLoader;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
+import com.zhixing.work.zhixin.bean.CertificationBean;
+import com.zhixing.work.zhixin.bean.CertificationBody;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.dialog.SelectImageDialog;
 import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.ModifyEvent;
-import com.zhixing.work.zhixin.event.UploadImageFinishEvent;
 import com.zhixing.work.zhixin.http.Constant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
+import com.zhixing.work.zhixin.msgctrl.RxBus;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
+import com.zhixing.work.zhixin.network.response.SubmitAuthenticateResult;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.AppUtils;
 import com.zhixing.work.zhixin.util.BitmapUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
 import com.zhixing.work.zhixin.view.util.SelectImageActivity;
 import com.zhixing.work.zhixin.widget.ClearEditText;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -61,12 +66,14 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscription;
 import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
@@ -99,6 +106,7 @@ public class CertificateCertificationActivity extends BaseTitleActivity {
     @BindView(R.id.submit)
     Button submit;
 
+    public static final String INTENT_KEY_CERITIFICATION = "intentKey";
     private String achievement;
     private String time;
     private String name;
@@ -116,6 +124,8 @@ public class CertificateCertificationActivity extends BaseTitleActivity {
     private StsToken stsToken;
     private int count;
     private Context context;
+    private int authenticatesId;
+    private Subscription certificateSubmitSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,11 +133,24 @@ public class CertificateCertificationActivity extends BaseTitleActivity {
         setContentView(R.layout.activity_certificate_certification);
         ButterKnife.bind(this);
         context = this;
-        setTitle("证书认证");
+        setTitle(ResourceUtils.getString(R.string.certificate_authentication));
         publishImages = new ArrayList<>();
         publishImages.add(null);
         getOssToken();
         initView();
+        authenticatesId = getIntent().getIntExtra(INTENT_KEY_CERITIFICATION, 0);
+        certificateSubmitSubscription = RxBus.getInstance().toObservable(SubmitAuthenticateResult.class).subscribe(
+                result -> handlerSubmitResult(result)
+        );
+    }
+
+    private void handlerSubmitResult(SubmitAuthenticateResult result) {
+        if (result.isContent()) {
+            AlertUtils.show(ResourceUtils.getString(R.string.submit_success));
+            CertificateCertificationActivity.this.finish();
+        } else {
+            AlertUtils.show(ResourceUtils.getString(R.string.submit_failure));
+        }
     }
 
 
@@ -210,7 +233,7 @@ public class CertificateCertificationActivity extends BaseTitleActivity {
                 Luban.with(context)
                         .load(photos)
                         .ignoreBy(100)
-                        .setTargetDir(getPath())
+                        //  .setTargetDir(getPath())
                         .filter(new CompressionPredicate() {
                             @Override
                             public boolean apply(String path) {
@@ -298,7 +321,8 @@ public class CertificateCertificationActivity extends BaseTitleActivity {
                             Logger.i(TAG, "动态图片上传成功：" + objectKey);
                             upImages.clear();
                             deleteDir(path);
-                            EventBus.getDefault().post(new UploadImageFinishEvent(upLoadImages.toString()));
+                            submitDataToService();
+                            // EventBus.getDefault().post(new UploadImageFinishEvent(upLoadImages.toString()));
                         }
                     }
 
@@ -321,6 +345,7 @@ public class CertificateCertificationActivity extends BaseTitleActivity {
                     }
                 });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -373,7 +398,7 @@ public class CertificateCertificationActivity extends BaseTitleActivity {
         photoFile = new File(photoPath);
         Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intentCamera.putExtra(MediaStore.Images.ImageColumns.ORIENTATION, 0);
-        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider7.getUriForFile(CertificateCertificationActivity.this, photoFile));
         startActivityForResult(intentCamera, REQUEST_CAMERA);
     }
 
@@ -393,7 +418,6 @@ public class CertificateCertificationActivity extends BaseTitleActivity {
                         .setTitleText("时间")
                         .setContentTextSize(20)//滚轮文字大小
                         .setTitleSize(20)//标题文字大小
-//                        .setTitleText("请选择时间")//标题文字
                         .setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
                         .isCyclic(true)//是否循环滚动
                         .setTextColorCenter(Color.BLACK)//设置选中项的颜色
@@ -410,7 +434,7 @@ public class CertificateCertificationActivity extends BaseTitleActivity {
                 startActivity(new Intent(context, ModifyDataActivity.class).
                         putExtra(ModifyDataActivity.TYPE_TITLE, "证书名字").
                         putExtra(ModifyDataActivity.TYPE, ModifyDataActivity.TYPE_CERTIFICATE_NAME)
-                        .putExtra(ModifyDataActivity.TYPE_CONTENT,certificateName.getText().toString())
+                        .putExtra(ModifyDataActivity.TYPE_CONTENT, certificateName.getText().toString())
                 );
                 break;
             case R.id.rl_achievement:
@@ -496,9 +520,30 @@ public class CertificateCertificationActivity extends BaseTitleActivity {
         //dir.delete();// 删除目录本身
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onTradeAreaEvent(UploadImageFinishEvent event) {
-        AlertUtils.toast(context, "资料上传成功,请耐心等待审核");
-        finish();
+//    @Subscribe(threadMode = ThreadMode.MAIN)
+//    public void onTradeAreaEvent(UploadImageFinishEvent event) {
+//        AlertUtils.toast(context, "资料上传成功,请耐心等待审核");
+//        finish();
+//    }
+
+    //提交服务器审核
+    private void submitDataToService() {
+        CertificationBody body = new CertificationBody();
+        body.setAuthenticatesId(authenticatesId);
+        CertificationBean bean = new CertificationBean();
+        bean.setCertificateTitle(name);
+        bean.setGrade(achievement);
+        bean.setImgUrl(upLoadImages);
+        bean.setGraduationDate(time);
+        body.setInfo(bean);
+        HashMap params = new HashMap();
+        params.put(RequestConstant.KEY_AUTHENTICATION_INFO, body);
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_CERTIFICATION_AUTHENTICATE_SUBMIT, params);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().unsubscribe(certificateSubmitSubscription);
     }
 }

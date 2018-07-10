@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.BitmapFactory;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -18,6 +17,7 @@ import android.widget.TextView;
 import com.alibaba.sdk.android.oss.ServiceException;
 import com.bumptech.glide.Glide;
 import com.google.gson.reflect.TypeToken;
+import com.xmd.file.provider.FileProvider7;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
 import com.zhixing.work.zhixin.aliyun.ALiYunOssFileLoader;
@@ -195,7 +195,7 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
                 Luban.with(context)
                         .load(photos)
                         .ignoreBy(100)
-                        .setTargetDir(getPath())
+                   //     .setTargetDir(getPath())
                         .filter(new CompressionPredicate() {
                             @Override
                             public boolean apply(String path) {
@@ -294,7 +294,9 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
         photoFile = new File(photoPath);
         Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intentCamera.putExtra(MediaStore.Images.ImageColumns.ORIENTATION, 0);
-        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+        //intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+        //intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider7.getUriForFile(PersonalQualificationActivity.this, photoFile));
         startActivityForResult(intentCamera, REQUEST_CAMERA);
     }
 

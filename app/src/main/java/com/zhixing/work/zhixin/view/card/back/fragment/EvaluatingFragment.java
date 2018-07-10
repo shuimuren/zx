@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.willy.ratingbar.ScaleRatingBar;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.SupportFragment;
-import com.zhixing.work.zhixin.view.card.back.fragment.CardCounterFragment;
 import com.zhixing.work.zhixin.view.score.EvaluationHallActivity;
 
 import butterknife.BindView;
@@ -46,18 +45,19 @@ public class EvaluatingFragment extends SupportFragment {
     TextView fate;
     @BindView(R.id.career)
     TextView career;
-    @BindView(R.id.skill_nm)
-    TextView skillNm;
-    @BindView(R.id.sincerity_nm)
-    TextView sincerityNm;
-    @BindView(R.id.connection_nm)
-    TextView connectionNm;
-    @BindView(R.id.compliance_nm)
-    TextView complianceNm;
-    @BindView(R.id.performance_nm)
-    TextView performanceNm;
-    @BindView(R.id.mentality_nm)
-    TextView mentalityNm;
+    @BindView(R.id.tvSkill)
+    TextView tvSkill;
+    @BindView(R.id.tvSincerity)
+    TextView tvSincerity;
+    @BindView(R.id.tvConnection)
+    TextView tvConnection;
+    @BindView(R.id.tvCompliance)
+    TextView tvCompliance;
+    @BindView(R.id.tvPerformance)
+    TextView tvPerformance;
+    @BindView(R.id.tvMentality)
+    TextView tvMentality;
+
 
     private Context context;
 
@@ -73,7 +73,6 @@ public class EvaluatingFragment extends SupportFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_score, container, false);
-
         ButterKnife.bind(this, view);
         basics.setSelected(true);
         context = getActivity();
@@ -108,6 +107,12 @@ public class EvaluatingFragment extends SupportFragment {
 
     @Override
     public void fetchData() {
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
 
     }
 }

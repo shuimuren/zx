@@ -19,6 +19,7 @@ import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.google.gson.reflect.TypeToken;
+import com.xmd.file.provider.FileProvider7;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
 import com.zhixing.work.zhixin.aliyun.ALiYunOssFileLoader;
@@ -148,7 +149,7 @@ public class PersonalDataActivity extends BaseTitleActivity {
                                 photoFile = new File(Constant.CACHE_DIR_IMAGE + "/" + System.currentTimeMillis() + ".jpg");
                                 Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                                 intentCamera.putExtra(MediaStore.Images.ImageColumns.ORIENTATION, 0);
-                                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+                                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider7.getUriForFile(PersonalDataActivity.this, photoFile));
                                 startActivityForResult(intentCamera, REQUEST_CAMERA);
                                 break;
                             case SelectImageDialog.TYPE_PHOTO:

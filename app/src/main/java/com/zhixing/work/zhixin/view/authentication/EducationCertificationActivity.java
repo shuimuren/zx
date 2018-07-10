@@ -32,19 +32,24 @@ import com.zhixing.work.zhixin.adapter.PublicEducationAdapter;
 import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
 import com.zhixing.work.zhixin.aliyun.ALiYunOssFileLoader;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
+import com.zhixing.work.zhixin.bean.EducationBean;
+import com.zhixing.work.zhixin.bean.EducationBody;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.dialog.SelectImageDialog;
 import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.ModifyEvent;
-import com.zhixing.work.zhixin.event.UploadImageFinishEvent;
 import com.zhixing.work.zhixin.http.Constant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
+import com.zhixing.work.zhixin.msgctrl.RxBus;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
+import com.zhixing.work.zhixin.network.response.SubmitAuthenticateResult;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.AppUtils;
 import com.zhixing.work.zhixin.util.BitmapUtils;
@@ -54,7 +59,6 @@ import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
 import com.zhixing.work.zhixin.view.util.SelectImageActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -63,12 +67,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscription;
 import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
@@ -108,14 +114,16 @@ public class EducationCertificationActivity extends BaseTitleActivity {
     @BindView(R.id.submit)
     Button submit;
 
+    public static final String INTENT_KEY_ID = "AuthenticatesId";
+
     private List<String> list;
 
-    private int education_type;
-    private String education_ct;
-    private String graduate_college_ct;
+    private int educationType; //学历类型
+    private String educationCt; //学历;
+    private String graduateCollegeCt;//毕业院校
     private String school_time_ct;
-    private String graduation_time_ct;
-    private String major_ct;
+    private String graduationTimeCt;//毕业时间
+    private String majorCt;//专业
 
 
     private List<AlbumItem> publishImages;
@@ -130,6 +138,9 @@ public class EducationCertificationActivity extends BaseTitleActivity {
     private List<AlbumItem> selectedImages;
     private List<AlbumItem> upImages = new ArrayList<AlbumItem>();
     private StsToken stsToken;
+    private int authenticatesId;
+
+    private Subscription educationSubmitSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,7 +151,25 @@ public class EducationCertificationActivity extends BaseTitleActivity {
         publishImages = new ArrayList<>();
         publishImages.add(null);
         getOssToken();
+        authenticatesId = getIntent().getIntExtra(INTENT_KEY_ID, 0);
         initView();
+        educationSubmitSubscription = RxBus.getInstance().toObservable(SubmitAuthenticateResult.class).subscribe(
+                result -> handlerSubmitResult(result)
+        );
+    }
+
+    /**
+     * 处理认证结果
+     *
+     * @param result
+     */
+    private void handlerSubmitResult(SubmitAuthenticateResult result) {
+        if (result.isContent()) {
+            AlertUtils.show(ResourceUtils.getString(R.string.submit_success));
+            EducationCertificationActivity.this.finish();
+        } else {
+            AlertUtils.show(ResourceUtils.getString(R.string.submit_failure));
+        }
     }
 
     //获取阿里云的凭证
@@ -217,7 +246,7 @@ public class EducationCertificationActivity extends BaseTitleActivity {
         photoFile = new File(photoPath);
         Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intentCamera.putExtra(MediaStore.Images.ImageColumns.ORIENTATION, 0);
-        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider7.getUriForFile(EducationCertificationActivity.this,photoFile));
+        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider7.getUriForFile(EducationCertificationActivity.this, photoFile));
         startActivityForResult(intentCamera, REQUEST_CAMERA);
     }
 
@@ -232,7 +261,7 @@ public class EducationCertificationActivity extends BaseTitleActivity {
                     public void onOptionsSelect(int options1, int option2, int options3, View v) {
                         //返回的分别是三个级别的选中位置
                         String s = list.get(options1);
-                        education_type = (options1 + 1) * 10;
+                        educationType = (options1 + 1) * 10;
                         education.setText(s);
                     }
                 })
@@ -265,7 +294,6 @@ public class EducationCertificationActivity extends BaseTitleActivity {
                         .setTitleText(ResourceUtils.getString(R.string.time_of_graduation))
                         .setContentTextSize(20)//滚轮文字大小
                         .setTitleSize(20)//标题文字大小
-//                        .setTitleText("请选择时间")//标题文字
                         .setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
                         .isCyclic(true)//是否循环滚动
                         .setTextColorCenter(Color.BLACK)//设置选中项的颜色
@@ -273,7 +301,6 @@ public class EducationCertificationActivity extends BaseTitleActivity {
                         .setSubmitColor(Color.BLUE)//确定按钮文字颜色
                         .setCancelColor(Color.BLUE)//取消按钮文字颜色
                         .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
-//                        .isDialog(true)//是否显示为对话框样式
                         .build();
                 graduation_time.setDate(Calendar.getInstance());//注：根据需求来决定是否使用该方法（一般是精确到秒的情况），此项可以在弹出选择器的时候重新设置当前时间，避免在初始化之后由于时间已经设定，导致选中时间与当前时间不匹配的问题。
                 graduation_time.show();
@@ -284,25 +311,25 @@ public class EducationCertificationActivity extends BaseTitleActivity {
                         putExtra(ModifyDataActivity.TYPE, ModifyDataActivity.TYPE_MAJOR));
                 break;
             case R.id.submit:
-                education_ct = education.getText().toString();
-                graduate_college_ct = graduateCollege.getText().toString();
-                graduation_time_ct = graduationTime.getText().toString();
-                major_ct = major.getText().toString();
+                educationCt = education.getText().toString();
+                graduateCollegeCt = graduateCollege.getText().toString();
+                graduationTimeCt = graduationTime.getText().toString();
+                majorCt = major.getText().toString();
 
-                if (TextUtils.isEmpty(education_ct)) {
+                if (TextUtils.isEmpty(educationCt)) {
                     AlertUtils.toast(context, "学历信息不能为空");
                     return;
                 }
-                if (TextUtils.isEmpty(graduate_college_ct)) {
+                if (TextUtils.isEmpty(graduateCollegeCt)) {
                     AlertUtils.toast(context, "毕业院校不能为空");
                     return;
                 }
 
-                if (TextUtils.isEmpty(graduation_time_ct)) {
+                if (TextUtils.isEmpty(graduationTimeCt)) {
                     AlertUtils.toast(context, "毕业时间不能为空");
                     return;
                 }
-                if (TextUtils.isEmpty(major_ct)) {
+                if (TextUtils.isEmpty(majorCt)) {
                     AlertUtils.toast(context, "专业信息不能为空");
                     return;
                 }
@@ -337,7 +364,7 @@ public class EducationCertificationActivity extends BaseTitleActivity {
                 Luban.with(context)
                         .load(photos)
                         .ignoreBy(100)
-                        .setTargetDir(getPath())
+                        //    .setTargetDir(getPath())
                         .filter(new CompressionPredicate() {
                             @Override
                             public boolean apply(String path) {
@@ -358,7 +385,7 @@ public class EducationCertificationActivity extends BaseTitleActivity {
 
                             @Override
                             public void onError(Throwable e) {
-
+                                hideLoadingDialog();
                                 Logger.e("错误", e.toString());
                             }
                         }).launch();
@@ -411,22 +438,22 @@ public class EducationCertificationActivity extends BaseTitleActivity {
                     @Override
                     public void onUploadSuccess(String objectKey) {
                         isUploadCount++;
+                        Logger.i(">>>","isUpload>"+isUploadCount);
                         if (index == 0) {
                             upLoadImages = "";
                             upLoadImages = objectKey;
                         } else {
                             upLoadImages = upLoadImages + "," + objectKey;
                         }
-                        String path = Environment.getExternalStorageDirectory() + "/zhixin/image/";
                         if (isUploadCount == size - (publishImages.get(size - 1) == null ? 1 : 0)) {
+                            Logger.i(">>>","isUploadSize>"+size);
                             hideLoadingDialog();
-                            Logger.i(TAG, "动态图片上传成功：" + upLoadImages);
+                            Logger.i(TAG, "动态图片上传成功：>>" + upLoadImages);
                             upImages.clear();
-                            deleteDir(path);
-                            EventBus.getDefault().post(new UploadImageFinishEvent(upLoadImages.toString()));
+                            submitDataToService();
                         }
-                        Logger.i(TAG, "动态图片上传成功：" + objectKey);
                     }
+
 
                     @Override
                     public void onUploadProgress(String objectKey, long currentSize, long totalSize) {
@@ -552,9 +579,26 @@ public class EducationCertificationActivity extends BaseTitleActivity {
         //dir.delete();// 删除目录本身
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onTradeAreaEvent(UploadImageFinishEvent event) {
-        AlertUtils.toast(context, "资料上传成功,请耐心等待审核");
-        finish();
+    //提交服务器审核
+    private void submitDataToService() {
+        EducationBody body = new EducationBody();
+        body.setAuthenticatesId(authenticatesId);
+        EducationBean bean = new EducationBean();
+        bean.setSchool(graduateCollegeCt);
+        bean.setEducation(educationType);
+        bean.setEndDate(graduationTimeCt);
+        bean.setMajor(majorCt);
+        bean.setImgUrl(upLoadImages);
+        body.setInfo(bean);
+
+        HashMap params = new HashMap();
+        params.put(RequestConstant.KEY_AUTHENTICATION_INFO, body);
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_EDUCATION_AUTHENTICATE_SUBMIT, params);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().unsubscribe(educationSubmitSubscription);
     }
 }

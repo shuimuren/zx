@@ -148,5 +148,6 @@
     <string name="hint_input_id_card_code">请输入身份证号码</string>
     <string name="submit_success">提交成功,请等待审核...</string>
     <string name="submit_failure">提交失败,请重新编辑...</string>
+    <string name="certificate_certification">证书认证</string>
 
 </resources>

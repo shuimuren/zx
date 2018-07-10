@@ -24,8 +24,6 @@ import java.io.IOException;
  */
 
 public class FileUtil {
-
-
     /**
      * 将一个InputStream里面的数据写入到SD卡中
      */

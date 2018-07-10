@@ -6,8 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -27,6 +26,7 @@ import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
@@ -38,16 +38,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 组织架构
+ */
 public class OrganizationalStructureActivity extends BaseTitleActivity {
 
-    @BindView(R.id.listview)
-    RecyclerView listview;
-    @BindView(R.id.add_workmate)
-    ImageView addWorkmate;
+    @BindView(R.id.departmentList)
+    RecyclerView departmentList;
     @BindView(R.id.workmate)
     TextView workmate;
     @BindView(R.id.rl_add_workmate)
-    RelativeLayout rlAddWorkmate;
+    LinearLayout rlAddWorkmate;
     @BindView(R.id.company_name)
     TextView companyName;
     @BindView(R.id.staff_listview)
@@ -65,7 +66,7 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_organizational_structure);
         ButterKnife.bind(this);
-        setTitle("组织架构");
+        setTitle(ResourceUtils.getString(R.string.organizational_structure));
         setRightText1("管理");
         getData();
         getAllnumber();
@@ -82,6 +83,7 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
         adapter.setOnItemClickListener(new StaffAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+
             }
 
             @Override
@@ -94,9 +96,9 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
             public void onClick(View v) {
                 if (department != null) {
                     Intent intent = new Intent(context, DepartmentManagementActivity.class);
-                    intent.putExtra("name", department.getDepartmentName());
                     Bundle bundle = new Bundle();
-                    bundle.putSerializable("bean", department);
+                    bundle.putString(DepartmentManagementActivity.INTENT_KEY_NAME, department.getDepartmentName());
+                    bundle.putSerializable(DepartmentManagementActivity.INTENT_KEY_BEAN, department);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }
@@ -108,7 +110,7 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
         }.getType(), new ResultCallBackListener<List<Department>>() {
             @Override
             public void onFailure(int errorId, String msg) {
-                AlertUtils.toast(context, "服务器错误");
+                AlertUtils.toast(context, ResourceUtils.getString(R.string.server_error));
             }
             @Override
             public void onSuccess(EntityObject<List<Department>> response) {

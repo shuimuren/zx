@@ -82,7 +82,7 @@ public class LoginActivity extends BaseTitleActivity {
         }
     }
 
-    @OnClick({R.id.tv_login_person, R.id.tv_login_company, R.id.btn_login, R.id.register, R.id.forget_password, R.id.show_password})
+    @OnClick({R.id.tv_login_person, R.id.tv_login_company, R.id.btn_login, R.id.cardView, R.id.forget_password, R.id.show_password})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //切换账户类型切换为个人用户
@@ -102,7 +102,7 @@ public class LoginActivity extends BaseTitleActivity {
                 tvLoginCompany.setTextColor(ResourceUtils.getColor(R.color.login_person_tv));
                 break;
             //注册
-            case R.id.register:
+            case R.id.cardView:
                 startActivity(new Intent(context, RegistActivity.class));
                 break;
             //忘记密码

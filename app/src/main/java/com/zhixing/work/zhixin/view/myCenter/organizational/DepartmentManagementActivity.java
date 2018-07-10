@@ -50,6 +50,10 @@ public class DepartmentManagementActivity extends BaseTitleActivity {
     TextView title;
     @BindView(R.id.staff_listview)
     RecyclerView staffListview;
+
+    public static final String INTENT_KEY_NAME = "name";
+    public static final String INTENT_KEY_BEAN = "bean";
+
     private List<Department> list = new ArrayList<>();
     private DepartmentAdapter adapter;
     private Department department;
@@ -64,8 +68,8 @@ public class DepartmentManagementActivity extends BaseTitleActivity {
         ButterKnife.bind(this);
         setTitle("管理部门与成员");
         Bundle bundle = getIntent().getExtras();
-        name = getIntent().getStringExtra("name");
-        department = (Department) bundle.get("bean");
+        name = bundle.getString(INTENT_KEY_NAME);
+        department = (Department) bundle.get(INTENT_KEY_BEAN);
         initView();
         getData();
         getStaff();

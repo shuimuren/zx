@@ -100,6 +100,7 @@
                         android:id="@+id/rl_avatar"
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
+                        android:paddingTop="@dimen/dp_10"
                         android:background="@color/bg_main">
 
                         <ImageView
@@ -336,7 +337,7 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:src="@drawable/hd_logo"></ImageView>
-                " />
+
             </RelativeLayout>
         </LinearLayout>
 

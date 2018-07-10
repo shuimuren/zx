@@ -406,6 +406,7 @@ public class MyResumeActivity extends BaseTitleActivity {
                 startActivity(new Intent(context, AddCertificateActivity.class).putExtra("type", "resume"));
                 break;
             case R.id.preview:
+                //预览功能
                 break;
         }
     }

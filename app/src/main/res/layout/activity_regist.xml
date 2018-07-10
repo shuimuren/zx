@@ -191,7 +191,7 @@
                 android:paddingLeft="@dimen/dp_35"
                 android:paddingRight="@dimen/dp_35"
                 android:paddingTop="@dimen/dp_3"
-                android:text="@string/login"
+                android:text="@string/register"
                 android:textColor="#ffffff"
                 android:textSize="@dimen/font_head" />
 

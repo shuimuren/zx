@@ -102,14 +102,12 @@ public class DepartmentSettingActivity extends BaseTitleActivity {
         setRightClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 ModifyDepartment modifyDepartment = new ModifyDepartment();
                 modifyDepartment.setId(department.getDepartmentId());
                 modifyDepartment.setParentId(Integer.parseInt(ParentId));
                 modifyDepartment.setName(departmentName.getText().toString());
                 modifyDepartment.setManagerId(ManagerId);
-                modifyDepartment.setHide(isHide.isChecked()+"");
+                modifyDepartment.setHide(isHide.isChecked() + "");
                 modifyDepartment.setDepartmentIds(DepartmentIds);
                 modifyDepartment.setStaffIds(StaffIds);
                 modify(gson.toJson(modifyDepartment));
@@ -136,8 +134,6 @@ public class DepartmentSettingActivity extends BaseTitleActivity {
             case R.id.rl_setting:
                 break;
             case R.id.delete:
-
-
                 deleteDialog = new DeleteDialog(context, "是否删除此部门", "", new DeleteDialog.OnItemClickListener() {
                     @Override
                     public void OnItemClick(int index, Dialog dialog) {
@@ -183,6 +179,7 @@ public class DepartmentSettingActivity extends BaseTitleActivity {
                     }
                 });
             }
+
             @Override
             public void onSuccess(final EntityObject<Boolean> response) {
                 hideLoadingDialog();

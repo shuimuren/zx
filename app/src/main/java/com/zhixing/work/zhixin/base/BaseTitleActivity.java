@@ -1,6 +1,7 @@
 package com.zhixing.work.zhixin.base;
 
 import android.content.Context;
+import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.os.Handler;
@@ -20,8 +21,11 @@ import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.app.ZxApplication;
+import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.dialog.LoadingDialog;
 import com.zhixing.work.zhixin.dialog.NoInternetDialog;
+import com.zhixing.work.zhixin.receiver.NetWorkStatusListener;
+import com.zhixing.work.zhixin.receiver.NetworkConnectChangedReceiver;
 import com.zhixing.work.zhixin.util.DensityUtils;
 import com.zhixing.work.zhixin.util.NetUtils;
 import com.zhixing.work.zhixin.util.ScreenUtils;
@@ -29,7 +33,7 @@ import com.zhixing.work.zhixin.util.SystemBarTintManager;
 import com.zhixing.work.zhixin.widget.NoInternetPopup;
 
 
-public abstract class BaseTitleActivity extends BaseControlActivity {
+public abstract class BaseTitleActivity extends BaseControlActivity implements NetWorkStatusListener {
     protected RelativeLayout ll_root;
     protected RelativeLayout rlTitleBar;
     protected FrameLayout flContent;
@@ -44,7 +48,7 @@ public abstract class BaseTitleActivity extends BaseControlActivity {
 
     // 右边标题部分
     protected LinearLayout llRight;
-    protected ImageView ivRight;
+    protected ImageView ivRight; //右边图片
     protected TextView tvRight1; // 右边文字
     protected TextView tvRight2; // 右边文字
 
@@ -56,6 +60,8 @@ public abstract class BaseTitleActivity extends BaseControlActivity {
     protected NoInternetDialog noInternetDialog;
     // 状态栏是否浮动在上面 默认为不浮
     private boolean isStatudBarFloat = false;
+    //网络状态监听
+    NetworkConnectChangedReceiver networkReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,13 +73,12 @@ public abstract class BaseTitleActivity extends BaseControlActivity {
         setAboutTitle();
         setSystemBar();
         ZxApplication.getInstance().addActivity(this);
-
+      //  registerReceiver();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //if (SplashActivity.instance == null) {
         if (!NetUtils.isConnected(context)) {
             if (noInternetDialog == null) {
                 noInternetDialog = new NoInternetDialog(BaseTitleActivity.this);
@@ -83,7 +88,6 @@ public abstract class BaseTitleActivity extends BaseControlActivity {
             noInternetDialog.show();
             new Thread(new MyThread()).start();
         }
-        //}
     }
 
 
@@ -138,6 +142,9 @@ public abstract class BaseTitleActivity extends BaseControlActivity {
 
     protected NoInternetPopup noInternetPopup;
 
+    /**
+     * 显示无网络状态
+     */
     protected void showNoInternetPopup() {
         if (noInternetPopup == null) {
             noInternetPopup = new NoInternetPopup(this);
@@ -159,13 +166,14 @@ public abstract class BaseTitleActivity extends BaseControlActivity {
         if (!noInternetPopup.isShowing()) {
             int[] location = new int[2];
             rlTitleBar.getLocationOnScreen(location);
-
             noInternetPopup.showAtLocation(ll_root, Gravity.TOP, 0, DensityUtils.dp2px(context, 50) + ScreenUtils.getStatusHeight(context));
         }
     }
 
+    /**
+     * 隐藏无网络状态
+     */
     public void dismissNoInternetPopup() {
-
         if (noInternetPopup != null && noInternetPopup.isShowing()) {
             noInternetPopup.dismiss();
         }
@@ -189,7 +197,6 @@ public abstract class BaseTitleActivity extends BaseControlActivity {
     }
 
     public void setAboutTitle() {
-
         // 默认情况下设置左边的图标为返回 点击finish掉这个界面
         setLeftImage(R.drawable.left);
         setLeftOnClickListener(new BackListener());
@@ -209,7 +216,6 @@ public abstract class BaseTitleActivity extends BaseControlActivity {
      * @param isVisible
      */
     public void setTitlteButtomLineVisisble(boolean isVisible) {
-
         if (isVisible) {
             titleBottomLine.setVisibility(View.VISIBLE);
         } else {
@@ -576,17 +582,17 @@ public abstract class BaseTitleActivity extends BaseControlActivity {
      * 自定义显示内容和返回键状态
      *
      * @param content
-     * @param cancancelable
+     * @param cancelable
      */
-    public void showLoading(String content, boolean cancancelable) {
+    public void showLoading(String content, boolean cancelable) {
         if (loadingDialog != null && loadingDialog.isShowing()) {
             loadingDialog.setLoadingMessage(content);
-            loadingDialog.setCancelable(cancancelable);
+            loadingDialog.setCancelable(cancelable);
             return;
         }
         loadingDialog = new LoadingDialog(this);
         loadingDialog.setLoadingMessage(content);
-        loadingDialog.setCancelable(cancancelable);
+        loadingDialog.setCancelable(cancelable);
         loadingDialog.show();
     }
 
@@ -653,5 +659,33 @@ public abstract class BaseTitleActivity extends BaseControlActivity {
             }
         }
     }
+
+    @Override
+    public void netWordStatusAndUsable(int status, boolean usable) {
+        if (usable) {
+            Logger.i(">>>", "当前网络可用");
+        } else {
+            Logger.i(">>>", "当前网络不可用");
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (networkReceiver != null) {
+            unregisterReceiver(networkReceiver);
+        }
+    }
+
+    private void registerReceiver() {
+        IntentFilter filter = new IntentFilter();
+        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+        filter.addAction("android.net.wifi.WIFI_STATE_CHANGED");
+        filter.addAction("android.net.wifi.STATE_CHANGE");
+        networkReceiver = NetworkConnectChangedReceiver.getInstance();
+        registerReceiver(networkReceiver, filter);
+        networkReceiver.setNetWorkStatusListener(this);
+    }
+
 
 }

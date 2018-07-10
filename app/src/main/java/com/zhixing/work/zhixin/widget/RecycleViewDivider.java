@@ -12,9 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 /**
- *
- *
- *
+ * recycleView 分割线
  */
 public class RecycleViewDivider extends RecyclerView.ItemDecoration{
     private Paint mPaint;

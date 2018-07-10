@@ -48,13 +48,7 @@ import imagetool.lhj.com.selector.bean.Folder;
 import imagetool.lhj.com.selector.bean.Image;
 import imagetool.lhj.com.selector.utils.FileUtils;
 import imagetool.lhj.com.selector.utils.ScreenUtils;
-//import me.nereo.multi_image_selector.adapter.FolderAdapter;
-//import me.nereo.multi_image_selector.adapter.ImageAction;
-//import me.nereo.multi_image_selector.adapter.ImageGridAdapter;
-//import me.nereo.multi_image_selector.bean.Folder;
-//import me.nereo.multi_image_selector.bean.Image;
-//import me.nereo.multi_image_selector.utils.FileUtils;
-//import me.nereo.multi_image_selector.utils.ScreenUtils;
+
 
 /**
  * Multi image selector Fragment

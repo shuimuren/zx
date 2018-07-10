@@ -18,9 +18,16 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+//        release {
+//            zipAlignEnabled false  //是否支持zip
+//            shrinkResources false  // 移除无用的resource文件
+//            minifyEnabled false //是否对代码进行混淆，true表示混淆
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        }
+
+        debug {//debug版签名配置
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
         }
     }
     compileOptions {
@@ -34,6 +41,7 @@ dependencies {
     implementation project(path: ':fragmentation_core')
     implementation project(path: ':okhttputils')
     implementation project(':imagetool')
+    implementation project(':xmd-file-provider')
     implementation 'com.android.support:multidex:1.0.1'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     //noinspection GradleCompatible
@@ -86,6 +94,8 @@ dependencies {
     implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
     //留式布局
     implementation 'com.hyman:flowlayout-lib:1.1.2'
+    //RecyclerViewHelper
+    implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:${rootProject.ext.recylerViewHelperVersion}"
 
 
 }

@@ -1,7 +1,9 @@
 package com.zhixing.work.zhixin.util;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -12,7 +14,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 
-
+import com.xmd.file.provider.FileProvider7;
 import com.zhixing.work.zhixin.app.ZxApplication;
 import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.fragment.ScoreFragment;
@@ -194,17 +196,36 @@ public class BitmapUtils {
         context.startActivityForResult(intent, Constant.IMAGE_CROP);
     }
 
-    /**
-     * 对图片进行裁剪功能 便于上传
-     *
-     * @param context
-     * @param imageUri
-     */
-    public static void createPhotoCropFragment(ScoreFragment fragment, Uri imageUri, Uri outPutUri) {
+//    /**
+//     * 对图片进行裁剪功能 便于上传
+//     *
+//     * @param context
+//     * @param imageUri
+//     */
+//    public static void createPhotoCropFragment(ScoreFragment fragment, Uri imageUri, Uri outPutUri) {
+//        Intent intent = new Intent("com.android.camera.action.CROP");
+//        /*
+//        */
+//        intent.setDataAndType(imageUri, "image/*");
+//        // 设置裁剪
+//        intent.putExtra("crop", "true");
+//        // aspectX aspectY 是宽高的比例
+//        intent.putExtra("aspectX", 1);
+//        intent.putExtra("aspectY", 1);
+//        // outputX outputY 是裁剪图片宽高
+//        intent.putExtra("outputX", 600);
+//        intent.putExtra("outputY", 600);
+//        intent.putExtra("scale", true);
+//        intent.putExtra("return-data", false);
+//        intent.putExtra(MediaStore.EXTRA_OUTPUT, outPutUri);
+//        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
+//        fragment.startActivityForResult(intent, Constant.IMAGE_CROP);
+//    }
+        public static void createPhotoCropFragment(ScoreFragment fragment, File imageFile, File outPutFile) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         /*
         */
-        intent.setDataAndType(imageUri, "image/*");
+        intent.setDataAndType(FileProvider7.getUriForFile(ZxApplication.getInstance().getApplicationContext(),imageFile), "image/*");
         // 设置裁剪
         intent.putExtra("crop", "true");
         // aspectX aspectY 是宽高的比例
@@ -215,7 +236,7 @@ public class BitmapUtils {
         intent.putExtra("outputY", 600);
         intent.putExtra("scale", true);
         intent.putExtra("return-data", false);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, outPutUri);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider7.getUriForFile(ZxApplication.getInstance().getApplicationContext(),outPutFile));
         intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
         fragment.startActivityForResult(intent, Constant.IMAGE_CROP);
     }
@@ -268,5 +289,30 @@ public class BitmapUtils {
             }
         }
         return path;
+    }
+
+    public static Uri getImageContentUri(File imageFile) {
+        String filePath = imageFile.getAbsolutePath();
+        Cursor cursor = ZxApplication.getInstance().getApplicationContext().getContentResolver().query(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                new String[] { MediaStore.Images.Media._ID },
+                MediaStore.Images.Media.DATA + "=? ",
+                new String[] { filePath }, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            int id = cursor.getInt(cursor
+                    .getColumnIndex(MediaStore.MediaColumns._ID));
+            Uri baseUri = Uri.parse("content://media/external/images/media");
+            return Uri.withAppendedPath(baseUri, "" + id);
+        } else {
+            if (imageFile.exists()) {
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.Images.Media.DATA, filePath);
+                return ZxApplication.getInstance().getApplicationContext().getContentResolver().insert(
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            } else {
+                return null;
+            }
+        }
     }
 }

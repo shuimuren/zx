@@ -14,7 +14,7 @@
         <LinearLayout
             android:id="@+id/ll_identity"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="@dimen/center_item_height"
             android:orientation="horizontal">
 
             <ImageView
@@ -23,15 +23,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:src="@drawable/icon_id" />
+                android:src="@drawable/selector_card" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:text="身份认证"
-                android:textSize="16sp" />
+                android:text="@string/identity_authentication"
+                android:textSize="@dimen/font_normal" />
 
             <TextView
                 android:id="@+id/identity"
@@ -42,8 +42,8 @@
                 android:layout_marginRight="@dimen/dp_10"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="未认证"
-                android:textSize="16sp" />
+                android:text="@string/unverified"
+                android:textSize="@dimen/font_right" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -53,12 +53,12 @@
                 android:src="@drawable/icon_next" />
         </LinearLayout>
 
-        <View style="@style/line"></View>
+        <View style="@style/line"/>
 
         <LinearLayout
             android:id="@+id/ll_education"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="@dimen/center_item_height"
             android:orientation="horizontal">
 
             <ImageView
@@ -67,15 +67,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:src="@drawable/icon_edu" />
+                android:src="@drawable/selector_education" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:text="学历认证"
-                android:textSize="16sp" />
+                android:text="@string/education_authentication"
+                android:textSize="@dimen/font_normal" />
 
             <TextView
                 android:id="@+id/education"
@@ -86,8 +86,8 @@
                 android:layout_marginRight="@dimen/dp_10"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="未认证"
-                android:textSize="16sp" />
+                android:text="@string/unverified"
+                android:textSize="@dimen/font_right" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
         <LinearLayout
             android:id="@+id/ll_work"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="@dimen/center_item_height"
             android:orientation="horizontal">
 
             <ImageView
@@ -111,15 +111,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:src="@drawable/icon_work" />
+                android:src="@drawable/selector_work" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:text="工作认证"
-                android:textSize="16sp" />
+                android:text="@string/work_authentication"
+                android:textSize="@dimen/font_normal" />
 
             <TextView
                 android:id="@+id/work"
@@ -130,8 +130,8 @@
                 android:layout_marginRight="@dimen/dp_10"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="未认证"
-                android:textSize="16sp" />
+                android:text="@string/unverified"
+                android:textSize="@dimen/font_right" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -146,7 +146,7 @@
         <LinearLayout
             android:id="@+id/ll_certificate"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
+            android:layout_height="@dimen/center_item_height"
             android:orientation="horizontal">
 
             <ImageView
@@ -155,15 +155,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:src="@drawable/icon_cert" />
+                android:src="@drawable/selector_certificate" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:text="证书认证"
-                android:textSize="16sp" />
+                android:text="@string/certificate_authentication"
+                android:textSize="@dimen/font_normal" />
 
             <TextView
                 android:id="@+id/certificate"
@@ -174,8 +174,8 @@
                 android:layout_marginRight="@dimen/dp_10"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="未认证"
-                android:textSize="16sp" />
+                android:text="@string/unverified"
+                android:textSize="@dimen/font_right" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -190,8 +190,9 @@
         <LinearLayout
             android:id="@+id/ll_skill"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_50"
-            android:orientation="horizontal">
+            android:layout_height="@dimen/center_item_height"
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/skill_iv"
@@ -206,8 +207,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/dp_10"
-                android:text="技能认证"
-                android:textSize="16sp" />
+                android:text="@string/shill_authentication"
+                android:textSize="@dimen/font_normal" />
 
             <TextView
                 android:id="@+id/skill"
@@ -218,8 +219,8 @@
                 android:layout_marginRight="@dimen/dp_10"
                 android:layout_weight="1"
                 android:gravity="right"
-                android:text="未认证"
-                android:textSize="16sp" />
+                android:text="@string/unverified"
+                android:textSize="@dimen/font_right" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -228,5 +229,6 @@
                 android:layout_marginRight="@dimen/dp_10"
                 android:src="@drawable/icon_next" />
         </LinearLayout>
+        <View style="@style/line"></View>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -12,7 +12,7 @@ import com.zhixing.work.zhixin.R;
 
 
 /**
- *
+ * 完善卡牌弹窗
  */
 
 public class CardCompleteDialog extends BaseDialog implements View.OnClickListener {

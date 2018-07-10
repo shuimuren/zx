@@ -31,6 +31,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 添加子部门
+ */
 public class AddDepartmentActivity extends BaseTitleActivity {
 
     @BindView(R.id.department_name)

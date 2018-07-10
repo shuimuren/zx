@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -27,6 +26,7 @@ import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.google.gson.reflect.TypeToken;
+import com.xmd.file.provider.FileProvider7;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.adapter.PublicEducationAdapter;
 import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
@@ -49,6 +49,7 @@ import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.AppUtils;
 import com.zhixing.work.zhixin.util.BitmapUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
 import com.zhixing.work.zhixin.view.util.SelectImageActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
@@ -72,6 +73,10 @@ import top.zibin.luban.CompressionPredicate;
 import top.zibin.luban.Luban;
 import top.zibin.luban.OnCompressListener;
 
+
+/**
+ * 学历认证
+ */
 public class EducationCertificationActivity extends BaseTitleActivity {
 
     @BindView(R.id.education)
@@ -131,7 +136,7 @@ public class EducationCertificationActivity extends BaseTitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_educationcertification);
         ButterKnife.bind(this);
-        setTitle("学历认证");
+        setTitle(ResourceUtils.getString(R.string.education_authentication));
         publishImages = new ArrayList<>();
         publishImages.add(null);
         getOssToken();
@@ -212,7 +217,7 @@ public class EducationCertificationActivity extends BaseTitleActivity {
         photoFile = new File(photoPath);
         Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intentCamera.putExtra(MediaStore.Images.ImageColumns.ORIENTATION, 0);
-        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider7.getUriForFile(EducationCertificationActivity.this,photoFile));
         startActivityForResult(intentCamera, REQUEST_CAMERA);
     }
 
@@ -231,7 +236,7 @@ public class EducationCertificationActivity extends BaseTitleActivity {
                         education.setText(s);
                     }
                 })
-                        .setTitleText("学历")
+                        .setTitleText(ResourceUtils.getString(R.string.education))
                         .setSubCalSize(20)//确定和取消文字大小
                         .setSubmitColor(Color.BLUE)//确定按钮文字颜色
                         .setCancelColor(Color.BLUE)//取消按钮文字颜色
@@ -255,9 +260,9 @@ public class EducationCertificationActivity extends BaseTitleActivity {
                     }
                 })
                         .setType(new boolean[]{true, true, true, false, false, false})//默认全部显示
-                        .setCancelText("取消")//取消按钮文字
-                        .setSubmitText("确定")//确认按钮文字
-                        .setTitleText("毕业时间")
+                        .setCancelText(ResourceUtils.getString(R.string.cancel))//取消按钮文字
+                        .setSubmitText(ResourceUtils.getString(R.string.make_sure))//确认按钮文字
+                        .setTitleText(ResourceUtils.getString(R.string.time_of_graduation))
                         .setContentTextSize(20)//滚轮文字大小
                         .setTitleSize(20)//标题文字大小
 //                        .setTitleText("请选择时间")//标题文字
@@ -281,7 +286,6 @@ public class EducationCertificationActivity extends BaseTitleActivity {
             case R.id.submit:
                 education_ct = education.getText().toString();
                 graduate_college_ct = graduateCollege.getText().toString();
-
                 graduation_time_ct = graduationTime.getText().toString();
                 major_ct = major.getText().toString();
 
@@ -327,7 +331,6 @@ public class EducationCertificationActivity extends BaseTitleActivity {
     //* 压缩图片 Listener 方式
 
     private void compressWithLs(final List<String> photos) {
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -344,7 +347,7 @@ public class EducationCertificationActivity extends BaseTitleActivity {
                         .setCompressListener(new OnCompressListener() {
                             @Override
                             public void onStart() {
-                                showLoadingDialog("上传中...");
+                                showLoadingDialog(ResourceUtils.getString(R.string.uploading));
                             }
 
                             @Override
@@ -356,7 +359,7 @@ public class EducationCertificationActivity extends BaseTitleActivity {
                             @Override
                             public void onError(Throwable e) {
 
-                                Logger.d("错误", e.toString());
+                                Logger.e("错误", e.toString());
                             }
                         }).launch();
 
@@ -373,7 +376,6 @@ public class EducationCertificationActivity extends BaseTitleActivity {
         albumItem.setFilePath(file.getAbsolutePath());
         upImages.add(albumItem);
         if (upImages.size() == photos.size()) {
-
             new Thread(new uploadRunnable()).start();
         }
     }
@@ -409,8 +411,6 @@ public class EducationCertificationActivity extends BaseTitleActivity {
                     @Override
                     public void onUploadSuccess(String objectKey) {
                         isUploadCount++;
-
-
                         if (index == 0) {
                             upLoadImages = "";
                             upLoadImages = objectKey;

@@ -78,6 +78,11 @@
     <color name="tv_choice_id">#101010</color>
     <color name="btn_write_per_data">#408ACF</color>
     <color name="color_register">#408acf</color>
+    <color name="tool_bar_color">#408ACF</color>
+    <color name="color_success">#99cc00</color>
+    <color name="color_default">#c3c3c3</color>
+    <color name="color_failure">#f96b72</color>
+    <color name="color_waiting">#ffaa4d</color>
 
 
     <drawable name="pay_bg_actionbar_normal">#d9434b</drawable>

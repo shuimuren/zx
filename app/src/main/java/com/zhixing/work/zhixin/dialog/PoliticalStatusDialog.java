@@ -11,7 +11,7 @@ import com.zhixing.work.zhixin.R;
 /**
 
  */
-public class PoliticalStatusDialog extends ButtomDialog {
+public class PoliticalStatusDialog extends BottomDialog {
     private TextView citizen;
     private TextView party_member_of_cpc;
     private TextView league_member;

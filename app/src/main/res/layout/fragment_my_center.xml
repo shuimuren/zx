@@ -1,106 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.ContentFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     tools:context="com.zhixing.work.zhixin.view.MainActivity">
-
-    <LinearLayout
+    <include layout="@layout/layout_toolbar"/>
+    <FrameLayout
+        android:id="@+id/frameCenter"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/ll_authentication"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10">
-
-            <TextView
-                android:id="@+id/authentication"
-
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="我的认证" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/icon_next" />
-        </LinearLayout>
-
-        <View style="@style/line"></View>
-
-        <LinearLayout
-            android:id="@+id/ll_resume"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="简历设置" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/icon_next" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_organize"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="组织架构" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/icon_next" />
-        </LinearLayout>
-
-
-        <View style="@style/line"></View>
-
-        <LinearLayout
-            android:id="@+id/ll_setthing"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:paddingLeft="@dimen/dp_10"
-            android:paddingRight="@dimen/dp_10">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:text="设置" />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:src="@drawable/icon_next" />
-        </LinearLayout>
-
-        <View style="@style/line"></View>
-
-
-    </LinearLayout>
-</android.support.v7.widget.ContentFrameLayout>
+        android:layout_height="match_parent"/>
+</android.support.v7.widget.LinearLayoutCompat>

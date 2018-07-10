@@ -11,7 +11,7 @@ import com.zhixing.work.zhixin.R;
 /**
  *
  */
-public class StateDialog extends ButtomDialog {
+public class StateDialog extends BottomDialog {
     private TextView quit;
     private TextView not_consider;
     private TextView consider;

@@ -9,12 +9,18 @@ import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
+import com.zhixing.work.zhixin.constant.ResultConstant;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
+import com.zhixing.work.zhixin.msgctrl.RxBus;
+import com.zhixing.work.zhixin.network.response.AuthenticateListResult;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscription;
 
 /**
  * 我的认证
@@ -52,31 +58,58 @@ public class AuthenticationHallActivity extends BaseTitleActivity {
     @BindView(R.id.ll_skill)
     LinearLayout llSkill;
 
+    private Subscription authenticationListSubscription;
+    private boolean identitySuccess, educationSuccess, workSuccess, certificateSuccess;
+    private int idCardId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authentication_hall);
         ButterKnife.bind(this);
         setTitle(ResourceUtils.getString(R.string.user_attestation));
+        authenticationListSubscription = RxBus.getInstance().toObservable(AuthenticateListResult.class).subscribe(
+                result -> handlerAuthenticateListResult(result)
+        );
+        getListData();
     }
+
 
     @OnClick({R.id.ll_identity, R.id.ll_education, R.id.ll_work, R.id.ll_certificate, R.id.ll_skill})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //身份认证
             case R.id.ll_identity:
-                startActivity(new Intent(context, IdAuthenticationActivity.class));
+                if (identitySuccess) {
+                    AlertUtils.show(ResourceUtils.getString(R.string.come_in_soon));
+                    return;
+                }
+                Intent intent = new Intent(context, IdAuthenticationActivity.class);
+                intent.putExtra(IdAuthenticationActivity.INTENT_KEY_ID_AUTHENTICATION, String.valueOf(idCardId));
+                startActivity(intent);
                 break;
             //学历认证
             case R.id.ll_education:
+//                if (educationSuccess) {
+//                    AlertUtils.show(ResourceUtils.getString(R.string.come_in_soon));
+//                    return;
+//                }
                 startActivity(new Intent(context, EducationCertificationActivity.class));
                 break;
             //工作认证
             case R.id.ll_work:
-                AlertUtils.show("工作认证");
+//                if (workSuccess) {
+//                    AlertUtils.show(ResourceUtils.getString(R.string.come_in_soon));
+//                    return;
+//                }
+                AlertUtils.show("工作认证" + ResourceUtils.getString(R.string.need_to_do));
                 break;
             //证书认证
             case R.id.ll_certificate:
+//                if (certificateSuccess) {
+//                    AlertUtils.show(ResourceUtils.getString(R.string.come_in_soon));
+//                    return;
+//                }
                 startActivity(new Intent(context, CertificateCertificationActivity.class));
                 break;
             //技能认证
@@ -84,5 +117,88 @@ public class AuthenticationHallActivity extends BaseTitleActivity {
                 AlertUtils.show("技能认证");
                 break;
         }
+    }
+
+    public void getListData() {
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_PERSONAL_AUTHENTICATES);
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_PERSONAL_AUTHENTICATES);
+    }
+
+    private void handlerAuthenticateListResult(AuthenticateListResult result) {
+        if (result != null && result.getContent() != null) {
+            for (int i = 0; i < result.getContent().size(); i++) {
+                switch (result.getContent().get(i).getAuthenticatesType()) {
+                    case ResultConstant.AUTHENTICATES_TYPE_IDENTITY_CARD:
+                        authenticateSetText(identityIv, identity, result.getContent().get(i).getList().get(0).getAuthenticatesStatus());
+                        idCardId = result.getContent().get(i).getList().get(0).getAuthenticatesId();
+                        if (result.getContent().get(i).getList().get(0).getAuthenticatesStatus() != ResultConstant.AUTHENTICATE_STATUS_NULL) {
+                            identitySuccess = true;
+                        } else {
+                            identitySuccess = false;
+                        }
+                        break;
+                    case ResultConstant.AUTHENTICATES_TYPE_EDUCATION:
+                        authenticateSetText(educationIv, education, result.getContent().get(i).getList().get(0).getAuthenticatesStatus());
+                        if (result.getContent().get(i).getList().get(0).getAuthenticatesStatus() != ResultConstant.AUTHENTICATE_STATUS_NULL) {
+                            educationSuccess = true;
+                        } else {
+                            educationSuccess = false;
+                        }
+                        break;
+                    case ResultConstant.AUTHENTICATES_TYPE_WORK:
+                        authenticateSetText(workIv, work, result.getContent().get(i).getList().get(0).getAuthenticatesStatus());
+                        if (result.getContent().get(i).getList().get(0).getAuthenticatesStatus() != ResultConstant.AUTHENTICATE_STATUS_NULL) {
+                            workSuccess = true;
+                        } else {
+                            workSuccess = false;
+                        }
+                        break;
+                    case ResultConstant.AUTHENTICATES_TYPE_CERTIFICATE:
+                        authenticateSetText(certificateIv, certificate, result.getContent().get(i).getList().get(0).getAuthenticatesStatus());
+                        if (result.getContent().get(i).getList().get(0).getAuthenticatesStatus() != ResultConstant.AUTHENTICATE_STATUS_NULL) {
+                            certificateSuccess = true;
+                        } else {
+                            certificateSuccess = false;
+                        }
+                        break;
+                }
+            }
+        }
+    }
+
+    private void authenticateSetText(ImageView im, TextView tv, int status) {
+        switch (status) {
+            case ResultConstant.AUTHENTICATE_STATUS_NULL:
+                tv.setText(ResourceUtils.getString(R.string.authenticate_status_null));
+                tv.setTextColor(ResourceUtils.getColor(R.color.color_default));
+                im.setEnabled(false);
+                break;
+            case ResultConstant.AUTHENTICATE_STATUS_ING:
+                tv.setText(ResourceUtils.getString(R.string.authenticate_status_ing));
+                tv.setTextColor(ResourceUtils.getColor(R.color.color_waiting));
+                im.setEnabled(false);
+                break;
+            case ResultConstant.AUTHENTICATE_STATUS_SUCCEED:
+                tv.setText(ResourceUtils.getString(R.string.authenticate_status_success));
+                tv.setTextColor(ResourceUtils.getColor(R.color.color_success));
+                im.setEnabled(true);
+                break;
+            case ResultConstant.AUTHENTICATE_STATUS_FAILURE:
+                tv.setText(ResourceUtils.getString(R.string.authenticate_status_failure));
+                tv.setTextColor(ResourceUtils.getColor(R.color.color_failure));
+                im.setEnabled(false);
+                break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().unsubscribe(authenticationListSubscription);
     }
 }

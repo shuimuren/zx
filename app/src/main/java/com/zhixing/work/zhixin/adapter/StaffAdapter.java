@@ -12,9 +12,7 @@ import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.bean.Staff;
-import com.zhixing.work.zhixin.bean.Staff;
 import com.zhixing.work.zhixin.util.GlideUtils;
-import com.zhixing.work.zhixin.util.Utils;
 
 import java.util.List;
 
@@ -22,6 +20,12 @@ import java.util.List;
  *
  */
 public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> {
+
+
+    private List<Staff> list;
+    private Context context;
+    private LayoutInflater mInflater;
+
     public List<Staff> getList() {
         return list;
     }
@@ -30,11 +34,6 @@ public class StaffAdapter extends RecyclerView.Adapter<StaffAdapter.ViewHolder> 
         this.list = list;
         notifyDataSetChanged();
     }
-
-    private List<Staff> list;
-    private Context context;
-    private LayoutInflater mInflater;
-
     public StaffAdapter(List<Staff> list, Context context) {
         this.list = list;
         this.context = context;

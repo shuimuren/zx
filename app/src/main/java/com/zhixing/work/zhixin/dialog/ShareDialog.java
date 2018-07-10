@@ -12,7 +12,7 @@ import com.zhixing.work.zhixin.R;
 /**
  * 分享
  */
-public class ShareDialog extends ButtomDialog {
+public class ShareDialog extends BottomDialog {
     private TextView camera;
     private TextView photo;
     private RelativeLayout rl_qq;

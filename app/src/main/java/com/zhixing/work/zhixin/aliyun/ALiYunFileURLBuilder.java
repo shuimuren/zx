@@ -44,7 +44,8 @@ public class ALiYunFileURLBuilder {
     public static final String KEY_SUB_ITEM_CATALOGUE = "subItem"; //子目录key
     public static final String KEY_FILE_PATH = "filePath"; //图片路径
     public static final String KEY_LOAD_BASE_URL = "baseUrl"; //
-    public static final String KEY_IMAGE_MARK = "imageMark"; //图片标记
+    public static final String KEY_IMAGE_MARK = "imageMark"; //图片加载标记位
+    public static final String KEY_IMAGE_CODE = "imageCode";//图片上传标记位
 
 
     public static String getBase() {

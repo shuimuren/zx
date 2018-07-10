@@ -1,482 +1,245 @@
 package com.zhixing.work.zhixin.view.authentication;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.graphics.BitmapFactory;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import com.alibaba.sdk.android.oss.ServiceException;
 import com.bumptech.glide.Glide;
-import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
-import com.zhixing.work.zhixin.aliyun.ALiYunOssFileLoader;
+import com.zhixing.work.zhixin.aliyun.ImageUploadOrDownManager;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
-import com.zhixing.work.zhixin.bean.EntityObject;
-import com.zhixing.work.zhixin.bean.StsToken;
-import com.zhixing.work.zhixin.common.Logger;
-import com.zhixing.work.zhixin.dialog.SelectImageDialog;
-import com.zhixing.work.zhixin.domain.AlbumItem;
-import com.zhixing.work.zhixin.event.UploadImageFinishEvent;
-import com.zhixing.work.zhixin.http.Constant;
-import com.zhixing.work.zhixin.http.JavaParamsUtils;
-import com.zhixing.work.zhixin.http.okhttp.OkUtils;
-import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.bean.AuthenticateBody;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
+import com.zhixing.work.zhixin.msgctrl.RxBus;
 import com.zhixing.work.zhixin.network.RequestConstant;
+import com.zhixing.work.zhixin.network.response.ImageUploadResult;
+import com.zhixing.work.zhixin.network.response.SubmitAuthenticateResult;
 import com.zhixing.work.zhixin.util.AlertUtils;
-import com.zhixing.work.zhixin.util.AppUtils;
-import com.zhixing.work.zhixin.util.BitmapUtils;
-import com.zhixing.work.zhixin.view.util.SelectImageActivity;
+import com.zhixing.work.zhixin.util.FileUtil;
+import com.zhixing.work.zhixin.util.ResourceUtils;
+import com.zhixing.work.zhixin.widget.ClearEditText;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import top.zibin.luban.CompressionPredicate;
-import top.zibin.luban.Luban;
-import top.zibin.luban.OnCompressListener;
+import imagetool.lhj.com.ImageTool;
+import rx.Subscription;
 
+/**
+ * 2018-07-09 lhj 身份认证重构
+ */
 public class IdAuthenticationActivity extends BaseTitleActivity {
-    //身份证验证
-    @BindView(R.id.prompt_hold)
-    LinearLayout promptHold;
-    @BindView(R.id.rl_hold_id)
-    LinearLayout rlHoldId;
-    @BindView(R.id.positive_prompt)
-    LinearLayout positivePrompt;
-    @BindView(R.id.rl_positive_id)
-    LinearLayout rlPositiveId;
-    @BindView(R.id.back_prompt)
-    LinearLayout backPrompt;
-    @BindView(R.id.rl_back_id)
-    LinearLayout rlBackId;
+
+    public static final String INTENT_KEY_ID_AUTHENTICATION = "id";
+
+    @BindView(R.id.editUserName)
+    ClearEditText editUserName;
+    @BindView(R.id.editUserIdCardCode)
+    ClearEditText editUserIdCardCode;
     @BindView(R.id.hold_iv)
     ImageView holdIv;
     @BindView(R.id.positive_iv)
     ImageView positiveIv;
     @BindView(R.id.back_iv)
     ImageView backIv;
-    private StsToken stsToken;
 
-    public static final int REQUEST_CAMERA = 106;
-    private int type;
-    private List<AlbumItem> selectedImages;
-    private List<AlbumItem> imagesList = new ArrayList<AlbumItem>();
-    private AlbumItem cardA;
-    private AlbumItem cardB;
-    private AlbumItem cardC;
-    private int isUploadCount;
-    private String upLoadImages;//上传图片组
-    private List<AlbumItem> upImages = new ArrayList<>();
-    private File photoFile;
-    private String photoPath;
+    //1:手持身份证,2:身份证正面,3身份证反面
+    private Uri holdIdUri, positiveIdUri, backIdUri;
+    private ImageTool imageTool;
+    private Subscription imageUploadSubscription;//上传图片
+    private Subscription submitInfoSubscription;//提交审核
+    private int totalUri = 2;
+    private int imageMaxSize = 2000;
+    private String holdImageUrl, positiveUrl, backUrl;
+    private String authenticatesId; //认证ID
+    private String userName;
+    private String userIdCardCode;
+    private String imageUrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_id_authentication);
         ButterKnife.bind(this);
-        setTitle("身份认证");
-        getOssToken();
-        setRightText1("上传");
+        setTitle(ResourceUtils.getString(R.string.identity_authentication));
+        setRightText1(ResourceUtils.getString(R.string.upload));
+        authenticatesId = getIntent().getStringExtra(INTENT_KEY_ID_AUTHENTICATION);
+        imageTool = new ImageTool(FileUtil.getDiskCachePath());
         initView();
+        imageUploadSubscription = RxBus.getInstance().toObservable(ImageUploadResult.class).subscribe(
+                result -> handlerUploadResult(result)
+        );
+        submitInfoSubscription = RxBus.getInstance().toObservable(SubmitAuthenticateResult.class).subscribe(
+                result -> handlerSubmitResult(result)
+        );
+    }
 
+
+    private void handlerUploadResult(ImageUploadResult result) {
+        if (result.isSuccess()) {
+            if (result.getCode() == 1) {
+                holdImageUrl = result.getUrl();
+            } else if (result.getCode() == 2) {
+                positiveUrl = result.getUrl();
+            } else if (result.getCode() == 3) {
+                backUrl = result.getUrl();
+            }
+        } else {
+            if (result.getCode() == 1) {
+                AlertUtils.show("手持身份证上传失败，请重新选择");
+            } else if (result.getCode() == 2) {
+                AlertUtils.show("身份证正面上传失败，请重新选择");
+            } else if (result.getCode() == 3) {
+                AlertUtils.show("身份证反面上传失败，请重新选择");
+            }
+        }
+
+        if (totalUri > 0) {
+            totalUri--;
+        } else {
+            hideLoadingDialog();
+        }
+
+        if ((!TextUtils.isEmpty(holdImageUrl)) && (!TextUtils.isEmpty(positiveUrl)) && (!TextUtils.isEmpty(backUrl))) {
+            imageUrl = holdImageUrl + "," + positiveUrl + "," + backUrl;
+            userName = editUserName.getText().toString();
+            userIdCardCode = editUserIdCardCode.getText().toString();
+            AuthenticateBody body = new AuthenticateBody();
+            AuthenticateBody.InfoBean infoBean = new AuthenticateBody.InfoBean();
+            infoBean.setRealName(userName);
+            infoBean.setImgUrl(imageUrl);
+            infoBean.setIdCard(userIdCardCode);
+            body.setInfo(infoBean);
+            body.setAuthenticatesId(Integer.parseInt(authenticatesId));
+            Map hasMap = new HashMap();
+            hasMap.put(RequestConstant.KEY_AUTHENTICATION_INFO, body);
+            MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_AUTHENTICATE_SUBMIT, hasMap);
+        }
+    }
+
+    /**
+     * 处理提交结果
+     *
+     * @param result
+     */
+    private void handlerSubmitResult(SubmitAuthenticateResult result) {
+        if (result.isContent()) {
+            AlertUtils.show(ResourceUtils.getString(R.string.submit_success));
+            this.finish();
+        } else {
+            totalUri = 2;
+            AlertUtils.show(ResourceUtils.getString(R.string.submit_failure));
+        }
     }
 
     private void initView() {
         setRightClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cardA == null) {
-                    AlertUtils.toast(context, "请上传手持身份证");
+                if (TextUtils.isEmpty(editUserName.getText().toString())) {
+                    AlertUtils.show(ResourceUtils.getString(R.string.alter_input_user_name));
                     return;
                 }
-                if (cardB == null) {
-                    AlertUtils.toast(context, "请上传身份证正面");
+                if (TextUtils.isEmpty(editUserIdCardCode.getText().toString())) {
+                    AlertUtils.show(ResourceUtils.getString(R.string.alert_input_user_id_card_code));
                     return;
                 }
-                if (cardC == null) {
-                    AlertUtils.toast(context, "请上传身份证反面");
+                if (holdIdUri == null) {
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_upload_photo_id_card));
                     return;
                 }
-                imagesList.clear();
-                imagesList.add(cardA);
-                imagesList.add(cardB);
-                imagesList.add(cardC);
 
-
-                if (null != imagesList && imagesList.size() > 1) {
-                    final List<String> list = new ArrayList<String>();
-                    for (int i = 0; i < imagesList.size(); i++) {
-                        AlbumItem albumItem = imagesList.get(i);
-                        if (null != albumItem) {
-                            list.add(albumItem.getFilePath());
-                        }
-                    }
-                    compressWithLs(list);
-                } else {
-                    AlertUtils.toast(context, "还未选择图片");
+                if (positiveIdUri == null) {
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_upload_photo_id_card_positive));
+                    return;
                 }
-
+                if (backIdUri == null) {
+                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_upload_photo_id_card_positive));
+                    return;
+                }
+                showLoading(ResourceUtils.getString(R.string.uploading), false);
+                MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_ALI_YUN_IMAGE_UPLOAD,
+                        ImageUploadOrDownManager.getUploadHashMap(1,
+                                ALiYunFileURLBuilder.PERSONALIDCARD, holdIdUri.getPath(), ALiYunFileURLBuilder.BUCKET_SECTET));
+                MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_ALI_YUN_IMAGE_UPLOAD,
+                        ImageUploadOrDownManager.getUploadHashMap(2,
+                                ALiYunFileURLBuilder.PERSONALIDCARD, positiveIdUri.getPath(), ALiYunFileURLBuilder.BUCKET_SECTET));
+                MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_ALI_YUN_IMAGE_UPLOAD,
+                        ImageUploadOrDownManager.getUploadHashMap(3,
+                                ALiYunFileURLBuilder.PERSONALIDCARD, backIdUri.getPath(), ALiYunFileURLBuilder.BUCKET_SECTET));
 
             }
         });
-    }
-
-
-    //压缩图片
-    //* 压缩图片 Listener 方式
-
-    private void compressWithLs(final List<String> photos) {
-
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Luban.with(context)
-                        .load(photos)
-                        .ignoreBy(100)
-                        .setTargetDir(getPath())
-                        .filter(new CompressionPredicate() {
-                            @Override
-                            public boolean apply(String path) {
-                                return !(TextUtils.isEmpty(path) || path.toLowerCase().endsWith(".gif"));
-                            }
-                        })
-                        .setCompressListener(new OnCompressListener() {
-                            @Override
-                            public void onStart() {
-                                showLoadingDialog("上传中...");
-                            }
-
-                            @Override
-                            public void onSuccess(File file) {
-                                Log.i(TAG, file.getAbsolutePath());
-                                showResult(photos, file);
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-
-                                Logger.d("错误", e.toString());
-                            }
-                        }).launch();
-
-            }
-        }).start();
-
-    }
-
-    private class uploadRunnable implements Runnable {
-
-        @Override
-        public void run() {
-            isUploadCount = 0;
-            for (int i = 0; i < upImages.size(); i++) {
-                AlbumItem albumItem = upImages.get(i);
-                if (null != albumItem) {
-                    upload(albumItem,i);
-                }
-            }
-
-        }
-    }
-
-    //获取阿里云的凭证
-    private void getOssToken() {
-        OkUtils.getInstances().httpTokenGet(context, RequestConstant.GET_OSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
-        }.getType(), new ResultCallBackListener<StsToken>() {
-            @Override
-            public void onFailure(int errorId, String msg) {
-                AlertUtils.toast(context, "服务器错误");
-            }
-
-            @Override
-            public void onSuccess(EntityObject<StsToken> response) {
-                if (response.getCode() == 10000) {
-                    stsToken = response.getContent();
-                }
-            }
-        });
-    }
-
-    private void upload(final AlbumItem albumItem, final int index) {
-        String thumbnail = albumItem.getFilePath();
-        String resultpath = thumbnail;
-        String UUID = AppUtils.getUUID();
-
-        ALiYunOssFileLoader.asyncUpload(context, stsToken, ALiYunFileURLBuilder.BUCKET_SECTET, ALiYunFileURLBuilder.PERSONALIDCARD + UUID,
-                resultpath, new ALiYunOssFileLoader.OssFileUploadListener() {
-                    @Override
-                    public void onUploadSuccess(String objectKey) {
-                        isUploadCount++;
-
-                        if (index == 0) {
-                            upLoadImages = "";
-                            upLoadImages = objectKey;
-                        } else {
-                            upLoadImages = upLoadImages + "," + objectKey;
-                        }
-                        String path = Environment.getExternalStorageDirectory() + "/zhixin/image/";
-                        if (isUploadCount == 3) {
-                            hideLoadingDialog();
-                            upImages.clear();
-                            deleteDir(path);
-                            EventBus.getDefault().post(new UploadImageFinishEvent(upLoadImages));
-                        }
-                        Logger.i(TAG, "动态图片上传成功：" + objectKey);
-                    }
-
-                    @Override
-                    public void onUploadProgress(String objectKey, long currentSize, long totalSize) {
-
-                    }
-
-                    @Override
-                    public void onUploadFailure(String objectKey, ServiceException ossException) {
-                        hideLoadingDialog();
-                        upImages.clear();
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                AlertUtils.toast(context, "动态图片上传失败");
-                            }
-                        });
-                        Logger.i(TAG, "动态图片上传失败：" + objectKey);
-                    }
-                });
     }
 
     @OnClick({R.id.rl_hold_id, R.id.rl_positive_id, R.id.rl_back_id})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_hold_id:
-                type = 0;
-                SelectImageDialog dialog = new SelectImageDialog(context, new SelectImageDialog.OnItemClickListener() {
+
+                imageTool.reset().onlyPick(true).maxSize(imageMaxSize).start(this, new ImageTool.ResultListener() {
                     @Override
-                    public void onClick(SelectImageDialog dialog, int index) {
-                        dialog.dismiss();
-                        switch (index) {
-                            case SelectImageDialog.TYPE_CAMERA:
-                                takeAPicture();
-                                break;
-                            case SelectImageDialog.TYPE_PHOTO:
-                                Intent intent = new Intent(context, SelectImageActivity.class);
-                                intent.putExtra(SelectImageActivity.LIMIT, 1);
-                                startActivityForResult(intent, SelectImageActivity.REQUEST_DYNAMIC);
-                                break;
+                    public void onResult(String error, Uri uri, Bitmap bitmap) {
+                        if (uri != null) {
+                            holdIdUri = uri;
+                            Glide.with(IdAuthenticationActivity.this).load(uri).into(holdIv);
+                            holdIv.setVisibility(View.VISIBLE);
+                        } else {
+                            holdIv.setVisibility(View.GONE);
                         }
                     }
                 });
-                dialog.show();
                 break;
             case R.id.rl_positive_id:
-                SelectImageDialog selectImageDialog = new SelectImageDialog(context, new SelectImageDialog.OnItemClickListener() {
+
+                imageTool.reset().onlyPick(true).maxSize(imageMaxSize).start(this, new ImageTool.ResultListener() {
                     @Override
-                    public void onClick(SelectImageDialog dialog, int index) {
-                        dialog.dismiss();
-                        switch (index) {
-                            case SelectImageDialog.TYPE_CAMERA:
-                                takeAPicture();
-                                break;
-                            case SelectImageDialog.TYPE_PHOTO:
-                                Intent intent = new Intent(context, SelectImageActivity.class);
-                                intent.putExtra(SelectImageActivity.LIMIT, 1);
-                                startActivityForResult(intent, SelectImageActivity.REQUEST_DYNAMIC);
-                                break;
+                    public void onResult(String error, Uri uri, Bitmap bitmap) {
+                        if (uri != null) {
+                            positiveIdUri = uri;
+                            Glide.with(IdAuthenticationActivity.this).load(uri).into(positiveIv);
+                            positiveIv.setVisibility(View.VISIBLE);
+                        } else {
+                            positiveIv.setVisibility(View.GONE);
                         }
                     }
                 });
-                selectImageDialog.show();
-                type = 1;
                 break;
             case R.id.rl_back_id:
-                SelectImageDialog imageDialog = new SelectImageDialog(context, new SelectImageDialog.OnItemClickListener() {
+                imageTool.reset().onlyPick(true).maxSize(imageMaxSize).start(this, new ImageTool.ResultListener() {
                     @Override
-                    public void onClick(SelectImageDialog dialog, int index) {
-                        dialog.dismiss();
-                        switch (index) {
-                            case SelectImageDialog.TYPE_CAMERA:
-                                takeAPicture();
-                                break;
-                            case SelectImageDialog.TYPE_PHOTO:
-                                Intent intent = new Intent(context, SelectImageActivity.class);
-                                intent.putExtra(SelectImageActivity.LIMIT, 1);
-                                startActivityForResult(intent, SelectImageActivity.REQUEST_DYNAMIC);
-                                break;
+                    public void onResult(String error, Uri uri, Bitmap bitmap) {
+                        if (uri != null) {
+                            backIdUri = uri;
+                            Glide.with(IdAuthenticationActivity.this).load(uri).into(backIv);
+                            backIv.setVisibility(View.VISIBLE);
+                        } else {
+                            backIv.setVisibility(View.GONE);
                         }
                     }
                 });
-                imageDialog.show();
-                type = 2;
                 break;
         }
-    }
-
-
-    private void takeAPicture() {
-        photoPath = Constant.CACHE_DIR_IMAGE + "/" + AppUtils.getUUID();
-        photoFile = new File(photoPath);
-        Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intentCamera.putExtra(MediaStore.Images.ImageColumns.ORIENTATION, 0);
-        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-        startActivityForResult(intentCamera, REQUEST_CAMERA);
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        //其实这里什么都不要做
-        super.onConfigurationChanged(newConfig);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode != Activity.RESULT_OK)
-            return;
-        if (requestCode == SelectImageActivity.REQUEST_DYNAMIC) {
-            //通过相册选择图片
-            selectedImages = (ArrayList<AlbumItem>) data.getSerializableExtra("images");
-            for (int i = 0; i < selectedImages.size(); i++) {
-                if (type == 0) {
-                    cardA = selectedImages.get(i);
-                    holdIv.setVisibility(View.VISIBLE);
-                    if (cardA.getThumbnail().isEmpty()) {
-                        Glide.with(context).load(cardA.getThumbnail()).into(holdIv);
-                    } else {
-                        Glide.with(context).load(cardA.getFilePath()).into(holdIv);
-                    }
-                } else if (type == 1) {
-                    positiveIv.setVisibility(View.VISIBLE);
-                    cardB = selectedImages.get(i);
-                    if (cardB.getThumbnail().isEmpty()) {
-                        Glide.with(context).load(cardB.getThumbnail()).into(positiveIv);
-                    } else {
-                        Glide.with(context).load(cardB.getFilePath()).into(positiveIv);
-                    }
-                } else {
-                    backIv.setVisibility(View.VISIBLE);
-                    cardC = selectedImages.get(i);
-                    if (cardC.getThumbnail().isEmpty()) {
-                        Glide.with(context).load(cardC.getThumbnail()).into(backIv);
-                    } else {
-                        Glide.with(context).load(cardC.getFilePath()).into(backIv);
-                    }
-
-                }
-            }
-
-
-        } else if (requestCode == REQUEST_CAMERA) {
-            //使用相机拍照
-            final int rotateDegree = BitmapUtils.readPictureDegree(photoFile.getAbsolutePath());
-            Logger.i(TAG, "拍照后旋转的角度：" + rotateDegree);
-            AlbumItem image = new AlbumItem();
-            image.setFilePath(photoFile.getAbsolutePath());
-            image.setThumbnail(photoFile.getAbsolutePath());
-            if (type == 0) {
-                holdIv.setVisibility(View.VISIBLE);
-                cardA = image;
-                if (cardA.getThumbnail().isEmpty()) {
-                    Glide.with(context).load(cardA.getThumbnail()).into(holdIv);
-                } else {
-                    Glide.with(context).load(cardA.getFilePath()).into(holdIv);
-                }
-            } else if (type == 1) {
-                positiveIv.setVisibility(View.VISIBLE);
-                cardB = image;
-                if (cardB.getThumbnail().isEmpty()) {
-                    Glide.with(context).load(cardB.getThumbnail()).into(positiveIv);
-                } else {
-                    Glide.with(context).load(cardB.getFilePath()).into(positiveIv);
-                }
-            } else {
-                backIv.setVisibility(View.VISIBLE);
-                cardC = image;
-                if (cardC.getThumbnail().isEmpty()) {
-                    Glide.with(context).load(cardC.getThumbnail()).into(backIv);
-                } else {
-                    Glide.with(context).load(cardC.getFilePath()).into(backIv);
-                }
-            }
-        }
+        imageTool.onActivityResult(requestCode, resultCode, data);
     }
 
-
-    private String getPath() {
-        String path = Environment.getExternalStorageDirectory() + "/zhixin/image/";
-        File file = new File(path);
-        if (file.mkdirs()) {
-            return path;
-        }
-        return path;
-    }
-
-
-    private void showResult(List<String> photos, File file) {
-
-        int[] thumbSize = computeSize(file.getAbsolutePath());
-        String thumbArg = String.format(Locale.CHINA, "压缩后参数：%d*%d, %dk", thumbSize[0], thumbSize[1], file.length() >> 10);
-        Logger.d("图", thumbArg);
-        AlbumItem albumItem = new AlbumItem();
-        albumItem.setFilePath(file.getAbsolutePath());
-        upImages.add(albumItem);
-        if (upImages.size() == photos.size()) {
-            new Thread(new uploadRunnable()).start();
-        }
-    }
-
-    private int[] computeSize(String srcImg) {
-        int[] size = new int[2];
-
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        options.inSampleSize = 1;
-
-        BitmapFactory.decodeFile(srcImg, options);
-        size[0] = options.outWidth;
-        size[1] = options.outHeight;
-        return size;
-    }
-
-    //删除文件夹和文件夹里面的文件
-    public static void deleteDir(final String pPath) {
-        File dir = new File(pPath);
-        deleteDirWihtFile(dir);
-    }
-
-    public static void deleteDirWihtFile(File dir) {
-        if (dir == null || !dir.exists() || !dir.isDirectory())
-            return;
-        for (File file : dir.listFiles()) {
-            if (file.isFile())
-                file.delete(); // 删除所有文件
-            else if (file.isDirectory())
-                deleteDirWihtFile(file); // 递规的方式删除文件夹
-        }
-        //dir.delete();// 删除目录本身
-    }
-
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onTradeAreaEvent(UploadImageFinishEvent event) {
-        AlertUtils.toast(context, "资料上传成功,请耐心等待审核");
-        finish();
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().unsubscribe(imageUploadSubscription, submitInfoSubscription);
     }
 }

@@ -1,27 +1,30 @@
 package com.zhixing.work.zhixin.view.card;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.event.ModifyEvent;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.Utils;
+import com.zhixing.work.zhixin.widget.ClearEditText;
 
 import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * 编辑页面
+ */
 public class ModifyDataActivity extends BaseTitleActivity {
+
     @BindView(R.id.edit)
-    EditText edit;
+    ClearEditText edit;
     private String title;
-    private Context context;
     private String type;
     private String content;
 
@@ -57,15 +60,15 @@ public class ModifyDataActivity extends BaseTitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify_data);
         ButterKnife.bind(this);
-        title = getIntent().getStringExtra("title");
-        type = getIntent().getStringExtra("type");
+        title = getIntent().getStringExtra(TYPE_TITLE);
+        type = getIntent().getStringExtra(TYPE);
         context = this;
         content = getIntent().getStringExtra(TYPE_CONTENT);
         if (!TextUtils.isEmpty(content)) {
             edit.setText(content);
             edit.setSelection(content.length());
         }
-        setRightText1("保存");
+        setRightText1(ResourceUtils.getString(R.string.save));
         initView();
     }
 
@@ -76,12 +79,12 @@ public class ModifyDataActivity extends BaseTitleActivity {
             public void onClick(View v) {
                 String content = edit.getText().toString();
                 if (TextUtils.isEmpty(edit.getText().toString())) {
-                    AlertUtils.toast(context, "填写不能为空");
+                   AlertUtils.show("填写不能为空");
                     return;
                 } else {
                     if (type.equals(TYPE_MAILBOX)) {
                         if (!Utils.checkEmaile(content)) {
-                            AlertUtils.toast(context, "请填写正确的邮箱");
+                           AlertUtils.show("请填写正确的邮箱");
                             return;
 
                         }
@@ -91,7 +94,7 @@ public class ModifyDataActivity extends BaseTitleActivity {
 
                         if (type.equals(TYPE_ID)) {
                             if (!Utils.isIdCardNo18(content)) {
-                                AlertUtils.toast(context, "请填写正确身份证号");
+                               AlertUtils.show("请填写正确身份证号");
                                 return;
                             }
                             EventBus.getDefault().post(new ModifyEvent(type, content));

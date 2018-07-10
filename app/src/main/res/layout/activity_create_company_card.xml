@@ -15,7 +15,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-
             android:background="#f5f5f5"
             android:orientation="horizontal">
 
@@ -42,9 +41,9 @@
             android:background="@color/white"
             android:gravity="center_vertical"
             android:text="公司信息"
-            android:textStyle="bold"
             android:textColor="@color/color_303030"
-            android:textSize="@dimen/font_head" />
+            android:textSize="@dimen/font_head"
+            android:textStyle="bold" />
 
 
         <RelativeLayout
@@ -173,7 +172,6 @@
             android:background="@color/bg_main"></View>
 
         <TextView
-            android:textStyle="bold"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
             android:layout_marginLeft="@dimen/dp_10"
@@ -181,7 +179,8 @@
             android:gravity="center_vertical"
             android:text="个人信息"
             android:textColor="@color/color_303030"
-            android:textSize="@dimen/font_head" />
+            android:textSize="@dimen/font_head"
+            android:textStyle="bold" />
         <!--姓名-->
         <RelativeLayout
             android:id="@+id/rl_name"
@@ -190,7 +189,6 @@
             android:background="@color/linerlayout">
 
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
@@ -209,10 +207,7 @@
                 android:layout_toLeftOf="@+id/name_right"
                 android:background="@null"
                 android:gravity="center"
-                android:textColor="@color/color_303030"
-
-
-                />
+                android:textColor="@color/color_303030" />
 
             <ImageView
                 android:id="@+id/name_right"
@@ -243,21 +238,15 @@
                 android:id="@+id/card_sex_man"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-
                 android:layout_marginRight="15dp"
-
                 android:layout_toLeftOf="@+id/card_sex_woman"
-                android:button="@drawable/card_check"
-
-                />
+                android:button="@drawable/card_check" />
 
             <CheckBox
-
                 android:id="@+id/card_sex_woman"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
-
                 android:layout_marginRight="10dp"
                 android:button="@drawable/card_check_m" />
         </RelativeLayout>
@@ -281,7 +270,6 @@
                 android:textSize="16sp" />
 
             <TextView
-
                 android:id="@+id/mailbox"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"

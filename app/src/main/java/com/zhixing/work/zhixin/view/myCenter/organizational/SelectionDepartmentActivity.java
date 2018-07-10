@@ -16,6 +16,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 选择上级部分
+ */
 public class SelectionDepartmentActivity extends BaseTitleActivity {
 
     @BindView(R.id.company_name)
@@ -28,7 +31,8 @@ public class SelectionDepartmentActivity extends BaseTitleActivity {
     LinearLayout llAdd;
     @BindView(R.id.listview)
     RecyclerView listview;
- private    NewDepartmentDialog  newDepartmentDialog;
+    private NewDepartmentDialog newDepartmentDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

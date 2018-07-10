@@ -11,7 +11,7 @@ import com.zhixing.work.zhixin.R;
 /**
 
  */
-public class ResidenceDialog extends ButtomDialog {
+public class ResidenceDialog extends BottomDialog {
     private TextView countryside;
     private TextView city;
 

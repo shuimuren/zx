@@ -4,17 +4,23 @@ import android.os.Message;
 import android.text.TextUtils;
 
 import com.alibaba.sdk.android.oss.ClientConfiguration;
+import com.alibaba.sdk.android.oss.ClientException;
 import com.alibaba.sdk.android.oss.OSSClient;
 import com.alibaba.sdk.android.oss.ServiceException;
+import com.alibaba.sdk.android.oss.callback.OSSCompletedCallback;
 import com.alibaba.sdk.android.oss.common.auth.OSSCredentialProvider;
 import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
+import com.alibaba.sdk.android.oss.model.PutObjectRequest;
+import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.zhixing.work.zhixin.app.ZxApplication;
 import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.msgctrl.AbstractController;
 import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.RxBus;
 import com.zhixing.work.zhixin.network.RetrofitServiceFactory;
 import com.zhixing.work.zhixin.network.TokenCheckedCallback;
+import com.zhixing.work.zhixin.network.response.ImageUploadResult;
 import com.zhixing.work.zhixin.network.response.StsTokenResult;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.AppUtils;
@@ -69,7 +75,6 @@ public class ALiYunController extends AbstractController {
         call.enqueue(new TokenCheckedCallback<StsTokenResult>() {
             @Override
             protected void postResult(StsTokenResult result) {
-                Logger.i(">>>", "result>" + result.getContent().getSecurityToken());
                 oSSToken = result.getContent();
                 if (params.containsKey(ALiYunFileURLBuilder.KEY_IMAGE_MARK)) {
                     loadImage(params);
@@ -95,15 +100,58 @@ public class ALiYunController extends AbstractController {
      * @param params
      */
     private void uploadImage(Map<String, String> params) {
-        Logger.i(">>>", "params>" + params.get(ALiYunFileURLBuilder.KEY_FILE_PATH));
         String objectKey = params.get(ALiYunFileURLBuilder.KEY_SUB_ITEM_CATALOGUE) + AppUtils.getUUID();
         String filePath = params.get(ALiYunFileURLBuilder.KEY_FILE_PATH);
         String bucketName = params.get(ALiYunFileURLBuilder.KEY_BUCKET_NAME);
+        String code = params.get(ALiYunFileURLBuilder.KEY_IMAGE_CODE);
         if (TextUtils.isEmpty(objectKey) || TextUtils.isEmpty(filePath) || TextUtils.isEmpty(bucketName)) {
             AlertUtils.show("请确认参数无误");
             return;
         }
-        ALiYunOssFileLoader.asyncUpload(ZxApplication.getInstance().getApplicationContext(), oSSToken, bucketName, objectKey, filePath, uploadListener);
+        asyncUpload(Integer.parseInt(code), oSSToken, bucketName, objectKey, filePath);
+    }
+
+    /**
+     * 文件异步上传
+     *
+     * @param bucketName     上传到Bucket的名字
+     * @param objectKey      上传到OSS后的ObjectKey
+     * @param uploadFilePath 上传文件的本地路径
+     */
+    public static void asyncUpload(int code, StsToken stsToken, String bucketName, final String objectKey, String uploadFilePath) {
+        OSSCredentialProvider credentialProvider = new OSSStsTokenCredentialProvider(stsToken.getAccessKeyId(), stsToken.getAccessKeySecret(), stsToken.getSecurityToken());
+        ClientConfiguration conf = new ClientConfiguration();
+        conf.setConnectionTimeout(15 * 1000); // 连接超时，默认15秒
+        conf.setSocketTimeout(15 * 1000); // socket超时，默认15秒
+        conf.setMaxConcurrentRequest(5); // 最大并发请求书，默认5个
+        conf.setMaxErrorRetry(2); // 失败后最大重试次数，默认2次
+        OSSClient mOSSClient = new OSSClient(ZxApplication.getInstance().getApplicationContext(), ALiYunFileURLBuilder.END_POINT, credentialProvider, conf);
+        // 构造上传请求
+        PutObjectRequest put = new PutObjectRequest(bucketName, objectKey, uploadFilePath);
+
+//        // 异步上传时可以设置进度回调
+//        put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
+//            @Override
+//            public void onProgress(PutObjectRequest request, long currentSize, long totalSize) {
+//
+//        });
+
+        mOSSClient.asyncPutObject(put, new OSSCompletedCallback<PutObjectRequest, PutObjectResult>() {
+
+            @Override
+            public void onSuccess(PutObjectRequest request, PutObjectResult result) {
+                Logger.i(">>>","图片上传成功。。。");
+                ImageUploadResult uploadResult = new ImageUploadResult(code,request.getObjectKey(), true);
+                RxBus.getInstance().post(uploadResult);
+            }
+
+            @Override
+            public void onFailure(PutObjectRequest request, ClientException clientException, ServiceException serviceException) {
+                Logger.i(">>>","图片上传失败。。。");
+                ImageUploadResult uploadResult = new ImageUploadResult(code,"", false);
+                RxBus.getInstance().post(uploadResult);
+            }
+        });
     }
 
     private void loadImage(Map<String, String> params) {
@@ -141,7 +189,8 @@ public class ALiYunController extends AbstractController {
     ALiYunOssFileLoader.OssFileUploadListener uploadListener = new ALiYunOssFileLoader.OssFileUploadListener() {
         @Override
         public void onUploadSuccess(String objectKey) {
-            Logger.i(">>>", "上传成功>" + objectKey);
+            Logger.i(">>>", "成功>" + objectKey);
+
         }
 
         @Override

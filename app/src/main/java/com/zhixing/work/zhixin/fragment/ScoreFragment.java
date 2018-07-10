@@ -4,10 +4,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -20,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.sdk.android.oss.ServiceException;
+import com.bumptech.glide.Glide;
 import com.google.gson.reflect.TypeToken;
 import com.willy.ratingbar.ScaleRatingBar;
 import com.zhixing.work.zhixin.R;
@@ -34,12 +34,9 @@ import com.zhixing.work.zhixin.bean.Token;
 import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.constant.RoleConstant;
 import com.zhixing.work.zhixin.dialog.CardCompleteDialog;
-import com.zhixing.work.zhixin.dialog.SelectImageDialog;
-import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.CardCompleteEvent;
 import com.zhixing.work.zhixin.event.CardRefreshEvent;
 import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
-import com.zhixing.work.zhixin.http.Constant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
@@ -47,8 +44,9 @@ import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.AppUtils;
-import com.zhixing.work.zhixin.util.BitmapUtils;
+import com.zhixing.work.zhixin.util.FileUtil;
 import com.zhixing.work.zhixin.util.GlideUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.view.card.CreateCardActivity;
@@ -56,27 +54,22 @@ import com.zhixing.work.zhixin.view.card.PerfectCardDataActivity;
 import com.zhixing.work.zhixin.view.card.back.CardMainActivity;
 import com.zhixing.work.zhixin.view.companyCard.CreateCompanyCardActivity;
 import com.zhixing.work.zhixin.view.companyCard.back.CompanyCardActivity;
-import com.zhixing.work.zhixin.view.util.SelectImageActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import imagetool.lhj.com.ImageTool;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
 
 /**
- *评分页面
+ * 评分页面
  */
 public class ScoreFragment extends BaseMainFragment {
 
@@ -176,19 +169,12 @@ public class ScoreFragment extends BaseMainFragment {
     private String study_abroad;
 
     private StsToken stsToken;
-    public static final int REQUEST_CAMERA = 10; // 拍照
-
-    private File photoFile;
-    private Uri imageUri;
-    private List<AlbumItem> selectedImages;//标记选中的图片
-    private String upLoadImages = "";//上传图片组
-    private File cropFilePath;
-    private Uri outPutUri;
     public static final String TAG = "ScoreFragment";
 
     public static ScoreFragment instance;
     public Token token;
     private String addressCity = "";
+    private ImageTool imageTool;
 
 
     public static ScoreFragment newInstance() {
@@ -267,6 +253,7 @@ public class ScoreFragment extends BaseMainFragment {
             }
         });
     }
+
     private void initData() {
         OkUtils.getInstances().httpTokenGet(context, RequestConstant.GET_CARD_INFO, JavaParamsUtils.getInstances().getCard(), new TypeToken<EntityObject<Card>>() {
         }.getType(), new ResultCallBackListener<Card>() {
@@ -277,6 +264,7 @@ public class ScoreFragment extends BaseMainFragment {
                 AlertUtils.toast(context, "服务器错误");
                 getOssToken();
             }
+
             @Override
             public void onSuccess(EntityObject<Card> response) {
                 if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
@@ -326,6 +314,7 @@ public class ScoreFragment extends BaseMainFragment {
     @Override
     public void fetchData() {
     }
+
     //获取阿里云的凭证
     private void getOssToken() {
         OkUtils.getInstances().httpTokenGet(context, RequestConstant.GET_OSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
@@ -350,6 +339,7 @@ public class ScoreFragment extends BaseMainFragment {
             }
         });
     }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -358,6 +348,7 @@ public class ScoreFragment extends BaseMainFragment {
         }
         EventBus.getDefault().unregister(this);
     }
+
     @OnClick({R.id.create_card, R.id.perfect_card, R.id.more, R.id.rl_avatar, R.id.create_enterprise_card})
     public void onViewClicked(View view) {
         switch (view.getId()) {
@@ -378,31 +369,22 @@ public class ScoreFragment extends BaseMainFragment {
                 }
                 break;
             case R.id.rl_avatar:
-                SelectImageDialog imageDialog = new SelectImageDialog(context, new SelectImageDialog.OnItemClickListener() {
+                imageTool = new ImageTool(FileUtil.getDiskCachePath());
+                imageTool.reset().onlyPick(false).start(this, new ImageTool.ResultListener() {
                     @Override
-                    public void onClick(SelectImageDialog dialog, int index) {
-                        dialog.dismiss();
-
-                        switch (index) {
-                            case SelectImageDialog.TYPE_CAMERA:
-                                photoFile = new File(Constant.CACHE_DIR_IMAGE + "/" + System.currentTimeMillis() + ".jpg");
-                                Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                intentCamera.putExtra(MediaStore.Images.ImageColumns.ORIENTATION, 0);
-                                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                                instance.startActivityForResult(intentCamera, REQUEST_CAMERA);
-                                break;
-                            case SelectImageDialog.TYPE_PHOTO:
-                                Intent intent = new Intent(context, SelectImageActivity.class);
-                                intent.putExtra(SelectImageActivity.LIMIT, 1);
-                                instance.startActivityForResult(intent, SelectImageActivity.REQUEST_AVATAR);
-                                break;
+                    public void onResult(String error, Uri uri, Bitmap bitmap) {
+                        Logger.i(">>>", "Uri>" + uri);
+                        if (uri != null && !TextUtils.isEmpty(uri.getPath())) {
+                            upload(uri.getPath());
+                            GlideUtils.getInstance().loadGlideRoundTransform(context, uri.getPath(), avatar);
                         }
                     }
                 });
-                imageDialog.show();
+
                 break;
         }
     }
+
     //显示成就弹框
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCardCompleteEvent(CardCompleteEvent event) {
@@ -444,56 +426,17 @@ public class ScoreFragment extends BaseMainFragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (cropFilePath != null) {
-            if (!TextUtils.isEmpty(cropFilePath.getAbsolutePath())) {
-                Utils.deleteDirWihtFile(new File(Environment.getExternalStorageDirectory().getPath()));
-            }
-        }
     }
 
-    /**
-     * 初始化剪裁图片的输出Uri
-     */
-    private void intCropUri() {
-        if (outPutUri == null) {
-            cropFilePath = new File(Environment.getExternalStorageDirectory().getPath(), "cutImage.png");
-            try {
-                cropFilePath.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            outPutUri = Uri.fromFile(cropFilePath);
-        }
-    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode != RESULT_OK) {
-            return;
-        }
-        if (requestCode == SelectImageActivity.REQUEST_AVATAR) {
-            //从相册选照片
-            selectedImages = (ArrayList<AlbumItem>) data.getSerializableExtra("images");
-            AlbumItem albumItem = selectedImages.get(0);
-            imageUri = Uri.fromFile(new File(albumItem.getFilePath()));
-            intCropUri();
-            BitmapUtils.createPhotoCropFragment(instance, imageUri, outPutUri);
-        } else if (requestCode == REQUEST_CAMERA) {
-            //拍照照片
-            imageUri = Uri.fromFile(photoFile);
-            intCropUri();
-            BitmapUtils.createPhotoCropFragment(instance, imageUri, outPutUri);
-        } else if (requestCode == Constant.IMAGE_CROP) {
-            upload(cropFilePath.getAbsolutePath());
-
-        }
-
+        imageTool.onActivityResult(requestCode, resultCode, data);
     }
 
 
     /*保存界面状态，如果activity意外被系统killed，返回时可以恢复状态值*/
-    @Override
+/*    @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         //savedInstanceState.putString("msg_con", htmlsource);
         if (photoFile != null) {
@@ -508,17 +451,18 @@ public class ScoreFragment extends BaseMainFragment {
     public void onRestoreInstanceState(Bundle savedInstanceState) {
 
         photoFile = new File(savedInstanceState.getString("msg_camera_picname"));
-    }
+    }*/
 
 
     //上传头像
     private void upload(final String resultpath) {
+        showLoading(ResourceUtils.getString(R.string.uploading),false);
         String UUID = AppUtils.getUUID();
         ALiYunOssFileLoader.asyncUpload(context, stsToken, ALiYunFileURLBuilder.BUCKET_PUBLIC, ALiYunFileURLBuilder.PERSONALAVATAR + UUID,
                 resultpath, new ALiYunOssFileLoader.OssFileUploadListener() {
                     @Override
                     public void onUploadSuccess(String objectKey) {
-                        Logger.i("tou", "动态图片上传成功：" + objectKey);
+                     //   Logger.i("tou", "动态图片上传成功：" + objectKey);
                         RequestBody body = new FormBody.Builder()
                                 .add("Avatar", objectKey)
                                 .build();
@@ -532,7 +476,9 @@ public class ScoreFragment extends BaseMainFragment {
 
                     @Override
                     public void onUploadFailure(String objectKey, ServiceException ossException) {
-                        Logger.i(TAG, "动态图片上传失败：" + objectKey);
+                        hideLoadingDialog();
+                        AlertUtils.show(ResourceUtils.getString(R.string.image_upload_failure));
+
                     }
                 });
     }
@@ -556,7 +502,7 @@ public class ScoreFragment extends BaseMainFragment {
                             String url = ALiYunOssFileLoader.gtePublic(context, stsToken, ALiYunFileURLBuilder.BUCKET_PUBLIC, key);
                             avatarText.setVisibility(View.GONE);
                             defaultAvatar.setVisibility(View.GONE);
-                            GlideUtils.getInstance().loadGlideRoundTransform(context, url, avatar);
+                            Glide.with(context).load(url).into(avatar);
                         }
                     } else {
                         AlertUtils.toast(context, "修改失败");

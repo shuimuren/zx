@@ -65,17 +65,18 @@ public abstract class SupportFragment extends Fragment implements ISupportFragme
     /**
      * 默认 message加载中 返回键可取消
      */
-    public void showLoading() {
+    public void showLoading(String msg,boolean cancelable) {
         if (loadingDialog != null && loadingDialog.isShowing()) {
-            loadingDialog.setLoadingMessage("加载中");
-            loadingDialog.setCancelable(true);
+            loadingDialog.setLoadingMessage(msg);
+            loadingDialog.setCancelable(cancelable);
             return;
         }
         loadingDialog = new LoadingDialog(getActivity());
-        loadingDialog.setLoadingMessage("加载中");
-        loadingDialog.setCancelable(true);
+        loadingDialog.setLoadingMessage(msg);
+        loadingDialog.setCancelable(cancelable);
         loadingDialog.show();
     }
+
     public abstract void fetchData();
 
     public boolean prepareFetchData() {

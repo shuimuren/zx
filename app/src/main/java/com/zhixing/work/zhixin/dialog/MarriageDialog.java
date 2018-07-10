@@ -11,7 +11,7 @@ import com.zhixing.work.zhixin.R;
 /**
 
  */
-public class MarriageDialog extends ButtomDialog {
+public class MarriageDialog extends BottomDialog {
     private TextView married;
     private TextView secrecy;
     private TextView unmarried;

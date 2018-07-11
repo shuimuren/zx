@@ -27,7 +27,7 @@ import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
 /**
- * 工作经历
+ * 教育经历
  */
 public class ResumeEducationAdapter extends RecyclerView.Adapter<ResumeEducationAdapter.ViewHolder> {
     public List<Resume.EducationOutputsBean> getList() {

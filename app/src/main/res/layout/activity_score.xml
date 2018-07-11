@@ -34,8 +34,8 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:text="职信评分"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/font_normal" />
+                    android:textSize="@dimen/font_big"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -44,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <com.zhixing.work.zhixin.widget.EvaluatingView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
@@ -52,8 +53,33 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp">
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <!--<LinearLayout-->
+                    <!--android:layout_width="0dp"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:gravity="center_vertical">-->
+
+                    <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@drawable/btn_brown_shape"-->
+                    <!--android:paddingBottom="2dp"-->
+                    <!--android:paddingLeft="7dp"-->
+                    <!--android:paddingRight="7dp"-->
+                    <!--android:paddingTop="2dp"-->
+                    <!--android:text="技能"-->
+                    <!--android:textColor="@color/white" />-->
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/tvSkill"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:text="-" />-->
+                    <!--</LinearLayout>-->
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -63,38 +89,13 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:background="@drawable/btn_brown_shape"
-                            android:paddingBottom="2dp"
-                            android:paddingLeft="7dp"
-                            android:paddingRight="7dp"
-                            android:paddingTop="2dp"
-                            android:text="技能"
-                            android:textColor="@color/white" />
-
-                        <TextView
-                            android:id="@+id/tvSkill"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:text="-" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/btn_brown_shape"
-                            android:paddingBottom="2dp"
-                            android:paddingLeft="7dp"
-                            android:paddingRight="7dp"
-                            android:paddingTop="2dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:textSize="@dimen/font_size_14sp"
                             android:text="诚信"
+                            android:gravity="center"
                             android:textColor="@color/white" />
 
                         <TextView
@@ -102,6 +103,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:textSize="@dimen/font_normal"
                             android:text="-" />
                     </LinearLayout>
 
@@ -113,12 +115,11 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:background="@drawable/btn_brown_shape"
-                            android:paddingBottom="2dp"
-                            android:paddingLeft="7dp"
-                            android:paddingRight="7dp"
-                            android:paddingTop="2dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:textSize="@dimen/font_size_14sp"
                             android:text="人脉"
                             android:textColor="@color/white" />
 
@@ -127,16 +128,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:textSize="@dimen/font_normal"
                             android:text="-" />
                     </LinearLayout>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:paddingLeft="30dp"
-                    android:paddingRight="30dp">
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -146,12 +140,11 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:background="@drawable/btn_brown_shape"
-                            android:paddingBottom="2dp"
-                            android:paddingLeft="7dp"
-                            android:paddingRight="7dp"
-                            android:paddingTop="2dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:textSize="@dimen/font_size_14sp"
                             android:text="合规"
                             android:textColor="@color/white" />
 
@@ -160,8 +153,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:textSize="@dimen/font_normal"
                             android:text="-" />
                     </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -171,12 +174,11 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:background="@drawable/btn_brown_shape"
-                            android:paddingBottom="2dp"
-                            android:paddingLeft="7dp"
-                            android:paddingRight="7dp"
-                            android:paddingTop="2dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:textSize="@dimen/font_size_14sp"
                             android:text="履约"
                             android:textColor="@color/white" />
 
@@ -185,6 +187,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:textSize="@dimen/font_normal"
                             android:text="-" />
                     </LinearLayout>
 
@@ -196,12 +199,11 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="20dp"
                             android:background="@drawable/btn_brown_shape"
-                            android:paddingBottom="2dp"
-                            android:paddingLeft="7dp"
-                            android:paddingRight="7dp"
-                            android:paddingTop="2dp"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:textSize="@dimen/font_size_14sp"
                             android:text="心态"
                             android:textColor="@color/white" />
 
@@ -210,9 +212,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
+                            android:textSize="@dimen/font_normal"
                             android:text="-" />
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
                 </LinearLayout>
 
 
@@ -221,12 +228,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
                     android:text="星级评分"
-                    android:textSize="16sp" />
+                    android:textSize="@dimen/font_big"
+                    android:textStyle="bold" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="@dimen/dp_30"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="@dimen/dp_30"
                     android:background="#c39341">
 
@@ -235,13 +243,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        app:srb_clickable="true"
+                        app:srb_clickable="false"
                         app:srb_drawableEmpty="@drawable/icon_star_nor"
                         app:srb_drawableFilled="@drawable/icon_star_light"
                         app:srb_isIndicator="false"
                         app:srb_numStars="10"
                         app:srb_rating="0"
-                        app:srb_scrollable="true"
+                        app:srb_scrollable="false"
                         app:srb_starHeight="15dp"
                         app:srb_starPadding="3dp"
                         app:srb_starWidth="15dp"
@@ -272,7 +280,8 @@
                         android:layout_below="@+id/evaluating"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/dp_10"
-                        android:text="历史评分" />
+                        android:text="历史评分"
+                        android:visibility="gone"/>
 
                     <View
                         android:layout_width="wrap_content"
@@ -280,7 +289,8 @@
                         android:layout_alignLeft="@+id/historical_score"
                         android:layout_alignRight="@+id/historical_score"
                         android:layout_below="@+id/historical_score"
-                        android:background="@color/bg_deep" />
+                        android:background="@color/bg_deep" 
+                        android:visibility="gone"/>
 
                 </RelativeLayout>
 

@@ -151,8 +151,6 @@ public class JobActivity extends BaseTitleActivity {
             @Override
             public boolean onTagClick(View view, int position, FlowLayout parent) {
                 JobType bean = dataList.get(position);
-
-
                 dataList.remove(position);
                 mAdapter.notifyDataChanged();
                 getList(bean.getId());

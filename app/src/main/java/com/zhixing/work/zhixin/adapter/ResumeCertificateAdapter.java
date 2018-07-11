@@ -27,7 +27,7 @@ import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
 /**
- * 证书
+ * 教育证书
  */
 public class ResumeCertificateAdapter extends RecyclerView.Adapter<ResumeCertificateAdapter.ViewHolder> {
     public List<Resume.CertificateOutputsBean> getList() {

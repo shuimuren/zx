@@ -23,7 +23,6 @@ import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Resume;
 import com.zhixing.work.zhixin.bean.StsToken;
-import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.dialog.StateDialog;
 import com.zhixing.work.zhixin.event.ModifyEvent;
 import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
@@ -34,6 +33,7 @@ import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.GlideUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.view.card.AddCertificateActivity;
 import com.zhixing.work.zhixin.view.card.AddEducationActivity;
 import com.zhixing.work.zhixin.view.card.AddWorkActivity;
@@ -84,32 +84,24 @@ public class MyResumeActivity extends BaseTitleActivity {
     RelativeLayout rlAdvantage;
     @BindView(R.id.work_list)
     RecyclerView workList;
-    @BindView(R.id.add_work)
-    ImageView addWork;
     @BindView(R.id.work)
     TextView work;
     @BindView(R.id.rl_add_work)
     RelativeLayout rlAddWork;
     @BindView(R.id.project_list)
     RecyclerView projectList;
-    @BindView(R.id.add_project)
-    ImageView addProject;
     @BindView(R.id.project)
     TextView project;
     @BindView(R.id.rl_add_project)
     RelativeLayout rlAddProject;
     @BindView(R.id.education_list)
     RecyclerView educationList;
-    @BindView(R.id.add_education)
-    ImageView addEducation;
     @BindView(R.id.education)
     TextView education;
     @BindView(R.id.rl_add_education)
     RelativeLayout rlAddEducation;
     @BindView(R.id.certificate_list)
     RecyclerView certificateList;
-    @BindView(R.id.add_certificate)
-    ImageView addCertificate;
     @BindView(R.id.certificate)
     TextView certificate;
     @BindView(R.id.ll_add_certificate)
@@ -147,9 +139,9 @@ public class MyResumeActivity extends BaseTitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_resume);
         ButterKnife.bind(this);
-        setTitle("我的简历");
+        setTitle(ResourceUtils.getString(R.string.my_resume));
         getOssToken();
-        setRightText1("隐私设置");
+        setRightText1(ResourceUtils.getString(R.string.privacy_setting));
         setOnClick();
         setListView();
     }
@@ -179,7 +171,6 @@ public class MyResumeActivity extends BaseTitleActivity {
         workAdapter.setOnItemClickListener(new ResumeWorkAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
                 Intent intent = new Intent(context, AddWorkActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("bean", work_list.get(position));
@@ -267,13 +258,13 @@ public class MyResumeActivity extends BaseTitleActivity {
     private void initView() {
         switch (resume.getJobHuntingStatus()) {
             case 0:
-                state.setText("离职-随时到岗");
+                state.setText(ResourceUtils.getString(R.string.work_status_left));
                 break;
             case 1:
-                state.setText("在职-暂不考虑");
+                state.setText(ResourceUtils.getString(R.string.work_status_on_job));
                 break;
             case 2:
-                state.setText("在职-考虑机会");
+                state.setText(ResourceUtils.getString(R.string.work_status_taking_chances));
                 break;
         }
 
@@ -283,18 +274,17 @@ public class MyResumeActivity extends BaseTitleActivity {
         name.setText(resume.getPersonalInfo().getRealName());
 
         String url = ALiYunOssFileLoader.gteSecret(context, stsToken, ALiYunFileURLBuilder.BUCKET_SECTET, resume.getAvatar());
-        Logger.i(">>>","url>"+url);
         GlideUtils.getInstance().loadCircleUserIconInto(context, url, avatar);
 
     }
 
-//    获取简历
+    //    获取简历
     private void getResume() {
         OkUtils.getInstances().httpTokenGet(context, RequestConstant.RESUME, JavaParamsUtils.getInstances().getResume(), new TypeToken<EntityObject<Resume>>() {
         }.getType(), new ResultCallBackListener<Resume>() {
             @Override
             public void onFailure(int errorId, String msg) {
-                AlertUtils.toast(context, "服务器错误");
+                AlertUtils.toast(context, ResourceUtils.getString(R.string.server_error));
             }
 
             @Override
@@ -309,6 +299,7 @@ public class MyResumeActivity extends BaseTitleActivity {
                     educationAdapter.setList(education_list);
                     certificateAdapter.setList(certificate_list);
                     projectAdapter.setList(project_list);
+                    stars.setRating(resume.getTotalScore() / 10f);
                     if (resume != null) {
                         initView();
                     }
@@ -323,7 +314,7 @@ public class MyResumeActivity extends BaseTitleActivity {
         }.getType(), new ResultCallBackListener<StsToken>() {
             @Override
             public void onFailure(int errorId, String msg) {
-                AlertUtils.toast(context, "服务器错误");
+                AlertUtils.toast(context, ResourceUtils.getString(R.string.server_error));
             }
 
             @Override
@@ -340,6 +331,7 @@ public class MyResumeActivity extends BaseTitleActivity {
     @OnClick({R.id.rl_user_info, R.id.rl_job_intention, R.id.ll_state, R.id.rl_advantage, R.id.rl_add_work, R.id.rl_add_project, R.id.rl_add_education, R.id.ll_add_certificate, R.id.preview})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            //个人资料
             case R.id.rl_user_info:
                 if (resume != null) {
                     Intent intent = new Intent(context, PersonalDataActivity.class);
@@ -350,6 +342,7 @@ public class MyResumeActivity extends BaseTitleActivity {
                 }
 
                 break;
+            //求职意向
             case R.id.rl_job_intention:
                 if (resume != null) {
                     if (resume.getStartSalary() != null) {
@@ -361,15 +354,14 @@ public class MyResumeActivity extends BaseTitleActivity {
                 }
 
                 break;
+            //工作状态
             case R.id.ll_state:
                 StateDialog dialog = new StateDialog(context, new StateDialog.OnItemClickListener() {
-
                     public void onClick(StateDialog dialog, int index) {
                         dialog.dismiss();
                         switch (index) {
                             case StateDialog.TYPE_QUIT:
                                 upUserData(JOBHUNTINGSTATUS, StateDialog.TYPE_QUIT + "");
-
                                 break;
                             case StateDialog.TYPE_NOT_CONSIDER:
                                 upUserData(JOBHUNTINGSTATUS, StateDialog.TYPE_NOT_CONSIDER + "");
@@ -383,6 +375,7 @@ public class MyResumeActivity extends BaseTitleActivity {
 
                 dialog.show();
                 break;
+            //我的优势
             case R.id.rl_advantage:
                 startActivity(new Intent(context, ModifyContentActivity.class).
                         putExtra(ModifyContentActivity.TYPE_TITLE, "我的优势").
@@ -390,19 +383,20 @@ public class MyResumeActivity extends BaseTitleActivity {
                         putExtra(ModifyContentActivity.HINT, "请输入工作优势").
                         putExtra(ModifyContentActivity.TYPE_CONTENT, advantage.getText().toString()));
                 break;
+            //添加工作经历
             case R.id.rl_add_work:
-
                 startActivity(new Intent(context, AddWorkActivity.class).putExtra("type", "resume"));
-
                 break;
+            //添加项目经验
             case R.id.rl_add_project:
                 startActivity(new Intent(context, AddProjectActivity.class).putExtra("type", "resume"));
                 break;
+            //添加教育经历
             case R.id.rl_add_education:
                 startActivity(new Intent(context, AddEducationActivity.class).putExtra("type", "resume"));
                 break;
+            //添加荣誉证书
             case R.id.ll_add_certificate:
-
                 startActivity(new Intent(context, AddCertificateActivity.class).putExtra("type", "resume"));
                 break;
             case R.id.preview:
@@ -452,13 +446,13 @@ public class MyResumeActivity extends BaseTitleActivity {
                                 case JOBHUNTINGSTATUS:
                                     switch (Integer.parseInt(value)) {
                                         case 0:
-                                            state.setText("离职-随时到岗");
+                                            state.setText(ResourceUtils.getString(R.string.work_status_left));
                                             break;
                                         case 1:
-                                            state.setText("在职-暂不考虑");
+                                            state.setText(ResourceUtils.getString(R.string.work_status_on_job));
                                             break;
                                         case 2:
-                                            state.setText("在职-考虑机会");
+                                            state.setText(ResourceUtils.getString(R.string.privacy_setting));
                                             break;
                                     }
                                     break;
@@ -469,7 +463,7 @@ public class MyResumeActivity extends BaseTitleActivity {
 
                         }
                     } else {
-                        AlertUtils.toast(context, "修改失败");
+                        AlertUtils.toast(context, ResourceUtils.getString(R.string.change_failed));
                     }
 
                 } else {

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -28,10 +29,10 @@
 
                     <ImageView
                         android:id="@+id/avatar"
-                        android:layout_width="75dp"
-                        android:layout_height="75dp"
+                        android:layout_width="@dimen/round_avatar_width"
+                        android:layout_height="@dimen/round_avatar_width"
                         android:layout_gravity="center_vertical"
-                        />
+                        android:src="@drawable/student" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -50,7 +51,7 @@
                         android:textColor="@color/white"
                         android:textSize="@dimen/font_head" />
 
-                    <com.willy.ratingbar.ScaleRatingBar xmlns:app="http://schemas.android.com/apk/res-auto"
+                    <com.willy.ratingbar.ScaleRatingBar
                         android:id="@+id/stars"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -58,12 +59,12 @@
                         android:layout_marginTop="5dp"
                         android:background="@drawable/btn_gray_shape"
                         app:srb_clearRatingEnabled="true"
+                        app:srb_clickable="false"
                         app:srb_drawableEmpty="@drawable/icon_star_nor"
                         app:srb_drawableFilled="@drawable/icon_star_light"
+                        app:srb_isIndicator="false"
                         app:srb_numStars="10"
                         app:srb_rating="0"
-                        app:srb_isIndicator="false"
-                        app:srb_clickable="false"
                         app:srb_scrollable="false"
                         app:srb_starHeight="15dp"
                         app:srb_starPadding="2dp"
@@ -159,7 +160,6 @@
                     android:textSize="@dimen/font_list_right" />
 
                 <TextView
-
                     android:id="@+id/state"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -196,17 +196,17 @@
                     android:textSize="@dimen/font_list_right" />
 
                 <TextView
-                    android:singleLine="true"
-                    android:ellipsize="end"
-                    android:maxEms="10"
-
-
                     android:id="@+id/advantage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
+
                     android:layout_centerVertical="true"
                     android:layout_marginRight="@dimen/dp_10"
                     android:layout_toLeftOf="@+id/advantage_iv"
+                    android:ellipsize="end"
+                    android:maxEms="10"
+                    android:singleLine="true"
                     android:textColor="@color/color_303030" />
 
                 <ImageView
@@ -223,13 +223,13 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_10"
-                android:background="@color/color_f5f5f5"></View>
+                android:background="@color/color_f5f5f5" />
 
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/work_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -244,31 +244,17 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true">
 
-                    <ImageView
-
-                        android:id="@+id/add_work"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/icon_add" />
-
                     <TextView
                         android:id="@+id/work"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/add_work"
-                        android:gravity="center_vertical"
-                        android:text="工作经历"
-                        android:textColor="#408acf"
-                        android:textSize="20sp" />
+                        style="@style/type_add_resume_item"
+                        android:text="工作经历" />
                 </RelativeLayout>
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_10"
-                android:background="@color/color_f5f5f5"></View>
+                android:background="@color/color_f5f5f5" />
 
 
             <android.support.v7.widget.RecyclerView
@@ -290,24 +276,11 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true">
 
-                    <ImageView
-
-                        android:id="@+id/add_project"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/icon_add" />
 
                     <TextView
                         android:id="@+id/project"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/add_project"
-                        android:gravity="center_vertical"
-                        android:text="项目经历"
-                        android:textColor="#408acf"
-                        android:textSize="20sp" />
+                        style="@style/type_add_resume_item"
+                        android:text="项目经历" />
                 </RelativeLayout>
             </RelativeLayout>
 
@@ -320,7 +293,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/education_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -336,24 +309,10 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true">
 
-                    <ImageView
-
-                        android:id="@+id/add_education"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/icon_add" />
-
                     <TextView
                         android:id="@+id/education"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/add_education"
-                        android:gravity="center_vertical"
-                        android:text="教育经历"
-                        android:textColor="#408acf"
-                        android:textSize="20sp" />
+                        style="@style/type_add_resume_item"
+                        android:text="教育经历" />
                 </RelativeLayout>
             </RelativeLayout>
 
@@ -366,7 +325,7 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/certificate_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -381,24 +340,14 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true">
 
-                    <ImageView
-                        android:id="@+id/add_certificate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/icon_add" />
+
                     <TextView
                         android:id="@+id/certificate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_toRightOf="@+id/add_certificate"
-                        android:gravity="center_vertical"
-                        android:text="荣誉证书"
-                        android:textColor="#408acf"
-                        android:textSize="20sp" />
+                        style="@style/type_add_resume_item"
+                        android:text="荣誉证书" />
                 </RelativeLayout>
             </RelativeLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_10"
@@ -408,6 +357,7 @@
                 android:id="@+id/preview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_big"
                 android:layout_marginLeft="@dimen/dp_30"
                 android:layout_marginRight="@dimen/dp_30"
                 android:background="@drawable/btn_blue_normal_shape"

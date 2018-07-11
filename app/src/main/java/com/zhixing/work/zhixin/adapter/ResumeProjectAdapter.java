@@ -27,7 +27,7 @@ import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
 /**
- * 证书
+ * 项目经历
  */
 public class ResumeProjectAdapter extends RecyclerView.Adapter<ResumeProjectAdapter.ViewHolder> {
     public List<Resume.ProjectBackgroundOutputsBean> getList() {

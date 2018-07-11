@@ -29,7 +29,7 @@ public class Resume implements Serializable {
 
     private int Id;
     private String Avatar;
-    private double TotalScore;
+    private float TotalScore;
     private int JobHuntingStatus;
     private String SelfIntro;
     private Integer StartSalary;
@@ -58,11 +58,11 @@ public class Resume implements Serializable {
         this.Avatar = Avatar;
     }
 
-    public double getTotalScore() {
+    public float getTotalScore() {
         return TotalScore;
     }
 
-    public void setTotalScore(double TotalScore) {
+    public void setTotalScore(float TotalScore) {
         this.TotalScore = TotalScore;
     }
 

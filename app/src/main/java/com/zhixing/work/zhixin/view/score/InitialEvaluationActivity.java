@@ -23,6 +23,7 @@ import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
@@ -62,7 +63,7 @@ public class InitialEvaluationActivity extends BaseTitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initial_evaluation);
         ButterKnife.bind(this);
-        setTitle("初始评测");
+        setTitle(ResourceUtils.getString(R.string.first_test));
         showView();
         getData();
     }

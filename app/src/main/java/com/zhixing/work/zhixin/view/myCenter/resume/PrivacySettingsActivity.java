@@ -18,6 +18,7 @@ import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -27,7 +28,9 @@ import butterknife.OnClick;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
-/*简历设置*/
+/**
+ * 隐私设置
+ */
 public class PrivacySettingsActivity extends BaseTitleActivity {
 
     @BindView(R.id.ll_shielding_company)
@@ -47,7 +50,7 @@ public class PrivacySettingsActivity extends BaseTitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_privacy_settings);
         ButterKnife.bind(this);
-        setTitle("隐私设置");
+        setTitle(ResourceUtils.getString(R.string.privacy_setting));
         Bundle bundle = getIntent().getExtras();
         resume = (Resume) bundle.get("bean");
         initView();

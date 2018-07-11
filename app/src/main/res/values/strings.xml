@@ -150,4 +150,16 @@
     <string name="submit_failure">提交失败,请重新编辑...</string>
     <string name="certificate_certification">证书认证</string>
 
+    <string name="text_empty_with_default">毕业时间</string>
+    <string name="first_test">初始评测</string>
+    <string name="alter_user_had_test_before">您已参加过测评</string>
+    <string name="my_resume">我的简历</string>
+    <string name="privacy_setting">隐私设置</string>
+    <string name="user_info">个人资料</string>
+    <string name="work_status_left">离职-随时到岗</string>
+    <string name="work_status_on_job">在职-暂不考虑</string>
+    <string name="work_status_taking_chances">在职-考虑机会</string>
+    <string name="change_failed">修改失败</string>
+    <string name="manager_job_intension">管理求职意向</string>
+
 </resources>

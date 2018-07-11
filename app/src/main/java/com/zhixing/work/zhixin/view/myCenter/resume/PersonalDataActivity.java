@@ -3,11 +3,11 @@ package com.zhixing.work.zhixin.view.myCenter.resume;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,7 +19,6 @@ import com.bigkoo.pickerview.builder.TimePickerBuilder;
 import com.bigkoo.pickerview.listener.OnTimeSelectListener;
 import com.bigkoo.pickerview.view.TimePickerView;
 import com.google.gson.reflect.TypeToken;
-import com.xmd.file.provider.FileProvider7;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
 import com.zhixing.work.zhixin.aliyun.ALiYunOssFileLoader;
@@ -28,11 +27,9 @@ import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Resume;
 import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.common.Logger;
-import com.zhixing.work.zhixin.dialog.SelectImageDialog;
 import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.ModifyEvent;
 import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
-import com.zhixing.work.zhixin.http.Constant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
@@ -40,20 +37,18 @@ import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.AppUtils;
-import com.zhixing.work.zhixin.util.BitmapUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
+import com.zhixing.work.zhixin.util.FileUtil;
 import com.zhixing.work.zhixin.util.GlideUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
-import com.zhixing.work.zhixin.view.util.SelectImageActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -61,9 +56,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import imagetool.lhj.com.ImageTool;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
+/**
+ * 个人资料
+ */
 public class PersonalDataActivity extends BaseTitleActivity {
 
     @BindView(R.id.image)
@@ -103,17 +102,19 @@ public class PersonalDataActivity extends BaseTitleActivity {
 
     private StsToken stsToken;
     private Context context;
+    private ImageTool imageTool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_data);
         ButterKnife.bind(this);
-        setTitle("个人资料");
+        setTitle(ResourceUtils.getString(R.string.user_info));
         context = this;
         Bundle bundle = getIntent().getExtras();
         resume = (Resume) bundle.get("bean");
         getOssToken();
+        imageTool = new ImageTool(FileUtil.getDiskCachePath());
 
     }
 
@@ -130,37 +131,44 @@ public class PersonalDataActivity extends BaseTitleActivity {
             dateBirth.setText(DateFormatUtil.parseDate(resume.getPersonalInfo().getBirthday(), "yyyy-MM"));
         }
 
-
-
-
     }
 
     @OnClick({R.id.llAvatar, R.id.llnick, R.id.ll_date_birth, R.id.ll_first_working_time})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.llAvatar:
-                SelectImageDialog imageDialog = new SelectImageDialog(context, new SelectImageDialog.OnItemClickListener() {
+                imageTool.reset().setAspectX_Y(1,1).onlyPick(false).start(PersonalDataActivity.this, new ImageTool.ResultListener() {
                     @Override
-                    public void onClick(SelectImageDialog dialog, int index) {
-                        dialog.dismiss();
-
-                        switch (index) {
-                            case SelectImageDialog.TYPE_CAMERA:
-                                photoFile = new File(Constant.CACHE_DIR_IMAGE + "/" + System.currentTimeMillis() + ".jpg");
-                                Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                intentCamera.putExtra(MediaStore.Images.ImageColumns.ORIENTATION, 0);
-                                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider7.getUriForFile(PersonalDataActivity.this, photoFile));
-                                startActivityForResult(intentCamera, REQUEST_CAMERA);
-                                break;
-                            case SelectImageDialog.TYPE_PHOTO:
-                                Intent intent = new Intent(context, SelectImageActivity.class);
-                                intent.putExtra(SelectImageActivity.LIMIT, 1);
-                                startActivityForResult(intent, SelectImageActivity.REQUEST_AVATAR);
-                                break;
+                    public void onResult(String error, Uri uri, Bitmap bitmap) {
+                        Logger.i(">>>","uri>"+uri);
+                        if(uri != null){
+                            upload(uri.getPath());
                         }
+
                     }
                 });
-                imageDialog.show();
+//                SelectImageDialog imageDialog = new SelectImageDialog(context, new SelectImageDialog.OnItemClickListener() {
+//                    @Override
+//                    public void onClick(SelectImageDialog dialog, int index) {
+//                        dialog.dismiss();
+//
+//                        switch (index) {
+//                            case SelectImageDialog.TYPE_CAMERA:
+//                                photoFile = new File(Constant.CACHE_DIR_IMAGE + "/" + System.currentTimeMillis() + ".jpg");
+//                                Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                                intentCamera.putExtra(MediaStore.Images.ImageColumns.ORIENTATION, 0);
+//                                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider7.getUriForFile(PersonalDataActivity.this, photoFile));
+//                                startActivityForResult(intentCamera, REQUEST_CAMERA);
+//                                break;
+//                            case SelectImageDialog.TYPE_PHOTO:
+//                                Intent intent = new Intent(context, SelectImageActivity.class);
+//                                intent.putExtra(SelectImageActivity.LIMIT, 1);
+//                                startActivityForResult(intent, SelectImageActivity.REQUEST_AVATAR);
+//                                break;
+//                        }
+//                    }
+//                });
+//                imageDialog.show();
                 break;
             case R.id.llnick:
                 startActivity(new Intent(context, ModifyDataActivity.class)
@@ -230,7 +238,6 @@ public class PersonalDataActivity extends BaseTitleActivity {
                         .setTitleText("工作时间")
                         .setContentTextSize(20)//滚轮文字大小
                         .setTitleSize(20)//标题文字大小
-//                        .setTitleText("请选择时间")//标题文字
                         .setOutSideCancelable(true)//点击屏幕，点在控件外部范围时，是否取消显示
                         .isCyclic(true)//是否循环滚动
                         .setTextColorCenter(Color.BLACK)//设置选中项的颜色
@@ -322,69 +329,70 @@ public class PersonalDataActivity extends BaseTitleActivity {
 
     /**
      * 初始化剪裁图片的输出Uri
-     */
-    private void intCropUri() {
-        if (outPutUri == null) {
-            cropFilePath = new File(Environment.getExternalStorageDirectory().getPath(), "cutImage.png");
-            try {
-                cropFilePath.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            outPutUri = Uri.fromFile(cropFilePath);
-        }
-    }
+//     */
+//    private void intCropUri() {
+//        if (outPutUri == null) {
+//            cropFilePath = new File(Environment.getExternalStorageDirectory().getPath(), "cutImage.png");
+//            try {
+//                cropFilePath.createNewFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            outPutUri = Uri.fromFile(cropFilePath);
+//        }
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        imageTool.onActivityResult(requestCode,resultCode,data);
 
-        if (resultCode != RESULT_OK) {
-            return;
-        }
-        if (requestCode == SelectImageActivity.REQUEST_AVATAR) {
-            //从相册选照片
-            selectedImages = (ArrayList<AlbumItem>) data.getSerializableExtra("images");
-            AlbumItem albumItem = selectedImages.get(0);
-            imageUri = Uri.fromFile(new File(albumItem.getFilePath()));
-            intCropUri();
-            BitmapUtils.createPhotoCrop(PersonalDataActivity.this, imageUri, outPutUri);
-        } else if (requestCode == REQUEST_CAMERA) {
-            //拍照照片
-            imageUri = Uri.fromFile(photoFile);
-            intCropUri();
-            BitmapUtils.createPhotoCrop(PersonalDataActivity.this, imageUri, outPutUri);
-        } else if (requestCode == Constant.IMAGE_CROP) {
-            showLoading();
-            upload(cropFilePath.getAbsolutePath());
-
-        }
-
-    }
-
-
-    /*保存界面状态，如果activity意外被系统killed，返回时可以恢复状态值*/
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        //savedInstanceState.putString("msg_con", htmlsource);
-        if (photoFile != null) {
-            if (photoFile.getAbsolutePath() != null) {
-                savedInstanceState.putString("msg_camera_picname", photoFile.getAbsolutePath());
-            }
-        }
-
-
-        super.onSaveInstanceState(savedInstanceState); //实现父类方法 放在最后 防止拍照后无法返回当前activity
-    }
-
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        photoFile = new File(savedInstanceState.getString("msg_camera_picname"));
-
+//        if (resultCode != RESULT_OK) {
+//            return;
+//        }
+//        if (requestCode == SelectImageActivity.REQUEST_AVATAR) {
+//            //从相册选照片
+//            selectedImages = (ArrayList<AlbumItem>) data.getSerializableExtra("images");
+//            AlbumItem albumItem = selectedImages.get(0);
+//            imageUri = Uri.fromFile(new File(albumItem.getFilePath()));
+//            intCropUri();
+//            BitmapUtils.createPhotoCrop(PersonalDataActivity.this, imageUri, outPutUri);
+//        } else if (requestCode == REQUEST_CAMERA) {
+//            //拍照照片
+//            imageUri = Uri.fromFile(photoFile);
+//            intCropUri();
+//            BitmapUtils.createPhotoCrop(PersonalDataActivity.this, imageUri, outPutUri);
+//        } else if (requestCode == Constant.IMAGE_CROP) {
+//            showLoading();
+//            upload(cropFilePath.getAbsolutePath());
+//
+//        }
 
     }
 
-    //获取阿里云的凭证
+
+//    /*保存界面状态，如果activity意外被系统killed，返回时可以恢复状态值*/
+//    @Override
+//    public void onSaveInstanceState(Bundle savedInstanceState) {
+//        //savedInstanceState.putString("msg_con", htmlsource);
+//        if (photoFile != null) {
+//            if (photoFile.getAbsolutePath() != null) {
+//                savedInstanceState.putString("msg_camera_picname", photoFile.getAbsolutePath());
+//            }
+//        }
+//
+//
+//        super.onSaveInstanceState(savedInstanceState); //实现父类方法 放在最后 防止拍照后无法返回当前activity
+//    }
+
+//    public void onRestoreInstanceState(Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//        photoFile = new File(savedInstanceState.getString("msg_camera_picname"));
+//
+//
+//    }
+
+//    //获取阿里云的凭证
     private void getOssToken() {
         OkUtils.getInstances().httpTokenGet(context, RequestConstant.GET_OSS, JavaParamsUtils.getInstances().getOSS(), new TypeToken<EntityObject<StsToken>>() {
         }.getType(), new ResultCallBackListener<StsToken>() {
@@ -456,9 +464,7 @@ public class PersonalDataActivity extends BaseTitleActivity {
                         if (response.getContent()) {
                             EventBus.getDefault().post(new ResumeRefreshEvent(true));
                             String url = ALiYunOssFileLoader.gteSecret(context, stsToken, ALiYunFileURLBuilder.BUCKET_SECTET, key);
-
                             GlideUtils.getInstance().loadCircleUserIconInto(context, url, image);
-
                         }
                     } else {
                         AlertUtils.toast(context, "修改失败");

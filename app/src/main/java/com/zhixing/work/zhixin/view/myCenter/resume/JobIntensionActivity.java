@@ -25,6 +25,7 @@ import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.Utils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -32,7 +33,6 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import butterknife.BindView;
@@ -41,6 +41,9 @@ import butterknife.OnClick;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
+/**
+ * 求职意向
+ */
 public class JobIntensionActivity extends BaseTitleActivity {
     @BindView(R.id.occupation)
     TextView occupation;
@@ -58,8 +61,8 @@ public class JobIntensionActivity extends BaseTitleActivity {
     TextView city;
     @BindView(R.id.llcity)
     LinearLayout llcity;
-    private List<String> constellationList;
-    private List<String> educationList;
+    //    private List<String> constellationList;
+//    private List<String> educationList;
     private String resumeId;
     private Expect expect;
     private List<Expect.ResumeExpectAreaOutputsBean> cityList = new ArrayList<Expect.ResumeExpectAreaOutputsBean>();
@@ -69,12 +72,13 @@ public class JobIntensionActivity extends BaseTitleActivity {
     private ArrayList<ArrayList<String>> options2Items = new ArrayList<>();
     private String StartSalary = "0";
     private String EndSalary = "0";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_job_intension);
         ButterKnife.bind(this);
-        setTitle("管理求职意向");
+        setTitle(ResourceUtils.getString(R.string.manager_job_intension));
         resumeId = getIntent().getStringExtra("resumeId");
         StartSalary = getIntent().getStringExtra("StartSalary");
         EndSalary = getIntent().getStringExtra("EndSalary");
@@ -134,6 +138,7 @@ public class JobIntensionActivity extends BaseTitleActivity {
     @OnClick({R.id.lloccupation, R.id.llindustry, R.id.llsalary, R.id.llcity})
     public void onViewClicked(View view) {
         switch (view.getId()) {
+            //期望职业
             case R.id.lloccupation:
                 Intent intentJob = new Intent(context, JobActivity.class);
                 Bundle bundleJob = new Bundle();
@@ -144,6 +149,7 @@ public class JobIntensionActivity extends BaseTitleActivity {
 
                 break;
             case R.id.llindustry:
+                //期望行业
                 Intent intent = new Intent(context, IndustryActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putSerializable("expect", expect);
@@ -151,9 +157,11 @@ public class JobIntensionActivity extends BaseTitleActivity {
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
+            //期望薪资
             case R.id.llsalary:
-                constellationList = Arrays.asList(getResources().getStringArray(R.array.constellation));
-                educationList = Arrays.asList(getResources().getStringArray(R.array.education));
+
+//                constellationList = Arrays.asList(getResources().getStringArray(R.array.constellation));
+//                educationList = Arrays.asList(getResources().getStringArray(R.array.education));
                 OptionsPickerView options = new OptionsPickerBuilder(context, new OnOptionsSelectListener() {
                     @Override
                     public void onOptionsSelect(int options1, int option2, int options3, View v) {
@@ -182,6 +190,7 @@ public class JobIntensionActivity extends BaseTitleActivity {
                     }
                 })
                         .setTitleText("薪资要求(月薪,单位:千元)")
+                        .setTitleSize(16)
                         .setSubCalSize(20)//确定和取消文字大小
                         .setContentTextSize(20)//滚轮文字大小
                         .setSubmitColor(Color.BLUE)//确定按钮文字颜色
@@ -191,6 +200,7 @@ public class JobIntensionActivity extends BaseTitleActivity {
                 options.setPicker(options1Items, options2Items);
                 options.show();
                 break;
+            //工作城市
             case R.id.llcity:
                 Intent intent1 = new Intent(context, WorkPlaceActivity.class);
                 Bundle bundle1 = new Bundle();

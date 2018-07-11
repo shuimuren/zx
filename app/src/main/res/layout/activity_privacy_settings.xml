@@ -67,9 +67,7 @@
                 android:checked="false" />
         </LinearLayout>
 
-        <View style="@style/line"
-
-            ></View>
+        <View style="@style/line"/>
 
         <LinearLayout
             android:id="@+id/ll_hidden_resume"

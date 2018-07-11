@@ -3,13 +3,11 @@ package com.zhixing.work.zhixin.app;
 import android.app.Activity;
 import android.content.Context;
 
-import com.squareup.leakcanary.LeakCanary;
 import com.zhixing.work.zhixin.base.BaseApplication;
 import com.zhixing.work.zhixin.common.ScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 public class ZxApplication extends BaseApplication {
@@ -33,16 +31,18 @@ public class ZxApplication extends BaseApplication {
         instance = this;
         //init demo helper
         applicationContext = this;
-     //
-        if(LeakCanary.isInAnalyzerProcess(this)){
-            return;
-        }
-        LeakCanary.install(this);
+        //
+//        if(LeakCanary.isInAnalyzerProcess(this)){
+//            return;
+//        }
+        //    LeakCanary.install(this);
         ScreenUtil.setDensity(this);
     }
+
     public static ZxApplication getInstance() {
         return instance;
     }
+
     public void addActivity(Activity activity) {
         aliveActivities.add(activity);
     }
@@ -52,12 +52,14 @@ public class ZxApplication extends BaseApplication {
         aliveActivities.remove(activity);
     }
 
-    @Override    public void finishAllActivity() {
+    @Override
+    public void finishAllActivity() {
         for (int i = 0; i < aliveActivities.size(); i++) {
             Activity activity = aliveActivities.get(i);
             activity.finish();
         }
     }
+
     /**
      * 强制关闭应用
      */

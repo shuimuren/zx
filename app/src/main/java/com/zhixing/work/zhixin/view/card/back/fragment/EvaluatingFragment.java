@@ -14,11 +14,18 @@ import android.widget.TextView;
 import com.willy.ratingbar.ScaleRatingBar;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.SupportFragment;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
+import com.zhixing.work.zhixin.msgctrl.RxBus;
+import com.zhixing.work.zhixin.network.response.EvaluateResult;
+import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.view.score.EvaluationHallActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscription;
 
 /**
  * 资质
@@ -45,8 +52,6 @@ public class EvaluatingFragment extends SupportFragment {
     TextView fate;
     @BindView(R.id.career)
     TextView career;
-    @BindView(R.id.tvSkill)
-    TextView tvSkill;
     @BindView(R.id.tvSincerity)
     TextView tvSincerity;
     @BindView(R.id.tvConnection)
@@ -60,7 +65,8 @@ public class EvaluatingFragment extends SupportFragment {
 
 
     private Context context;
-
+    private Subscription evaluateInfoSubscription;
+    private boolean hasTested;
 
     public static EvaluatingFragment newInstance() {
         Bundle args = new Bundle();
@@ -76,9 +82,24 @@ public class EvaluatingFragment extends SupportFragment {
         ButterKnife.bind(this, view);
         basics.setSelected(true);
         context = getActivity();
-
-
+        evaluateInfoSubscription = RxBus.getInstance().toObservable(EvaluateResult.class).subscribe(
+                result -> handlerEvaluateInfo(result)
+        );
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_EVALUATE_INFO);
         return view;
+    }
+
+    private void handlerEvaluateInfo(EvaluateResult result) {
+        if (result.getContent() != null) {
+            hasTested = true;
+            tvCompliance.setText(String.valueOf(result.getContent().getComplianceScore()));
+            tvConnection.setText(String.valueOf(result.getContent().getConnectionScore()));
+            tvMentality.setText(String.valueOf(result.getContent().getMindsetScore()));
+            tvPerformance.setText(String.valueOf(result.getContent().getCovenantScore()));
+            tvSincerity.setText(String.valueOf(result.getContent().getIntegrityScore()));
+            stars.setRating(result.getContent().getTotalScore() / 10f);
+        }
+
     }
 
     @OnClick({R.id.evaluating, R.id.historical_score, R.id.basics_bt, R.id.seniority, R.id.skill, R.id.fate, R.id.career})
@@ -86,22 +107,27 @@ public class EvaluatingFragment extends SupportFragment {
         switch (view.getId()) {
             //参加测评
             case R.id.evaluating:
-                startActivity(new Intent(context, EvaluationHallActivity.class));
+                if(!hasTested){
+                    startActivity(new Intent(context, EvaluationHallActivity.class));
+                }else {
+                    AlertUtils.show(ResourceUtils.getString(R.string.alter_user_had_test_before));
+                }
+
                 break;
             //历史评分
             case R.id.historical_score:
+                AlertUtils.show("历史评分:" + ResourceUtils.getString(R.string.need_to_do));
                 break;
-            case R.id.basics_bt:
-
-                break;
-            case R.id.seniority:
-                break;
-            case R.id.skill:
-                break;
-            case R.id.fate:
-                break;
-            case R.id.career:
-                break;
+//            case R.id.basics_bt:
+//                break;
+//            case R.id.seniority:
+//                break;
+//            case R.id.skill:
+//                break;
+//            case R.id.fate:
+//                break;
+//            case R.id.career:
+//                break;
         }
     }
 
@@ -113,6 +139,6 @@ public class EvaluatingFragment extends SupportFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
+        RxBus.getInstance().unsubscribe(evaluateInfoSubscription);
     }
 }

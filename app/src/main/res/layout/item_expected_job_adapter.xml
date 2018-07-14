@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/jobChoiceTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#99c3c3c3"
+        android:paddingBottom="@dimen/padding_normal"
+        android:paddingLeft="20dp"
+        android:paddingTop="@dimen/padding_normal"
+        android:textColor="@color/color_71aae0"
+        android:textSize="@dimen/font_size_14sp" />
+
+    <com.zhixing.work.zhixin.widget.CustomExpandableListView
+        android:id="@+id/expandList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:groupIndicator="@null" />
+
+</LinearLayout>

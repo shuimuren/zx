@@ -161,5 +161,14 @@
     <string name="work_status_taking_chances">在职-考虑机会</string>
     <string name="change_failed">修改失败</string>
     <string name="manager_job_intension">管理求职意向</string>
+    <string name="zhi_xin_card">职信卡牌</string>
+    <string name="finish">完成</string>
+    <string name="alter_selected_mast_three">最多选择3项</string>
+    <string name="handler_success">操作成功</string>
+    <string name="handler_fail">操作失败</string>
+    <string name="alter_selected_null">您尚未进行选择</string>
+    <string name="service_error">服务器异常</string>
+    <string name="expected_job_title">期望职位</string>
+
 
 </resources>

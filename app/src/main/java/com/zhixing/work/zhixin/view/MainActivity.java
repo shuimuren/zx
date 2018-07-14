@@ -3,7 +3,6 @@ package com.zhixing.work.zhixin.view;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.widget.Toast;
 
@@ -12,6 +11,7 @@ import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.SupportActivity;
 import com.zhixing.work.zhixin.bean.AddressJson;
+import com.zhixing.work.zhixin.common.JobManagerHelper;
 import com.zhixing.work.zhixin.fragment.MainFragment;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
@@ -43,10 +43,13 @@ public class MainActivity extends SupportActivity {
             loadRootFragment(R.id.fl_container, MainFragment.newInstance());
         }
         instance = this;
-        if (TextUtils.isEmpty(SettingUtils.getProvincialList())) {
-            mHandler.sendEmptyMessage(MSG_LOAD_DATA);
-        }
+//        if (TextUtils.isEmpty(SettingUtils.getProvincialList())) {
+//mHandler.sendEmptyMessage(MSG_LOAD_DATA);
+//        }
+        mHandler.sendEmptyMessage(MSG_LOAD_DATA);
+
     }
+
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         switch (keyCode) {
@@ -65,6 +68,7 @@ public class MainActivity extends SupportActivity {
         }
         return super.onKeyUp(keyCode, event);
     }
+
     private Handler mHandler = new Handler() {
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -107,12 +111,13 @@ public class MainActivity extends SupportActivity {
 
         String cityData = Utils.getJson(context, "hotcity.json");//热门城市
         String Industrytype = Utils.getJson(context, "Industrytype.json");//行业
-        String jobList = Utils.getJson(context, "Jobtype.json");//行业
-
+        String jobList = Utils.getJson(context, "Jobtype.json");//职位
+        String jobDataList = Utils.getJson(context, "jobChoiceData.json");//职位,重构
 
         SettingUtils.putJobList(jobList);
         SettingUtils.putHotCityList(cityData);
         SettingUtils.putIndustry(Industrytype);
+        JobManagerHelper.getJobManagerHelperInstance().parseJobData(jobDataList);
         /**
          * 添加省份数据
          *

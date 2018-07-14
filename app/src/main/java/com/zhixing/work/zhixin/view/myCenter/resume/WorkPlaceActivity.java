@@ -27,6 +27,7 @@ import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
@@ -73,7 +74,7 @@ public class WorkPlaceActivity extends BaseTitleActivity {
         resumeId = getIntent().getStringExtra("resumeId");
         Bundle bundle = getIntent().getExtras();
         expect = (Expect) bundle.get("expect");
-        setRightText1("保存");
+        setRightText1(ResourceUtils.getString(R.string.save));
         initView();
         mHandler.sendEmptyMessage(MSG_LOAD_DATA);
     }
@@ -117,7 +118,7 @@ public class WorkPlaceActivity extends BaseTitleActivity {
                 dataList.remove(position);
                 workCityAdapter.setList(dataList);
                 getList(bean.getId());
-
+                number.setText(dataList.size() + "/3");
             }
 
             @Override

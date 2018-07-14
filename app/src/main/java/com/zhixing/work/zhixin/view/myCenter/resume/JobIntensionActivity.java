@@ -61,8 +61,7 @@ public class JobIntensionActivity extends BaseTitleActivity {
     TextView city;
     @BindView(R.id.llcity)
     LinearLayout llcity;
-    //    private List<String> constellationList;
-//    private List<String> educationList;
+
     private String resumeId;
     private Expect expect;
     private List<Expect.ResumeExpectAreaOutputsBean> cityList = new ArrayList<Expect.ResumeExpectAreaOutputsBean>();
@@ -123,7 +122,6 @@ public class JobIntensionActivity extends BaseTitleActivity {
 
     private void initView() {
         if (!cityList.isEmpty()) {
-
             city.setText(getCityString(cityList));
         }
         if (!IndustryList.isEmpty()) {
@@ -140,12 +138,13 @@ public class JobIntensionActivity extends BaseTitleActivity {
         switch (view.getId()) {
             //期望职业
             case R.id.lloccupation:
-                Intent intentJob = new Intent(context, JobActivity.class);
+                Intent intentJob = new Intent(context, ExpectedJobActivity.class);
                 Bundle bundleJob = new Bundle();
                 bundleJob.putSerializable("expect", expect);
                 intentJob.putExtra("resumeId", resumeId);
                 intentJob.putExtras(bundleJob);
                 startActivity(intentJob);
+
 
                 break;
             case R.id.llindustry:

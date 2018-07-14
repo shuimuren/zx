@@ -38,12 +38,13 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * 期望行业
+ */
 public class IndustryActivity extends BaseTitleActivity {
 
     @BindView(R.id.number)
     TextView number;
-    @BindView(R.id.listview)
-    RecyclerView listview;
     @BindView(R.id.industry_list)
     RecyclerView industryList;
 
@@ -110,7 +111,6 @@ public class IndustryActivity extends BaseTitleActivity {
                 number.setText(dataList.size() + "/3");
                 mAdapter.notifyDataChanged();
 
-                //workCityAdapter.setList(dataList);
             }
 
             public void onItemLongClick(View view, int position) {
@@ -142,8 +142,7 @@ public class IndustryActivity extends BaseTitleActivity {
                 dataList.remove(position);
                 mAdapter.notifyDataChanged();
                 getList(bean.getId());
-
-                //view.setVisibility(View.GONE);
+                number.setText(dataList.size() + "/3");
                 return true;
             }
         });

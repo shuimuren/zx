@@ -351,6 +351,8 @@ public class MyResumeActivity extends BaseTitleActivity {
                     }
                     startActivity(new Intent(context, JobIntensionActivity.class).putExtra("StartSalary", StartSalary).putExtra("EndSalary", EndSalary)
                             .putExtra("resumeId", resume.getId() + ""));
+
+
                 }
 
                 break;

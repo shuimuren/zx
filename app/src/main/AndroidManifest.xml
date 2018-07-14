@@ -62,7 +62,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".receiver.NetworkConnectChangedReceiver"/>
+
+        <receiver android:name=".receiver.NetworkConnectChangedReceiver" />
 
         <!--登录界面-->
         <activity
@@ -252,6 +253,9 @@
         <!--期望职位-->
         <activity
             android:name=".view.myCenter.resume.JobActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myCenter.resume.ExpectedJobActivity"
             android:screenOrientation="portrait" />
 
         <!--职位子级-->

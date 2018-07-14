@@ -193,6 +193,7 @@ public class ScoreFragment extends BaseMainFragment {
         context = getActivity();
         EventBus.getDefault().register(this);
         token = SettingUtils.getTokenBean();
+        title.setText(ResourceUtils.getString(R.string.profession_card));
         if (token.getRole() == Integer.parseInt(RoleConstant.PERSONAL_ROLE)) {
             initData();
             llUser.setVisibility(View.VISIBLE);
@@ -376,7 +377,8 @@ public class ScoreFragment extends BaseMainFragment {
                         Logger.i(">>>", "Uri>" + uri);
                         if (uri != null && !TextUtils.isEmpty(uri.getPath())) {
                             upload(uri.getPath());
-                            GlideUtils.getInstance().loadGlideRoundTransform(context, uri.getPath(), avatar);
+                            //GlideUtils.getInstance().loadGlideRoundTransform(context, uri.getPath(), avatar);
+                            Glide.with(getActivity()).load(uri).into(avatar);
                         }
                     }
                 });

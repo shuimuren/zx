@@ -6,15 +6,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.bean.HotCity;
-import com.zhixing.work.zhixin.bean.Resume;
 import com.zhixing.work.zhixin.util.AlertUtils;
-import com.zhixing.work.zhixin.util.DateFormatUtil;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +60,7 @@ public class HotCityAdapter extends RecyclerView.Adapter<HotCityAdapter.ViewHold
         }
 
         private TextView name;
-        private CheckBox add_city;
+        private ImageView add_city;
         private LinearLayout ll_work;
     }
 
@@ -75,7 +74,7 @@ public class HotCityAdapter extends RecyclerView.Adapter<HotCityAdapter.ViewHold
 
 
         viewHolder.name = (TextView) convertView.findViewById(R.id.name);
-        viewHolder.add_city = (CheckBox) convertView.findViewById(R.id.add_city);
+        viewHolder.add_city = (ImageView) convertView.findViewById(R.id.add_city);
         viewHolder.ll_work = (LinearLayout) convertView.findViewById(R.id.ll_work);
 
         return viewHolder;
@@ -88,21 +87,21 @@ public class HotCityAdapter extends RecyclerView.Adapter<HotCityAdapter.ViewHold
         final HotCity city = list.get(position);
         holder.name.setText(city.getName());
         if (city.getIsSelect() == 0) {
-            holder.add_city.setChecked(false);
+            holder.add_city.setSelected(false);
         } else {
-            holder.add_city.setChecked(true);
+            holder.add_city.setSelected(true);
         }
         if (mOnItemClickListener != null) {
 
 
-            holder.add_city.setOnClickListener(new View.OnClickListener() {
+            holder.name.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    if (holder.add_city.isChecked()) {
+                    if (holder.add_city.isSelected()) {
                         if (getData(list).size() == 3) {
-                            AlertUtils.toast(context, "最多只能选3个");
-                            holder.add_city.setChecked(!holder.add_city.isChecked());
+                            AlertUtils.toast(context, ResourceUtils.getString(R.string.alter_selected_mast_three));
+                            holder.add_city.setSelected(!holder.add_city.isSelected());
                             return;
                         }
                         city.setIsSelect(1);

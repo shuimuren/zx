@@ -149,10 +149,11 @@ public class RegistActivity extends BaseTitleActivity {
                     AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_phone_number_unusable));
                     return;
                 }
-                if (!TextUtils.isDigitsOnly(password)) {
+                if(TextUtils.isEmpty(password)){
                     AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_pass_word_unusable));
                     return;
                 }
+
                 if (!TextUtils.isDigitsOnly(code)) {
                     AlertUtils.toast(context, ResourceUtils.getString(R.string.verification_code_is_null));
                     return;

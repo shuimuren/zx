@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:id="@+id/llChat"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_5"
+        android:paddingLeft="@dimen/dp_10"
+        android:paddingTop="@dimen/dp_5">
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/student" />
+
+        <TextView
+            android:id="@+id/unReadNumber"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="-20dp"
+            android:layout_toRightOf="@id/avatar"
+            android:background="@drawable/shape_round"
+            android:gravity="center"
+            android:textColor="@color/white"
+            tool:text="1" />
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/avatar"
+            android:textColor="#ffbbaa"
+            android:textSize="@dimen/font_normal"
+            tool:text="name" />
+
+        <TextView
+            android:id="@+id/messageDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/userName"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@id/avatar"
+            android:paddingTop="@dimen/padding_small"
+            android:textColor="#c3c3c3"
+            android:textSize="@dimen/font_right"
+
+            tool:text="name" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c3c3c3" />
+</LinearLayout>

@@ -182,14 +182,14 @@ public class EditorialBasisActivity extends BaseTitleActivity {
             workTime.setText(DateFormatUtil.parseDate(cardBack.getFirstWorkTime(), "yyyy-MM-dd"));
         }
 
-        height.setText(cardBack.getStature()+"");
-        weight.setText(cardBack.getWeight()+"");
+        height.setText(cardBack.getStature() + "");
+        weight.setText(cardBack.getWeight() + "");
         Stature = cardBack.getStature() + "";
         Weight = cardBack.getWeight() + "";
         mottoTx.setText(cardBack.getMotto());
         motto = cardBack.getMotto();
         constellationText.setText(cardBack.getConstellation());
-        constellationType = Utils.getConstellation(cardBack.getConstellation());
+        constellationType = TextUtils.isEmpty(cardBack.getConstellation()) ? "" : Utils.getConstellation(cardBack.getConstellation());
 
     }
 
@@ -387,6 +387,7 @@ public class EditorialBasisActivity extends BaseTitleActivity {
                 hideLoadingDialog();
                 AlertUtils.toast(context, msg);
             }
+
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();

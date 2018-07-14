@@ -53,7 +53,7 @@ import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
- * 基础
+ * 职信卡牌-基础
  */
 public class CardCounterFragment extends SupportFragment {
     @BindView(R.id.basics)
@@ -231,7 +231,7 @@ public class CardCounterFragment extends SupportFragment {
         educationList.setAdapter(educationAdapter);
     }
 
-    @OnClick({R.id.basics, R.id.senior, R.id.basic_editor, R.id.perfect_card ,R.id.senior_editor, R.id.basics_bt, R.id.seniority, R.id.skill, R.id.fate, R.id.career})
+    @OnClick({R.id.basics, R.id.senior, R.id.basic_editor, R.id.perfect_card, R.id.senior_editor, R.id.basics_bt, R.id.seniority, R.id.skill, R.id.fate, R.id.career})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.basics:
@@ -283,21 +283,19 @@ public class CardCounterFragment extends SupportFragment {
             public void onSuccess(EntityObject<CardBack> response) {
                 if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     cardBack = response.getContent();
-                    list = cardBack.getWorkBackgroundOutputs();
-                    edList = cardBack.getEducationBackgroundOutputs();
                     if (cardBack != null) {
-                        if (cardBack.getCertificateBackgroundOutputs() != null && !cardBack.getCertificateBackgroundOutputs().isEmpty()) {
-                            llData.setVisibility(View.VISIBLE);
-                            llEmpty.setVisibility(View.GONE);
-                        } else {
+                        list = cardBack.getWorkBackgroundOutputs();
+                        edList = cardBack.getEducationBackgroundOutputs();
+                        workAdapter.setList(list);
+                        educationAdapter.setList(edList);
+                        llData.setVisibility(View.VISIBLE);
+                        llEmpty.setVisibility(View.GONE);
 
-                            llData.setVisibility(View.GONE);
-                            llEmpty.setVisibility(View.VISIBLE);
-                        }
+                        initView();
+                    } else {
+                        llData.setVisibility(View.VISIBLE);
+                        llEmpty.setVisibility(View.GONE);
                     }
-                    workAdapter.setList(list);
-                    educationAdapter.setList(edList);
-                    initView();
                 }
             }
         });

@@ -56,6 +56,7 @@ public class SettingUtils {
         public static final String INDUSTRY = "industry"; // 行业
         public static final String AREALIST = "areaList"; // 区
         public static final String STAFFSLIST = "StaffsList"; //公司所有员工
+        public static final String JOB_LIST_DATA = "jobListData";//意向
         /**
          * 点赞消息
          */

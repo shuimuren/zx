@@ -124,8 +124,8 @@ public class UpDatePwdActivity extends BaseTitleActivity {
                     AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_phone_number_unusable));
                     return;
                 }
-                if (!TextUtils.isDigitsOnly(password)) {
-                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_phone_number_is_null));
+                if(TextUtils.isEmpty(password)){
+                    AlertUtils.toast(context,ResourceUtils.getString(R.string.alert_pass_word_unusable));
                     return;
                 }
                 if (!TextUtils.isDigitsOnly(code)) {

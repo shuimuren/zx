@@ -33,6 +33,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 教育经历
+ */
 public class PerfectCardEducationActivity extends BaseTitleActivity {
 
 

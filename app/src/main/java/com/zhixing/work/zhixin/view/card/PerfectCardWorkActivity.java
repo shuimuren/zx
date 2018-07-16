@@ -37,6 +37,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 工作信息
+ */
 public class PerfectCardWorkActivity extends BaseTitleActivity {
 
     @BindView(R.id.onea_iv)

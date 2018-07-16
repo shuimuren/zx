@@ -15,7 +15,9 @@ import java.util.Map;
 public class PreferenceUtils {
 	//public static final String key_expected_list =
 
-	static final String TAG = PreferenceUtils.class.getSimpleName();
+	private static final String TAG = PreferenceUtils.class.getSimpleName();
+	public static final String KEY_SHOW_SPLASH = "showSplash";
+	public static final String KEY_HAVE_CARD_INFO = "cardInfo";
 
 	private static String PREFERENCES_NAME;
 

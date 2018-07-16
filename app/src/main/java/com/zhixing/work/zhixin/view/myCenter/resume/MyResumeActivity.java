@@ -128,6 +128,7 @@ public class MyResumeActivity extends BaseTitleActivity {
     private ResumeEducationAdapter educationAdapter;
     private ResumeCertificateAdapter certificateAdapter;
     private ResumeProjectAdapter projectAdapter;
+    private int currentWorkStatus;
 
     private List<Resume.WrokBackgroundOutputsBean> work_list = new ArrayList<Resume.WrokBackgroundOutputsBean>();
     private List<Resume.EducationOutputsBean> education_list = new ArrayList<Resume.EducationOutputsBean>();
@@ -256,6 +257,7 @@ public class MyResumeActivity extends BaseTitleActivity {
     }
 
     private void initView() {
+        currentWorkStatus = resume.getJobHuntingStatus();
         switch (resume.getJobHuntingStatus()) {
             case 0:
                 state.setText(ResourceUtils.getString(R.string.work_status_left));
@@ -275,6 +277,8 @@ public class MyResumeActivity extends BaseTitleActivity {
 
         String url = ALiYunOssFileLoader.gteSecret(context, stsToken, ALiYunFileURLBuilder.BUCKET_SECTET, resume.getAvatar());
         GlideUtils.getInstance().loadCircleUserIconInto(context, url, avatar);
+
+
 
     }
 
@@ -361,6 +365,11 @@ public class MyResumeActivity extends BaseTitleActivity {
                 StateDialog dialog = new StateDialog(context, new StateDialog.OnItemClickListener() {
                     public void onClick(StateDialog dialog, int index) {
                         dialog.dismiss();
+                        if(currentWorkStatus == index){
+                            return;
+                        }else{
+                            currentWorkStatus = index;
+                        }
                         switch (index) {
                             case StateDialog.TYPE_QUIT:
                                 upUserData(JOBHUNTINGSTATUS, StateDialog.TYPE_QUIT + "");
@@ -454,7 +463,7 @@ public class MyResumeActivity extends BaseTitleActivity {
                                             state.setText(ResourceUtils.getString(R.string.work_status_on_job));
                                             break;
                                         case 2:
-                                            state.setText(ResourceUtils.getString(R.string.privacy_setting));
+                                            state.setText(ResourceUtils.getString(R.string.work_status_taking_chances));
                                             break;
                                     }
                                     break;

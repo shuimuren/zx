@@ -136,6 +136,9 @@ public class LoginActivity extends BaseTitleActivity {
                 } else if (TextUtils.isEmpty(password)) {
                    AlertUtils.show(ResourceUtils.getString(R.string.alert_pass_word_unusable));
                     return;
+                }else if(password.length() < 6){
+                   AlertUtils.show(ResourceUtils.getString(R.string.alert_pass_word_length));
+                   return;
                 } else {
                     showLoadingDialog(ResourceUtils.getString(R.string.landing));
                     OkUtils.getInstances().httpPost(context, RequestConstant.GO_LOGIN,

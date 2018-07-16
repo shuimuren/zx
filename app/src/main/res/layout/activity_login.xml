@@ -84,6 +84,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/dp_15"
                     android:text="@string/phone_number"
+                    android:maxLength="11"
                     android:textColor="#98c3ec"
                     android:textSize="@dimen/font_head" />
 

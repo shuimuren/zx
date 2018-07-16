@@ -93,6 +93,7 @@
     <string name="alert_verification_code_is_null">验证码不能为空</string>
     <string name="alert_phone_number_unusable">请输入正确的手机号</string>
     <string name="alert_pass_word_unusable">密码不能为空</string>
+    <string name="alert_pass_word_length">密码长度小于6位</string>
     <string name="alert_pass_word_not_match">重复密码不一致</string>
     <string name="forget_password">忘记密码?</string>
     <string name="landing">登陆中...</string>
@@ -169,6 +170,18 @@
     <string name="alter_selected_null">您尚未进行选择</string>
     <string name="service_error">服务器异常</string>
     <string name="expected_job_title">期望职位</string>
+    <string name="card_basic_selected">基础</string>
+    <string name="card_basic_default">基</string>
+    <string name="card_aptitude_selected">资质</string>
+    <string name="card_aptitude_default">资</string>
+    <string name="card_shill_selected">技能</string>
+    <string name="card_shill_default">技</string>
+    <string name="card_luck_selected">缘分</string>
+    <string name="card_luck_default">缘</string>
+    <string name="card_career_selected">生涯</string>
+    <string name="card_career_default">生</string>
+    <string name="complete_user_information">请先创建卡牌</string>
+    <string name="complete_user_base_info">请先完善基本信息</string>
 
 
 </resources>

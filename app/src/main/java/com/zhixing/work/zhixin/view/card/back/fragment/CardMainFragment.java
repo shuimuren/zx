@@ -1,36 +1,53 @@
 package com.zhixing.work.zhixin.view.card.back.fragment;
 
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.SupportFragment;
+import com.zhixing.work.zhixin.util.ResourceUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 
 
 /**
- *基础
+ * 职信卡牌fragment
  */
 public class CardMainFragment extends SupportFragment {
-    private static final int REQ_MSG = 10;
-    public static final int FIRST = 0;
-    public static final int SECOND = 1;
-    public static final int OTHER = 2;
-    public static final int FIND = 3;
-    public static final int THIRD = 4;
+
+
+    //  private static final int REQ_MSG = 10;
+    public static final int FRAGMENT_BASE = 0; //基础
+    public static final int FRAGMENT_APTITUDE = 1;//资质
+    public static final int FRAGMENT_SKILL = 2;//技能
+    public static final int FRAGMENT_LUCK = 3;//缘分
+    public static final int FRAGMENT_CAREER = 4;//生涯
+
+    Unbinder unbinder;
+    @BindView(R.id.flCardTabContainer)
+    FrameLayout flCardTabContainer;
+    @BindView(R.id.tvCardBasic)
+    TextView tvCardBasic;
+    @BindView(R.id.tvCardAptitude)
+    TextView tvCardAptitude;
+    @BindView(R.id.tvCardSkill)
+    TextView tvCardSkill;
+    @BindView(R.id.tvCarLuck)
+    TextView tvCarLuck;
+    @BindView(R.id.tvCardCareer)
+    TextView tvCardCareer;
+
     private SupportFragment[] mFragments = new SupportFragment[5];
-
-    public TextView basics_bt;
-    public TextView seniority;
-
-    public TextView skill;
-    public TextView fate;
-    public TextView career;
-    public static CardMainFragment instance;
-    private int prePosition;
+    private int mCurrentSelectedPosition;
 
     public static CardMainFragment newInstance() {
         Bundle args = new Bundle();
@@ -39,14 +56,43 @@ public class CardMainFragment extends SupportFragment {
         return fragment;
     }
 
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_card_main, container, false);
-        initView(view);
-        instance = this;
+        unbinder = ButterKnife.bind(this, view);
         return view;
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        SupportFragment firstFragment = findChildFragment(CardCounterFragment.class);
+      //  SupportFragment firstFragment = findChildFragment(PersonalCardBasicFragment.class);
+        tvCardBasic.setSelected(true);
+        mCurrentSelectedPosition = 0;
+        if (firstFragment == null) {
+           mFragments[FRAGMENT_BASE] = CardCounterFragment.newInstance();
+        //    mFragments[FRAGMENT_BASE] = PersonalCardBasicFragment.newInstance();
+            mFragments[FRAGMENT_APTITUDE] = EvaluatingFragment.newInstance();
+            mFragments[FRAGMENT_SKILL] = SkillFragment.newInstance();
+            mFragments[FRAGMENT_LUCK] = KarmaFragment.newInstance();
+            mFragments[FRAGMENT_CAREER] = CareerFragment.newInstance();
+            loadMultipleRootFragment(R.id.flCardTabContainer, FRAGMENT_BASE,
+                    mFragments[FRAGMENT_BASE],
+                    mFragments[FRAGMENT_APTITUDE],
+                    mFragments[FRAGMENT_SKILL],
+                    mFragments[FRAGMENT_LUCK],
+                    mFragments[FRAGMENT_CAREER]);
+        } else {
+            // 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
+            // 这里我们需要拿到mFragments的引用,也可以通过getChildFragmentManager.findFragmentByTag自行进行判断查找(效率更高些),用下面的方法查找更方便些
+            mFragments[FRAGMENT_BASE] = firstFragment;
+            mFragments[FRAGMENT_APTITUDE] = findChildFragment(EvaluatingFragment.class);
+            mFragments[FRAGMENT_SKILL] = findChildFragment(SkillFragment.class);
+            mFragments[FRAGMENT_LUCK] = findChildFragment(KarmaFragment.class);
+            mFragments[FRAGMENT_CAREER] = findChildFragment(CareerFragment.class);
+        }
     }
 
     @Override
@@ -54,154 +100,82 @@ public class CardMainFragment extends SupportFragment {
 
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        SupportFragment firstFragment = findChildFragment(CardCounterFragment.class);
-        if (firstFragment == null) {
-            mFragments[FIRST] = CardCounterFragment.newInstance();
-            mFragments[SECOND] = EvaluatingFragment.newInstance();
-            mFragments[OTHER] = SkillFragment.newInstance();
-            mFragments[FIND] = KarmaFragment.newInstance();
-            mFragments[THIRD] = CareerFragment.newInstance();
-            loadMultipleRootFragment(R.id.fl_tab_container, FIRST,
-                    mFragments[FIRST],
-                    mFragments[SECOND],
-                    mFragments[OTHER],
-                    mFragments[FIND],
-                    mFragments[THIRD]);
-        } else {
-            // 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
-            // 这里我们需要拿到mFragments的引用,也可以通过getChildFragmentManager.findFragmentByTag自行进行判断查找(效率更高些),用下面的方法查找更方便些
-            mFragments[FIRST] = firstFragment;
-            mFragments[SECOND] = findChildFragment(EvaluatingFragment.class);
-            mFragments[OTHER] = findChildFragment(SkillFragment.class);
-            mFragments[FIND] = findChildFragment(KarmaFragment.class);
-            mFragments[THIRD] = findChildFragment(CareerFragment.class);
-        }
-    }
-
-    private void initView(View view) {
-
-        basics_bt = (TextView) view.findViewById(R.id.basics_bt);
-        seniority = (TextView) view.findViewById(R.id.seniority);
-        skill = (TextView) view.findViewById(R.id.skill);
-        fate = (TextView) view.findViewById(R.id.fate);
-        career = (TextView) view.findViewById(R.id.career);
-        basics_bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                basics_bt.setBackgroundResource(R.drawable.btn_pre);
-                seniority.setBackgroundResource(R.drawable.btn_nor);
-                skill.setBackgroundResource(R.drawable.btn_nor);
-                fate.setBackgroundResource(R.drawable.btn_nor);
-                career.setBackgroundResource(R.drawable.btn_nor);
-                showHideFragment(mFragments[FIRST], mFragments[prePosition]);
-                prePosition = FIRST;
-
-
-                basics_bt.setText("基础");
-                seniority.setText("资");
-                skill.setText("技");
-                fate.setText("缘");
-                career.setText("生");
-            }
-        });
-        seniority.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                basics_bt.setBackgroundResource(R.drawable.btn_nor);
-                seniority.setBackgroundResource(R.drawable.btn_pre);
-                skill.setBackgroundResource(R.drawable.btn_nor);
-                fate.setBackgroundResource(R.drawable.btn_nor);
-                career.setBackgroundResource(R.drawable.btn_nor);
-                showHideFragment(mFragments[SECOND], mFragments[prePosition]);
-                prePosition = SECOND;
-
-                basics_bt.setText("基");
-                seniority.setText("资质");
-                skill.setText("技");
-                fate.setText("缘");
-                career.setText("生");
-
-            }
-        });
-        skill.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                basics_bt.setBackgroundResource(R.drawable.btn_nor);
-                seniority.setBackgroundResource(R.drawable.btn_nor);
-                skill.setBackgroundResource(R.drawable.btn_pre);
-                fate.setBackgroundResource(R.drawable.btn_nor);
-                career.setBackgroundResource(R.drawable.btn_nor);
-                showHideFragment(mFragments[OTHER], mFragments[prePosition]);
-                prePosition = OTHER;
-
-                basics_bt.setText("基");
-                seniority.setText("资");
-                skill.setText("技能");
-                fate.setText("缘");
-                career.setText("生");
-
-            }
-        });
-        fate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                basics_bt.setBackgroundResource(R.drawable.btn_nor);
-                seniority.setBackgroundResource(R.drawable.btn_nor);
-                skill.setBackgroundResource(R.drawable.btn_nor);
-                fate.setBackgroundResource(R.drawable.btn_pre);
-                career.setBackgroundResource(R.drawable.btn_nor);
-                showHideFragment(mFragments[FIND], mFragments[prePosition]);
-                prePosition = FIND;
-
-
-
-                basics_bt.setText("基");
-                seniority.setText("资");
-                skill.setText("技");
-                fate.setText("缘分");
-                career.setText("生");
-
-            }
-        });
-        career.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                basics_bt.setBackgroundResource(R.drawable.btn_nor);
-                seniority.setBackgroundResource(R.drawable.btn_nor);
-                skill.setBackgroundResource(R.drawable.btn_nor);
-                fate.setBackgroundResource(R.drawable.btn_nor);
-                career.setBackgroundResource(R.drawable.btn_pre);
-                showHideFragment(mFragments[THIRD], mFragments[prePosition]);
-                prePosition = THIRD;
-
-                basics_bt.setText("基");
-                seniority.setText("资");
-                skill.setText("技");
-                fate.setText("缘");
-                career.setText("生涯");
-
-            }
-        });
-
-    }
-
-    @Override
-    public void onFragmentResult(int requestCode, int resultCode, Bundle data) {
-        super.onFragmentResult(requestCode, resultCode, data);
-        if (requestCode == REQ_MSG && resultCode == RESULT_OK) {
-
+    /**
+     * 点击各按钮
+     *
+     * @param view
+     */
+    @OnClick({R.id.tvCardBasic, R.id.tvCardAptitude, R.id.tvCardSkill, R.id.tvCarLuck, R.id.tvCardCareer})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.tvCardBasic:
+                onFragmentChanged(FRAGMENT_BASE);
+                break;
+            case R.id.tvCardAptitude:
+                onFragmentChanged(FRAGMENT_APTITUDE);
+                break;
+            case R.id.tvCardSkill:
+                onFragmentChanged(FRAGMENT_SKILL);
+                break;
+            case R.id.tvCarLuck:
+                onFragmentChanged(FRAGMENT_LUCK);
+                break;
+            case R.id.tvCardCareer:
+                onFragmentChanged(FRAGMENT_CAREER);
+                break;
         }
     }
 
     /**
-     * start other BrotherFragment
+     * 切换选中状态
+     *
+     * @param selectedPosition
      */
-    public void startBrotherFragment(SupportFragment targetFragment) {
-        start(targetFragment);
+    private void onFragmentChanged(int selectedPosition) {
+        tvCardBasic.setSelected(false);
+        tvCardBasic.setText(ResourceUtils.getString(R.string.card_basic_default));
+        tvCardAptitude.setSelected(false);
+        tvCardAptitude.setText(ResourceUtils.getString(R.string.card_aptitude_default));
+        tvCardSkill.setSelected(false);
+        tvCardSkill.setText(ResourceUtils.getString(R.string.card_shill_default));
+        tvCarLuck.setSelected(false);
+        tvCarLuck.setText(ResourceUtils.getString(R.string.card_luck_default));
+        tvCardCareer.setSelected(false);
+        tvCardCareer.setText(ResourceUtils.getString(R.string.card_career_default));
+        showHideFragment(mFragments[selectedPosition], mFragments[mCurrentSelectedPosition]);
+        switch (selectedPosition) {
+            case FRAGMENT_BASE:
+                tvCardBasic.setSelected(true);
+                mCurrentSelectedPosition = FRAGMENT_BASE;
+                tvCardBasic.setText(ResourceUtils.getString(R.string.card_basic_selected));
+                break;
+            case FRAGMENT_APTITUDE:
+                tvCardAptitude.setSelected(true);
+                mCurrentSelectedPosition = FRAGMENT_APTITUDE;
+                tvCardAptitude.setText(ResourceUtils.getString(R.string.card_aptitude_selected));
+                break;
+            case FRAGMENT_SKILL:
+                tvCardSkill.setSelected(true);
+                mCurrentSelectedPosition = FRAGMENT_SKILL;
+                tvCardSkill.setText(ResourceUtils.getString(R.string.card_shill_selected));
+                break;
+            case FRAGMENT_LUCK:
+                tvCarLuck.setSelected(true);
+                mCurrentSelectedPosition = FRAGMENT_LUCK;
+                tvCarLuck.setText(ResourceUtils.getString(R.string.card_luck_selected));
+                break;
+            case FRAGMENT_CAREER:
+                tvCardCareer.setSelected(true);
+                mCurrentSelectedPosition = FRAGMENT_CAREER;
+                tvCardCareer.setText(ResourceUtils.getString(R.string.card_career_selected));
+                break;
+        }
+
     }
 
-
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }

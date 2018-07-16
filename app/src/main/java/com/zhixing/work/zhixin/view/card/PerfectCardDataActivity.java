@@ -33,6 +33,7 @@ import com.zhixing.work.zhixin.dialog.MarriageDialog;
 import com.zhixing.work.zhixin.dialog.PoliticalStatusDialog;
 import com.zhixing.work.zhixin.dialog.ResidenceDialog;
 import com.zhixing.work.zhixin.event.ModifyEvent;
+import com.zhixing.work.zhixin.event.UserBasicInfoSubmitEvent;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
@@ -42,6 +43,7 @@ import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
 import com.zhixing.work.zhixin.util.Utils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -61,6 +63,9 @@ import butterknife.OnClick;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
+/**
+ * 个人资料
+ */
 public class PerfectCardDataActivity extends BaseTitleActivity {
 
 
@@ -240,7 +245,10 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
     }
 
 
-    @OnClick({R.id.rl_date, R.id.rl_name, R.id.rl_id, R.id.rl_height, R.id.is_study_abroad_yes, R.id.study_abroad_no, R.id.rl_motto, R.id.rl_constellation, R.id.rl_education, R.id.rl_worktime, R.id.all_iv, R.id.rl_weight, R.id.rl_marriage, R.id.rl_census_register, R.id.rl_political, R.id.rl_nation, R.id.rl_native_place, R.id.rl_adress, R.id.btn_go_compete_edu})
+    @OnClick({R.id.rl_date, R.id.rl_name, R.id.rl_id, R.id.rl_height, R.id.is_study_abroad_yes,
+            R.id.study_abroad_no, R.id.rl_motto, R.id.rl_constellation, R.id.rl_education,
+            R.id.rl_worktime, R.id.all_iv, R.id.rl_weight, R.id.rl_marriage, R.id.rl_census_register,
+            R.id.rl_political, R.id.rl_nation, R.id.rl_native_place, R.id.rl_adress, R.id.btn_go_compete_edu})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_date:
@@ -637,6 +645,7 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
                 hideLoadingDialog();
                 if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     startActivity(new Intent(context, PerfectCardEducationActivity.class));
+                    EventBus.getDefault().post(new UserBasicInfoSubmitEvent(true));
                     finish();
                 } else {
                     AlertUtils.toast(context, response.getMessage());

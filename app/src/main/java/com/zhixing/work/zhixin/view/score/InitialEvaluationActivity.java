@@ -17,6 +17,7 @@ import com.zhixing.work.zhixin.base.TestPaper;
 import com.zhixing.work.zhixin.bean.Answer;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Evaluating;
+import com.zhixing.work.zhixin.event.EvaluationEvent;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
@@ -26,6 +27,8 @@ import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -188,6 +191,7 @@ public class InitialEvaluationActivity extends BaseTitleActivity {
                                 if (response.getContent() != null) {
                                     AlertUtils.toast(context, "提交成功");
                                     SettingUtils.putTestPaper("");
+                                    EventBus.getDefault().post(new EvaluationEvent(true));
                                     finish();
                                 } else {
                                     AlertUtils.toast(context, response.getMessage());

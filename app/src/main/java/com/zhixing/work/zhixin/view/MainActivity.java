@@ -147,6 +147,5 @@ public class MainActivity extends SupportActivity {
         SettingUtils.putCityList(gson.toJson(cityList));
         SettingUtils.putAreaList(gson.toJson(areaList));
 
-
     }
 }

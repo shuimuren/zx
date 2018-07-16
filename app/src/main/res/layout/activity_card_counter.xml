@@ -33,7 +33,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="45dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -400,9 +400,9 @@
                                 android:layout_height="wrap_content">
 
                                 <TextView
-
                                     android:layout_width="match_parent"
                                     android:layout_height="match_parent"
+                                    android:padding="@dimen/padding_small"
                                     android:background="#26000000"
                                     android:text="个人信息" />
                             </LinearLayout>
@@ -588,6 +588,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_10"
+                                android:padding="@dimen/padding_small"
                                 android:background="#26000000"
                                 android:text="工作经历" />
 
@@ -609,7 +610,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/dp_10"
                                 android:background="#26000000"
-                                android:text="教育精力" />
+                                android:padding="@dimen/padding_small"
+                                android:text="教育经历" />
 
                             <RelativeLayout
                                 android:layout_width="match_parent"

@@ -35,6 +35,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * 证书
+ */
 public class PerfectCardCertificateActivity extends BaseTitleActivity {
 
 

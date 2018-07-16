@@ -181,9 +181,19 @@ public class EditorialBasisActivity extends BaseTitleActivity {
         if (!TextUtils.isEmpty(cardBack.getFirstWorkTime())) {
             workTime.setText(DateFormatUtil.parseDate(cardBack.getFirstWorkTime(), "yyyy-MM-dd"));
         }
+        if(null == cardBack.getStature()){
+            height.setText("");
+        }else {
+            height.setText(cardBack.getStature() + "");
+        }
 
-        height.setText(cardBack.getStature() + "");
-        weight.setText(cardBack.getWeight() + "");
+        if(null == cardBack.getWeight()){
+            weight.setText("");
+        }else {
+            weight.setText(cardBack.getWeight() + "");
+        }
+
+
         Stature = cardBack.getStature() + "";
         Weight = cardBack.getWeight() + "";
         mottoTx.setText(cardBack.getMotto());

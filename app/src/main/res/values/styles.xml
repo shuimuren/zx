@@ -11,7 +11,6 @@
     <style name="Theme.beginBackground" parent="@android:style/Theme.Translucent.NoTitleBar" />
 
     <style name="ThemeSplash" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:background">@drawable/bg</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="windowActionBar">false</item>

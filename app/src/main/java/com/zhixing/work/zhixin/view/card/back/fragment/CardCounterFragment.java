@@ -26,6 +26,7 @@ import com.zhixing.work.zhixin.bean.AddressJson;
 import com.zhixing.work.zhixin.bean.CardBack;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.event.CardBackEvent;
+import com.zhixing.work.zhixin.event.UserBasicInfoSubmitEvent;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
@@ -35,6 +36,7 @@ import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
+import com.zhixing.work.zhixin.util.ZxTextUtils;
 import com.zhixing.work.zhixin.view.card.AdvancedInformationActivity;
 import com.zhixing.work.zhixin.view.card.EditorialBasisActivity;
 import com.zhixing.work.zhixin.view.card.PerfectCardDataActivity;
@@ -202,7 +204,6 @@ public class CardCounterFragment extends SupportFragment {
 
         unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
-     /*   mHandler.sendEmptyMessage(MSG_LOAD_DATA);*/
         initAdapter();
         return view;
     }
@@ -288,13 +289,20 @@ public class CardCounterFragment extends SupportFragment {
                         edList = cardBack.getEducationBackgroundOutputs();
                         workAdapter.setList(list);
                         educationAdapter.setList(edList);
-                        llData.setVisibility(View.VISIBLE);
-                        llEmpty.setVisibility(View.GONE);
+                        //完善资料
+                        if (TextUtils.isEmpty(cardBack.getNickName())) {
+                            llData.setVisibility(View.GONE);
+                            llEmpty.setVisibility(View.VISIBLE);
+                        } else {
+                            llData.setVisibility(View.VISIBLE);
+                            llEmpty.setVisibility(View.GONE);
+                        }
+
 
                         initView();
                     } else {
-                        llData.setVisibility(View.VISIBLE);
-                        llEmpty.setVisibility(View.GONE);
+                        llData.setVisibility(View.GONE);
+                        llEmpty.setVisibility(View.VISIBLE);
                     }
                 }
             }
@@ -315,32 +323,33 @@ public class CardCounterFragment extends SupportFragment {
 
     //设置参数
     private void initView() {
-        name.setText(cardBack.getRealName());
-        mail.setText(cardBack.getEmail());
-        phone.setText(SettingUtils.getPhoneNumber());
-        nikeName.setText(cardBack.getNickName());
-        gendr.setText(cardBack.getSex());
+        name.setText(ZxTextUtils.getTextWithDefault(cardBack.getRealName()));
+        mail.setText(ZxTextUtils.getTextWithDefault(cardBack.getEmail()));
+        phone.setText(ZxTextUtils.getTextWithDefault(SettingUtils.getPhoneNumber()));
+        nikeName.setText(ZxTextUtils.getTextWithDefault(cardBack.getNickName()));
+        gendr.setText(ZxTextUtils.getTextWithDefault(cardBack.getSex()));
         if (!TextUtils.isEmpty(cardBack.getBirthday())) {
             dateBirth.setText(DateFormatUtil.parseDate(cardBack.getBirthday(), "yyyy-MM-dd"));
         }
         constellation.setText(cardBack.getConstellation());
-        height.setText(cardBack.getStature() + "cm");
-        weight.setText(cardBack.getWeight() + "kg");
-        motto.setText(cardBack.getMotto());
+        height.setText(cardBack.getStature() == null ? "-" : cardBack.getStature() + "cm");
+        weight.setText(cardBack.getWeight() == null ? "-" : cardBack.getWeight() + "kg");
+        motto.setText(ZxTextUtils.getTextWithDefault(cardBack.getMotto()));
         if (!TextUtils.isEmpty(cardBack.getFirstWorkTime())) {
             firstWorkingTime.setText(DateFormatUtil.parseDate(cardBack.getFirstWorkTime(), "yyyy-MM-dd"));
         }
-
-        nation.setText(cardBack.getNation());
+        nation.setText(ZxTextUtils.getTextWithDefault(cardBack.getNation()));
         if (cardBack.getNativePlaceProvince() != null) {
             nativePlace.setText(Utils.searchProvincial(cardBack.getNativePlaceProvince()));
+        } else {
+            nativePlace.setText("-");
         }
 
-        political.setText(cardBack.getPoliticsFace());
+        political.setText(ZxTextUtils.getTextWithDefault(cardBack.getPoliticsFace()));
 
-        idNo.setText(cardBack.getIdCard());
+        idNo.setText(ZxTextUtils.getTextWithDefault(cardBack.getIdCard()));
         if (cardBack.getHouseholdType() == null) {
-
+            censusRegister.setText("-");
         } else {
             if (cardBack.getHouseholdType() == 0) {
                 censusRegister.setText("农村户口");
@@ -358,11 +367,11 @@ public class CardCounterFragment extends SupportFragment {
             addressct = addressct + Utils.searchArea(cardBack.getDistrict());
         }
         if (TextUtils.isEmpty(cardBack.getAddress())) {
-            address.setText(addressct);
+            address.setText("-");
         } else {
             address.setText(addressct + cardBack.getAddress());
         }
-        education.setText(cardBack.getEducation());
+        education.setText(ZxTextUtils.getTextWithDefault(cardBack.getEducation()));
 
     }
 
@@ -370,6 +379,13 @@ public class CardCounterFragment extends SupportFragment {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onCardBackEvent(CardBackEvent event) {
         if (event.getRefresh()) {
+            getData();
+        }
+    }
+
+    @Subscribe
+    public void onUserInfoSubmitEvent(UserBasicInfoSubmitEvent event){
+        if(event.isSuccess()){
             getData();
         }
     }

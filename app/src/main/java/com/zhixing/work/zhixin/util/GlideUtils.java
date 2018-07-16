@@ -7,7 +7,6 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -103,7 +102,7 @@ public class GlideUtils extends AppGlideModule {
     public void loadCircleUserIconInto(Context context, String url, ImageView imageView) {
         Glide.with(context).load(url).
                 apply(RequestOptions.bitmapTransform(new CircleCrop())
-                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE)))
+                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE)).error(ResourceUtils.getDrawable(R.drawable.img_man)))
                 .into(imageView);
 
     }

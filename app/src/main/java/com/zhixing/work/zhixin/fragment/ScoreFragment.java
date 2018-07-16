@@ -175,6 +175,7 @@ public class ScoreFragment extends BaseMainFragment {
     public Token token;
     private String addressCity = "";
     private ImageTool imageTool;
+    private String userName;
 
 
     public static ScoreFragment newInstance() {
@@ -195,10 +196,12 @@ public class ScoreFragment extends BaseMainFragment {
         token = SettingUtils.getTokenBean();
         title.setText(ResourceUtils.getString(R.string.profession_card));
         if (token.getRole() == Integer.parseInt(RoleConstant.PERSONAL_ROLE)) {
+            typeIv.setVisibility(View.GONE);
             initData();
             llUser.setVisibility(View.VISIBLE);
             llEnterprise.setVisibility(View.GONE);
         } else {
+            typeIv.setVisibility(View.VISIBLE);
             getCompanyData();
             llEnterprise.setVisibility(View.VISIBLE);
             llUser.setVisibility(View.GONE);
@@ -248,6 +251,7 @@ public class ScoreFragment extends BaseMainFragment {
                             companyAddress.setText(addressCity + companyCard.getAddress());
                         }
                         companyName.setText(companyCard.getFullName());
+                        userName = companyCard.getFullName();
                     }
 
                 }
@@ -280,6 +284,7 @@ public class ScoreFragment extends BaseMainFragment {
                         mail.setText(card.getEmail());
                         phone.setText(SettingUtils.getPhoneNumber());
                         name.setText(card.getRealName());
+                        userName = card.getRealName();
                         img_card.setImageResource(R.drawable.icon_1_light);
                         if (TextUtils.isEmpty(card.getNickName())) {
                             llNikeName.setVisibility(View.GONE);
@@ -363,20 +368,25 @@ public class ScoreFragment extends BaseMainFragment {
                 startActivity(new Intent(context, PerfectCardDataActivity.class));
                 break;
             case R.id.more:
+//                if(TextUtils.isEmpty(userName)){
+//                    AlertUtils.show(ResourceUtils.getString(R.string.complete_user_information));
+//                    return;
+//                }else {
                 if (token.getRole() == Integer.parseInt(RoleConstant.PERSONAL_ROLE)) {
                     startActivity(new Intent(context, CardMainActivity.class));
                 } else {
                     startActivity(new Intent(context, CompanyCardActivity.class));
                 }
+                //              }
                 break;
             case R.id.rl_avatar:
                 imageTool = new ImageTool(FileUtil.getDiskCachePath());
-                imageTool.reset().onlyPick(false).start(this, new ImageTool.ResultListener() {
+                imageTool.reset().onlyPick(false).setAspectX_Y(5, 3).start(this, new ImageTool.ResultListener() {
                     @Override
                     public void onResult(String error, Uri uri, Bitmap bitmap) {
-                        Logger.i(">>>", "Uri>" + uri);
                         if (uri != null && !TextUtils.isEmpty(uri.getPath())) {
                             upload(uri.getPath());
+                            Logger.i(">>>", "uri>" + uri);
                             //GlideUtils.getInstance().loadGlideRoundTransform(context, uri.getPath(), avatar);
                             Glide.with(getActivity()).load(uri).into(avatar);
                         }
@@ -458,13 +468,13 @@ public class ScoreFragment extends BaseMainFragment {
 
     //上传头像
     private void upload(final String resultpath) {
-        showLoading(ResourceUtils.getString(R.string.uploading),false);
+        showLoading(ResourceUtils.getString(R.string.uploading), false);
         String UUID = AppUtils.getUUID();
         ALiYunOssFileLoader.asyncUpload(context, stsToken, ALiYunFileURLBuilder.BUCKET_PUBLIC, ALiYunFileURLBuilder.PERSONALAVATAR + UUID,
                 resultpath, new ALiYunOssFileLoader.OssFileUploadListener() {
                     @Override
                     public void onUploadSuccess(String objectKey) {
-                     //   Logger.i("tou", "动态图片上传成功：" + objectKey);
+                        //   Logger.i("tou", "动态图片上传成功：" + objectKey);
                         RequestBody body = new FormBody.Builder()
                                 .add("Avatar", objectKey)
                                 .build();
@@ -504,6 +514,8 @@ public class ScoreFragment extends BaseMainFragment {
                             String url = ALiYunOssFileLoader.gtePublic(context, stsToken, ALiYunFileURLBuilder.BUCKET_PUBLIC, key);
                             avatarText.setVisibility(View.GONE);
                             defaultAvatar.setVisibility(View.GONE);
+                            avatar.setVisibility(View.VISIBLE);
+                            Logger.i(">>>", "uri2>" + url);
                             Glide.with(context).load(url).into(avatar);
                         }
                     } else {

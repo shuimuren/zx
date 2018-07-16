@@ -5,21 +5,17 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.bean.Education;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
- * 添加学历
+ * 添加学历/
  */
 public class AddEducationAdapter extends RecyclerView.Adapter<AddEducationAdapter.ViewHolder> {
     public List<Education> getContactList() {

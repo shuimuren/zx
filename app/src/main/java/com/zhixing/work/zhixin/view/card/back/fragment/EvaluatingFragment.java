@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.willy.ratingbar.ScaleRatingBar;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.SupportFragment;
+import com.zhixing.work.zhixin.event.EvaluationEvent;
 import com.zhixing.work.zhixin.msgctrl.MsgDef;
 import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
 import com.zhixing.work.zhixin.msgctrl.RxBus;
@@ -21,6 +22,9 @@ import com.zhixing.work.zhixin.network.response.EvaluateResult;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.view.score.EvaluationHallActivity;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -85,6 +89,7 @@ public class EvaluatingFragment extends SupportFragment {
         evaluateInfoSubscription = RxBus.getInstance().toObservable(EvaluateResult.class).subscribe(
                 result -> handlerEvaluateInfo(result)
         );
+        EventBus.getDefault().register(this);
         MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_EVALUATE_INFO);
         return view;
     }
@@ -134,6 +139,13 @@ public class EvaluatingFragment extends SupportFragment {
     @Override
     public void fetchData() {
 
+    }
+
+    @Subscribe
+    public void onEvaluationEvent(EvaluationEvent evaluationEvent){
+        if(evaluationEvent.isRefresh()){
+            MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_EVALUATE_INFO);
+        }
     }
 
     @Override

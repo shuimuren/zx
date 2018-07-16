@@ -1,1 +1,1 @@
-package com.zhixing.work.zhixin.network;import java.io.Serializable;/** * Created by lhj on 18/5/8 */public class BaseResult implements Serializable {    public int Code;    public String Message;    //public int pageCount;}
+package com.zhixing.work.zhixin.network;import java.io.Serializable;/** * Created by lhj on 18/5/8 */public class BaseResult implements Serializable {    public int Code;    public String Message;}

@@ -190,7 +190,7 @@ public class RegisterActivity extends BaseTitleActivity {
         Map params = new HashMap();
         params.put(RequestConstant.KEY_PHONE_NUMBER, mPhoneNumber);
         params.put(RequestConstant.KEY_ROLE, mUserRole);
-        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_TELEPHONE_USEABLE, params);
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_TELEPHONE_USABLE, params);
     }
 
     private void togoRegister() {

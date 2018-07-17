@@ -73,6 +73,10 @@ public class AuthenticationHallActivity extends BaseTitleActivity {
         authenticationListSubscription = RxBus.getInstance().toObservable(AuthenticateListResult.class).subscribe(
                 result -> handlerAuthenticateListResult(result)
         );
+        authenticateSetText(identityIv, identity, ResultConstant.AUTHENTICATE_STATUS_NULL);
+        authenticateSetText(educationIv, education, ResultConstant.AUTHENTICATE_STATUS_NULL);
+        authenticateSetText(workIv, work, ResultConstant.AUTHENTICATE_STATUS_NULL);
+        authenticateSetText(certificateIv, certificate, ResultConstant.AUTHENTICATE_STATUS_NULL);
         getListData();
     }
 

@@ -368,16 +368,11 @@ public class ScoreFragment extends BaseMainFragment {
                 startActivity(new Intent(context, PerfectCardDataActivity.class));
                 break;
             case R.id.more:
-//                if(TextUtils.isEmpty(userName)){
-//                    AlertUtils.show(ResourceUtils.getString(R.string.complete_user_information));
-//                    return;
-//                }else {
                 if (token.getRole() == Integer.parseInt(RoleConstant.PERSONAL_ROLE)) {
                     startActivity(new Intent(context, CardMainActivity.class));
                 } else {
                     startActivity(new Intent(context, CompanyCardActivity.class));
                 }
-                //              }
                 break;
             case R.id.rl_avatar:
                 imageTool = new ImageTool(FileUtil.getDiskCachePath());

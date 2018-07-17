@@ -1,44 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:background="@color/main_color">
+    android:layout_height="50dp">
+
+    <View
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:background="@color/main_color"></View>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_below="@id/top"
+        android:background="@color/white"></View>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="7dp"
-        android:layout_marginLeft="@dimen/dp_60"
+        android:orientation="horizontal">
 
-        android:layout_marginTop="7dp"
-        android:layout_weight="1"
-        android:background="@drawable/btn_white_shape">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="@dimen/dp_20"
-            android:src="@drawable/search_ed" />
-
-        <com.zhixing.work.zhixin.widget.ClearEditText
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:background="@null"
-            android:hint="搜索您需要的内容"
-            android:textColorHint="@color/hint" />
+            android:layout_marginBottom="7dp"
+            android:layout_marginLeft="@dimen/dp_60"
+            android:layout_marginTop="7dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_white_shape">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:src="@drawable/search_ed" />
+
+            <com.zhixing.work.zhixin.widget.ClearEditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="搜索您需要的内容"
+                android:textColorHint="@color/hint"
+                android:textSize="@dimen/font_size_14sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvSearchOrCancel"
+            android:layout_width="@dimen/dp_60"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/search"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_normal"
+            android:visibility="invisible" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvSearchOrCancel"
-        android:layout_width="@dimen/dp_60"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="@string/search"
-        android:textColor="@color/white"
-        android:textSize="@dimen/font_normal"
-        android:visibility="invisible"/>
 
-</LinearLayout>
+</RelativeLayout>

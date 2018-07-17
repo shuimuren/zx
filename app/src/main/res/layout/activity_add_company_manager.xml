@@ -40,8 +40,6 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
                     android:layout_toLeftOf="@+id/iv_photo"
-
-
                     />
 
                 <ImageView

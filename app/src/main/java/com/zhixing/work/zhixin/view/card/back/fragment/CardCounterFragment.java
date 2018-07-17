@@ -184,7 +184,7 @@ public class CardCounterFragment extends SupportFragment {
 
     //Fragment对用户可见的标记
     private boolean isUIVisible;
-    private Unbinder unbinder;
+
 
     public static CardCounterFragment newInstance() {
         Bundle args = new Bundle();
@@ -201,8 +201,6 @@ public class CardCounterFragment extends SupportFragment {
         basics.setSelected(true);
         context = getActivity();
         isViewCreated = true;
-
-        unbinder = ButterKnife.bind(this, view);
         EventBus.getDefault().register(this);
         initAdapter();
         return view;
@@ -297,8 +295,6 @@ public class CardCounterFragment extends SupportFragment {
                             llData.setVisibility(View.VISIBLE);
                             llEmpty.setVisibility(View.GONE);
                         }
-
-
                         initView();
                     } else {
                         llData.setVisibility(View.GONE);
@@ -429,6 +425,5 @@ public class CardCounterFragment extends SupportFragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 }

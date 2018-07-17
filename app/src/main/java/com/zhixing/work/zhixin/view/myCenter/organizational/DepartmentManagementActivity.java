@@ -39,7 +39,7 @@ import butterknife.OnClick;
 public class DepartmentManagementActivity extends BaseTitleActivity {
 
     @BindView(R.id.listview)
-    RecyclerView listview;
+    RecyclerView listView;
     @BindView(R.id.add_user)
     TextView addUser;
     @BindView(R.id.add_department)
@@ -79,10 +79,10 @@ public class DepartmentManagementActivity extends BaseTitleActivity {
         adapter = new DepartmentAdapter(list, context);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        listview.setLayoutManager(linearLayoutManager);
-        listview.setItemAnimator(new DefaultItemAnimator());
-        listview.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL));
-        listview.setAdapter(adapter);
+        listView.setLayoutManager(linearLayoutManager);
+        listView.setItemAnimator(new DefaultItemAnimator());
+        listView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL));
+        listView.setAdapter(adapter);
         adapter.setOnItemClickListener(new DepartmentAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {

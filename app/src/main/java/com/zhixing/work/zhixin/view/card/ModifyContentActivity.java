@@ -4,13 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.event.ModifyEvent;
 import com.zhixing.work.zhixin.util.AlertUtils;
-import com.zhixing.work.zhixin.util.Utils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
+import com.zhixing.work.zhixin.widget.ClearEditText;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
 
 public class ModifyContentActivity extends BaseTitleActivity {
     @BindView(R.id.edit)
-    EditText edit;
+    ClearEditText edit;
     private String title;
     private Context context;
     private String content;
@@ -66,7 +66,7 @@ public class ModifyContentActivity extends BaseTitleActivity {
         }
         setTitle(title);
 
-        setRightText1("保存");
+        setRightText1(ResourceUtils.getString(R.string.finish));
         initView();
     }
 
@@ -80,11 +80,8 @@ public class ModifyContentActivity extends BaseTitleActivity {
                     AlertUtils.toast(context, "填写不能为空");
                     return;
                 } else {
-
                     EventBus.getDefault().post(new ModifyEvent(type, content));
                     finish();
-
-
                 }
 
             }

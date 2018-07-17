@@ -294,15 +294,15 @@
         <Button
             android:id="@+id/btn_born_card"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="@dimen/telephone_text_height"
             android:layout_gravity="center"
             android:layout_marginLeft="@dimen/dp_40"
             android:layout_marginRight="@dimen/dp_40"
             android:layout_marginTop="50dp"
-            android:background="@color/hardtoast"
+            android:background="@drawable/selector_verification_code_time_bg"
             android:enabled="false"
             android:text="生成卡牌"
-            android:textColor="#ffffff"
-            android:textSize="20sp" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_big" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

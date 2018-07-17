@@ -43,16 +43,18 @@ import butterknife.OnClick;
  */
 public class OrganizationalStructureActivity extends BaseTitleActivity {
 
-    @BindView(R.id.departmentList)
-    RecyclerView departmentList;
-    @BindView(R.id.workmate)
-    TextView workmate;
-    @BindView(R.id.rl_add_workmate)
-    LinearLayout rlAddWorkmate;
+
+    @BindView(R.id.tvSearchOrCancel)
+    TextView tvSearchOrCancel;
     @BindView(R.id.company_name)
     TextView companyName;
-    @BindView(R.id.staff_listview)
-    RecyclerView staffListview;
+    @BindView(R.id.department_list)
+    RecyclerView departmentList;
+    @BindView(R.id.staff_list)
+    RecyclerView staffListView;
+    @BindView(R.id.ll_staff_view)
+    LinearLayout llStaffView;
+
     private List<Department> list = new ArrayList<>();
     private List<Staff> staffList = new ArrayList<>();
     private List<Staffs> numberList = new ArrayList<>();
@@ -72,14 +74,15 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
         getAllnumber();
         initView();
     }
+
     private void initView() {
         adapter = new StaffAdapter(staffList, context);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        staffListview.setLayoutManager(linearLayoutManager);
-        staffListview.setItemAnimator(new DefaultItemAnimator());
-        staffListview.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL));
-        staffListview.setAdapter(adapter);
+        staffListView.setLayoutManager(linearLayoutManager);
+        staffListView.setItemAnimator(new DefaultItemAnimator());
+        staffListView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL));
+        staffListView.setAdapter(adapter);
         adapter.setOnItemClickListener(new StaffAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -105,6 +108,7 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
             }
         });
     }
+
     private void getData() {
         OkUtils.getInstances().httpTokenGet(context, RequestConstant.DEPARTMENT, JavaParamsUtils.getInstances().getCompany(), new TypeToken<EntityObject<List<Department>>>() {
         }.getType(), new ResultCallBackListener<List<Department>>() {
@@ -112,6 +116,7 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
             public void onFailure(int errorId, String msg) {
                 AlertUtils.toast(context, ResourceUtils.getString(R.string.server_error));
             }
+
             @Override
             public void onSuccess(EntityObject<List<Department>> response) {
                 if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
@@ -125,6 +130,7 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
             }
         });
     }
+
     private void getAllnumber() {
         OkUtils.getInstances().httpTokenGet(context, RequestConstant.DEPARTMENT_MEMBER, JavaParamsUtils.getInstances().getCompany(), new TypeToken<EntityObject<List<Staffs>>>() {
         }.getType(), new ResultCallBackListener<List<Staffs>>() {
@@ -132,6 +138,7 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
             public void onFailure(int errorId, String msg) {
                 AlertUtils.toast(context, "服务器错误");
             }
+
             @Override
             public void onSuccess(EntityObject<List<Staffs>> response) {
                 if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
@@ -148,6 +155,7 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
             }
         });
     }
+
     private void getStaff() {
         OkUtils.getInstances().httpTokenGet(context, RequestConstant.STAFF, JavaParamsUtils.getInstances().getSetff(department.getDepartmentId() + ""), new TypeToken<EntityObject<List<Staff>>>() {
         }.getType(), new ResultCallBackListener<List<Staff>>() {
@@ -167,7 +175,8 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
         });
     }
 
-    @OnClick(R.id.rl_add_workmate)
+
+    @OnClick(R.id.workmate)
     public void onViewClicked() {
         ShareDialog imageDialog = new ShareDialog(context, new ShareDialog.OnItemClickListener() {
             @Override

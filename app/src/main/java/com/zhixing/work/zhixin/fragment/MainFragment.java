@@ -1,9 +1,7 @@
 package com.zhixing.work.zhixin.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +10,6 @@ import android.widget.ImageView;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.SupportFragment;
 import com.zhixing.work.zhixin.event.TabSelectedEvent;
-import com.zhixing.work.zhixin.util.AlertUtils;
-import com.zhixing.work.zhixin.util.PreferenceUtils;
-import com.zhixing.work.zhixin.util.ResourceUtils;
-import com.zhixing.work.zhixin.view.card.CreateCardActivity;
 import com.zhixing.work.zhixin.widget.BottomBar;
 import com.zhixing.work.zhixin.widget.BottomBarTab;
 
@@ -96,15 +90,15 @@ public class MainFragment extends SupportFragment {
         mBottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, int prePosition) {
-                if(position != 1 && TextUtils.isEmpty(PreferenceUtils.getString(PreferenceUtils.KEY_HAVE_CARD_INFO))){
-                    AlertUtils.show(ResourceUtils.getString(R.string.complete_user_base_info));
-                    startActivity(new Intent(getActivity(), CreateCardActivity.class));
-                    mBottomBar.setCurrentItem(SCORE_FRAGMENT_CODE);
-                }else {
-                    showHideFragment(mFragments[position], mFragments[prePosition]);
-                }
-
-
+//                if (position != 1 && TextUtils.isEmpty(PreferenceUtils.getString(PreferenceUtils.KEY_HAVE_CARD_INFO)) &&
+//                        (SettingUtils.getRoleInfo().equals(RoleConstant.PERSONAL_ROLE))) {
+//                    AlertUtils.show(ResourceUtils.getString(R.string.complete_user_base_info));
+//                    startActivity(new Intent(getActivity(), CreateCardActivity.class));
+//                    mBottomBar.setCurrentItem(SCORE_FRAGMENT_CODE);
+//                } else {
+//                    showHideFragment(mFragments[position], mFragments[prePosition]);
+//                }
+                showHideFragment(mFragments[position], mFragments[prePosition]);
 
 //                BottomBarTab tab = mBottomBar.getItem(SCORE_FRAGMENT_CODE);
 //                if (position == THIRD) {

@@ -12,15 +12,14 @@
         android:layout_height="wrap_content"
         android:background="@color/white">
 
-        <EditText
-            android:padding="5dp"
+        <com.zhixing.work.zhixin.widget.ClearEditText
             android:id="@+id/edit"
             android:layout_width="match_parent"
             android:layout_height="300dp"
             android:background="@null"
             android:gravity="left"
-            android:text=""
-        />
+            android:padding="5dp"
+            android:text="" />
 
 
     </LinearLayout>

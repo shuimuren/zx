@@ -699,7 +699,7 @@ public class SettingUtils {
     /**
      * 保存当前登录角色
      *
-     * roleInfo 10:个人,10企业
+     * roleInfo 10:个人,20企业
      */
     public static void putRole(String roleInfo) {
 

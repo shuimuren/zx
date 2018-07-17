@@ -15,21 +15,20 @@
             android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/add"
-            >
+            android:layout_above="@+id/add">
 
         </android.support.v7.widget.RecyclerView>
 
         <Button
-            android:layout_marginTop="@dimen/dp_20"
             android:id="@+id/add"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/dp_20"
 
             android:layout_marginLeft="@dimen/dp_30"
             android:layout_marginRight="@dimen/dp_30"
-            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
             android:background="@drawable/btn_blue_normal_shape"
             android:text="添加"
             android:textColor="#ffffff"

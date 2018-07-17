@@ -18,6 +18,7 @@ public class PreferenceUtils {
 	private static final String TAG = PreferenceUtils.class.getSimpleName();
 	public static final String KEY_SHOW_SPLASH = "showSplash";
 	public static final String KEY_HAVE_CARD_INFO = "cardInfo";
+	public static final String KEY_ROLE_INFO = "roleInfo";
 
 	private static String PREFERENCES_NAME;
 

@@ -73,10 +73,11 @@
     </string-array>
     <string name="phone_number">手机号</string>
     <string name="pass_word">密&#12288;码</string>
+    <!--<string name="pass_word">密码</string>-->
     <string name="register">注册</string>
-    <string name="login">登陆</string>
+    <string name="login">登&#12288;陆</string>
     <string name="personage_login">个人登录</string>
-    <string name="enterprise">企业</string>
+    <string name="company">企业</string>
     <string name="profession_card">职业卡牌</string>
     <string name="about_zhi_xin">关于职信</string>
     <string name="setting">设置</string>
@@ -97,23 +98,27 @@
     <string name="alert_pass_word_not_match">重复密码不一致</string>
     <string name="forget_password">忘记密码?</string>
     <string name="landing">登陆中...</string>
+    <string name="registering">注册中...</string>
     <string name="cancel">取消</string>
     <string name="make_sure">确认</string>
     <string name="personal_register">个人账号注册</string>
+    <string name="company_register">企业账号注册</string>
     <string name="personal">个人</string>
     <string name="verification_code">验证码</string>
-    <string name="password_hint">请设置一个6~20位的密码</string>
+    <string name="password_hint">请设置一个6~16位的密码</string>
     <string name="had_read_and_agree">我已阅读并同意</string>
     <string name="agreement">《用户协议》</string>
     <string name="get_success_and_waiting">短信处理成功,请耐心等待</string>
-    <string name="verification_code_is_null">验证码不能为空</string>
+    <string name="verification_code_is_null">请输入正确的验证码</string>
     <string name="agree_agreement">请同意用户协议</string>
     <string name="get_verification_code">获取验证码</string>
     <string name="send_again">秒后重新发送</string>
     <string name="register_success">注册成功</string>
+    <string name="register_false">该手机号已注册</string>
     <string name="account_unusable">账号已存在</string>
     <string name="hint_input_password">请确认密码</string>
     <string name="hint_input_phone_number">请输入手机号</string>
+    <string name="login_hint_input_password">请输入密码</string>
     <string name="forget_password_title">忘记密码</string>
     <string name="fix_success">修改成功</string>
     <string name="personal_authentication">我的认证</string>
@@ -127,6 +132,7 @@
     <string name="save">保存</string>
     <string name="time_of_graduation">毕业时间</string>
     <string name="back">返回</string>
+    <string name="btn_make_sure">确定</string>
     <string name="organizational_structure">组织架构</string>
     <string name="search">搜 索</string>
     <string name="search_cancel">取消</string>
@@ -182,6 +188,9 @@
     <string name="card_career_default">生</string>
     <string name="complete_user_information">请先创建卡牌</string>
     <string name="complete_user_base_info">请先完善基本信息</string>
-
+    <string name="loading">正在登录...</string>
+    <string name="update_password">重置密码</string>
+    <string name="get_sms_code_success">获取验证码成功</string>
+    <string name="update_password_success">重置密码成功</string>
 
 </resources>

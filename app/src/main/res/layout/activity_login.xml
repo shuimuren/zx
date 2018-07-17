@@ -1,187 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg">
+    android:background="@drawable/image_login_bg"
+    android:orientation="vertical">
     <!--选择用户类型-->
-
     <android.support.v7.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="@dimen/login_card_width"
-        android:layout_height="@dimen/dp_50"
-        android:layout_below="@+id/rl_login"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/png_shadow"
-        app:cardCornerRadius="@dimen/corner_radius_big"
-        app:cardUseCompatPadding="true">
-
-        <TextView
-            android:id="@+id/register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/register"
-            android:textColor="@color/color_register"
-            android:textSize="18sp" />
-    </android.support.v7.widget.CardView>
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/rl_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginLeft="@dimen/login_card_margin"
-        android:layout_marginRight="@dimen/login_card_margin"
-        android:layout_marginTop="@dimen/dp_100"
-        android:background="@color/white"
-        app:cardCornerRadius="@dimen/corner_radius_big"
-        app:cardUseCompatPadding="true">
 
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="@dimen/dp_90"
+        app:cardCornerRadius="@dimen/corner_radius_big"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardMaxElevation="2dp"
+        app:cardUseCompatPadding="true">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/shape_round_corner_white"
             android:orientation="vertical">
-            <!--用户类型选择-->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_55">
 
-                <TextView
-                    android:id="@+id/tv_login_person"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp_15"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="@string/personage_login"
-                    android:textColor="@color/login_person_tv"
-                    android:textSize="@dimen/font_list_right" />
-
-                <TextView
-                    android:id="@+id/tv_login_company"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/dp_15"
-                    android:layout_marginTop="@dimen/dp_10"
-                    android:text="@string/enterprise"
-                    android:textColor="#408acf"
-                    android:textSize="@dimen/font_normal" />
-
-            </RelativeLayout>
-
-            <!--用户手机号-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:layout_marginTop="@dimen/dp_35"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp_15"
-                    android:text="@string/phone_number"
-                    android:maxLength="11"
-                    android:textColor="#98c3ec"
-                    android:textSize="@dimen/font_head" />
+                <LinearLayout
+                    android:id="@+id/ll_personal"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_personal_login_bg"
+                    android:orientation="vertical">
 
-                <com.zhixing.work.zhixin.widget.ClearEditText
-                    android:id="@+id/phone_ed"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_30"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:layout_marginRight="@dimen/dp_15"
-                    android:background="@null"
-                    android:inputType="number" />
+                    <TextView
+                        android:id="@+id/tv_personal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingTop="@dimen/dp_10"
+                        android:text="@string/personal"
+                        android:textColor="@color/color_text_btn"
+                        android:textSize="@dimen/font_bigger"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:id="@+id/mark_personal"
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_4"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:background="@drawable/shape_login_mark" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_company"
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/selector_company_login_bg"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_company"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingTop="@dimen/dp_10"
+                        android:text="@string/company"
+                        android:textColor="@color/color_text_btn"
+                        android:textSize="@dimen/font_bigger"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:id="@+id/mark_company"
+                        android:layout_width="@dimen/dp_30"
+                        android:layout_height="@dimen/dp_4"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/dp_15"
+                        android:background="@drawable/shape_login_mark" />
+                </LinearLayout>
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height_normal"
-                android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginRight="@dimen/dp_10"
-                android:background="#98c3ec"></View>
-
-            <!--密码-->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/dp_40"
-                android:layout_marginTop="@dimen/dp_25"
-                android:orientation="horizontal">
+                android:layout_height="@dimen/telephone_text_height"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginTop="34dp"
+                android:background="@drawable/shape_login_text_phone"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_20">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp_15"
-                    android:text="@string/pass_word"
-                    android:textColor="#98c3ec"
-                    android:textSize="@dimen/font_head" />
+                    android:drawableLeft="@drawable/icon_phone"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:text="@string/phone_number"
+                    android:textSize="@dimen/font_size_14sp" />
 
-                <EditText
-                    android:id="@+id/password_ed"
-                    android:layout_width="@dimen/dp_0"
-                    android:layout_height="@dimen/dp_30"
-                    android:layout_gravity="center_vertical"
+                <com.zhixing.work.zhixin.widget.ClearEditText
+                    android:id="@+id/editTelephone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp_15"
-                    android:layout_marginRight="@dimen/dp_10"
+                    android:background="@null"
+                    android:hint="@string/hint_input_phone_number"
+                    android:inputType="phone"
+                    android:maxLength="11"
+                    android:paddingRight="@dimen/telephone_text_corner"
+                    android:textColor="@color/text_color_dark"
+                    android:textSize="@dimen/font_size_14sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/telephone_text_height"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/shape_login_text_phone"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/dp_20">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_password"
+                    android:drawablePadding="@dimen/dp_10"
+                    android:text="@string/pass_word"
+                    android:textSize="@dimen/font_size_14sp" />
+
+                <com.zhixing.work.zhixin.widget.ClearEditText
+                    android:id="@+id/editPassword"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_15"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:inputType="textPassword" />
+                    android:hint="@string/login_hint_input_password"
+                    android:inputType="phone"
+                    android:maxLength="16"
+                    android:password="true"
+                    android:textColor="@color/text_color_dark"
+                    android:textSize="@dimen/font_size_14sp" />
 
                 <ImageView
                     android:id="@+id/show_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="@dimen/dp_20"
+                    android:layout_marginRight="@dimen/dp_15"
                     android:padding="@dimen/dp_6"
                     android:src="@drawable/icon_hide" />
-
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height_normal"
-                android:layout_marginLeft="@dimen/dp_15"
-                android:layout_marginRight="@dimen/dp_15"
-                android:background="#98c3ec">
-
-            </View>
-
-            <!--登录按钮-->
-            <TextView
+            <Button
                 android:id="@+id/btn_login"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/btn_login_height"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_20"
+                android:layout_marginTop="38dp"
+                android:background="@drawable/selector_main_btn"
+                android:gravity="center"
+                android:text="@string/login"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_normal" />
+
+            <TextView
+                android:id="@+id/tvForgetPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/dp_25"
-                android:background="@drawable/btn_blue_normal_shape"
-                android:paddingBottom="@dimen/dp_3"
-                android:paddingLeft="@dimen/dp_35"
-                android:paddingRight="@dimen/dp_35"
-                android:paddingTop="@dimen/dp_3"
-                android:text="@string/login"
-                android:textColor="@color/white"
-                android:textSize="@dimen/font_head" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/dp_15">
-                <!--忘记密码-->
-                <TextView
-                    android:id="@+id/forget_password"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="@string/forget_password"
-                    android:textSize="@dimen/font_head" />
-            </RelativeLayout>
+                android:padding="@dimen/dp_20"
+                android:text="@string/forget_password"
+                android:textColor="@color/hint"
+                android:textSize="@dimen/font_size_14sp" />
         </LinearLayout>
     </android.support.v7.widget.CardView>
-</RelativeLayout>
+
+
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginTop="-10dp"
+        android:background="@drawable/shape_round_2corner_white"
+        android:text="@string/register"
+        android:textColor="@color/login_company_tv"
+        android:textSize="@dimen/font_size_14sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp_30"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgQQ"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:src="@drawable/icon_qq" />
+
+        <ImageView
+            android:id="@+id/imgWeChat"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginLeft="@dimen/dp_50"
+            android:src="@drawable/icon_wechat" />
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.LinearLayoutCompat>

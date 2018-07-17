@@ -2,33 +2,32 @@ package com.zhixing.work.zhixin.util;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
 import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.util.Base64;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Adapter;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.app.ZxApplication;
 import com.zhixing.work.zhixin.bean.AddressJson;
-import com.zhixing.work.zhixin.bean.Education;
 import com.zhixing.work.zhixin.bean.HotCity;
 import com.zhixing.work.zhixin.bean.IndustryType;
 import com.zhixing.work.zhixin.bean.JobType;
-import com.zhixing.work.zhixin.bean.Staff;
 import com.zhixing.work.zhixin.bean.StaffList;
 import com.zhixing.work.zhixin.bean.Staffs;
 
@@ -1500,6 +1499,25 @@ public class Utils {
             return getTreeOrgs(allOrgs);
         }
         return null;
+    }
+
+    /**
+     * @param source 需要改变颜色的字符串
+     * @param color  要改变成的颜色，比如：{@link Color#RED}
+     * @param start  字符串改变颜色的开始的位置
+     * @param end    字符串改变颜色的结束的位置（包前不包后）
+     * @return {@link Spannable}
+     * @Title: changeColor
+     * @Description: 改变原字符串的原色。
+     */
+    public static Spannable changeColor(String source, int color, int start,
+                                        int end) {
+        if (TextUtils.isEmpty(source)) {
+            return new SpannableString("");
+        }
+        Spannable spannable = new SpannableString(source);
+        spannable.setSpan(new ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannable;
     }
 
 

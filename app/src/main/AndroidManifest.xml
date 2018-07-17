@@ -68,11 +68,12 @@
         <!--登录界面-->
         <activity
             android:name=".view.LoginActivity"
+            android:theme="@style/ThemeSplash"
             android:screenOrientation="portrait" />
 
         <!--注册-->
         <activity
-            android:name=".view.RegistActivity"
+            android:name=".view.RegisterActivity"
             android:screenOrientation="portrait" />
 
         <!--忘记密码-->

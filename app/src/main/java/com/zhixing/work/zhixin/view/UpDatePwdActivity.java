@@ -1,61 +1,69 @@
 package com.zhixing.work.zhixin.view;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
-import com.zhixing.work.zhixin.bean.EntityObject;
-import com.zhixing.work.zhixin.bean.UpdateBean;
+import com.zhixing.work.zhixin.bean.UpDateInfoBody;
 import com.zhixing.work.zhixin.constant.RoleConstant;
-import com.zhixing.work.zhixin.http.JavaParamsUtils;
-import com.zhixing.work.zhixin.http.okhttp.OkUtils;
-import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
+import com.zhixing.work.zhixin.msgctrl.RxBus;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
+import com.zhixing.work.zhixin.network.response.SmsCodeResult;
+import com.zhixing.work.zhixin.network.response.UpdatePasswordResult;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.Utils;
+import com.zhixing.work.zhixin.widget.ClearEditText;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.FormBody;
-import okhttp3.RequestBody;
+import rx.Subscription;
 
+/**
+ * 更新密码
+ */
 public class UpDatePwdActivity extends BaseTitleActivity {
 
-    @BindView(R.id.tv_update_person)
-    TextView tvUpdatePerson;
-    @BindView(R.id.tv_update_date_company)
-    TextView tvUpdateDateCompany;
-    @BindView(R.id.code_ed)
-    EditText codeEd;
-    @BindView(R.id.btn_update_code)
-    TextView btnUpdateCode;
-    @BindView(R.id.password_ed)
-    EditText passwordEd;
-    @BindView(R.id.confirm_password)
-    EditText confirmPassword;
-    @BindView(R.id.btn_go_update)
-    TextView btnGoUpdate;
-    @BindView(R.id.phone_ed)
-    EditText phoneEd;
-    private String type = RoleConstant.PERSONAL_ROLE;
-    private String phone;
-    private String password;
-    private String confirmpassword;
-    private String code;
-    private Context context;
+    public static final String KEY_INTENT_ROLE = "intentRole";
+    @BindView(R.id.editTelephone)
+    ClearEditText editTelephone;
+    @BindView(R.id.verification_code)
+    ClearEditText verificationCode;
+    @BindView(R.id.get_verification_code)
+    TextView getVerificationCode;
+    @BindView(R.id.editPassword)
+    ClearEditText editPassword;
+    @BindView(R.id.show_password)
+    ImageView showPassword;
+    @BindView(R.id.btn_update)
+    Button btnLogin;
+    @BindView(R.id.btn_cancel)
+    Button btnCancel;
+
+    private Subscription mGetVerificationCodeSubscription;
+    private Subscription mUpdatePasswordSubscription;
+    private String mUserRole;
+    private String mPhoneNumber;
+    private String mPassword;
+    private String mSmsCode;
+    private String mSmsCodeTypeEnum; //短信类型
+    private boolean mShowPassword ;
     private int time = 60;
     private Timer timer;// 短信重发倒计时
     private Repeat repeat;
@@ -66,89 +74,35 @@ public class UpDatePwdActivity extends BaseTitleActivity {
         setContentView(R.layout.activity_up_date_pwd);
         ButterKnife.bind(this);
         context = this;
-        setTitle(ResourceUtils.getString(R.string.forget_password_title));
+        setTitle(ResourceUtils.getString(R.string.update_password));
+        mUserRole = getIntent().getStringExtra(KEY_INTENT_ROLE);
+        mSmsCodeTypeEnum = RoleConstant.SMS_CODE_UPDATE;
+        mShowPassword = false;
+        mGetVerificationCodeSubscription = RxBus.getInstance().toObservable(SmsCodeResult.class).subscribe(
+                result -> handlerSmsCodeResult(result)
+        );
+        mUpdatePasswordSubscription = RxBus.getInstance().toObservable(UpdatePasswordResult.class).subscribe(
+                updateResult -> handlerUpdateResult(updateResult)
+        );
     }
 
-    @OnClick({R.id.tv_update_person, R.id.tv_update_date_company, R.id.btn_update_code, R.id.btn_go_update})
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.tv_update_person:
-                type = RoleConstant.PERSONAL_ROLE;
-                tvUpdatePerson.setTextSize(20);
-                tvUpdatePerson.setTextColor(context.getResources().getColor(R.color.login_person_tv));
-                tvUpdateDateCompany.setTextSize(16);
-                tvUpdateDateCompany.setTextColor(context.getResources().getColor(R.color.login_company_tv));
-                break;
-            case R.id.tv_update_date_company:
-                type = RoleConstant.ENTERPRISE_ROLE;
-                tvUpdatePerson.setTextSize(16);
-                tvUpdatePerson.setTextColor(context.getResources().getColor(R.color.login_company_tv));
-                tvUpdateDateCompany.setTextSize(20);
-                tvUpdateDateCompany.setTextColor(context.getResources().getColor(R.color.login_person_tv));
-                break;
-            case R.id.btn_update_code:
-                phone = phoneEd.getText().toString();
-                if (Utils.isMobileNO1(phone)) {
-                    timer = new Timer();
-                    repeat = new Repeat();
-                    timer.schedule(repeat, 0, 1000);
-                    btnUpdateCode.setClickable(false);
-                    btnUpdateCode.setBackgroundColor(getResources().getColor(R.color.withDrawBankText));
-                    OkUtils.getInstances().httpGet(context, RequestConstant.GET_REGISTER_CODE, JavaParamsUtils.getInstances().Short_Message(phone, type, "20"), new TypeToken<EntityObject<Object>>() {
-                    }.getType(), new ResultCallBackListener<Object>() {
-                        @Override
-                        public void onFailure(int errorId, String msg) {
-                            AlertUtils.toast(context, msg);
-                        }
-
-                        @Override
-                        public void onSuccess(EntityObject<Object> response) {
-                            AlertUtils.toast(context, ResourceUtils.getString(R.string.get_success_and_waiting));
-                        }
-                    });
-                } else {
-                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_phone_number_unusable));
-                }
-                break;
-            case R.id.btn_go_update:
-
-                phone = phoneEd.getText().toString();
-                code = codeEd.getText().toString();
-                password = passwordEd.getText().toString();
-
-
-                confirmpassword = confirmPassword.getText().toString();
-
-
-                if (!Utils.isMobileNO1(phone)) {
-                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_phone_number_unusable));
-                    return;
-                }
-                if(TextUtils.isEmpty(password)){
-                    AlertUtils.toast(context,ResourceUtils.getString(R.string.alert_pass_word_unusable));
-                    return;
-                }
-                if (!TextUtils.isDigitsOnly(code)) {
-                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_verification_code_is_null));
-                    return;
-                }
-                if (!password.equals(confirmpassword)) {
-                    AlertUtils.toast(context, ResourceUtils.getString(R.string.alert_pass_word_not_match));
-                }
-                UpdateBean bean = new UpdateBean();
-                bean.PhoneNum = phone;
-
-                bean.NewPassword = password;
-                bean.Role = type;
-                bean.SmsCode = code;
-                RequestBody body = new FormBody.Builder()
-                        .add("PhoneNum", phone)
-                        .add("NewPassword", password)
-                        .add("Role", type)
-                        .add("SmsCode", code)
-                        .build();
-                modifyPassword(body, phone, password, code);
-                break;
+    /**
+     * 获取验证码结果
+     * @param result
+     */
+    private void handlerSmsCodeResult(SmsCodeResult result) {
+        if(result.Code == NetworkConstant.SUCCESS_CODE){
+            if(result.isContent()) {
+                AlertUtils.show(ResourceUtils.getString(R.string.get_sms_code_success));
+                timer = new Timer();
+                repeat = new Repeat();
+                timer.schedule(repeat, 0, 1000);
+                getVerificationCode.setEnabled(false);
+            }else {
+                AlertUtils.show(result.Message);
+            }
+        }else {
+            AlertUtils.show(result.Message);
         }
     }
 
@@ -159,7 +113,7 @@ public class UpDatePwdActivity extends BaseTitleActivity {
                 @Override
                 public void run() {
                     time--;
-                    btnUpdateCode.setText(time + "秒后重新发送");
+                    getVerificationCode.setText(time + "秒后重新发送");
                     if (time == 0) {
                         setCanGetPin();
                     }
@@ -169,10 +123,10 @@ public class UpDatePwdActivity extends BaseTitleActivity {
     }
 
     private void setCanGetPin() {
-        btnUpdateCode.setText(ResourceUtils.getString(R.string.get_verification_code));
-        btnUpdateCode.setClickable(true);
-        btnUpdateCode.setBackgroundColor(getResources().getColor(R.color.bcompany));
-        btnUpdateCode.setTextColor(getResources().getColor(R.color.white));
+        getVerificationCode.setText(ResourceUtils.getString(R.string.get_verification_code));
+        getVerificationCode.setEnabled(true);
+        getVerificationCode.setBackgroundColor(getResources().getColor(R.color.bcompany));
+        getVerificationCode.setTextColor(getResources().getColor(R.color.white));
         if (repeat != null) {
             repeat.cancel();
             repeat = null;
@@ -183,33 +137,97 @@ public class UpDatePwdActivity extends BaseTitleActivity {
         time = 60;
     }
 
-    private void modifyPassword(RequestBody body, String phone, String password, String code) {
-
-
-        OkUtils.getInstances().httpatch(body, context, RequestConstant.UPDATE_PASSWORD, JavaParamsUtils.getInstances().upPassword(phone, password, type, code), new TypeToken<EntityObject<Object>>() {
-        }.getType(), new ResultCallBackListener<Object>() {
-            @Override
-            public void onFailure(int errorId, String msg) {
-                hideLoadingDialog();
-                AlertUtils.toast(context, msg);
+    /**
+     * 更新密码结果
+     * @param result
+     */
+    private void handlerUpdateResult(UpdatePasswordResult result) {
+        if(result.Code == NetworkConstant.SUCCESS_CODE){
+            if(result.isContent()){
+                AlertUtils.show(ResourceUtils.getString(R.string.update_password_success));
+                this.finish();
+            }else{
+               AlertUtils.show(result.Message);
             }
-
-            @Override
-            public void onSuccess(EntityObject<Object> response) {
-                hideLoadingDialog();
-                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
-                    AlertUtils.toast(context, ResourceUtils.getString(R.string.fix_success));
-                    startActivity(new Intent(context, LoginActivity.class));
-                    finish();
-                } else {
-                    AlertUtils.toast(context, response.getMessage());
-                }
-
-
-            }
-        });
-
+        }else {
+            AlertUtils.show(result.Message);
+        }
     }
 
 
+    @OnClick({R.id.get_verification_code, R.id.btn_update, R.id.btn_cancel,R.id.show_password})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.get_verification_code:
+                getVerificationCode();
+                break;
+            case R.id.btn_update:
+                updatePassWord();
+                break;
+            case R.id.show_password:
+                if (mShowPassword) {// 显示密码
+                    showPassword.setImageDrawable(getResources().getDrawable(R.drawable.icon_show));
+                    editPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    editPassword.setSelection(editPassword.getText().toString().length());
+                    mShowPassword = !mShowPassword;
+                } else {// 隐藏密码
+                    showPassword.setImageDrawable(getResources().getDrawable(R.drawable.icon_hide));
+                    editPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    editPassword.setSelection(editPassword.getText().toString().length());
+                    mShowPassword = !mShowPassword;
+                }
+                break;
+            case R.id.btn_cancel:
+                this.finish();
+                break;
+        }
+    }
+
+    private void updatePassWord() {
+        mPhoneNumber = editTelephone.getText().toString();
+        mPassword = editPassword.getText().toString();
+        mSmsCode = verificationCode.getText().toString();
+        if(!Utils.isMobileNO1(mPhoneNumber)){
+            AlertUtils.show(ResourceUtils.getString(R.string.alert_phone_number_unusable));
+            return;
+        }
+        if(TextUtils.isEmpty(mPassword) || mPassword.length() < 6){
+            AlertUtils.show(ResourceUtils.getString(R.string.password_hint));
+            return;
+        }
+        if(TextUtils.isEmpty(mSmsCode) || mSmsCode.length() < 6){
+            AlertUtils.show(ResourceUtils.getString(R.string.verification_code_is_null));
+            return;
+        }
+        UpDateInfoBody  infoBody = new UpDateInfoBody();
+        infoBody.setPhoneNum(mPhoneNumber);
+        infoBody.setNewPassword(mPassword);
+        infoBody.setRole(mUserRole);
+        infoBody.setSmsCode(mSmsCode);
+        Map params = new HashMap();
+        params.put(RequestConstant.KEY_UPDATE_PSAAWORD_BODY,infoBody);
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_UPDATE_PASSWORD,params);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().unsubscribe(mGetVerificationCodeSubscription,mUpdatePasswordSubscription);
+    }
+
+    /**
+     * 获取验证码
+     */
+    public void getVerificationCode() {
+        mPhoneNumber = editTelephone.getText().toString();
+        if(!Utils.isMobileNO1(mPhoneNumber)){
+            AlertUtils.show(ResourceUtils.getString(R.string.alert_phone_number_unusable));
+            return;
+        }
+        Map params = new HashMap();
+        params.put(RequestConstant.KEY_PHONE_NUMBER,mPhoneNumber);
+        params.put(RequestConstant.KEY_USER_ROLE_ENUM,mUserRole);
+        params.put(RequestConstant.KEY_SMS_CODE_TYPE_ENUM,mSmsCodeTypeEnum);
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_VERIFICATION_CODE,params);
+    }
 }

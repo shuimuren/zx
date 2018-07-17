@@ -57,6 +57,7 @@ public class SettingUtils {
         public static final String AREALIST = "areaList"; // 区
         public static final String STAFFSLIST = "StaffsList"; //公司所有员工
         public static final String JOB_LIST_DATA = "jobListData";//意向
+        public static final String KEY_ROLE_INFO = "roleInfo";
         /**
          * 点赞消息
          */
@@ -696,7 +697,33 @@ public class SettingUtils {
     }
 
     /**
-     * 保存nckName
+     * 保存当前登录角色
+     *
+     * roleInfo 10:个人,10企业
+     */
+    public static void putRole(String roleInfo) {
+
+        if (!TextUtils.isEmpty(roleInfo)) {
+            PreferenceUtils.putString(SettingItems.KEY_ROLE_INFO, roleInfo);
+        }
+    }
+
+    /**
+     * 获取登录角色
+     *
+     * @return
+     */
+    public static String getRoleInfo() {
+
+        String role = PreferenceUtils.getString(SettingItems.KEY_ROLE_INFO);
+        if (!TextUtils.isEmpty(role)) {
+            return role;
+        }
+        return "";
+    }
+
+    /**
+     *
      *
      * @param //用户登录类型
      */

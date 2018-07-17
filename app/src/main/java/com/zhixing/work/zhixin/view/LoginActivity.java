@@ -2,25 +2,25 @@ package com.zhixing.work.zhixin.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
+import android.support.v4.app.FragmentActivity;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
-import com.zhixing.work.zhixin.base.BaseTitleActivity;
-import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.constant.RoleConstant;
-import com.zhixing.work.zhixin.http.JavaParamsUtils;
-import com.zhixing.work.zhixin.http.okhttp.OkUtils;
-import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.dialog.LoadingDialog;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
+import com.zhixing.work.zhixin.msgctrl.RxBus;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
+import com.zhixing.work.zhixin.network.response.LoginResult;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.RegularUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
@@ -28,153 +28,190 @@ import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.widget.ClearEditText;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscription;
 
 
-public class LoginActivity extends BaseTitleActivity {
+public class LoginActivity extends FragmentActivity {
 
-    @BindView(R.id.cardView)
-    CardView cardView;
-    @BindView(R.id.tv_login_person)
-    TextView tvLoginPerson;
-    @BindView(R.id.tv_login_company)
-    TextView tvLoginCompany;
-    @BindView(R.id.btn_login)
-    TextView btnLogin;
-    @BindView(R.id.phone_ed)
-    ClearEditText phoneEd;
-    @BindView(R.id.register)
-    TextView register;
+    @BindView(R.id.tv_personal)
+    TextView tvPersonal;
+    @BindView(R.id.mark_personal)
+    View markPersonal;
+    @BindView(R.id.ll_personal)
+    LinearLayout llPersonal;
+    @BindView(R.id.tv_company)
+    TextView tvCompany;
+    @BindView(R.id.mark_company)
+    View markCompany;
+    @BindView(R.id.ll_company)
+    LinearLayout llCompany;
+    @BindView(R.id.editTelephone)
+    ClearEditText editTelephone;
+    @BindView(R.id.editPassword)
+    ClearEditText editPassword;
     @BindView(R.id.show_password)
     ImageView showPassword;
-    @BindView(R.id.forget_password)
-    TextView forgetPassword;
-    @BindView(R.id.rl_login)
-    CardView rlLogin;
-    @BindView(R.id.password_ed)
-    EditText passwordEd;
+    @BindView(R.id.btn_login)
+    Button btnLogin;
+    @BindView(R.id.tvForgetPassword)
+    TextView tvForgetPassword;
+    @BindView(R.id.btn_register)
+    Button btnRegister;
 
-    private String type;
+    private String defaultRole;
+    private Subscription mLoginSubscription;
+    private boolean mShowPassword;
     private String phone;
-    private String password;
-    private Boolean isShowPassword = true;
-
+    private LoadingDialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        setTitle(ResourceUtils.getString(R.string.login));
-        setLeftNotVisible();
-        context = this;
-        type = RoleConstant.PERSONAL_ROLE;
         initView();
     }
 
-
     private void initView() {
-        if (!TextUtils.isEmpty(SettingUtils.getPhoneNumber())) {
-            phoneEd.setText(SettingUtils.getPhoneNumber());
-            phoneEd.setSelection(SettingUtils.getPhoneNumber().length());
+
+        mLoginSubscription = RxBus.getInstance().toObservable(LoginResult.class).subscribe(
+                result -> handlerLoginResult(result)
+        );
+        setRoleView();
+        mDialog = new LoadingDialog(LoginActivity.this);
+    }
+
+    private void setRoleView() {
+        if(TextUtils.isEmpty(SettingUtils.getRoleInfo()) || SettingUtils.getRoleInfo().equals(RoleConstant.PERSONAL_ROLE)){
+            defaultRole = RoleConstant.PERSONAL_ROLE;
+            tvPersonal.setSelected(true);
+            llPersonal.setSelected(true);
+            markPersonal.setVisibility(View.VISIBLE);
+            tvCompany.setSelected(false);
+            llCompany.setSelected(false);
+            markCompany.setVisibility(View.INVISIBLE);
+        }else {
+            defaultRole = RoleConstant.ENTERPRISE_ROLE;
+            tvPersonal.setSelected(false);
+            llPersonal.setSelected(false);
+            markPersonal.setVisibility(View.INVISIBLE);
+            tvCompany.setSelected(true);
+            llCompany.setSelected(true);
+            markCompany.setVisibility(View.VISIBLE);
         }
     }
 
-    @OnClick({R.id.tv_login_person, R.id.tv_login_company, R.id.btn_login, R.id.cardView, R.id.forget_password, R.id.show_password})
+    private void handlerLoginResult(LoginResult result) {
+        if(mDialog != null){
+            mDialog.dismiss();
+        }
+        if (result.Code == NetworkConstant.SUCCESS_CODE) {
+            if (!TextUtils.isEmpty(result.getContent())) {
+                SettingUtils.putToken(result.getContent());
+                SettingUtils.setHttpRequestHead(result.getContent());
+                String token = Utils.getFromBase64(result.getContent().substring(result.getContent().indexOf(".") + 1, result.getContent().lastIndexOf(".")));
+                if (!TextUtils.isEmpty(token)) {
+                    SettingUtils.putTokenBean(token);
+                }
+                SettingUtils.putRole(defaultRole);
+                SettingUtils.putPhoneNumber(phone);
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+            }
+        } else {
+            AlertUtils.show(result.Message);
+        }
+    }
+
+
+    @OnClick({R.id.ll_personal, R.id.ll_company, R.id.show_password, R.id.btn_login, R.id.tvForgetPassword,
+            R.id.btn_register,R.id.imgWeChat,R.id.imgQQ})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            //切换账户类型切换为个人用户
-            case R.id.tv_login_person:
-                type = RoleConstant.PERSONAL_ROLE;
-                tvLoginPerson.setTextSize(20);
-                tvLoginPerson.setTextColor(ResourceUtils.getColor(R.color.login_person_tv));
-                tvLoginCompany.setTextSize(16);
-                tvLoginCompany.setTextColor(ResourceUtils.getColor(R.color.login_company_tv));
+            case R.id.ll_personal:
+                defaultRole = RoleConstant.PERSONAL_ROLE;
+                tvPersonal.setSelected(true);
+                llPersonal.setSelected(true);
+                markPersonal.setVisibility(View.VISIBLE);
+                tvCompany.setSelected(false);
+                llCompany.setSelected(false);
+                markCompany.setVisibility(View.INVISIBLE);
                 break;
-            //切换账户类型切换为企业
-            case R.id.tv_login_company:
-                type = RoleConstant.ENTERPRISE_ROLE;
-                tvLoginPerson.setTextSize(16);
-                tvLoginPerson.setTextColor(ResourceUtils.getColor(R.color.login_company_tv));
-                tvLoginCompany.setTextSize(20);
-                tvLoginCompany.setTextColor(ResourceUtils.getColor(R.color.login_person_tv));
+            case R.id.ll_company:
+                defaultRole = RoleConstant.ENTERPRISE_ROLE;
+                tvPersonal.setSelected(false);
+                llPersonal.setSelected(false);
+                markPersonal.setVisibility(View.INVISIBLE);
+                tvCompany.setSelected(true);
+                llCompany.setSelected(true);
+                markCompany.setVisibility(View.VISIBLE);
                 break;
-            //注册
-            case R.id.cardView:
-                startActivity(new Intent(context, RegistActivity.class));
-                break;
-            //忘记密码
-            case R.id.forget_password:
-                startActivity(new Intent(context, UpDatePwdActivity.class));
-                break;
-            //显示密码
             case R.id.show_password:
-                if (isShowPassword) {// 显示密码
+                if (mShowPassword) {// 显示密码
                     showPassword.setImageDrawable(getResources().getDrawable(R.drawable.icon_show));
-                    passwordEd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    passwordEd.setSelection(passwordEd.getText().toString().length());
-                    isShowPassword = !isShowPassword;
+                    editPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    editPassword.setSelection(editPassword.getText().toString().length());
+                    mShowPassword = !mShowPassword;
                 } else {// 隐藏密码
                     showPassword.setImageDrawable(getResources().getDrawable(R.drawable.icon_hide));
-                    passwordEd.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    passwordEd.setSelection(passwordEd.getText().toString().length());
-                    isShowPassword = !isShowPassword;
+                    editPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    editPassword.setSelection(editPassword.getText().toString().length());
+                    mShowPassword = !mShowPassword;
                 }
                 break;
-            //登录
             case R.id.btn_login:
-                phone = phoneEd.getText().toString();
-                password = passwordEd.getText().toString();
-                if (TextUtils.isEmpty(phone)) {
-                    AlertUtils.show(ResourceUtils.getString(R.string.alert_phone_number_is_null));
-                    return;
-                }else if(!RegularUtils.isMobileNo(phone)){
-                    AlertUtils.show(ResourceUtils.getString(R.string.alert_phone_number_unusable));
-                    return;
-                } else if (TextUtils.isEmpty(password)) {
-                   AlertUtils.show(ResourceUtils.getString(R.string.alert_pass_word_unusable));
-                    return;
-                }else if(password.length() < 6){
-                   AlertUtils.show(ResourceUtils.getString(R.string.alert_pass_word_length));
-                   return;
-                } else {
-                    showLoadingDialog(ResourceUtils.getString(R.string.landing));
-                    OkUtils.getInstances().httpPost(context, RequestConstant.GO_LOGIN,
-                            JavaParamsUtils.getInstances().Login(phone, password, type), new TypeToken<EntityObject<String>>() {
-                            }.getType(), new ResultCallBackListener<String>() {
-                                @Override
-                                public void onFailure(int errorId, String msg) {
-                                    hideLoadingDialog();
-                                    AlertUtils.toast(context, msg);
-                                }
-                                @Override
-                                public void onSuccess(EntityObject<String> response) {
-                                    hideLoadingDialog();
-                                    if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
-                                        if (!TextUtils.isEmpty(response.getContent())) {
-                                            SettingUtils.putToken(response.getContent());
-                                            SettingUtils.setHttpRequestHead(response.getContent());
-                                            String token = Utils.getFromBase64(response.getContent().substring(response.getContent().indexOf(".") + 1, response.getContent().lastIndexOf(".")));
-                                            if (!TextUtils.isEmpty(token)) {
-                                                SettingUtils.putTokenBean(token);
-                                            }
-
-                                            SettingUtils.putPhoneNumber(phone);
-                                            startActivity(new Intent(context, MainActivity.class));
-                                            finish();
-                                        }
-                                    } else {
-                                        AlertUtils.toast(context, response.getMessage());
-                                    }
-                                }
-                            });
-                    break;
-
-                }
+                doLogin();
+                break;
+            case R.id.tvForgetPassword:
+                Intent intentPassword = new Intent(LoginActivity.this,UpDatePwdActivity.class);
+                intentPassword.putExtra(UpDatePwdActivity.KEY_INTENT_ROLE,defaultRole);
+                startActivity(intentPassword);
+                break;
+            case R.id.btn_register:
+                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+                break;
+            case R.id.imgWeChat:
+                break;
+            case R.id.imgQQ:
+                break;
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().unsubscribe(mLoginSubscription);
+    }
 
+    private void doLogin() {
+        phone = editTelephone.getText().toString();
+        String password = editPassword.getText().toString();
+        if (TextUtils.isEmpty(phone)) {
+            AlertUtils.show(ResourceUtils.getString(R.string.alert_phone_number_is_null));
+            return;
+        }else if(!RegularUtils.isMobileNo(phone)){
+            AlertUtils.show(ResourceUtils.getString(R.string.alert_phone_number_unusable));
+            return;
+        } else if (TextUtils.isEmpty(password)) {
+            AlertUtils.show(ResourceUtils.getString(R.string.alert_pass_word_unusable));
+            return;
+        }else if(password.length() < 6){
+            AlertUtils.show(ResourceUtils.getString(R.string.alert_pass_word_length));
+            return;
+        }
+        Map params = new HashMap();
+        params.put(RequestConstant.KEY_PHONE_NUMBER, phone);
+        params.put(RequestConstant.KEY_PASSWORD, password);
+        params.put(RequestConstant.KEY_USER_ROLE_ENUM, defaultRole);
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_LOGIN, params);
+        mDialog.setLoadingMessage(ResourceUtils.getString(R.string.loading));
+        mDialog.setCancelable(false);
+        mDialog.show();
+    }
 }

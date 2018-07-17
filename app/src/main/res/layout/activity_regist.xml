@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:background="@drawable/image_login_bg"
     tools:context="com.zixin.login.activity.RegistActivity">
 
 
@@ -48,7 +48,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/dp_15"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:text="@string/enterprise"
+                    android:text="@string/company"
                     android:textColor="@color/login_company_tv"
                     android:textSize="@dimen/font_normal" />
 

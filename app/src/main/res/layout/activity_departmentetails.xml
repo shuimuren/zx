@@ -4,91 +4,71 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zhixing.work.zhixin.view.myCenter.organizational.DepartmentDetailsActivity">
+    tools:context="com.zhixing.work.zhixin.view.myCenter.organizational.DepartmentManagementActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/rl_add"
-            android:background="@color/bg_main"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/main_color">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="7dp"
-                    android:layout_marginLeft="@dimen/dp_40"
-                    android:layout_marginRight="@dimen/dp_40"
-                    android:layout_marginTop="7dp"
-                    android:background="@drawable/btn_white_shape">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/dp_20"
-                        android:src="@drawable/search_ed" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@null"
-                        android:hint="搜索您需要的内容"
-                        android:textColorHint="@color/hint" />
-                </LinearLayout>
-
-            </LinearLayout>
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/dp_50">
+            <include layout="@layout/layout_search_view" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp_50"
                 android:background="@color/white">
 
-                <TextView
-                    android:id="@+id/company_name"
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/departmentTitleList"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:text=""
-                    android:textColor="@color/main_color" />
+                    android:layout_height="wrap_content"/>
 
-                <TextView
-                    android:id="@+id/department_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp_10"
-                    android:text=""
-                    android:textColor="@color/hint" />
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/listview"
+            <com.zhixing.work.zhixin.widget.ElasticScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white">
+                android:layout_height="wrap_content">
 
-            </android.support.v7.widget.RecyclerView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/staff_listview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white">
-            </android.support.v7.widget.RecyclerView>
+                    <View style="@style/division_view" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/department_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_staff_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <View style="@style/division_view" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/staff_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <View style="@style/division_view" />
+                    </LinearLayout>
+
+                    <View
+                        style="@style/line"
+                        android:layout_marginBottom="@dimen/margin_big" />
+                </LinearLayout>
+
+
+            </com.zhixing.work.zhixin.widget.ElasticScrollView>
         </LinearLayout>
-
 
         <LinearLayout
             android:id="@+id/rl_add"
@@ -109,8 +89,8 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
                 android:background="@color/hint"></View>
 
             <TextView
@@ -126,8 +106,8 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
                 android:background="@color/hint"></View>
 
             <TextView
@@ -139,6 +119,6 @@
                 android:text="设置"
                 android:textColor="@color/main_color" />
         </LinearLayout>
-    </RelativeLayout>
 
+    </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

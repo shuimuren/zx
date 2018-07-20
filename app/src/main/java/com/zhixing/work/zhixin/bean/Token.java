@@ -26,6 +26,16 @@ public class Token  implements Serializable{
     private int CompanyId;
     private int StaffRole;
 
+    public int getDepartmentId() {
+        return DepartmentId;
+    }
+
+    public void setDepartmentId(int departmentId) {
+        DepartmentId = departmentId;
+    }
+
+    private int DepartmentId;
+
     public int getExp() {
         return exp;
     }

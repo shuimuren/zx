@@ -107,6 +107,7 @@
     <dimen name="toolbar_height">52dp</dimen>
     <dimen name="center_item_height">50dp</dimen>
     <dimen name="round_avatar_width">55dp</dimen>
+    <dimen name="item_avatar_width">45dp</dimen>
     <dimen name="btn_height">45dp</dimen>
     <dimen name="login_corner">15px</dimen>
     <dimen name="main_btn_corner">25dp</dimen>
@@ -114,4 +115,6 @@
     <dimen name="telephone_text_corner">22dp</dimen>
     <dimen name="telephone_text_height">44dp</dimen>
     <dimen name="btn_login_height">50dp</dimen>
+    <dimen name="normal_item_height">50dp</dimen>
+    <dimen name="avatar_item_height">61dp</dimen>
 </resources>

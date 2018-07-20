@@ -69,6 +69,7 @@
                     android:text="上级部门"
                     android:textColor="@color/linerlayout_tv"
                     android:textSize="16sp" />
+
                 <TextView
                     android:id="@+id/superior_department"
                     android:layout_width="wrap_content"
@@ -81,7 +82,6 @@
                     android:textColor="@color/color_303030" />
 
                 <ImageView
-                    android:visibility="invisible"
                     android:id="@+id/superior_department_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -89,7 +89,8 @@
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
                     android:src="@drawable/icon_next"
-                    android:textColor="@color/color_303030" />
+                    android:textColor="@color/color_303030"
+                    android:visibility="invisible" />
             </RelativeLayout>
 
             <View style="@style/line"></View>
@@ -170,8 +171,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:background="@drawable/selector_ck_bg"
-                    android:button="@null"
-                    />
+                    android:button="@null" />
             </LinearLayout>
 
 
@@ -224,8 +224,7 @@
                 android:background="@drawable/btn_blue_normal_shape"
                 android:text="删除部门"
                 android:textColor="#ffffff"
-                android:textSize="20sp"
-                 />
+                android:textSize="20sp" />
         </RelativeLayout>
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

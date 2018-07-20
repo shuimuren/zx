@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_department"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/normal_item_height"
+    android:background="@android:color/transparent"
+    android:orientation="horizontal"
+    android:padding="@dimen/padding_normal">
+
+    <TextView
+        android:id="@+id/tv_department_name"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_303030"
+        android:textSize="@dimen/font_list_left"
+        tools:text="name" />
+
+    <TextView
+        android:id="@+id/tvNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity=""
+        android:drawablePadding="@dimen/padding_normal"
+        android:drawableRight="@drawable/icon_next"
+        android:gravity="center_vertical"
+        android:textColor="@color/color_303030"
+        android:textSize="@dimen/font_list_right"
+        tools:text="2" />
+
+
+</LinearLayout>

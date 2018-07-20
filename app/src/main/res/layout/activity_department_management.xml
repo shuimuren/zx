@@ -9,16 +9,12 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/rl_add"
-            android:background="@color/bg_main"
-            android:orientation="vertical">
-
-            <include layout="@layout/layout_search_view"/>
-
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/dp_50">
+            <include layout="@layout/layout_search_view" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -26,29 +22,60 @@
                 android:background="@color/white">
 
                 <TextView
-                    android:id="@+id/title"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:id="@+id/company_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/dp_10"
-                    android:gravity="center_vertical"
-                    android:text=""
-                    android:textColor="@color/hint" />
+                    android:textColor="@color/color_303030"
+                    android:textSize="@dimen/font_normal"
+                    android:textStyle="bold"
+                    tools:text="职信(深圳)科技有限公司" />
+
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/listview"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"></android.support.v7.widget.RecyclerView>
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/staff_listview"
-                android:background="@color/white"
+            <com.zhixing.work.zhixin.widget.ElasticScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            </android.support.v7.widget.RecyclerView>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
+                    <View style="@style/division_view" />
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/department_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_staff_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <View style="@style/division_view" />
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/staff_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <View style="@style/division_view" />
+                    </LinearLayout>
+
+                    <View
+                        style="@style/line"
+                        android:layout_marginBottom="@dimen/margin_big" />
+                </LinearLayout>
+
+
+            </com.zhixing.work.zhixin.widget.ElasticScrollView>
         </LinearLayout>
+
 
         <LinearLayout
             android:id="@+id/rl_add"
@@ -69,8 +96,8 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="@dimen/dp_10"
-                android:layout_marginTop="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_20"
+                android:layout_marginTop="@dimen/dp_20"
                 android:background="@color/hint"></View>
 
             <TextView

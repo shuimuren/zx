@@ -1,89 +1,70 @@
 package com.zhixing.work.zhixin.dialog;
 
 import android.content.Context;
-import android.view.View;
+import android.text.TextUtils;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
+import com.zhixing.work.zhixin.share.ShareConstant;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
  * 分享
  */
 public class ShareDialog extends BottomDialog {
-    private TextView camera;
-    private TextView photo;
-    private RelativeLayout rl_qq;
+
+    private RelativeLayout rlQQ;
     private LinearLayout llClose;
-    private RelativeLayout rl_wechat;
-    private RelativeLayout rl_sms;
-    private RelativeLayout rl_firend;
-    private OnItemClickListener clickListener;
+    private RelativeLayout rlWeChat;
+    private RelativeLayout rlSms;
+    private RelativeLayout rlZX;
+    private TextView dialogTitle;
+    private Map<String, Object> mParams;
 
 
-    public static final int TYPE_QQ = 0;
-    public static final int TYPE_WECHAT = 1;
-    public static final int TYPE_Friend = 2;
-    public static final int TYPE_SMS = 3;
-
-    public interface OnItemClickListener {
-
-        void onClick(ShareDialog dialog, int index);
-    }
-
-    public ShareDialog(Context context, OnItemClickListener clickListener) {
+    public ShareDialog(Context context, Map<String, Object> params) {
         super(context);
-        this.clickListener = clickListener;
+        mParams = new HashMap<>();
+        mParams.putAll(params);
         setContentView(R.layout.dialog_share);
         bindViews();
     }
 
     private void bindViews() {
-        rl_qq = (RelativeLayout) findViewById(R.id.rl_qq);
-        rl_wechat = (RelativeLayout) findViewById(R.id.rl_wechat);
-        rl_firend = (RelativeLayout) findViewById(R.id.rl_firend);
-        rl_sms = (RelativeLayout) findViewById(R.id.rl_sms);
+        rlQQ = (RelativeLayout) findViewById(R.id.rl_qq);
+        rlWeChat = (RelativeLayout) findViewById(R.id.rl_wechat);
+        rlZX = (RelativeLayout) findViewById(R.id.rl_firend);
+        rlSms = (RelativeLayout) findViewById(R.id.rl_sms);
         llClose = (LinearLayout) findViewById(R.id.llClose);
-        llClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
-        rl_qq.setOnClickListener(new View.OnClickListener() {
+        dialogTitle= findViewById(R.id.tv_companyName);
+        if(!mParams.isEmpty() && TextUtils.isEmpty((String)mParams.get(ShareConstant.PARAM_SHARE_COMPANY_NAME))){
+            dialogTitle.setText(String.format("邀请同事加入%s",mParams.get(ShareConstant.PARAM_SHARE_COMPANY_NAME)));
+        }
 
-            @Override
-            public void onClick(View v) {
-                clickListener.onClick(ShareDialog.this, TYPE_QQ);
-            }
-
+        llClose.setOnClickListener(v -> dismiss());
+        rlQQ.setOnClickListener(v -> {
+            MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHARE_TO_QQ, mParams);
+            dismiss();
         });
 
-        rl_wechat.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                clickListener.onClick(ShareDialog.this, TYPE_WECHAT);
-            }
-
+        rlWeChat.setOnClickListener(v -> {
+            MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHARE_TO_FRIEND, mParams);
+            dismiss();
         });
-        rl_firend.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                clickListener.onClick(ShareDialog.this, TYPE_Friend);
-            }
-
+        rlZX.setOnClickListener(v -> {
+            MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHARE_TO_ZX, mParams);
+            dismiss();
         });
-        rl_sms.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                clickListener.onClick(ShareDialog.this, TYPE_SMS);
-            }
-
+        rlSms.setOnClickListener(v -> {
+            MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHARE_TO_EMS, mParams);
+            dismiss();
         });
     }
 }

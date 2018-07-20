@@ -26,42 +26,60 @@
 
     </LinearLayout>
 
-    <View style="@style/division_view" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/department_list"
+    <com.zhixing.work.zhixin.widget.ElasticScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:id="@+id/ll_staff_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <View style="@style/division_view" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/staff_list"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <View style="@style/division_view" />
-    </LinearLayout>
+            <View style="@style/division_view" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/department_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:id="@+id/ll_staff_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <View style="@style/division_view" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/staff_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <View style="@style/division_view" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/workmate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:drawableLeft="@drawable/icon_add"
+                android:drawablePadding="@dimen/padding_normal"
+                android:gravity="center_vertical"
+                android:padding="@dimen/dp_10"
+                android:text="@string/invite_colleague"
+                android:textColor="#408acf"
+                android:textSize="@dimen/font_big" />
+
+            <View
+                style="@style/line"
+                android:layout_marginBottom="@dimen/margin_big" />
+        </LinearLayout>
 
 
-    <TextView
-        android:id="@+id/workmate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:drawableLeft="@drawable/icon_add"
-        android:drawablePadding="@dimen/padding_normal"
-        android:gravity="center_vertical"
-        android:paddingLeft="@dimen/dp_10"
-        android:text="@string/invite_colleague"
-        android:textColor="#408acf"
-        android:textSize="@dimen/font_big" />
+    </com.zhixing.work.zhixin.widget.ElasticScrollView>
+
 
 </LinearLayout>
 

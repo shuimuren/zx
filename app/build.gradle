@@ -96,7 +96,9 @@ dependencies {
     implementation 'com.hyman:flowlayout-lib:1.1.2'
     //RecyclerViewHelper
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:${rootProject.ext.recylerViewHelperVersion}"
-//banner轮播图
+    //banner轮播图
     implementation "com.youth.banner:banner:${rootProject.ext.bannerVersion}"
+    //微信分享
+    implementation 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 
 }

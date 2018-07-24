@@ -28,6 +28,7 @@ import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.GlideUtils;
 import com.zhixing.work.zhixin.util.Utils;
+import com.zhixing.work.zhixin.util.ZxTextUtils;
 import com.zhixing.work.zhixin.view.companyCard.back.CompanyPerfectCardActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -134,10 +135,8 @@ public class CompanyBasicFragment extends SupportFragment {
                 intent.putExtra("type", "edit");
                 intent.putExtras(bundle);
                 startActivity(intent);
-
                 break;
             case R.id.perfect_card:
-
                 startActivity(new Intent(getActivity(), CompanyPerfectCardActivity.class).putExtra("type", "add"));
                 break;
         }
@@ -149,11 +148,8 @@ public class CompanyBasicFragment extends SupportFragment {
         thread = new Thread(new Runnable() {
             @Override
             public void run() {
-
                 if (company == null) {
-
                     getData();
-
                 }
             }
         });
@@ -175,29 +171,14 @@ public class CompanyBasicFragment extends SupportFragment {
         if (!TextUtils.isEmpty(company.getLogo())) {
             GlideUtils.getInstance().loadCircleUserIconInto(getActivity(), ALiYunFileURLBuilder.getUserIconUrl(company.getLogo()), logo);
         }
-        companyRegion.setText(region);
-        if (TextUtils.isEmpty(company.getAddress())) {
+        companyRegion.setText(ZxTextUtils.getTextWithDefault(region));
+        companyAddress.setText(ZxTextUtils.getTextWithDefault(company.getAddress()));
+        companyWebsite.setText(ZxTextUtils.getTextWithDefault(company.getWebsiteUrl()));
+        companyName.setText(ZxTextUtils.getTextWithDefault(company.getFullName()));
+        companyAbbreviation.setText(ZxTextUtils.getTextWithDefault(company.getShortName()));
 
-        } else {
-            companyAddress.setText(company.getAddress());
-        }
-
-        companyWebsite.setText(company.getWebsiteUrl());
-
-        companyName.setText(company.getFullName());
-        companyAbbreviation.setText(company.getShortName());
-        if (!TextUtils.isEmpty(company.getNatureOfUnit())) {
-
-
-        }
-        if (!TextUtils.isEmpty(company.getIndustryTypeId())) {
-
-
-        }
         if (!TextUtils.isEmpty(company.getStaffSize())) {
             companyScale.setText(Utils.getStaffSize(company.getStaffSize()));
-
-
         }
         if (!TextUtils.isEmpty(company.getFinancingStage())) {
             companyFinancing.setText(Utils.getFinancingStage(company.getFinancingStage()));

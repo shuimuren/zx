@@ -9,24 +9,25 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/dp_10"
         android:layout_marginTop="@dimen/dp_20"
-        android:gravity="center"
-        android:text="新建部门"
+        android:gravity="left"
+        android:paddingLeft="@dimen/dp_20"
+        android:text="请输入部门名称"
         android:textSize="@dimen/font_list_right" />
 
-    <EditText
-android:paddingLeft="@dimen/dp_10"
+    <com.zhixing.work.zhixin.widget.ClearEditText
         android:id="@+id/ed_text"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@drawable/textview_border"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:layout_marginLeft="@dimen/dp_20"
+        android:layout_marginRight="@dimen/dp_20"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@drawable/shape_edit_text_bg"
+        android:paddingLeft="@dimen/dp_10"
         android:textColor="@color/color_303030"
         android:textSize="@dimen/font_size_14sp" />
 
-    <View
-        style="@style/line"
-        android:layout_marginTop="@dimen/dp_10"></View>
 
     <LinearLayout
 
@@ -34,30 +35,26 @@ android:paddingLeft="@dimen/dp_10"
         android:layout_height="@dimen/dp_50"
         android:orientation="horizontal">
 
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
 
         <TextView
-
             android:id="@+id/cancelBtn"
-            android:layout_width="0dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:gravity="center"
             android:text="取消"
-            android:textColor="@color/color_303030" />
-
-        <View
-            android:layout_width="@dimen/dp_1"
-            android:layout_height="match_parent"
-            android:background="@color/color_e5e5e5"></View>
+            android:textColor="@color/hint"
+            android:textSize="@dimen/font_size_14sp" />
 
         <TextView
-            android:background="@color/main_color"
             android:id="@+id/okBtn"
-            android:layout_width="0dp"
+            android:layout_width="80dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:gravity="center"
             android:text="确定"
-            android:textColor="@color/white" />
+            android:textColor="@color/main_color" />
     </LinearLayout>
 </LinearLayout>

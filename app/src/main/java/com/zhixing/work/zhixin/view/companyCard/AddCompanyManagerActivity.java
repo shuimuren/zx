@@ -3,9 +3,9 @@ package com.zhixing.work.zhixin.view.companyCard;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import com.alibaba.sdk.android.oss.ServiceException;
 import com.google.gson.reflect.TypeToken;
-import com.xmd.file.provider.FileProvider7;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
 import com.zhixing.work.zhixin.aliyun.ALiYunOssFileLoader;
@@ -26,11 +25,8 @@ import com.zhixing.work.zhixin.bean.Manager;
 import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.bean.Token;
 import com.zhixing.work.zhixin.common.Logger;
-import com.zhixing.work.zhixin.dialog.SelectImageDialog;
-import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.ManagerRefreshEvent;
 import com.zhixing.work.zhixin.event.ModifyEvent;
-import com.zhixing.work.zhixin.http.Constant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
@@ -38,26 +34,20 @@ import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.AppUtils;
-import com.zhixing.work.zhixin.util.BitmapUtils;
+import com.zhixing.work.zhixin.util.FileUtil;
 import com.zhixing.work.zhixin.util.GlideUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
-import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.view.card.ModifyContentActivity;
 import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
-import com.zhixing.work.zhixin.view.util.SelectImageActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import imagetool.lhj.com.ImageTool;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
@@ -98,18 +88,19 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
     private String Avatar = "";
     private String id = "";
 
-    public static final int REQUEST_CAMERA = 10; // 拍照
-    private File photoFile;
-    private Uri imageUri;
-    private List<AlbumItem> selectedImages;//标记选中的图片
-    private String upLoadImages = "";//上传图片组
-    private File cropFilePath;
-    private Uri outPutUri;
+//    public static final int REQUEST_CAMERA = 10; // 拍照
+//    private File photoFile;
+//    private Uri imageUri;
+//    private List<AlbumItem> selectedImages;//标记选中的图片
+//    private String upLoadImages = "";//上传图片组
+//    private File cropFilePath;
+   private Uri outPutUri;
     private StsToken stsToken;
 
     private Token token;
     private String type;
     private Manager manager;
+    private ImageTool mImageTool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +117,7 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
             initView();
         }
         setTitle("公司高管");
+        mImageTool = new ImageTool(FileUtil.getDiskCachePath());
     }
 
 
@@ -152,29 +144,15 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_manager_photo:
-                SelectImageDialog imageDialog = new SelectImageDialog(context, new SelectImageDialog.OnItemClickListener() {
+                mImageTool.reset().setAspectX_Y(1,1).start(AddCompanyManagerActivity.this, new ImageTool.ResultListener() {
                     @Override
-                    public void onClick(SelectImageDialog dialog, int index) {
-                        dialog.dismiss();
-
-                        switch (index) {
-                            case SelectImageDialog.TYPE_CAMERA:
-                                photoFile = new File(Constant.CACHE_DIR_IMAGE + "/" + System.currentTimeMillis() + ".jpg");
-                                Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                intentCamera.putExtra(MediaStore.Images.ImageColumns.ORIENTATION, 0);
-                               // intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider7.getUriForFile(AddCompanyManagerActivity.this, photoFile));
-                                startActivityForResult(intentCamera, REQUEST_CAMERA);
-                                break;
-                            case SelectImageDialog.TYPE_PHOTO:
-                                Intent intent = new Intent(context, SelectImageActivity.class);
-                                intent.putExtra(SelectImageActivity.LIMIT, 1);
-                                startActivityForResult(intent, SelectImageActivity.REQUEST_AVATAR);
-                                break;
+                    public void onResult(String error, Uri uri, Bitmap bitmap) {
+                        if(uri != null){
+                            outPutUri = uri;
+                           GlideUtils.getInstance().loadCircleUserIconInto(AddCompanyManagerActivity.this,uri.getPath(),photo);
                         }
                     }
                 });
-                imageDialog.show();
 
                 break;
             case R.id.rl_manager_name:
@@ -210,7 +188,7 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
                     return;
                 }
 
-                if (TextUtils.isEmpty(Avatar)) {
+                if (outPutUri == null) {
                     AlertUtils.toast(context, "高管头像不能为空");
                     return;
                 }
@@ -222,14 +200,14 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
 
                 if (type.equals("edit")) {
 
-                    if (cropFilePath == null) {
+                    if (outPutUri == null) {
                         editManager(manager.getId() + "", Name, Avatar, JotTitle, Intro);
                     } else {
-                        upload(cropFilePath.getAbsolutePath());
+                        upload(outPutUri.getPath());
                     }
                 } else {
                     showLoading();
-                    upload(cropFilePath.getAbsolutePath());
+                    upload(outPutUri.getPath());
                 }
 
                 break;
@@ -259,78 +237,21 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
         super.onConfigurationChanged(newConfig);
     }
 
-    /**
-     * 初始化剪裁图片的输出Uri
-     */
-    private void intCropUri() {
-        if (outPutUri == null) {
-            cropFilePath = new File(Environment.getExternalStorageDirectory().getPath(), "cutImage.png");
-            try {
-                cropFilePath.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            outPutUri = Uri.fromFile(cropFilePath);
-        }
-    }
+
 
 
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (cropFilePath != null) {
-            if (!TextUtils.isEmpty(cropFilePath.getAbsolutePath())) {
-                Utils. deleteDirWihtFile(new File(Environment.getExternalStorageDirectory().getPath()));
-            }
-        }
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode != RESULT_OK) {
-            return;
-        }
-        if (requestCode == SelectImageActivity.REQUEST_AVATAR) {
-            //从相册选照片
-            selectedImages = (ArrayList<AlbumItem>) data.getSerializableExtra("images");
-            AlbumItem albumItem = selectedImages.get(0);
-            imageUri = Uri.fromFile(new File(albumItem.getFilePath()));
-            intCropUri();
-            BitmapUtils.createPhotoCrop(this, imageUri, outPutUri);
-        } else if (requestCode == REQUEST_CAMERA) {
-            //拍照照片
-            imageUri = Uri.fromFile(photoFile);
-            intCropUri();
-            BitmapUtils.createPhotoCrop(this, imageUri, outPutUri);
-        } else if (requestCode == Constant.IMAGE_CROP) {
-            Avatar = cropFilePath.getAbsolutePath();
-            GlideUtils.getInstance().loadIconInto(context, cropFilePath.getAbsolutePath(), photo);
-        }
-
-    }
-
-
-    /*保存界面状态，如果activity意外被系统killed，返回时可以恢复状态值*/
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        //savedInstanceState.putString("msg_con", htmlsource);
-        if (photoFile != null) {
-            if (photoFile.getAbsolutePath() != null) {
-                savedInstanceState.putString("msg_camera_picname", photoFile.getAbsolutePath());
-            }
-        }
-
-
-        super.onSaveInstanceState(savedInstanceState); //实现父类方法 放在最后 防止拍照后无法返回当前activity
-    }
-
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        photoFile = new File(savedInstanceState.getString("msg_camera_picname"));
-
+        mImageTool.onActivityResult(requestCode,resultCode,data);
 
     }
 
@@ -367,8 +288,6 @@ public class AddCompanyManagerActivity extends BaseTitleActivity {
                         } else {
                             addManager(CompanyId, Name, Avatar, JotTitle, Intro);
                         }
-
-                        // upAvatar(body, objectKey);
                     }
 
                     @Override

@@ -64,12 +64,32 @@
         </activity>
 
         <receiver android:name=".receiver.NetworkConnectChangedReceiver" />
+        <!--QQSdk相关-->
+
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- tencent你的AppId-->
+                <data android:scheme="123" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!--登录界面-->
         <activity
             android:name=".view.LoginActivity"
-            android:theme="@style/ThemeSplash"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/ThemeSplash" />
 
         <!--注册-->
         <activity
@@ -365,14 +385,16 @@
         <activity
             android:name=".view.myCenter.organizational.SelectionDepartmentActivity"
             android:screenOrientation="portrait" />
-        <!--选择上级部门列表-->
+        <!--选择联系人-->
         <activity
-            android:name=".view.myCenter.organizational.SelectionDepartmentListActivity"
+            android:name=".view.myCenter.organizational.SelectionDepartmentMemberActivity"
             android:screenOrientation="portrait" />
+
         <!--微信分享-->
-        <activity android:name=".wxapi.WXEntryActivity"
-            android:label="@string/app_name"
-            android:exported="true"/>
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>

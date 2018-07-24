@@ -1,6 +1,7 @@
 package com.zhixing.work.zhixin.base;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
@@ -687,5 +688,9 @@ public abstract class BaseTitleActivity extends BaseControlActivity implements N
         networkReceiver.setNetWorkStatusListener(this);
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+     //   Tencent.onActivityResultData(requestCode,resultCode,data,listener);
+    }
 }

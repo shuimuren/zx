@@ -188,7 +188,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
-                    android:text="制定部门/人可见"
+                    android:text="指定部门/人可见"
                     android:textColor="@color/linerlayout_tv"
                     android:textSize="16sp" />
 

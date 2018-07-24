@@ -2,10 +2,12 @@ package com.zhixing.work.zhixin.app;
 
 import android.content.Context;
 
+import com.tencent.tauth.Tencent;
 import com.zhixing.work.zhixin.BuildConfig;
 import com.zhixing.work.zhixin.msgctrl.ControllerRegister;
 import com.zhixing.work.zhixin.network.OkHttpUtil;
 import com.zhixing.work.zhixin.network.RetrofitServiceFactory;
+import com.zhixing.work.zhixin.share.ShareConstant;
 
 import java.io.File;
 
@@ -16,11 +18,12 @@ import java.io.File;
 
 public class AppManager {
     private Context mContext;
+
     private static final long CACHE_SIZE = 10 * 1024 * 1024l;
     private static final long CONNECT_TIME_OUT = 20000l;
     private static final long READ_TIME_OUT = 20000l;
     private static final long WRITE_TIME_OUT = 20000l;
-
+    public static Tencent mTencent;
     private AppManager() {
 
     }
@@ -52,5 +55,9 @@ public class AppManager {
         //重置网络请求
         RetrofitServiceFactory.recreateService();
         ControllerRegister.initialize();
+        //QQ分享
+        if (mTencent == null) {
+            mTencent = Tencent.createInstance(ShareConstant.QQ_SHARE_APP_ID,mContext);
+        }
     }
 }

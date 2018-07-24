@@ -33,6 +33,8 @@ import com.zhixing.work.zhixin.http.Constant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
@@ -423,6 +425,7 @@ public class PersonalQualificationActivity extends BaseTitleActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTradeAreaEvent(UploadImageFinishEvent event) {
         AlertUtils.toast(context, "资料上传成功,请耐心等待审核");
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_COMPANY_CERTIFICATION_STATUS);
         finish();
     }
 }

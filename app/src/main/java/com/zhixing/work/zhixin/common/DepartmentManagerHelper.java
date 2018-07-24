@@ -66,6 +66,9 @@ public class DepartmentManagerHelper {
 
     public int getStaffTotalByDepartmentId(int departmentId) {
         Set<Integer> setList = new HashSet<>();
+        if(departmentMap == null || departmentMap.get(departmentId) == null){
+            return 0;
+        }
         List<DepartmentStaffsBean> beans = departmentMap.get(departmentId);
         for (int i = 0; i < beans.size(); i++) {
             setList.addAll(beans.get(i).getStaffIds());

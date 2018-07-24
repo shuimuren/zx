@@ -26,6 +26,17 @@ public class DepartmentMemberInfoBean implements Serializable{
     private String StaffAvatar;
     private String StaffJobType;
     private int StaffRole;
+    private boolean isSelected;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+
 
     public int getStaffId() {
         return StaffId;

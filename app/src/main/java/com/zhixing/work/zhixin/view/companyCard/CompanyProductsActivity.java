@@ -51,7 +51,6 @@ public class CompanyProductsActivity extends BaseTitleActivity {
         setContentView(R.layout.activity_company_products);
         ButterKnife.bind(this);
         setTitle("公司产品");
-
         initView();
         getData();
     }

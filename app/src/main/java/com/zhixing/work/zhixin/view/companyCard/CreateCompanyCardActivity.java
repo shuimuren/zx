@@ -28,6 +28,7 @@ import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.view.card.ModifyContentActivity;
@@ -107,7 +108,7 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
         setContentView(R.layout.activity_create_company_card);
         ButterKnife.bind(this);
         initJsonData();
-        setTitle("创建卡牌");
+        setTitle(ResourceUtils.getString(R.string.create_company_card));
     }
     @OnClick({R.id.rl_corporate_name, R.id.card_sex_man, R.id.card_sex_woman, R.id.rl_region, R.id.rl_address, R.id.rl_name, R.id.rl_mail, R.id.btn_born_card})
     public void onViewClicked(View view) {
@@ -124,9 +125,9 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
                 break;
             case R.id.rl_corporate_name:
                 startActivity(new Intent(context, ModifyContentActivity.class).
-                        putExtra(ModifyContentActivity.TYPE_TITLE, "公司名称").
+                        putExtra(ModifyContentActivity.TYPE_TITLE, "公司全称").
                         putExtra(ModifyContentActivity.TYPE, ModifyContentActivity.CORPORATE_NAME).
-                        putExtra(ModifyContentActivity.HINT, "与营业照一致...").
+                        putExtra(ModifyContentActivity.HINT, "请与营业照一致...").
                         putExtra(ModifyContentActivity.TYPE_CONTENT, corporateName.getText().toString()));
                 break;
             case R.id.rl_region:
@@ -218,11 +219,9 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
     private void isComplete() {
         if (dataMap.values().size() == 6) {
             btnBornCard.setEnabled(true);
-            btnBornCard.setBackgroundResource(R.color.color_71aae0);
 
         } else {
             btnBornCard.setEnabled(false);
-            btnBornCard.setBackgroundResource(R.color.hardtoast);
         }
 
     }

@@ -1,5 +1,6 @@
 package com.zhixing.work.zhixin.view.myCenter.organizational;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -8,28 +9,34 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
-import com.zhixing.work.zhixin.bean.Department;
-import com.zhixing.work.zhixin.bean.EntityObject;
-import com.zhixing.work.zhixin.event.DepartmentRefreshEvent;
+import com.zhixing.work.zhixin.bean.ChildDepartmentBean;
+import com.zhixing.work.zhixin.bean.DepartmentMemberBean;
 import com.zhixing.work.zhixin.event.ModifyEvent;
-import com.zhixing.work.zhixin.http.JavaParamsUtils;
-import com.zhixing.work.zhixin.http.okhttp.OkUtils;
-import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.event.SelectedDepartmentEvent;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
+import com.zhixing.work.zhixin.msgctrl.RxBus;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
+import com.zhixing.work.zhixin.network.response.AddDepartmentResult;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscription;
 
 /**
  * 添加子部门
@@ -48,7 +55,28 @@ public class AddDepartmentActivity extends BaseTitleActivity {
     ImageView superiorDepartmentRight;
     @BindView(R.id.rl_superior_department)
     RelativeLayout rlSuperiorDepartment;
-    private Department department;
+
+    public static final String INTENT_KEY_PARENT_DEPARTMENT_NAME = "name";
+    public static final String INTENT_KEY_DEPARTMENT_ID = "departmentId";
+    private static final String INTENT_KEY_DEPARTMENT_NAME_LIST = "departmentNameList";
+    private static final String INTENT_KEY_DEPARTMENT_LIST = "departmentList";
+
+    private String mParentDepartmentId;
+    private String mParentDepartmentName;
+    private Subscription mAddDepartmentSubscription;
+    private List<ChildDepartmentBean> mDepartments;
+    private List<DepartmentMemberBean> mDepartmentMembers;
+
+    public static void startAddDepartmentActivity(Activity activity, String departmentId, String departmentName,
+                                                  List<ChildDepartmentBean> departments,
+                                                  List<DepartmentMemberBean> departmentMembers) {
+        Intent addIntent = new Intent(activity, AddDepartmentActivity.class);
+        addIntent.putExtra(AddDepartmentActivity.INTENT_KEY_DEPARTMENT_ID, departmentId);
+        addIntent.putExtra(AddDepartmentActivity.INTENT_KEY_PARENT_DEPARTMENT_NAME, departmentName);
+        addIntent.putExtra(INTENT_KEY_DEPARTMENT_NAME_LIST, (Serializable) departments);
+        addIntent.putExtra(INTENT_KEY_DEPARTMENT_LIST, (Serializable) departmentMembers);
+        activity.startActivity(addIntent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +85,12 @@ public class AddDepartmentActivity extends BaseTitleActivity {
         ButterKnife.bind(this);
         setTitle("添加子部门");
         setRightText1("完成");
-        Bundle bundle = getIntent().getExtras();
-        department = (Department) bundle.get("bean");
-        superiorDepartment.setText(department.getDepartmentName());
+
+        mParentDepartmentId = getIntent().getStringExtra(INTENT_KEY_DEPARTMENT_ID);
+        mParentDepartmentName = getIntent().getStringExtra(INTENT_KEY_PARENT_DEPARTMENT_NAME);
+        mDepartmentMembers = (List<DepartmentMemberBean>) getIntent().getSerializableExtra(INTENT_KEY_DEPARTMENT_NAME_LIST);
+        mDepartments = (List<ChildDepartmentBean>) getIntent().getSerializableExtra(INTENT_KEY_DEPARTMENT_LIST);
+        superiorDepartment.setText(mParentDepartmentName);
         initView();
     }
 
@@ -71,11 +102,29 @@ public class AddDepartmentActivity extends BaseTitleActivity {
                     AlertUtils.toast(context, "部门名字不能为空");
                     return;
                 }
-                showLoading();
-                addDepartment(department.getDepartmentId() + "",departmentName.getText().toString());
+                addDepartment(mParentDepartmentId, departmentName.getText().toString());
             }
 
         });
+
+        mAddDepartmentSubscription = RxBus.getInstance().toObservable(AddDepartmentResult.class).subscribe(
+                result -> handlerAddResult(result)
+        );
+    }
+
+    private void handlerAddResult(AddDepartmentResult result) {
+        if (result.Code == NetworkConstant.SUCCESS_CODE) {
+            if (result.isContent()) {
+                AlertUtils.show(ResourceUtils.getString(R.string.add_department_success));
+                MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_CHILD_DEPARTMENT, mParentDepartmentId);
+                MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_CHILD_DEPARTMENT_MEMBER, mParentDepartmentId);
+                this.finish();
+            } else {
+                AlertUtils.show(result.Message);
+            }
+        } else {
+            AlertUtils.show(result.Message);
+        }
     }
 
     @OnClick({R.id.rl_department_name, R.id.rl_superior_department})
@@ -88,7 +137,7 @@ public class AddDepartmentActivity extends BaseTitleActivity {
                         .putExtra(ModifyDataActivity.TYPE_CONTENT, departmentName.getText().toString()));
                 break;
             case R.id.rl_superior_department:
-                //startActivity(new Intent(context, SelectionDepartmentActivity.class));
+                SelectionDepartmentActivity.startSelectionDepartmentActivity(AddDepartmentActivity.this, mDepartments, mDepartmentMembers);
                 break;
         }
     }
@@ -99,37 +148,29 @@ public class AddDepartmentActivity extends BaseTitleActivity {
             case ModifyDataActivity.DEPARTMENT_NAME:
                 departmentName.setText(event.getContent());
                 break;
-
-
         }
     }
 
-    private void addDepartment(String ParentId, String Name
-    ) {
-        OkUtils.getInstances().httpPost(context, RequestConstant.DEPARTMENT, JavaParamsUtils.getInstances().addDepartment(ParentId, Name
-        ), new TypeToken<EntityObject<Boolean>>() {
-        }.getType(), new ResultCallBackListener<Boolean>() {
-            @Override
-            public void onFailure(int errorId, String msg) {
-                hideLoadingDialog();
-                AlertUtils.toast(context, msg);
-            }
-            @Override
-            public void onSuccess(EntityObject<Boolean> response) {
-                hideLoadingDialog();
-                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
-                    if (response.getContent()) {
-                        AlertUtils.toast(context, "添加成功");
-                        EventBus.getDefault().post(new DepartmentRefreshEvent(true));
-                        finish();
-                    }
-                } else {
-                    AlertUtils.toast(context, response.getMessage());
+    private void addDepartment(String ParentId, String Name) {
+        Map params = new HashMap();
+        params.put(RequestConstant.KEY_PARENT_ID, ParentId);
+        params.put(RequestConstant.KEY_NAME, Name);
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_ADD_DEPARTMENT, params);
 
-                }
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().unsubscribe(mAddDepartmentSubscription);
+    }
 
-            }
-        });
+    @Subscribe
+    public void selectedDepartmentEvent(SelectedDepartmentEvent event){
+        if(event != null && event.getDepartmentId() != null && event.getDepartmentName() != null){
+            mParentDepartmentId = event.getDepartmentId();
+            mParentDepartmentName = event.getDepartmentName();
+            superiorDepartment.setText(mParentDepartmentName);
+        }
     }
 }

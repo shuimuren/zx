@@ -2,11 +2,10 @@ package com.zhixing.work.zhixin.view.companyCard.back;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +20,6 @@ import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.xmd.file.provider.FileProvider7;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
 import com.zhixing.work.zhixin.aliyun.ALiYunOssFileLoader;
@@ -32,12 +30,9 @@ import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.IndustryType;
 import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.common.Logger;
-import com.zhixing.work.zhixin.dialog.SelectImageDialog;
-import com.zhixing.work.zhixin.domain.AlbumItem;
 import com.zhixing.work.zhixin.event.BasicRefreshEvent;
 import com.zhixing.work.zhixin.event.CompanyIndustryEvent;
 import com.zhixing.work.zhixin.event.ModifyEvent;
-import com.zhixing.work.zhixin.http.Constant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
@@ -45,20 +40,18 @@ import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.AppUtils;
-import com.zhixing.work.zhixin.util.BitmapUtils;
+import com.zhixing.work.zhixin.util.FileUtil;
 import com.zhixing.work.zhixin.util.GlideUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.view.card.ModifyContentActivity;
 import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
 import com.zhixing.work.zhixin.view.companyCard.CompanyIndustryActivity;
-import com.zhixing.work.zhixin.view.util.SelectImageActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -66,11 +59,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import imagetool.lhj.com.ImageTool;
 import okhttp3.FormBody;
 import okhttp3.RequestBody;
 
 /**
- * 完善卡牌
+ * 企业端 完善卡牌
  */
 public class CompanyPerfectCardActivity extends BaseTitleActivity {
     @BindView(R.id.company_logo)
@@ -161,15 +155,16 @@ public class CompanyPerfectCardActivity extends BaseTitleActivity {
 
     public static final int REQUEST_CAMERA = 10; // 拍照
     private File photoFile;
-    private Uri imageUri;
-    private List<AlbumItem> selectedImages;//标记选中的图片
-    private String upLoadImages = "";//上传图片组
-    private File cropFilePath;
+    //    private Uri imageUri;
+//    private List<AlbumItem> selectedImages;//标记选中的图片
+//    private String upLoadImages = "";//上传图片组
+//    private File cropFilePath;
     private Uri outPutUri;
     private StsToken stsToken;
     private Company company;
     private String type;
     private String region;
+    private ImageTool mImageTool;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -238,35 +233,25 @@ public class CompanyPerfectCardActivity extends BaseTitleActivity {
             }
 
         }
+        mImageTool = new ImageTool(FileUtil.getDiskCachePath());
+
     }
 
     @OnClick({R.id.rl_company_logo, R.id.rl_company_name, R.id.rl_company_abbreviation, R.id.rl_company_region, R.id.rl_company_address, R.id.rl_company_nature, R.id.rl_company_industry, R.id.rl_company_financing, R.id.rl_company_scale, R.id.rl_company_website, R.id.submit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_company_logo:
-                SelectImageDialog imageDialog = new SelectImageDialog(context, new SelectImageDialog.OnItemClickListener() {
+                mImageTool.reset().setAspectX_Y(1, 1).start(CompanyPerfectCardActivity.this, new ImageTool.ResultListener() {
                     @Override
-                    public void onClick(SelectImageDialog dialog, int index) {
-                        dialog.dismiss();
-
-                        switch (index) {
-                            case SelectImageDialog.TYPE_CAMERA:
-                                photoFile = new File(Constant.CACHE_DIR_IMAGE + "/" + System.currentTimeMillis() + ".jpg");
-                                Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                                intentCamera.putExtra(MediaStore.Images.ImageColumns.ORIENTATION, 0);
-                                //intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-                                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider7.getUriForFile(CompanyPerfectCardActivity.this, photoFile));
-                                startActivityForResult(intentCamera, REQUEST_CAMERA);
-                                break;
-                            case SelectImageDialog.TYPE_PHOTO:
-                                Intent intent = new Intent(context, SelectImageActivity.class);
-                                intent.putExtra(SelectImageActivity.LIMIT, 1);
-                                startActivityForResult(intent, SelectImageActivity.REQUEST_AVATAR);
-                                break;
+                    public void onResult(String error, Uri uri, Bitmap bitmap) {
+                        Logger.i(">>>", "Uri>>" + uri);
+                        if (uri != null) {
+                            outPutUri = uri;
+                            GlideUtils.getInstance().loadCircleUserIconInto(CompanyPerfectCardActivity.this, uri.getPath(), companyLogo);
                         }
                     }
                 });
-                imageDialog.show();
+
 
                 break;
             case R.id.rl_company_name:
@@ -401,8 +386,6 @@ public class CompanyPerfectCardActivity extends BaseTitleActivity {
                         putExtra(ModifyDataActivity.TYPE_CONTENT, companyWebsite.getText().toString()));
                 break;
             case R.id.submit:
-
-
                 if (TextUtils.isEmpty(Province)) {
                     AlertUtils.toast(context, "请选择地区");
                 }
@@ -410,7 +393,7 @@ public class CompanyPerfectCardActivity extends BaseTitleActivity {
                     AlertUtils.toast(context, "请添加地址");
                 }
                 showLoading();
-                if (cropFilePath == null) {
+                if (outPutUri == null) {
                     RequestBody body = new FormBody.Builder()
                             .add("Logo", Logo)
                             .add("ShortName", ShortName)
@@ -426,14 +409,13 @@ public class CompanyPerfectCardActivity extends BaseTitleActivity {
                             .build();
                     addCompany(body);
                 } else {
-                    upload(cropFilePath.getAbsolutePath());
+                    upload(outPutUri.getPath());
                 }
 
 
                 break;
         }
     }
-
 
 
     private void addCompany(RequestBody body) {
@@ -552,15 +534,10 @@ public class CompanyPerfectCardActivity extends BaseTitleActivity {
     }
 
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (cropFilePath != null) {
-            if (!TextUtils.isEmpty(cropFilePath.getAbsolutePath())) {
-                Utils. deleteDirWihtFile(new File(Environment.getExternalStorageDirectory().getPath()));
-            }
-        }
+
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -577,46 +554,15 @@ public class CompanyPerfectCardActivity extends BaseTitleActivity {
         super.onConfigurationChanged(newConfig);
     }
 
-    /**
-     * 初始化剪裁图片的输出Uri
-     */
-    private void intCropUri() {
-        if (outPutUri == null) {
-            cropFilePath = new File(Environment.getExternalStorageDirectory().getPath(), "cutImage.png");
-            try {
-                cropFilePath.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            outPutUri = Uri.fromFile(cropFilePath);
-        }
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        mImageTool.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_OK) {
             return;
         }
-        if (requestCode == SelectImageActivity.REQUEST_AVATAR) {
-            //从相册选照片
-            selectedImages = (ArrayList<AlbumItem>) data.getSerializableExtra("images");
-            AlbumItem albumItem = selectedImages.get(0);
-            imageUri = Uri.fromFile(new File(albumItem.getFilePath()));
-            intCropUri();
-            BitmapUtils.createPhotoCrop(this, imageUri, outPutUri);
-        } else if (requestCode == REQUEST_CAMERA) {
-            //拍照照片
-            imageUri = Uri.fromFile(photoFile);
-            intCropUri();
-            BitmapUtils.createPhotoCrop(this, imageUri, outPutUri);
-        } else if (requestCode == Constant.IMAGE_CROP) {
 
-            GlideUtils.getInstance().loadIconInto(context, cropFilePath.getAbsolutePath(), companyLogo);
-            //upload(cropFilePath.getAbsolutePath());
-
-        }
 
     }
 

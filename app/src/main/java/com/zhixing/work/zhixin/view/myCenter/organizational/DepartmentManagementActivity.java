@@ -1,65 +1,80 @@
 package com.zhixing.work.zhixin.view.myCenter.organizational;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
-import com.zhixing.work.zhixin.adapter.DepartmentAdapter;
-import com.zhixing.work.zhixin.adapter.StaffAdapter;
+import com.zhixing.work.zhixin.adapter.DepartmentListAdapter;
+import com.zhixing.work.zhixin.adapter.DepartmentStaffAdapter;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
-import com.zhixing.work.zhixin.bean.Department;
-import com.zhixing.work.zhixin.bean.EntityObject;
-import com.zhixing.work.zhixin.bean.Staff;
-import com.zhixing.work.zhixin.event.DepartmentRefreshEvent;
-import com.zhixing.work.zhixin.http.JavaParamsUtils;
-import com.zhixing.work.zhixin.http.okhttp.OkUtils;
-import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.bean.ChildDepartmentBean;
+import com.zhixing.work.zhixin.bean.DepartmentMemberBean;
+import com.zhixing.work.zhixin.bean.DepartmentMemberInfoBean;
+import com.zhixing.work.zhixin.common.DepartmentManagerHelper;
+import com.zhixing.work.zhixin.common.Logger;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
+import com.zhixing.work.zhixin.msgctrl.RxBus;
 import com.zhixing.work.zhixin.network.NetworkConstant;
-import com.zhixing.work.zhixin.network.RequestConstant;
+import com.zhixing.work.zhixin.network.response.AllDepartmentMemberResult;
+import com.zhixing.work.zhixin.network.response.ChildDepartmentResult;
+import com.zhixing.work.zhixin.network.response.DepartmentMemberInfoResult;
+import com.zhixing.work.zhixin.share.ShareConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import rx.Subscription;
 
 public class DepartmentManagementActivity extends BaseTitleActivity {
 
-    @BindView(R.id.listview)
-    RecyclerView listView;
+    @BindView(R.id.tvSearchOrCancel)
+    TextView tvSearchOrCancel;
+    @BindView(R.id.company_name)
+    TextView companyName;
+    @BindView(R.id.department_list)
+    RecyclerView departmentList;
+    @BindView(R.id.staff_list)
+    RecyclerView staffListView;
+    @BindView(R.id.ll_staff_view)
+    LinearLayout llStaffView;
+    @BindView(R.id.top)
+    View top;
     @BindView(R.id.add_user)
     TextView addUser;
     @BindView(R.id.add_department)
     TextView addDepartment;
-    @BindView(R.id.rl_add)
-    LinearLayout rlAdd;
-    @BindView(R.id.title)
-    TextView title;
-    @BindView(R.id.staff_listview)
-    RecyclerView staffListview;
 
-    public static final String INTENT_KEY_NAME = "name";
-    public static final String INTENT_KEY_BEAN = "bean";
+    public static final String INTENT_KEY_CHILD_DEPARTMENT_LIST = "departmentList";
+    public static final String INTENT_KEY_DEPARTMENT_MEMBER_LIST = "departmentMemberList";
+    public static final String INTENT_KEY_DEPARTMENT_ID = "departmentId";
+    public static final String INTENT_KEY_PARENT_DEPARTMENT_NAME = "departmentName";
 
-    private List<Department> list = new ArrayList<>();
-    private DepartmentAdapter adapter;
-    private Department department;
-    private String name;
-    private StaffAdapter staffAdapter;
-    private List<Staff> staffList = new ArrayList<>();
+    private Subscription mGetAllDepartmentSubscription; //获取公司下所有员工
+    private Subscription mGetChildDepartmentSubscription; //获取子部门
+    private Subscription mDepartmentStaffSubscription;//获取部门下员工列表
+
+
+    private DepartmentListAdapter mDepartmentListAdapter;
+    private DepartmentStaffAdapter mDepartmentStaffAdapter;
+    private List<ChildDepartmentBean> departments;
+    private List<DepartmentMemberInfoBean> staffs;
+    private List<DepartmentMemberBean> mDepartmentMembers;
+    private String departmentName;
+    private String departmentId;
+    private DepartmentManagerHelper mDepartmentManagerHelper;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,124 +82,145 @@ public class DepartmentManagementActivity extends BaseTitleActivity {
         setContentView(R.layout.activity_department_management);
         ButterKnife.bind(this);
         setTitle("管理部门与成员");
-        Bundle bundle = getIntent().getExtras();
-        name = bundle.getString(INTENT_KEY_NAME);
-        department = (Department) bundle.get(INTENT_KEY_BEAN);
-        initView();
-        getData();
-        getStaff();
+        intiView();
+        registerRequest();
+        getIntentDate();
     }
-    private void initView() {
-        title.setText(name);
-        adapter = new DepartmentAdapter(list, context);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        listView.setLayoutManager(linearLayoutManager);
-        listView.setItemAnimator(new DefaultItemAnimator());
-        listView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL));
-        listView.setAdapter(adapter);
-        adapter.setOnItemClickListener(new DepartmentAdapter.OnItemClickListener() {
+
+    private void intiView() {
+        departments = new ArrayList<>();
+        mDepartmentMembers = new ArrayList<>();
+        mDepartmentManagerHelper = DepartmentManagerHelper.getInstance();
+        mDepartmentListAdapter = new DepartmentListAdapter(departments);
+        departmentList.setHasFixedSize(true);
+        departmentList.setLayoutManager(new LinearLayoutManager(DepartmentManagementActivity.this));
+        departmentList.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL));
+        departmentList.setAdapter(mDepartmentListAdapter);
+        mDepartmentListAdapter.setItemClickedListener(new DepartmentListAdapter.ItemClickedInterface() {
             @Override
-            public void onItemClick(View view, int position) {
-                Intent intent = new Intent(context, DepartmentDetailsActivity.class);
-                intent.putExtra("name", name + ">" + list.get(position).getDepartmentName());
-                Bundle bundle = new Bundle();
-                intent.putExtra("ParentId", department.getDepartmentId() + "");
-                intent.putExtra("SuperiorName", department.getDepartmentName() + "");
-
-                bundle.putSerializable("bean", list.get(position));
-                intent.putExtras(bundle);
-                startActivity(intent);
-                Math.floor(60.5);
-            }
-
-            @Override
-            public void onItemLongClick(View view, int position) {
-
-            }
-        });
-        staffAdapter = new StaffAdapter(staffList, context);
-        LinearLayoutManager LayoutManager = new LinearLayoutManager(context);
-        LayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        staffListview.setLayoutManager(LayoutManager);
-        staffListview.setItemAnimator(new DefaultItemAnimator());
-        staffListview.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL));
-        staffListview.setAdapter(staffAdapter);
-        staffAdapter.setOnItemClickListener(new StaffAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-            }
-
-            @Override
-            public void onItemLongClick(View view, int position) {
-
+            public void onItemClicked(ChildDepartmentBean bean) {
+                DepartmentDetailsActivity.startDepartmentDetailActivity(DepartmentManagementActivity.this, departmentName,
+                        departmentId, bean.getDepartmentName(), String.valueOf(bean.getDepartmentId()));
             }
         });
 
+        staffs = new ArrayList<>();
+        mDepartmentStaffAdapter = new DepartmentStaffAdapter(this, staffs, true);
+        staffListView.setHasFixedSize(true);
+        staffListView.setLayoutManager(new LinearLayoutManager(DepartmentManagementActivity.this));
+        staffListView.addItemDecoration(new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL));
+        staffListView.setAdapter(mDepartmentStaffAdapter);
+        mDepartmentStaffAdapter.setItemClickedListener(new DepartmentStaffAdapter.ItemClickedInterface() {
+            @Override
+            public void onItemClicked(DepartmentMemberInfoBean bean) {
+                Logger.i(">>>", "点击个人");
+            }
+        });
+
+    }
+
+
+    private void registerRequest() {
+        mGetAllDepartmentSubscription = RxBus.getInstance().toObservable(AllDepartmentMemberResult.class).subscribe(
+                result -> handlerAllDepartmentMember(result));
+        mGetChildDepartmentSubscription = RxBus.getInstance().toObservable(ChildDepartmentResult.class).subscribe(
+                result -> handlerChildDepartment(result));
+        mDepartmentStaffSubscription = RxBus.getInstance().toObservable(DepartmentMemberInfoResult.class).subscribe(
+                result -> handlerDepartmentMemberInfo(result));
+    }
+
+
+    public void getIntentDate() {
+        Bundle bundle = getIntent().getExtras();
+        departmentName = bundle.getString(INTENT_KEY_PARENT_DEPARTMENT_NAME);
+        departmentId = bundle.getString(INTENT_KEY_DEPARTMENT_ID);
+        mDepartmentMembers.add(new DepartmentMemberBean(departmentId, departmentName));
+        departments = (List<ChildDepartmentBean>) bundle.getSerializable(INTENT_KEY_CHILD_DEPARTMENT_LIST);
+        staffs = (List<DepartmentMemberInfoBean>) bundle.getSerializable(INTENT_KEY_DEPARTMENT_MEMBER_LIST);
+
+        companyName.setText(departmentName);
+        mDepartmentListAdapter.setData(departments);
+        if (staffs.size() > 0) {
+            llStaffView.setVisibility(View.VISIBLE);
+            mDepartmentStaffAdapter.setData(staffs);
+        } else {
+            llStaffView.setVisibility(View.GONE);
+        }
+    }
+
+    private void handlerAllDepartmentMember(AllDepartmentMemberResult result) {
+        if (result.Code == NetworkConstant.SUCCESS_CODE) {
+
+        } else {
+            AlertUtils.show(result.Message);
+        }
+
+    }
+
+    private void handlerChildDepartment(ChildDepartmentResult result) {
+        if (result.Code == NetworkConstant.SUCCESS_CODE) {
+            if (result.getDepartmentId().equals(departmentId)) {
+                departments = result.getContent().getSubDepartments();
+                for (int i = 0; i < departments.size(); i++) {
+                    departments.get(i).setMemberTotal(mDepartmentManagerHelper.getStaffTotalByDepartmentId(departments.get(i).getDepartmentId()));
+                }
+                mDepartmentListAdapter.setData(departments);
+
+            }
+        } else {
+            AlertUtils.show(result.Message);
+        }
+
+    }
+
+    private void handlerDepartmentMemberInfo(DepartmentMemberInfoResult result) {
+        if (result.Code == NetworkConstant.SUCCESS_CODE) {
+            if (result.getDepartmentId().equals(departmentId)) {
+                if (result.getContent() != null && result.getContent().size() > 0) {
+                    llStaffView.setVisibility(View.VISIBLE);
+                    mDepartmentStaffAdapter.setData(result.getContent());
+                } else {
+                    llStaffView.setVisibility(View.GONE);
+                }
+
+            }
+        } else {
+            AlertUtils.show(result.Message);
+        }
+
+    }
+
+
+    @OnClick()
+    public void onViewClicked() {
+        Map<String, Object> params = new HashMap<>();
+        //此处应填写完整参数
+        params.put(ShareConstant.PARAM_SHARE_TITLE, "职信科技有限公司");
+        params.put(ShareConstant.PARAMS_CONTEXT, DepartmentManagementActivity.this);
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHOW_SHARE_PLATFORM, params);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().unsubscribe(mDepartmentStaffSubscription, mGetAllDepartmentSubscription, mGetChildDepartmentSubscription);
     }
 
     @OnClick({R.id.add_user, R.id.add_department})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_user:
+                Map<String, Object> params = new HashMap<>();
+                //此处应填写完整参数
+                params.put(ShareConstant.PARAM_SHARE_TITLE, "职信科技有限公司");
+                params.put(ShareConstant.PARAMS_CONTEXT, DepartmentManagementActivity.this);
+                MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHOW_SHARE_PLATFORM, params);
                 break;
             case R.id.add_department:
-                if (department != null) {
-                    Intent intent = new Intent(context, AddDepartmentActivity.class);
-                    Bundle bundle = new Bundle();
-                    bundle.putSerializable("bean", department);
-                    intent.putExtras(bundle);
-                    startActivity(intent);
-                }
-
+                AddDepartmentActivity.startAddDepartmentActivity(DepartmentManagementActivity.this,
+                        departmentId, departmentName, departments, mDepartmentMembers);
                 break;
         }
     }
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onDepartmentRefreshEvent(DepartmentRefreshEvent event) {
-        if (event.getRefresh()) {
-            getData();
-        }
-    }
-    private void getStaff() {
-        OkUtils.getInstances().httpTokenGet(context, RequestConstant.STAFF, JavaParamsUtils.getInstances().getSetff(department.getDepartmentId()+""), new TypeToken<EntityObject<List<Staff>>>() {
-        }.getType(), new ResultCallBackListener<List<Staff>>() {
-            @Override
-            public void onFailure(int errorId, String msg) {
-                AlertUtils.toast(context, "服务器错误");
-            }
-
-            @Override
-            public void onSuccess(EntityObject<List<Staff>> response) {
-                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
-                    if (!response.getContent().isEmpty()) {
-                        staffList = response.getContent();
-
-                    }
-                }
-            }
-        });
-    }
-    private void getData() {
-        OkUtils.getInstances().httpTokenGet(context, RequestConstant.DEPARTMENT, JavaParamsUtils.getInstances().getDepartment(department.getDepartmentId() + ""), new TypeToken<EntityObject<List<Department>>>() {
-        }.getType(), new ResultCallBackListener<List<Department>>() {
-            @Override
-            public void onFailure(int errorId, String msg) {
-                AlertUtils.toast(context, "服务器错误");
-            }
-            @Override
-            public void onSuccess(EntityObject<List<Department>> response) {
-                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
-                    if (!response.getContent().isEmpty()) {
-                        list = response.getContent();
-                        adapter.setList(list);
-                    } else {
-                        list.clear();
-                        adapter.setList(list);
-                    }
-                }
-            }
-        });
-    }
 }

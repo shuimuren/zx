@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -25,6 +24,7 @@ import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
 import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.google.gson.reflect.TypeToken;
+import com.xmd.file.provider.FileProvider7;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.adapter.PublicEducationAdapter;
 import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
@@ -41,6 +41,8 @@ import com.zhixing.work.zhixin.http.Constant;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
@@ -200,7 +202,7 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
         photoFile = new File(photoPath);
         Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intentCamera.putExtra(MediaStore.Images.ImageColumns.ORIENTATION, 0);
-        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+        intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, FileProvider7.getUriForFile(context,photoFile));
         startActivityForResult(intentCamera, REQUEST_CAMERA);
     }
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -510,6 +512,7 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onTradeAreaEvent(UploadImageFinishEvent event) {
         AlertUtils.toast(context, "资料上传成功,请耐心等待审核");
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_COMPANY_CERTIFICATION_STATUS);
         finish();
     }
     private void putCertification(RequestBody body) {

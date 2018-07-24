@@ -197,5 +197,9 @@
     <string name="delete_success">删除成功</string>
     <string name="update_success">更新成功</string>
     <string name="new_add_department">新建部门</string>
+    <string name="new_add_department_success">新建部门成功</string>
+    <string name="text_department_is_null">暂无部门</string>
+    <string name="next_step">下级</string>
+    <string name="choice_member">选择联系人</string>
 
 </resources>

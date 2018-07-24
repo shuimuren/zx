@@ -80,6 +80,6 @@
             android:layout_marginRight="10dp"
             android:src="@drawable/icon_next"
             android:textColor="@color/color_303030"
-            android:visibility="invisible" />
+             />
     </RelativeLayout>
 </LinearLayout>

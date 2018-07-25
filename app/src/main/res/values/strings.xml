@@ -201,5 +201,10 @@
     <string name="text_department_is_null">暂无部门</string>
     <string name="next_step">下级</string>
     <string name="choice_member">选择联系人</string>
+    <string name="user_know">我知道了</string>
+    <string name="authentication_again">重新认证</string>
+    <string name="identity_failure_text">1.图像不清晰\n2.图像有残缺\n3.图像过暗或过爆</string>
+    <string name="to_see">查看</string>
+    <string name="audit_ing_please_waite">正在审核中,请耐心等待</string>
 
 </resources>

@@ -395,6 +395,10 @@
             android:name=".wxapi.WXEntryActivity"
             android:exported="true"
             android:label="@string/app_name" />
+
+        <!-- 认证结果 -->
+        <activity android:name=".view.authentication.CertificationStatusActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -41,7 +41,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/image_card_null"
-                        android:src="@drawable/img_nor_03" />
+                        android:src="@drawable/image_list_null" />
 
                     <TextView
                         android:layout_width="wrap_content"

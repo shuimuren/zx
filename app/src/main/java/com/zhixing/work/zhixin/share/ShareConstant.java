@@ -10,6 +10,8 @@ public class ShareConstant {
     public static final String WX_APP_ID = "wxa18e37ad45bd0f28";
     public static final String WX_APP_SECRET = "c223e91bca60f5f5d25a408b370a25ae";
 
+    public static final String QQ_SHARE_APP_ID = "123";
+
     public static final int SHARE_TO_TIMELINE = 0;
     public static final int SHARE_TO_FRIEND = 1;
 

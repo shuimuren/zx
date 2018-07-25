@@ -13,6 +13,7 @@ import com.alibaba.sdk.android.oss.common.auth.OSSStsTokenCredentialProvider;
 import com.alibaba.sdk.android.oss.model.PutObjectRequest;
 import com.alibaba.sdk.android.oss.model.PutObjectResult;
 import com.zhixing.work.zhixin.app.ZxApplication;
+import com.zhixing.work.zhixin.bean.ALiImageUrlBean;
 import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.msgctrl.AbstractController;
@@ -181,7 +182,8 @@ public class ALiYunController extends AbstractController {
             url = mOSSClient.presignPublicObjectURL(bucketName, objectKey);
         }
 
-
+        ALiImageUrlBean bean = new ALiImageUrlBean(url,objectKey);
+        RxBus.getInstance().post(bean);
         Logger.i(">>>", "url>" + url);
 
     }

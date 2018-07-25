@@ -1062,7 +1062,6 @@ public class SettingUtils {
      * @return
      */
     public static String getUserPhone() {
-
         String userPhone = PreferenceUtils.getString(SettingItems.USER_PHONE);
         if (!TextUtils.isEmpty(userPhone)) {
             return userPhone;
@@ -1187,4 +1186,23 @@ public class SettingUtils {
             return password;
         }
     }
+
+    /**
+     * 账号是否创建过卡牌基础信息
+     */
+    public static boolean createCardBefore(){
+        String key = getUserPhone() + getRoleInfo();
+       // return true;
+      return PreferenceUtils.getBoolean(key);
+    }
+
+    /**
+     * 存储账号创建卡牌基本信息
+     */
+
+    public static void saveCreateCard(){
+        String key = getUserPhone() + getRoleInfo();
+        PreferenceUtils.putBoolean(key, true);
+    }
+
 }

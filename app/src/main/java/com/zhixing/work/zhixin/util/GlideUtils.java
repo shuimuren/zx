@@ -84,7 +84,7 @@ public class GlideUtils extends AppGlideModule {
      *
      * @param context
      * @param
-     * @param imageView 圆角头像
+     * @param imageView 圆角图片
      */
     public void loadGlideRoundTransform(Context context, String url, ImageView imageView) {
         Glide.with(context).load(url)

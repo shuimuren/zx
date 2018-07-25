@@ -47,6 +47,10 @@ public class ALiYunFileURLBuilder {
     public static final String KEY_IMAGE_MARK = "imageMark"; //图片加载标记位
     public static final String KEY_IMAGE_CODE = "imageCode";//图片上传标记位
 
+    //图片上传识别码
+    public static final int IMAGE_DISCERN_CODE_PERSONAL_FRAGMENT = 1;//个人卡牌页上传图片
+    public static final int IMAGE_DISCERN_CODE_COMPANY_FRAGMENT = 2;//企业卡牌页上传图片
+
 
     public static String getBase() {
         String str = String.format("http://%1$s.oss-cn-shenzhen.aliyuncs.com/", new Object[]{"zx-img-public"});

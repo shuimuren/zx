@@ -7,560 +7,351 @@
 
     <include layout="@layout/layout_toolbar" />
 
-    <!--无卡牌界面-->
-    <LinearLayout
-        android:id="@+id/no_cord"
+    <FrameLayout
+        android:id="@+id/frame_score"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/bg_front"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/ll_user"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <RelativeLayout
-                android:id="@+id/rl_cord"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="30dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/img_card"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="90dp"
-                    android:src="@drawable/img_person" />
-                <!--文字提醒-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_marginTop="250dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="请点击下方创建按钮"
-                        android:textColor="#7d5023"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:text="立刻生成您的专属卡牌"
-                        android:textColor="#7d5023"
-                        android:textSize="14sp" />
-                </LinearLayout>
-                <!--创建卡牌按钮-->
-                <Button
-                    android:id="@+id/create_card"
-                    android:layout_width="160dp"
-                    android:layout_height="45dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="380dp"
-                    android:background="@drawable/btn"
-                    android:text="创建卡牌"
-                    android:textColor="#f5e9b4" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_data"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="30dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:visibility="gone">
-
-
-                <RelativeLayout
-                    android:id="@+id/have_cord"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp">
-
-                    <RelativeLayout
-                        android:id="@+id/rl_avatar"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:paddingTop="@dimen/dp_10"
-                        android:background="@color/bg_main">
-
-                        <ImageView
-                            android:id="@+id/avatar"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="fitXY" />
-
-                        <ImageView
-                            android:id="@+id/default_avatar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerHorizontal="true"
-                            android:layout_centerVertical="true"
-                            android:src="@drawable/img_man" />
-
-                        <TextView
-                            android:id="@+id/avatar_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/avatar"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="5dp"
-                            android:text="点此上传照片" />
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:id="@+id/rl_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_below="@+id/rl_avatar">
-
-                        <TextView
-                            android:id="@+id/name"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:background="@drawable/card_user_id"
-                            android:gravity="center_vertical"
-                            android:paddingLeft="20dp"
-                            android:text=""
-                            android:textColor="@color/white" />
-
-                        <TextView
-
-                            android:id="@+id/level"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/card_user_num"
-                            android:gravity="center"
-                            android:paddingRight="10dp"
-                            android:text=""
-                            android:textColor="@color/white" />
-                    </LinearLayout>
-
-                    <LinearLayout
-
-                        android:id="@+id/ll_data"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_below="@+id/rl_name"
-                        android:background="@drawable/card_bot"
-                        android:orientation="vertical"
-                        android:paddingLeft="20dp">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1">
-
-                            <ImageView
-                                android:id="@+id/constellation"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_marginRight="@dimen/dp_10"
-                                android:layout_marginTop="@dimen/dp_10"
-                                android:src="@drawable/chunv" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-
-                                android:orientation="vertical">
-
-                                <LinearLayout
-                                    android:id="@+id/ll_nike_name"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignLeft="@+id/stars"
-                                        android:layout_alignStart="@+id/stars"
-                                        android:layout_below="@+id/rl_name"
-                                        android:text="昵&#12288;昵 :  " />
-
-                                    <TextView
-                                        android:id="@+id/nikeName"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:text="" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignLeft="@+id/stars"
-                                        android:layout_alignStart="@+id/stars"
-                                        android:layout_below="@+id/rl_name"
-                                        android:text="手机号 :  " />
-
-                                    <TextView
-                                        android:id="@+id/phone"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:text="" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="5dp"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignLeft="@+id/stars"
-                                        android:layout_alignStart="@+id/stars"
-                                        android:layout_below="@+id/rl_name"
-                                        android:text="邮&#12288;箱 :  " />
-
-                                    <TextView
-                                        android:id="@+id/mail"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:text="" />
-                                </LinearLayout>
-
-                                <LinearLayout
-                                    android:id="@+id/ll_motto"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginTop="10dp"
-                                    android:orientation="horizontal">
-
-                                    <TextView
-
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_alignLeft="@+id/stars"
-                                        android:layout_alignStart="@+id/stars"
-                                        android:layout_below="@+id/rl_name"
-                                        android:text="座右铭 :  " />
-
-                                    <TextView
-                                        android:id="@+id/motto"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:text="" />
-                                </LinearLayout>
-                            </LinearLayout>
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="@dimen/dp_30"
-                            android:visibility="gone">
-
-                            <Button
-                                android:id="@+id/perfect_card"
-                                android:layout_width="160dp"
-                                android:layout_height="45dp"
-                                android:layout_centerHorizontal="true"
-                                android:background="@drawable/btn"
-                                android:text="完善卡牌"
-                                android:textColor="#f5e9b4" />
-                        </RelativeLayout>
-
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/card_bg" />
-
-
-                    <com.willy.ratingbar.ScaleRatingBar xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/stars"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/dp_30"
-                        android:layout_marginTop="6dp"
-                        app:srb_clearRatingEnabled="true"
-                        app:srb_clickable="false"
-                        app:srb_drawableEmpty="@drawable/icon_star_nor"
-                        app:srb_drawableFilled="@drawable/icon_star_light"
-                        app:srb_isIndicator="false"
-                        app:srb_numStars="10"
-                        app:srb_rating="0"
-                        app:srb_scrollable="false"
-                        app:srb_starHeight="15dp"
-                        app:srb_starPadding="2dp"
-                        app:srb_starWidth="15dp"
-                        app:srb_stepSize="1"></com.willy.ratingbar.ScaleRatingBar>
-
-                </RelativeLayout>
-
-                <ImageView
-                    android:id="@+id/type_iv"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:src="@drawable/hd_logo"></ImageView>
-
-            </RelativeLayout>
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/ll_enterprise"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:visibility="gone">
-
-            <RelativeLayout
-                android:id="@+id/rl_enterprise_nocard"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="30dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:background="@drawable/img_card"
-                android:visibility="gone">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="90dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/img_person" />
-                <!--文字提醒-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_marginTop="250dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="请点击下方创建按钮"
-                        android:textColor="#7d5023"
-                        android:textSize="16sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="5dp"
-                        android:text="立刻生成您的专属卡牌"
-                        android:textColor="#7d5023"
-                        android:textSize="14sp" />
-                </LinearLayout>
-                <!--创建卡牌按钮-->
-                <Button
-                    android:id="@+id/create_enterprise_card"
-                    android:layout_width="160dp"
-                    android:layout_height="45dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginTop="380dp"
-                    android:background="@drawable/btn"
-                    android:text="创建卡牌"
-                    android:textColor="#f5e9b4" />
-
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/rl_enterprise_data"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginLeft="40dp"
-                    android:layout_marginTop="30dp"
-                    android:layout_weight="1">
-
-                    <RelativeLayout
-                        android:id="@+id/enterprise_cord"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginTop="5dp">
-
-                        <RelativeLayout
-                            android:id="@+id/rl_enterprise_avatar"
-                            android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:background="@color/bg_main">
-
-                            <ImageView
-                                android:id="@+id/enterprise_avatar"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="fitXY" />
-
-                            <ImageView
-                                android:id="@+id/enterprise_default_avatar"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
-                                android:layout_centerVertical="true"
-                                android:src="@drawable/img_man" />
-
-                            <TextView
-                                android:id="@+id/enterprise_avatar_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@+id/enterprise_avatar"
-                                android:layout_centerHorizontal="true"
-                                android:layout_marginTop="5dp"
-                                android:text="点此上传照片" />
-                        </RelativeLayout>
-
-                        <LinearLayout
-                            android:id="@+id/enterprise_data"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_below="@+id/rl_enterprise_avatar"
-                            android:background="@drawable/card_bot"
-                            android:orientation="vertical"
-                            android:paddingLeft="20dp">
-
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1">
-
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
-
-                                    <LinearLayout
-                                        android:id="@+id/ll_company_address"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginTop="5dp"
-                                        android:orientation="horizontal">
-
-                                        <TextView
-
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_alignLeft="@+id/stars"
-                                            android:layout_alignStart="@+id/stars"
-                                            android:layout_below="@+id/rl_name"
-                                            android:text="地&#12288;址 :  " />
-
-                                        <TextView
-                                            android:id="@+id/company_address"
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="1"
-                                            android:text="" />
-                                    </LinearLayout>
-                                </LinearLayout>
-                            </RelativeLayout>
-                        </LinearLayout>
-                    </RelativeLayout>
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentLeft="true"
-                        android:layout_alignParentStart="true"
-                        android:layout_alignParentTop="true"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/card_bg" />
-
-
-                    <TextView
-                        android:id="@+id/company_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="30dp"
-                        android:layout_marginLeft="@dimen/dp_30"
-                        android:layout_marginRight="@dimen/dp_20"
-                        android:layout_marginTop="@dimen/dp_5"
-                        android:maxLines="1"
-                        android:text="" />
-
-                    <com.willy.ratingbar.ScaleRatingBar xmlns:app="http://schemas.android.com/apk/res-auto"
-                        android:id="@+id/enterprise_stars"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginBottom="@dimen/dp_5"
-                        android:layout_marginTop="6dp"
-                        app:srb_clearRatingEnabled="true"
-                        app:srb_clickable="false"
-                        app:srb_drawableEmpty="@drawable/icon_star_nor"
-                        app:srb_drawableFilled="@drawable/icon_star_light"
-                        app:srb_isIndicator="false"
-                        app:srb_numStars="10"
-                        app:srb_rating="0"
-                        app:srb_scrollable="false"
-                        app:srb_starHeight="15dp"
-                        app:srb_starPadding="2dp"
-                        app:srb_starWidth="15dp"
-                        app:srb_stepSize="1"></com.willy.ratingbar.ScaleRatingBar>
-
-
-                    <ImageView
-                        android:id="@+id/enterprise_iv"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/hd_logo"></ImageView>
-                </RelativeLayout>
-            </RelativeLayout>
-
-        </LinearLayout>
-
-     <include layout="@layout/layout_card_fragment_right"/>
-
-    </LinearLayout>
+        android:layout_height="match_parent"/>
+
+    <!--无卡牌界面-->
+    <!--<LinearLayout-->
+        <!--android:id="@+id/no_cord"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@drawable/bg_front"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<LinearLayout-->
+            <!--android:id="@+id/ll_user"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/rl_cord"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginBottom="30dp"-->
+                <!--android:layout_marginLeft="40dp"-->
+                <!--android:layout_marginTop="30dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:background="@drawable/img_card"-->
+                <!--android:visibility="gone">-->
+
+                <!--<ImageView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_marginTop="90dp"-->
+                    <!--android:src="@drawable/img_person" />-->
+                <!--&lt;!&ndash;文字提醒&ndash;&gt;-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="55dp"-->
+                    <!--android:layout_marginTop="250dp"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:text="请点击下方创建按钮"-->
+                        <!--android:textColor="#7d5023"-->
+                        <!--android:textSize="16sp" />-->
+
+                    <!--<TextView-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center"-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:text="立刻生成您的专属卡牌"-->
+                        <!--android:textColor="#7d5023"-->
+                        <!--android:textSize="14sp" />-->
+                <!--</LinearLayout>-->
+                <!--&lt;!&ndash;创建卡牌按钮&ndash;&gt;-->
+                <!--<Button-->
+                    <!--android:id="@+id/create_card"-->
+                    <!--android:layout_width="160dp"-->
+                    <!--android:layout_height="45dp"-->
+                    <!--android:layout_centerHorizontal="true"-->
+                    <!--android:layout_marginLeft="60dp"-->
+                    <!--android:layout_marginTop="380dp"-->
+                    <!--android:background="@drawable/btn"-->
+                    <!--android:text="创建卡牌"-->
+                    <!--android:textColor="#f5e9b4" />-->
+
+
+            <!--</RelativeLayout>-->
+
+            <!--<RelativeLayout-->
+                <!--android:id="@+id/rl_data"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_marginBottom="30dp"-->
+                <!--android:layout_marginLeft="40dp"-->
+                <!--android:layout_marginTop="30dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:visibility="gone">-->
+
+
+                <!--<RelativeLayout-->
+                    <!--android:id="@+id/have_cord"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:layout_marginTop="5dp">-->
+
+                    <!--<RelativeLayout-->
+                        <!--android:id="@+id/rl_avatar"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="200dp"-->
+                        <!--android:paddingTop="@dimen/dp_10"-->
+                        <!--android:background="@color/bg_main">-->
+
+                        <!--<ImageView-->
+                            <!--android:id="@+id/avatar"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:scaleType="fitXY" />-->
+
+                        <!--<ImageView-->
+                            <!--android:id="@+id/default_avatar"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_centerHorizontal="true"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:src="@drawable/img_man" />-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/avatar_text"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_below="@+id/avatar"-->
+                            <!--android:layout_centerHorizontal="true"-->
+                            <!--android:layout_marginTop="5dp"-->
+                            <!--android:text="点此上传照片" />-->
+                    <!--</RelativeLayout>-->
+
+                    <!--<LinearLayout-->
+                        <!--android:id="@+id/rl_name"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="30dp"-->
+                        <!--android:layout_below="@+id/rl_avatar">-->
+
+                        <!--<TextView-->
+                            <!--android:id="@+id/name"-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:background="@drawable/card_user_id"-->
+                            <!--android:gravity="center_vertical"-->
+                            <!--android:paddingLeft="20dp"-->
+                            <!--android:text=""-->
+                            <!--android:textColor="@color/white" />-->
+
+                        <!--<TextView-->
+
+                            <!--android:id="@+id/level"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:background="@drawable/card_user_num"-->
+                            <!--android:gravity="center"-->
+                            <!--android:paddingRight="10dp"-->
+                            <!--android:text=""-->
+                            <!--android:textColor="@color/white" />-->
+                    <!--</LinearLayout>-->
+
+                    <!--<LinearLayout-->
+
+                        <!--android:id="@+id/ll_data"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_below="@+id/rl_name"-->
+                        <!--android:background="@drawable/card_bot"-->
+                        <!--android:orientation="vertical"-->
+                        <!--android:paddingLeft="20dp">-->
+
+                        <!--<RelativeLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="0dp"-->
+                            <!--android:layout_weight="1">-->
+
+                            <!--<ImageView-->
+                                <!--android:id="@+id/constellation"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_alignParentRight="true"-->
+                                <!--android:layout_marginRight="@dimen/dp_10"-->
+                                <!--android:layout_marginTop="@dimen/dp_10"-->
+                                <!--android:src="@drawable/chunv" />-->
+
+                            <!--<LinearLayout-->
+                                <!--android:layout_width="match_parent"-->
+                                <!--android:layout_height="match_parent"-->
+
+                                <!--android:orientation="vertical">-->
+
+                                <!--<LinearLayout-->
+                                    <!--android:id="@+id/ll_nike_name"-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginTop="5dp"-->
+                                    <!--android:orientation="horizontal">-->
+
+                                    <!--<TextView-->
+
+                                        <!--android:layout_width="wrap_content"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_alignLeft="@+id/stars"-->
+                                        <!--android:layout_alignStart="@+id/stars"-->
+                                        <!--android:layout_below="@+id/rl_name"-->
+                                        <!--android:text="昵&#12288;昵 :  " />-->
+
+                                    <!--<TextView-->
+                                        <!--android:id="@+id/nikeName"-->
+                                        <!--android:layout_width="0dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_weight="1"-->
+                                        <!--android:text="" />-->
+                                <!--</LinearLayout>-->
+
+                                <!--<LinearLayout-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginTop="10dp"-->
+                                    <!--android:orientation="horizontal">-->
+
+                                    <!--<TextView-->
+
+                                        <!--android:layout_width="wrap_content"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_alignLeft="@+id/stars"-->
+                                        <!--android:layout_alignStart="@+id/stars"-->
+                                        <!--android:layout_below="@+id/rl_name"-->
+                                        <!--android:text="手机号 :  " />-->
+
+                                    <!--<TextView-->
+                                        <!--android:id="@+id/phone"-->
+                                        <!--android:layout_width="0dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_weight="1"-->
+                                        <!--android:text="" />-->
+                                <!--</LinearLayout>-->
+
+                                <!--<LinearLayout-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginTop="5dp"-->
+                                    <!--android:orientation="horizontal">-->
+
+                                    <!--<TextView-->
+
+                                        <!--android:layout_width="wrap_content"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_alignLeft="@+id/stars"-->
+                                        <!--android:layout_alignStart="@+id/stars"-->
+                                        <!--android:layout_below="@+id/rl_name"-->
+                                        <!--android:text="邮&#12288;箱 :  " />-->
+
+                                    <!--<TextView-->
+                                        <!--android:id="@+id/mail"-->
+                                        <!--android:layout_width="0dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_weight="1"-->
+                                        <!--android:text="" />-->
+                                <!--</LinearLayout>-->
+
+                                <!--<LinearLayout-->
+                                    <!--android:id="@+id/ll_motto"-->
+                                    <!--android:layout_width="match_parent"-->
+                                    <!--android:layout_height="wrap_content"-->
+                                    <!--android:layout_marginTop="10dp"-->
+                                    <!--android:orientation="horizontal">-->
+
+                                    <!--<TextView-->
+
+                                        <!--android:layout_width="wrap_content"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_alignLeft="@+id/stars"-->
+                                        <!--android:layout_alignStart="@+id/stars"-->
+                                        <!--android:layout_below="@+id/rl_name"-->
+                                        <!--android:text="座右铭 :  " />-->
+
+                                    <!--<TextView-->
+                                        <!--android:id="@+id/motto"-->
+                                        <!--android:layout_width="0dp"-->
+                                        <!--android:layout_height="wrap_content"-->
+                                        <!--android:layout_weight="1"-->
+                                        <!--android:text="" />-->
+                                <!--</LinearLayout>-->
+                            <!--</LinearLayout>-->
+                        <!--</RelativeLayout>-->
+
+                        <!--<RelativeLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginBottom="@dimen/dp_30"-->
+                            <!--android:visibility="gone">-->
+
+                            <!--<Button-->
+                                <!--android:id="@+id/perfect_card"-->
+                                <!--android:layout_width="160dp"-->
+                                <!--android:layout_height="45dp"-->
+                                <!--android:layout_centerHorizontal="true"-->
+                                <!--android:background="@drawable/btn"-->
+                                <!--android:text="完善卡牌"-->
+                                <!--android:textColor="#f5e9b4" />-->
+                        <!--</RelativeLayout>-->
+
+                    <!--</LinearLayout>-->
+
+                    <!--<ImageView-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="match_parent"-->
+                        <!--android:layout_alignParentLeft="true"-->
+                        <!--android:layout_alignParentStart="true"-->
+                        <!--android:layout_alignParentTop="true"-->
+                        <!--android:scaleType="fitXY"-->
+                        <!--android:src="@drawable/card_bg" />-->
+
+
+                    <!--<com.willy.ratingbar.ScaleRatingBar xmlns:app="http://schemas.android.com/apk/res-auto"-->
+                        <!--android:id="@+id/stars"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_gravity="center_vertical"-->
+                        <!--android:layout_marginLeft="@dimen/dp_30"-->
+                        <!--android:layout_marginTop="6dp"-->
+                        <!--app:srb_clearRatingEnabled="true"-->
+                        <!--app:srb_clickable="false"-->
+                        <!--app:srb_drawableEmpty="@drawable/icon_star_nor"-->
+                        <!--app:srb_drawableFilled="@drawable/icon_star_light"-->
+                        <!--app:srb_isIndicator="false"-->
+                        <!--app:srb_numStars="10"-->
+                        <!--app:srb_rating="0"-->
+                        <!--app:srb_scrollable="false"-->
+                        <!--app:srb_starHeight="15dp"-->
+                        <!--app:srb_starPadding="2dp"-->
+                        <!--app:srb_starWidth="15dp"-->
+                        <!--app:srb_stepSize="1"></com.willy.ratingbar.ScaleRatingBar>-->
+
+                <!--</RelativeLayout>-->
+
+                <!--<ImageView-->
+                    <!--android:id="@+id/type_iv"-->
+                    <!--android:layout_width="30dp"-->
+                    <!--android:layout_height="30dp"-->
+                    <!--android:src="@drawable/hd_logo"></ImageView>-->
+
+            <!--</RelativeLayout>-->
+        <!--</LinearLayout>-->
+
+
+
+
+     <!--<include layout="@layout/layout_card_fragment_right"/>-->
+
+    <!--</LinearLayout>-->
 
 </LinearLayout>
 

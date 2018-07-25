@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_identity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="gone">
+
+    <LinearLayout
+        android:id="@+id/ll_identity_status_ing"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp_50"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/img_identity_ing" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="提交成功~请您耐心等待"
+            android:textSize="@dimen/font_size_14sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="我们将24小时之内给您答复"
+            android:textSize="@dimen/font_size_14sp" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_identity_ing"
+            android:layout_width="@dimen/main_btn_with"
+            android:layout_height="@dimen/main_btn_height"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_50"
+            android:background="@drawable/selector_main_btn"
+            android:text="@string/user_know"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_big" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_identity_status_failure"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp_50"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/img__identity_failure" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="审核失败!"
+            android:textColor="#212121"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="可能由一下原因造成:"
+            android:textColor="#212121"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="@string/identity_failure_text"
+            android:textSize="@dimen/font_small" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_identity_failure"
+            android:layout_width="@dimen/main_btn_with"
+            android:layout_height="@dimen/main_btn_height"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_50"
+            android:background="@drawable/selector_main_btn"
+            android:text="@string/authentication_again"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_big" />
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_identity_status_success"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp_50"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/img_identity_success" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_40"
+            android:text="审核通过!"
+            android:textColor="#212121"
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_5"
+            android:text="您的身份图标已点亮"
+            android:textColor="#212121"
+            android:textSize="@dimen/font_normal" />
+
+
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/btn_identity_success"
+            android:layout_width="@dimen/main_btn_with"
+            android:layout_height="@dimen/main_btn_height"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dp_50"
+            android:background="@drawable/selector_main_btn"
+            android:text="@string/to_see"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_big" />
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.LinearLayoutCompat>

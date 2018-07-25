@@ -42,14 +42,19 @@ public class CompanyCertificationActivity extends BaseTitleActivity {
     LinearLayout llIdentity;
 
     private Subscription mCompanyCertificationSubscription;
+    private int mBusinessStatus;
+    private int mIdCardStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_certification);
         ButterKnife.bind(this);
         setTitle(ResourceUtils.getString(R.string.certified_company));
-        authenticateSetText(companyIv, company,ResultConstant.AUTHENTICATE_STATUS_NULL);
-        authenticateSetText(identityIv, identity,ResultConstant.AUTHENTICATE_STATUS_NULL);
+        mBusinessStatus = ResultConstant.AUTHENTICATE_STATUS_NULL;
+        mIdCardStatus = ResultConstant.AUTHENTICATE_STATUS_NULL;
+        authenticateSetText(companyIv, company, ResultConstant.AUTHENTICATE_STATUS_NULL);
+        authenticateSetText(identityIv, identity, ResultConstant.AUTHENTICATE_STATUS_NULL);
         mCompanyCertificationSubscription = RxBus.getInstance().toObservable(CompanyCertificationStatusResult.class).subscribe(
                 result -> handlerCompanyCertificationResult(result)
         );
@@ -57,12 +62,14 @@ public class CompanyCertificationActivity extends BaseTitleActivity {
     }
 
     private void handlerCompanyCertificationResult(CompanyCertificationStatusResult result) {
-        if(result.Code == NetworkConstant.SUCCESS_CODE){
-            if(result.getContent() != null){
+        if (result.Code == NetworkConstant.SUCCESS_CODE) {
+            if (result.getContent() != null) {
+                mBusinessStatus = result.getContent().getBusinessLicenseStatus();
+                mIdCardStatus = result.getContent().getManagerIdCardStatus();
                 authenticateSetText(companyIv, company, result.getContent().getBusinessLicenseStatus());
-                authenticateSetText(identityIv, identity,result.getContent().getManagerIdCardStatus());
+                authenticateSetText(identityIv, identity, result.getContent().getManagerIdCardStatus());
             }
-        }else {
+        } else {
             AlertUtils.show(result.Message);
         }
     }
@@ -72,11 +79,35 @@ public class CompanyCertificationActivity extends BaseTitleActivity {
         switch (view.getId()) {
             //公司认证
             case R.id.ll_company:
-                startActivity(new Intent(context, EnterpriseCertificationActivity.class));
+                switch (mBusinessStatus){
+                    case ResultConstant.AUTHENTICATE_STATUS_NULL:
+                        startActivity(new Intent(context, EnterpriseCertificationActivity.class));
+                    case ResultConstant.AUTHENTICATE_STATUS_FAILURE:
+
+                        break;
+                    case ResultConstant.AUTHENTICATE_STATUS_ING:
+                        AlertUtils.show(ResourceUtils.getString(R.string.audit_ing_please_waite));
+                        break;
+                    case ResultConstant.AUTHENTICATE_STATUS_SUCCEED:
+                        break;
+                }
+
                 break;
             //身份认证
             case R.id.ll_identity:
-                startActivity(new Intent(context, PersonalQualificationActivity.class));
+                switch (mIdCardStatus){
+                    case ResultConstant.AUTHENTICATE_STATUS_NULL:
+                        startActivity(new Intent(context, PersonalQualificationActivity.class));
+                    case ResultConstant.AUTHENTICATE_STATUS_FAILURE:
+
+                        break;
+                    case ResultConstant.AUTHENTICATE_STATUS_ING:
+                        AlertUtils.show(ResourceUtils.getString(R.string.audit_ing_please_waite));
+                        break;
+                    case ResultConstant.AUTHENTICATE_STATUS_SUCCEED:
+                        break;
+                }
+
                 break;
         }
     }

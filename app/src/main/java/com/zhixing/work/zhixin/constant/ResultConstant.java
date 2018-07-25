@@ -25,4 +25,9 @@ public class ResultConstant {
     //认证失败
     public static final int AUTHENTICATE_STATUS_FAILURE = 3;
 
+    //性别男
+    public static final int USER_GERNAL_MAN = 0;
+    //性别女
+    public static final int USER_GERNAL_WOMAN = 1;
+
 }

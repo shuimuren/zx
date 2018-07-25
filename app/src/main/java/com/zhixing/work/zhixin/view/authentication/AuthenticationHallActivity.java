@@ -59,7 +59,7 @@ public class AuthenticationHallActivity extends BaseTitleActivity {
     LinearLayout llSkill;
 
     private Subscription authenticationListSubscription;
-    private boolean identitySuccess, educationSuccess, workSuccess, certificateSuccess;
+    private int identityStatus, educationStatus, workStatus, certificateStatus,skillStatus;
     private int idCardId;
     private int educationId;
     private int certificationId;
@@ -86,52 +86,92 @@ public class AuthenticationHallActivity extends BaseTitleActivity {
         switch (view.getId()) {
             //身份认证
             case R.id.ll_identity:
-                if (identitySuccess) {
-                    AlertUtils.show(ResourceUtils.getString(R.string.come_in_soon));
-                    return;
+                switch (identityStatus) {
+                    case ResultConstant.AUTHENTICATE_STATUS_NULL:
+                        Intent intent = new Intent(context, IdAuthenticationActivity.class);
+                        intent.putExtra(IdAuthenticationActivity.INTENT_KEY_ID_AUTHENTICATION, String.valueOf(idCardId));
+                        startActivity(intent);
+                        break;
+                    case ResultConstant.AUTHENTICATE_STATUS_ING:
+                    case ResultConstant.AUTHENTICATE_STATUS_SUCCEED:
+                    case ResultConstant.AUTHENTICATE_STATUS_FAILURE:
+                        gotoCertificationStatusActivity(identityStatus,CertificationStatusActivity.INTENT_IDENTITY_TYPE);
+                        break;
                 }
-                Intent intent = new Intent(context, IdAuthenticationActivity.class);
-                intent.putExtra(IdAuthenticationActivity.INTENT_KEY_ID_AUTHENTICATION, String.valueOf(idCardId));
-                startActivity(intent);
+
                 break;
             //学历认证
             case R.id.ll_education:
-                if (educationSuccess) {
-                    AlertUtils.show(ResourceUtils.getString(R.string.come_in_soon));
-                    return;
+                switch (educationStatus) {
+                    case ResultConstant.AUTHENTICATE_STATUS_NULL:
+                        Intent educationIntent = new Intent(context, EducationCertificationActivity.class);
+                        educationIntent.putExtra(EducationCertificationActivity.INTENT_KEY_ID, educationId);
+                        startActivity(educationIntent);
+                        break;
+                    case ResultConstant.AUTHENTICATE_STATUS_ING:
+                    case ResultConstant.AUTHENTICATE_STATUS_SUCCEED:
+                    case ResultConstant.AUTHENTICATE_STATUS_FAILURE:
+                        gotoCertificationStatusActivity(educationStatus,CertificationStatusActivity.INTENT_EDUCATION_TYPE);
+                        break;
                 }
-                Intent educationIntent = new Intent(context, EducationCertificationActivity.class);
-                educationIntent.putExtra(EducationCertificationActivity.INTENT_KEY_ID, educationId);
-                startActivity(educationIntent);
+
                 break;
             //工作认证
             case R.id.ll_work:
-                if (workSuccess) {
-                    AlertUtils.show(ResourceUtils.getString(R.string.come_in_soon));
-                    return;
-                }
                 AlertUtils.show("工作认证" + ResourceUtils.getString(R.string.need_to_do));
+//                switch (workStatus) {
+//                    case ResultConstant.AUTHENTICATE_STATUS_NULL:
+//                        Intent certificationIntent = new Intent(context, CertificateCertificationActivity.class);
+//                        certificationIntent.putExtra(CertificateCertificationActivity.INTENT_KEY_CERITIFICATION, certificationId);
+//                        startActivity(certificationIntent);
+//                        break;
+//                    case ResultConstant.AUTHENTICATE_STATUS_ING:
+//                    case ResultConstant.AUTHENTICATE_STATUS_SUCCEED:
+//                    case ResultConstant.AUTHENTICATE_STATUS_FAILURE:
+//                        gotoCertificationStatusActivity(workStatus,CertificationStatusActivity.INTENT_WORK_TYPE);
+//                        break;
+//                }
                 break;
             //证书认证
             case R.id.ll_certificate:
-                if (certificateSuccess) {
-                    AlertUtils.show(ResourceUtils.getString(R.string.come_in_soon));
-                    return;
+                switch (certificateStatus) {
+                    case ResultConstant.AUTHENTICATE_STATUS_NULL:
+                        Intent certificationIntent = new Intent(context, CertificateCertificationActivity.class);
+                        certificationIntent.putExtra(CertificateCertificationActivity.INTENT_KEY_CERITIFICATION, certificationId);
+                        startActivity(certificationIntent);
+                        break;
+                    case ResultConstant.AUTHENTICATE_STATUS_ING:
+                    case ResultConstant.AUTHENTICATE_STATUS_SUCCEED:
+                    case ResultConstant.AUTHENTICATE_STATUS_FAILURE:
+                        gotoCertificationStatusActivity(certificateStatus,CertificationStatusActivity.INTENT_CERTIFICATE_TYPE);
+                        break;
                 }
-                Intent certificationIntent = new Intent(context, CertificateCertificationActivity.class);
-                certificationIntent.putExtra(CertificateCertificationActivity.INTENT_KEY_CERITIFICATION, certificationId);
-                startActivity(certificationIntent);
-
                 break;
             //技能认证
             case R.id.ll_skill:
                 AlertUtils.show("技能认证");
+//                switch (skillStatus) {
+//                    case ResultConstant.AUTHENTICATE_STATUS_NULL:
+//                        Intent certificationIntent = new Intent(context, CertificateCertificationActivity.class);
+//                        certificationIntent.putExtra(CertificateCertificationActivity.INTENT_KEY_CERITIFICATION, certificationId);
+//                        startActivity(certificationIntent);
+//                        break;
+//                    case ResultConstant.AUTHENTICATE_STATUS_ING:
+//                    case ResultConstant.AUTHENTICATE_STATUS_SUCCEED:
+//                    case ResultConstant.AUTHENTICATE_STATUS_FAILURE:
+//                        gotoCertificationStatusActivity(skillStatus,CertificationStatusActivity.INTENT_SKILL_TYPE);
+//                        break;
+//                }
                 break;
         }
     }
 
     public void getListData() {
         MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_PERSONAL_AUTHENTICATES);
+    }
+
+    private void gotoCertificationStatusActivity(int status, int type) {
+        CertificationStatusActivity.startCertificationStatusActivity(AuthenticationHallActivity.this, status, type);
     }
 
     @Override
@@ -147,38 +187,21 @@ public class AuthenticationHallActivity extends BaseTitleActivity {
                     case ResultConstant.AUTHENTICATES_TYPE_IDENTITY_CARD:
                         authenticateSetText(identityIv, identity, result.getContent().get(i).getList().get(0).getAuthenticatesStatus());
                         idCardId = result.getContent().get(i).getList().get(0).getAuthenticatesId();
-                        if (result.getContent().get(i).getList().get(0).getAuthenticatesStatus() != ResultConstant.AUTHENTICATE_STATUS_NULL) {
-                            identitySuccess = true;
-                        } else {
-                            identitySuccess = false;
-                        }
+                        identityStatus = result.getContent().get(i).getList().get(0).getAuthenticatesStatus();
                         break;
                     case ResultConstant.AUTHENTICATES_TYPE_EDUCATION:
                         authenticateSetText(educationIv, education, result.getContent().get(i).getList().get(0).getAuthenticatesStatus());
                         educationId = result.getContent().get(i).getList().get(0).getAuthenticatesId();
-                        if (result.getContent().get(i).getList().get(0).getAuthenticatesStatus() != ResultConstant.AUTHENTICATE_STATUS_NULL) {
-                            educationSuccess = true;
-                        } else {
-                            educationSuccess = false;
-                        }
+                        educationStatus = result.getContent().get(i).getList().get(0).getAuthenticatesStatus();
                         break;
                     case ResultConstant.AUTHENTICATES_TYPE_WORK:
                         authenticateSetText(workIv, work, result.getContent().get(i).getList().get(0).getAuthenticatesStatus());
-
-                        if (result.getContent().get(i).getList().get(0).getAuthenticatesStatus() != ResultConstant.AUTHENTICATE_STATUS_NULL) {
-                            workSuccess = true;
-                        } else {
-                            workSuccess = false;
-                        }
+                        workStatus = result.getContent().get(i).getList().get(0).getAuthenticatesStatus();
                         break;
                     case ResultConstant.AUTHENTICATES_TYPE_CERTIFICATE:
                         authenticateSetText(certificateIv, certificate, result.getContent().get(i).getList().get(0).getAuthenticatesStatus());
                         certificationId = result.getContent().get(i).getList().get(0).getAuthenticatesId();
-                        if (result.getContent().get(i).getList().get(0).getAuthenticatesStatus() != ResultConstant.AUTHENTICATE_STATUS_NULL) {
-                            certificateSuccess = true;
-                        } else {
-                            certificateSuccess = false;
-                        }
+                        certificateStatus = result.getContent().get(i).getList().get(0).getAuthenticatesStatus();
                         break;
                 }
             }

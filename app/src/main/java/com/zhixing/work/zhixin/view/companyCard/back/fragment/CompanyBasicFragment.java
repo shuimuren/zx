@@ -179,12 +179,14 @@ public class CompanyBasicFragment extends SupportFragment {
 
         if (!TextUtils.isEmpty(company.getStaffSize())) {
             companyScale.setText(Utils.getStaffSize(company.getStaffSize()));
+        }else{
+            companyScale.setText(ZxTextUtils.getTextWithDefault(""));
         }
         if (!TextUtils.isEmpty(company.getFinancingStage())) {
             companyFinancing.setText(Utils.getFinancingStage(company.getFinancingStage()));
+        }else{
+            companyFinancing.setText("-");
         }
-
-
 
     }
 

@@ -90,8 +90,7 @@ public class MainFragment extends SupportFragment {
         mBottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
             @Override
             public void onTabSelected(int position, int prePosition) {
-//                if (position != 1 && TextUtils.isEmpty(PreferenceUtils.getString(PreferenceUtils.KEY_HAVE_CARD_INFO)) &&
-//                        (SettingUtils.getRoleInfo().equals(RoleConstant.PERSONAL_ROLE))) {
+//                if (position != 1 && SettingUtils.createCardBefore()) {
 //                    AlertUtils.show(ResourceUtils.getString(R.string.complete_user_base_info));
 //                    startActivity(new Intent(getActivity(), CreateCardActivity.class));
 //                    mBottomBar.setCurrentItem(SCORE_FRAGMENT_CODE);

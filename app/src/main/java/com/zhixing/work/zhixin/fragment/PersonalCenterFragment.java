@@ -10,7 +10,11 @@ import android.view.ViewGroup;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.SupportFragment;
+import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
+import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.view.authentication.AuthenticationHallActivity;
+import com.zhixing.work.zhixin.view.card.CreateCardActivity;
 import com.zhixing.work.zhixin.view.myCenter.resume.MyResumeActivity;
 import com.zhixing.work.zhixin.view.setting.SettingActivity;
 
@@ -57,10 +61,21 @@ public class PersonalCenterFragment extends SupportFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_authentication:
-                startActivity(new Intent(getActivity(), AuthenticationHallActivity.class));
+                if (SettingUtils.createCardBefore()) {
+                    startActivity(new Intent(getActivity(), AuthenticationHallActivity.class));
+                } else {
+                    AlertUtils.show(ResourceUtils.getString(R.string.complete_user_base_info));
+                    startActivity(new Intent(getActivity(), CreateCardActivity.class));
+                }
                 break;
             case R.id.ll_resume:
-                startActivity(new Intent(getActivity(), MyResumeActivity.class));
+                if (SettingUtils.createCardBefore()) {
+                    startActivity(new Intent(getActivity(), MyResumeActivity.class));
+                } else {
+                    AlertUtils.show(ResourceUtils.getString(R.string.complete_user_base_info));
+                    startActivity(new Intent(getActivity(), CreateCardActivity.class));
+                }
+
                 break;
             case R.id.ll_setting:
                 startActivity(new Intent(getActivity(), SettingActivity.class));

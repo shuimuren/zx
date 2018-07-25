@@ -48,6 +48,7 @@ import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.AppUtils;
 import com.zhixing.work.zhixin.util.BitmapUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.view.card.ModifyContentActivity;
 import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
 import com.zhixing.work.zhixin.view.util.SelectImageActivity;
@@ -126,7 +127,7 @@ public class EnterpriseCertificationActivity extends BaseTitleActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enterprise_certification);
         ButterKnife.bind(this);
-        setTitle("公司认证");
+        setTitle(ResourceUtils.getString(R.string.certified_company));
         publishImages = new ArrayList<>();
         publishImages.add(null);
         getOssToken();

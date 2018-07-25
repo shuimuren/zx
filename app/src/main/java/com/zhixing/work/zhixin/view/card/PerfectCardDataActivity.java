@@ -33,17 +33,17 @@ import com.zhixing.work.zhixin.dialog.MarriageDialog;
 import com.zhixing.work.zhixin.dialog.PoliticalStatusDialog;
 import com.zhixing.work.zhixin.dialog.ResidenceDialog;
 import com.zhixing.work.zhixin.event.ModifyEvent;
-import com.zhixing.work.zhixin.event.UserBasicInfoSubmitEvent;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
 import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
 import com.zhixing.work.zhixin.util.Utils;
 
-import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
@@ -645,7 +645,7 @@ public class PerfectCardDataActivity extends BaseTitleActivity {
                 hideLoadingDialog();
                 if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     startActivity(new Intent(context, PerfectCardEducationActivity.class));
-                    EventBus.getDefault().post(new UserBasicInfoSubmitEvent(true));
+                    MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_PERSONAL_CARD_INFO);
                     finish();
                 } else {
                     AlertUtils.toast(context, response.getMessage());

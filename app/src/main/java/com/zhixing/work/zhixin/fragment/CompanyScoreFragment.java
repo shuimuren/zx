@@ -25,7 +25,9 @@ import com.zhixing.work.zhixin.base.SupportFragment;
 import com.zhixing.work.zhixin.bean.ALiImageUrlBean;
 import com.zhixing.work.zhixin.bean.CompanyCardInfoBean;
 import com.zhixing.work.zhixin.common.Logger;
+import com.zhixing.work.zhixin.constant.ResultConstant;
 import com.zhixing.work.zhixin.dialog.CardCompleteDialog;
+import com.zhixing.work.zhixin.dialog.CertifiedDialog;
 import com.zhixing.work.zhixin.event.BasicRefreshEvent;
 import com.zhixing.work.zhixin.event.CardCompleteEvent;
 import com.zhixing.work.zhixin.msgctrl.MsgDef;
@@ -40,6 +42,7 @@ import com.zhixing.work.zhixin.util.FileUtil;
 import com.zhixing.work.zhixin.util.GlideUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.Utils;
+import com.zhixing.work.zhixin.view.companyCard.CompanyCertificationActivity;
 import com.zhixing.work.zhixin.view.companyCard.CreateCompanyCardActivity;
 import com.zhixing.work.zhixin.view.companyCard.back.CompanyCardActivity;
 
@@ -200,6 +203,13 @@ public class CompanyScoreFragment extends SupportFragment {
                 tvCompanyAddress.setText(addressCity + mCompanyCard.getAddress());
             }
             tvCompanyName.setText(mCompanyCard.getFullName());
+
+            if(mCompanyCard.getBusinessLicenseStatus()!= ResultConstant.AUTHENTICATE_STATUS_NULL
+                    && mCompanyCard.getManagerIdCardStatus() != ResultConstant.AUTHENTICATE_STATUS_NULL){
+                imageNotify.setVisibility(View.INVISIBLE);
+            }else {
+                imageNotify.setVisibility(View.GONE);
+            }
         }
 
 
@@ -211,7 +221,7 @@ public class CompanyScoreFragment extends SupportFragment {
      * @param result
      */
     private void handlerAvatarResult(ALiImageUrlBean result) {
-        if (result.getBaseUrl().equals(mAvatarBaseUrl)) {
+        if (result.getBaseUrl()!= null && result.getBaseUrl().equals(mAvatarBaseUrl)) {
             Glide.with(getActivity()).load(result.getUrl()).into(imageCompanyPicture);
         } else if (mLogoBaseUrl.equals(result.getBaseUrl())) {
             GlideUtils.getInstance().loadCircleUserIconInto(getActivity(), result.getUrl(), imageCompanyLogo);
@@ -299,6 +309,15 @@ public class CompanyScoreFragment extends SupportFragment {
 
                 break;
             case R.id.image_notify:
+                CertifiedDialog dialog = new CertifiedDialog(getActivity(), new CertifiedDialog.OnItemClickListener() {
+                    @Override
+                    public void OnItemClick(Dialog dialog) {
+                        startActivity(new Intent(getActivity(), CompanyCertificationActivity.class));
+                        dialog.dismiss();
+                    }
+                });
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.show();
 
                 break;
             case R.id.img_friend:

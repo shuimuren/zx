@@ -22,6 +22,7 @@ import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import org.greenrobot.eventbus.EventBus;
@@ -44,19 +45,22 @@ public class BigEventActivity extends BaseTitleActivity {
     private BigEventListAdapter bigEventListAdapter;
     private List<History> list = new ArrayList<>();
     private DeleteDialog deleteDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_big_event);
         ButterKnife.bind(this);
-        setTitle("公司事件");
+        setTitle(ResourceUtils.getString(R.string.company_history_event));
         initView();
         getData();
     }
+
     @OnClick(R.id.add)
     public void onViewClicked() {
-        startActivity(new Intent(context, AddEventActivity.class).putExtra("type", "add"));
+        startActivity(new Intent(context, AddEventActivity.class).putExtra(AddEventActivity.KEY_TYPE, AddEventActivity.VALUE_ADD_TYPE));
     }
+
     private void getData() {
         OkUtils.getInstances().httpTokenGet(context, RequestConstant.COMPANY_HISTORY, JavaParamsUtils.getInstances().getCompanyHistory(), new TypeToken<EntityObject<List<History>>>() {
         }.getType(), new ResultCallBackListener<List<History>>() {
@@ -88,14 +92,13 @@ public class BigEventActivity extends BaseTitleActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(context, AddEventActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("bean", list.get(position));
-                intent.putExtra("type", "edit");
-                intent.putExtras(bundle);
+                intent.putExtra(AddEventActivity.KEY_HISTORY_BEAN, list.get(position));
+                intent.putExtra(AddEventActivity.KEY_TYPE, AddEventActivity.VALUE_EDIT_TYPE);
                 startActivity(intent);
             }
+
             @Override
-            public void onItemLongClick(View view,final int position) {
+            public void onItemLongClick(View view, final int position) {
 
                 deleteDialog = new DeleteDialog(context, "是否删除此公司大事件", "", new DeleteDialog.OnItemClickListener() {
                     @Override
@@ -110,8 +113,6 @@ public class BigEventActivity extends BaseTitleActivity {
 
             }
         });
-
-
 
 
     }
@@ -132,6 +133,7 @@ public class BigEventActivity extends BaseTitleActivity {
                 hideLoadingDialog();
                 AlertUtils.toast(context, msg);
             }
+
             @Override
             public void onSuccess(EntityObject<Boolean> response) {
                 hideLoadingDialog();

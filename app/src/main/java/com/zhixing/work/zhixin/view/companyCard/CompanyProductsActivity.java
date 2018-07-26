@@ -22,6 +22,7 @@ import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import org.greenrobot.eventbus.EventBus;
@@ -51,6 +52,7 @@ public class CompanyProductsActivity extends BaseTitleActivity {
         setContentView(R.layout.activity_company_products);
         ButterKnife.bind(this);
         setTitle("公司产品");
+        setRightText1(ResourceUtils.getString(R.string.manager_text));
         initView();
         getData();
     }

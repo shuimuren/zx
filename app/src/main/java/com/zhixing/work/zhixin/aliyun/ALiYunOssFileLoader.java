@@ -105,7 +105,6 @@ public class ALiYunOssFileLoader {
         OSSClient mOSSClient = new OSSClient(context, ALiYunFileURLBuilder.PUBLIC_END_POINT, credentialProvider, conf);
         conf.setHttpDnsEnable(true);
         url = mOSSClient.presignPublicObjectURL(bucketName, objectKey);
-
         return url;
     }
 

@@ -206,5 +206,12 @@
     <string name="identity_failure_text">1.图像不清晰\n2.图像有残缺\n3.图像过暗或过爆</string>
     <string name="to_see">查看</string>
     <string name="audit_ing_please_waite">正在审核中,请耐心等待</string>
+    <string name="certified_dialog_title">当前您还未认证\n认证之后能解锁更多功能哦</string>
+    <string name="certified_dialog_content">您也可以通过"我的"入口进行认证</string>
+    <string name="btn_certified">去认证</string>
+    <string name="manager_text">管理</string>
+    <string name="company_history_event">公司事件</string>
+    <string name="add_event_success">大事件添加成功</string>
+    <string name="edit_event_success">大事件修改成功</string>
 
 </resources>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/img_certified_dialog" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/dp_10"
+        android:gravity="center"
+        android:paddingBottom="@dimen/dp_20"
+        android:background="@drawable/shape_bottom_corner_white" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_5"
+            android:textSize="@dimen/font_normal"
+            android:textColor="#212121"
+            android:text="@string/certified_dialog_title"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lineSpacingExtra="@dimen/dp_5"
+            android:paddingTop="@dimen/dp_20"
+            android:textSize="@dimen/font_size_14sp"
+            android:text="@string/certified_dialog_content"/>
+
+        <Button
+            android:id="@+id/btn_certified"
+            android:layout_marginLeft="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_40"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/dp_40"
+
+            android:layout_height="@dimen/btn_height"
+            android:background="@drawable/selector_main_btn"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_normal"
+            android:text="@string/btn_certified"/>
+    </LinearLayout>
+
+
+</LinearLayout>

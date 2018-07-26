@@ -13,10 +13,11 @@ import android.widget.Button;
 
 import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
-import com.zhixing.work.zhixin.adapter.BigEventListAdapter;
+import com.zhixing.work.zhixin.adapter.CompanyEventAdapter;
 import com.zhixing.work.zhixin.base.SupportFragment;
 import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.History;
+import com.zhixing.work.zhixin.dialog.CompanyEventDialog;
 import com.zhixing.work.zhixin.event.BigEventRefreshEvent;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;
 import com.zhixing.work.zhixin.http.okhttp.OkUtils;
@@ -25,7 +26,6 @@ import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.view.companyCard.BigEventActivity;
-import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -50,9 +50,8 @@ public class BigEventFragment extends SupportFragment {
     Button editor;
     private Thread thread;
     private Unbinder unbinder;
-    private BigEventListAdapter adapter;
     private List<History> list = new ArrayList<>();
-
+    private CompanyEventAdapter eventAdapter;
     private Context context;
 
     public static BigEventFragment newInstance() {
@@ -79,24 +78,21 @@ public class BigEventFragment extends SupportFragment {
     }
 
     private void initView() {
-        adapter = new BigEventListAdapter(list, context);
+        // adapter = new BigEventListAdapter(list, context);
+
         LinearLayoutManager commodityLayoutManager = new LinearLayoutManager(context);
         commodityLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         listview.setLayoutManager(commodityLayoutManager);
-        listview.addItemDecoration(new RecycleViewDivider(context,  LinearLayoutManager.HORIZONTAL, R.drawable.list_line));
-        listview.setAdapter(adapter);
-        adapter.setOnItemClickListener(new BigEventListAdapter.OnItemClickListener() {
+        eventAdapter = new CompanyEventAdapter(list, new CompanyEventAdapter.OnItemClickedListener() {
             @Override
-            public void onItemClick(View view, int position) {
-
-            }
-
-            @Override
-            public void onItemLongClick(View view, int position) {
+            public void onItemClicked(History history) {
+                CompanyEventDialog dialog = new CompanyEventDialog(getActivity(),history);
+                dialog.setCancelable(true);
+                dialog.setCanceledOnTouchOutside(true);
+                dialog.show();
             }
         });
-
-
+        listview.setAdapter(eventAdapter);
     }
 
     @Override
@@ -110,7 +106,7 @@ public class BigEventFragment extends SupportFragment {
             @Override
             public void run() {
 
-                if (list.isEmpty() ) {
+                if (list.isEmpty()) {
 
                     getData();
 
@@ -151,12 +147,13 @@ public class BigEventFragment extends SupportFragment {
 
                     } else {
                         list = response.getContent();
-                        adapter.setList(list);
+                        eventAdapter.setData(list);
                     }
                 }
             }
         });
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onBigEventRefreshEvent(BigEventRefreshEvent event) {
         if (event.getRefresh()) {

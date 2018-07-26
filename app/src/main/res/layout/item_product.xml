@@ -40,7 +40,6 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/name"
                 android:layout_marginTop="5dp"
-
                 android:textColor="@color/color_7d4a14"/>
         </RelativeLayout>
 

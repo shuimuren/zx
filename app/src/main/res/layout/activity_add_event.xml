@@ -8,9 +8,9 @@
 
 
     <RelativeLayout
-        android:background="@color/bg_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/bg_main">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/event_name"
+                    android:id="@+id/tv_event_name"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_centerVertical="true"
@@ -42,7 +42,10 @@
                     android:layout_toLeftOf="@+id/event_name_right"
                     android:background="@null"
                     android:gravity="center"
+                    android:lines="1"
+                    android:ellipsize="end"
                     android:textColor="@color/color_303030" />
+
                 <ImageView
                     android:id="@+id/event_name_right"
                     android:layout_width="wrap_content"
@@ -53,7 +56,9 @@
                     android:src="@drawable/icon_next"
                     android:textColor="@color/color_303030" />
             </RelativeLayout>
+
             <View style="@style/line"></View>
+
             <RelativeLayout
                 android:id="@+id/rl_event_time"
                 android:layout_width="match_parent"
@@ -79,6 +84,7 @@
                     android:background="@null"
                     android:gravity="center"
                     android:textColor="@color/color_303030" />
+
                 <ImageView
                     android:id="@+id/event_time_right"
                     android:layout_width="wrap_content"
@@ -89,6 +95,7 @@
                     android:src="@drawable/icon_next"
                     android:textColor="@color/color_303030" />
             </RelativeLayout>
+
             <View style="@style/line"></View>
 
             <RelativeLayout
@@ -103,6 +110,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="10dp"
                     android:text="事件简介"
+
                     android:textColor="@color/linerlayout_tv"
                     android:textSize="16sp" />
 
@@ -115,7 +123,10 @@
                     android:layout_toLeftOf="@+id/event_synopsis_right"
                     android:background="@null"
                     android:gravity="center"
+                    android:lines="1"
+                    android:ellipsize="end"
                     android:textColor="@color/color_303030" />
+
                 <ImageView
                     android:id="@+id/event_synopsis_right"
                     android:layout_width="wrap_content"
@@ -126,42 +137,47 @@
                     android:src="@drawable/icon_next"
                     android:textColor="@color/color_303030" />
             </RelativeLayout>
-            <View style="@style/line"></View>
-<LinearLayout
-    android:orientation="vertical"
-    android:background="@color/white"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_50"
-        android:layout_marginLeft="@dimen/dp_10"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:text="相关照片"
-        android:textColor="@color/color_303030"
-        android:textSize="@dimen/dp_16" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/listview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="@dimen/dp_10"
-        android:layout_marginTop="25dp"
-        android:background="@color/white"></android.support.v7.widget.RecyclerView>
-</LinearLayout>
+            <View style="@style/line"></View>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_10"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp_50"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:text="相关照片"
+                    android:textColor="@color/color_303030"
+                    android:textSize="@dimen/dp_16" />
+
+                <ImageView
+                    android:id="@+id/img_event"
+                    android:layout_width="@dimen/dp_120"
+                    android:layout_height="@dimen/dp_120"
+                    android:src="@drawable/add_image" />
+
+
+            </LinearLayout>
 
         </LinearLayout>
 
         <RelativeLayout
-            android:id="@+id/ll_sava"
+            android:id="@+id/ll_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/dp_20"
-           >
+            android:layout_marginBottom="@dimen/dp_20">
+
             <Button
-                android:id="@+id/sava"
+                android:id="@+id/btn_save"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_centerInParent="true"

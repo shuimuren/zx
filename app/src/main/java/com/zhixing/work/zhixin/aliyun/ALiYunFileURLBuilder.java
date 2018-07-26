@@ -50,6 +50,7 @@ public class ALiYunFileURLBuilder {
     //图片上传识别码
     public static final int IMAGE_DISCERN_CODE_PERSONAL_FRAGMENT = 1;//个人卡牌页上传图片
     public static final int IMAGE_DISCERN_CODE_COMPANY_FRAGMENT = 2;//企业卡牌页上传图片
+    public static final int IMAGE_DISCERN_CODE_COMPNY_ENVEN = 3;//企业大事件
 
 
     public static String getBase() {

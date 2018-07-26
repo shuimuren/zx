@@ -1,6 +1,7 @@
 package com.zhixing.work.zhixin.util;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Looper;
 import android.widget.ImageView;
 
@@ -118,4 +119,21 @@ public class GlideUtils extends AppGlideModule {
                 .into(imageView);
 
     }
+
+    /**
+     * 带默认图片
+     * @param context
+     * @param url
+     * @param imageView
+     */
+
+    public void loadGlideRoundTransform(Context context, Drawable drawable, String url, ImageView imageView) {
+        Glide.with(context).load(url)
+                .transition(DrawableTransitionOptions.withCrossFade()).
+                apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE).placeholder(drawable))
+                .into(imageView);
+    }
+
+
 }

@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 
 
 /**
- * 正聊
+ * 主页-正聊
  */
 public class MessageFragment extends BaseMainFragment implements ChatMessageAdapter.ItemClickedInterface{
 

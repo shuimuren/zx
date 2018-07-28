@@ -24,7 +24,7 @@ import butterknife.Unbinder;
 
 /**
  * Created by lhj on 2018/7/6.
- * Description: 个人版 我的
+ * Description: 主页-个人版我的
  */
 
 public class PersonalCenterFragment extends SupportFragment {

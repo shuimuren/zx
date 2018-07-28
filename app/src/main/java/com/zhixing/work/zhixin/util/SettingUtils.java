@@ -1191,7 +1191,7 @@ public class SettingUtils {
      * 账号是否创建过卡牌基础信息
      */
     public static boolean createCardBefore(){
-        String key = getUserPhone() + getRoleInfo();
+        String key = getPhoneNumber() + getRoleInfo();
        // return true;
       return PreferenceUtils.getBoolean(key);
     }
@@ -1201,7 +1201,7 @@ public class SettingUtils {
      */
 
     public static void saveCreateCard(){
-        String key = getUserPhone() + getRoleInfo();
+        String key = getPhoneNumber() + getRoleInfo();
         PreferenceUtils.putBoolean(key, true);
     }
 

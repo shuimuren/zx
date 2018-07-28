@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.willy.ratingbar.ScaleRatingBar;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.SupportFragment;
+import com.zhixing.work.zhixin.bean.AbilityBean;
 import com.zhixing.work.zhixin.event.EvaluationEvent;
 import com.zhixing.work.zhixin.msgctrl.MsgDef;
 import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
@@ -22,6 +23,7 @@ import com.zhixing.work.zhixin.network.response.EvaluateResult;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.view.score.EvaluationHallActivity;
+import com.zhixing.work.zhixin.widget.EvaluatingView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -66,6 +68,8 @@ public class EvaluatingFragment extends SupportFragment {
     TextView tvPerformance;
     @BindView(R.id.tvMentality)
     TextView tvMentality;
+    @BindView(R.id.evaluateView)
+    EvaluatingView evaluateView;
 
 
     private Context context;
@@ -103,6 +107,11 @@ public class EvaluatingFragment extends SupportFragment {
             tvPerformance.setText(String.valueOf(result.getContent().getCovenantScore()));
             tvSincerity.setText(String.valueOf(result.getContent().getIntegrityScore()));
             stars.setRating(result.getContent().getTotalScore() / 10f);
+            //int psychology, int integrity, int agreement, int compliance, int connection
+            AbilityBean bean = new AbilityBean((int)result.getContent().getIntegrityScore(),(int)result.getContent().getComplianceScore(),
+                    (int)result.getContent().getConnectionScore(),(int) result.getContent().getCovenantScore(),(int)result.getContent().getMindsetScore());
+
+            evaluateView.setData(bean);
         }
 
     }

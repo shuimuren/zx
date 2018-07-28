@@ -22,6 +22,7 @@ import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -165,10 +166,9 @@ public class CreateCardActivity extends BaseTitleActivity {
             public void onSuccess(EntityObject<Object> response) {
                 hideLoadingDialog();
                 if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
-                    AlertUtils.toast(context, "添加成功");
+                    AlertUtils.show(ResourceUtils.getString(R.string.create_company_success));
                     SettingUtils.saveCreateCard();
                     EventBus.getDefault().post(new CardCompleteEvent(true));
-
                     finish();
                 } else {
                     AlertUtils.toast(context, response.getMessage());

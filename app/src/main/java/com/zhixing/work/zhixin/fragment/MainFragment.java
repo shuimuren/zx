@@ -58,7 +58,7 @@ public class MainFragment extends SupportFragment {
         if (firstFragment == null) {
             mFragments[MAIN_FRAGMENT_CODE] = MessageFragment.newInstance();
             mFragments[SCORE_FRAGMENT_CODE] = ScoreFragment.newInstance();
-            mFragments[APPLICATION_FRAGMENT_CODE] = AppiconFragment.newInstance();
+            mFragments[APPLICATION_FRAGMENT_CODE] = ApplicationFragment.newInstance();
             mFragments[COMMUNITY_FRAGMENT_CODE] = CommunityFragment.newInstance();
             mFragments[MY_CENTER_FRAGMENT_CODE] = MyCenterFragment.newInstance();
 
@@ -73,7 +73,7 @@ public class MainFragment extends SupportFragment {
             // 这里我们需要拿到mFragments的引用,也可以通过getChildFragmentManager.findFragmentByTag自行进行判断查找(效率更高些),用下面的方法查找更方便些
             mFragments[MAIN_FRAGMENT_CODE] = firstFragment;
             mFragments[SCORE_FRAGMENT_CODE] = findChildFragment(ScoreFragment.class);
-            mFragments[APPLICATION_FRAGMENT_CODE] = findChildFragment(AppiconFragment.class);
+            mFragments[APPLICATION_FRAGMENT_CODE] = findChildFragment(ApplicationFragment.class);
             mFragments[COMMUNITY_FRAGMENT_CODE] = findChildFragment(CommunityFragment.class);
             mFragments[MY_CENTER_FRAGMENT_CODE] = findChildFragment(MyCenterFragment.class);
         }

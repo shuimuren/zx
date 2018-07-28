@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.zhixing.work.zhixin.view.authentication.AuthenticationHallActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:id="@+id/ll_identity"
             android:layout_width="match_parent"
             android:layout_height="@dimen/center_item_height"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/identity_iv"
@@ -53,13 +56,16 @@
                 android:src="@drawable/icon_next" />
         </LinearLayout>
 
-        <View style="@style/line"/>
+        <View
+            android:id="@+id/view_identity"
+            style="@style/line" />
 
         <LinearLayout
             android:id="@+id/ll_education"
             android:layout_width="match_parent"
             android:layout_height="@dimen/center_item_height"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/education_iv"
@@ -97,13 +103,17 @@
                 android:src="@drawable/icon_next" />
         </LinearLayout>
 
-        <View style="@style/line"></View>
+        <View
+            android:id="@+id/view_education"
+            style="@style/line"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/ll_work"
             android:layout_width="match_parent"
             android:layout_height="@dimen/center_item_height"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/work_iv"
@@ -141,13 +151,17 @@
                 android:src="@drawable/icon_next" />
         </LinearLayout>
 
-        <View style="@style/line"></View>
+        <View
+            android:id="@+id/view_work"
+            style="@style/line"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/ll_certificate"
             android:layout_width="match_parent"
             android:layout_height="@dimen/center_item_height"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/certificate_iv"
@@ -185,7 +199,10 @@
                 android:src="@drawable/icon_next" />
         </LinearLayout>
 
-        <View style="@style/line"></View>
+        <View
+            android:id="@+id/view_certificate"
+            style="@style/line"
+            android:visibility="gone" />
 
         <LinearLayout
             android:id="@+id/ll_skill"
@@ -229,6 +246,10 @@
                 android:layout_marginRight="@dimen/dp_10"
                 android:src="@drawable/icon_next" />
         </LinearLayout>
-        <View style="@style/line"></View>
+
+        <View
+            android:id="@+id/view_skill"
+            style="@style/line"
+            android:visibility="gone"></View>
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.LinearLayoutCompat>

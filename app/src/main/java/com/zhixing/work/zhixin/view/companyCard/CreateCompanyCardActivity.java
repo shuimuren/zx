@@ -1,5 +1,6 @@
 package com.zhixing.work.zhixin.view.companyCard;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -102,6 +103,11 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
     private String City = "";
     private String District = "";
 
+    public  static void startCompanyCard(Activity activity){
+        Intent intent = new Intent(activity,CreateCompanyCardActivity.class);
+        activity.startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -200,8 +206,8 @@ public class CreateCompanyCardActivity extends BaseTitleActivity {
                 hideLoadingDialog();
                 if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
                     if (!TextUtils.isEmpty(response.getContent())){
-                        AlertUtils.toast(context, "添加成功");
-                        SettingUtils.putToken(response.getContent());
+                        AlertUtils.show(ResourceUtils.getString(R.string.create_company_success));
+                        SettingUtils.saveCreateCard();
                         EventBus.getDefault().post(new CardCompleteEvent(true));
                         finish();
                     }

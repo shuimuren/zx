@@ -1520,5 +1520,18 @@ public class Utils {
         return spannable;
     }
 
+    public static String listToString(List<String> list) {
+        if (list.size() > 0) {
+            StringBuffer buffer = new StringBuffer();
+            for (int i = 0; i < list.size(); i++) {
+                buffer.append(list.get(i) + ",");
+            }
+            return buffer.toString().substring(0, buffer.length() - 1);
+        } else {
+            return "";
+        }
+
+    }
+
 
 }

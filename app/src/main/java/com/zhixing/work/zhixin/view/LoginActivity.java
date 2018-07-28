@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
-import com.zhixing.work.zhixin.constant.RoleConstant;
+import com.zhixing.work.zhixin.constant.DiscernConstant;
 import com.zhixing.work.zhixin.dialog.LoadingDialog;
 import com.zhixing.work.zhixin.msgctrl.MsgDef;
 import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
@@ -88,8 +88,8 @@ public class LoginActivity extends FragmentActivity {
     }
 
     private void setRoleView() {
-        if(TextUtils.isEmpty(SettingUtils.getRoleInfo()) || SettingUtils.getRoleInfo().equals(RoleConstant.PERSONAL_ROLE)){
-            defaultRole = RoleConstant.PERSONAL_ROLE;
+        if(TextUtils.isEmpty(SettingUtils.getRoleInfo()) || SettingUtils.getRoleInfo().equals(DiscernConstant.PERSONAL_ROLE)){
+            defaultRole = DiscernConstant.PERSONAL_ROLE;
             tvPersonal.setSelected(true);
             llPersonal.setSelected(true);
             markPersonal.setVisibility(View.VISIBLE);
@@ -97,7 +97,7 @@ public class LoginActivity extends FragmentActivity {
             llCompany.setSelected(false);
             markCompany.setVisibility(View.INVISIBLE);
         }else {
-            defaultRole = RoleConstant.ENTERPRISE_ROLE;
+            defaultRole = DiscernConstant.ENTERPRISE_ROLE;
             tvPersonal.setSelected(false);
             llPersonal.setSelected(false);
             markPersonal.setVisibility(View.INVISIBLE);
@@ -135,7 +135,7 @@ public class LoginActivity extends FragmentActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_personal:
-                defaultRole = RoleConstant.PERSONAL_ROLE;
+                defaultRole = DiscernConstant.PERSONAL_ROLE;
                 tvPersonal.setSelected(true);
                 llPersonal.setSelected(true);
                 markPersonal.setVisibility(View.VISIBLE);
@@ -144,7 +144,7 @@ public class LoginActivity extends FragmentActivity {
                 markCompany.setVisibility(View.INVISIBLE);
                 break;
             case R.id.ll_company:
-                defaultRole = RoleConstant.ENTERPRISE_ROLE;
+                defaultRole = DiscernConstant.ENTERPRISE_ROLE;
                 tvPersonal.setSelected(false);
                 llPersonal.setSelected(false);
                 markPersonal.setVisibility(View.INVISIBLE);

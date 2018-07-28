@@ -162,7 +162,7 @@ public class AddEventActivity extends BaseTitleActivity {
      * @param result
      */
     private void handlerImageUploadResult(ImageUploadResult result) {
-        if (result.getCode() == ALiYunFileURLBuilder.IMAGE_DISCERN_CODE_COMPNY_ENVEN && result.isSuccess()) {
+        if (result.getCode() == ALiYunFileURLBuilder.IMAGE_DISCERN_CODE_COMPANY_EVENT&& result.isSuccess()) {
             mImage = result.getUrl();
             if (isEdit) {
                 editEvent();
@@ -340,7 +340,7 @@ public class AddEventActivity extends BaseTitleActivity {
         params.put(ALiYunFileURLBuilder.KEY_SUB_ITEM_CATALOGUE, ALiYunFileURLBuilder.COMPANYHISTORY);
         params.put(ALiYunFileURLBuilder.KEY_FILE_PATH, path);
         params.put(ALiYunFileURLBuilder.KEY_BUCKET_NAME, ALiYunFileURLBuilder.BUCKET_PUBLIC);
-        params.put(ALiYunFileURLBuilder.KEY_IMAGE_CODE, String.valueOf(ALiYunFileURLBuilder.IMAGE_DISCERN_CODE_COMPNY_ENVEN));
+        params.put(ALiYunFileURLBuilder.KEY_IMAGE_CODE, String.valueOf(ALiYunFileURLBuilder.IMAGE_DISCERN_CODE_COMPANY_EVENT));
         MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_ALI_YUN_IMAGE_UPLOAD, params);
     }
 

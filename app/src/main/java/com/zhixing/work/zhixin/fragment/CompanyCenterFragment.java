@@ -10,7 +10,11 @@ import android.view.ViewGroup;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.SupportFragment;
+import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
+import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.view.companyCard.CompanyCertificationActivity;
+import com.zhixing.work.zhixin.view.companyCard.CreateCompanyCardActivity;
 import com.zhixing.work.zhixin.view.myCenter.organizational.OrganizationalStructureActivity;
 import com.zhixing.work.zhixin.view.setting.SettingActivity;
 
@@ -20,7 +24,7 @@ import butterknife.Unbinder;
 
 /**
  * Created by lhj on 2018/7/6.
- * Description: 企业我的
+ * Description: 主页-企业我的
  */
 
 public class CompanyCenterFragment extends SupportFragment {
@@ -57,10 +61,22 @@ public class CompanyCenterFragment extends SupportFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_company_authentication:
-                startActivity(new Intent(getActivity(), CompanyCertificationActivity.class));
+                if (SettingUtils.createCardBefore()) {
+                    startActivity(new Intent(getActivity(), CompanyCertificationActivity.class));
+                } else {
+                    AlertUtils.show(ResourceUtils.getString(R.string.complete_user_information));
+                    CreateCompanyCardActivity.startCompanyCard(getActivity());
+                }
+
                 break;
             case R.id.ll_organize:
-                startActivity(new Intent(getActivity(), OrganizationalStructureActivity.class));
+                if (SettingUtils.createCardBefore()) {
+                    startActivity(new Intent(getActivity(), OrganizationalStructureActivity.class));
+                } else {
+                    AlertUtils.show(ResourceUtils.getString(R.string.complete_user_information));
+                    CreateCompanyCardActivity.startCompanyCard(getActivity());
+                }
+
                 break;
             case R.id.ll_setting:
                 startActivity(new Intent(getActivity(), SettingActivity.class));

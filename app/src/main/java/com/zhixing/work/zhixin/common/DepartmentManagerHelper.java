@@ -11,7 +11,7 @@ import java.util.Set;
 
 /**
  * Created by lhj on 2018/7/20.
- * Description:
+ * Description:组织架构管理类
  */
 
 public class DepartmentManagerHelper {

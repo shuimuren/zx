@@ -64,7 +64,7 @@ import rx.Subscription;
 
 /**
  * Created by lhj on 2018/7/24.
- * Description: 个人卡牌页
+ * Description: 主页-个人版评分
  */
 
 public class PersonalScoreFragment extends SupportFragment {
@@ -218,7 +218,7 @@ public class PersonalScoreFragment extends SupportFragment {
                 perfectCard.setVisibility(View.GONE);
                 imgCard.setImageResource(R.drawable.icon_1_light);
                 mPersonalCard = result.getContent();
-
+                SettingUtils.saveCreateCard();
                 if (mPersonalCard.getSex() == ResultConstant.USER_GERNAL_MAN) {
                     imgPersonalType.setImageDrawable(ResourceUtils.getDrawable(R.drawable.img_boy));
                 } else {

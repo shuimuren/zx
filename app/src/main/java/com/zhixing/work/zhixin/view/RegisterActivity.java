@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
-import com.zhixing.work.zhixin.constant.RoleConstant;
+import com.zhixing.work.zhixin.constant.DiscernConstant;
 import com.zhixing.work.zhixin.msgctrl.MsgDef;
 import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
 import com.zhixing.work.zhixin.msgctrl.RxBus;
@@ -89,8 +89,8 @@ public class RegisterActivity extends BaseTitleActivity {
     }
 
     private void initView() {
-        mSmsCodeTypeEnum = RoleConstant.SMS_CODE_REGISTER;
-        mUserRole = RoleConstant.PERSONAL_ROLE;
+        mSmsCodeTypeEnum = DiscernConstant.SMS_CODE_REGISTER;
+        mUserRole = DiscernConstant.PERSONAL_ROLE;
         tvPersonalRegister.setSelected(true);
         tvCompanyRegister.setSelected(false);
         mShowPassword = false;
@@ -152,12 +152,12 @@ public class RegisterActivity extends BaseTitleActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_personal_register:
-                mUserRole = RoleConstant.PERSONAL_ROLE;
+                mUserRole = DiscernConstant.PERSONAL_ROLE;
                 tvPersonalRegister.setSelected(true);
                 tvCompanyRegister.setSelected(false);
                 break;
             case R.id.tv_company_register:
-                mUserRole = RoleConstant.ENTERPRISE_ROLE;
+                mUserRole = DiscernConstant.ENTERPRISE_ROLE;
                 tvPersonalRegister.setSelected(false);
                 tvCompanyRegister.setSelected(true);
                 break;

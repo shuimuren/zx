@@ -41,6 +41,7 @@ import com.zhixing.work.zhixin.requestbody.CompanyAvatarBody;
 import com.zhixing.work.zhixin.util.FileUtil;
 import com.zhixing.work.zhixin.util.GlideUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
+import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.view.companyCard.CompanyCertificationActivity;
 import com.zhixing.work.zhixin.view.companyCard.CreateCompanyCardActivity;
@@ -62,7 +63,7 @@ import rx.Subscription;
 
 /**
  * Created by lhj on 2018/7/24.
- * Description:
+ * Description:主页-企业评分
  */
 
 public class CompanyScoreFragment extends SupportFragment {
@@ -173,6 +174,7 @@ public class CompanyScoreFragment extends SupportFragment {
             imgCard.setImageResource(R.drawable.icon_1_light);
             rlCompanyCardEmpty.setVisibility(View.GONE);
             rlCompanyData.setVisibility(View.VISIBLE);
+            SettingUtils.saveCreateCard();
             mCompanyCard = result.getContent();
 
             if (!TextUtils.isEmpty(mCompanyCard.getLogo())) {
@@ -289,7 +291,7 @@ public class CompanyScoreFragment extends SupportFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_create_company_card:
-                startActivity(new Intent(getActivity(), CreateCompanyCardActivity.class));
+                CreateCompanyCardActivity.startCompanyCard(getActivity());
                 break;
             case R.id.img_card_default:
             case R.id.image_company_picture:
@@ -330,7 +332,12 @@ public class CompanyScoreFragment extends SupportFragment {
 
                 break;
             case R.id.more:
-                startActivity(new Intent(getActivity(), CompanyCardActivity.class));
+                if(SettingUtils.createCardBefore()){
+                    startActivity(new Intent(getActivity(), CompanyCardActivity.class));
+                }else {
+                    CreateCompanyCardActivity.startCompanyCard(getActivity());
+                }
+
                 break;
         }
     }

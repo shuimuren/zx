@@ -23,7 +23,7 @@ import butterknife.OnClick;
 import rx.Subscription;
 
 /**
- * 我的认证
+ * 我的-我的认证-我的认证
  */
 public class AuthenticationHallActivity extends BaseTitleActivity {
 
@@ -57,12 +57,22 @@ public class AuthenticationHallActivity extends BaseTitleActivity {
     TextView skill;
     @BindView(R.id.ll_skill)
     LinearLayout llSkill;
+    @BindView(R.id.view_identity)
+    View viewIdentity;
+    @BindView(R.id.view_education)
+    View viewEducation;
+    @BindView(R.id.view_work)
+    View viewWork;
+    @BindView(R.id.view_certificate)
+    View viewCertificate;
+    @BindView(R.id.view_skill)
+    View viewSkill;
 
     private Subscription authenticationListSubscription;
-    private int identityStatus, educationStatus, workStatus, certificateStatus,skillStatus;
+    private int identityStatus, educationStatus, workStatus, certificateStatus, skillStatus;
     private int idCardId;
     private int educationId;
-    private int certificationId;
+    private int authenticationId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +105,7 @@ public class AuthenticationHallActivity extends BaseTitleActivity {
                     case ResultConstant.AUTHENTICATE_STATUS_ING:
                     case ResultConstant.AUTHENTICATE_STATUS_SUCCEED:
                     case ResultConstant.AUTHENTICATE_STATUS_FAILURE:
-                        gotoCertificationStatusActivity(identityStatus,CertificationStatusActivity.INTENT_IDENTITY_TYPE);
+                        gotoCertificationStatusActivity(identityStatus, CertificationStatusActivity.INTENT_IDENTITY_TYPE);
                         break;
                 }
 
@@ -111,7 +121,7 @@ public class AuthenticationHallActivity extends BaseTitleActivity {
                     case ResultConstant.AUTHENTICATE_STATUS_ING:
                     case ResultConstant.AUTHENTICATE_STATUS_SUCCEED:
                     case ResultConstant.AUTHENTICATE_STATUS_FAILURE:
-                        gotoCertificationStatusActivity(educationStatus,CertificationStatusActivity.INTENT_EDUCATION_TYPE);
+                        gotoCertificationStatusActivity(educationStatus, CertificationStatusActivity.INTENT_EDUCATION_TYPE);
                         break;
                 }
 
@@ -137,13 +147,13 @@ public class AuthenticationHallActivity extends BaseTitleActivity {
                 switch (certificateStatus) {
                     case ResultConstant.AUTHENTICATE_STATUS_NULL:
                         Intent certificationIntent = new Intent(context, CertificateCertificationActivity.class);
-                        certificationIntent.putExtra(CertificateCertificationActivity.INTENT_KEY_CERITIFICATION, certificationId);
+                        certificationIntent.putExtra(CertificateCertificationActivity.INTENT_KEY_CERTIFICATION, authenticationId);
                         startActivity(certificationIntent);
                         break;
                     case ResultConstant.AUTHENTICATE_STATUS_ING:
                     case ResultConstant.AUTHENTICATE_STATUS_SUCCEED:
                     case ResultConstant.AUTHENTICATE_STATUS_FAILURE:
-                        gotoCertificationStatusActivity(certificateStatus,CertificationStatusActivity.INTENT_CERTIFICATE_TYPE);
+                        gotoCertificationStatusActivity(certificateStatus, CertificationStatusActivity.INTENT_CERTIFICATE_TYPE);
                         break;
                 }
                 break;
@@ -185,22 +195,30 @@ public class AuthenticationHallActivity extends BaseTitleActivity {
             for (int i = 0; i < result.getContent().size(); i++) {
                 switch (result.getContent().get(i).getAuthenticatesType()) {
                     case ResultConstant.AUTHENTICATES_TYPE_IDENTITY_CARD:
+                        llIdentity.setVisibility(View.VISIBLE);
+                        viewIdentity.setVisibility(View.VISIBLE);
                         authenticateSetText(identityIv, identity, result.getContent().get(i).getList().get(0).getAuthenticatesStatus());
                         idCardId = result.getContent().get(i).getList().get(0).getAuthenticatesId();
                         identityStatus = result.getContent().get(i).getList().get(0).getAuthenticatesStatus();
                         break;
                     case ResultConstant.AUTHENTICATES_TYPE_EDUCATION:
+                        llEducation.setVisibility(View.VISIBLE);
+                        viewEducation.setVisibility(View.VISIBLE);
                         authenticateSetText(educationIv, education, result.getContent().get(i).getList().get(0).getAuthenticatesStatus());
                         educationId = result.getContent().get(i).getList().get(0).getAuthenticatesId();
                         educationStatus = result.getContent().get(i).getList().get(0).getAuthenticatesStatus();
                         break;
                     case ResultConstant.AUTHENTICATES_TYPE_WORK:
+                        llWork.setVisibility(View.VISIBLE);
+                        viewWork.setVisibility(View.VISIBLE);
                         authenticateSetText(workIv, work, result.getContent().get(i).getList().get(0).getAuthenticatesStatus());
                         workStatus = result.getContent().get(i).getList().get(0).getAuthenticatesStatus();
                         break;
                     case ResultConstant.AUTHENTICATES_TYPE_CERTIFICATE:
+                        llCertificate.setVisibility(View.VISIBLE);
+                        viewCertificate.setVisibility(View.VISIBLE);
                         authenticateSetText(certificateIv, certificate, result.getContent().get(i).getList().get(0).getAuthenticatesStatus());
-                        certificationId = result.getContent().get(i).getList().get(0).getAuthenticatesId();
+                        authenticationId = result.getContent().get(i).getList().get(0).getAuthenticatesId();
                         certificateStatus = result.getContent().get(i).getList().get(0).getAuthenticatesStatus();
                         break;
                 }

@@ -148,7 +148,7 @@ public class ALiYunController extends AbstractController {
 
             @Override
             public void onFailure(PutObjectRequest request, ClientException clientException, ServiceException serviceException) {
-                Logger.i(">>>","图片上传失败。。。");
+                Logger.i(">>>","图片上传失败。。。"+"client>"+clientException.getMessage()+"service"+serviceException.getMessage());
                 ImageUploadResult uploadResult = new ImageUploadResult(code,"", false);
                 RxBus.getInstance().post(uploadResult);
             }

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseMainFragment;
 import com.zhixing.work.zhixin.bean.Token;
-import com.zhixing.work.zhixin.constant.RoleConstant;
+import com.zhixing.work.zhixin.constant.DiscernConstant;
 import com.zhixing.work.zhixin.util.SettingUtils;
 
 import butterknife.BindView;
@@ -20,7 +20,7 @@ import butterknife.Unbinder;
 
 
 /**
- * 评分页面
+ * 主页-评分
  */
 public class ScoreFragment extends BaseMainFragment {
 
@@ -51,7 +51,7 @@ public class ScoreFragment extends BaseMainFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        if (mToken.getRole() == Integer.parseInt(RoleConstant.PERSONAL_ROLE)) {
+        if (mToken.getRole() == Integer.parseInt(DiscernConstant.PERSONAL_ROLE)) {
             if (mPersonalScoreFragment == null) {
                 mPersonalScoreFragment = PersonalScoreFragment.newInstance();
             }

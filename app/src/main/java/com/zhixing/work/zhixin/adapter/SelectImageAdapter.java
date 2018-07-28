@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.zhixing.work.zhixin.R;
-import com.zhixing.work.zhixin.domain.AlbumItem;
+import com.zhixing.work.zhixin.bean.AlbumItem;
 
 
 import java.util.ArrayList;

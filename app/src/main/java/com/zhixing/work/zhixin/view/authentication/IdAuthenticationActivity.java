@@ -35,7 +35,7 @@ import imagetool.lhj.com.ImageTool;
 import rx.Subscription;
 
 /**
- * 2018-07-09 lhj 身份认证重构
+ * 2018-07-09 lhj 我的-我的认证-我的认证-身份认证
  */
 public class IdAuthenticationActivity extends BaseTitleActivity {
 

@@ -34,7 +34,7 @@ import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.dialog.SelectImageDialog;
-import com.zhixing.work.zhixin.domain.AlbumItem;
+import com.zhixing.work.zhixin.bean.AlbumItem;
 import com.zhixing.work.zhixin.event.ModifyEvent;
 import com.zhixing.work.zhixin.event.UploadImageFinishEvent;
 import com.zhixing.work.zhixin.http.Constant;
@@ -51,7 +51,7 @@ import com.zhixing.work.zhixin.util.BitmapUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.view.card.ModifyContentActivity;
 import com.zhixing.work.zhixin.view.card.ModifyDataActivity;
-import com.zhixing.work.zhixin.view.util.SelectImageActivity;
+import com.zhixing.work.zhixin.view.SelectImageActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import org.greenrobot.eventbus.EventBus;

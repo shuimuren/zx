@@ -59,7 +59,6 @@ public class OkUtils<T> {
     private String ASCII;
 
 
-
     private Gson gson = new Gson();
     public static final MediaType JSONType = MediaType.parse("application/json; charset=utf-8");
 
@@ -133,7 +132,7 @@ public class OkUtils<T> {
                         addHeader(HttpHeadUtils.KEY_TIMESTAMP, timer).
                         addHeader(HttpHeadUtils.KEY_TOKEN, SettingUtils.getToken()).
                         addHeader(HttpHeadUtils.KEY_NONCE, randoms).
-                        addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms,HttpHeadUtils.ACCESS_SECRET)))
+                        addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms, HttpHeadUtils.ACCESS_SECRET)))
                         .build().execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
@@ -315,6 +314,7 @@ public class OkUtils<T> {
                         Log.i(TAG + "返回失败= >", "" + e.getMessage());
                         callback.onFailure(32000, e.getMessage());
                     }
+
                     @Override
                     public void onResponse(String response, int id) {
                         Log.i(TAG + "返回成功 = >", "" + response);
@@ -425,8 +425,8 @@ public class OkUtils<T> {
         patch(requestBody, context, url, param, classType, callback);
     }
 
-    public void httpDelete( final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
-        delete( context, url, param, classType, callback);
+    public void httpDelete(final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
+        delete(context, url, param, classType, callback);
     }
 
     public void httpPut(final RequestBody requestBody, final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
@@ -444,6 +444,7 @@ public class OkUtils<T> {
     public void httpTokenGet(final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
         httpTokenBase(false, context, url, param, classType, callback);
     }
+
     public void httpPostString(final Context context, final String url, Map<String, String> param, String json, final Type classType, final ResultCallBackListener<T> callback) {
         httpPostBase(context, url, param, json, classType, callback);
     }
@@ -617,7 +618,7 @@ public class OkUtils<T> {
 
     }
 
-    private void delete( final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
+    private void delete(final Context context, final String url, Map<String, String> param, final Type classType, final ResultCallBackListener<T> callback) {
 
 
         if (NetUtils.isConnected(context)) {
@@ -820,7 +821,7 @@ public class OkUtils<T> {
         Request request = new Request.Builder()
                 .url(url)
                 .put(requestBody).addHeader("token", SettingUtils.getToken()).
-                        addHeader(HttpHeadUtils.KEY_ACCESSID,HttpHeadUtils.ACCESS_ID).
+                        addHeader(HttpHeadUtils.KEY_ACCESSID, HttpHeadUtils.ACCESS_ID).
                         addHeader(HttpHeadUtils.KEY_TIMESTAMP, timer).
                         addHeader(HttpHeadUtils.KEY_NONCE, randoms).
                         addHeader(HttpHeadUtils.KEY_SIGNATURE, getSignature(getASCII(HttpHeadUtils.ACCESS_ID, timer, randoms, HttpHeadUtils.ACCESS_SECRET)))
@@ -832,6 +833,7 @@ public class OkUtils<T> {
             public void onFailure(Call call, IOException e) {
                 callback.onFailure(0, "错误");
             }
+
             @Override
             public void onResponse(Call call, Response response) throws IOException {
 

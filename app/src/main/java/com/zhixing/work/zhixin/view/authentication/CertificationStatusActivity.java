@@ -27,12 +27,6 @@ public class CertificationStatusActivity extends BaseTitleActivity {
     private static final String INTENT_KEY_STATUS = "status";
     private static final String INTENT_KEY_CERTIFICATION_TYPE = "type";
 
-//    public static final String INTENT_KEY_IDENTITY_TYPE = "identity";
-//    public static final String INTENT_KEY_EDUCATION_TYPE = "education";
-//    public static final String INTENT_KEY_WORK_TYPE = "work";
-//    public static final String INTENT_KEY_CERTIFICATE = "certificate";
-//    public static final String
-
     public static final int INTENT_IDENTITY_TYPE = 0;
     public static final int INTENT_EDUCATION_TYPE = 1;
     public static final int INTENT_WORK_TYPE = 2;

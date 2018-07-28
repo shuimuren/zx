@@ -27,7 +27,7 @@ import com.zhixing.work.zhixin.bean.EntityObject;
 import com.zhixing.work.zhixin.bean.Resume;
 import com.zhixing.work.zhixin.bean.StsToken;
 import com.zhixing.work.zhixin.common.Logger;
-import com.zhixing.work.zhixin.domain.AlbumItem;
+import com.zhixing.work.zhixin.bean.AlbumItem;
 import com.zhixing.work.zhixin.event.ModifyEvent;
 import com.zhixing.work.zhixin.event.ResumeRefreshEvent;
 import com.zhixing.work.zhixin.http.JavaParamsUtils;

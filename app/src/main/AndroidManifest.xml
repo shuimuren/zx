@@ -167,7 +167,7 @@
             />
         <!--选择图片-->
         <activity
-            android:name=".view.util.SelectImageActivity"
+            android:name=".view.SelectImageActivity"
             android:screenOrientation="portrait" />
 
 

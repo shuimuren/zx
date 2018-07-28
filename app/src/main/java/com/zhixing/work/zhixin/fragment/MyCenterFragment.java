@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseMainFragment;
 import com.zhixing.work.zhixin.bean.Token;
-import com.zhixing.work.zhixin.constant.RoleConstant;
+import com.zhixing.work.zhixin.constant.DiscernConstant;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 
@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- * 我的
+ * 主页-我的
  */
 public class MyCenterFragment extends BaseMainFragment {
 
@@ -55,7 +55,7 @@ public class MyCenterFragment extends BaseMainFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mToken = SettingUtils.getTokenBean();
-        if (mToken.getRole() == Integer.parseInt(RoleConstant.PERSONAL_ROLE)) {
+        if (mToken.getRole() == Integer.parseInt(DiscernConstant.PERSONAL_ROLE)) {
             if (mPersonalCenterFragment == null) {
                 mPersonalCenterFragment = PersonalCenterFragment.newInstance();
             }

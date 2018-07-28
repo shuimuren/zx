@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.UpDateInfoBody;
-import com.zhixing.work.zhixin.constant.RoleConstant;
+import com.zhixing.work.zhixin.constant.DiscernConstant;
 import com.zhixing.work.zhixin.msgctrl.MsgDef;
 import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
 import com.zhixing.work.zhixin.msgctrl.RxBus;
@@ -76,7 +76,7 @@ public class UpDatePwdActivity extends BaseTitleActivity {
         context = this;
         setTitle(ResourceUtils.getString(R.string.update_password));
         mUserRole = getIntent().getStringExtra(KEY_INTENT_ROLE);
-        mSmsCodeTypeEnum = RoleConstant.SMS_CODE_UPDATE;
+        mSmsCodeTypeEnum = DiscernConstant.SMS_CODE_UPDATE;
         mShowPassword = false;
         mGetVerificationCodeSubscription = RxBus.getInstance().toObservable(SmsCodeResult.class).subscribe(
                 result -> handlerSmsCodeResult(result)

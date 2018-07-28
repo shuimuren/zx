@@ -46,6 +46,8 @@
                 android:orientation="vertical">
 
                 <com.zhixing.work.zhixin.widget.EvaluatingView
+                    android:id="@+id/evaluateView"
+                    android:layout_marginLeft="@dimen/dp_40"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 

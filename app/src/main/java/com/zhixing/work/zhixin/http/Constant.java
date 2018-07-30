@@ -25,6 +25,8 @@ public class Constant {
     public static final String VOICE_DIR = BASE + "voice/";
     //数据库文件
     public static final String DB_DIR = BASE + "db/";
+    //Crash日志
+    public static final String CRASH_DIR = BASE + "crashLog/";
     //app下载文件
     public static final String UPDATE_FILE_DIR = BASE + "updateFile/";
     public static final String XML_PATH = BASE + "zhixindata/";
@@ -32,6 +34,7 @@ public class Constant {
     public static final int IMAGE_QUALITY = 80;
     //图片裁剪
     public static final int IMAGE_CROP = 1001;
+
     static {
         File f1 = new File(CACHE_DIR_IMAGE);
         File f2 = new File(THUMBNAIL_DIR_IMAGE);
@@ -40,6 +43,7 @@ public class Constant {
         File f5 = new File(DB_DIR);
         File f6 = new File(UPDATE_FILE_DIR);
         File f7 = new File(CACHE_DIR_SCREENSHOT);
+    //    File f8 = new File(CRASH_DIR);
         if (!f1.exists()) {
             f1.mkdirs();
         }
@@ -58,9 +62,12 @@ public class Constant {
         if (!f6.exists()) {
             f6.mkdirs();
         }
-        if (!f6.exists()) {
+        if (!f7.exists()) {
             f7.mkdirs();
         }
+//        if (!f8.exists()) {
+//            f8.mkdirs();
+//        }
     }
 
 

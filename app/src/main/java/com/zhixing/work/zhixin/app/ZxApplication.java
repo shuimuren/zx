@@ -37,6 +37,7 @@ public class ZxApplication extends BaseApplication {
 //        }
         //    LeakCanary.install(this);
         ScreenUtil.setDensity(this);
+    //    AppCrashHandler.getInstance(this);
     }
 
     public static ZxApplication getInstance() {

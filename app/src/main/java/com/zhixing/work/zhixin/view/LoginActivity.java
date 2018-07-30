@@ -1,5 +1,6 @@
 package com.zhixing.work.zhixin.view;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -34,6 +35,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import imagetool.lhj.com.permission.PermissionTool;
 import rx.Subscription;
 
 
@@ -76,6 +78,10 @@ public class LoginActivity extends FragmentActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         initView();
+        if(!PermissionTool.hasPermissions(this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE})){
+            PermissionTool.requestPermission(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, new String[]{"存取SD卡"}, 1000);
+        }
+
     }
 
     private void initView() {
@@ -88,7 +94,7 @@ public class LoginActivity extends FragmentActivity {
     }
 
     private void setRoleView() {
-        if(TextUtils.isEmpty(SettingUtils.getRoleInfo()) || SettingUtils.getRoleInfo().equals(DiscernConstant.PERSONAL_ROLE)){
+        if (TextUtils.isEmpty(SettingUtils.getRoleInfo()) || SettingUtils.getRoleInfo().equals(DiscernConstant.PERSONAL_ROLE)) {
             defaultRole = DiscernConstant.PERSONAL_ROLE;
             tvPersonal.setSelected(true);
             llPersonal.setSelected(true);
@@ -96,7 +102,7 @@ public class LoginActivity extends FragmentActivity {
             tvCompany.setSelected(false);
             llCompany.setSelected(false);
             markCompany.setVisibility(View.INVISIBLE);
-        }else {
+        } else {
             defaultRole = DiscernConstant.ENTERPRISE_ROLE;
             tvPersonal.setSelected(false);
             llPersonal.setSelected(false);
@@ -108,7 +114,7 @@ public class LoginActivity extends FragmentActivity {
     }
 
     private void handlerLoginResult(LoginResult result) {
-        if(mDialog != null){
+        if (mDialog != null) {
             mDialog.dismiss();
         }
         if (result.Code == NetworkConstant.SUCCESS_CODE) {
@@ -131,7 +137,7 @@ public class LoginActivity extends FragmentActivity {
 
 
     @OnClick({R.id.ll_personal, R.id.ll_company, R.id.show_password, R.id.btn_login, R.id.tvForgetPassword,
-            R.id.btn_register,R.id.imgWeChat,R.id.imgQQ})
+            R.id.btn_register, R.id.imgWeChat, R.id.imgQQ})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_personal:
@@ -169,12 +175,12 @@ public class LoginActivity extends FragmentActivity {
                 doLogin();
                 break;
             case R.id.tvForgetPassword:
-                Intent intentPassword = new Intent(LoginActivity.this,UpDatePwdActivity.class);
-                intentPassword.putExtra(UpDatePwdActivity.KEY_INTENT_ROLE,defaultRole);
+                Intent intentPassword = new Intent(LoginActivity.this, UpDatePwdActivity.class);
+                intentPassword.putExtra(UpDatePwdActivity.KEY_INTENT_ROLE, defaultRole);
                 startActivity(intentPassword);
                 break;
             case R.id.btn_register:
-                startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 break;
             case R.id.imgWeChat:
                 break;
@@ -195,13 +201,13 @@ public class LoginActivity extends FragmentActivity {
         if (TextUtils.isEmpty(phone)) {
             AlertUtils.show(ResourceUtils.getString(R.string.alert_phone_number_is_null));
             return;
-        }else if(!RegularUtils.isMobileNo(phone)){
+        } else if (!RegularUtils.isMobileNo(phone)) {
             AlertUtils.show(ResourceUtils.getString(R.string.alert_phone_number_unusable));
             return;
         } else if (TextUtils.isEmpty(password)) {
             AlertUtils.show(ResourceUtils.getString(R.string.alert_pass_word_unusable));
             return;
-        }else if(password.length() < 6){
+        } else if (password.length() < 6) {
             AlertUtils.show(ResourceUtils.getString(R.string.alert_pass_word_length));
             return;
         }

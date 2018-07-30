@@ -214,4 +214,18 @@ public class FileUtil {
         return filePath;
     }
 
+//    /**
+//     * 判断能否使用外置存储
+//     */
+//    public static boolean isExternalStorageExist() {
+//        public boolean isSdkStorageReady() {
+//            String externalRoot = Environment.getExternalStorageDirectory().getAbsolutePath();
+//            if (this.sdkStorageRoot.startsWith(externalRoot)) {
+//                return Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
+//            } else {
+//                return true;
+//            }
+//        }
+//    }
+
 }

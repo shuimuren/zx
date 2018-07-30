@@ -16,6 +16,7 @@ import java.io.File;
 public class AppUtils {
     public static final String WIDTH = "width";
     public static final String HEIGHT = "height";
+
     //版本名
     public static String getVersionName(Context context) {
         return getPackageInfo(context).versionName;

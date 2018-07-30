@@ -1,9 +1,9 @@
 package com.zhixing.work.zhixin.http.okhttp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.JsonReader;
 import android.util.Log;
-
 
 import com.google.gson.Gson;
 import com.zhixing.work.zhixin.BuildConfig;
@@ -13,9 +13,9 @@ import com.zhixing.work.zhixin.bean.FailObject;
 import com.zhixing.work.zhixin.http.HttpHeadUtils;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.DateFormatUtil;
-import com.zhixing.work.zhixin.util.Indicator;
 import com.zhixing.work.zhixin.util.NetUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
+import com.zhixing.work.zhixin.view.LoginActivity;
 import com.zhixing.work.zhixin.view.MainActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.FileCallBack;
@@ -35,7 +35,6 @@ import java.util.Map;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-
 
 import okhttp3.Call;
 import okhttp3.MediaType;
@@ -973,7 +972,6 @@ public class OkUtils<T> {
                         //不成功状态
                         if (entity.getCode() == 10005 && entity.getMessage().equals("Token已过期")) {
                             AlertUtils.toast(ZxApplication.getInstance().getApplicationContext(), "您的账号信息已过期，请重新登录");
-
                             logout();
                         }
                         //  sessionId 失效 导致重先登录 重新登录还是失败  那就跳到登录界面去
@@ -999,8 +997,11 @@ public class OkUtils<T> {
     }
 
     private void logout() {
-
-        Indicator.goLogin(ZxApplication.getInstance());
+        Intent intent = new Intent();
+        intent.setClass(ZxApplication.getInstance(), LoginActivity.class);
+        intent.putExtra("sessionType", "true");
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ZxApplication.getInstance().startActivity(intent);
         //ZxApplication.getInstance().finishAllActivity();
         MainActivity.instance.finish();
         clearLoginState();

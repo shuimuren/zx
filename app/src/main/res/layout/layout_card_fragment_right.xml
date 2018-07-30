@@ -13,14 +13,14 @@
         android:src="@drawable/icon_1_nor" />
 
     <ImageView
-        android:id="@+id/img_friend"
+        android:id="@+id/img_identity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:src="@drawable/icon_2_nor" />
 
     <ImageView
-        android:id="@+id/img_identity"
+        android:id="@+id/img_friend"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"

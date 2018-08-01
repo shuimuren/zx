@@ -5,11 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-
-import com.zhixing.work.zhixin.app.ZxApplication;
-import com.zhixing.work.zhixin.common.Logger;
 
 /**
  * Created by lhj on 2018/7/7.
@@ -17,6 +12,7 @@ import com.zhixing.work.zhixin.common.Logger;
  */
 
 public class NetworkConnectChangedReceiver extends BroadcastReceiver {
+
     //TYPE_MOBILE ,TYPE_WIFI,
     public static final int NETWORK_TYPE_NONE = -2;
     public static final int NETWORK_TYPE_CONNECTED_FAILED = -3;
@@ -44,11 +40,11 @@ public class NetworkConnectChangedReceiver extends BroadcastReceiver {
             if (info != null && netWorkStatusListener != null) {
                 if (NetworkInfo.State.CONNECTED == info.getState()) {
                     if (info.getType() == ConnectivityManager.TYPE_WIFI) {
-                        WifiManager wifiManager = (WifiManager) ZxApplication.getInstance().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-                        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-                        Logger.i(">>>", "bssId>" + wifiInfo.getBSSID());
-                        Logger.i(">>>", "macAddress" + wifiInfo.getMacAddress());
-                        Logger.i(">>>", "wifiInfo>" + wifiInfo.toString());
+//                        WifiManager wifiManager = (WifiManager) ZxApplication.getInstance().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+//                        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+//                        Logger.i(">>>", "bssId>" + wifiInfo.getBSSID());
+//                        Logger.i(">>>", "macAddress" + wifiInfo.getMacAddress());
+//                        Logger.i(">>>", "wifiInfo>" + wifiInfo.toString());
                         netWorkStatusListener.netWordStatusAndUsable(ConnectivityManager.TYPE_WIFI, info.isAvailable());
                     } else if (info.getType() == ConnectivityManager.TYPE_MOBILE) {
                         netWorkStatusListener.netWordStatusAndUsable(ConnectivityManager.TYPE_MOBILE, info.isAvailable());

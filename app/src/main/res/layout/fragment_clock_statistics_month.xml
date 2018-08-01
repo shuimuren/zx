@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:background="#f6f6f6"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
+            android:src="@drawable/selector_clock_time_left" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/main_color"
+            android:textSize="@dimen/font_normal"
+            tools:text="2017-18-02" />
+
+        <ImageView
+            android:id="@+id/img_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/dp_20"
+            android:paddingRight="@dimen/dp_20"
+            android:src="@drawable/selector_clock_time_right" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_late"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_item_white_clickable"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/style_item_left_text"
+            android:text="@string/clock_time_late" />
+
+        <TextView
+            android:id="@+id/tv_late_num"
+            style="@style/style_item_right_text"
+            android:text="100n" />
+    </LinearLayout>
+
+    <View style="@style/line" />
+
+    <LinearLayout
+        android:id="@+id/ll_before"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_item_white_clickable"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/style_item_left_text"
+            android:text="@string/clock_time_before" />
+
+        <TextView
+            android:id="@+id/tv_before_num"
+            style="@style/style_item_right_text"
+            android:text="100n" />
+    </LinearLayout>
+
+    <View style="@style/line" />
+
+    <LinearLayout
+        android:id="@+id/ll_miss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_item_white_clickable"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/style_item_left_text"
+            android:text="@string/clock_time_miss" />
+
+        <TextView
+            android:id="@+id/tv_miss_num"
+            style="@style/style_item_right_text"
+            android:text="100n" />
+    </LinearLayout>
+
+    <View style="@style/line" />
+
+    <LinearLayout
+        android:id="@+id/ll_absenteeism"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_item_white_clickable"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/style_item_left_text"
+            android:text="@string/clock_time_absenteeism" />
+
+        <TextView
+            android:id="@+id/tv_absenteeism_num"
+            style="@style/style_item_right_text"
+            android:text="100n" />
+    </LinearLayout>
+
+    <View style="@style/line" />
+</LinearLayout>

@@ -7,7 +7,7 @@ package com.zhixing.work.zhixin.constant;
 
 public class ResultConstant {
 
-   // <!------------------- 个人认证 ----------------------->
+    // <!------------------- 个人认证 ----------------------->
     //身份证
     public static final int AUTHENTICATES_TYPE_IDENTITY_CARD = 10;
     //学历证
@@ -29,5 +29,10 @@ public class ResultConstant {
     public static final int USER_GERNAL_MAN = 0;
     //性别女
     public static final int USER_GERNAL_WOMAN = 1;
+
+    public static final int USER_STAFF_ROLE_EMPLOYEE = 0; //员工
+    public static final int USER_STAFF_ROLE_HR = 1; //Hr
+    public static final int USER_STAFF_ROLE_MANAGER = 2;//管理员
+
 
 }

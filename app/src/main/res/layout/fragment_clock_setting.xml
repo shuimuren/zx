@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_add_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/color_white_clickable"
+        android:drawableLeft="@drawable/icon_add"
+        android:drawablePadding="@dimen/padding_normal"
+        android:padding="@dimen/padding_big"
+        android:text="@string/new_add_attendance_group"
+        android:textColor="@color/main_color"
+        android:textSize="@dimen/font_normal" />
+
+    <View style="@style/division_view" />
+
+    <LinearLayout
+        android:id="@+id/ll_group_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/image_group_empty" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@string/setting_attendance_group_empty"
+            android:textSize="@dimen/font_size_14sp" />
+    </LinearLayout>
+
+</LinearLayout>

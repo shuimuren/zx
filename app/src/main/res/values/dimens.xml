@@ -118,4 +118,18 @@
     <dimen name="normal_item_height">50dp</dimen>
     <dimen name="avatar_item_height">61dp</dimen>
     <dimen name="main_btn_with">240dp</dimen>
+
+    <dimen name="tab_height">48dp</dimen>
+    <dimen name="tab_indicator_text_padding">8dp</dimen>
+    <dimen name="tab_indicator_text_padding_bottom">4dp</dimen>
+    <dimen name="line_width">1dp</dimen>
+    <dimen name="line_margin_bottom">0dp</dimen>
+    <dimen name="tab_notice_size">12dp</dimen>
+    <dimen name="tab_notice_text_size">10sp</dimen>
+    <dimen name="tab_notice_margin_top">5dp</dimen>
+    <dimen name="tab_notice_margin_right">28dp</dimen>
+    <dimen name="tab_indicator_indicator_height">2dp</dimen>
+    <dimen name="tiny_space">3dp</dimen>
+    <dimen name="spinner_item_text_size">8dp</dimen>
+
 </resources>

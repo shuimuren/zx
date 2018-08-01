@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_small"
+        android:scrollbars="none">
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radio_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:background="@drawable/selector_radio_round_corner_bg"
+                android:button="@null"
+                android:checked="true"
+                android:padding="@dimen/padding_normal"
+                android:text="全部已打卡"
+                android:textColor="@color/color_radio_text"
+                android:textSize="@dimen/font_size_14sp" />
+            <RadioButton
+                android:id="@+id/radio_normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:background="@drawable/selector_radio_round_corner_bg"
+                android:button="@null"
+                android:checked="false"
+                android:padding="@dimen/padding_normal"
+                android:text="正常打卡"
+                android:textColor="@color/color_radio_text"
+                android:textSize="@dimen/font_size_14sp" />
+            <RadioButton
+                android:id="@+id/radio_late"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:background="@drawable/selector_radio_round_corner_bg"
+                android:button="@null"
+                android:padding="@dimen/padding_normal"
+                android:text="迟到"
+                android:textColor="@color/color_radio_text"
+                android:textSize="@dimen/font_size_14sp" />
+            <RadioButton
+                android:id="@+id/radio_absenteeism"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:background="@drawable/selector_radio_round_corner_bg"
+                android:button="@null"
+                android:padding="@dimen/padding_normal"
+                android:text="旷工"
+                android:textColor="@color/color_radio_text"
+                android:textSize="@dimen/font_size_14sp" />
+            <RadioButton
+                android:id="@+id/radio_advanced"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:background="@drawable/selector_radio_round_corner_bg"
+                android:button="@null"
+                android:padding="@dimen/padding_normal"
+                android:text="早退"
+                android:textColor="@color/color_radio_text"
+                android:textSize="@dimen/font_size_14sp" />
+        </RadioGroup>
+    </HorizontalScrollView>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+</LinearLayout>

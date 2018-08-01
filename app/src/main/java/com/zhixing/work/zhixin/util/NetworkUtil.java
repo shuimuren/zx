@@ -15,7 +15,7 @@ import com.zhixing.work.zhixin.common.Logger;
 
 /**
  * Created by lhj on 2018/7/28.
- * Description:
+ * Description: 网络工具
  */
 
 public class NetworkUtil {
@@ -552,6 +552,30 @@ public class NetworkUtil {
 
         if (info != null) {
             return info.getMacAddress();
+        }
+
+        return "";
+    }
+
+    public static String getWifiBssId(Context context) {
+        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+
+        WifiInfo info = wifi.getConnectionInfo();
+
+        if (info != null) {
+            return info.getBSSID();
+        }
+
+        return "";
+    }
+
+    public static String getWifiSSId(Context context) {
+        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+
+        WifiInfo info = wifi.getConnectionInfo();
+
+        if (info != null) {
+            return info.getSSID();
         }
 
         return "";

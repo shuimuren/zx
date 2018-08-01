@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <View style="@style/division_view" />
+
+
+    <View style="@style/line" />
+
+    <LinearLayout
+        android:id="@+id/ll_work_time"
+        style="@style/style_linear_layout_item">
+
+        <TextView
+            style="@style/style_item_left_text"
+            android:text="@string/setting_work_time" />
+
+        <TextView
+            android:id="@+id/tv_work_time"
+            style="@style/style_item_right_text"
+            android:text="" />
+    </LinearLayout>
+
+    <View style="@style/line" />
+
+    <LinearLayout
+        android:id="@+id/ll_work_begin_time"
+        style="@style/style_linear_layout_item">
+
+        <TextView
+            style="@style/style_item_left_text"
+            android:text="@string/setting_begin_time" />
+
+        <TextView
+            android:id="@+id/tv_begin_time"
+            style="@style/style_item_right_text"
+            android:text="" />
+    </LinearLayout>
+
+    <View style="@style/line" />
+
+    <LinearLayout
+        android:id="@+id/ll_work_end_time"
+        style="@style/style_linear_layout_item">
+
+        <TextView
+            android:id="@+id/tv_end_time"
+            style="@style/style_item_left_text"
+            android:text="@string/setting_end_time" />
+
+        <TextView
+            style="@style/style_item_right_text"
+            android:text="" />
+    </LinearLayout>
+
+    <View style="@style/division_view" />
+
+    <LinearLayout
+        android:id="@+id/ll_work_scope_time"
+        style="@style/style_linear_layout_item">
+
+        <TextView
+            style="@style/style_item_left_text"
+            android:text="@string/setting_time_scope" />
+
+        <TextView
+            android:id="@+id/tv_scope_time"
+            style="@style/style_item_right_text"
+            android:text="" />
+    </LinearLayout>
+
+    <View style="@style/line" />
+
+    <LinearLayout
+        android:id="@+id/ll_absenteeism_time"
+        style="@style/style_linear_layout_item">
+
+        <TextView
+            style="@style/style_item_left_text"
+            android:text="@string/setting_time_absenteeism" />
+
+        <TextView
+            android:id="@+id/tv_absenteeism"
+            style="@style/style_item_right_text"
+            android:text="" />
+    </LinearLayout>
+
+    <View style="@style/division_view" />
+
+    <LinearLayout
+        android:id="@+id/ll_wifi"
+        style="@style/style_linear_layout_item">
+
+        <TextView
+            style="@style/style_item_left_text"
+            android:text="@string/setting_wifi" />
+
+        <TextView
+            android:id="@+id/tv_wifi"
+            style="@style/style_item_right_text"
+            android:text="" />
+    </LinearLayout>
+
+    <View style="@style/division_view" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btn_finish"
+        style="@style/style_bottom_btn"
+        android:text="@string/save" />
+</LinearLayout>

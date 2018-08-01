@@ -47,7 +47,7 @@ import com.zhixing.work.zhixin.util.ZxTextUtils;
 import com.zhixing.work.zhixin.view.card.CreateCardActivity;
 import com.zhixing.work.zhixin.view.card.PerfectCardDataActivity;
 import com.zhixing.work.zhixin.view.card.back.CardMainActivity;
-import com.zhixing.work.zhixin.view.clock.PersonalClockInActivity;
+import com.zhixing.work.zhixin.view.clock.ManagerClockInActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -306,7 +306,8 @@ public class PersonalScoreFragment extends SupportFragment {
                 break;
             //坚持打卡
             case R.id.img_friend:
-                startActivity(new Intent(getActivity(), PersonalClockInActivity.class));
+              //  startActivity(new Intent(getActivity(), PersonalClockInActivity.class));
+                startActivity(new Intent(getActivity(), ManagerClockInActivity.class));
                 break;
              //身份认证
             case R.id.img_identity:

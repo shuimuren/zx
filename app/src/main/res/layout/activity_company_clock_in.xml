@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <FrameLayout
+        android:id="@+id/fm_personal_clock"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_bar_height"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/dp_5"
+        android:background="@color/color_98c3ec">
+        <TextView
+            android:id="@+id/tv_clock_in"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/clock_in"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:drawableTop="@drawable/selector_clock_in"
+            android:textColor="@color/color_text_btn"/>
+        <TextView
+            android:id="@+id/tv_clock_statistics"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/clock_in_statistics"
+            android:drawableTop="@drawable/selector_clock_statistic"
+            android:textColor="@color/color_text_btn"/>
+
+        <TextView
+            android:id="@+id/tv_clock_setting"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/clock_in_setting"
+            android:drawableTop="@drawable/selector_clock_setting"
+            android:textColor="@color/color_text_btn"/>
+
+    </LinearLayout>
+
+</LinearLayout>

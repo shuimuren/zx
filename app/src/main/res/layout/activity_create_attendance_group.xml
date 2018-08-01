@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View style="@style/division_view" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_big">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/attendance_group_name"
+            android:textColor="@color/text_color_dark"
+            android:textSize="@dimen/font_btn_normal" />
+
+        <com.zhixing.work.zhixin.widget.ClearEditText
+            android:id="@+id/name_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_normal"
+            android:background="@null"
+            android:hint="@string/hint_input_attendance_name"
+            android:textSize="@dimen/font_size_14sp" />
+
+    </LinearLayout>
+
+    <View style="@style/line" />
+
+    <LinearLayout
+        android:id="@+id/ll_add_member"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/color_white_clickable"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/style_item_left_text"
+            android:text="@string/attendance_group_number" />
+
+        <TextView
+            style="@style/style_item_right_text"
+            android:text="0成员" />
+    </LinearLayout>
+
+    <View style="@style/division_view" />
+
+    <View
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btn_next"
+        style="@style/style_bottom_btn"
+        android:text="@string/btn_next" />
+</LinearLayout>

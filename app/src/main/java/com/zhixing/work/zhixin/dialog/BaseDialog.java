@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Context;
 
+import com.zhixing.work.zhixin.R;
+
 public class BaseDialog extends Dialog {
 
 	@SuppressLint("InlinedApi")
@@ -13,8 +15,10 @@ public class BaseDialog extends Dialog {
 		if(getTheme() != 0){
 			getContext().setTheme(getTheme());
 		}else{
-			getContext().setTheme(android.R.style.Theme_Holo_InputMethod);
+			getContext().setTheme(R.style.default_dialog_style);
 		}
+
+
 
 	}
 

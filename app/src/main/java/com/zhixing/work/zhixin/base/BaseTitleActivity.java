@@ -62,7 +62,7 @@ public abstract class BaseTitleActivity extends BaseControlActivity implements N
     // 状态栏是否浮动在上面 默认为不浮
     private boolean isStatudBarFloat = false;
     //网络状态监听
-    NetworkConnectChangedReceiver networkReceiver;
+    protected NetworkConnectChangedReceiver networkReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +74,7 @@ public abstract class BaseTitleActivity extends BaseControlActivity implements N
         setAboutTitle();
         setSystemBar();
         ZxApplication.getInstance().addActivity(this);
-      //  registerReceiver();
+        registerReceiver();
     }
 
     @Override

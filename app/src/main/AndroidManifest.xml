@@ -397,8 +397,38 @@
             android:label="@string/app_name" />
 
         <!-- 认证结果 -->
-        <activity android:name=".view.authentication.CertificationStatusActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.authentication.CertificationStatusActivity"
+            android:screenOrientation="portrait" />
+        <!-- 个人上班打卡 -->
+        <activity
+            android:name=".view.clock.PersonalClockInActivity"
+            android:screenOrientation="portrait" />
+        <!-- 管理员打卡 -->
+        <activity
+            android:name=".view.clock.ManagerClockInActivity"
+            android:screenOrientation="portrait" />
+        <!-- 打卡明细 -->
+        <activity
+            android:name=".view.clock.ClockInfoDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <!-- 新建打卡分组 -->
+        <activity
+            android:name=".view.clock.CreateAttendanceGroupActivity"
+            android:screenOrientation="portrait" />
+        <!-- 新建分组-编辑 -->
+        <activity
+            android:name=".view.clock.EditAttendanceGroupActivity"
+            android:screenOrientation="portrait" />
+        <!-- wifi设置-->
+        <activity
+            android:name=".view.clock.SettingWifiActivity"
+            android:screenOrientation="portrait" />
+        <!-- 新增wifi -->
+        <activity
+            android:name=".view.clock.AddWifiActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

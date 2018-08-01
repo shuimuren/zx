@@ -216,5 +216,40 @@
     <string name="edit_event_success">大事件修改成功</string>
     <string name="dialog_summit_ing">正在提交</string>
     <string name="add_certificate">添加证书</string>
+    <string name="work_clock_in">工作打卡</string>
+    <string name="clock_in">打卡</string>
+    <string name="clock_in_statistics">统计</string>
+    <string name="clock_start">上班打卡</string>
+    <string name="clock_end">下班打卡</string>
+    <string name="clock_in_setting">设置</string>
+    <string name="statistics_by_day">日统计</string>
+    <string name="statistics_by_month">月统计</string>
+    <string name="statistics_by_user">我的</string>
+    <string name="clock_info_detail">打卡明细</string>
+    <string name="clock_time_late">迟到</string>
+    <string name="clock_time_before">早退</string>
+    <string name="clock_time_miss">缺卡</string>
+    <string name="clock_time_absenteeism">矿工</string>
+    <string name="clock_finished">已打卡</string>
+    <string name="clock_lack">应到但未打卡</string>
+    <string name="new_add_attendance_group">新建考勤组</string>
+    <string name="setting_attendance_group_empty">当前暂未设置考勤组</string>
+    <string name="attendance_group_name">考勤组名称</string>
+    <string name="hint_input_attendance_name">请输入考勤组名称</string>
+    <string name="attendance_group_number">参与人数</string>
+    <string name="btn_next">下一步</string>
+    <string name="setting_work_time">设置工作日</string>
+    <string name="setting_begin_time">上班</string>
+    <string name="setting_end_time">下班</string>
+    <string name="setting_time_scope">上班弹性时间</string>
+    <string name="setting_time_absenteeism">旷工</string>
+    <string name="setting_wifi">打卡wifi</string>
+    <string name="setting_add_wifi">添加wifi</string>
+    <string name="edit">编辑</string>
+    <string name="edit_cancel">取消</string>
+    <string name="wifi_access">获取方式</string>
+    <string name="wifi_rule">1.此页面会自动采集当前连接WI-FI的BSSID \n2.若公司有多
+    个WI-FI,请依次手动连接到各个WI-FI,再切换到此页面采集数据 \n3.采集完成后,选择所需WI-FI并提交</string>
+
 
 </resources>

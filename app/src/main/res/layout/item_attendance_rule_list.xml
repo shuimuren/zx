@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="@dimen/dp_10"
+    app:cardElevation="@dimen/dp_5"
+    app:cardUseCompatPadding="true"
+    app:contentPaddingBottom="@dimen/padding_normal"
+    app:contentPaddingLeft="@dimen/padding_big"
+    app:contentPaddingRight="@dimen/padding_normal"
+    app:contentPaddingTop="@dimen/padding_normal"
+    android:foreground="?android:attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_rule_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/font_big"
+                android:textStyle="bold"
+                tools:text="膨胀" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/img_rule_delete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/padding_big"
+                android:paddingRight="@dimen/padding_big"
+                android:src="@drawable/icon_del" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_15"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/icon_people"
+                android:drawablePadding="@dimen/padding_normal"
+                android:text="@string/member_total"
+                android:textColor="@color/minor_text_color"
+                android:textSize="@dimen/font_size_14sp" />
+
+            <TextView
+                android:id="@+id/tv_rule_member_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:textColor="@color/minor_text_color"
+                android:textSize="@dimen/font_size_14sp"
+                tools:text="7人" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/icon_time"
+                android:drawablePadding="@dimen/padding_normal"
+                android:text="@string/attendance_rule_day"
+                android:textColor="@color/minor_text_color"
+                android:textSize="@dimen/font_size_14sp" />
+
+            <TextView
+                android:id="@+id/tv_rule_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="@color/minor_text_color"
+                android:textSize="@dimen/font_size_14sp"
+                tools:text="周一.." />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/icon_time"
+                android:drawablePadding="@dimen/padding_normal"
+                android:text="@string/attendance_rule_work_time"
+                android:textColor="@color/minor_text_color"
+                android:textSize="@dimen/font_size_14sp" />
+
+            <TextView
+                android:id="@+id/tv_rule_work_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="@color/minor_text_color"
+                android:textSize="@dimen/font_size_14sp"
+                tools:text="周一.." />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/icon_wifi"
+                android:drawablePadding="@dimen/padding_normal"
+                android:text=""
+                android:textColor="@color/minor_text_color"
+                android:textSize="@dimen/font_size_14sp" />
+
+            <TextView
+                android:id="@+id/tv_rule_wifi_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="@color/minor_text_color"
+                android:textSize="@dimen/font_size_14sp"
+                tools:text="周一.." />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tv_change_member"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/change_member"
+                android:textColor="@color/color_text_clickable"
+                android:textSize="@dimen/font_small" />
+
+            <TextView
+                android:id="@+id/tv_change_rule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_20"
+                android:text="@string/change_rule"
+                android:textColor="@color/color_text_clickable"
+                android:textSize="@dimen/font_small" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

@@ -57,7 +57,7 @@ public class ShareUtil extends BaseShareUtil {
      * @param params
      */
     public void shareToTimeLine(Map<String, Object> params) {
-        shareToWeiXin(params, ShareConstant.SHARE_TO_FRIEND);
+        shareToWeiXin(params, ShareConstant.SHARE_TO_TIMELINE);
         Logger.i(">>>", "分享到朋友圈");
     }
 
@@ -114,13 +114,16 @@ public class ShareUtil extends BaseShareUtil {
         //标题
         params.putString(QQShare.SHARE_TO_QQ_TITLE, (String) object.get(ShareConstant.PARAM_SHARE_TITLE));
         //链接
-        params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, (String) object.get(ShareConstant.PARAM_SHARE_URL));
+    //    params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, (String) object.get(ShareConstant.PARAM_SHARE_URL));
         //描述语言
         params.putString(QQShare.SHARE_TO_QQ_SUMMARY, (String) object.get(ShareConstant.PARAM_SHARE_DESCRIPTION));
         //应用名
         params.putString(QQShare.SHARE_TO_QQ_APP_NAME, ResourceUtils.getString(R.string.app_name));
         //分享类型
         params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+        //分享图片
+        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL,"http://avatar.csdn.net/C/3/D/1_u013451048.jpg");
+
 
                 /*QQ分享增加ARK*/
 //        String arkStr = arkInfo.getText().toString();
@@ -147,7 +150,7 @@ public class ShareUtil extends BaseShareUtil {
         @Override
         public void onError(UiError e) {
             // TODO Auto-generated method stub
-            Logger.i(">>>", "QQ分享错误" + e.errorDetail);
+            Logger.i(">>>", "QQ分享错误" + e.errorDetail +"cord>>"+e.errorCode+">>"+e.errorMessage);
         }
     };
 }

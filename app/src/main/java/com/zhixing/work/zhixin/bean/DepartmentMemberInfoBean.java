@@ -27,6 +27,17 @@ public class DepartmentMemberInfoBean implements Serializable{
     private String StaffJobType;
     private int StaffRole;
     private boolean isSelected;
+    private int parentDepartmentId; //上级departmentId
+
+    public int getParentDepartmentId() {
+        return parentDepartmentId;
+    }
+
+    public void setParentDepartmentId(int parentDepartmentId) {
+        this.parentDepartmentId = parentDepartmentId;
+    }
+
+
 
     public boolean isSelected() {
         return isSelected;

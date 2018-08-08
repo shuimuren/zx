@@ -241,7 +241,7 @@ public class AddEventActivity extends BaseTitleActivity {
     private void addEvent() {
         Map params = new HashMap();
         params.put(RequestConstant.KEY_NAME, mName);
-        params.put(RequestConstant.KEY_DATE, mDate);
+        params.put(RequestConstant.KEY_DATE_DATE, mDate);
         params.put(RequestConstant.KEY_INTRO, mIntro);
         params.put(RequestConstant.KEY_IMAGE, mImage);
         MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_ADD_COMPANY_EVENT, params);

@@ -76,7 +76,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!-- tencent你的AppId-->
-                <data android:scheme="123" />
+                <data android:scheme="tencent1107477170" />
             </intent-filter>
         </activity>
 
@@ -428,6 +428,18 @@
         <!-- 新增wifi -->
         <activity
             android:name=".view.clock.AddWifiActivity"
+            android:screenOrientation="portrait" />
+        <!--添加考勤人员-->
+        <activity
+            android:name=".view.clock.SelectAttendanceMemberActivity"
+            android:screenOrientation="portrait" />
+        <!--考勤统计-->
+        <activity
+            android:name=".view.clock.StaffAttendanceStatisticsActivity"
+            android:screenOrientation="portrait" />
+        <!--月统计明细-->
+        <activity
+            android:name=".view.clock.StatisticsMonthDetailActivity"
             android:screenOrientation="portrait" />
     </application>
 

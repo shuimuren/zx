@@ -26,8 +26,9 @@ public class CardMainFragment extends SupportFragment {
 
 
     //  private static final int REQ_MSG = 10;
-    public static final int FRAGMENT_BASE = 0; //基础
-    public static final int FRAGMENT_APTITUDE = 1;//资质
+
+    public static final int FRAGMENT_APTITUDE = 0;//资质
+    public static final int FRAGMENT_BASE = 1; //基础
     public static final int FRAGMENT_SKILL = 2;//技能
     public static final int FRAGMENT_LUCK = 3;//缘分
     public static final int FRAGMENT_CAREER = 4;//生涯
@@ -67,28 +68,26 @@ public class CardMainFragment extends SupportFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        SupportFragment firstFragment = findChildFragment(CardCounterFragment.class);
-      //  SupportFragment firstFragment = findChildFragment(PersonalCardBasicFragment.class);
-        tvCardBasic.setSelected(true);
+        SupportFragment firstFragment = findChildFragment(EvaluatingFragment.class);
+        tvCardAptitude.setSelected(true);
         mCurrentSelectedPosition = 0;
         if (firstFragment == null) {
-           mFragments[FRAGMENT_BASE] = CardCounterFragment.newInstance();
-        //    mFragments[FRAGMENT_BASE] = PersonalCardBasicFragment.newInstance();
             mFragments[FRAGMENT_APTITUDE] = EvaluatingFragment.newInstance();
+            mFragments[FRAGMENT_BASE] = CardCounterFragment.newInstance();
             mFragments[FRAGMENT_SKILL] = SkillFragment.newInstance();
             mFragments[FRAGMENT_LUCK] = KarmaFragment.newInstance();
             mFragments[FRAGMENT_CAREER] = CareerFragment.newInstance();
-            loadMultipleRootFragment(R.id.flCardTabContainer, FRAGMENT_BASE,
-                    mFragments[FRAGMENT_BASE],
+            loadMultipleRootFragment(R.id.flCardTabContainer, FRAGMENT_APTITUDE,
                     mFragments[FRAGMENT_APTITUDE],
+                    mFragments[FRAGMENT_BASE],
                     mFragments[FRAGMENT_SKILL],
                     mFragments[FRAGMENT_LUCK],
                     mFragments[FRAGMENT_CAREER]);
         } else {
             // 这里库已经做了Fragment恢复,所有不需要额外的处理了, 不会出现重叠问题
             // 这里我们需要拿到mFragments的引用,也可以通过getChildFragmentManager.findFragmentByTag自行进行判断查找(效率更高些),用下面的方法查找更方便些
-            mFragments[FRAGMENT_BASE] = firstFragment;
-            mFragments[FRAGMENT_APTITUDE] = findChildFragment(EvaluatingFragment.class);
+            mFragments[FRAGMENT_BASE] = findChildFragment(CardCounterFragment.class);
+            mFragments[FRAGMENT_APTITUDE] = firstFragment;
             mFragments[FRAGMENT_SKILL] = findChildFragment(SkillFragment.class);
             mFragments[FRAGMENT_LUCK] = findChildFragment(KarmaFragment.class);
             mFragments[FRAGMENT_CAREER] = findChildFragment(CareerFragment.class);

@@ -1,26 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/wifi_recycler"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <View style="@style/line" />
-
-    <TextView
-        android:id="@+id/tv_add_wifi"
+    <com.zhixing.work.zhixin.widget.ElasticScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/color_white_clickable"
-        android:drawableLeft="@drawable/icon_add"
-        android:drawablePadding="@dimen/padding_normal"
-        android:padding="@dimen/padding_big"
-        android:text="@string/setting_add_wifi"
-        android:textColor="@color/main_color"
-        android:textSize="@dimen/font_normal" />
+        android:layout_marginBottom="@dimen/dp_80">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/wifi_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10" />
+
+            <View style="@style/line" />
+
+            <TextView
+                android:id="@+id/tv_add_wifi"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/color_white_clickable"
+                android:drawableLeft="@drawable/icon_add"
+                android:drawablePadding="@dimen/padding_normal"
+                android:padding="@dimen/padding_big"
+                android:text="@string/setting_add_wifi"
+                android:textColor="@color/main_color"
+                android:textSize="@dimen/font_normal" />
+        </LinearLayout>
+    </com.zhixing.work.zhixin.widget.ElasticScrollView>
+
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="@dimen/main_btn_with"
+        android:layout_height="@dimen/main_btn_height"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="@drawable/selector_main_btn"
+        android:text="@string/save"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="@dimen/main_btn_with"
+        android:layout_height="@dimen/main_btn_height"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:background="@drawable/selector_main_delete_btn"
+        android:text="@string/delete_btn"
+        android:textColor="@color/white"
+        android:visibility="gone" />
+
+
+</RelativeLayout>

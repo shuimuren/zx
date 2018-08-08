@@ -9,6 +9,9 @@ import android.widget.CompoundButton;
 
 import com.zhixing.work.zhixin.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by lhj on 2018/8/1.
  * Description: 工作时间选择
@@ -29,16 +32,39 @@ public abstract class MultiCheckDialog extends BaseDialog implements CompoundBut
     private CheckBox mCheckSun;
 
     private Boolean[] checked = new Boolean[7];
-    private String mDayRange;
+    private List<Integer> mSelectedWork;
 
     public MultiCheckDialog(Context context) {
         super(context);
     }
 
-    public void setDayRange(String dayRange){
-        this.mDayRange = dayRange;
+    public void setDayRange(List<Integer> selected){
+        mSelectedWork = selected;
         for (int i = 0; i < checked.length; i++) {
-            checked[i] = mDayRange.contains(Integer.toString(i)) ? true : false;
+            checked[i] = isSelected(i);
+        }
+    }
+
+    private  boolean isSelected(int i){
+        switch (i){
+            case 0:
+                return mSelectedWork.contains(1);
+            case 1:
+                return mSelectedWork.contains(2);
+            case 2:
+                return mSelectedWork.contains(4);
+            case 3:
+                return mSelectedWork.contains(8);
+            case 4:
+                return mSelectedWork.contains(16);
+            case 5:
+                return mSelectedWork.contains(32);
+            case 6:
+                return mSelectedWork.contains(64);
+
+
+            default:
+                return false;
         }
     }
 
@@ -123,40 +149,39 @@ public abstract class MultiCheckDialog extends BaseDialog implements CompoundBut
 
     protected abstract void onSelectDaysConfirmMethod();
 
-    protected String onGetDayNameResult() {
-
-        StringBuilder sbDayName = new StringBuilder();
+    protected List<Integer> onGetDayNameResult() {
+        List<Integer> workList = new ArrayList<>();
         if (mCheckMon.isChecked()) {
-            sbDayName.append(mCheckMon.getText().toString() + ",");
+            workList.add(1);
         }
         if (mCheckTue.isChecked()) {
-            sbDayName.append(mCheckTue.getText().toString() + ",");
+            workList.add(2);
         }
         if (mCheckWed.isChecked()) {
-            sbDayName.append(mCheckWed.getText().toString() + ",");
+            workList.add(4);
         }
         if (mCheckThu.isChecked()) {
-            sbDayName.append(mCheckThu.getText().toString() + ",");
+            workList.add(8);
         }
         if (mCheckFri.isChecked()) {
-            sbDayName.append(mCheckFri.getText().toString() + ",");
+            workList.add(16);
         }
         if (mCheckSat.isChecked()) {
-            sbDayName.append(mCheckSat.getText().toString() + ",");
+            workList.add(32);
         }
         if (mCheckSun.isChecked()) {
-            sbDayName.append(mCheckSun.getText().toString() + ",");
+            workList.add(64);
         }
-        return (sbDayName.length() == 0) ? sbDayName.toString() : sbDayName.substring(0, sbDayName.length() - 1);
+        return workList;
     }
 
-    protected String onGetDayIdResult() {
-        StringBuilder sbDayId = new StringBuilder();
-        for (int i = 0; i < checked.length; i++) {
-            if (checked[i]) {
-                sbDayId.append(i + ",");
-            }
-        }
-        return (sbDayId.length() == 0) ? sbDayId.toString() : sbDayId.substring(0, sbDayId.length() - 1);
-    }
+//    protected String onGetDayIdResult() {
+//        StringBuilder sbDayId = new StringBuilder();
+//        for (int i = 0; i < checked.length; i++) {
+//            if (checked[i]) {
+//                sbDayId.append(i + ",");
+//            }
+//        }
+//        return (sbDayId.length() == 0) ? sbDayId.toString() : sbDayId.substring(0, sbDayId.length() - 1);
+//    }
 }

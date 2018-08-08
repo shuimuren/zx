@@ -38,14 +38,6 @@ import rx.Subscription;
 public class CompanyEventDialog extends BaseDialog {
 
 
-    //    @BindView(R.id.img_event)
-//    ImageView imgEvent;
-//    @BindView(R.id.tv_event_name)
-//    TextView tvEventName;
-//    @BindView(R.id.tv_event_time)
-//    TextView tvEventTime;
-//    @BindView(R.id.tv_event_info)
-//    TextView tvEventInfo;
     private History history;
     private ImageView imgEvent;
     private TextView tvEventName;

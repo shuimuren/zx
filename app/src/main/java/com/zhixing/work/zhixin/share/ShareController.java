@@ -52,6 +52,7 @@ public class ShareController extends AbstractController {
     }
 
     private void shareToEMS(Map<String, Object> obj) {
+
         ShareUtil.getInstance().shareToSMS(obj);
     }
 

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.SupportFragment;
+import com.zhixing.work.zhixin.constant.ResultConstant;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,6 +50,9 @@ public class ClockStatisticsMonthFragment extends SupportFragment {
     LinearLayout llAbsenteeism;
     Unbinder unbinder;
 
+    private String mMonthData;
+    private String mLateTotal, mEarlyTotal, mMissTotal, mAbsenteeismTotal;
+
     public static ClockStatisticsMonthFragment getInstance() {
         return new ClockStatisticsMonthFragment();
     }
@@ -80,12 +84,20 @@ public class ClockStatisticsMonthFragment extends SupportFragment {
             case R.id.img_right:
                 break;
             case R.id.ll_late:
+                StatisticsMonthDetailActivity.startMonthDetailActivity(getActivity(), mMonthData,
+                        ResultConstant.CLOCK_STATUS_LATE, mLateTotal);
                 break;
             case R.id.ll_before:
+                StatisticsMonthDetailActivity.startMonthDetailActivity(getActivity(), mMonthData,
+                        ResultConstant.CLOCK_STATUS_EARLY, mEarlyTotal);
                 break;
             case R.id.ll_miss:
+                StatisticsMonthDetailActivity.startMonthDetailActivity(getActivity(), mMonthData,
+                        ResultConstant.CLOCK_STATUS_MISS, mMissTotal);
                 break;
             case R.id.ll_absenteeism:
+                StatisticsMonthDetailActivity.startMonthDetailActivity(getActivity(), mMonthData,
+                        ResultConstant.CLOCK_STATUS_ABSENTEEISM, mAbsenteeismTotal);
                 break;
         }
     }

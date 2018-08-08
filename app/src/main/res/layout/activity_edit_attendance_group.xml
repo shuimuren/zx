@@ -15,13 +15,31 @@
         style="@style/style_linear_layout_item">
 
         <TextView
-            style="@style/style_item_left_text"
+            android:layout_width="@dimen/dp_120"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_big"
+            android:paddingLeft="@dimen/padding_big"
+            android:paddingTop="@dimen/padding_big"
             android:text="@string/setting_work_time" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
 
         <TextView
             android:id="@+id/tv_work_time"
-            style="@style/style_item_right_text"
-            android:text="" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/padding_big"
+            android:drawableRight="@drawable/icon_next"
+            android:drawablePadding="@dimen/padding_normal"
+            android:ellipsize="end"
+            android:gravity="right"
+            android:lines="1"
+            android:text=""
+            android:textColor="@color/minor_text_color"
+            android:textSize="@dimen/font_size_14sp" />
     </LinearLayout>
 
     <View style="@style/line" />
@@ -47,11 +65,11 @@
         style="@style/style_linear_layout_item">
 
         <TextView
-            android:id="@+id/tv_end_time"
             style="@style/style_item_left_text"
             android:text="@string/setting_end_time" />
 
         <TextView
+            android:id="@+id/tv_end_time"
             style="@style/style_item_right_text"
             android:text="" />
     </LinearLayout>
@@ -66,10 +84,25 @@
             style="@style/style_item_left_text"
             android:text="@string/setting_time_scope" />
 
+        <com.zhixing.work.zhixin.widget.ClearEditText
+            android:id="@+id/flex_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:background="@null"
+            android:gravity="right"
+            android:hint="请输入弹性时间，没有可不填"
+            android:inputType="number"
+            android:paddingRight="@dimen/padding_big"
+            android:textSize="@dimen/font_size_14sp" />
+
         <TextView
-            android:id="@+id/tv_scope_time"
-            style="@style/style_item_right_text"
-            android:text="" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/padding_small"
+            android:text="分钟"
+            android:textColor="@color/minor_text_color"
+            android:textSize="@dimen/font_small" />
     </LinearLayout>
 
     <View style="@style/line" />
@@ -82,10 +115,25 @@
             style="@style/style_item_left_text"
             android:text="@string/setting_time_absenteeism" />
 
+        <com.zhixing.work.zhixin.widget.ClearEditText
+            android:id="@+id/absenteeism_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:background="@null"
+            android:gravity="right"
+            android:hint="请输入旷工最低标准范围（1-1140）"
+            android:inputType="number"
+            android:paddingRight="@dimen/padding_big"
+            android:textSize="@dimen/font_size_14sp" />
+
         <TextView
-            android:id="@+id/tv_absenteeism"
-            style="@style/style_item_right_text"
-            android:text="" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/padding_small"
+            android:text="分钟"
+            android:textColor="@color/minor_text_color"
+            android:textSize="@dimen/font_small" />
     </LinearLayout>
 
     <View style="@style/division_view" />
@@ -101,6 +149,8 @@
         <TextView
             android:id="@+id/tv_wifi"
             style="@style/style_item_right_text"
+            android:lines="1"
+            android:ellipsize="end"
             android:text="" />
     </LinearLayout>
 

@@ -9,6 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="horizontal"
         android:padding="@dimen/padding_big">
 
@@ -44,6 +45,7 @@
             android:text="@string/attendance_group_number" />
 
         <TextView
+            android:id="@+id/tv_member"
             style="@style/style_item_right_text"
             android:text="0成员" />
     </LinearLayout>

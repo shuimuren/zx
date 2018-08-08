@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.SupportActivity;
 import com.zhixing.work.zhixin.base.SupportFragment;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,6 +37,7 @@ public class ManagerClockInActivity extends SupportActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_clock_in);
         ButterKnife.bind(this);
+        setTitle(ResourceUtils.getString(R.string.work_clock_in));
         initView();
     }
 
@@ -64,18 +66,21 @@ public class ManagerClockInActivity extends SupportActivity {
                 tvClockStatistics.setSelected(false);
                 tvClockSetting.setSelected(false);
                 showHideFragment(mFragments[0]);
+                setTitle(ResourceUtils.getString(R.string.work_clock_in));
                 break;
             case R.id.tv_clock_statistics:
                 tvClockIn.setSelected(false);
                 tvClockStatistics.setSelected(true);
                 tvClockSetting.setSelected(false);
                 showHideFragment(mFragments[1]);
+                setTitle(ResourceUtils.getString(R.string.clock_in_statistics));
                 break;
             case R.id.tv_clock_setting:
                 tvClockSetting.setSelected(true);
                 tvClockIn.setSelected(false);
                 tvClockStatistics.setSelected(false);
                 showHideFragment(mFragments[2]);
+                setTitle(ResourceUtils.getString(R.string.attendance_setting_title));
                 break;
         }
     }

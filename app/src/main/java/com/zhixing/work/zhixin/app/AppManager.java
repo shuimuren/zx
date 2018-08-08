@@ -7,6 +7,7 @@ import com.zhixing.work.zhixin.BuildConfig;
 import com.zhixing.work.zhixin.msgctrl.ControllerRegister;
 import com.zhixing.work.zhixin.network.OkHttpUtil;
 import com.zhixing.work.zhixin.network.RetrofitServiceFactory;
+import com.zhixing.work.zhixin.share.ShareConstant;
 
 import java.io.File;
 
@@ -55,9 +56,9 @@ public class AppManager {
         RetrofitServiceFactory.recreateService();
         ControllerRegister.initialize();
         //QQ分享
-//        if (mTencent == null) {
-//            mTencent = Tencent.createInstance(ShareConstant.QQ_SHARE_APP_ID,mContext);
-//        }
+        if (mTencent == null) {
+            mTencent = Tencent.createInstance(ShareConstant.QQ_SHARE_APP_ID,mContext);
+        }
 
 //        CrashHandler.getInstance().init(appContext);
     }

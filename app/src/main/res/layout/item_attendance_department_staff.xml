@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_member"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/avatar_item_height"
+    android:background="@android:color/transparent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="@dimen/padding_normal">
+
+    <ImageView
+        android:id="@+id/img_selector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal"
+        android:src="@drawable/selector_department_item" />
+
+    <ImageView
+        android:id="@+id/member_avatar"
+        android:layout_width="@dimen/item_avatar_width"
+        android:layout_height="@dimen/item_avatar_width"
+        android:src="@drawable/student" />
+
+    <TextView
+        android:id="@+id/member_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_big"
+        android:gravity="center"
+        android:text="22222"
+        android:textColor="@color/color_303030"
+        android:textSize="@dimen/font_normal" />
+
+    <ImageView
+        android:id="@+id/member_mark"
+        android:layout_width="@dimen/dp_40"
+        android:layout_height="@dimen/dp_20"
+        android:visibility="gone" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_1"
+        android:layout_weight="1"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/img_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/icon_edit"
+        android:visibility="gone" />
+
+</LinearLayout>

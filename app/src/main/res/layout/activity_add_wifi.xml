@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lineSpacingExtra="1.5dp"
+            android:textColor="@color/minor_text_color"
             android:text="@string/wifi_rule" />
     </LinearLayout>
 
@@ -30,7 +31,6 @@
         android:id="@+id/tv_wifi_connected"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#cccccc"
         android:padding="@dimen/padding_big"
         android:text="已获取WI-FI"
         android:textSize="@dimen/font_normal" />
@@ -53,6 +53,7 @@
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:background="@color/white"
         android:padding="@dimen/padding_normal">
 
         <ImageView

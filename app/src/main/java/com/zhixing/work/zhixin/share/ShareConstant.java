@@ -7,10 +7,11 @@ package com.zhixing.work.zhixin.share;
 
 public class ShareConstant {
 
-    public static final String WX_APP_ID = "wxa18e37ad45bd0f28";
-    public static final String WX_APP_SECRET = "c223e91bca60f5f5d25a408b370a25ae";
+    public static final String WX_APP_ID = "wx52e926653aec7fcb";
+    public static final String WX_APP_SECRET = "5f926564e994968d60f18fb0eee330a1";
 
-    public static final String QQ_SHARE_APP_ID = "123";
+    public static final String QQ_SHARE_APP_ID = "1107477170";
+    public static final String QQ_SHARE_APP_KEY = "IbWodxmRJxhrnJeG";
 
     public static final int SHARE_TO_TIMELINE = 0;
     public static final int SHARE_TO_FRIEND = 1;

@@ -250,6 +250,30 @@
     <string name="wifi_access">获取方式</string>
     <string name="wifi_rule">1.此页面会自动采集当前连接WI-FI的BSSID \n2.若公司有多
     个WI-FI,请依次手动连接到各个WI-FI,再切换到此页面采集数据 \n3.采集完成后,选择所需WI-FI并提交</string>
+    <string name="attendance_day_normal">出勤天数</string>
+    <string name="attendance_late">迟到</string>
+    <string name="attendance_before">早退</string>
+    <string name="attendance_miss">缺卡</string>
+    <string name="attendance_rest">矿工</string>
+    <string name="attendance_absenteeism">矿工</string>
+    <string name="statistics">统计</string>
+    <string name="list_item_loading">点击或者上拉，加载更多数据</string>
+    <string name="list_item_no_more">----------已经全部加载完毕----------</string>
+    <string name="list_item_empty">=_=!!, 还没有数据哦</string>
+    <string name="clock_member">参与人员</string>
+    <string name="select_all">全选</string>
+    <string name="select_staff_before">请先选择人员</string>
+    <string name="input_attendance_group_name">分组名称不能为空</string>
+    <string name="create_rule_success">考勤组创建成功</string>
+    <string name="delete_btn">删除</string>
+    <string name="alert_selector_wifi">请先选择wifi</string>
+    <string name="alert_selector_usable_wifi">您尚未添加可用wifi</string>
+    <string name="attendance_setting_title">考勤设置</string>
+    <string name="member_total">成员数量</string>
+    <string name="attendance_rule_day">固定班次</string>
+    <string name="change_member">修改参与人员</string>
+    <string name="change_rule">修改考勤规则</string>
+    <string name="attendance_rule_work_time">上下班时间</string>
 
 
 </resources>

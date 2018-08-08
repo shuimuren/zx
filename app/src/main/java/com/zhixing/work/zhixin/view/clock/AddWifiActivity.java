@@ -10,8 +10,12 @@ import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
+import com.zhixing.work.zhixin.event.AddWifiEvent;
+import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.NetworkUtil;
 import com.zhixing.work.zhixin.util.ResourceUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,7 +66,12 @@ public class AddWifiActivity extends BaseTitleActivity {
 
     @OnClick(R.id.save)
     public void onViewClicked() {
-
+        if (!TextUtils.isEmpty(wifiSSId)) {
+            EventBus.getDefault().post(new AddWifiEvent(wifiSSId, wifiBisId));
+            this.finish();
+        } else {
+            AlertUtils.show(ResourceUtils.getString(R.string.alert_selector_wifi));
+        }
     }
 
     public void updateUi() {

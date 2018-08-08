@@ -6,7 +6,7 @@
     <color name="bg_btn">#dadada</color>
     <color name="colorAccent">#FF4081</color>
     <color name="color_dddddd">#dddddd</color>
-    <color name="main_color">#408acf</color>
+    <color name="main_color">#1ba0ff</color>
     <color name="base_end_color_default">#FFFFFF</color>
     <color name="base_end_color_pressed">#ff2570ba</color>
     <color name="base_start_color_default">#FFFFFF</color>
@@ -16,8 +16,9 @@
     <color name="color_71aae0">#71aae0</color>
     <color name="color_main_bg">#eef0f2</color>
     <color name="main_text_color">#303030</color>
+    <color name="minor_text_color">#b1b6bb</color>
 
-    <color name="toobar">#408acf</color>
+    <color name="toobar">@color/main_color</color>
     <color name="red">#ff503e</color>
     <color name="color_cfc496">#cfc496</color>
     <color name="hardtoast">#b1b6bb</color>
@@ -80,9 +81,9 @@
     <color name="spinner_check">#42494f</color>
     <color name="spinner_checked">#42494f</color>
     <color name="tv_choice_id">#101010</color>
-    <color name="btn_write_per_data">#408ACF</color>
-    <color name="color_register">#408acf</color>
-    <color name="tool_bar_color">#408ACF</color>
+    <color name="btn_write_per_data">@color/main_color</color>
+    <color name="color_register">@color/main_color</color>
+    <color name="tool_bar_color">@color/main_color</color>
     <color name="color_success">#99cc00</color>
     <color name="color_default">#c3c3c3</color>
     <color name="color_failure">#f96b72</color>

@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.zhixing.work.zhixin.widget.ElasticScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:padding="@dimen/padding_normal">
+
+                <ImageView
+                    android:id="@+id/img_staff_avatar"
+                    android:layout_width="@dimen/item_avatar_width"
+                    android:layout_height="@dimen/item_avatar_width"
+                    android:src="@drawable/on_job" />
+
+                <TextView
+                    android:id="@+id/tv_staff_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_big"
+                    android:layout_toRightOf="@id/img_staff_avatar"
+                    tools:text="小张" />
+
+                <TextView
+                    android:id="@+id/tv_staff_department"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_staff_name"
+                    android:layout_marginLeft="@dimen/margin_big"
+                    android:layout_toRightOf="@id/img_staff_avatar"
+                    android:paddingTop="@dimen/padding_small"
+                    android:textColor="@color/minor_text_color"
+                    android:textSize="@dimen/font_size_14sp"
+                    tools:text="研发部" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@drawable/color_white_clickable"
+                android:gravity="center_vertical"
+                android:padding="@dimen/padding_big">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/attendance_day_normal" />
+
+                <TextView
+                    android:id="@+id/tv_normal_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:text="12天"
+                    android:textColor="@color/minor_text_color"
+                    android:textSize="@dimen/font_size_14sp" />
+
+                <ImageView
+                    android:id="@+id/img_normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_big"
+                    android:src="@drawable/selector_image_down_up" />
+
+
+            </RelativeLayout>
+
+            <View style="@style/line" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/rl_late"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/color_white_clickable"
+                android:gravity="center_vertical"
+                android:padding="@dimen/padding_big">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/attendance_late" />
+
+                <TextView
+                    android:id="@+id/tv_late_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/minor_text_color"
+                    android:textSize="@dimen/font_size_14sp"
+                    tools:text="12天" />
+
+                <ImageView
+                    android:id="@+id/img_late"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_big"
+                    android:src="@drawable/selector_image_down_up" />
+
+
+            </RelativeLayout>
+
+            <View style="@style/line" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_late"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/rl_before"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/color_white_clickable"
+                android:gravity="center_vertical"
+                android:padding="@dimen/padding_big">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/attendance_before" />
+
+                <TextView
+                    android:id="@+id/tv_normal_before"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/minor_text_color"
+                    android:textSize="@dimen/font_size_14sp"
+                    tools:text="12天" />
+
+                <ImageView
+                    android:id="@+id/img_before"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_big"
+                    android:src="@drawable/selector_image_down_up" />
+
+
+            </RelativeLayout>
+
+            <View style="@style/line" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_before"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+
+            <RelativeLayout
+                android:id="@+id/rl_miss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/color_white_clickable"
+                android:gravity="center_vertical"
+                android:padding="@dimen/padding_big">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/attendance_miss" />
+
+                <TextView
+                    android:id="@+id/tv_miss_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/font_size_14sp"
+                    tools:text="12天" />
+
+                <ImageView
+                    android:id="@+id/img_miss"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_big"
+                    android:src="@drawable/selector_image_down_up" />
+
+
+            </RelativeLayout>
+
+            <View style="@style/line" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_miss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+
+            <RelativeLayout
+                android:id="@+id/rl_absenteeism"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/color_white_clickable"
+                android:gravity="center_vertical"
+                android:padding="@dimen/padding_big">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/attendance_absenteeism" />
+
+                <TextView
+                    android:id="@+id/tv_absenteeism_total"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="20dp"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/font_size_14sp"
+                    tools:text="12天" />
+
+                <ImageView
+                    android:id="@+id/img_absenteeism"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/margin_big"
+                    android:src="@drawable/selector_image_down_up" />
+
+
+            </RelativeLayout>
+
+            <View style="@style/line" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_absenteeism"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
+        </LinearLayout>
+
+    </com.zhixing.work.zhixin.widget.ElasticScrollView>
+
+
+</LinearLayout>

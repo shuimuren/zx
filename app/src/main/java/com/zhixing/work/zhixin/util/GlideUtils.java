@@ -14,6 +14,7 @@ import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.module.AppGlideModule;
 import com.bumptech.glide.request.RequestOptions;
 import com.zhixing.work.zhixin.R;
+import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
 import com.zhixing.work.zhixin.app.ZxApplication;
 
 /**
@@ -89,6 +90,22 @@ public class GlideUtils extends AppGlideModule {
      */
     public void loadGlideRoundTransform(Context context, String url, ImageView imageView) {
         Glide.with(context).load(url)
+                .transition(DrawableTransitionOptions.withCrossFade()).
+                apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
+                .into(imageView);
+    }
+
+
+    /**
+     * 便于更换头像 头像资源实时更新
+     *
+     * @param context
+     * @param
+     * @param imageView 圆角图片
+     */
+    public void loadPublicRoundTransform(Context context, String url, ImageView imageView) {
+        Glide.with(context).load(ALiYunFileURLBuilder.PUBLIC_END_POINT +url)
                 .transition(DrawableTransitionOptions.withCrossFade()).
                 apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                 .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))

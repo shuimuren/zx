@@ -189,13 +189,27 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
 
     }
 
-
+/*
+ public static final String PARAMS_CONTEXT = "shareContext";
+    public static final String PARAM_SHARE_THUMBNAIL = "p_share_thumbnail";
+    public static final String PARAM_SHARE_TITLE = "p_share_title";
+    public static final String PARAM_SHARE_URL = "p_share_url";
+    public static final String PARAM_SHARE_DESCRIPTION = "p_share_desc";
+    public static final String PARAM_SHARE_COMPANY_NAME = "company_name"; //公司名称
+    public static final String PARAM_SHARE_MANAGER_NAME = "manager_name";//管理员名称
+ */
     @OnClick(R.id.workmate)
     public void onViewClicked() {
         Map<String, Object> params = new HashMap<>();
         //此处应填写完整参数
-        params.put(ShareConstant.PARAM_SHARE_TITLE, departmentName);
+
         params.put(ShareConstant.PARAMS_CONTEXT, OrganizationalStructureActivity.this);
+        params.put(ShareConstant.PARAM_SHARE_TITLE, departmentName);
+        params.put(ShareConstant.PARAM_SHARE_URL,"www.baidu.com");
+        params.put(ShareConstant.PARAM_SHARE_DESCRIPTION,"入职邀请测试");
+        params.put(ShareConstant.PARAM_SHARE_COMPANY_NAME,"职信科技");
+        params.put(ShareConstant.PARAM_SHARE_MANAGER_NAME,"aaa");
+
         MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHOW_SHARE_PLATFORM, params);
     }
 

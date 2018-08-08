@@ -206,10 +206,10 @@ public class CompanyScoreFragment extends SupportFragment {
             }
             tvCompanyName.setText(mCompanyCard.getFullName());
 
-            if(mCompanyCard.getBusinessLicenseStatus()!= ResultConstant.AUTHENTICATE_STATUS_NULL
-                    && mCompanyCard.getManagerIdCardStatus() != ResultConstant.AUTHENTICATE_STATUS_NULL){
+            if (mCompanyCard.getBusinessLicenseStatus() != ResultConstant.AUTHENTICATE_STATUS_NULL
+                    && mCompanyCard.getManagerIdCardStatus() != ResultConstant.AUTHENTICATE_STATUS_NULL) {
                 imageNotify.setVisibility(View.INVISIBLE);
-            }else {
+            } else {
                 imageNotify.setVisibility(View.GONE);
             }
         }
@@ -223,7 +223,7 @@ public class CompanyScoreFragment extends SupportFragment {
      * @param result
      */
     private void handlerAvatarResult(ALiImageUrlBean result) {
-        if (result.getBaseUrl()!= null && result.getBaseUrl().equals(mAvatarBaseUrl)) {
+        if (result.getBaseUrl() != null && result.getBaseUrl().equals(mAvatarBaseUrl)) {
             Glide.with(getActivity()).load(result.getUrl()).into(imageCompanyPicture);
         } else if (mLogoBaseUrl.equals(result.getBaseUrl())) {
             GlideUtils.getInstance().loadCircleUserIconInto(getActivity(), result.getUrl(), imageCompanyLogo);
@@ -332,12 +332,11 @@ public class CompanyScoreFragment extends SupportFragment {
 
                 break;
             case R.id.more:
-                if(SettingUtils.createCardBefore()){
+                if (SettingUtils.createCardBefore()) {
                     startActivity(new Intent(getActivity(), CompanyCardActivity.class));
-                }else {
+                } else {
                     CreateCompanyCardActivity.startCompanyCard(getActivity());
                 }
-
                 break;
         }
     }

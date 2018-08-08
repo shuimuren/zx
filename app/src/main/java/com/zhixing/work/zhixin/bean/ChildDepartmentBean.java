@@ -18,7 +18,32 @@ public class ChildDepartmentBean implements Serializable {
     private int memberTotal;
     private int typeSelected; //0:正常.1:可选择
     private boolean isSelected; //true 被选中,false 未被选中
+    private int selectedTotal; //被选中的总数
+    private int parentDepartmentId; //上级departmentId;
 
+    public int getSelectedTotal() {
+        return selectedTotal;
+    }
+
+    public void setSelectedTotal(int selectedTotal) {
+        this.selectedTotal = selectedTotal;
+    }
+
+    public int getParentDepartmentId() {
+        return parentDepartmentId;
+    }
+
+    public void setParentDepartmentId(int parentDepartmentId) {
+        this.parentDepartmentId = parentDepartmentId;
+    }
+
+    public int getSetlectedTotal() {
+        return selectedTotal;
+    }
+
+    public void setSetlectedTotal(int setlectedTotal) {
+        this.selectedTotal = setlectedTotal;
+    }
     public int getTypeSelected() {
         return typeSelected;
     }

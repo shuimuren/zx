@@ -11,6 +11,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.zhixing.work.zhixin.R;
+import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.share.ShareConstant;
 
 /**
@@ -45,6 +46,7 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
     @Override
     public void onReq(BaseReq baseReq) {
 
+
     }
     // 第三方应用发送到微信的请求处理后的响应结果，会回调到该方法
     @Override
@@ -52,23 +54,23 @@ public class WXEntryActivity extends AppCompatActivity implements IWXAPIEventHan
         switch (baseResp.errCode) {
             //发送成功
             case BaseResp.ErrCode.ERR_OK:
-
+                Logger.i(">>>","微信分享成功");
                 break;
             //发送取消
             case BaseResp.ErrCode.ERR_USER_CANCEL:
-
+                Logger.i(">>>","微信分享取消");
                 break;
             //发送被拒绝
             case BaseResp.ErrCode.ERR_AUTH_DENIED:
-
+                Logger.i(">>>","微信分享拒绝");
                 break;
              //不支持错误
             case BaseResp.ErrCode.ERR_UNSUPPORT:
-
+                Logger.i(">>>","微信分享不支持错误");
                 break;
              //发送返回
             default:
-
+                Logger.i(">>>","微信分享default");
                 break;
 
         }

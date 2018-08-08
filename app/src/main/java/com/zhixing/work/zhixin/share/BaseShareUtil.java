@@ -2,6 +2,8 @@ package com.zhixing.work.zhixin.share;
 
 import android.graphics.Bitmap;
 
+import com.zhixing.work.zhixin.util.AlertUtils;
+
 import java.util.Map;
 
 /**
@@ -25,16 +27,25 @@ public class BaseShareUtil {
         Object url = params.get(ShareConstant.PARAM_SHARE_URL);
         if (url != null) {
             mShareUrl = url.toString();
+        }else{
+            AlertUtils.show("分享链接为空");
+            return;
         }
 
         Object title = params.get(ShareConstant.PARAM_SHARE_TITLE);
         if (title != null) {
             mShareTitle = title.toString();
+        }else{
+            AlertUtils.show("分享标题为空");
+            return;
         }
 
         Object description = params.get(ShareConstant.PARAM_SHARE_DESCRIPTION);
         if (description != null) {
             mShareDescription = description.toString();
+        }else{
+            AlertUtils.show("分享描述为空");
+            return;
         }
 
         Object thumbnail = params.get(ShareConstant.PARAM_SHARE_THUMBNAIL);

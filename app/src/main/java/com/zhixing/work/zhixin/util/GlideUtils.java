@@ -125,7 +125,6 @@ public class GlideUtils extends AppGlideModule {
 
     }
     /**
-
      * @param imageView 圆形头像本地
      */
     public void loadIconInto(Context context, String url, ImageView imageView) {

@@ -66,8 +66,8 @@ dependencies {
     implementation 'com.jakewharton.rxbinding:rxbinding:0.4.0'
     implementation 'com.jakewharton.rxbinding:rxbinding-design:0.4.0'
     //Okhttp
-    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
+    //implementation 'com.squareup.okhttp3:logging-interceptor:3.11.0'
     //阿里云
     implementation 'com.aliyun.dpa:oss-android-sdk:+'
     //EventBus

@@ -274,6 +274,8 @@
     <string name="change_member">修改参与人员</string>
     <string name="change_rule">修改考勤规则</string>
     <string name="attendance_rule_work_time">上下班时间</string>
-
+    <string name="user_rule_do_not_have_permission">用户权限不匹配</string>
+    <string name="wifi_usable">当前已进入考勤范围</string>
+    <string name="wifi_unusable">当前不在wifi考勤范围内</string>
 
 </resources>

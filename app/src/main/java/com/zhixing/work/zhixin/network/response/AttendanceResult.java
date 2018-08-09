@@ -9,17 +9,18 @@ import com.zhixing.work.zhixin.network.BaseResult;
 
 public class AttendanceResult extends BaseResult{
 
+
     /**
-     * Content : true
+     * Content : 2018-08-09 18:23:41
      */
 
-    private boolean Content;
+    private String Content;
 
-    public boolean isContent() {
+    public String getContent() {
         return Content;
     }
 
-    public void setContent(boolean Content) {
+    public void setContent(String Content) {
         this.Content = Content;
     }
 }

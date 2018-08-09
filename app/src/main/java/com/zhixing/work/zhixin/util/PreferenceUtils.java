@@ -117,24 +117,8 @@ public class PreferenceUtils {
 	 */
 	public synchronized static int getInt2(String key, int defaultValue) {
 		int value = 0;
-		// try {
-		// Object objValue = mCacheItem.get(key);
-		// if (objValue != null) {
-		// value = (Integer) objValue;
-		// if (value != 0) {
-		// return value;
-		// }
-		// }
-		// } catch (Exception e) {
-		// // ignore
-		// }
-
 		SharedPreferences sp = getAppSettingPreference();
 		value = sp.getInt(key, defaultValue);
-		// if (value != 0) {
-		// mCacheItem.put(key, value);
-		// }
-
 		return value;
 	}
 
@@ -270,5 +254,7 @@ public class PreferenceUtils {
 	private static Context getContext() {
 		return BaseApplication.getInstance();
 	}
+
+
 }
 

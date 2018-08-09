@@ -1,5 +1,6 @@
 package com.zhixing.work.zhixin.network.response;
 
+import com.zhixing.work.zhixin.bean.WifiBean;
 import com.zhixing.work.zhixin.network.BaseResult;
 
 import java.util.List;
@@ -11,39 +12,15 @@ import java.util.List;
 
 public class WifiListResult extends BaseResult {
 
-    private List<ContentBean> Content;
+    private List<WifiBean> Content;
 
-    public List<ContentBean> getContent() {
+    public List<WifiBean> getContent() {
         return Content;
     }
 
-    public void setContent(List<ContentBean> Content) {
+    public void setContent(List<WifiBean> Content) {
         this.Content = Content;
     }
 
-    public static class ContentBean {
-        /**
-         * Name : hongyan
-         * Bssid : f3-g4-g6-cv-d7-8h-s8
-         */
 
-        private String Name;
-        private String Bssid;
-
-        public String getName() {
-            return Name;
-        }
-
-        public void setName(String Name) {
-            this.Name = Name;
-        }
-
-        public String getBssid() {
-            return Bssid;
-        }
-
-        public void setBssid(String Bssid) {
-            this.Bssid = Bssid;
-        }
-    }
 }

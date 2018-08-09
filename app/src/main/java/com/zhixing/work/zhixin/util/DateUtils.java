@@ -196,6 +196,22 @@ public class DateUtils {
         return new Date();
     }
 
+    /**
+     * Thu, 09 Aug 2018 03:29:46 GMT
+     *
+     * @return
+     */
+    public static String parseTime(String dateString) {
+        Date date = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss 'GMT'", Locale.CHINA);
+        try {
+            date = sdf.parse(dateString);
+            sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return sdf.format(date);
+    }
 
     public static String getTimestampStr() {
         return Long.toString(System.currentTimeMillis());
@@ -274,5 +290,12 @@ public class DateUtils {
             e.printStackTrace();
         }
         return 0L;
+    }
+
+    public static String getDfHourMinSec(Long date){
+        SimpleDateFormat format = new SimpleDateFormat(DF_HOUR_MIN_SEC);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(date);
+        return format.format(calendar.getTime());
     }
 }

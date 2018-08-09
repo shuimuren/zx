@@ -2,10 +2,11 @@ package com.zhixing.work.zhixin.bean;
 
 /**
  * Created by lhj on 2018/8/2.
- * Description:
+ * Description: 打卡记录
  */
 
 public class AttendanceRecordsBean {
+
     private String ClockDate;
     private String ClockInTime;
     private String ClockOutTime;

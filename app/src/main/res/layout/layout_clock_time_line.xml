@@ -52,6 +52,7 @@
                     android:id="@+id/tv_start_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/black"
                     android:text="上班时间" />
 
                 <TextView
@@ -59,7 +60,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_10"
-                    android:textColor="#212121"
+                    android:textColor="@color/black"
                     android:visibility="gone"
                     tools:text="打卡时间" />
 
@@ -126,7 +127,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_end_clock_start_time"
+                    android:id="@+id/tv_end_clock_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="下班时间" />

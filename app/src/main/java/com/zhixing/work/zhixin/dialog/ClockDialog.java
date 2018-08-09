@@ -11,7 +11,7 @@ import com.zhixing.work.zhixin.util.ResourceUtils;
 
 /**
  * Created by lhj on 2018/7/30.
- * Description:
+ * Description: 打卡成功
  */
 
 public class ClockDialog extends BaseDialog implements View.OnClickListener {

@@ -94,17 +94,6 @@
     <drawable name="pay_bg_actionbar_normal">#d9434b</drawable>
     <drawable name="pay_bg_actionbar_pressed">#ce2730</drawable>
 
-    <style name="CustomProgressDialog">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:backgroundDimEnabled">true</item>
-    </style>
-
-    <style name="Theme.Activity.Translucent" parent="android:Theme">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowIsTranslucent">true</item>
-    </style>
 
     <style name="app_base_theme" parent="android:Theme.Light.NoTitleBar" />
 

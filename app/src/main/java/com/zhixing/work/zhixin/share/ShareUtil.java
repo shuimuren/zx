@@ -1,6 +1,8 @@
 package com.zhixing.work.zhixin.share;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.tencent.connect.share.QQShare;
@@ -14,6 +16,7 @@ import com.tencent.tauth.UiError;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.app.AppManager;
 import com.zhixing.work.zhixin.app.ZxApplication;
+import com.zhixing.work.zhixin.bean.DepartmentInviteBean;
 import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 
@@ -74,6 +77,13 @@ public class ShareUtil extends BaseShareUtil {
      */
     public void shareToSMS(Map<String, Object> params) {
         Logger.i(">>>", "分享到SMS");
+        DepartmentInviteBean bean = (DepartmentInviteBean)params.get(ShareConstant.PARAM_SHARE_DEPARTMENT_INVITE);
+        Logger.i(">>>","SMS>>>"+bean.getUrl());
+        String des = bean.getInviter()+"邀请你加入"+bean.getCompanyName()+bean.getUrl();
+        Uri uri = Uri.parse("smsto:" );
+        Intent intent = new Intent(Intent.ACTION_SENDTO, uri);
+        intent.putExtra("sms_body", des);
+        ((Activity)params.get(ShareConstant.PARAMS_CONTEXT)).startActivity(intent);
     }
 
     /**

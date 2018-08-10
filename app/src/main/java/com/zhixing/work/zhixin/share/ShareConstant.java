@@ -23,4 +23,6 @@ public class ShareConstant {
     public static final String PARAM_SHARE_DESCRIPTION = "p_share_desc";
     public static final String PARAM_SHARE_COMPANY_NAME = "company_name"; //公司名称
     public static final String PARAM_SHARE_MANAGER_NAME = "manager_name";//管理员名称
+    public static final String PARAM_SHARE_DEPARTMENT_ID = "departmentId";//组织名称
+    public static final String PARAM_SHARE_DEPARTMENT_INVITE = "inviteBean";//邀请加入组织连接
 }

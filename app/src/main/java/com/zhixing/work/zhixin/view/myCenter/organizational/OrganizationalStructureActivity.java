@@ -13,6 +13,7 @@ import com.zhixing.work.zhixin.adapter.DepartmentListAdapter;
 import com.zhixing.work.zhixin.adapter.DepartmentStaffAdapter;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.ChildDepartmentBean;
+import com.zhixing.work.zhixin.bean.DepartmentInviteBean;
 import com.zhixing.work.zhixin.bean.DepartmentMemberInfoBean;
 import com.zhixing.work.zhixin.common.DepartmentManagerHelper;
 import com.zhixing.work.zhixin.common.Logger;
@@ -22,6 +23,7 @@ import com.zhixing.work.zhixin.msgctrl.RxBus;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.response.AllDepartmentMemberResult;
 import com.zhixing.work.zhixin.network.response.ChildDepartmentResult;
+import com.zhixing.work.zhixin.network.response.DepartmentInviteResult;
 import com.zhixing.work.zhixin.network.response.DepartmentMemberInfoResult;
 import com.zhixing.work.zhixin.share.ShareConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
@@ -61,6 +63,7 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
     private Subscription mGetAllDepartmentSubscription; //获取公司下所有员工
     private Subscription mGetChildDepartmentSubscription; //获取子部门
     private Subscription mDepartmentStaffSubscription;//获取部门下员工列表
+    private Subscription mInviteSubscription;//邀请连接
     private String departmentId;
 
     private DepartmentListAdapter mDepartmentListAdapter;
@@ -68,6 +71,8 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
     private List<ChildDepartmentBean> departments;
     private List<DepartmentMemberInfoBean> staffs;
     private String departmentName;
+    private DepartmentInviteBean inviteBean;
+
     private DepartmentManagerHelper mDepartmentManagerHelper;
 
 
@@ -135,8 +140,19 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
         mDepartmentStaffSubscription = RxBus.getInstance().toObservable(DepartmentMemberInfoResult.class).subscribe(
                 result -> handlerDepartmentMemberInfo(result)
         );
+        mInviteSubscription = RxBus.getInstance().toObservable(DepartmentInviteResult.class).subscribe(
+                result -> handlerDepartmentInvite(result)
+        );
+
         MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_ALL_DEPARTMENT_MEMBER);
 
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_DEPARTMENT_INVITE,departmentId);
+    }
+
+    private void handlerDepartmentInvite(DepartmentInviteResult result) {
+        if (result.Code == NetworkConstant.SUCCESS_CODE) {
+            inviteBean = result.getContent();
+        }
     }
 
     private void handlerAllDepartmentMember(AllDepartmentMemberResult result) {
@@ -161,7 +177,7 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
                 if (result.getContent().getSubDepartments() != null) {
                     departments = result.getContent().getSubDepartments();
                     for (int i = 0; i < departments.size(); i++) {
-                       departments.get(i).setMemberTotal(mDepartmentManagerHelper.getStaffTotalByDepartmentId(departments.get(i).getDepartmentId()));
+                        departments.get(i).setMemberTotal(mDepartmentManagerHelper.getStaffTotalByDepartmentId(departments.get(i).getDepartmentId()));
                     }
                     mDepartmentListAdapter.setData(departments);
                 }
@@ -189,15 +205,15 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
 
     }
 
-/*
- public static final String PARAMS_CONTEXT = "shareContext";
-    public static final String PARAM_SHARE_THUMBNAIL = "p_share_thumbnail";
-    public static final String PARAM_SHARE_TITLE = "p_share_title";
-    public static final String PARAM_SHARE_URL = "p_share_url";
-    public static final String PARAM_SHARE_DESCRIPTION = "p_share_desc";
-    public static final String PARAM_SHARE_COMPANY_NAME = "company_name"; //公司名称
-    public static final String PARAM_SHARE_MANAGER_NAME = "manager_name";//管理员名称
- */
+    /*
+     public static final String PARAMS_CONTEXT = "shareContext";
+        public static final String PARAM_SHARE_THUMBNAIL = "p_share_thumbnail";
+        public static final String PARAM_SHARE_TITLE = "p_share_title";
+        public static final String PARAM_SHARE_URL = "p_share_url";
+        public static final String PARAM_SHARE_DESCRIPTION = "p_share_desc";
+        public static final String PARAM_SHARE_COMPANY_NAME = "company_name"; //公司名称
+        public static final String PARAM_SHARE_MANAGER_NAME = "manager_name";//管理员名称
+     */
     @OnClick(R.id.workmate)
     public void onViewClicked() {
         Map<String, Object> params = new HashMap<>();
@@ -205,10 +221,13 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
 
         params.put(ShareConstant.PARAMS_CONTEXT, OrganizationalStructureActivity.this);
         params.put(ShareConstant.PARAM_SHARE_TITLE, departmentName);
-        params.put(ShareConstant.PARAM_SHARE_URL,"www.baidu.com");
-        params.put(ShareConstant.PARAM_SHARE_DESCRIPTION,"入职邀请测试");
-        params.put(ShareConstant.PARAM_SHARE_COMPANY_NAME,"职信科技");
-        params.put(ShareConstant.PARAM_SHARE_MANAGER_NAME,"aaa");
+        params.put(ShareConstant.PARAM_SHARE_URL, "www.baidu.com");
+        params.put(ShareConstant.PARAM_SHARE_DESCRIPTION, "入职邀请测试");
+        params.put(ShareConstant.PARAM_SHARE_COMPANY_NAME, "职信科技");
+        params.put(ShareConstant.PARAM_SHARE_MANAGER_NAME, "aaa");
+        // params.put(ShareConstant.PARAM_SHARE_DEPARTMENT_ID,departmentId);
+
+        params.put(ShareConstant.PARAM_SHARE_DEPARTMENT_INVITE, inviteBean);
 
         MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHOW_SHARE_PLATFORM, params);
     }
@@ -216,6 +235,7 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RxBus.getInstance().unsubscribe(mDepartmentStaffSubscription, mGetAllDepartmentSubscription, mGetChildDepartmentSubscription);
+        RxBus.getInstance().unsubscribe(mDepartmentStaffSubscription, mGetAllDepartmentSubscription,
+                mGetChildDepartmentSubscription,mInviteSubscription);
     }
 }

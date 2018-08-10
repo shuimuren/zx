@@ -1,5 +1,6 @@
 package com.zhixing.work.zhixin.network.response;
 
+import com.zhixing.work.zhixin.bean.DepartmentInviteBean;
 import com.zhixing.work.zhixin.network.BaseResult;
 
 /**
@@ -8,13 +9,21 @@ import com.zhixing.work.zhixin.network.BaseResult;
  */
 
 public class DepartmentInviteResult extends BaseResult {
-    public String getContent() {
+
+    /**
+     * Content : {"Inviter":"吴","CompanyName":"成功后","Url":"http://9681.vicp.net:11285/#/invite?departId=15&uid=11&s=WycxMScsJ+WQtCcsJ+aIkOWKn+WQjidd"}
+     */
+
+    private DepartmentInviteBean Content;
+
+    public DepartmentInviteBean getContent() {
         return Content;
     }
 
-    public void setContent(String content) {
-        Content = content;
+    public void setContent(DepartmentInviteBean Content) {
+        this.Content = Content;
     }
 
-    private String Content;
+
+
 }

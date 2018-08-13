@@ -160,7 +160,7 @@ public class AuditDetailActivity extends BaseTitleActivity {
     private void handlerApply(boolean isAgree) {
         Map params = new HashMap();
         params.put(RequestConstant.KEY_ID, mUserId);
-        params.put(RequestConstant.KEY_PASSED, isAgree);
+        params.put(RequestConstant.KEY_PASSED, isAgree ? "True" : "False");
         params.put(RequestConstant.KEY_ATTENDANCE_RULE_ID, mAttendanceRuleId);
         MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_HANDLER_JOIN_DEPARTMENT, params);
     }

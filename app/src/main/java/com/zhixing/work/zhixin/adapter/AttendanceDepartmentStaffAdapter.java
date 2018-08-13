@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.bean.DepartmentMemberInfoBean;
 import com.zhixing.work.zhixin.util.GlideUtils;
+import com.zhixing.work.zhixin.util.ZxTextUtils;
 
 import java.util.List;
 
@@ -66,7 +67,7 @@ public class AttendanceDepartmentStaffAdapter extends RecyclerView.Adapter {
         } else {
             viewHolder.imgSelector.setSelected(false);
         }
-        viewHolder.memberName.setText(bean.getStaffNickName());
+        viewHolder.memberName.setText(ZxTextUtils.getTextWithDefault(bean.getStaffNickName()));
         GlideUtils.getInstance().loadCircleUserIconInto(mContext, bean.getStaffAvatar(), viewHolder.memberAvatar);
         viewHolder.imgSelector.setOnClickListener(v -> itemClickedInterface.onItemClicked(position,bean));
     }

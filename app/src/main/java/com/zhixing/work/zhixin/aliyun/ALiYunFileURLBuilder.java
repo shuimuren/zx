@@ -9,8 +9,10 @@ import com.zhixing.work.zhixin.common.Logger;
 public class ALiYunFileURLBuilder {
     private static final String TAG = ALiYunOssFileLoader.class.getSimpleName();
     public static String END_POINT = "http://oss-cn-shenzhen.aliyuncs.com";
-    public static String PUBLIC_END_POINT = "http://public.img.52zhixin.cn";
-    public static String SECRET_END_POINT = "http://secret.img.52zhixin.cn";
+   // public static String PUBLIC_END_POINT = "http://public.img.52zhixin.cn";
+    public static String PUBLIC_END_POINT = "http://oss-cn-shenzhen.aliyuncs.com/";
+    //public static String SECRET_END_POINT = "http://secret.img.52zhixin.cn";
+    public static String  SECRET_END_POINT = "http://oss-cn-shenzhen.aliyuncs.com/";
     public static String OSS_END_POINT = "http://oss.52zhixin.cn";
 
     // 正式环境

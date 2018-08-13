@@ -129,6 +129,10 @@ public class ALiYunController extends AbstractController {
         OSSClient mOSSClient = new OSSClient(ZxApplication.getInstance().getApplicationContext(), ALiYunFileURLBuilder.END_POINT, credentialProvider, conf);
         // 构造上传请求
         PutObjectRequest put = new PutObjectRequest(bucketName, objectKey, uploadFilePath);
+//        ObjectMetadata metadata = new ObjectMetadata();
+//        metadata.setContentType("image/png");
+//
+//        put.setMetadata(metadata);
 
 //        // 异步上传时可以设置进度回调
 //        put.setProgressCallback(new OSSProgressCallback<PutObjectRequest>() {
@@ -141,15 +145,16 @@ public class ALiYunController extends AbstractController {
 
             @Override
             public void onSuccess(PutObjectRequest request, PutObjectResult result) {
-                Logger.i(">>>","图片上传成功。。。");
-                ImageUploadResult uploadResult = new ImageUploadResult(code,request.getObjectKey(), true);
+                Logger.i(">>>", "图片上传成功。。。");
+                Logger.i(">>>", "resut>" + result.toString());
+                ImageUploadResult uploadResult = new ImageUploadResult(code, request.getObjectKey(), true);
                 RxBus.getInstance().post(uploadResult);
             }
 
             @Override
             public void onFailure(PutObjectRequest request, ClientException clientException, ServiceException serviceException) {
-                Logger.i(">>>","图片上传失败。。。"+"client>"+clientException.getMessage()+"service"+serviceException.getMessage());
-                ImageUploadResult uploadResult = new ImageUploadResult(code,"", false);
+                Logger.i(">>>", "图片上传失败。。。" + "client>" + clientException.getMessage() + "service" + serviceException.getMessage());
+                ImageUploadResult uploadResult = new ImageUploadResult(code, "", false);
                 RxBus.getInstance().post(uploadResult);
             }
         });
@@ -182,7 +187,7 @@ public class ALiYunController extends AbstractController {
             url = mOSSClient.presignPublicObjectURL(bucketName, objectKey);
         }
 
-        ALiImageUrlBean bean = new ALiImageUrlBean(url,objectKey);
+        ALiImageUrlBean bean = new ALiImageUrlBean(url, objectKey);
         RxBus.getInstance().post(bean);
         Logger.i(">>>", "url>" + url);
 

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/color_white_clickable"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/padding_normal"
+    android:paddingLeft="@dimen/padding_big"
+    android:paddingRight="@dimen/padding_big"
+    android:paddingTop="@dimen/padding_normal">
+
+    <ImageView
+        android:id="@+id/img_avatar"
+        android:layout_width="@dimen/item_avatar_width"
+        android:layout_height="@dimen/item_avatar_width"
+        android:src="@drawable/img_boy" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_big"
+        android:layout_toRightOf="@id/img_avatar"
+        tools:text="老张" />
+
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_name"
+        android:layout_marginLeft="@dimen/margin_big"
+        android:layout_toRightOf="@id/img_avatar"
+        android:textColor="@color/minor_text_color"
+        android:textSize="@dimen/font_size_14sp"
+        tools:text="aaaaaaaaaaaa" />
+
+    <TextView
+        android:id="@+id/tv_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:textColor="#FF6666"
+        android:textSize="@dimen/font_small"
+        tools:text="待审核" />
+</RelativeLayout>

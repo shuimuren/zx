@@ -12,6 +12,7 @@ import com.zhixing.work.zhixin.adapter.DepartmentListAdapter;
 import com.zhixing.work.zhixin.adapter.DepartmentStaffAdapter;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.ChildDepartmentBean;
+import com.zhixing.work.zhixin.bean.DepartmentInviteBean;
 import com.zhixing.work.zhixin.bean.DepartmentMemberBean;
 import com.zhixing.work.zhixin.bean.DepartmentMemberInfoBean;
 import com.zhixing.work.zhixin.common.DepartmentManagerHelper;
@@ -22,13 +23,14 @@ import com.zhixing.work.zhixin.msgctrl.RxBus;
 import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.response.AllDepartmentMemberResult;
 import com.zhixing.work.zhixin.network.response.ChildDepartmentResult;
+import com.zhixing.work.zhixin.network.response.DepartmentInviteResult;
 import com.zhixing.work.zhixin.network.response.DepartmentMemberInfoResult;
-import com.zhixing.work.zhixin.share.ShareConstant;
+import com.zhixing.work.zhixin.share.ShareUtil;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,6 +66,7 @@ public class DepartmentManagementActivity extends BaseTitleActivity {
     private Subscription mGetAllDepartmentSubscription; //获取公司下所有员工
     private Subscription mGetChildDepartmentSubscription; //获取子部门
     private Subscription mDepartmentStaffSubscription;//获取部门下员工列表
+    private Subscription mInviteSubscription;//邀请连接
 
 
     private DepartmentListAdapter mDepartmentListAdapter;
@@ -73,6 +76,7 @@ public class DepartmentManagementActivity extends BaseTitleActivity {
     private List<DepartmentMemberBean> mDepartmentMembers;
     private String departmentName;
     private String departmentId;
+    private DepartmentInviteBean inviteBean;
     private DepartmentManagerHelper mDepartmentManagerHelper;
 
 
@@ -127,8 +131,18 @@ public class DepartmentManagementActivity extends BaseTitleActivity {
                 result -> handlerChildDepartment(result));
         mDepartmentStaffSubscription = RxBus.getInstance().toObservable(DepartmentMemberInfoResult.class).subscribe(
                 result -> handlerDepartmentMemberInfo(result));
+        mInviteSubscription = RxBus.getInstance().toObservable(DepartmentInviteResult.class).subscribe(
+                result -> handlerDepartmentInvite(result)
+        );
+
+
     }
 
+    private void handlerDepartmentInvite(DepartmentInviteResult result) {
+        if (result.Code == NetworkConstant.SUCCESS_CODE) {
+            inviteBean = result.getContent();
+        }
+    }
 
     public void getIntentDate() {
         Bundle bundle = getIntent().getExtras();
@@ -146,6 +160,7 @@ public class DepartmentManagementActivity extends BaseTitleActivity {
         } else {
             llStaffView.setVisibility(View.GONE);
         }
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_DEPARTMENT_INVITE, departmentId);
     }
 
     private void handlerAllDepartmentMember(AllDepartmentMemberResult result) {
@@ -193,28 +208,33 @@ public class DepartmentManagementActivity extends BaseTitleActivity {
 
     @OnClick()
     public void onViewClicked() {
-        Map<String, Object> params = new HashMap<>();
-        //此处应填写完整参数
-        params.put(ShareConstant.PARAM_SHARE_TITLE, "职信科技有限公司");
-        params.put(ShareConstant.PARAMS_CONTEXT, DepartmentManagementActivity.this);
-        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHOW_SHARE_PLATFORM, params);
+        if(inviteBean != null){
+            Map<String, Object> params = ShareUtil.getInstance().getShareParams(this,"邀请加入公司",
+                    inviteBean.getInviter()+"邀请您加入"+inviteBean.getCompanyName(),inviteBean.getUrl(),departmentId,inviteBean);
+            MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHOW_SHARE_PLATFORM, params);
+        }else{
+            AlertUtils.show(ResourceUtils.getString(R.string.get_department_info_error));
+        }
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        RxBus.getInstance().unsubscribe(mDepartmentStaffSubscription, mGetAllDepartmentSubscription, mGetChildDepartmentSubscription);
+        RxBus.getInstance().unsubscribe(mDepartmentStaffSubscription, mGetAllDepartmentSubscription,
+                mGetChildDepartmentSubscription, mInviteSubscription);
     }
 
     @OnClick({R.id.add_user, R.id.add_department})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_user:
-                Map<String, Object> params = new HashMap<>();
-                //此处应填写完整参数
-                params.put(ShareConstant.PARAM_SHARE_TITLE, "职信科技有限公司");
-                params.put(ShareConstant.PARAMS_CONTEXT, DepartmentManagementActivity.this);
-                MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHOW_SHARE_PLATFORM, params);
+                if(inviteBean != null){
+                    Map<String, Object> params = ShareUtil.getInstance().getShareParams(this,"邀请加入公司",
+                            inviteBean.getInviter()+"邀请您加入"+inviteBean.getCompanyName(),inviteBean.getUrl(),departmentId,inviteBean);
+                    MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHOW_SHARE_PLATFORM, params);
+                }else{
+                    AlertUtils.show(ResourceUtils.getString(R.string.get_department_info_error));
+                }
                 break;
             case R.id.add_department:
                 AddDepartmentActivity.startAddDepartmentActivity(DepartmentManagementActivity.this,
@@ -222,5 +242,7 @@ public class DepartmentManagementActivity extends BaseTitleActivity {
                 break;
         }
     }
+
+
 
 }

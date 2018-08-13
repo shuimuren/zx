@@ -15,6 +15,7 @@ import com.zhixing.work.zhixin.adapter.DepartmentMemberTitleAdapter;
 import com.zhixing.work.zhixin.adapter.DepartmentStaffAdapter;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.bean.ChildDepartmentBean;
+import com.zhixing.work.zhixin.bean.DepartmentInviteBean;
 import com.zhixing.work.zhixin.bean.DepartmentMemberBean;
 import com.zhixing.work.zhixin.bean.DepartmentMemberInfoBean;
 import com.zhixing.work.zhixin.common.DepartmentManagerHelper;
@@ -26,14 +27,15 @@ import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.response.AllDepartmentMemberResult;
 import com.zhixing.work.zhixin.network.response.ChildDepartmentResult;
 import com.zhixing.work.zhixin.network.response.DeleteDepartmentResult;
+import com.zhixing.work.zhixin.network.response.DepartmentInviteResult;
 import com.zhixing.work.zhixin.network.response.DepartmentMemberInfoResult;
 import com.zhixing.work.zhixin.network.response.UpdateChildDepartmentResult;
-import com.zhixing.work.zhixin.share.ShareConstant;
+import com.zhixing.work.zhixin.share.ShareUtil;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -80,6 +82,7 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
     private DepartmentMemberTitleAdapter mDepartmentMemberTitleAdapter; // 顶部title
     private Subscription mDeleteDepartmentSubscription;//删除子部门;
     private Subscription mUpdateSettingInfoSubscription;//更新子部门
+    private Subscription mInviteSubscription;//邀请连接
 
     private List<ChildDepartmentBean> departments;
     private List<DepartmentMemberInfoBean> staffs;
@@ -90,6 +93,7 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
     private String mParentDepartmentName;
     private String mParentDepartmentId;
     private String mCurrentParentDepartmentId;
+    private DepartmentInviteBean inviteBean;
     private DepartmentManagerHelper mDepartmentManagerHelper;
 
 
@@ -127,6 +131,7 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
         mDepartmentMembers.add(new DepartmentMemberBean(mDepartmentId, mDepartmentName));
         //  mDepartmentMemberTitleAdapter.setData(mDepartmentMembers);
         upDateDepartmentAndStaff(mDepartmentId);
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_DEPARTMENT_INVITE,mDepartmentId);
     }
 
     private void intiView() {
@@ -206,8 +211,19 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
         mUpdateSettingInfoSubscription = RxBus.getInstance().toObservable(UpdateChildDepartmentResult.class).subscribe(
                 result -> handlerUpdateChildDepartment(result)
         );
-        //   MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_ALL_DEPARTMENT_MEMBER);
 
+        mInviteSubscription = RxBus.getInstance().toObservable(DepartmentInviteResult.class).subscribe(
+                result -> handlerDepartmentInvite(result)
+        );
+
+
+
+    }
+
+    private void handlerDepartmentInvite(DepartmentInviteResult result) {
+        if (result.Code == NetworkConstant.SUCCESS_CODE) {
+            inviteBean = result.getContent();
+        }
     }
 
     private void handlerUpdateChildDepartment(UpdateChildDepartmentResult result) {
@@ -291,11 +307,14 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_user:
-                Map<String, Object> params = new HashMap<>();
-                //此处应填写完整参数
-                params.put(ShareConstant.PARAM_SHARE_TITLE, "职信科技有限公司");
-                params.put(ShareConstant.PARAMS_CONTEXT, DepartmentDetailsActivity.this);
-                MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHOW_SHARE_PLATFORM, params);
+                if(inviteBean != null){
+                    Map<String, Object> params = ShareUtil.getInstance().getShareParams(this,"邀请加入公司",
+                            inviteBean.getInviter()+"邀请您加入"+inviteBean.getCompanyName(),inviteBean.getUrl(),mDepartmentId,inviteBean);
+                    MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHOW_SHARE_PLATFORM, params);
+                }else{
+                    AlertUtils.show(ResourceUtils.getString(R.string.get_department_info_error));
+                }
+
                 break;
             case R.id.add_department:
                 AddDepartmentActivity.startAddDepartmentActivity(DepartmentDetailsActivity.this,
@@ -312,7 +331,7 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
     protected void onDestroy() {
         super.onDestroy();
         RxBus.getInstance().unsubscribe(mGetAllDepartmentSubscription, mGetChildDepartmentSubscription,
-                mDepartmentStaffSubscription, mDeleteDepartmentSubscription, mUpdateSettingInfoSubscription);
+                mDepartmentStaffSubscription, mDeleteDepartmentSubscription, mUpdateSettingInfoSubscription,mInviteSubscription);
     }
 
 

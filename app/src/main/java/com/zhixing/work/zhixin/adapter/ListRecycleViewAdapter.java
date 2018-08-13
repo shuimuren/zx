@@ -11,7 +11,9 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zhixing.work.zhixin.R;
+import com.zhixing.work.zhixin.bean.NewMemberBean;
 import com.zhixing.work.zhixin.bean.StatisticsMonthDataBean;
+import com.zhixing.work.zhixin.constant.ResultConstant;
 import com.zhixing.work.zhixin.util.GlideUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.ZxTextUtils;
@@ -36,6 +38,7 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
 
     private static final int TYPE_FOOTER = 99;
     private static final int TYPE_ATTENDANCE_MONTH = 0;
+    private static final int TYPE_NEW_MEMBER_BEAN = 1;
 
     public ListRecycleViewAdapter(Context context, List<T> data, Callback back) {
         this.mContext = context;
@@ -68,6 +71,9 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
             case TYPE_ATTENDANCE_MONTH:
                 View viewMonth = LayoutInflater.from(mContext).inflate(R.layout.item_attendance_month, parent, false);
                 return new ViewMonthHolder(viewMonth);
+            case TYPE_NEW_MEMBER_BEAN:
+                View viewNewMember = LayoutInflater.from(mContext).inflate(R.layout.item_new_member, parent, false);
+                return new ViewNewMemberHolder(viewNewMember);
             default:
                 View viewFooter = LayoutInflater.from(mContext).inflate(R.layout.item_list_footer, parent, false);
                 return new ViewFooterHolder(viewFooter);
@@ -87,7 +93,26 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
             viewHolder.tvTimes.setText(String.format("%s次", String.valueOf(bean.getCount())));
             viewHolder.tvMinute.setText(String.format("%s分钟", String.valueOf(bean.getLateMinutes())));
             viewHolder.itemView.setOnClickListener(v -> mCallback.onItemClicked(bean));
+            return;
         }
+        if (holder instanceof ViewNewMemberHolder) {
+            ViewNewMemberHolder viewNewMemberHolder = (ViewNewMemberHolder) holder;
+            NewMemberBean bean = (NewMemberBean) mData.get(position);
+            GlideUtils.getInstance().loadGlideRoundTransform(mContext, ResourceUtils.getDrawable(R.drawable.icon_avatar),
+                    bean.getAvatar(), viewNewMemberHolder.imgAvatar);
+            viewNewMemberHolder.tvName.setText(ZxTextUtils.getTextWithDefault(bean.getRealName()));
+            viewNewMemberHolder.tvPhone.setText(ZxTextUtils.getTextWithDefault(bean.getPhoneNum()));
+            if (bean.getAuditStatus() == ResultConstant.AUDIT_STATUS_PASS) {
+                viewNewMemberHolder.tvStatus.setText(ResourceUtils.getString(R.string.audit_member_passed));
+            } else if (bean.getAuditStatus() == ResultConstant.AUDIT_STATUS_REJECT) {
+                viewNewMemberHolder.tvStatus.setText(ResourceUtils.getString(R.string.audit_member_reject));
+            } else {
+                viewNewMemberHolder.tvStatus.setText(ResourceUtils.getString(R.string.audit_member_wait));
+            }
+            viewNewMemberHolder.itemView.setOnClickListener(v -> mCallback.onItemClicked(bean));
+            return;
+        }
+
         if (holder instanceof ViewFooterHolder) {
             ViewFooterHolder footerHolder = (ViewFooterHolder) holder;
             String desc = "";
@@ -120,6 +145,9 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
             if (mData.get(position) instanceof StatisticsMonthDataBean) {
                 return TYPE_ATTENDANCE_MONTH;
             }
+            if (mData.get(position) instanceof NewMemberBean) {
+                return TYPE_NEW_MEMBER_BEAN;
+            }
         }
         return TYPE_FOOTER;
     }
@@ -149,6 +177,22 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
         TextView itemFooter;
 
         ViewFooterHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+    }
+
+    static class ViewNewMemberHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.img_avatar)
+        ImageView imgAvatar;
+        @BindView(R.id.tv_name)
+        TextView tvName;
+        @BindView(R.id.tv_phone)
+        TextView tvPhone;
+        @BindView(R.id.tv_status)
+        TextView tvStatus;
+
+        ViewNewMemberHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

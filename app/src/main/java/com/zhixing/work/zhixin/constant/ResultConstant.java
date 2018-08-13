@@ -39,6 +39,9 @@ public class ResultConstant {
     public static final String CLOCK_STATUS_ABSENTEEISM = "4";//缺卡
     public static final String CLOCK_STATUS_MISS = "5"; //旷工
 
+    public static final int AUDIT_STATUS_WAITING = 0; //审核中
+    public static final int AUDIT_STATUS_PASS = 1; //审核通过
+    public static final int AUDIT_STATUS_REJECT = 2; //审核拒绝
 
 
 }

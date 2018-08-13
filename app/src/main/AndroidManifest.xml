@@ -441,6 +441,13 @@
         <activity
             android:name=".view.clock.StatisticsMonthDetailActivity"
             android:screenOrientation="portrait" />
+        <!--审核列表-->
+        <activity
+            android:name=".view.myCenter.organizational.AuditMemberListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myCenter.organizational.AuditDetailActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

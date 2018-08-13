@@ -1,12 +1,12 @@
 package com.zhixing.work.zhixin.dialog;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
+import com.zhixing.work.zhixin.bean.DepartmentInviteBean;
 import com.zhixing.work.zhixin.msgctrl.MsgDef;
 import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
 import com.zhixing.work.zhixin.share.ShareConstant;
@@ -44,8 +44,9 @@ public class ShareDialog extends BottomDialog {
         rlSms = (RelativeLayout) findViewById(R.id.rl_sms);
         llClose = (LinearLayout) findViewById(R.id.llClose);
         dialogTitle= findViewById(R.id.tv_companyName);
-        if(!mParams.isEmpty() && TextUtils.isEmpty((String)mParams.get(ShareConstant.PARAM_SHARE_COMPANY_NAME))){
-            dialogTitle.setText(String.format("邀请同事加入%s",mParams.get(ShareConstant.PARAM_SHARE_COMPANY_NAME)));
+        if(!mParams.isEmpty()){
+            DepartmentInviteBean bean = (DepartmentInviteBean) mParams.get(ShareConstant.PARAM_SHARE_DEPARTMENT_INVITE);
+            dialogTitle.setText(String.format("邀请同事加入%s",bean.getCompanyName()));
         }
 
         llClose.setOnClickListener(v -> dismiss());

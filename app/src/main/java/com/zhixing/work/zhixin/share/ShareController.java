@@ -68,4 +68,7 @@ public class ShareController extends AbstractController {
         ShareDialog imageDialog = new ShareDialog((Context) params.get(ShareConstant.PARAMS_CONTEXT),params);
         imageDialog.show();
     }
+
+
+
 }

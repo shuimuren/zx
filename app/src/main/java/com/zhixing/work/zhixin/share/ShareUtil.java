@@ -1,6 +1,7 @@
 package com.zhixing.work.zhixin.share;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.zhixing.work.zhixin.bean.DepartmentInviteBean;
 import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -163,4 +165,27 @@ public class ShareUtil extends BaseShareUtil {
             Logger.i(">>>", "QQ分享错误" + e.errorDetail +"cord>>"+e.errorCode+">>"+e.errorMessage);
         }
     };
+
+    /**
+     *
+     * @param context
+     * @param shareTitle 微信分享title
+     * @param shareDescription 微信分享描述
+     * @param shareUrl 分享链接
+     * @param departmentId 组织名称
+     * @param inviteBean 邀请内容
+     * @return
+     */
+    public Map<String, Object> getShareParams(Context context, String shareTitle, String shareDescription,
+                                              String shareUrl, String departmentId, DepartmentInviteBean inviteBean){
+        Map<String,Object> params = new HashMap<>();
+        params.put(ShareConstant.PARAMS_CONTEXT,context);
+        params.put(ShareConstant.PARAM_SHARE_TITLE, shareTitle);
+        params.put(ShareConstant.PARAM_SHARE_URL,shareUrl);
+        params.put(ShareConstant.PARAM_SHARE_DESCRIPTION, shareDescription);
+        params.put(ShareConstant.PARAM_SHARE_DEPARTMENT_ID,departmentId);
+        params.put(ShareConstant.PARAM_SHARE_DEPARTMENT_INVITE, inviteBean);
+        return params;
+    }
+
 }

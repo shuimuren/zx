@@ -6,16 +6,9 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.gson.reflect.TypeToken;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.app.ZxApplication;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
-import com.zhixing.work.zhixin.bean.EntityObject;
-import com.zhixing.work.zhixin.http.JavaParamsUtils;
-import com.zhixing.work.zhixin.http.okhttp.OkUtils;
-import com.zhixing.work.zhixin.http.okhttp.ResultCallBackListener;
-import com.zhixing.work.zhixin.network.NetworkConstant;
-import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
@@ -69,37 +62,37 @@ public class SettingActivity extends BaseTitleActivity {
         SettingUtils.putUserId(null);
         SettingUtils.putPass_Id(null);
         SettingUtils.putAvatar(null);
-
-
     }
 
     //退出登录
     private void LogOut() {
-        OkUtils.getInstances().httpDelete(context, RequestConstant.LOG_OUT, JavaParamsUtils.getInstances().project(), new TypeToken<EntityObject<Boolean>>() {
-        }.getType(), new ResultCallBackListener<Boolean>() {
-            @Override
-            public void onFailure(int errorId, String msg) {
-                hideLoadingDialog();
-                AlertUtils.toast(context, msg);
-            }
-
-            @Override
-            public void onSuccess(EntityObject<Boolean> response) {
-                hideLoadingDialog();
-                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
-                    if (response.getContent()) {
-                        ZxApplication.getInstance().finishAllActivity();
-                        startActivity(new Intent(context, LoginActivity.class));
-                        clearLoginState();
-                    } else {
-                      //  AlertUtils.show();
-                    }
-                } else {
-                    AlertUtils.toast(context, response.getMessage());
-                }
-            }
-        });
-
+//        OkUtils.getInstances().httpDelete(context, RequestConstant.LOG_OUT, JavaParamsUtils.getInstances().project(), new TypeToken<EntityObject<Boolean>>() {
+//        }.getType(), new ResultCallBackListener<Boolean>() {
+//            @Override
+//            public void onFailure(int errorId, String msg) {
+//                hideLoadingDialog();
+//                AlertUtils.toast(context, msg);
+//            }
+//
+//            @Override
+//            public void onSuccess(EntityObject<Boolean> response) {
+//                hideLoadingDialog();
+//                if (response.getCode() == NetworkConstant.SUCCESS_CODE) {
+//                    if (response.getContent()) {
+//                        ZxApplication.getInstance().finishAllActivity();
+//                        startActivity(new Intent(context, LoginActivity.class));
+//                        clearLoginState();
+//                    } else {
+//                      //  AlertUtils.show();
+//                    }
+//                } else {
+//                    AlertUtils.toast(context, response.getMessage());
+//                }
+//            }
+//        });
+        ZxApplication.getInstance().finishAllActivity();
+        startActivity(new Intent(context, LoginActivity.class));
+        clearLoginState();
 
     }
 

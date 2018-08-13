@@ -277,5 +277,16 @@
     <string name="user_rule_do_not_have_permission">用户权限不匹配</string>
     <string name="wifi_usable">当前已进入考勤范围</string>
     <string name="wifi_unusable">当前不在wifi考勤范围内</string>
+    <string name="get_department_info_error">获取组织架构信息失败</string>
+    <string name="new_member_audit_total">新同事审核</string>
+    <string name="leave_member_audit_total">已离职员工</string>
+    <string name="new_member_title">新同事</string>
+    <string name="audit_member_wait">待审核</string>
+    <string name="audit_member_passed">已通过</string>
+    <string name="audit_member_reject">已拒绝</string>
+    <string name="btn_agree">同意</string>
+    <string name="btn_reject">拒绝</string>
+    <string name="member_audit_title">人员审批</string>
+    <string name="empty_view_text">所有数据已处理完毕</string>
 
 </resources>

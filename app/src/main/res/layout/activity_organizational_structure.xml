@@ -59,6 +59,50 @@
                 <View style="@style/division_view" />
             </LinearLayout>
 
+            <View style="@style/division_view" />
+
+            <LinearLayout
+                android:id="@+id/ll_audit_new_member"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/color_white_clickable"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_new_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_new_add"
+                    android:drawablePadding="@dimen/padding_normal"
+                    android:padding="@dimen/padding_normal"
+                    android:text="@string/new_member_audit_total"
+                    android:textSize="@dimen/font_big" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_audit_leave_member"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/color_white_clickable"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_leave_member"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/icon_leave_member"
+                    android:drawablePadding="@dimen/padding_normal"
+                    android:padding="@dimen/padding_normal"
+                    android:text="@string/leave_member_audit_total"
+                    android:textSize="@dimen/font_big" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+
             <TextView
                 android:id="@+id/workmate"
                 android:layout_width="wrap_content"

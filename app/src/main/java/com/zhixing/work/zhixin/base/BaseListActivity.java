@@ -55,9 +55,10 @@ public abstract class BaseListActivity<T> extends BaseTitleActivity implements L
         mListAdapter = new ListRecycleViewAdapter(this, mData, this);
         mListView.setAdapter(mListAdapter);
         mListView.setItemAnimator(new DefaultItemAnimator());
-        if (addDecoration()) {
-            mListView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
-        }
+//        if (addDecoration()) {
+//            mListView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
+//        }
+        mListView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
         mListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

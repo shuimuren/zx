@@ -562,6 +562,28 @@ public class Utils {
         return result;
     }
 
+    public static String stringListToString(List<String> strings,String delimiter) {
+
+        String result = "";
+
+        if (strings == null) {
+            return "";
+        }
+
+        StringBuilder text = new StringBuilder();
+        int j = 0;
+        for (int i = 0; i < strings.size(); i++) {
+            text.append(strings.get(i));
+            j++;
+            if (j < strings.size()) {
+                text.append(delimiter);
+            }
+        }
+
+        result = text.toString();
+        return result;
+    }
+
     /**
      * 获取资源文件的字符串
      *
@@ -1503,7 +1525,7 @@ public class Utils {
 
     /**
      * @param source 需要改变颜色的字符串
-     * @param color  要改变成的颜色，比如：{@link Color#RED}
+     * @param color  要改变成的颜色，比如：
      * @param start  字符串改变颜色的开始的位置
      * @param end    字符串改变颜色的结束的位置（包前不包后）
      * @return {@link Spannable}

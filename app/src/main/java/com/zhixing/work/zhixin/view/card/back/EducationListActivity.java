@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
@@ -37,17 +35,16 @@ import butterknife.OnClick;
 
 public class EducationListActivity extends BaseTitleActivity {
 
+
     @BindView(R.id.education_list)
     RecyclerView educationList;
-    @BindView(R.id.add_education)
-    ImageView addEducation;
-    @BindView(R.id.education)
-    TextView education;
-    @BindView(R.id.rl_add_education)
-    RelativeLayout rlAddEducation;
-    private  List<Resume.EducationOutputsBean>list=new ArrayList<>();
+    @BindView(R.id.tv_education)
+    TextView tvEducation;
+
+    private List<Resume.EducationOutputsBean> list = new ArrayList<>();
 
     private EducationListAdapter educationListAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,8 +54,8 @@ public class EducationListActivity extends BaseTitleActivity {
         getData();
         initView();
     }
-    private void initView()
-    {
+
+    private void initView() {
         educationListAdapter = new EducationListAdapter(list, context);
         LinearLayoutManager commodityLayoutManager = new LinearLayoutManager(context);
         commodityLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -111,9 +108,8 @@ public class EducationListActivity extends BaseTitleActivity {
         }
     }
 
-    @OnClick(R.id.rl_add_education)
+    @OnClick(R.id.tv_education)
     public void onViewClicked() {
-
         startActivity(new Intent(context, AddEducationActivity.class).putExtra("type", "resume"));
     }
 }

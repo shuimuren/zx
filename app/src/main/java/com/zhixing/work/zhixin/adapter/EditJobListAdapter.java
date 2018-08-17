@@ -65,6 +65,9 @@ public class EditJobListAdapter<T> extends RecyclerView.Adapter {
             case WORK_TYPE:
                 View viewWork = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_job_work_edit, parent, false);
                 return new WorkViewHolder(viewWork);
+            case EDUCATION_TYPE:
+                View viewEducation = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_job_work_edit,parent,false);
+                return new EducationViewHolder(viewEducation);
             default:
                 View viewDefault = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_job_list_empty, parent, false);
                 return new EmptyViewHolder(viewDefault);
@@ -88,6 +91,22 @@ public class EditJobListAdapter<T> extends RecyclerView.Adapter {
             viewHolder.tvTime.setText(bgsBean.getStartDate().substring(0,7)+"-"+bgsBean.getEndDate().substring(0,7));
             viewHolder.itemView.setOnClickListener(v -> mCallBack.itemClicked(bgsBean));
             viewHolder.btnDelete.setOnClickListener(v -> mCallBack.deleteClicked(bgsBean));
+            return;
+        }else  if(holder instanceof EducationViewHolder){
+            EducationViewHolder viewHolder = (EducationViewHolder) holder;
+            EducationBgsBean bgsBean = (EducationBgsBean) mData.get(position);
+            if (mIsEdit) {
+                viewHolder.btnDelete.setVisibility(View.VISIBLE);
+                viewHolder.imgMark.setVisibility(View.GONE);
+            } else {
+                viewHolder.btnDelete.setVisibility(View.GONE);
+                viewHolder.imgMark.setVisibility(View.VISIBLE);
+            }
+            viewHolder.tvName.setText(bgsBean.getSchool());
+            viewHolder.tvTime.setText(bgsBean.getStartDate().substring(0,7)+"-"+bgsBean.getEndDate().substring(0,7));
+            viewHolder.itemView.setOnClickListener(v -> mCallBack.itemClicked(bgsBean));
+            viewHolder.btnDelete.setOnClickListener(v -> mCallBack.deleteClicked(bgsBean));
+            return;
         }
     }
 
@@ -127,6 +146,22 @@ public class EditJobListAdapter<T> extends RecyclerView.Adapter {
         ImageView imgMark;
 
         WorkViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+    }
+    //
+    static class EducationViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_name)
+        TextView tvName;
+        @BindView(R.id.tv_time)
+        TextView tvTime;
+        @BindView(R.id.btn_delete)
+        Button btnDelete;
+        @BindView(R.id.img_mark)
+        ImageView imgMark;
+
+        EducationViewHolder (View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

@@ -29,7 +29,6 @@ import com.zhixing.work.zhixin.bean.CertificateBean;
 import com.zhixing.work.zhixin.bean.EducationBgsBean;
 import com.zhixing.work.zhixin.bean.StaffJobAdvanceBean;
 import com.zhixing.work.zhixin.bean.WorkBgsBean;
-import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.dialog.MarriageDialog;
 import com.zhixing.work.zhixin.dialog.PoliticalStatusDialog;
 import com.zhixing.work.zhixin.dialog.ResidenceDialog;
@@ -47,7 +46,7 @@ import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.view.card.back.CertificateListActivity;
-import com.zhixing.work.zhixin.view.card.back.EducationListActivity;
+import com.zhixing.work.zhixin.view.card.back.WorkEducationListActivity;
 import com.zhixing.work.zhixin.view.card.back.WorkJobListActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
@@ -219,17 +218,9 @@ public class EditJobAdvancedActivity extends BaseTitleActivity {
         if (mStaffAdvanceBean.getNativePlaceProvince() != null) {
             nativePlace.setText(Utils.searchProvincial(mStaffAdvanceBean.getNativePlaceProvince()));
         }
-//        if (mStaffAdvanceBean.getNativePlaceCity() != null) {
-//            NativePlaceCity = mStaffAdvanceBean.getNativePlaceCity() + "";
-//        }
         if (mStaffAdvanceBean.getPoliticsFace() != null) {
             political.setText(Utils.getStaffPolitical(mStaffAdvanceBean.getPoliticsFace()));
         }
-
-//        if (!TextUtils.isEmpty(mStaffAdvanceBean.getPoliticsFace())) {
-        //           PoliticsFace = Utils.getPolitical(mStaffAdvanceBean.getPoliticsFace());
-//        }
-
         id.setText(mStaffAdvanceBean.getIdCard());
         if (mStaffAdvanceBean.getHouseholdType() == null) {
 
@@ -261,9 +252,6 @@ public class EditJobAdvancedActivity extends BaseTitleActivity {
         }
 
         highestEducation.setText(mStaffAdvanceBean.getEducation());
-//        if (TextUtils.isEmpty(mStaffAdvanceBean.getEducation())) {
-//            Education = Utils.getEducationId(mStaffAdvanceBean.getEducation());
-//        }
         if (mStaffAdvanceBean.getMarried() != null) {
             switch (mStaffAdvanceBean.getMarried()) {
                 case 0:
@@ -305,7 +293,6 @@ public class EditJobAdvancedActivity extends BaseTitleActivity {
 
     private void handlerEditResult(EditJobAdvancedResult result) {
         if (result.Code == NetworkConstant.SUCCESS_CODE) {
-            Logger.i(">>>", "编辑成功");
             if (result.isContent()) {
                 AlertUtils.show(ResourceUtils.getString(R.string.update_success));
                 EventBus.getDefault().post(new RefreshStaffJobInfoEvent(false));
@@ -314,7 +301,6 @@ public class EditJobAdvancedActivity extends BaseTitleActivity {
                 AlertUtils.show("操作失败:" + result.Message);
             }
         } else {
-            Logger.i(">>>", "失败");
             AlertUtils.show(result.Message);
         }
     }
@@ -482,11 +468,10 @@ public class EditJobAdvancedActivity extends BaseTitleActivity {
                 pvOptions.show();
                 break;
             case R.id.rlwork:
-                // startActivity(new Intent(context, WorkListActivity.class))
                 WorkJobListActivity.startWorkJobListActivity(this, mStaffId);
                 break;
             case R.id.rleducation:
-                startActivity(new Intent(context, EducationListActivity.class));
+                WorkEducationListActivity.startWorkEducationListActivity(this,mStaffId);
                 break;
             case R.id.rlcertificate:
                 startActivity(new Intent(context, CertificateListActivity.class));

@@ -19,14 +19,14 @@ public class EducationBgsBean implements Serializable{
     private String School;
     private String StartDate;
     private String EndDate;
-    private String id;
+    private String Id;
 
     public String getId() {
-        return id;
+        return Id;
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.Id = id;
     }
 
     public int getEducation() {

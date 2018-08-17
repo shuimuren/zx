@@ -480,6 +480,11 @@
         <activity
             android:name=".view.card.AddJobWorkActivity"
             android:screenOrientation="portrait" />
+        <!--编辑员工卡牌高级-工作列表信息-添加教育-->
+        <activity android:name=".view.card.back.WorkEducationListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".view.card.AddJobEducationActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

@@ -221,7 +221,6 @@ public class AddJobWorkActivity extends BaseTitleActivity {
                 } else {
                     MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_EDIT_STAFF_WORK,map);
                 }
-
             }
         });
 

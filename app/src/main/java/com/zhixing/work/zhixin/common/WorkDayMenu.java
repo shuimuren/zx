@@ -1,7 +1,5 @@
 package com.zhixing.work.zhixin.common;
 
-import android.graphics.Color;
-
 /**
  * Created by lhj on 2018/8/7.
  * Description:

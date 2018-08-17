@@ -34,6 +34,9 @@ public class ResultConstant {
     public static final int USER_STAFF_ROLE_HR = 1; //Hr
     public static final int USER_STAFF_ROLE_MANAGER = 2;//管理员
 
+    public static final int USER_TYPE_PERSONAL = 10; //个人
+    public static final int USER_TYPE_COMPANY = 20;//企业
+
     public static final String CLOCK_STATUS_LATE = "2"; //迟到
     public static final String CLOCK_STATUS_EARLY = "3"; //早退
     public static final String CLOCK_STATUS_ABSENTEEISM = "4";//缺卡

@@ -9,7 +9,10 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zhixing.work.zhixin.R;
+import com.zhixing.work.zhixin.bean.EducationBgsBean;
+import com.zhixing.work.zhixin.bean.WorkBgsBean;
 import com.zhixing.work.zhixin.network.response.AttendanceRecordMonthResult;
+import com.zhixing.work.zhixin.util.ZxTextUtils;
 
 import java.util.List;
 
@@ -28,11 +31,14 @@ public class AttendanceStatisticsAdapter<T> extends RecyclerView.Adapter {
 
     public void setData(List<T> data) {
         this.mData = data;
+        notifyDataSetChanged();
     }
 
     private static final int LATE = 0;
     private static final int NORMAL_ABSENTEEISM_MISS = 1;
     private static final int EARLY = 2;
+    private static final int EDUCATION_TYPE = 3;
+    private static final int WORK_TYPE = 4;
 
     @NonNull
     @Override
@@ -45,6 +51,12 @@ public class AttendanceStatisticsAdapter<T> extends RecyclerView.Adapter {
             case NORMAL_ABSENTEEISM_MISS:
                 View viewNormal = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_normal_or_miss, parent, false);
                 return new ViewNormalOrMissHolder(viewNormal);
+            case WORK_TYPE:
+                View workView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_work_or_education, parent, false);
+                return new ViewWorkHolder(workView);
+            case EDUCATION_TYPE:
+                View educationView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_work_or_education, parent, false);
+                return new ViewEducationHolder(educationView);
             default:
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_normal_or_miss, parent, false);
                 return new ViewNormalOrMissHolder(view);
@@ -64,6 +76,16 @@ public class AttendanceStatisticsAdapter<T> extends RecyclerView.Adapter {
                 viewHolder.tvMinutes.setText(String.format("上班早退%s分钟", ((AttendanceRecordMonthResult.ContentBean.EarlyDaysBean) mData.get(position)).getMinutes()));
             }
 
+        }else if(holder instanceof ViewWorkHolder){
+            ViewWorkHolder viewWorkHolder = (ViewWorkHolder) holder;
+            WorkBgsBean bgsBean = (WorkBgsBean) mData.get(position);
+            viewWorkHolder.name.setText(ZxTextUtils.getTextWithDefault(bgsBean.getCompanyName()));
+            viewWorkHolder.time.setText(bgsBean.getStartDate().substring(0,7)+"-"+bgsBean.getEndDate().substring(0,7));
+        }else if(holder instanceof ViewEducationHolder){
+            ViewEducationHolder viewWorkHolder = ( ViewEducationHolder) holder;
+            EducationBgsBean bgsBean = (EducationBgsBean) mData.get(position);
+            viewWorkHolder.name.setText(ZxTextUtils.getTextWithDefault(bgsBean.getSchool()));
+            viewWorkHolder.time.setText(bgsBean.getStartDate().substring(0,7)+"-"+bgsBean.getEndDate().substring(0,7));
         } else {
             ViewNormalOrMissHolder viewHolder = (ViewNormalOrMissHolder) holder;
             viewHolder.tvDate.setText((String) mData.get(position));
@@ -81,6 +103,10 @@ public class AttendanceStatisticsAdapter<T> extends RecyclerView.Adapter {
             return NORMAL_ABSENTEEISM_MISS;
         } else if (mData.get(position) instanceof AttendanceRecordMonthResult.ContentBean.LateDaysBean) {
             return LATE;
+        } else if (mData.get(position) instanceof WorkBgsBean) {
+            return WORK_TYPE;
+        } else if (mData.get(position) instanceof EducationBgsBean) {
+            return EDUCATION_TYPE;
         } else {
             return EARLY;
         }
@@ -105,6 +131,30 @@ public class AttendanceStatisticsAdapter<T> extends RecyclerView.Adapter {
         TextView tvMinutes;
 
         ViewNormalOrMissHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+    }
+
+    static class ViewWorkHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.name)
+        TextView name;
+        @BindView(R.id.time)
+        TextView time;
+
+        ViewWorkHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+    }
+
+    static class ViewEducationHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.name)
+        TextView name;
+        @BindView(R.id.time)
+        TextView time;
+
+        ViewEducationHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

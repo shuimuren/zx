@@ -448,6 +448,38 @@
         <activity
             android:name=".view.myCenter.organizational.AuditDetailActivity"
             android:screenOrientation="portrait" />
+        <!--个人信息-->
+        <activity
+            android:name=".view.card.back.PersonalJobInfoActivity"
+            android:screenOrientation="portrait" />
+        <!--编辑员工个人基础信息-->
+        <activity
+            android:name=".view.card.EditStaffBasicInfoActivity"
+            android:screenOrientation="portrait" />
+        <!--编辑员工个人高级信息-->
+        <activity
+            android:name=".view.card.EditStaffSeniorInfoActivity"
+            android:screenOrientation="portrait" />
+        <!--员工卡牌-->
+        <activity
+            android:name=".view.card.StaffCardActivity"
+            android:screenOrientation="portrait" />
+        <!--编辑员工卡牌基本信息-->
+        <activity
+            android:name=".view.card.EditJobBasisActivity"
+            android:screenOrientation="portrait" />
+        <!--编辑员工卡牌高级信息-->
+        <activity
+            android:name=".view.card.EditJobAdvancedActivity"
+            android:screenOrientation="portrait" />
+        <!--编辑员工卡牌高级-工作列表信息-->
+        <activity
+            android:name=".view.card.back.WorkJobListActivity"
+            android:screenOrientation="portrait" />
+        <!--编辑员工卡牌高级-工作列表信息-添加工作-->
+        <activity
+            android:name=".view.card.AddJobWorkActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

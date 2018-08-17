@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/color_white_clickable"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/margin_big"
+    android:padding="@dimen/padding_normal">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lines="1"
+        android:maxWidth="@dimen/dp_160"
+        tools:text="aaa" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="right|center"
+        android:lines="1"
+        android:textSize="@dimen/font_size_14sp"
+        tools:text="aaaaaaaa" />
+
+    <ImageView
+        android:id="@+id/img_mark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_big"
+        android:layout_marginTop="2dp"
+        android:src="@drawable/icon_next" />
+
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="@dimen/dp_10"
+        android:background="@drawable/selector_item_delete_btn"
+        android:text="删除"
+        android:visibility="gone" />
+
+
+</LinearLayout>

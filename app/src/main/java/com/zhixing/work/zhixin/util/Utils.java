@@ -1303,6 +1303,36 @@ public class Utils {
         return political;
     }
 
+    public static String getStaffPolitical(Integer index) {
+        if(index == null){
+            return "-";
+        }
+        String political = "";
+        switch (index) {
+            case 0:
+                political = "普通公民";
+                break;
+            case 1:
+                political = "中共党员";
+                break;
+            case 2:
+                political = "共青团员";
+                break;
+            case 3:
+                political = "民主党派人士";
+                break;
+            case 4:
+                political ="无党派民主人士";
+                break;
+            default:
+                political = "普通公民";
+
+
+        }
+        return political;
+    }
+
+
     public static String getEducationId(String constellation) {
 
         String education = "";

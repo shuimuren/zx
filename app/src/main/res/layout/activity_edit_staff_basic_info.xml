@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_basic"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout style="@style/style_item_line_layout">
+
+            <TextView
+                style="@style/style_card_text_left"
+                android:text="@string/job_card_user_name" />
+
+            <TextView
+                android:id="@+id/tv_card_name"
+                style="@style/style_item_right_text_no_more" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout style="@style/style_item_line_layout">
+
+            <TextView
+                style="@style/style_card_text_left"
+                android:text="@string/job_card_email" />
+
+            <com.zhixing.work.zhixin.widget.ClearEditText
+                android:id="@+id/edit_emil"
+                style="@style/style_item_edit_text_right"
+                android:hint="请输入邮箱..." />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout style="@style/style_item_line_layout">
+
+            <TextView
+                style="@style/style_card_text_left"
+                android:text="@string/job_card_department" />
+
+            <TextView
+                android:id="@+id/tv_card_department"
+                style="@style/style_item_right_text_no_more" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout style="@style/style_item_line_layout">
+
+            <TextView
+                style="@style/style_card_text_left"
+                android:text="@string/job_card_position" />
+
+            <com.zhixing.work.zhixin.widget.ClearEditText
+                android:id="@+id/edit_position"
+                style="@style/style_item_edit_text_right"
+                android:hint="请输入职位..." />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout style="@style/style_item_line_layout">
+
+            <TextView
+                style="@style/style_card_text_left"
+                android:text="@string/job_card_work_telephone" />
+
+            <com.zhixing.work.zhixin.widget.ClearEditText
+                android:id="@+id/edit_telephone"
+                style="@style/style_item_edit_text_right"
+                android:maxLength="11"
+                android:inputType="number"
+                android:hint="请输入工作电话..." />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout style="@style/style_item_line_layout">
+
+            <TextView
+                style="@style/style_card_text_left"
+                android:text="@string/job_card_code" />
+
+            <com.zhixing.work.zhixin.widget.ClearEditText
+                android:id="@+id/edit_card_code"
+                style="@style/style_item_edit_text_right"
+                android:hint="请输入分机号" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout style="@style/style_item_line_layout">
+
+            <TextView
+                style="@style/style_card_text_left"
+                android:text="@string/job_card_company_telephone" />
+
+            <com.zhixing.work.zhixin.widget.ClearEditText
+                android:id="@+id/edit_company_telephone"
+                style="@style/style_item_edit_text_right"
+                android:hint="请输入分机号" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout style="@style/style_item_line_layout">
+
+            <TextView
+                style="@style/style_card_text_left"
+                android:text="@string/job_card_work_place" />
+
+            <com.zhixing.work.zhixin.widget.ClearEditText
+                android:id="@+id/edit_work_place"
+                style="@style/style_item_edit_text_right"
+                android:hint="请输入办公地点...."
+                android:maxLength="128"
+                android:maxLines="3" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

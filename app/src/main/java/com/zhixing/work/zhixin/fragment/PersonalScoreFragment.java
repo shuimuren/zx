@@ -24,6 +24,7 @@ import com.zhixing.work.zhixin.aliyun.ALiYunFileURLBuilder;
 import com.zhixing.work.zhixin.base.SupportFragment;
 import com.zhixing.work.zhixin.bean.ALiImageUrlBean;
 import com.zhixing.work.zhixin.bean.PersonalCardInfoBean;
+import com.zhixing.work.zhixin.bean.PersonalJobCardBean;
 import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.constant.ResultConstant;
 import com.zhixing.work.zhixin.dialog.CardCompleteDialog;
@@ -35,6 +36,7 @@ import com.zhixing.work.zhixin.network.NetworkConstant;
 import com.zhixing.work.zhixin.network.RequestConstant;
 import com.zhixing.work.zhixin.network.response.ImageUploadResult;
 import com.zhixing.work.zhixin.network.response.PersonalCardInfoResult;
+import com.zhixing.work.zhixin.network.response.PersonalJobCardInfoResult;
 import com.zhixing.work.zhixin.network.response.UploadPersonalAvatarResult;
 import com.zhixing.work.zhixin.requestbody.AvatarBody;
 import com.zhixing.work.zhixin.util.AlertUtils;
@@ -46,6 +48,7 @@ import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.util.ZxTextUtils;
 import com.zhixing.work.zhixin.view.card.CreateCardActivity;
 import com.zhixing.work.zhixin.view.card.PerfectCardDataActivity;
+import com.zhixing.work.zhixin.view.card.back.PersonalJobInfoActivity;
 import com.zhixing.work.zhixin.view.card.back.CardMainActivity;
 import com.zhixing.work.zhixin.view.clock.PersonalClockInActivity;
 
@@ -123,14 +126,26 @@ public class PersonalScoreFragment extends SupportFragment {
     @BindView(R.id.more)
     ImageView more;
     Unbinder unbinder;
+    @BindView(R.id.tv_job_nike_name)
+    TextView tvJobNikeName;
+    @BindView(R.id.tv_job_position)
+    TextView tvJobPosition;
+    @BindView(R.id.tv_job_department)
+    TextView tvJobDepartment;
+    @BindView(R.id.tv_user_mark)
+    TextView tvUserMark;
+    @BindView(R.id.ll_job_card_data)
+    LinearLayout llJobCardData;
 
     private Subscription mPersonalCardInfoSubscription;
     private Subscription mGetAvatarSubscription;
     private Subscription mImageUploadSubscription;
     private Subscription mUploadPersonalSubscription;
+    private Subscription mPersonalJobCardInfoSubscription;
     private PersonalCardInfoBean mPersonalCard;
     private String mAvatarBaseUrl;
     private ImageTool mImageTool;
+    private boolean isPersonalType; //true:个人卡牌 false : 个人企业看
 
 
     public static PersonalScoreFragment newInstance() {
@@ -149,6 +164,7 @@ public class PersonalScoreFragment extends SupportFragment {
         initSubscription();
         EventBus.getDefault().register(this);
         getPersonalCardInfo();
+        isPersonalType = true;
         return view;
     }
 
@@ -178,6 +194,36 @@ public class PersonalScoreFragment extends SupportFragment {
         mUploadPersonalSubscription = RxBus.getInstance().toObservable(UploadPersonalAvatarResult.class).subscribe(
                 result -> handlerUploadResult(result)
         );
+
+        mPersonalJobCardInfoSubscription = RxBus.getInstance().toObservable(PersonalJobCardInfoResult.class).subscribe(
+                result -> handlerPersonalJobCardInfoResult(result)
+        );
+    }
+
+    /**
+     * 个人员工卡牌
+     *
+     * @param result
+     */
+    private void handlerPersonalJobCardInfoResult(PersonalJobCardInfoResult result) {
+        if (result.Code == NetworkConstant.SUCCESS_CODE) {
+            llJobCardData.setVisibility(View.VISIBLE);
+            llData.setVisibility(View.GONE);
+            PersonalJobCardBean cardBean = result.getContent();
+            if (cardBean != null) {
+                tvJobNikeName.setText(ZxTextUtils.getTextWithDefault(cardBean.getNickName()));
+                tvJobDepartment.setText(ZxTextUtils.getTextWithDefault(cardBean.getDepartmentName()));
+                tvJobPosition.setText(ZxTextUtils.getTextWithDefault(cardBean.getJobType()));
+                tvUserMark.setText(ZxTextUtils.getTextWithDefault(cardBean.getMotto()));
+            }
+            GlideUtils.getInstance().loadPublicRoundTransformWithDefault(getActivity(),
+                    ResourceUtils.getDrawable(R.drawable.img_company_default), cardBean.getCardAvatar(), avatar);
+            GlideUtils.getInstance().loadPublicCircleWithDefault(getActivity(),
+                    ResourceUtils.getDrawable(R.drawable.img_company_default), cardBean.getCompanyLogo(), imgPersonalType);
+
+        } else {
+            AlertUtils.show(result.Message);
+        }
     }
 
     /**
@@ -217,6 +263,8 @@ public class PersonalScoreFragment extends SupportFragment {
                 rlCardEmpty.setVisibility(View.GONE);
                 rlPersonalData.setVisibility(View.VISIBLE);
                 perfectCard.setVisibility(View.GONE);
+                llJobCardData.setVisibility(View.GONE);
+                llData.setVisibility(View.VISIBLE);
                 imgCard.setImageResource(R.drawable.icon_1_light);
                 mPersonalCard = result.getContent();
                 SettingUtils.saveCreateCard();
@@ -275,7 +323,8 @@ public class PersonalScoreFragment extends SupportFragment {
     }
 
 
-    @OnClick({R.id.create_card, R.id.avatar, R.id.default_avatar, R.id.avatar_text, R.id.perfect_card, R.id.img_card, R.id.img_friend, R.id.img_identity, R.id.more})
+    @OnClick({R.id.create_card, R.id.avatar, R.id.default_avatar, R.id.avatar_text, R.id.perfect_card,
+            R.id.img_card, R.id.img_friend, R.id.img_identity, R.id.more, R.id.img_personal_type})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.create_card:
@@ -301,21 +350,43 @@ public class PersonalScoreFragment extends SupportFragment {
             case R.id.perfect_card:
                 startActivity(new Intent(getActivity(), PerfectCardDataActivity.class));
                 break;
-             //第一张卡
+            //第一张卡
             case R.id.img_card:
                 break;
             //坚持打卡
             case R.id.img_friend:
                 startActivity(new Intent(getActivity(), PersonalClockInActivity.class));
-              //  startActivity(new Intent(getActivity(), ManagerClockInActivity.class));
+                //  startActivity(new Intent(getActivity(), ManagerClockInActivity.class));
                 break;
-             //身份认证
+            //身份认证
             case R.id.img_identity:
+
+                break;
+            case R.id.img_personal_type:
+                int staffId = SettingUtils.getTokenBean().getStaffId();
+                if (staffId == 0) {
+                    AlertUtils.show(ResourceUtils.getString(R.string.alter_user_no_company));
+                    return;
+                }
+                isPersonalType = !isPersonalType;
+                if (isPersonalType) {
+                    AlertUtils.show(ResourceUtils.getString(R.string.exchange_card_to_personal));
+                    getPersonalCardInfo();
+                } else {
+                    MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_COMPANY_STAFF_CARD, staffId);
+                    AlertUtils.show(ResourceUtils.getString(R.string.exchange_card_to_company));
+                }
 
                 break;
             case R.id.more:
                 if (SettingUtils.createCardBefore()) {
-                    startActivity(new Intent(getActivity(), CardMainActivity.class));
+                    if (isPersonalType) {
+                        //个人卡牌跳转
+                        startActivity(new Intent(getActivity(), CardMainActivity.class));
+                    } else {
+                        //个人企业卡牌跳转
+                        PersonalJobInfoActivity.startPersonalJobInfoActivity(getActivity(), String.valueOf(SettingUtils.getTokenBean().getStaffId()));
+                    }
                 } else {
                     AlertUtils.show(ResourceUtils.getString(R.string.complete_user_information));
                     startActivity(new Intent(getActivity(), CreateCardActivity.class));
@@ -335,7 +406,8 @@ public class PersonalScoreFragment extends SupportFragment {
         super.onDestroyView();
         unbinder.unbind();
         EventBus.getDefault().unregister(this);
-        RxBus.getInstance().unsubscribe(mPersonalCardInfoSubscription, mGetAvatarSubscription, mImageUploadSubscription,mUploadPersonalSubscription);
+        RxBus.getInstance().unsubscribe(mPersonalCardInfoSubscription, mGetAvatarSubscription,
+                mImageUploadSubscription, mUploadPersonalSubscription, mPersonalJobCardInfoSubscription);
     }
 
     //显示成就弹框

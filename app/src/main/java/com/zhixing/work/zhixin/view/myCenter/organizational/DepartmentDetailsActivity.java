@@ -33,6 +33,7 @@ import com.zhixing.work.zhixin.network.response.UpdateChildDepartmentResult;
 import com.zhixing.work.zhixin.share.ShareUtil;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
+import com.zhixing.work.zhixin.view.card.StaffCardActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import java.util.ArrayList;
@@ -131,7 +132,7 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
         mDepartmentMembers.add(new DepartmentMemberBean(mDepartmentId, mDepartmentName));
         //  mDepartmentMemberTitleAdapter.setData(mDepartmentMembers);
         upDateDepartmentAndStaff(mDepartmentId);
-        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_DEPARTMENT_INVITE,mDepartmentId);
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_DEPARTMENT_INVITE, mDepartmentId);
     }
 
     private void intiView() {
@@ -164,7 +165,7 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
         mDepartmentStaffAdapter.setItemClickedListener(new DepartmentStaffAdapter.ItemClickedInterface() {
             @Override
             public void onItemClicked(DepartmentMemberInfoBean bean) {
-                Logger.i(">>>", "点击个人");
+                StaffCardActivity.startStaffCardActivity(DepartmentDetailsActivity.this, String.valueOf(bean.getStaffId()));
             }
         });
 
@@ -215,7 +216,6 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
         mInviteSubscription = RxBus.getInstance().toObservable(DepartmentInviteResult.class).subscribe(
                 result -> handlerDepartmentInvite(result)
         );
-
 
 
     }
@@ -307,11 +307,11 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.add_user:
-                if(inviteBean != null){
-                    Map<String, Object> params = ShareUtil.getInstance().getShareParams(this,"邀请加入公司",
-                            inviteBean.getInviter()+"邀请您加入"+inviteBean.getCompanyName(),inviteBean.getUrl(),mDepartmentId,inviteBean);
+                if (inviteBean != null) {
+                    Map<String, Object> params = ShareUtil.getInstance().getShareParams(this, "邀请加入公司",
+                            inviteBean.getInviter() + "邀请您加入" + inviteBean.getCompanyName(), inviteBean.getUrl(), mDepartmentId, inviteBean);
                     MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_SHOW_SHARE_PLATFORM, params);
-                }else{
+                } else {
                     AlertUtils.show(ResourceUtils.getString(R.string.get_department_info_error));
                 }
 
@@ -331,7 +331,7 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
     protected void onDestroy() {
         super.onDestroy();
         RxBus.getInstance().unsubscribe(mGetAllDepartmentSubscription, mGetChildDepartmentSubscription,
-                mDepartmentStaffSubscription, mDeleteDepartmentSubscription, mUpdateSettingInfoSubscription,mInviteSubscription);
+                mDepartmentStaffSubscription, mDeleteDepartmentSubscription, mUpdateSettingInfoSubscription, mInviteSubscription);
     }
 
 

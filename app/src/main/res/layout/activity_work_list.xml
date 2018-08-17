@@ -16,41 +16,30 @@
             android:id="@+id/work_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"></android.support.v7.widget.RecyclerView>
+            android:layout_weight="1" />
+
 
         <RelativeLayout
+            android:id="@+id/rl_add_work"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal">
+            android:background="@color/white">
 
-            <RelativeLayout
-                android:id="@+id/rl_add_work"
+            <TextView
+                android:id="@+id/work"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true">
-
-                <ImageView
-
-                    android:id="@+id/add_work"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/icon_add" />
-
-                <TextView
-                    android:id="@+id/work"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/add_work"
-                    android:gravity="center_vertical"
-                    android:text="工作经历"
-                    android:textColor="#408acf"
-                    android:textSize="20sp" />
-            </RelativeLayout>
+                android:layout_centerInParent="true"
+                android:layout_toRightOf="@+id/add_work"
+                android:drawableLeft="@drawable/icon_add"
+                android:drawablePadding="@dimen/padding_normal"
+                android:gravity="center_vertical"
+                android:text="工作经历"
+                android:textColor="#408acf"
+                android:textSize="20sp" />
         </RelativeLayout>
+
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

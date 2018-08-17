@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_senior"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <LinearLayout style="@style/style_item_line_layout_clickable">
+
+            <TextView
+                style="@style/style_card_text_left"
+                android:text="@string/job_card_begin_time" />
+
+            <TextView
+                android:id="@+id/tv_card_work_begin_time"
+                style="@style/style_item_right_text" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout style="@style/style_item_line_layout_clickable">
+
+            <TextView
+                style="@style/style_card_text_left"
+                android:text="@string/job_card_user_role_type" />
+
+            <TextView
+                android:id="@+id/tv_card_user_role_type"
+                style="@style/style_item_right_text"  />
+
+        </LinearLayout>
+        <View style="@style/line" />
+        <LinearLayout style="@style/style_item_line_layout_clickable">
+
+            <TextView
+                style="@style/style_card_text_left"
+                android:text="@string/job_card_user_status" />
+
+            <TextView
+                android:id="@+id/tv_card_user_status"
+                style="@style/style_item_right_text"  />
+
+        </LinearLayout>
+        <View style="@style/line" />
+        <LinearLayout style="@style/style_item_line_layout_clickable">
+
+            <TextView
+                style="@style/style_card_text_left"
+                android:text="@string/job_card_test_time" />
+
+            <TextView
+                android:id="@+id/tv_card_test_time"
+                style="@style/style_item_right_text"  />
+
+        </LinearLayout>
+        <View style="@style/line" />
+        <LinearLayout style="@style/style_item_line_layout_clickable">
+
+            <TextView
+                style="@style/style_card_text_left"
+                android:text="@string/job_card_formal_time" />
+
+            <TextView
+                android:id="@+id/tv_card_formal_time"
+                style="@style/style_item_right_text" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

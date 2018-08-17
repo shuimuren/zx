@@ -28,6 +28,7 @@ import com.zhixing.work.zhixin.network.response.DepartmentMemberInfoResult;
 import com.zhixing.work.zhixin.share.ShareUtil;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
+import com.zhixing.work.zhixin.view.card.StaffCardActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import java.util.ArrayList;
@@ -117,7 +118,7 @@ public class DepartmentManagementActivity extends BaseTitleActivity {
         mDepartmentStaffAdapter.setItemClickedListener(new DepartmentStaffAdapter.ItemClickedInterface() {
             @Override
             public void onItemClicked(DepartmentMemberInfoBean bean) {
-                Logger.i(">>>", "点击个人");
+                StaffCardActivity.startStaffCardActivity(DepartmentManagementActivity.this,String.valueOf(bean.getStaffId()));
             }
         });
 

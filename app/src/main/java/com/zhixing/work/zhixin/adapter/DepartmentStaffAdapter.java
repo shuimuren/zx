@@ -68,6 +68,7 @@ public class DepartmentStaffAdapter extends RecyclerView.Adapter {
         }else {
             viewHolder.imgEdit.setVisibility(View.INVISIBLE);
         }
+        //TextUtils.isEmpty(bean.get)
         viewHolder.memberName.setText(bean.getStaffNickName());
         GlideUtils.getInstance().loadCircleUserIconInto(mContext,bean.getStaffAvatar(),viewHolder.memberAvatar);
         viewHolder.llMember.setOnClickListener(v -> itemClickedInterface.onItemClicked(bean));

@@ -47,9 +47,9 @@
 
                 <com.zhixing.work.zhixin.widget.EvaluatingView
                     android:id="@+id/evaluateView"
-                    android:layout_marginLeft="@dimen/dp_40"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/dp_40" />
 
 
                 <LinearLayout
@@ -91,22 +91,22 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="20dp"
+                            android:layout_height="18dp"
                             android:background="@drawable/btn_brown_shape"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:textSize="@dimen/font_size_14sp"
-                            android:text="诚信"
                             android:gravity="center"
-                            android:textColor="@color/white" />
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:text="领导力"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_small" />
 
                         <TextView
                             android:id="@+id/tvSincerity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:textSize="@dimen/font_normal"
-                            android:text="-" />
+                            android:layout_marginLeft="3dp"
+                            android:text="-"
+                            android:textSize="@dimen/font_smaller" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -117,46 +117,48 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="20dp"
+                            android:layout_height="18dp"
                             android:background="@drawable/btn_brown_shape"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:textSize="@dimen/font_size_14sp"
+                            android:gravity="center"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
                             android:text="人脉"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_small" />
 
                         <TextView
                             android:id="@+id/tvConnection"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:textSize="@dimen/font_normal"
-                            android:text="-" />
+                            android:layout_marginLeft="3dp"
+                            android:text="-"
+                            android:textSize="@dimen/font_smaller" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="1.2"
                         android:gravity="center_vertical">
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="20dp"
+                            android:layout_height="18dp"
                             android:background="@drawable/btn_brown_shape"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:textSize="@dimen/font_size_14sp"
-                            android:text="合规"
-                            android:textColor="@color/white" />
+                            android:gravity="center"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:text="职业素养"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_small" />
 
                         <TextView
                             android:id="@+id/tvCompliance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:textSize="@dimen/font_normal"
-                            android:text="-" />
+                            android:text="-"
+                            android:textSize="@dimen/font_smaller" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -176,21 +178,22 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="20dp"
+                            android:layout_height="18dp"
                             android:background="@drawable/btn_brown_shape"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:textSize="@dimen/font_size_14sp"
-                            android:text="履约"
-                            android:textColor="@color/white" />
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:gravity="center"
+                            android:text="执行力"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_small" />
 
                         <TextView
                             android:id="@+id/tvPerformance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:textSize="@dimen/font_normal"
-                            android:text="-" />
+                            android:layout_marginLeft="3dp"
+                            android:text="-"
+                            android:textSize="@dimen/font_smaller" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -201,27 +204,28 @@
 
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="20dp"
+                            android:layout_height="18dp"
                             android:background="@drawable/btn_brown_shape"
-                            android:paddingLeft="10dp"
-                            android:paddingRight="10dp"
-                            android:textSize="@dimen/font_size_14sp"
+                            android:paddingLeft="8dp"
+                            android:paddingRight="8dp"
+                            android:gravity="center"
                             android:text="心态"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/font_small" />
 
                         <TextView
                             android:id="@+id/tvMentality"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="5dp"
-                            android:textSize="@dimen/font_normal"
-                            android:text="-" />
+                            android:layout_marginLeft="3dp"
+                            android:text="-"
+                            android:textSize="@dimen/font_smaller" />
                     </LinearLayout>
 
                     <View
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1" />
+                        android:layout_weight="1.2" />
                 </LinearLayout>
 
 
@@ -283,7 +287,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="@dimen/dp_10"
                         android:text="历史评分"
-                        android:visibility="gone"/>
+                        android:visibility="gone" />
 
                     <View
                         android:layout_width="wrap_content"
@@ -291,8 +295,8 @@
                         android:layout_alignLeft="@+id/historical_score"
                         android:layout_alignRight="@+id/historical_score"
                         android:layout_below="@+id/historical_score"
-                        android:background="@color/bg_deep" 
-                        android:visibility="gone"/>
+                        android:background="@color/bg_deep"
+                        android:visibility="gone" />
 
                 </RelativeLayout>
 

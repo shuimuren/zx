@@ -3,6 +3,7 @@ package com.zhixing.work.zhixin.util;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Looper;
+import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -66,6 +67,10 @@ public class GlideUtils extends AppGlideModule {
         return false;
     }
 
+    public void loadImage(Context context, Drawable url, ImageView imageView){
+        Glide.with(context).load(url).into(imageView);
+    }
+
     /**
      * 便于更换头像 头像资源实时更新
      *
@@ -105,14 +110,24 @@ public class GlideUtils extends AppGlideModule {
      * @param imageView 圆角图片
      */
     public void loadPublicRoundTransform(Context context, String url, ImageView imageView) {
-        Glide.with(context).load(ALiYunFileURLBuilder.PUBLIC_END_POINT +url)
+        Glide.with(context).load(ALiYunFileURLBuilder.PUBLIC_END_POINT + url)
                 .transition(DrawableTransitionOptions.withCrossFade()).
                 apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
                 .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                 .into(imageView);
     }
+    public void loadPublicRoundTransformWithDefault(Context context, Drawable drawable,String url, ImageView imageView) {
+        Glide.with(context).load(ALiYunFileURLBuilder.PUBLIC_END_POINT + url)
+                .transition(DrawableTransitionOptions.withCrossFade()).
+                apply(RequestOptions.bitmapTransform(new RoundedCorners(10)))
+                .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE).error(drawable))
+                .into(imageView);
+    }
+
+
     /**
      * 便于更换头像 头像资源实时更新
+     *
      * @param context
      * @param
      * @param imageView 圆形头像
@@ -124,6 +139,15 @@ public class GlideUtils extends AppGlideModule {
                 .into(imageView);
 
     }
+
+    public void loadPublicCircleWithDefault(Context context, @NonNull Drawable drawable, String url, ImageView imageView) {
+        Glide.with(context).load(ALiYunFileURLBuilder.PUBLIC_END_POINT + url).
+                apply(RequestOptions.bitmapTransform(new CircleCrop())
+                        .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE)).error(drawable))
+                .into(imageView);
+
+    }
+
     /**
      * @param imageView 圆形头像本地
      */
@@ -131,13 +155,14 @@ public class GlideUtils extends AppGlideModule {
         Glide.with(context).load(url).
                 apply(RequestOptions.bitmapTransform(new CircleCrop())
                         .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE)))
-                .apply( new RequestOptions().skipMemoryCache( true ))
+                .apply(new RequestOptions().skipMemoryCache(true))
                 .into(imageView);
 
     }
 
     /**
      * 带默认图片
+     *
      * @param context
      * @param url
      * @param imageView

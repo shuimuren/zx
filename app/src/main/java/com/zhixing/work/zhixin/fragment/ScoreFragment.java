@@ -12,6 +12,7 @@ import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseMainFragment;
 import com.zhixing.work.zhixin.bean.Token;
 import com.zhixing.work.zhixin.constant.DiscernConstant;
+import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 
 import butterknife.BindView;
@@ -44,7 +45,7 @@ public class ScoreFragment extends BaseMainFragment {
         mToken = SettingUtils.getTokenBean();
         View view = inflater.inflate(R.layout.fragment_score, container, false);
         unbinder = ButterKnife.bind(this, view);
-        title.setText("职业卡牌");
+        title.setText(ResourceUtils.getString(R.string.zhi_xin_card));
         return view;
     }
 

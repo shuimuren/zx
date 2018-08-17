@@ -91,11 +91,11 @@
     </style>
 
     <style name="style_item_right_text">
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:padding">@dimen/padding_normal</item>
         <item name="android:textSize">@dimen/font_size_14sp</item>
-        <item name="android:textColor">#c3c3c3</item>
+        <item name="android:textColor">@color/minor_text_color</item>
+        <item name="android:gravity">right</item>
         <item name="android:drawableRight">@drawable/icon_next</item>
         <item name="android:drawablePadding">@dimen/padding_normal</item>
     </style>
@@ -135,6 +135,58 @@
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="style_card_text_left">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">90dp</item>
+        <item name="android:textSize">@dimen/font_size_14sp</item>
+    </style>
+
+    <style name="style_card_text_right">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_size_14sp</item>
+    </style>
+
+    <style name="style_item_line_layout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingTop">@dimen/padding_big</item>
+        <item name="android:paddingBottom">@dimen/padding_big</item>
+        <item name="android:paddingLeft">@dimen/padding_normal</item>
+        <item name="android:paddingRight">@dimen/padding_normal</item>
+    </style>
+
+    <style name="style_item_line_layout_clickable">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingTop">@dimen/padding_big</item>
+        <item name="android:paddingBottom">@dimen/padding_big</item>
+        <item name="android:paddingLeft">@dimen/padding_normal</item>
+        <item name="android:paddingRight">@dimen/padding_normal</item>
+        <item name="android:background">@drawable/color_white_clickable</item>
+    </style>
+
+    <style name="style_item_right_text_no_more">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/font_size_14sp</item>
+        <item name="android:textColor">@color/minor_text_color</item>
+        <item name="android:gravity">right</item>
+    </style>
+
+    <style name="style_item_edit_text_right">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@null</item>
+        <item name="android:gravity">right</item>
+        <item name="android:textColor">@color/minor_text_color</item>
+        <item name="android:textColorHint">#c3c4c3</item>
+        <item name="android:textSize">@dimen/font_size_14sp</item>
     </style>
 
 </resources>

@@ -185,7 +185,9 @@ public class ClockInFragment extends SupportFragment {
             switch (msg.what) {
                 case 2000:
                     mServiceTimeLong += 1000;
-                    tvLeave.setText(DateUtils.getDfHourMinSec(mServiceTimeLong));
+                    if (isWorkWifi()) {
+                        tvLeave.setText(DateUtils.getDfHourMinSec(mServiceTimeLong));
+                    }
                     break;
             }
         }
@@ -234,7 +236,7 @@ public class ClockInFragment extends SupportFragment {
             }
             getAttendanceRecord();
         } else {
-            AlertUtils.show("打卡失败:"+result.Message);
+            AlertUtils.show("打卡失败:" + result.Message);
         }
 
     }
@@ -301,7 +303,7 @@ public class ClockInFragment extends SupportFragment {
         String clockInTime = mAttendanceBean.getClockInTime();
 
         long inLong = DateUtils.doDate2Long(clockInTime);
-        int flex =mAttendanceBean.getFlexTime(); //迟到时间
+        int flex = mAttendanceBean.getFlexTime(); //迟到时间
         int absenteeism = mAttendanceBean.getAbsenteeismTime();//旷工时间
         tvClockStatusNormal.setVisibility(View.VISIBLE);
 
@@ -356,9 +358,9 @@ public class ClockInFragment extends SupportFragment {
     private void staffAttendance() {
         Map map = new HashMap();
         String wifiName = mWifiName.substring(1, mWifiName.length() - 1);
-        map.put(RequestConstant.KEY_WIFI_NAME,wifiName);
-        map.put(RequestConstant.KEY_BSS_ID,mBssid);
-        map.put(RequestConstant.KEY_CLIENT_CODE,mClientCode);
+        map.put(RequestConstant.KEY_WIFI_NAME, wifiName);
+        map.put(RequestConstant.KEY_BSS_ID, mBssid);
+        map.put(RequestConstant.KEY_CLIENT_CODE, mClientCode);
         MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_STAFF_ATTENDANCE, map);
     }
 

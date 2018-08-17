@@ -16,7 +16,6 @@ import com.zhixing.work.zhixin.bean.ChildDepartmentBean;
 import com.zhixing.work.zhixin.bean.DepartmentInviteBean;
 import com.zhixing.work.zhixin.bean.DepartmentMemberInfoBean;
 import com.zhixing.work.zhixin.common.DepartmentManagerHelper;
-import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.constant.ResultConstant;
 import com.zhixing.work.zhixin.event.HandlerApplyEvent;
 import com.zhixing.work.zhixin.msgctrl.MsgDef;
@@ -34,6 +33,7 @@ import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
 import com.zhixing.work.zhixin.util.ZxTextUtils;
+import com.zhixing.work.zhixin.view.card.StaffCardActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -123,7 +123,7 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
         mDepartmentStaffAdapter.setItemClickedListener(new DepartmentStaffAdapter.ItemClickedInterface() {
             @Override
             public void onItemClicked(DepartmentMemberInfoBean bean) {
-                Logger.i(">>>", "点击个人");
+                StaffCardActivity.startStaffCardActivity(OrganizationalStructureActivity.this,String.valueOf(bean.getStaffId()));
             }
         });
 

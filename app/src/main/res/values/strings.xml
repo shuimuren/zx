@@ -288,5 +288,35 @@
     <string name="btn_reject">拒绝</string>
     <string name="member_audit_title">人员审批</string>
     <string name="empty_view_text">所有数据已处理完毕</string>
+    <string name="alter_user_no_company">您尚未加入公司,无法查看工作卡牌</string>
+    <string name="exchange_card_to_company">已切换为工作卡牌</string>
+    <string name="exchange_card_to_personal">已切换为个人卡牌</string>
+    <string name="personal_info_title">个人信息</string>
+    <string name="personal_job_card_position_normal">职</string>
+    <string name="personal_job_card_position_selected">职位信息</string>
+    <string name="personal_job_card_job_normal">工</string>
+    <string name="personal_job_card_job_selected">工作信息</string>
+    <string name="personal_job_card_user_normal">个</string>
+    <string name="personal_job_card_user_selected">个人信息</string>
+    <string name="job_card_user_name">姓名</string>
+    <string name="job_card_email">工作邮箱</string>
+    <string name="job_card_department">部门</string>
+    <string name="job_card_position">职位</string>
+    <string name="job_card_work_telephone">工作手机号</string>
+    <string name="job_card_code">工号</string>
+    <string name="job_card_company_telephone">分机号</string>
+    <string name="job_card_work_place">办公地点</string>
+    <string name="job_card_begin_time">入职时间</string>
+    <string name="job_card_user_role_type">员工类别</string>
+    <string name="job_card_user_status">员工状态</string>
+    <string name="job_card_test_time">试用期</string>
+    <string name="job_card_formal_time">转正日期</string>
+    <string name="basic_info_title">基础信息</string>
+    <string name="senior_title_text">高级信息</string>
+    <string name="alert_telephone">请输入11位手机号码</string>
+    <string name="alert_email">请输入正确的邮箱地址</string>
+    <string name="get_more">查看更多</string>
+    <string name="staff_info_title">员工信息</string>
+
 
 </resources>

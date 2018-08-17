@@ -9,7 +9,7 @@ public class AbilityBean {
 
 
 
-    public static final String[] abilitys = {"诚信", "人脉", "合规", "履约", "心态" };
+    public static final String[] abilitys = {"领导力", "人脉", "职业素养", "执行力", "心态" };
 
     public int[] getAllAbility() {
         int[] allAbility = {psychology, integrity, agreement, compliance, connection};

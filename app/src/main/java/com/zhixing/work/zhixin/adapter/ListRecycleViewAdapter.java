@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zhixing.work.zhixin.R;
+import com.zhixing.work.zhixin.bean.LeaveStaffBean;
 import com.zhixing.work.zhixin.bean.NewMemberBean;
 import com.zhixing.work.zhixin.bean.StatisticsMonthDataBean;
 import com.zhixing.work.zhixin.constant.ResultConstant;
@@ -39,6 +40,7 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
     private static final int TYPE_FOOTER = 99;
     private static final int TYPE_ATTENDANCE_MONTH = 0;
     private static final int TYPE_NEW_MEMBER_BEAN = 1;
+    private static final int TYPE_LEAVE_STAFF_BEAN = 2;
 
     public ListRecycleViewAdapter(Context context, List<T> data, Callback back) {
         this.mContext = context;
@@ -74,6 +76,9 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
             case TYPE_NEW_MEMBER_BEAN:
                 View viewNewMember = LayoutInflater.from(mContext).inflate(R.layout.item_new_member, parent, false);
                 return new ViewNewMemberHolder(viewNewMember);
+            case TYPE_LEAVE_STAFF_BEAN:
+                View viewLeave = LayoutInflater.from(mContext).inflate(R.layout.item_leave_staff, parent, false);
+                return new ViewLeaveStaffHolder(viewLeave);
             default:
                 View viewFooter = LayoutInflater.from(mContext).inflate(R.layout.item_list_footer, parent, false);
                 return new ViewFooterHolder(viewFooter);
@@ -113,6 +118,18 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
             return;
         }
 
+        if(holder instanceof ViewLeaveStaffHolder){
+            ViewLeaveStaffHolder leaveStaffHolder = (ViewLeaveStaffHolder) holder;
+            LeaveStaffBean bean = (LeaveStaffBean) mData.get(position);
+            GlideUtils.getInstance().loadGlideRoundTransform(mContext, ResourceUtils.getDrawable(R.drawable.icon_avatar),
+                    bean.getAvatar(), leaveStaffHolder.imgAvatar);
+           // leaveStaffHolder.tvLeaveTime.setText();
+            leaveStaffHolder.tvName.setText(ZxTextUtils.getTextWithDefault(bean.getRealName()));
+            leaveStaffHolder.tvDepartment.setText(ZxTextUtils.getTextWithDefault(bean.getDepartmentName()));
+            leaveStaffHolder.tvLeaveTime.setText(String.format("离职日期：%s", bean.getDimissionTime().substring(0,10)));
+            leaveStaffHolder.itemView.setOnClickListener(v -> mCallback.onItemClicked(bean));
+        }
+
         if (holder instanceof ViewFooterHolder) {
             ViewFooterHolder footerHolder = (ViewFooterHolder) holder;
             String desc = "";
@@ -147,6 +164,9 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
             }
             if (mData.get(position) instanceof NewMemberBean) {
                 return TYPE_NEW_MEMBER_BEAN;
+            }
+            if (mData.get(position) instanceof LeaveStaffBean) {
+                return TYPE_LEAVE_STAFF_BEAN;
             }
         }
         return TYPE_FOOTER;
@@ -193,6 +213,24 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
         TextView tvStatus;
 
         ViewNewMemberHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+    }
+
+    static class ViewLeaveStaffHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.img_avatar)
+        ImageView imgAvatar;
+        @BindView(R.id.tv_name)
+        TextView tvName;
+        @BindView(R.id.tv_time_total)
+        TextView tvTimeTotal;
+        @BindView(R.id.tv_department)
+        TextView tvDepartment;
+        @BindView(R.id.tv_leave_time)
+        TextView tvLeaveTime;
+
+        ViewLeaveStaffHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.adapter.AttendanceStatisticsAdapter;
 import com.zhixing.work.zhixin.base.SupportFragment;
+import com.zhixing.work.zhixin.bean.CertificateBean;
 import com.zhixing.work.zhixin.bean.EducationBgsBean;
 import com.zhixing.work.zhixin.bean.StaffJobAdvanceBean;
 import com.zhixing.work.zhixin.bean.StaffJobBaseCardBean;
@@ -138,6 +139,8 @@ public class PersonalJobUserInfoFragment extends SupportFragment {
     RecyclerView workListView;
     @BindView(R.id.education_list_view)
     RecyclerView educationListView;
+    @BindView(R.id.certificate_list_view)
+    RecyclerView certificateListView;
     @BindView(R.id.senior_editor)
     Button seniorEditor;
     @BindView(R.id.rl_senior_ed)
@@ -171,8 +174,10 @@ public class PersonalJobUserInfoFragment extends SupportFragment {
 
     private List<EducationBgsBean> mEducations;
     private List<WorkBgsBean> mWorks;
+    private List<CertificateBean> mCertificates;
     private AttendanceStatisticsAdapter mWordAdapter;
     private AttendanceStatisticsAdapter mEducationAdapter;
+    private AttendanceStatisticsAdapter mCertificateAdapter;
 
     @Nullable
     @Override
@@ -194,6 +199,7 @@ public class PersonalJobUserInfoFragment extends SupportFragment {
     private void initView() {
         mEducations = new ArrayList<>();
         mWorks = new ArrayList<>();
+        mCertificates = new ArrayList<>();
 
         mWordAdapter = new AttendanceStatisticsAdapter();
         mWordAdapter.setData(mWorks);
@@ -209,6 +215,12 @@ public class PersonalJobUserInfoFragment extends SupportFragment {
         educationListView.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.HORIZONTAL));
         educationListView.setAdapter(mEducationAdapter);
 
+        mCertificateAdapter = new AttendanceStatisticsAdapter();
+        mCertificateAdapter.setData(mCertificates);
+        certificateListView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        certificateListView.setHasFixedSize(true);
+        certificateListView.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.HORIZONTAL));
+        certificateListView.setAdapter(mCertificateAdapter);
 
     }
 
@@ -289,8 +301,16 @@ public class PersonalJobUserInfoFragment extends SupportFragment {
             address.setText(addressct + mAdvanceBean.getAddress());
         }
         education.setText(ZxTextUtils.getTextWithDefault(mAdvanceBean.getEducation()));
-        mWordAdapter.setData(mAdvanceBean.getWorkBgs());
-        mEducationAdapter.setData(mAdvanceBean.getEducationBgs());
+        if (mAdvanceBean.getWorkBgs() != null) {
+            mWordAdapter.setData(mAdvanceBean.getWorkBgs());
+        }
+        if (mAdvanceBean.getCertificateBgs() != null) {
+            mCertificateAdapter.setData(mAdvanceBean.getCertificateBgs());
+        }
+        if (mAdvanceBean.getEducation() != null) {
+            mEducationAdapter.setData(mAdvanceBean.getEducationBgs());
+        }
+
     }
 
     //基本信息UI

@@ -68,6 +68,9 @@ public class EditJobListAdapter<T> extends RecyclerView.Adapter {
             case EDUCATION_TYPE:
                 View viewEducation = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_job_work_edit,parent,false);
                 return new EducationViewHolder(viewEducation);
+            case CERTIFICATE_TYPE:
+                View viewCertificate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_job_work_edit,parent,false);
+                return new CertificateViewHolder(viewCertificate);
             default:
                 View viewDefault = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_job_list_empty, parent, false);
                 return new EmptyViewHolder(viewDefault);
@@ -107,6 +110,20 @@ public class EditJobListAdapter<T> extends RecyclerView.Adapter {
             viewHolder.itemView.setOnClickListener(v -> mCallBack.itemClicked(bgsBean));
             viewHolder.btnDelete.setOnClickListener(v -> mCallBack.deleteClicked(bgsBean));
             return;
+        }else if(holder instanceof CertificateViewHolder){
+            CertificateViewHolder viewHolder = (CertificateViewHolder) holder;
+            CertificateBean bgsBean = (CertificateBean) mData.get(position);
+            if (mIsEdit) {
+                viewHolder.btnDelete.setVisibility(View.VISIBLE);
+                viewHolder.imgMark.setVisibility(View.GONE);
+            } else {
+                viewHolder.btnDelete.setVisibility(View.GONE);
+                viewHolder.imgMark.setVisibility(View.VISIBLE);
+            }
+            viewHolder.tvName.setText(bgsBean.getCertificateTitle());
+            viewHolder.tvTime.setText(bgsBean.getGraduationDate().substring(0,7));
+            viewHolder.itemView.setOnClickListener(v -> mCallBack.itemClicked(bgsBean));
+            viewHolder.btnDelete.setOnClickListener(v -> mCallBack.deleteClicked(bgsBean));
         }
     }
 
@@ -162,6 +179,23 @@ public class EditJobListAdapter<T> extends RecyclerView.Adapter {
         ImageView imgMark;
 
         EducationViewHolder (View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+    }
+
+    //CertificateViewHolder
+    static class CertificateViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_name)
+        TextView tvName;
+        @BindView(R.id.tv_time)
+        TextView tvTime;
+        @BindView(R.id.btn_delete)
+        Button btnDelete;
+        @BindView(R.id.img_mark)
+        ImageView imgMark;
+
+        CertificateViewHolder (View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

@@ -45,7 +45,7 @@ import com.zhixing.work.zhixin.network.response.UpdateJobResult;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.Utils;
-import com.zhixing.work.zhixin.view.card.back.CertificateListActivity;
+import com.zhixing.work.zhixin.view.card.back.WorkCertificateListActivity;
 import com.zhixing.work.zhixin.view.card.back.WorkEducationListActivity;
 import com.zhixing.work.zhixin.view.card.back.WorkJobListActivity;
 import com.zhixing.work.zhixin.widget.RecycleViewDivider;
@@ -474,7 +474,8 @@ public class EditJobAdvancedActivity extends BaseTitleActivity {
                 WorkEducationListActivity.startWorkEducationListActivity(this,mStaffId);
                 break;
             case R.id.rlcertificate:
-                startActivity(new Intent(context, CertificateListActivity.class));
+               // startActivity(new Intent(context, CertificateListActivity.class));
+                WorkCertificateListActivity.startWorkCertificateListActivity(this,mStaffId);
                 break;
         }
     }

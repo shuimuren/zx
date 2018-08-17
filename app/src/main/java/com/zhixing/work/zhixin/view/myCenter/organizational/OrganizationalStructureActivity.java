@@ -26,6 +26,7 @@ import com.zhixing.work.zhixin.network.response.AllDepartmentMemberResult;
 import com.zhixing.work.zhixin.network.response.ChildDepartmentResult;
 import com.zhixing.work.zhixin.network.response.DepartmentInviteResult;
 import com.zhixing.work.zhixin.network.response.DepartmentMemberInfoResult;
+import com.zhixing.work.zhixin.network.response.LeaveMemberResult;
 import com.zhixing.work.zhixin.network.response.NewJoinMemberResult;
 import com.zhixing.work.zhixin.share.ShareUtil;
 import com.zhixing.work.zhixin.util.AlertUtils;
@@ -68,12 +69,19 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
     TextView tvNewAdd;
     @BindView(R.id.ll_audit_new_member)
     LinearLayout llAuditNewMember;
+    @BindView(R.id.tv_leave_member)
+    TextView tvLeaveMember;
+    @BindView(R.id.ll_audit_leave_member)
+    LinearLayout llAuditLeaveMember;
+    @BindView(R.id.workmate)
+    TextView workmate;
 
     private Subscription mGetAllDepartmentSubscription; //获取公司下所有员工
     private Subscription mGetChildDepartmentSubscription; //获取子部门
     private Subscription mDepartmentStaffSubscription;//获取部门下员工列表
     private Subscription mInviteSubscription;//邀请连接
-    private Subscription mGetJoinDepartmentApply;
+    private Subscription mGetJoinDepartmentApply;//新员工审核
+    private Subscription mGetLeaveDepartmentSubscription;//已离职员工
     private String departmentId;
 
     private DepartmentListAdapter mDepartmentListAdapter;
@@ -123,7 +131,7 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
         mDepartmentStaffAdapter.setItemClickedListener(new DepartmentStaffAdapter.ItemClickedInterface() {
             @Override
             public void onItemClicked(DepartmentMemberInfoBean bean) {
-                StaffCardActivity.startStaffCardActivity(OrganizationalStructureActivity.this,String.valueOf(bean.getStaffId()));
+                StaffCardActivity.startStaffCardActivity(OrganizationalStructureActivity.this, String.valueOf(bean.getStaffId()));
             }
         });
 
@@ -158,9 +166,26 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
                 result -> handlerJoinMember(result)
         );
 
+        mGetLeaveDepartmentSubscription= RxBus.getInstance().toObservable(LeaveMemberResult.class).subscribe(
+                result -> handlerLeaveMember(result)
+        );
+
         MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_ALL_DEPARTMENT_MEMBER);
         MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_DEPARTMENT_INVITE, departmentId);
         MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_JOIN_DEPARTMENT_APPLY, departmentId);
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_COMPANY_STAFF_DIMISSION_COUNT,departmentId);
+    }
+
+    private void handlerLeaveMember(LeaveMemberResult result) {
+        if (result.Code == NetworkConstant.SUCCESS_CODE) {
+            if (result.getContent() > 0) {
+                llAuditLeaveMember.setVisibility(View.VISIBLE);
+                String des = String.format("已离职员工 (%s)", String.valueOf(result.getContent()));
+                tvLeaveMember.setText(Utils.changeColor(des, ResourceUtils.getColor(R.color.moremoney), des.indexOf("(") + 1, des.indexOf(")")));
+            } else {
+                llAuditLeaveMember.setVisibility(View.GONE);
+            }
+        }
     }
 
     private void handlerJoinMember(NewJoinMemberResult result) {
@@ -231,11 +256,14 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
 
     }
 
-    @OnClick({R.id.ll_audit_new_member, R.id.workmate})
+    @OnClick({R.id.ll_audit_new_member, R.id.workmate,R.id.ll_audit_leave_member})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_audit_new_member:
                 AuditMemberListActivity.StartActivityAuditMemberList(this, ResultConstant.AUDIT_STATUS_WAITING);
+                break;
+            case R.id.ll_audit_leave_member:
+                LeaveMemberListActivity.StartActivityLeaveMemberList(this);
                 break;
             case R.id.workmate:
                 if (inviteBean != null) {
@@ -253,7 +281,7 @@ public class OrganizationalStructureActivity extends BaseTitleActivity {
     protected void onDestroy() {
         super.onDestroy();
         RxBus.getInstance().unsubscribe(mDepartmentStaffSubscription, mGetAllDepartmentSubscription,
-                mGetChildDepartmentSubscription, mInviteSubscription, mGetJoinDepartmentApply);
+                mGetChildDepartmentSubscription, mInviteSubscription, mGetJoinDepartmentApply,mGetLeaveDepartmentSubscription);
     }
 
     @Subscribe

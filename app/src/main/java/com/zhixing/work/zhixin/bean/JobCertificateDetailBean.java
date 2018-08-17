@@ -1,30 +1,40 @@
 package com.zhixing.work.zhixin.bean;
 
-import java.io.Serializable;
-
 /**
- * Created by lhj on 2018/8/15.
+ * Created by lhj on 2018/8/17.
  * Description:
  */
 
-public class CertificateBean implements Serializable{
+public class JobCertificateDetailBean {
+
     /**
-     * CertificateTitle : 证书名称1
-     * GraduationDate : 2011-01-01
-     * Grade :
+     * Id : 1
+     * StaffId : 7
+     * CertificateTitle : 证书1
+     * GraduationDate : 2015-01-01 00:00:00
+     * Grade : null
      */
 
+    private String Id;
+    private String StaffId;
     private String CertificateTitle;
     private String GraduationDate;
-    private String Grade;
-    private String Id;
+    private String  Grade;
 
     public String getId() {
         return Id;
     }
 
-    public void setId(String id) {
-        this.Id = id;
+    public void setId(String Id) {
+        this.Id = Id;
+    }
+
+    public String getStaffId() {
+        return StaffId;
+    }
+
+    public void setStaffId(String StaffId) {
+        this.StaffId = StaffId;
     }
 
     public String getCertificateTitle() {

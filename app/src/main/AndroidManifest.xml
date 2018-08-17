@@ -480,10 +480,18 @@
         <activity
             android:name=".view.card.AddJobWorkActivity"
             android:screenOrientation="portrait" />
-        <!--编辑员工卡牌高级-工作列表信息-添加教育-->
+        <!--编辑员工卡牌高级-工作列表信息-教育列表-->
         <activity android:name=".view.card.back.WorkEducationListActivity"
             android:screenOrientation="portrait"/>
+        <!--编辑员工卡牌高级-工作列表信息-添加教育-->
         <activity android:name=".view.card.AddJobEducationActivity"
+            android:screenOrientation="portrait"/>
+        <!--编辑员工卡牌高级-工作列表信息-证书列表-->
+        <activity android:name=".view.card.AddJobCertificateActivity"
+            android:screenOrientation="portrait"/>
+
+        <!--编辑员工卡牌高级-工作列表信息-添加证书-->
+        <activity android:name=".view.card.back.WorkCertificateListActivity"
             android:screenOrientation="portrait"/>
     </application>
 

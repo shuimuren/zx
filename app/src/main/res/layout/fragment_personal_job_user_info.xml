@@ -628,7 +628,25 @@
 
                     </android.support.v7.widget.RecyclerView>
                 </RelativeLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:background="#26000000"
+                    android:padding="@dimen/padding_small"
+                    android:text="证书信息" />
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/certificate_list_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </android.support.v7.widget.RecyclerView>
+                </RelativeLayout>
 
             </LinearLayout>
         </com.zhixing.work.zhixin.widget.ElasticScrollView>

@@ -92,11 +92,17 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
         if (holder instanceof ViewMonthHolder) {
             StatisticsMonthDataBean bean = (StatisticsMonthDataBean) mData.get(position);
             ViewMonthHolder viewHolder = (ViewMonthHolder) holder;
-            GlideUtils.getInstance().loadPublicRoundTransform(mContext, bean.getAvatar(), viewHolder.imgAvatar);
+            GlideUtils.getInstance().loadPublicRoundTransformWithDefault(mContext,ResourceUtils.getDrawable(R.drawable.icon_avatar), bean.getAvatar(), viewHolder.imgAvatar);
             viewHolder.tvName.setText(bean.getRealName());
             viewHolder.tvSection.setText(ZxTextUtils.getTextWithDefault(bean.getDepartmentName()));
             viewHolder.tvTimes.setText(String.format("%s次", String.valueOf(bean.getCount())));
-            viewHolder.tvMinute.setText(String.format("%s分钟", String.valueOf(bean.getLateMinutes())));
+            if(bean.getLateMinutes()>0){
+                viewHolder.tvMinute.setText(String.format("%s分钟", String.valueOf(bean.getLateMinutes())));
+                viewHolder.tvMinute.setVisibility(View.VISIBLE);
+            }else {
+                viewHolder.tvMinute.setVisibility(View.GONE);
+            }
+
             viewHolder.itemView.setOnClickListener(v -> mCallback.onItemClicked(bean));
             return;
         }

@@ -307,7 +307,7 @@ public class EditJobAdvancedActivity extends BaseTitleActivity {
 
 
     private void initAdapter() {
-        workAdapter = new AttendanceStatisticsAdapter();
+        workAdapter = new AttendanceStatisticsAdapter(this);
         LinearLayoutManager commodityLayoutManager = new LinearLayoutManager(context);
         commodityLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         workListView.setLayoutManager(commodityLayoutManager);
@@ -315,7 +315,7 @@ public class EditJobAdvancedActivity extends BaseTitleActivity {
         workListView.setAdapter(workAdapter);
         workAdapter.setData(workList);
 
-        educationAdapter = new AttendanceStatisticsAdapter();
+        educationAdapter = new AttendanceStatisticsAdapter(this);
         LinearLayoutManager layoutManager = new LinearLayoutManager(context);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         educationListView.setLayoutManager(layoutManager);
@@ -324,7 +324,7 @@ public class EditJobAdvancedActivity extends BaseTitleActivity {
         educationAdapter.setData(educationList);
 
 
-        certificateAdapter = new AttendanceStatisticsAdapter();
+        certificateAdapter = new AttendanceStatisticsAdapter(this);
         LinearLayoutManager cflayoutManager = new LinearLayoutManager(context);
         cflayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         certificateListView.setLayoutManager(cflayoutManager);

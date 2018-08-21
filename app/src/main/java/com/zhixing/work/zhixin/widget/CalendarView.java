@@ -31,6 +31,7 @@ public class CalendarView extends View {
      */
     private Calendar calendar;
     private OnSelectChangeListener listener;
+    private DayManager mDayManager;
 
     /**
      * 改变日期，并更改当前状态，由于绘图是在calendar基础上进行绘制的，所以改变calendar就可以改变图片
@@ -45,6 +46,10 @@ public class CalendarView extends View {
             DayManager.setCurrent(-1);
         }
         invalidate();
+    }
+
+    public void setDayManager(DayManager dayManager){
+        this.mDayManager = dayManager;
     }
 
     public CalendarView(Context context) {

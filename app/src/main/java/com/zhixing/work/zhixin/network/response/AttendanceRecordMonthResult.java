@@ -9,7 +9,7 @@ import java.util.List;
  * Description:
  */
 
-public class AttendanceRecordMonthResult extends BaseResult{
+public class AttendanceRecordMonthResult extends BaseResult {
 
 
     /**
@@ -27,11 +27,11 @@ public class AttendanceRecordMonthResult extends BaseResult{
     }
 
     public static class ContentBean {
-        private List<String> AttendanceDays;
-        private List<LateDaysBean> LateDays;
-        private List<EarlyDaysBean> EarlyDays;
-        private List<String> NotClockInDays;
-        private List<String> AbsenteeismDays;
+        private List<String> AttendanceDays; //出勤
+        private List<LateDaysBean> LateDays; //迟到
+        private List<EarlyDaysBean> EarlyDays;//早退
+        private List<String> NotClockInDays;//缺卡
+        private List<String> AbsenteeismDays;//旷工
 
         public List<String> getAttendanceDays() {
             return AttendanceDays;

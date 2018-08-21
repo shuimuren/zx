@@ -80,6 +80,7 @@
 
     <View style="@style/division_view" />
 
+
     <com.zhixing.work.zhixin.widget.ElasticScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

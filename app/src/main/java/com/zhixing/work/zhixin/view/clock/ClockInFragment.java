@@ -31,6 +31,7 @@ import com.zhixing.work.zhixin.network.response.StaffAttendanceRecordResult;
 import com.zhixing.work.zhixin.network.response.WifiListResult;
 import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.DateUtils;
+import com.zhixing.work.zhixin.util.GlideUtils;
 import com.zhixing.work.zhixin.util.NetworkUtil;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
@@ -118,12 +119,12 @@ public class ClockInFragment extends SupportFragment {
     @BindView(R.id.tv_hint)
     TextView tvHint;
     Unbinder unbinder;
-    @BindView(R.id.tv_work_time_update)
-    TextView tvWorkTimeUpdate;
     @BindView(R.id.tv_end_clock_update)
     TextView tvEndClockUpdate;
     @BindView(R.id.layout_time_line)
     LinearLayout layoutTimeLine;
+    @BindView(R.id.ll_clock)
+    LinearLayout llClock;
 
     public static ClockInFragment getInstance() {
         return new ClockInFragment();
@@ -145,8 +146,8 @@ public class ClockInFragment extends SupportFragment {
     private List<AttendanceRecordsBean> mAttendanceRecords;
     private AttendanceRecordsBean mAttendanceBean;
     private long mCurrentTime;
-    private int mFlexTime;
-    private int mAbsenteeismTime;
+    private int mFlexTime; //弹性时间
+    private int mAbsenteeismTime; //旷工时间
     private String mCurrentServiceTime;
     private long mServiceTimeLong;
     private boolean mIsStart; //是否为上班打卡
@@ -209,11 +210,11 @@ public class ClockInFragment extends SupportFragment {
                 }
             });
 
+            getAttendanceRecord();
+
             if (result.getContent() != null) {
                 mWifiList = result.getContent();
             }
-
-            getAttendanceRecord();
 
 
         }
@@ -247,73 +248,151 @@ public class ClockInFragment extends SupportFragment {
      * @param result
      */
     private void handlerStaffAttendanceRecordResult(StaffAttendanceRecordResult result) {
+        hideLoadingDialog();
         if (result.Code == NetworkConstant.SUCCESS_CODE) {
+            if(result.getRequestType() != 0){
+                return;
+            }
             userName.setText(result.getContent().getStaffName());
+            GlideUtils.getInstance().loadPublicCircleWithDefault(getActivity(), ResourceUtils.getDrawable(R.drawable.icon_avatar),
+                    result.getContent().getStaffAvatar(), userAvatar);
+
             if (result.getContent().getAttendanceRecords() != null && result.getContent().getAttendanceRecords().size() > 0) {
                 mAttendanceBean = result.getContent().getAttendanceRecords().get(0);
+            } else {
+                mAttendanceBean = null;
             }
             if (mAttendanceBean != null) {
-                tvStartTime.setText(String.format("上班时间 %s", mAttendanceBean.getStartTime()));
-                tvEndClockTime.setText(String.format("下班时间 %s", mAttendanceBean.getEndTime()));
+                if (isCurrentDate()) { //当前天
+                    tvStartTime.setText(String.format("上班时间 %s", mAttendanceBean.getStartTime()));
+                    tvEndClockTime.setText(String.format("下班时间 %s", mAttendanceBean.getEndTime()));
+                    mFlexTime = mAttendanceBean.getFlexTime(); //活动时间
+                    mAbsenteeismTime = mAttendanceBean.getAbsenteeismTime();//旷工时间
+                    if (TextUtils.isEmpty(mAttendanceBean.getClockInTime())) {//上班未打卡
+                        mIsStart = true;
+                    } else {
+                        mIsStart = false;
+                        setClockInStatus(false);
+                    }
+                    if (!TextUtils.isEmpty(mAttendanceBean.getClockOutTime())) {
+                        setClockOutStatus(false);
+                    }
+
+                } else { //非当前天
+                    mIsStart = false;
+                    if (TextUtils.isEmpty(mAttendanceBean.getClockInTime())) {
+                        setClockInStatus(true);
+                    } else {
+                        setClockInStatus(false);
+                    }
+
+                    if (TextUtils.isEmpty(mAttendanceBean.getClockOutTime())) {
+                        setClockOutStatus(true);
+                    } else {
+                        setClockOutStatus(false);
+                    }
+                }
+                if (isCurrentDate() && (TextUtils.isEmpty(mAttendanceBean.getClockInTime()) || TextUtils.isEmpty(mAttendanceBean.getClockOutTime()))) {
+                    llClock.setVisibility(View.VISIBLE);
+                    if (NetworkUtil.isWifi(getActivity())) {
+                        if (isWorkWifi()) {
+                            llDoClock.setEnabled(true);
+                            imgClockMark.setEnabled(true);
+                            tvHint.setText(ResourceUtils.getString(R.string.wifi_usable));
+                            tvArrive.setText(mIsStart ? "上班打卡" : "下班打卡");
+                            tvLeave.setText(DateUtils.getDfHourMinSec(mServiceTimeLong));
+                        } else {
+                            llDoClock.setEnabled(false);
+                            imgClockMark.setEnabled(false);
+                            tvHint.setText(ResourceUtils.getString(R.string.wifi_unusable));
+                            tvArrive.setText("请先连接");
+                            tvLeave.setText("打卡wifi");
+                        }
+                    }
+                } else {
+                    llClock.setVisibility(View.GONE);
+                }
+            } else {
+                setClockInStatus(true);
+                setClockOutStatus(true);
             }
 
-            if (TextUtils.isEmpty(mAttendanceBean.getClockInTime())) {
-                mIsStart = true;
-                tvWorkTime.setVisibility(View.GONE);
-                tvWorkTimeDetail.setText("");
-            } else {
+        } else {
+            AlertUtils.show(result.Message);
+        }
+    }
+
+    //上班打卡
+    private void setClockInStatus(boolean isMiss) {
+        tvClockStatusMiss.setVisibility(View.GONE);
+        tvClockStatusLate.setVisibility(View.GONE);
+        tvClockStatusNormal.setVisibility(View.GONE);
+        tvWorkTime.setVisibility(View.GONE);
+        tvWorkTimeDetail.setText("");
+        tvEndWorkTimeDetail.setText("");
+        if (isMiss) {
+            tvClockStatusMiss.setVisibility(View.VISIBLE);
+        } else {
+            if (!TextUtils.isEmpty(mAttendanceBean.getClockInTime())) {
                 tvWorkTime.setVisibility(View.VISIBLE);
                 tvWorkTimeDetail.setText(mAttendanceBean.getClockInTime());
-                mIsStart = false;
-                //  setClockStatus();
-            }
-            if (NetworkUtil.isWifi(getActivity())) {
-                if (isWorkWifi()) {
-                    llDoClock.setEnabled(true);
-                    imgClockMark.setEnabled(true);
-                    tvHint.setText(ResourceUtils.getString(R.string.wifi_usable));
-                    tvArrive.setText(mIsStart ? "上班打卡" : "下班打卡");
-                    tvLeave.setText(DateUtils.getDfHourMinSec(mServiceTimeLong));
+                String ruleStartTime = DateUtils.getCurrentDate() + " " + mAttendanceBean.getStartTime();
+                String currentStartTime = DateUtils.getCurrentDate() + " " + mAttendanceBean.getClockInTime();
+
+                long startTime = DateUtils.stringDateToLong(ruleStartTime);
+                long clockInTime = DateUtils.stringDateToLong(currentStartTime); //打卡时间毫秒值
+
+                if (clockInTime < startTime || (clockInTime - startTime) < mFlexTime * 60 * 1000) {
+                    tvClockStatusNormal.setVisibility(View.VISIBLE);
                 } else {
-                    llDoClock.setEnabled(false);
-                    imgClockMark.setEnabled(false);
-                    tvHint.setText(ResourceUtils.getString(R.string.wifi_unusable));
-                    tvArrive.setText("请先连接");
-                    tvLeave.setText("打卡wifi");
+                    tvClockStatusLate.setVisibility(View.VISIBLE);
                 }
-            }
-
-
-            if (TextUtils.isEmpty(mAttendanceBean.getClockOutTime())) {
-
-                tvEndWorkTime.setVisibility(View.GONE);
-                tvEndWorkTimeDetail.setText("");
-            } else {
-                tvEndWorkTime.setVisibility(View.VISIBLE);
-                tvEndWorkTimeDetail.setText(mAttendanceBean.getClockOutTime());
-                tvEndClockUpdate.setVisibility(View.VISIBLE);
-                //  setClockStatus();
             }
 
         }
 
+
     }
 
-    private void setClockInStatus(boolean isStartStatus) {
-        String clockInTime = mAttendanceBean.getClockInTime();
+    //下班打卡
+    private void setClockOutStatus(boolean isMiss) {
+        tvEndClockStatusMiss.setVisibility(View.GONE);
+        tvEndClockStatusLate.setVisibility(View.GONE);
+        tvEndClockStatusNormal.setVisibility(View.GONE);
+        tvEndClockUpdate.setVisibility(View.GONE);
+        tvEndWorkTime.setVisibility(View.GONE);
 
-        long inLong = DateUtils.doDate2Long(clockInTime);
-        int flex = mAttendanceBean.getFlexTime(); //迟到时间
-        int absenteeism = mAttendanceBean.getAbsenteeismTime();//旷工时间
-        tvClockStatusNormal.setVisibility(View.VISIBLE);
+        if (isMiss) {
+            tvEndClockStatusMiss.setVisibility(View.VISIBLE);
+        } else {
+            tvEndClockUpdate.setVisibility(View.VISIBLE);
+            tvEndWorkTime.setVisibility(View.VISIBLE);
+            tvEndWorkTimeDetail.setText(mAttendanceBean.getClockOutTime());
+            tvEndClockStatusMiss.setVisibility(View.GONE);
+            tvEndClockStatusLate.setVisibility(View.GONE);
+            tvEndClockStatusNormal.setVisibility(View.GONE);
+
+            String ruleStartTime = DateUtils.getCurrentDate() + " " + mAttendanceBean.getStartTime();
+            String currentEndTime = DateUtils.getCurrentDate() + " " + mAttendanceBean.getClockOutTime();
+            String ruleEndTime = DateUtils.getCurrentDate() + " " + mAttendanceBean.getEndTime();
+
+            long endTime = DateUtils.stringDateToLong(ruleEndTime, DateUtils.DF_DEFAULT); //规定下班时间
+            long clockOutTime = DateUtils.stringDateToLong(currentEndTime, DateUtils.DF_DEFAULT); //下班打卡时间毫秒值
+            //正常
+            //早退
+            //旷工
+            if (endTime < clockOutTime) {
+                tvEndClockStatusNormal.setVisibility(View.VISIBLE);
+            } else if (endTime > clockOutTime) {
+                tvEndClockStatusLate.setVisibility(View.VISIBLE);
+            }
+        }
 
 
-        tvClockStatusNormal.setText("迟到");
-        tvClockStatusNormal.setText("早退");
-        tvClockStatusNormal.setText("缺卡");
     }
 
     private void initView() {
+        tvMonth.setText(DateUtils.getCurrentDate().substring(5, 7));
         mStaffId = String.valueOf(SettingUtils.getTokenBean().getStaffId());
         mWifiName = NetworkUtil.getWifiSSId(getActivity());
         mBssid = NetworkUtil.getWifiBssId(getActivity());
@@ -330,6 +409,9 @@ public class ClockInFragment extends SupportFragment {
         rbText5.setText(getDayOfMonth(mCurrentTime + DAY_LONG));
         rbText6.setText(getDayOfMonth(mCurrentTime + +2 * DAY_LONG));
         rbText7.setText(getDayOfMonth(mCurrentTime + 3 * +DAY_LONG));
+        rbText5.setEnabled(false);
+        rbText6.setEnabled(false);
+        rbText7.setEnabled(false);
         llDoClock.setEnabled(false);
         imgClockMark.setEnabled(false);
         tvHint.setText(ResourceUtils.getString(R.string.wifi_usable));
@@ -345,6 +427,7 @@ public class ClockInFragment extends SupportFragment {
         map.put(RequestConstant.KEY_STAFF_ID, mStaffId);
         map.put(RequestConstant.KEY_START_DATE, mStartDate);
         map.put(RequestConstant.KEY_END_DATE, mEndDate);
+        map.put(RequestConstant.KEY_REQUEST_TYPE,"0");
         MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_USER_ATTENDANCE_RECORD, map);
 
     }
@@ -356,6 +439,7 @@ public class ClockInFragment extends SupportFragment {
 
     //员工打卡
     private void staffAttendance() {
+        showLoading(ResourceUtils.getString(R.string.loading_default), true);
         Map map = new HashMap();
         String wifiName = mWifiName.substring(1, mWifiName.length() - 1);
         map.put(RequestConstant.KEY_WIFI_NAME, wifiName);
@@ -379,27 +463,38 @@ public class ClockInFragment extends SupportFragment {
     }
 
 
-    @OnClick({R.id.tv_work_time_update, R.id.tv_end_clock_update, R.id.tv_month, R.id.ll_do_clock,
+    @OnClick({R.id.tv_end_clock_update, R.id.tv_month, R.id.ll_do_clock,
             R.id.rb_text1, R.id.rb_text2, R.id.rb_text3, R.id.rb_text4})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tv_work_time_update:
-                break;
             case R.id.tv_end_clock_update:
+                staffAttendance();
                 break;
             case R.id.tv_month:
+
                 break;
             case R.id.ll_do_clock:
                 staffAttendance();
                 break;
             case R.id.rb_text1:
+                mStartDate = DateUtils.longToDate(mCurrentTime - 3 * DAY_LONG);
+                mEndDate = mStartDate;
+                getAttendanceRecord();
                 break;
             case R.id.rb_text2:
+                mStartDate = DateUtils.longToDate(mCurrentTime - 2 * DAY_LONG);
+                mEndDate = mStartDate;
+                getAttendanceRecord();
                 break;
             case R.id.rb_text3:
+                mStartDate = DateUtils.longToDate(mCurrentTime - 1 * DAY_LONG);
+                mEndDate = mStartDate;
+                getAttendanceRecord();
                 break;
             case R.id.rb_text4:
-
+                mStartDate = DateUtils.longToDate(mCurrentTime);
+                mEndDate = mStartDate;
+                getAttendanceRecord();
                 break;
         }
     }
@@ -429,6 +524,15 @@ public class ClockInFragment extends SupportFragment {
             }
         }
         return isWifi;
+    }
+
+    //判断是否为当前天
+    private boolean isCurrentDate() {
+        if (mStartDate.equals(DateUtils.getCurrentDate())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

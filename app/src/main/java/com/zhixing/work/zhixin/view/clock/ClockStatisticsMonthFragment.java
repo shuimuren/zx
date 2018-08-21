@@ -12,12 +12,20 @@ import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.SupportFragment;
+import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.constant.ResultConstant;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
+import com.zhixing.work.zhixin.msgctrl.RxBus;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.response.StatisticsMonthResult;
+import com.zhixing.work.zhixin.util.DateUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import rx.Subscription;
 
 /**
  * Created by lhj on 2018/7/31.
@@ -50,8 +58,11 @@ public class ClockStatisticsMonthFragment extends SupportFragment {
     LinearLayout llAbsenteeism;
     Unbinder unbinder;
 
+
+    private Subscription mStatisticsMonthSubscription;
+
     private String mMonthData;
-    private String mLateTotal, mEarlyTotal, mMissTotal, mAbsenteeismTotal;
+    private int mLateTotal, mEarlyTotal, mMissTotal, mAbsenteeismTotal;
 
     public static ClockStatisticsMonthFragment getInstance() {
         return new ClockStatisticsMonthFragment();
@@ -62,12 +73,36 @@ public class ClockStatisticsMonthFragment extends SupportFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_clock_statistics_month, container, false);
         unbinder = ButterKnife.bind(this, view);
+        registerRequest();
+        mMonthData = DateUtils.getCurrentDate().substring(0, 7);
+        tvTime.setText(mMonthData);
         return view;
+    }
+
+    private void registerRequest() {
+        mStatisticsMonthSubscription = RxBus.getInstance().toObservable(StatisticsMonthResult.class).subscribe(
+                result -> handlerStaticsMonthResult(result)
+        );
+    }
+
+    private void handlerStaticsMonthResult(StatisticsMonthResult result) {
+        if (result.Code == NetworkConstant.SUCCESS_CODE) {
+            mLateTotal = result.getContent().getLateCount();
+            mEarlyTotal = result.getContent().getEarlyCount();
+            mMissTotal = result.getContent().getNotClockIn();
+            mAbsenteeismTotal = result.getContent().getAbsenteeismCount();
+
+            tvLateNum.setText(String.format("%s 人", String.valueOf(mLateTotal)));
+            tvBeforeNum.setText(String.format("%s 人", String.valueOf(mEarlyTotal)));
+            tvMissNum.setText(String.format("%s 人", String.valueOf(mMissTotal)));
+            tvAbsenteeismNum.setText(String.format("%s 人", String.valueOf(mAbsenteeismTotal)));
+        }
+
     }
 
     @Override
     public void fetchData() {
-
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_ATTENDANCE_RECORD_STATISTICS_MONTH, mMonthData);
     }
 
     @Override
@@ -80,8 +115,10 @@ public class ClockStatisticsMonthFragment extends SupportFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.img_left:
+
                 break;
             case R.id.img_right:
+
                 break;
             case R.id.ll_late:
                 StatisticsMonthDetailActivity.startMonthDetailActivity(getActivity(), mMonthData,
@@ -100,5 +137,11 @@ public class ClockStatisticsMonthFragment extends SupportFragment {
                         ResultConstant.CLOCK_STATUS_ABSENTEEISM, mAbsenteeismTotal);
                 break;
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().unsubscribe(mStatisticsMonthSubscription);
     }
 }

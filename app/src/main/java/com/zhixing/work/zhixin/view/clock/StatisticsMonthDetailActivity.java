@@ -8,9 +8,18 @@ import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseListActivity;
 import com.zhixing.work.zhixin.bean.StatisticsMonthDataBean;
 import com.zhixing.work.zhixin.constant.ResultConstant;
+import com.zhixing.work.zhixin.msgctrl.MsgDef;
+import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
+import com.zhixing.work.zhixin.msgctrl.RxBus;
+import com.zhixing.work.zhixin.network.NetworkConstant;
+import com.zhixing.work.zhixin.network.RequestConstant;
+import com.zhixing.work.zhixin.network.response.StatisticsMonthDetailResult;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 
-import butterknife.BindView;
+import java.util.HashMap;
+import java.util.Map;
+
+import rx.Subscription;
 
 /**
  * Created by lhj on 2018/8/3.
@@ -23,11 +32,11 @@ public class StatisticsMonthDetailActivity extends BaseListActivity<StatisticsMo
     public static final String INTENT_KEY_STATUS = "clockStatus";
     public static final String INTENT_KEY_TOTAL = "total";
 
-    @BindView(R.id.tv_statistics_total)
+
     TextView tvStatisticsTotal;
+    private Subscription mStatisticsDetailSubscription;
 
-
-    public static void startMonthDetailActivity(Activity activity, String date, String status, String total) {
+    public static void startMonthDetailActivity(Activity activity, String date, String status, int total) {
         Intent intent = new Intent(activity, StatisticsMonthDetailActivity.class);
         intent.putExtra(INTENT_KEY_DATE, date);
         intent.putExtra(INTENT_KEY_STATUS, status);
@@ -37,7 +46,7 @@ public class StatisticsMonthDetailActivity extends BaseListActivity<StatisticsMo
 
     private String mDate;
     private String mStatus;
-    private String mTotal;
+    private int mTotal;
 
 
     @Override
@@ -48,11 +57,30 @@ public class StatisticsMonthDetailActivity extends BaseListActivity<StatisticsMo
     @Override
     protected void setContentViewLayout() {
         setContentView(R.layout.activity_statistic_month_detail);
+        tvStatisticsTotal = findViewById(R.id.tv_statistics_total);
+        mStatisticsDetailSubscription = RxBus.getInstance().toObservable(StatisticsMonthDetailResult.class).subscribe(
+                result -> handlerStatisticDetailResult(result)
+        );
     }
+
+    private void handlerStatisticDetailResult(StatisticsMonthDetailResult result) {
+        if(result.Code == NetworkConstant.SUCCESS_CODE){
+            onGetListSucceeded(result.getContent().getTotalPage(),result.getContent().getData());
+        }else{
+            onGetListFailed(result.Message);
+        }
+    }
+
+
 
     @Override
     protected void dispatchRequest() {
-
+        Map map = new HashMap();
+        map.put(RequestConstant.KEY_DATE_DATE,mDate);
+        map.put(RequestConstant.KEY_CLOCK_STATUS,mStatus);
+        map.put(RequestConstant.KEY_PAGE_INDEX,String.valueOf(mPages));
+        map.put(RequestConstant.KEY_ROWS_COUNT,String.valueOf(PAGE_SIZE));
+        MsgDispatcher.dispatchMessage(MsgDef.MSG_DEF_GET_ATTENDANCE_STATISTICS_MONTH_DETAIL,map);
     }
 
     @Override
@@ -65,7 +93,7 @@ public class StatisticsMonthDetailActivity extends BaseListActivity<StatisticsMo
         Intent data = getIntent();
         mDate = data.getStringExtra(INTENT_KEY_DATE);
         mStatus = data.getStringExtra(INTENT_KEY_STATUS);
-        mTotal = data.getStringExtra(INTENT_KEY_TOTAL);
+        mTotal = data.getIntExtra(INTENT_KEY_TOTAL,0);
     }
 
     private void setViewData() {
@@ -92,6 +120,12 @@ public class StatisticsMonthDetailActivity extends BaseListActivity<StatisticsMo
     @Override
     public void onItemClicked(StatisticsMonthDataBean bean) {
         StaffAttendanceStatisticsActivity.startStaffAttendanceStatisticsActivity(this,
-                mDate, bean.getStaffId());
+                mDate, bean.getStaffId(),bean.getRealName(),bean.getAvatar(),bean.getDepartmentName());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RxBus.getInstance().unsubscribe(mStatisticsDetailSubscription);
     }
 }

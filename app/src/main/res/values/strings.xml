@@ -229,7 +229,7 @@
     <string name="clock_time_late">迟到</string>
     <string name="clock_time_before">早退</string>
     <string name="clock_time_miss">缺卡</string>
-    <string name="clock_time_absenteeism">矿工</string>
+    <string name="clock_time_absenteeism">旷工</string>
     <string name="clock_finished">已打卡</string>
     <string name="clock_lack">应到但未打卡</string>
     <string name="new_add_attendance_group">新建考勤组</string>
@@ -254,8 +254,8 @@
     <string name="attendance_late">迟到</string>
     <string name="attendance_before">早退</string>
     <string name="attendance_miss">缺卡</string>
-    <string name="attendance_rest">矿工</string>
-    <string name="attendance_absenteeism">矿工</string>
+    <string name="attendance_rest">旷工</string>
+    <string name="attendance_absenteeism">旷工</string>
     <string name="statistics">统计</string>
     <string name="list_item_loading">点击或者上拉，加载更多数据</string>
     <string name="list_item_no_more">----------已经全部加载完毕----------</string>
@@ -317,6 +317,7 @@
     <string name="alert_email">请输入正确的邮箱地址</string>
     <string name="get_more">查看更多</string>
     <string name="staff_info_title">员工信息</string>
+    <string name="loading_default">正在加载...</string>
 
 
 </resources>

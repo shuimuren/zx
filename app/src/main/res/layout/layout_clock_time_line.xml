@@ -62,7 +62,7 @@
                     android:layout_marginTop="@dimen/dp_10"
                     android:textColor="@color/black"
                     android:visibility="gone"
-                    tools:text="打卡时间" />
+                    android:text="打卡时间" />
 
                 <TextView
                     android:id="@+id/tv_work_time_detail"
@@ -71,7 +71,6 @@
                     android:textColor="#212121"
                     android:textSize="28sp"
                     android:textStyle="bold"
-                    android:visibility="gone"
                     tools:text="07:55" />
 
 
@@ -84,17 +83,6 @@
                     android:text="正常"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_small"
-                    android:visibility="gone" />
-
-                <TextView
-                    android:id="@+id/tv_work_time_update"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="@dimen/padding_normal"
-                    android:drawableRight="@drawable/icon_update_right"
-                    android:text="更新打卡"
-                    android:textColor="#559fed"
-                    android:textSize="@dimen/font_normal"
                     android:visibility="gone" />
 
                 <TextView
@@ -139,7 +127,7 @@
                     android:layout_marginTop="@dimen/dp_10"
                     android:textColor="#212121"
                     android:visibility="gone"
-                    tools:text="打卡时间" />
+                    android:text="打卡时间" />
 
                 <TextView
                     android:id="@+id/tv_end_work_time_detail"
@@ -148,7 +136,6 @@
                     android:textColor="#212121"
                     android:textSize="28sp"
                     android:textStyle="bold"
-                    android:visibility="gone"
                     tools:text="07:55" />
 
                 <TextView
@@ -177,6 +164,7 @@
                     android:id="@+id/tv_end_clock_status_miss"
                     android:layout_width="60dp"
                     android:layout_height="20dp"
+                    android:layout_marginTop="@dimen/margin_big"
                     android:background="@drawable/shape_clock_status_miss"
                     android:gravity="center"
                     android:text="缺卡"
@@ -190,6 +178,7 @@
                     android:layout_height="20dp"
                     android:background="@drawable/shape_clock_status_late"
                     android:gravity="center"
+                    android:layout_marginTop="@dimen/margin_big"
                     android:text="早退"
                     android:textColor="@color/white"
                     android:textSize="@dimen/font_small"

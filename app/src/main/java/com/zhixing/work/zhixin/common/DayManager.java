@@ -229,16 +229,16 @@ public class DayManager {
      * 模拟数据
      */
     private static void imitateData() {
-        abnormalDays.add(2);
-        abnormalDays.add(11);
-        abnormalDays.add(16);
-        abnormalDays.add(17);
-        abnormalDays.add(23);
-
-        outDays.add(8);
-        outDays.add(9);
-        outDays.add(18);
-        outDays.add(22);
+//        abnormalDays.add(2);
+//        abnormalDays.add(11);
+//        abnormalDays.add(16);
+//        abnormalDays.add(17);
+//        abnormalDays.add(23);
+//
+//        outDays.add(8);
+//        outDays.add(9);
+//        outDays.add(18);
+//        outDays.add(22);
 
     }
 

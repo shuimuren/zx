@@ -116,6 +116,7 @@ public class GlideUtils extends AppGlideModule {
                 .apply(new RequestOptions().diskCacheStrategy(DiskCacheStrategy.RESOURCE))
                 .into(imageView);
     }
+
     public void loadPublicRoundTransformWithDefault(Context context, Drawable drawable,String url, ImageView imageView) {
         Glide.with(context).load(ALiYunFileURLBuilder.PUBLIC_END_POINT + url)
                 .transition(DrawableTransitionOptions.withCrossFade()).

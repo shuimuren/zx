@@ -53,9 +53,6 @@ public abstract class SupportFragment extends Fragment implements ISupportFragme
         _mActivity = mDelegate.getActivity();
     }
 
-
-
-
     public void hideLoadingDialog() {
         if (loadingDialog != null && loadingDialog.isShowing()) {
             loadingDialog.dismiss();

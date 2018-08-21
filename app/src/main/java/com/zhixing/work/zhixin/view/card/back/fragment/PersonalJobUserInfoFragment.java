@@ -201,21 +201,21 @@ public class PersonalJobUserInfoFragment extends SupportFragment {
         mWorks = new ArrayList<>();
         mCertificates = new ArrayList<>();
 
-        mWordAdapter = new AttendanceStatisticsAdapter();
+        mWordAdapter = new AttendanceStatisticsAdapter(getActivity());
         mWordAdapter.setData(mWorks);
         workListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         workListView.setHasFixedSize(true);
         workListView.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.HORIZONTAL));
         workListView.setAdapter(mWordAdapter);
 
-        mEducationAdapter = new AttendanceStatisticsAdapter();
+        mEducationAdapter = new AttendanceStatisticsAdapter(getActivity());
         mEducationAdapter.setData(mEducations);
         educationListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         educationListView.setHasFixedSize(true);
         educationListView.addItemDecoration(new RecycleViewDivider(getActivity(), LinearLayoutManager.HORIZONTAL));
         educationListView.setAdapter(mEducationAdapter);
 
-        mCertificateAdapter = new AttendanceStatisticsAdapter();
+        mCertificateAdapter = new AttendanceStatisticsAdapter(getActivity());
         mCertificateAdapter.setData(mCertificates);
         certificateListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         certificateListView.setHasFixedSize(true);

@@ -18,7 +18,7 @@ public class CircleAnimation extends RelativeLayout {
     private int mFrontColor = 0xff559fed;
     private float mFrontLine = 50;
     private Style mFrontStyle = Style.STROKE;
-    private int mShadeColor = 0xffeeeeee;
+    private int mShadeColor = 0xffe3e3e3;
     private float mShadeLine = 50;
     private Style mShadeStyle = Style.STROKE;
     private ShadeView mShadeView;

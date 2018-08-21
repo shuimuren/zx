@@ -254,7 +254,7 @@ public class EditAttendanceGroupActivity extends BaseTitleActivity {
                 }
 
                 if (TextUtils.isEmpty(mAbsenteeismTime)) {
-                    AlertUtils.show("请设置矿工时间标准");
+                    AlertUtils.show("请设置旷工时间标准");
                     return;
                 } else {
                     int value = Integer.parseInt(mAbsenteeismTime);

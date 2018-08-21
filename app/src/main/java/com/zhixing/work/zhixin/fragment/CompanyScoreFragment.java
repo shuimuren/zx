@@ -43,9 +43,9 @@ import com.zhixing.work.zhixin.util.GlideUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
+import com.zhixing.work.zhixin.view.clock.ManagerClockInActivity;
 import com.zhixing.work.zhixin.view.companyCard.CompanyCertificationActivity;
 import com.zhixing.work.zhixin.view.companyCard.CreateCompanyCardActivity;
-import com.zhixing.work.zhixin.view.companyCard.back.CompanyCardActivity;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -332,11 +332,12 @@ public class CompanyScoreFragment extends SupportFragment {
 
                 break;
             case R.id.more:
-                if (SettingUtils.createCardBefore()) {
-                    startActivity(new Intent(getActivity(), CompanyCardActivity.class));
-                } else {
-                    CreateCompanyCardActivity.startCompanyCard(getActivity());
-                }
+//                if (SettingUtils.createCardBefore()) {
+//                    startActivity(new Intent(getActivity(), CompanyCardActivity.class));
+//                } else {
+//                    CreateCompanyCardActivity.startCompanyCard(getActivity());
+//                }
+                startActivity(new Intent(getActivity(),ManagerClockInActivity.class));
                 break;
         }
     }

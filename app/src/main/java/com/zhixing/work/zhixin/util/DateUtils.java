@@ -292,10 +292,32 @@ public class DateUtils {
         return 0L;
     }
 
-    public static String getDfHourMinSec(Long date){
+    public static Long stringDateToLong(String date, String formatStr) {
+
+        SimpleDateFormat format;
+        if (TextUtils.isEmpty(formatStr)) {
+            format = new SimpleDateFormat(DF_YEAR_MONTH_DAY);
+        } else {
+            format = new SimpleDateFormat(formatStr);
+        }
+        if (TextUtils.isEmpty(date)) {
+            date = "1970-01-01 00:00:00";
+        }
+        try {
+            Date mDate = format.parse(date);
+            return mDate.getTime();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0L;
+    }
+
+    public static String getDfHourMinSec(Long date) {
         SimpleDateFormat format = new SimpleDateFormat(DF_HOUR_MIN_SEC);
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(date);
         return format.format(calendar.getTime());
     }
+
+
 }

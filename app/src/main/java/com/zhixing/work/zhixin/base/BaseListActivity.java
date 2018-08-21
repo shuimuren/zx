@@ -2,13 +2,13 @@ package com.zhixing.work.zhixin.base;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.adapter.ListRecycleViewAdapter;
 import com.zhixing.work.zhixin.util.AlertUtils;
+import com.zhixing.work.zhixin.widget.RecycleViewDivider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,10 +55,10 @@ public abstract class BaseListActivity<T> extends BaseTitleActivity implements L
         mListAdapter = new ListRecycleViewAdapter(this, mData, this);
         mListView.setAdapter(mListAdapter);
         mListView.setItemAnimator(new DefaultItemAnimator());
-//        if (addDecoration()) {
-//            mListView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
-//        }
-        mListView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL));
+        if (addDecoration()) {
+            mListView.addItemDecoration(new RecycleViewDivider(this,LinearLayoutManager.HORIZONTAL));
+        }
+
         mListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

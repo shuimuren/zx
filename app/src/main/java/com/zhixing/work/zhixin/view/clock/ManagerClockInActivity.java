@@ -17,7 +17,7 @@ import butterknife.OnClick;
 
 /**
  * Created by lhj on 2018/7/31.
- * Description:
+ * Description: 考勤打卡
  */
 
 public class ManagerClockInActivity extends SupportActivity {

@@ -18,6 +18,16 @@ public class StaffAttendanceRecordResult extends BaseResult{
 
     private ContentBean Content;
 
+    public int getRequestType() {
+        return requestType;
+    }
+
+    public void setRequestType(int requestType) {
+        this.requestType = requestType;
+    }
+
+    private int requestType; //0:打卡,1:统计
+
     public ContentBean getContent() {
         return Content;
     }

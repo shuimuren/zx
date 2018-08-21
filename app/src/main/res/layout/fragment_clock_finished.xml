@@ -28,6 +28,7 @@
                 android:text="全部已打卡"
                 android:textColor="@color/color_radio_text"
                 android:textSize="@dimen/font_size_14sp" />
+
             <RadioButton
                 android:id="@+id/radio_normal"
                 android:layout_width="wrap_content"
@@ -40,6 +41,7 @@
                 android:text="正常打卡"
                 android:textColor="@color/color_radio_text"
                 android:textSize="@dimen/font_size_14sp" />
+
             <RadioButton
                 android:id="@+id/radio_late"
                 android:layout_width="wrap_content"
@@ -51,6 +53,7 @@
                 android:text="迟到"
                 android:textColor="@color/color_radio_text"
                 android:textSize="@dimen/font_size_14sp" />
+
             <RadioButton
                 android:id="@+id/radio_absenteeism"
                 android:layout_width="wrap_content"
@@ -62,6 +65,7 @@
                 android:text="旷工"
                 android:textColor="@color/color_radio_text"
                 android:textSize="@dimen/font_size_14sp" />
+
             <RadioButton
                 android:id="@+id/radio_advanced"
                 android:layout_width="wrap_content"
@@ -73,10 +77,44 @@
                 android:text="早退"
                 android:textColor="@color/color_radio_text"
                 android:textSize="@dimen/font_size_14sp" />
+
+            <!--<RadioButton-->
+                <!--android:id="@+id/radio_miss"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/margin_normal"-->
+                <!--android:background="@drawable/selector_radio_round_corner_bg"-->
+                <!--android:button="@null"-->
+                <!--android:padding="@dimen/padding_normal"-->
+                <!--android:text="未打卡"-->
+                <!--android:textColor="@color/color_radio_text"-->
+                <!--android:textSize="@dimen/font_size_14sp" />-->
         </RadioGroup>
     </HorizontalScrollView>
+
+    <LinearLayout
+        android:id="@+id/ll_empty"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/image_group_empty" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_20"
+            android:text="空空如也..."
+            android:textColor="@color/minor_text_color" />
+    </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+        android:layout_height="wrap_content"/>
 </LinearLayout>

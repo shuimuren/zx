@@ -355,7 +355,12 @@ public class PersonalScoreFragment extends SupportFragment {
                 break;
             //坚持打卡
             case R.id.img_friend:
-                startActivity(new Intent(getActivity(), PersonalClockInActivity.class));
+                if (SettingUtils.getTokenBean().getStaffId() != 0) {
+                    startActivity(new Intent(getActivity(), PersonalClockInActivity.class));
+                } else {
+                    AlertUtils.show("您尚未加入公司");
+                }
+
                 //  startActivity(new Intent(getActivity(), ManagerClockInActivity.class));
                 break;
             //身份认证

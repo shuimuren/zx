@@ -20,66 +20,53 @@ import butterknife.OnClick;
  * Description: 考勤打卡-管理员角色/HR
  */
 
-public class ManagerClockInActivity extends SupportActivity {
+public class CompanyClockManagerActivity extends SupportActivity {
 
     @BindView(R.id.fm_personal_clock)
     FrameLayout fmPersonalClock;
-    @BindView(R.id.tv_clock_in)
-    TextView tvClockIn;
     @BindView(R.id.tv_clock_statistics)
     TextView tvClockStatistics;
     @BindView(R.id.tv_clock_setting)
     TextView tvClockSetting;
-    private SupportFragment[] mFragments = new SupportFragment[3];
+    private SupportFragment[] mFragments = new SupportFragment[2];
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_company_clock_in);
         ButterKnife.bind(this);
-        setTitle(ResourceUtils.getString(R.string.work_clock_in));
+        setTitle(ResourceUtils.getString(R.string.clock_in_statistics));
         initView();
     }
 
     private void initView() {
-        tvClockIn.setSelected(true);
-        SupportFragment clockInFragment = findFragment(ClockInFragment.class);
-        if (findFragment(ClockInFragment.class) == null) {
-            mFragments[0] = ClockInFragment.getInstance();
-            mFragments[1] = ManagerStatisticsFragment.getInstance();
-            mFragments[2] = ClockSettingFragment.getInstance();
+        tvClockStatistics.setSelected(true);
+        SupportFragment managerStatisticsFragment = findFragment(CompanyManagerStatisticsFragment.class);
+        if (managerStatisticsFragment == null) {
+            mFragments[0] = CompanyManagerStatisticsFragment.getInstance();
+            mFragments[1] = ClockSettingFragment.getInstance();
             loadMultipleRootFragment(R.id.fm_personal_clock, 0,
-                    mFragments[0], mFragments[1], mFragments[2]);
+                    mFragments[0], mFragments[1]);
         } else {
-            mFragments[0] = clockInFragment;
-            mFragments[1] = findFragment(ManagerStatisticsFragment.class);
-            mFragments[2] = findFragment(ClockSettingFragment.class);
+            mFragments[0] = findFragment(CompanyManagerStatisticsFragment.class);
+            mFragments[1] = findFragment(ClockSettingFragment.class);
 
         }
     }
 
-    @OnClick({R.id.tv_clock_in, R.id.tv_clock_statistics, R.id.tv_clock_setting})
+    @OnClick({R.id.tv_clock_statistics, R.id.tv_clock_setting})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tv_clock_in:
-                tvClockIn.setSelected(true);
-                tvClockStatistics.setSelected(false);
-                tvClockSetting.setSelected(false);
-                showHideFragment(mFragments[0]);
-                setTitle(ResourceUtils.getString(R.string.work_clock_in));
-                break;
             case R.id.tv_clock_statistics:
-                tvClockIn.setSelected(false);
                 tvClockStatistics.setSelected(true);
                 tvClockSetting.setSelected(false);
-                showHideFragment(mFragments[1]);
+                showHideFragment(mFragments[0]);
                 setTitle(ResourceUtils.getString(R.string.clock_in_statistics));
                 break;
             case R.id.tv_clock_setting:
                 tvClockSetting.setSelected(true);
-                tvClockIn.setSelected(false);
                 tvClockStatistics.setSelected(false);
-                showHideFragment(mFragments[2]);
+                showHideFragment(mFragments[1]);
                 setTitle(ResourceUtils.getString(R.string.attendance_setting_title));
                 break;
         }

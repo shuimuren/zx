@@ -19,10 +19,10 @@ import butterknife.Unbinder;
 
 /**
  * Created by lhj on 2018/7/31.
- * Description:考勤-统计
+ * Description:考勤-统计-B端查看
  */
 
-public class ManagerStatisticsFragment extends SupportFragment {
+public class CompanyManagerStatisticsFragment extends SupportFragment {
 
     @BindView(R.id.table_indicator)
     ViewPagerTabIndicator tableIndicator;
@@ -31,8 +31,8 @@ public class ManagerStatisticsFragment extends SupportFragment {
     Unbinder unbinder;
 
     private ViewPagerTabIndicator.PageFragmentAdapter  mPageFragmentAdapter;
-    public static ManagerStatisticsFragment getInstance() {
-        ManagerStatisticsFragment managerStatisticsFragment = new ManagerStatisticsFragment();
+    public static CompanyManagerStatisticsFragment getInstance() {
+        CompanyManagerStatisticsFragment managerStatisticsFragment = new CompanyManagerStatisticsFragment();
         return managerStatisticsFragment;
     }
 
@@ -47,11 +47,10 @@ public class ManagerStatisticsFragment extends SupportFragment {
 
     private void initViewPagerView() {
         String[] tabTexts = new String[]{ResourceUtils.getString(R.string.statistics_by_day),
-                ResourceUtils.getString(R.string.statistics_by_month),ResourceUtils.getString(R.string.statistics_by_user)};
+                ResourceUtils.getString(R.string.statistics_by_month)};
         mPageFragmentAdapter = new ViewPagerTabIndicator.PageFragmentAdapter(getChildFragmentManager(),getActivity());
         mPageFragmentAdapter.addFragment(ClockStatisticsDayFragment.getInstance());
         mPageFragmentAdapter.addFragment(ClockStatisticsMonthFragment.getInstance());
-        mPageFragmentAdapter.addFragment(ClockStatisticsFragment.getInstance());
         viewPager.setAdapter(mPageFragmentAdapter);
         tableIndicator.setTabTexts(tabTexts);
         tableIndicator.setWithIndicator(true);

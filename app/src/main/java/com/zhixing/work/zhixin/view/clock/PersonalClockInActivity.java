@@ -18,7 +18,7 @@ import butterknife.OnClick;
 
 /**
  * Created by lhj on 2018/7/30.
- * Description: 个人上班打卡
+ * Description: 考勤打卡-个人角色
  */
 
 public class PersonalClockInActivity extends SupportActivity {

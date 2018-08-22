@@ -404,10 +404,13 @@
         <activity
             android:name=".view.clock.PersonalClockInActivity"
             android:screenOrientation="portrait" />
-        <!-- 管理员打卡 -->
+        <!-- 管理员/HR打卡 -->
         <activity
             android:name=".view.clock.ManagerClockInActivity"
             android:screenOrientation="portrait" />
+        <!--企业账号-->
+        <activity android:name=".view.clock.CompanyClockManagerActivity"
+            android:screenOrientation="portrait"/>
         <!-- 打卡明细 -->
         <activity
             android:name=".view.clock.ClockInfoDetailActivity"

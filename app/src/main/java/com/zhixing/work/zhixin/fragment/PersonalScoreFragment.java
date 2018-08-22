@@ -50,6 +50,7 @@ import com.zhixing.work.zhixin.view.card.CreateCardActivity;
 import com.zhixing.work.zhixin.view.card.PerfectCardDataActivity;
 import com.zhixing.work.zhixin.view.card.back.PersonalJobInfoActivity;
 import com.zhixing.work.zhixin.view.card.back.CardMainActivity;
+import com.zhixing.work.zhixin.view.clock.ManagerClockInActivity;
 import com.zhixing.work.zhixin.view.clock.PersonalClockInActivity;
 
 import org.greenrobot.eventbus.EventBus;
@@ -356,7 +357,12 @@ public class PersonalScoreFragment extends SupportFragment {
             //坚持打卡
             case R.id.img_friend:
                 if (SettingUtils.getTokenBean().getStaffId() != 0) {
-                    startActivity(new Intent(getActivity(), PersonalClockInActivity.class));
+                    if (SettingUtils.getTokenBean().getStaffRole() == ResultConstant.USER_STAFF_ROLE_EMPLOYEE) {
+                        startActivity(new Intent(getActivity(), PersonalClockInActivity.class));
+                    } else {
+                        startActivity(new Intent(getActivity(), ManagerClockInActivity.class));
+                    }
+
                 } else {
                     AlertUtils.show("您尚未加入公司");
                 }

@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.bean.DepartmentMemberInfoBean;
+import com.zhixing.work.zhixin.constant.ResultConstant;
 import com.zhixing.work.zhixin.util.GlideUtils;
 
 import java.util.List;
@@ -24,22 +25,19 @@ import butterknife.ButterKnife;
  * Description: 组织架构列表
  */
 
-public class DepartmentStaffAdapter extends RecyclerView.Adapter {
+public class DepartmentManagerSelectorAdapter extends RecyclerView.Adapter {
 
     private List<DepartmentMemberInfoBean> members;
     private ItemClickedInterface itemClickedInterface;
-    private boolean isEdit;
     private Context mContext;
 
-    public DepartmentStaffAdapter(Context context,List<DepartmentMemberInfoBean> data, boolean isEdit) {
+    public DepartmentManagerSelectorAdapter(Context context, List<DepartmentMemberInfoBean> data) {
         this.mContext = context;
         this.members = data;
-        this.isEdit = isEdit;
     }
 
     public void setData(List<DepartmentMemberInfoBean> data) {
-        members.clear();
-        members.addAll(data);
+        members = data;
         notifyDataSetChanged();
     }
 
@@ -50,12 +48,14 @@ public class DepartmentStaffAdapter extends RecyclerView.Adapter {
 
     public interface ItemClickedInterface {
         void onItemClicked(DepartmentMemberInfoBean bean);
+
+        void selectClicked(int position, DepartmentMemberInfoBean bean);
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_department_staff, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_department_selector_manager, parent, false);
         return new MemberViewHolder(view);
     }
 
@@ -63,14 +63,23 @@ public class DepartmentStaffAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         DepartmentMemberInfoBean bean = members.get(position);
         MemberViewHolder viewHolder = (MemberViewHolder) holder;
-        if(isEdit){
-            viewHolder.imgEdit.setVisibility(View.VISIBLE);
-        }else {
-            viewHolder.imgEdit.setVisibility(View.INVISIBLE);
+        if (bean.getStaffRole() != ResultConstant.USER_STAFF_ROLE_EMPLOYEE) {
+            viewHolder.imgSelector.setEnabled(false);
+            viewHolder.memberRole.setVisibility(View.VISIBLE);
+            if (bean.getStaffRole() == ResultConstant.USER_STAFF_ROLE_HR) {
+                viewHolder.memberRole.setText("HR");
+            } else {
+                viewHolder.memberRole.setText("管理员");
+            }
+        } else {
+            viewHolder.imgSelector.setEnabled(true);
+            viewHolder.memberRole.setVisibility(View.GONE);
         }
+        viewHolder.imgSelector.setSelected(bean.isSelected());
         viewHolder.memberName.setText(bean.getStaffNickName());
-        GlideUtils.getInstance().loadCircleUserIconInto(mContext,bean.getStaffAvatar(),viewHolder.memberAvatar);
-        viewHolder.llMember.setOnClickListener(v -> itemClickedInterface.onItemClicked(bean));
+        GlideUtils.getInstance().loadCircleUserIconInto(mContext, bean.getStaffAvatar(), viewHolder.memberAvatar);
+        viewHolder.imgSelector.setOnClickListener(v -> itemClickedInterface.selectClicked(position, bean));
+        viewHolder.itemView.setOnClickListener(v -> itemClickedInterface.onItemClicked(bean));
     }
 
     @Override
@@ -78,15 +87,16 @@ public class DepartmentStaffAdapter extends RecyclerView.Adapter {
         return members.size();
     }
 
+
     static class MemberViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.img_selector)
+        ImageView imgSelector;
         @BindView(R.id.member_avatar)
         ImageView memberAvatar;
         @BindView(R.id.member_name)
         TextView memberName;
-        @BindView(R.id.member_mark)
-        ImageView memberMark;
-        @BindView(R.id.img_edit)
-        ImageView imgEdit;
+        @BindView(R.id.member_role)
+        TextView memberRole;
         @BindView(R.id.ll_member)
         LinearLayout llMember;
 
@@ -95,5 +105,4 @@ public class DepartmentStaffAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, view);
         }
     }
-
 }

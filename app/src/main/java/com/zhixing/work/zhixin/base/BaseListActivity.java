@@ -130,6 +130,11 @@ public abstract class BaseListActivity<T> extends BaseTitleActivity implements L
     }
 
     @Override
+    public void onDeleteClicked(T bean) {
+
+    }
+
+    @Override
     public void onLoadMoreButtonClicked() {
         loadMore();
     }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_manager_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/color_white_clickable"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/style_item_left_text"
+            android:text="设置管理员" />
+
+        <TextView style="@style/style_item_right_text" />
+    </LinearLayout>
+
+    <View style="@style/line" />
+
+    <LinearLayout
+        android:id="@+id/ll_hr_setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/color_white_clickable"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/style_item_left_text"
+            android:text="设置HR" />
+
+        <TextView style="@style/style_item_right_text" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -19,7 +19,6 @@ import com.zhixing.work.zhixin.bean.DepartmentInviteBean;
 import com.zhixing.work.zhixin.bean.DepartmentMemberBean;
 import com.zhixing.work.zhixin.bean.DepartmentMemberInfoBean;
 import com.zhixing.work.zhixin.common.DepartmentManagerHelper;
-import com.zhixing.work.zhixin.common.Logger;
 import com.zhixing.work.zhixin.msgctrl.MsgDef;
 import com.zhixing.work.zhixin.msgctrl.MsgDispatcher;
 import com.zhixing.work.zhixin.msgctrl.RxBus;
@@ -81,6 +80,7 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
     private DepartmentListAdapter mDepartmentListAdapter; //部门
     private DepartmentStaffAdapter mDepartmentStaffAdapter; //人员
     private DepartmentMemberTitleAdapter mDepartmentMemberTitleAdapter; // 顶部title
+
     private Subscription mDeleteDepartmentSubscription;//删除子部门;
     private Subscription mUpdateSettingInfoSubscription;//更新子部门
     private Subscription mInviteSubscription;//邀请连接
@@ -146,7 +146,6 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
         mDepartmentListAdapter.setItemClickedListener(new DepartmentListAdapter.ItemClickedInterface() {
             @Override
             public void onItemClicked(ChildDepartmentBean bean) {
-                Logger.i(">>>", "点击组织");
                 mCurrentParentDepartmentId = String.valueOf(bean.getDepartmentId());
                 mDepartmentId = String.valueOf(bean.getDepartmentId());
                 mDepartmentName = bean.getDepartmentName();
@@ -171,13 +170,11 @@ public class DepartmentDetailsActivity extends BaseTitleActivity {
 
         mDepartmentMembers = new ArrayList<>();
         mDepartmentMemberTitleAdapter = new DepartmentMemberTitleAdapter(mDepartmentMembers);
-        // departmentTitleList.setHasFixedSize(true);
         LinearLayoutManager manager = new LinearLayoutManager(DepartmentDetailsActivity.this);
         manager.setOrientation(LinearLayoutManager.HORIZONTAL);
         departmentTitleList.setLayoutManager(manager);
         departmentTitleList.setAdapter(mDepartmentMemberTitleAdapter);
         mDepartmentMemberTitleAdapter.setItemClickedListener(((position, bean) -> {
-            Logger.i(">>>", "点击了Title");
             if (position == 0) {
                 this.finish();
             } else {

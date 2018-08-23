@@ -68,6 +68,30 @@
         </RelativeLayout>
 
         <View style="@style/line" />
+        <RelativeLayout
+            android:id="@+id/rl_manager_setting"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="管理员设置"
+                android:textColor="@color/color_333333"
+                android:textSize="@dimen/font_list_item" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/right"
+                android:visibility="gone" />
+        </RelativeLayout>
 
 
         <RelativeLayout

@@ -389,7 +389,6 @@
         <activity
             android:name=".view.myCenter.organizational.SelectionDepartmentMemberActivity"
             android:screenOrientation="portrait" />
-
         <!--微信分享-->
         <activity
             android:name=".wxapi.WXEntryActivity"
@@ -409,8 +408,9 @@
             android:name=".view.clock.ManagerClockInActivity"
             android:screenOrientation="portrait" />
         <!--企业账号-->
-        <activity android:name=".view.clock.CompanyClockManagerActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.clock.CompanyClockManagerActivity"
+            android:screenOrientation="portrait" />
         <!-- 打卡明细 -->
         <activity
             android:name=".view.clock.ClockInfoDetailActivity"
@@ -484,18 +484,33 @@
             android:name=".view.card.AddJobWorkActivity"
             android:screenOrientation="portrait" />
         <!--编辑员工卡牌高级-工作列表信息-教育列表-->
-        <activity android:name=".view.card.back.WorkEducationListActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.card.back.WorkEducationListActivity"
+            android:screenOrientation="portrait" />
         <!--编辑员工卡牌高级-工作列表信息-添加教育-->
-        <activity android:name=".view.card.AddJobEducationActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.card.AddJobEducationActivity"
+            android:screenOrientation="portrait" />
         <!--编辑员工卡牌高级-工作列表信息-证书列表-->
-        <activity android:name=".view.card.AddJobCertificateActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.card.AddJobCertificateActivity"
+            android:screenOrientation="portrait" />
 
         <!--编辑员工卡牌高级-工作列表信息-添加证书-->
-        <activity android:name=".view.card.back.WorkCertificateListActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".view.card.back.WorkCertificateListActivity"
+            android:screenOrientation="portrait" />
+        <!-- 管理员设置 -->
+        <activity
+            android:name=".view.setting.ManagerSettingActivity"
+            android:screenOrientation="portrait" />
+        <!-- 管理员列表 -->
+        <activity
+            android:name=".view.setting.ManagerOrHrListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".view.myCenter.organizational.SelectionDepartmentManagerActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

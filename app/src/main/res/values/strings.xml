@@ -318,6 +318,9 @@
     <string name="get_more">查看更多</string>
     <string name="staff_info_title">员工信息</string>
     <string name="loading_default">正在加载...</string>
-
+    <string name="manager_setting_title">管理员设置</string>
+    <string name="setting_hr_title">设置HR</string>
+    <string name="setting_manager_title">设置管理员</string>
+    <string name="add">添加</string>
 
 </resources>

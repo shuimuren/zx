@@ -6,11 +6,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.zhixing.work.zhixin.R;
+import com.zhixing.work.zhixin.bean.HrBean;
 import com.zhixing.work.zhixin.bean.LeaveStaffBean;
 import com.zhixing.work.zhixin.bean.NewMemberBean;
 import com.zhixing.work.zhixin.bean.StatisticsMonthDataBean;
@@ -41,6 +43,7 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
     private static final int TYPE_ATTENDANCE_MONTH = 0;
     private static final int TYPE_NEW_MEMBER_BEAN = 1;
     private static final int TYPE_LEAVE_STAFF_BEAN = 2;
+    private static final int TYPE_HR_OR_MANAGER_BEAN = 3;
 
     public ListRecycleViewAdapter(Context context, List<T> data, Callback back) {
         this.mContext = context;
@@ -50,6 +53,8 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
 
     public interface Callback<T> {
         void onItemClicked(T bean);
+
+        void onDeleteClicked(T bean);
 
         boolean isPaged();
 
@@ -79,6 +84,9 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
             case TYPE_LEAVE_STAFF_BEAN:
                 View viewLeave = LayoutInflater.from(mContext).inflate(R.layout.item_leave_staff, parent, false);
                 return new ViewLeaveStaffHolder(viewLeave);
+            case TYPE_HR_OR_MANAGER_BEAN:
+                View viewManager = LayoutInflater.from(mContext).inflate(R.layout.item_hr_or_manager, parent, false);
+                return new ViewManagerHolder(viewManager);
             default:
                 View viewFooter = LayoutInflater.from(mContext).inflate(R.layout.item_list_footer, parent, false);
                 return new ViewFooterHolder(viewFooter);
@@ -92,14 +100,14 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
         if (holder instanceof ViewMonthHolder) {
             StatisticsMonthDataBean bean = (StatisticsMonthDataBean) mData.get(position);
             ViewMonthHolder viewHolder = (ViewMonthHolder) holder;
-            GlideUtils.getInstance().loadPublicRoundTransformWithDefault(mContext,ResourceUtils.getDrawable(R.drawable.icon_avatar), bean.getAvatar(), viewHolder.imgAvatar);
+            GlideUtils.getInstance().loadPublicRoundTransformWithDefault(mContext, ResourceUtils.getDrawable(R.drawable.icon_avatar), bean.getAvatar(), viewHolder.imgAvatar);
             viewHolder.tvName.setText(bean.getRealName());
             viewHolder.tvSection.setText(ZxTextUtils.getTextWithDefault(bean.getDepartmentName()));
             viewHolder.tvTimes.setText(String.format("%s次", String.valueOf(bean.getCount())));
-            if(bean.getLateMinutes()>0){
+            if (bean.getLateMinutes() > 0) {
                 viewHolder.tvMinute.setText(String.format("%s分钟", String.valueOf(bean.getLateMinutes())));
                 viewHolder.tvMinute.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 viewHolder.tvMinute.setVisibility(View.GONE);
             }
 
@@ -124,16 +132,28 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
             return;
         }
 
-        if(holder instanceof ViewLeaveStaffHolder){
+        if (holder instanceof ViewLeaveStaffHolder) {
             ViewLeaveStaffHolder leaveStaffHolder = (ViewLeaveStaffHolder) holder;
             LeaveStaffBean bean = (LeaveStaffBean) mData.get(position);
             GlideUtils.getInstance().loadGlideRoundTransform(mContext, ResourceUtils.getDrawable(R.drawable.icon_avatar),
                     bean.getAvatar(), leaveStaffHolder.imgAvatar);
-           // leaveStaffHolder.tvLeaveTime.setText();
+            // leaveStaffHolder.tvLeaveTime.setText();
             leaveStaffHolder.tvName.setText(ZxTextUtils.getTextWithDefault(bean.getRealName()));
             leaveStaffHolder.tvDepartment.setText(ZxTextUtils.getTextWithDefault(bean.getDepartmentName()));
-            leaveStaffHolder.tvLeaveTime.setText(String.format("离职日期：%s", bean.getDimissionTime().substring(0,10)));
+            leaveStaffHolder.tvLeaveTime.setText(String.format("离职日期：%s", bean.getDimissionTime().substring(0, 10)));
             leaveStaffHolder.itemView.setOnClickListener(v -> mCallback.onItemClicked(bean));
+            return;
+        }
+
+        if (holder instanceof ViewManagerHolder) {
+            ViewManagerHolder managerHolder = (ViewManagerHolder) holder;
+            HrBean bean = (HrBean) mData.get(position);
+            GlideUtils.getInstance().loadGlideRoundTransform(mContext, ResourceUtils.getDrawable(R.drawable.icon_avatar),
+                    bean.getAvatar(), managerHolder.imageAvatar);
+            managerHolder.tvUserName.setText(ZxTextUtils.getTextWithDefault(bean.getRealName()));
+            managerHolder.btnDelete.setOnClickListener(v -> mCallback.onDeleteClicked(bean));
+
+
         }
 
         if (holder instanceof ViewFooterHolder) {
@@ -173,6 +193,9 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
             }
             if (mData.get(position) instanceof LeaveStaffBean) {
                 return TYPE_LEAVE_STAFF_BEAN;
+            }
+            if (mData.get(position) instanceof HrBean) {
+                return TYPE_HR_OR_MANAGER_BEAN;
             }
         }
         return TYPE_FOOTER;
@@ -237,6 +260,21 @@ public class ListRecycleViewAdapter<T> extends RecyclerView.Adapter {
         TextView tvLeaveTime;
 
         ViewLeaveStaffHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+    }
+
+    static class ViewManagerHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.image_avatar)
+        ImageView imageAvatar;
+        @BindView(R.id.tv_user_name)
+        TextView tvUserName;
+        @BindView(R.id.btn_delete)
+        Button btnDelete;
+
+        ViewManagerHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }

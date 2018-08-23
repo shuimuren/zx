@@ -96,7 +96,8 @@ public class SettingActivity extends BaseTitleActivity {
 
     }
 
-    @OnClick({R.id.rlUserAgreement, R.id.rlPrivacyStrategy, R.id.account_security, R.id.rlAbout, R.id.check_version, R.id.data_clean})
+    @OnClick({R.id.rlUserAgreement, R.id.rlPrivacyStrategy, R.id.account_security, R.id.rlAbout,
+            R.id.check_version, R.id.data_clean,R.id.rl_manager_setting})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             //用户协议
@@ -104,6 +105,9 @@ public class SettingActivity extends BaseTitleActivity {
                 break;
             //隐私策略
             case R.id.rlPrivacyStrategy:
+                break;
+            case R.id.rl_manager_setting:
+                startActivity(new Intent(this, ManagerSettingActivity.class));
                 break;
             //修改密码
             case R.id.account_security:

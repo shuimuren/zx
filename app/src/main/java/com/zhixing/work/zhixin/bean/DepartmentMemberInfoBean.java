@@ -66,6 +66,7 @@ public class DepartmentMemberInfoBean implements Serializable{
     }
 
     public String getStaffAvatar() {
+
         if (TextUtils.isEmpty(StaffAvatar)) {
             return "";
         } else {

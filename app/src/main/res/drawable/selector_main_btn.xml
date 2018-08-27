@@ -5,7 +5,7 @@
             <corners android:radius="@dimen/main_btn_corner"/>
             <gradient
                 android:startColor="#4c92d3"
-                android:endColor="#72abdf"
+                android:endColor="@color/main_color"
                 android:type="linear"/>
         </shape>
     </item>

@@ -16,11 +16,10 @@
         android:background="@drawable/bg_back_in"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="生涯" />
+       <android.support.v7.widget.RecyclerView
+           android:id="@+id/career_recycler_view"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"/>
 
     </LinearLayout>
 

@@ -8,7 +8,6 @@ import android.widget.LinearLayout;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.base.BaseTitleActivity;
 import com.zhixing.work.zhixin.constant.ResultConstant;
-import com.zhixing.work.zhixin.util.AlertUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 
 import butterknife.BindView;

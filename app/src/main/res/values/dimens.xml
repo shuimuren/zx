@@ -131,5 +131,9 @@
     <dimen name="tab_indicator_indicator_height">2dp</dimen>
     <dimen name="tiny_space">3dp</dimen>
     <dimen name="spinner_item_text_size">8dp</dimen>
+    <dimen name="award_view_width">45dp</dimen>
+    <dimen name="award_view_height">20dp</dimen>
+    <dimen name="award_radius_width">10dp</dimen>
+    <dimen name="dialog_width">280dp</dimen>
 
 </resources>

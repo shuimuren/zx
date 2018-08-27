@@ -86,6 +86,21 @@ public class EvaluateBean {
         TotalScore = totalScore;
     }
 
+    public EvaluateBean(int questionResultId, int quizTime, String startTime, String endTime, float mindsetScore,
+                        float covenantScore, float complianceScore, float connectionScore,
+                        float integrityScore, float totalScore) {
+        QuestionResultId = questionResultId;
+        QuizTime = quizTime;
+        StartTime = startTime;
+        EndTime = endTime;
+        MindsetScore = mindsetScore;
+        CovenantScore = covenantScore;
+        ComplianceScore = complianceScore;
+        ConnectionScore = connectionScore;
+        IntegrityScore = integrityScore;
+        TotalScore = totalScore;
+    }
+
     /**
      * QuestionResultId : 1005
      * QuizTime : 50

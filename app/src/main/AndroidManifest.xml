@@ -508,9 +508,25 @@
         <activity
             android:name=".view.setting.ManagerOrHrListActivity"
             android:screenOrientation="portrait" />
+        <!-- 选择管理员 -->
         <activity
             android:name=".view.myCenter.organizational.SelectionDepartmentManagerActivity"
             android:screenOrientation="portrait" />
+        <!-- 生涯详情 -->
+        <activity
+            android:name=".view.card.CareerDetailActivity"
+            android:screenOrientation="portrait" />
+        <!-- 月度卡牌 -->
+        <activity
+            android:name=".view.card.StaffMonthCardActivity"
+            android:screenOrientation="portrait" />
+        <!-- 荣誉Or惩罚列表 -->
+        <activity
+            android:name=".view.card.AwardOrPunishmentListActivity"
+            android:screenOrientation="portrait" />
+        <!-- 荣誉Or惩罚详情 -->
+        <activity android:name=".view.card.AwardOrPunishmentDetailActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

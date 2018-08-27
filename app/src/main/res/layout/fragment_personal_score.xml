@@ -397,22 +397,6 @@
                         </LinearLayout>
                     </RelativeLayout>
 
-                    <!--<RelativeLayout-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_marginBottom="@dimen/dp_30"-->
-                    <!--android:visibility="visible">-->
-
-                    <!--<Button-->
-                    <!--android:id="@+id/perfect_card"-->
-                    <!--android:layout_width="160dp"-->
-                    <!--android:layout_height="45dp"-->
-                    <!--android:layout_centerHorizontal="true"-->
-                    <!--android:background="@drawable/btn"-->
-                    <!--android:text="完善卡牌"-->
-                    <!--android:textColor="#f5e9b4"-->
-                    <!--android:visibility="gone" />-->
-                    <!--</RelativeLayout>-->
 
                 </LinearLayout>
 

@@ -24,7 +24,6 @@
             android:gravity="center"
             android:drawableTop="@drawable/selector_clock_in"
             android:textColor="@color/color_text_btn"/>
-
         <TextView
             android:id="@+id/tv_clock_statistics"
             android:layout_width="0dp"
@@ -34,17 +33,6 @@
             android:gravity="center"
             android:text="@string/clock_in_statistics"
             android:drawableTop="@drawable/selector_clock_statistic"
-            android:textColor="@color/color_text_btn"/>
-
-        <TextView
-            android:id="@+id/tv_clock_setting"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/clock_in_setting"
-            android:drawableTop="@drawable/selector_clock_setting"
             android:textColor="@color/color_text_btn"/>
 
     </LinearLayout>

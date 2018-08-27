@@ -14,40 +14,52 @@
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingTop="@dimen/dp_10"
+        android:background="@drawable/shape_bottom_corner_white"
         android:gravity="center"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/dp_20"
-        android:background="@drawable/shape_bottom_corner_white" >
+        android:paddingTop="@dimen/dp_10">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:lineSpacingExtra="@dimen/dp_5"
-            android:textSize="@dimen/font_normal"
+            android:text="提醒Hr对你进行月度考评"
             android:textColor="#212121"
-            android:text="@string/certified_dialog_title"/>
+            android:textSize="@dimen/font_normal" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_10"
             android:gravity="center"
-            android:lineSpacingExtra="@dimen/dp_5"
-            android:paddingTop="@dimen/dp_20"
-            android:textSize="@dimen/font_size_14sp"
-            android:text="@string/certified_dialog_content"/>
+            android:lineSpacingExtra="3dp"
+            android:paddingLeft="@dimen/dp_40"
+            android:paddingRight="@dimen/dp_40"
+            android:text="完善月度评分对于个人职信评分有着非常重要的意义,认真工作,让boss看到更加精彩的你!"
+            android:textSize="@dimen/font_small" />
 
         <Button
             android:id="@+id/btn_certified"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/btn_height"
             android:layout_marginLeft="@dimen/dp_40"
             android:layout_marginRight="@dimen/dp_40"
-            android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/dp_40"
-
-            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/dp_20"
             android:background="@drawable/selector_main_btn"
+            android:text="提醒Hr"
             android:textColor="@color/white"
-            android:textSize="@dimen/font_normal"
-            android:text="@string/btn_certified"/>
+            android:textSize="@dimen/font_normal" />
+
+        <TextView
+            android:id="@+id/tv_dismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/dp_10"
+            android:textColor="@color/minor_text_color"
+            android:textSize="@dimen/font_smaller"
+            android:text="不了不了,下次再说吧" />
     </LinearLayout>
 
 

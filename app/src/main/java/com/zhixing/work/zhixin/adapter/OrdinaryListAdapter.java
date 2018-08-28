@@ -13,8 +13,10 @@ import android.widget.TextView;
 import com.willy.ratingbar.ScaleRatingBar;
 import com.zhixing.work.zhixin.R;
 import com.zhixing.work.zhixin.bean.CareerAwardPunishment;
+import com.zhixing.work.zhixin.bean.HonourEventBean;
 import com.zhixing.work.zhixin.bean.MonthStatisticsBean;
 import com.zhixing.work.zhixin.bean.StaffCareerBean;
+import com.zhixing.work.zhixin.bean.StaffStatementBean;
 import com.zhixing.work.zhixin.util.GlideUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.widget.AwardOrPunishmentView;
@@ -34,6 +36,7 @@ public class OrdinaryListAdapter<T> extends RecyclerView.Adapter {
     private List<T> mData;
     private Callback mCallback;
     private Context mContext;
+
 
     public interface Callback<T> {
         void onItemClicked(T bean);
@@ -57,6 +60,8 @@ public class OrdinaryListAdapter<T> extends RecyclerView.Adapter {
     private static final int TYPE_CAREER_BEAN = 1;
     private static final int TYPE_CAREER_AWARD = 2;
     private static final int TYPE_MONTH_STATISTICS = 3;
+    private static final int TYPE_STAFF_STATEMENT = 4;
+    private static final int TYPE_HONOUR_EVENT = 5;
 
     @NonNull
     @Override
@@ -71,6 +76,13 @@ public class OrdinaryListAdapter<T> extends RecyclerView.Adapter {
             case TYPE_MONTH_STATISTICS:
                 View monthStatistics = LayoutInflater.from(mContext).inflate(R.layout.item_month_statistics, parent, false);
                 return new MonthStatisticsViewHolder(monthStatistics);
+            case TYPE_STAFF_STATEMENT:
+                View staffStatement = LayoutInflater.from(mContext).inflate(R.layout.item_staff_statement, parent, false);
+                return new StaffStatementViewHolder(staffStatement);
+            case TYPE_HONOUR_EVENT:
+                View honourEvent = LayoutInflater.from(mContext).inflate(R.layout.item_honour_event, parent, false);
+                return new HonourEventViewHolder(honourEvent);
+
             default:
                 View viewDefault = LayoutInflater.from(mContext).inflate(R.layout.item_default_view, parent, false);
                 return new DefaultViewHolder(viewDefault);
@@ -107,8 +119,17 @@ public class OrdinaryListAdapter<T> extends RecyclerView.Adapter {
                 monthStatisticsViewHolder.starsTop.setVisibility(View.GONE);
                 monthStatisticsViewHolder.starsBottom.setVisibility(View.GONE);
                 monthStatisticsViewHolder.tvStatusAudit.setVisibility(View.VISIBLE);
-                if(mCallback != null){
-                    monthStatisticsViewHolder.itemView.setOnClickListener(v -> mCallback.onItemClicked(bean));
+
+                //已审核:0,待审核:1,待完成:2,已完成:3;
+                if (bean.getStatus() == 1) {
+                    monthStatisticsViewHolder.tvStatusAudit.setSelected(true);
+                    monthStatisticsViewHolder.tvStatusAudit.setText("审核中");
+                } else if (bean.getStatus() == 2) {
+                    monthStatisticsViewHolder.tvStatusAudit.setSelected(true);
+                    monthStatisticsViewHolder.tvStatusAudit.setText("待完成");
+                } else {
+                    monthStatisticsViewHolder.tvStatusAudit.setSelected(false);
+                    monthStatisticsViewHolder.tvStatusAudit.setText("已完成");
                 }
 
             } else {
@@ -122,8 +143,28 @@ public class OrdinaryListAdapter<T> extends RecyclerView.Adapter {
             } else {
                 monthStatisticsViewHolder.starsTop.setRating(bean.getIntegrate());
             }
+            if (mCallback != null) {
+                monthStatisticsViewHolder.itemView.setOnClickListener(v -> mCallback.onItemClicked(bean));
+            }
             monthStatisticsViewHolder.tvMonth.setText(getMonth(bean.getMonth()));
             GlideUtils.getInstance().loadImage(mContext, getViewImage(bean.getMonth()), monthStatisticsViewHolder.imgMonth);
+            return;
+        }
+        if (holder instanceof StaffStatementViewHolder) {
+            StaffStatementViewHolder statementViewHolder = (StaffStatementViewHolder) holder;
+            StaffStatementBean bean = (StaffStatementBean) mData.get(position);
+            GlideUtils.getInstance().loadPublicCircleWithDefault(mContext, ResourceUtils.getDrawable(R.drawable.icon_avatar), bean.getAvatar(), statementViewHolder.imgStaffAvatar);
+            statementViewHolder.tvStaffName.setText(bean.getName());
+            statementViewHolder.stars.setRating(bean.getScore());
+            return;
+        }
+
+        if (holder instanceof HonourEventViewHolder) {
+            HonourEventViewHolder honourHolder = (HonourEventViewHolder) holder;
+            HonourEventBean bean = (HonourEventBean) mData.get(position);
+            honourHolder.tvHonourMessage.setText(bean.getEvent());
+            honourHolder.tvHonourTime.setText(bean.getTime());
+            honourHolder.itemView.setOnClickListener(v -> mCallback.onItemClicked(bean));
         }
     }
 
@@ -140,6 +181,10 @@ public class OrdinaryListAdapter<T> extends RecyclerView.Adapter {
             return TYPE_CAREER_AWARD;
         } else if (mData.get(position) instanceof MonthStatisticsBean) {
             return TYPE_MONTH_STATISTICS;
+        } else if (mData.get(position) instanceof StaffStatementBean) {
+            return TYPE_STAFF_STATEMENT;
+        } else if (mData.get(position) instanceof HonourEventBean) {
+            return TYPE_HONOUR_EVENT;
         } else {
             return TYPE_DEFAULT;
         }
@@ -193,6 +238,32 @@ public class OrdinaryListAdapter<T> extends RecyclerView.Adapter {
         ScaleRatingBar starsBottom;
 
         MonthStatisticsViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+    }
+
+    static class StaffStatementViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.img_staff_avatar)
+        ImageView imgStaffAvatar;
+        @BindView(R.id.tv_staff_name)
+        TextView tvStaffName;
+        @BindView(R.id.stars)
+        ScaleRatingBar stars;
+
+        StaffStatementViewHolder(View view) {
+            super(view);
+            ButterKnife.bind(this, view);
+        }
+    }
+
+    static class HonourEventViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tv_honour_message)
+        TextView tvHonourMessage;
+        @BindView(R.id.tv_honour_time)
+        TextView tvHonourTime;
+
+        HonourEventViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
@@ -288,4 +359,6 @@ public class OrdinaryListAdapter<T> extends RecyclerView.Adapter {
         }
         return month;
     }
+
+
 }

@@ -8,7 +8,7 @@ package com.zhixing.work.zhixin.bean;
 public class MonthStatisticsBean {
 
 
-    private int status;//审核:0,已审核:1
+    private int status;//待审核:0,已审核:1,待完成:2,已完成:3;
     private float integrate;
     private int month;
 

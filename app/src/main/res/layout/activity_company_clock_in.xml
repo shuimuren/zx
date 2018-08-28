@@ -23,7 +23,8 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:drawableTop="@drawable/selector_clock_in"
-            android:textColor="@color/color_text_btn"/>
+            android:textColor="@color/color_text_btn"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/tv_clock_statistics"

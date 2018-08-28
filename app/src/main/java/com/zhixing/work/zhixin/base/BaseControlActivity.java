@@ -21,6 +21,7 @@ import org.greenrobot.eventbus.ThreadMode;
  * @author Administrator
  */
 public class BaseControlActivity extends FragmentActivity {
+
     public static final String TAG = "BJDPActivity";
     public Context context;
     public ZxApplication zxApplication;

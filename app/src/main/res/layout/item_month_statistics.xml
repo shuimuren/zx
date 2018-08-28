@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_10"
             android:text="审核中"
-            android:textColor="#ff6666"
+            android:textColor="@color/color_statement_month"
             android:textSize="@dimen/font_big"
             android:visibility="gone"/>
 

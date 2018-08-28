@@ -43,7 +43,7 @@ import com.zhixing.work.zhixin.util.GlideUtils;
 import com.zhixing.work.zhixin.util.ResourceUtils;
 import com.zhixing.work.zhixin.util.SettingUtils;
 import com.zhixing.work.zhixin.util.Utils;
-import com.zhixing.work.zhixin.view.clock.CompanyClockManagerActivity;
+import com.zhixing.work.zhixin.view.card.EventEvaluateActivity;
 import com.zhixing.work.zhixin.view.companyCard.CompanyCertificationActivity;
 import com.zhixing.work.zhixin.view.companyCard.CreateCompanyCardActivity;
 
@@ -337,8 +337,9 @@ public class CompanyScoreFragment extends SupportFragment {
 //                } else {
 //                    CreateCompanyCardActivity.startCompanyCard(getActivity());
 //                }
- //               startActivity(new Intent(getActivity(),ManagerClockInActivity.class));
-                startActivity(new Intent(getActivity(), CompanyClockManagerActivity.class));
+//                startActivity(new Intent(getActivity(), CompanyClockManagerActivity.class));
+ //               startActivity(new Intent(getActivity(), CompanyMonthEvaluateActivity.class));
+                startActivity(new Intent(getActivity(), EventEvaluateActivity.class));
                 break;
         }
     }

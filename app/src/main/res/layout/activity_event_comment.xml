@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_normal"
+        android:text="时间名称（必填）" />
+
+    <com.zhixing.work.zhixin.widget.ClearEditText
+        android:id="@+id/edit_event_name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/white"
+        android:hint="请填写事件名称"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_normal"
+        android:text="事件经过（必填）" />
+
+    <com.zhixing.work.zhixin.widget.ClearEditText
+        android:id="@+id/edit_event_detail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:gravity="left"
+        android:hint="请填写时间经过"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_normal"
+        android:text="责任上司评价" />
+
+    <com.zhixing.work.zhixin.widget.ClearEditText
+        android:id="@+id/edit_leader_comment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:gravity="left"
+        android:hint="请填写责任上司评价"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="@dimen/margin_normal"
+        android:layout_marginTop="@dimen/margin_normal"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/padding_normal"
+        android:paddingRight="@dimen/padding_normal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="事件评分" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <RadioGroup
+            android:id="@+id/radio_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_small">
+
+            <RadioButton
+                android:id="@+id/radio_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_normal"
+                android:background="@drawable/selector_radio_round_corner_bg"
+                android:button="@null"
+                android:checked="false"
+                android:paddingBottom="@dimen/padding_small"
+                android:paddingLeft="@dimen/padding_big"
+                android:paddingRight="@dimen/padding_big"
+                android:paddingTop="@dimen/padding_small"
+                android:text="4分"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_14sp" />
+
+            <RadioButton
+                android:id="@+id/radio_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_big"
+                android:background="@drawable/selector_radio_round_corner_bg"
+                android:button="@null"
+                android:paddingBottom="@dimen/padding_small"
+                android:paddingLeft="@dimen/padding_big"
+                android:paddingRight="@dimen/padding_big"
+                android:paddingTop="@dimen/padding_small"
+                android:text="5分"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_14sp" />
+
+            <RadioButton
+                android:id="@+id/radio_three"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_big"
+                android:background="@drawable/selector_radio_round_corner_bg"
+                android:button="@null"
+                android:checked="true"
+                android:paddingBottom="@dimen/padding_small"
+                android:paddingLeft="@dimen/padding_big"
+                android:paddingRight="@dimen/padding_big"
+                android:paddingTop="@dimen/padding_small"
+                android:text="6分"
+                android:textColor="@color/white"
+                android:textSize="@dimen/font_size_14sp" />
+        </RadioGroup>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_summit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/btn_height"
+        android:background="@color/main_color"
+        android:gravity="center"
+        android:text="@string/submit"
+        android:textColor="@color/white" />
+</LinearLayout>

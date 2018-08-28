@@ -525,8 +525,24 @@
             android:name=".view.card.AwardOrPunishmentListActivity"
             android:screenOrientation="portrait" />
         <!-- 荣誉Or惩罚详情 -->
-        <activity android:name=".view.card.AwardOrPunishmentDetailActivity"
+        <activity
+            android:name=".view.card.AwardOrPunishmentDetailActivity"
+            android:screenOrientation="portrait" />
+        <!-- B段职信月评 -->
+        <activity
+            android:name=".view.card.CompanyMonthEvaluateActivity"
+            android:screenOrientation="portrait" />
+        <!-- 职信月评详情 -->
+        <activity
+            android:name=".view.card.MonthStatementDetailActivity"
+            android:screenOrientation="portrait" />
+        <!-- 主动事件 -->
+        <activity android:name=".view.card.EventEvaluateActivity"
             android:screenOrientation="portrait"/>
+        <!-- 员工评价详情-->
+        <activity android:name=".view.card.back.StaffStatementDetailActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>

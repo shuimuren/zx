@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="PopupAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/slide_left_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_left_out</item>
+    </style>
+
+    <style name="anim_bottom_to_top_style">
+        <item name="android:windowEnterAnimation">@anim/slide_bottom_top_alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_top_bottom_alpha_out</item>
+    </style>
+
+    <style name="anim_top_to_bottom_style">
+        <item name="android:windowEnterAnimation">@anim/slide_top_bottom_alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_bottom_top_alpha_out</item>
+    </style>
+
+    <style name="anim_style_scale_out">
+        <item name="android:windowEnterAnimation">@anim/scale_alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/scale_alpha_out</item>
+    </style>
+</resources>

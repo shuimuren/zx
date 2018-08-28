@@ -322,5 +322,12 @@
     <string name="setting_hr_title">设置HR</string>
     <string name="setting_manager_title">设置管理员</string>
     <string name="add">添加</string>
+    <string name="month_statement">月报表</string>
+    <string name="user_statement">我的</string>
+    <string name="ranking_statement">排行榜</string>
+    <string name="event_honour">荣誉事件</string>
+    <string name="event_punishment">违纪事件</string>
+    <string name="staff_statement_detail_title">评价详情</string>
+    <string name="event_comment_title">主动事件评</string>
 
 </resources>
